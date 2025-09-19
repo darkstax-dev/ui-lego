@@ -1,0 +1,5 @@
+export { default as Tab } from './Tab'
+export { default as Tabs } from './Tabs'
+export { default as TabsDemo } from './TabsDemo'
+export type { TabProps } from './Tab'
+export type { TabsProps, TabItem } from './Tabs'

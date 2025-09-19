@@ -1,0 +1,48 @@
+/* Tabs container styles */
+.tabs {
+  display: inline-flex;
+  align-items: flex-start;
+  gap: 0;
+  border-bottom: 1px solid transparent;
+  position: relative;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.tabs::-webkit-scrollbar {
+  display: none;
+}
+
+/* Ensure tabs are connected without gaps */
+.tabs .tab {
+  border-left: none;
+  border-right: none;
+  flex-shrink: 0;
+}
+
+.tabs .tab:first-child {
+  border-left: none;
+}
+
+.tabs .tab:last-child {
+  border-right: none;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  .tabs {
+    width: 100%;
+    justify-content: flex-start;
+  }
+}
+
+@media (max-width: 480px) {
+  .tabs {
+    padding: 0 4px;
+  }
+  
+  .tabs .tab {
+    min-width: 60px;
+  }
+}
