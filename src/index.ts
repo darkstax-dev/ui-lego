@@ -45,5 +45,11 @@ export * from './components/menu'
 // Tooltip exports
 export * from './components/tooltip'
 
+// Navigation components
+export * from './components/navigation'
+
+// TopBar components
+export * from './components/bar'
+
 // Snackbar types
 export type { SnackbarVariant } from './components/snackbar/Snackbar'
