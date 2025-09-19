@@ -1,3 +1,11 @@
+:root {
+  --Text-Blue-text-Main-text: #00112B;
+  --Red-500: #FF3B31;
+  --Blue-Dark-blue-950: #00112B;
+  --Drop-down-light-Background-default: #ECECEC;
+  --Gray-300: #CECECE;
+}
+
 * {
   box-sizing: border-box;
 }

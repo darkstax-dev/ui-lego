@@ -15,6 +15,7 @@ import LoginInput from './components/inputs/LoginInput'
 import Icons from './components/icons/Icons'
 import { Pagination } from './components/pagination'
 import Snackbar from './components/snackbar/Snackbar'
+import DropdownDemo from './components/dropdown/DropdownDemo'
 import './dev.css'
 
 function App() {
@@ -810,6 +811,11 @@ function App() {
             />
           </div>
         </div>
+      </section>
+
+      <section className="component-section">
+        <h2>Dropdown Components</h2>
+        <DropdownDemo />
       </section>
 
       <section className="component-section">
