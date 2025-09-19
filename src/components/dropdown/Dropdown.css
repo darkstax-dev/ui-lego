@@ -1,0 +1,137 @@
+/* Dropdown container styles matching Figma design */
+.dropdown {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  background: var(--Drop-down-light-Background-default, #ECECEC);
+  border: 1px solid transparent;
+  min-width: 240px;
+  max-width: 100%;
+  position: relative;
+}
+
+/* Scrollable dropdown */
+.dropdown--scrollable {
+  max-height: 258px;
+  overflow-y: auto;
+}
+
+/* Custom scrollbar styling */
+.dropdown--scrollable::-webkit-scrollbar {
+  width: 4px;
+}
+
+.dropdown--scrollable::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.dropdown--scrollable::-webkit-scrollbar-thumb {
+  background: var(--Gray-300, #CECECE);
+  border-radius: 0;
+}
+
+.dropdown--scrollable::-webkit-scrollbar-thumb:hover {
+  background: #B8B8B8;
+}
+
+/* Firefox scrollbar */
+.dropdown--scrollable {
+  scrollbar-width: thin;
+  scrollbar-color: var(--Gray-300, #CECECE) transparent;
+}
+
+/* Dropdown items container */
+.dropdown__items {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+/* Remove default button styles for all items */
+.dropdown .dropdown-item {
+  border: none;
+  outline: none;
+}
+
+/* Ensure items stretch to full width */
+.dropdown .dropdown-item {
+  width: 100%;
+  justify-content: flex-start;
+}
+
+/* Hidden dropdown for positioning */
+.dropdown--hidden {
+  display: none;
+}
+
+/* Dropdown positioning variants */
+.dropdown--absolute {
+  position: absolute;
+  z-index: 1000;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.dropdown--relative {
+  position: relative;
+}
+
+/* Size variants */
+.dropdown--compact {
+  min-width: 200px;
+}
+
+.dropdown--standard {
+  min-width: 240px;
+}
+
+.dropdown--wide {
+  min-width: 320px;
+}
+
+/* Border radius for better visual appearance */
+.dropdown {
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+/* Focus management for keyboard navigation */
+.dropdown {
+  outline: none;
+}
+
+.dropdown:focus-within {
+  border-color: rgba(0, 17, 43, 0.2);
+}
+
+/* Animation for dropdown appearance */
+.dropdown--animated {
+  animation: dropdown-appear 0.15s ease-out;
+}
+
+@keyframes dropdown-appear {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Ensure scrollbar appears on the right side like in Figma */
+.dropdown--scrollable {
+  padding-right: 0;
+}
+
+/* Custom scrollbar track positioning */
+.dropdown--scrollable::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 4px;
+  height: 100%;
+  background: transparent;
+  pointer-events: none;
+}
