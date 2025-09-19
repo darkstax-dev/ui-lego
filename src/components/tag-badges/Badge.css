@@ -1,0 +1,69 @@
+/* Badge styles matching Figma design */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  height: 20px;
+  position: relative;
+}
+
+.badge__flag {
+  width: 9px;
+  height: 20px;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.badge__flag::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 9px;
+  height: 11.67px;
+  background: currentColor;
+}
+
+.badge__flag::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 0;
+  border-left: 9px solid currentColor;
+  border-bottom: 8.33px solid transparent;
+}
+
+.badge__content {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 6px 4px 1px;
+  background: currentColor;
+  height: 20px;
+  box-sizing: border-box;
+}
+
+.badge__text {
+  color: var(--Text-White-text-Main-text, #FFF);
+  font-family: 'Macan Mono Trial', -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 100%;
+  text-transform: uppercase;
+}
+
+/* Active status */
+.badge--active {
+  color: var(--Green-Green-800, #108541);
+}
+
+/* Canceled status */
+.badge--canceled {
+  color: var(--Black, #0E0E0E);
+}
+
+/* Pending status */
+.badge--pending {
+  color: var(--Yellow-500, #ED8B30);
+}
