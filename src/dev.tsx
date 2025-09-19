@@ -698,6 +698,10 @@ function App() {
           />
         </div>
       </section>
+
+      <section className="component-section">
+        <Icons />
+      </section>
     </div>
   )
 }
