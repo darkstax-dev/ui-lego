@@ -1,0 +1,235 @@
+/* Modal styles matching Figma design */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 17, 43, 0.30);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 16px;
+}
+
+.modal-container {
+  background: #00112B;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 480px;
+  max-height: 90vh;
+  overflow: hidden;
+}
+
+.modal-header {
+  display: flex;
+  padding: 16px 20px;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px dashed #072B56;
+}
+
+.modal-title-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+}
+
+.modal-title {
+  color: #DFDFDF;
+  font-family: Macan, -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: -0.48px;
+  margin: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.modal-close-button {
+  display: flex;
+  width: 24px;
+  height: 24px;
+  justify-content: center;
+  align-items: center;
+  background: none;
+  border: none;
+  color: #072B56;
+  cursor: pointer;
+  padding: 0;
+  flex-shrink: 0;
+  transition: color 0.2s ease;
+}
+
+.modal-close-button:hover {
+  color: #DFDFDF;
+}
+
+.modal-close-button:focus {
+  outline: 2px solid rgba(223, 223, 223, 0.2);
+  outline-offset: 2px;
+}
+
+.modal-content {
+  display: flex;
+  padding: 0 20px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  flex: 1;
+  overflow-y: auto;
+}
+
+.modal-actions {
+  display: flex;
+  padding: 16px 20px;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.modal-button {
+  display: flex;
+  height: 35px;
+  padding: 8px 16px;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+  border: 1px solid #D9322A;
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: 'Macan Mono Trial', -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+}
+
+.modal-button--secondary {
+  color: #D9322A;
+  background: transparent;
+}
+
+.modal-button--secondary:hover {
+  background: rgba(217, 50, 42, 0.1);
+}
+
+.modal-button--secondary:focus {
+  outline: 2px solid rgba(217, 50, 42, 0.2);
+  outline-offset: 2px;
+}
+
+.modal-button--primary {
+  color: #DFDFDF;
+  background: #D9322A;
+  padding: 10px 16px;
+}
+
+.modal-button--primary:hover {
+  background: #B52A23;
+}
+
+.modal-button--primary:focus {
+  outline: 2px solid rgba(217, 50, 42, 0.4);
+  outline-offset: 2px;
+}
+
+.modal-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.modal-button:disabled:hover {
+  background: transparent;
+}
+
+.modal-button--primary:disabled:hover {
+  background: #D9322A;
+}
+
+/* Responsive design */
+@media (max-width: 640px) {
+  .modal-overlay {
+    padding: 8px;
+  }
+  
+  .modal-container {
+    max-height: 95vh;
+  }
+  
+  .modal-header {
+    padding: 12px 16px;
+  }
+  
+  .modal-title {
+    font-size: 20px;
+    letter-spacing: -0.4px;
+  }
+  
+  .modal-content {
+    padding: 0 16px;
+    gap: 12px;
+  }
+  
+  .modal-actions {
+    padding: 12px 16px;
+    gap: 8px;
+  }
+  
+  .modal-button {
+    font-size: 12px;
+    letter-spacing: 1.2px;
+    padding: 6px 12px;
+    height: 32px;
+  }
+  
+  .modal-button--primary {
+    padding: 8px 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .modal-actions {
+    flex-direction: column;
+  }
+  
+  .modal-button {
+    width: 100%;
+  }
+}
+
+/* Animation */
+@keyframes modal-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes modal-scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.modal-overlay {
+  animation: modal-fade-in 0.2s ease-out;
+}
+
+.modal-container {
+  animation: modal-scale-in 0.2s ease-out;
+}
