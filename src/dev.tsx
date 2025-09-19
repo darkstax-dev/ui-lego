@@ -24,6 +24,7 @@ import TabsDemo from './components/tabs/TabsDemo'
 import NavigationDemo from './components/navigation/NavigationDemo'
 import TagBadgeDemo from './components/tag-badges/TagBadgeDemo'
 import MenuDemo from './components/menu/MenuDemo'
+import TooltipDemo from './components/tooltip/TooltipDemo'
 import './dev.css'
 
 function App() {
@@ -821,6 +822,12 @@ function App() {
             />
           </div>
         </div>
+      </section>
+
+      <section className="component-section">
+        <h1>Tooltip Components</h1>
+        <h2>Interactive tooltips with multiple placements and content options</h2>
+        <TooltipDemo />
       </section>
 
       <section className="component-section">
