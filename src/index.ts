@@ -27,5 +27,8 @@ export * from './components/dropdown'
 // Modeling exports
 export * from './components/modeling'
 
+// Modal exports
+export * from './components/modal'
+
 // Snackbar types
 export type { SnackbarVariant } from './components/snackbar/Snackbar'

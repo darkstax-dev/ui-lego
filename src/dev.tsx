@@ -17,6 +17,7 @@ import { Pagination } from './components/pagination'
 import Snackbar from './components/snackbar/Snackbar'
 import DropdownDemo from './components/dropdown/DropdownDemo'
 import ModelingDemo from './components/modeling/ModelingDemo'
+import ModalDemo from './components/modal/ModalDemo'
 import './dev.css'
 
 function App() {
@@ -825,6 +826,12 @@ function App() {
 
       <section className="component-section">
         <ModelingDemo />
+      </section>
+
+      <section className="component-section">
+        <h1>Modal</h1>
+        <h2>Interactive modal dialog for creating scenarios</h2>
+        <ModalDemo />
       </section>
     </div>
   )
