@@ -1,0 +1,139 @@
+:root {
+  --tooltip-background: #DFDFDF;
+  --tooltip-text-color: #000;
+  --tooltip-border-radius: 8px;
+  --tooltip-padding: 12px 16px;
+  --tooltip-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  --tooltip-beak-size: 8px;
+  --tooltip-gap: 8px;
+}
+
+.tooltip {
+  display: inline-flex;
+  position: relative;
+  max-width: 280px;
+  background: var(--tooltip-background);
+  border-radius: var(--tooltip-border-radius);
+  box-shadow: var(--tooltip-shadow);
+  z-index: 1000;
+}
+
+.tooltip--hidden {
+  display: none;
+}
+
+.tooltip--visible {
+  display: inline-flex;
+}
+
+/* Content container */
+.tooltip__content {
+  padding: var(--tooltip-padding);
+  text-align: center;
+  flex: 1;
+}
+
+/* Title styles */
+.tooltip__title {
+  color: var(--tooltip-text-color);
+  font-family: Inter, -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.4;
+  margin: 0;
+}
+
+/* Body text styles */
+.tooltip__body {
+  color: var(--tooltip-text-color);
+  font-family: Inter, -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.4;
+  margin: 4px 0 0 0;
+}
+
+/* Beak container */
+.tooltip__beak-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  z-index: 1001;
+}
+
+.tooltip__beak {
+  width: var(--tooltip-beak-size);
+  height: var(--tooltip-beak-size);
+}
+
+/* Placement-specific styles */
+.tooltip--top {
+  flex-direction: column;
+}
+
+.tooltip--top .tooltip__beak-container {
+  bottom: calc(-1 * var(--tooltip-beak-size) / 2);
+  left: 50%;
+  transform: translateX(-50%) rotate(45deg);
+}
+
+.tooltip--bottom {
+  flex-direction: column-reverse;
+}
+
+.tooltip--bottom .tooltip__beak-container {
+  top: calc(-1 * var(--tooltip-beak-size) / 2);
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.tooltip--left {
+  flex-direction: row;
+}
+
+.tooltip--left .tooltip__beak-container {
+  right: calc(-1 * var(--tooltip-beak-size) / 2);
+  top: 50%;
+  transform: translateY(-50%) rotate(-45deg);
+}
+
+.tooltip--right {
+  flex-direction: row-reverse;
+}
+
+.tooltip--right .tooltip__beak-container {
+  left: calc(-1 * var(--tooltip-beak-size) / 2);
+  top: 50%;
+  transform: translateY(-50%) rotate(135deg);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .tooltip {
+    max-width: 240px;
+    font-size: 14px;
+  }
+
+  .tooltip__title {
+    font-size: 14px;
+  }
+
+  .tooltip__body {
+    font-size: 12px;
+  }
+
+  .tooltip__content {
+    padding: 10px 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .tooltip {
+    max-width: 200px;
+  }
+
+  .tooltip__content {
+    padding: 8px 10px;
+  }
+}
