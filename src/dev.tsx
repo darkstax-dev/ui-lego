@@ -18,6 +18,7 @@ import Snackbar from './components/snackbar/Snackbar'
 import DropdownDemo from './components/dropdown/DropdownDemo'
 import ModelingDemo from './components/modeling/ModelingDemo'
 import ModalDemo from './components/modal/ModalDemo'
+import NotificationDemo from './components/notifications/NotificationDemo'
 import './dev.css'
 
 function App() {
@@ -813,6 +814,10 @@ function App() {
             />
           </div>
         </div>
+      </section>
+
+      <section className="component-section">
+        <NotificationDemo />
       </section>
 
       <section className="component-section">
