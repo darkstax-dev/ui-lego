@@ -706,6 +706,60 @@ function App() {
       </section>
 
       <section className="component-section">
+        <h2>Pagination Components</h2>
+
+        <div className="demo-group">
+          <h3>Basic Pagination</h3>
+          <p>Navigate through pages with previous/next buttons</p>
+          <Pagination
+            currentPage={currentPage}
+            totalPages={10}
+            onPageChange={setCurrentPage}
+          />
+          <p style={{ marginTop: '12px', fontSize: '14px', color: '#666' }}>
+            Current page: {currentPage} of 10
+          </p>
+        </div>
+
+        <div className="demo-group">
+          <h3>Large Dataset Pagination</h3>
+          <p>Pagination with gaps for large page counts (similar to Figma design)</p>
+          <Pagination
+            currentPage={currentPage2}
+            totalPages={68}
+            onPageChange={setCurrentPage2}
+          />
+          <p style={{ marginTop: '12px', fontSize: '14px', color: '#666' }}>
+            Current page: {currentPage2} of 68
+          </p>
+        </div>
+
+        <div className="demo-group">
+          <h3>Small Dataset Pagination</h3>
+          <p>Pagination without gaps when few pages</p>
+          <Pagination
+            currentPage={currentPage3}
+            totalPages={5}
+            onPageChange={setCurrentPage3}
+          />
+          <p style={{ marginTop: '12px', fontSize: '14px', color: '#666' }}>
+            Current page: {currentPage3} of 5
+          </p>
+        </div>
+
+        <div className="demo-group">
+          <h3>Pagination Without Previous/Next</h3>
+          <p>Page numbers only</p>
+          <Pagination
+            currentPage={currentPage}
+            totalPages={10}
+            onPageChange={setCurrentPage}
+            showPrevNext={false}
+          />
+        </div>
+      </section>
+
+      <section className="component-section">
         <Icons />
       </section>
     </div>
