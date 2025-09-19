@@ -1,0 +1,181 @@
+/* CSS Variables for snackbar */
+:root {
+  --snackbar-bg: #1A1B23;
+  --snackbar-text-primary: #FFFFFF;
+  --snackbar-text-secondary: #FFFFFF;
+  --snackbar-close-color: #DFDFDF;
+  --snackbar-success-color: #23A45A;
+  --snackbar-error-color: #D9322A;
+  --snackbar-border-radius: 8px;
+  --snackbar-padding: 16px;
+  --snackbar-gap: 12px;
+  --snackbar-max-width: 647px;
+}
+
+.snackbar {
+  background-color: var(--snackbar-bg);
+  border-radius: var(--snackbar-border-radius);
+  padding: var(--snackbar-padding);
+  max-width: var(--snackbar-max-width);
+  width: 100%;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  margin: 0 auto;
+}
+
+.snackbar__content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 66px;
+  width: 100%;
+}
+
+.snackbar__icon-text {
+  display: flex;
+  align-items: center;
+  gap: var(--snackbar-gap);
+  flex: 1;
+  min-width: 0;
+}
+
+.snackbar__icon {
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.snackbar__text {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex: 1;
+  min-width: 0;
+}
+
+.snackbar__title {
+  color: var(--snackbar-text-primary);
+  font-family: Macan, -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -0.36px;
+  margin: 0;
+}
+
+.snackbar__message {
+  color: var(--snackbar-text-secondary);
+  font-family: Macan, -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 14px;
+  font-weight: 450;
+  line-height: 1.2;
+  margin: 0;
+}
+
+.snackbar__close-button {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  color: var(--snackbar-close-color);
+  transition: color 0.2s ease, transform 0.1s ease;
+  flex-shrink: 0;
+}
+
+.snackbar__close-button:hover {
+  color: var(--snackbar-text-primary);
+}
+
+.snackbar__close-button:active {
+  transform: scale(0.95);
+}
+
+.snackbar__close-button:focus {
+  outline: 2px solid rgba(255, 255, 255, 0.3);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+.snackbar__close-button:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .snackbar {
+    margin: 0 16px;
+    max-width: calc(100% - 32px);
+  }
+  
+  .snackbar__content {
+    gap: 24px;
+  }
+  
+  .snackbar__title {
+    font-size: 16px;
+  }
+  
+  .snackbar__message {
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 480px) {
+  .snackbar {
+    padding: 12px;
+  }
+  
+  .snackbar__content {
+    gap: 16px;
+  }
+  
+  .snackbar__icon {
+    width: 32px;
+    height: 32px;
+  }
+  
+  .snackbar__icon svg {
+    width: 32px;
+    height: 32px;
+  }
+  
+  .snackbar__title {
+    font-size: 15px;
+  }
+  
+  .snackbar__message {
+    font-size: 12px;
+  }
+}
+
+/* Animation for entrance/exit */
+.snackbar {
+  animation: snackbarSlideIn 0.3s ease-out;
+}
+
+@keyframes snackbarSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Variant-specific styles (if needed for future customization) */
+.snackbar--success {
+  /* Success-specific styles can be added here */
+}
+
+.snackbar--error {
+  /* Error-specific styles can be added here */
+}

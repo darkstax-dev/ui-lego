@@ -14,6 +14,7 @@ import FileUpload from './components/inputs/FileUpload'
 import LoginInput from './components/inputs/LoginInput'
 import Icons from './components/icons/Icons'
 import { Pagination } from './components/pagination'
+import Snackbar from './components/snackbar/Snackbar'
 import './dev.css'
 
 function App() {
@@ -756,6 +757,58 @@ function App() {
             onPageChange={setCurrentPage}
             showPrevNext={false}
           />
+        </div>
+      </section>
+
+      <section className="component-section">
+        <h2>Snackbar Components</h2>
+
+        <div className="demo-group">
+          <h3>Success Snackbar</h3>
+          <Snackbar
+            variant="success"
+            title="Success message"
+            message="The information in the table was successfully updated."
+            onClose={() => console.log('Success snackbar closed')}
+          />
+        </div>
+
+        <div className="demo-group">
+          <h3>Error Snackbar</h3>
+          <Snackbar
+            variant="error"
+            title="Error message"
+            message="Update failed. Please refresh the page and try again."
+            onClose={() => console.log('Error snackbar closed')}
+          />
+        </div>
+
+        <div className="demo-group">
+          <h3>Without Close Button</h3>
+          <Snackbar
+            variant="success"
+            title="Auto-dismissing notification"
+            message="This snackbar will auto-dismiss after a few seconds."
+          />
+        </div>
+
+        <div className="demo-group">
+          <h3>Custom Messages</h3>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+            <Snackbar
+              variant="success"
+              title="Profile Updated"
+              message="Your profile information has been saved successfully."
+              onClose={() => console.log('Profile update closed')}
+            />
+
+            <Snackbar
+              variant="error"
+              title="Connection Failed"
+              message="Unable to connect to the server. Check your internet connection and try again."
+              onClose={() => console.log('Connection error closed')}
+            />
+          </div>
         </div>
       </section>
 
