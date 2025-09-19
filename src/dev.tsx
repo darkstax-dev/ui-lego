@@ -27,6 +27,7 @@ import TagBadgeDemo from './components/tag-badges/TagBadgeDemo'
 import MenuDemo from './components/menu/MenuDemo'
 import TooltipDemo from './components/tooltip/TooltipDemo'
 import './dev.css'
+import './tokens.css'
 
 function App() {
   const [checked1, setChecked1] = React.useState(false)
