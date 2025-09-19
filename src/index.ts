@@ -1,3 +1,5 @@
 export { default as CheckboxField } from './components/CheckboxField'
 export { default as RadioField } from './components/RadioField'
 export { default as SwitchField } from './components/SwitchField'
+export { default as RadioGroup } from './components/RadioGroup'
+export { default as CheckboxGroup } from './components/CheckboxGroup'

@@ -1,0 +1,25 @@
+/* CheckboxGroup styles matching Figma design */
+.checkbox-group {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  width: 100%;
+}
+
+/* Ensure proper spacing between checkbox items */
+.checkbox-group .checkbox-field + .checkbox-field {
+  margin-top: 0;
+}
+
+/* Optional: Set a max-width to match Figma design */
+.checkbox-group--fixed-width {
+  width: 240px;
+}
+
+/* Responsive behavior */
+@media (max-width: 768px) {
+  .checkbox-group {
+    gap: 8px;
+  }
+}
