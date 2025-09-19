@@ -1,0 +1,139 @@
+/* CSS Variables from Figma design */
+:root {
+  --checkbox-stroke-selected: #00112B;
+  --checkbox-stroke-default: #00112B;
+  --checkbox-stroke-disabled: #868D97;
+  --text-blue-main: #00112B;
+  --text-gray-main: #78797A;
+  --text-gray-secondary: #ADADAD;
+  --space-300: 12px;
+}
+
+.checkbox-field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.checkbox-field__main {
+  display: flex;
+  align-items: center;
+  gap: var(--space-300);
+}
+
+.checkbox-field__checkbox-container {
+  position: relative;
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+
+.checkbox-field__input {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+  margin: 0;
+}
+
+.checkbox-field__input:disabled {
+  cursor: not-allowed;
+}
+
+.checkbox-field__checkbox {
+  width: 16px;
+  height: 16px;
+  border: 1.5px solid var(--checkbox-stroke-default);
+  border-radius: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.checkbox-field__checkbox--checked {
+  border-color: var(--checkbox-stroke-selected);
+}
+
+.checkbox-field__checkmark {
+  color: var(--checkbox-stroke-selected);
+  width: 14px;
+  height: 14px;
+}
+
+.checkbox-field__label {
+  flex: 1;
+  color: var(--text-blue-main);
+  font-family: Macan, -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 16px;
+  font-weight: 450;
+  line-height: 1.2;
+  letter-spacing: -0.32px;
+  cursor: pointer;
+  margin: 0;
+}
+
+.checkbox-field__description-row {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-300);
+}
+
+.checkbox-field__spacer {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+
+.checkbox-field__description {
+  flex: 1;
+  color: var(--text-gray-main);
+  font-family: Macan, -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 14px;
+  font-weight: 450;
+  line-height: 1.2;
+}
+
+/* Disabled state */
+.checkbox-field--disabled .checkbox-field__checkbox {
+  border-color: var(--checkbox-stroke-disabled);
+}
+
+.checkbox-field--disabled .checkbox-field__checkbox--checked {
+  border-color: var(--checkbox-stroke-disabled);
+}
+
+.checkbox-field--disabled .checkbox-field__checkmark {
+  color: var(--checkbox-stroke-disabled);
+}
+
+.checkbox-field--disabled .checkbox-field__label {
+  cursor: not-allowed;
+}
+
+.checkbox-field--disabled .checkbox-field__description-row {
+  opacity: 0.5;
+}
+
+.checkbox-field--disabled .checkbox-field__description {
+  color: var(--text-gray-secondary);
+}
+
+/* Hover states for non-disabled checkboxes */
+.checkbox-field:not(.checkbox-field--disabled) .checkbox-field__input:hover + .checkbox-field__checkbox {
+  border-color: var(--checkbox-stroke-selected);
+  background-color: rgba(0, 17, 43, 0.04);
+}
+
+/* Focus states */
+.checkbox-field__input:focus + .checkbox-field__checkbox {
+  outline: 2px solid rgba(0, 17, 43, 0.2);
+  outline-offset: 2px;
+}
+
+.checkbox-field__input:focus:not(:focus-visible) + .checkbox-field__checkbox {
+  outline: none;
+}
