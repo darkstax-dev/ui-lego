@@ -62,6 +62,8 @@ function App() {
 
   return (
     <div className="app">
+      <NavigationDemo />
+
       <h1>Input Components</h1>
 
       <section className="component-section">
