@@ -42,5 +42,8 @@ export * from './components/tabs'
 // Menu exports
 export * from './components/menu'
 
+// Tooltip exports
+export * from './components/tooltip'
+
 // Snackbar types
 export type { SnackbarVariant } from './components/snackbar/Snackbar'
