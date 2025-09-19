@@ -31,7 +31,6 @@ const TextareaField: React.FC<TextareaFieldProps> = ({
   id
 }) => {
   const textareaId = id || `textarea-${Math.random().toString(36).substr(2, 9)}`
-  const hasValue = !!value
   const hasError = !!error
   const hasSuccess = !!success
 

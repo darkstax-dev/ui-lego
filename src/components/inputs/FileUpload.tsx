@@ -120,10 +120,9 @@ const FileUpload: React.FC<FileUploadProps> = ({
           <div className="file-upload__title">
             {title}
           </div>
-          
+
           <div className="file-upload__description">
-            <span className="file-upload__link">Click to upload</span>
-            <span className="file-upload__or"> or drag and drop</span>
+            {description}
           </div>
         </div>
       </div>

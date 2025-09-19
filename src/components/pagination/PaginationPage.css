@@ -1,0 +1,66 @@
+.pagination-page {
+  display: flex;
+  padding: 8px 12px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 8px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  
+  /* Typography */
+  color: rgba(30, 30, 30, 1);
+  font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 110%;
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+  
+  /* Reset button styles */
+  outline: none;
+  user-select: none;
+}
+
+.pagination-page:hover:not(.pagination-page--current):not(.pagination-page--disabled) {
+  background: rgba(30, 30, 30, 1);
+  color: #FFF;
+}
+
+.pagination-page:focus-visible {
+  outline: 2px solid rgba(30, 30, 30, 0.5);
+  outline-offset: 2px;
+}
+
+.pagination-page--current {
+  background: #CECECE;
+  color: #00112B;
+  cursor: default;
+}
+
+.pagination-page--disabled {
+  color: #78797A;
+  cursor: not-allowed;
+}
+
+.pagination-page--disabled:hover {
+  background: transparent;
+  color: #78797A;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  .pagination-page {
+    padding: 6px 10px;
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 480px) {
+  .pagination-page {
+    padding: 4px 8px;
+    font-size: 12px;
+  }
+}
