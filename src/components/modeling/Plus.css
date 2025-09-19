@@ -1,0 +1,49 @@
+.plus {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  padding: 8px;
+  border-radius: 4px;
+}
+
+.plus:hover {
+  background: rgba(0, 17, 43, 0.1);
+}
+
+.plus:active {
+  background: rgba(0, 17, 43, 0.2);
+  transform: scale(0.95);
+}
+
+.plus__icon {
+  width: 20px;
+  height: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .plus {
+    padding: 6px;
+  }
+  
+  .plus__icon {
+    width: 18px;
+    height: 18px;
+  }
+}
+
+@media (max-width: 480px) {
+  .plus {
+    padding: 4px;
+  }
+  
+  .plus__icon {
+    width: 16px;
+    height: 16px;
+  }
+}

@@ -16,6 +16,7 @@ import Icons from './components/icons/Icons'
 import { Pagination } from './components/pagination'
 import Snackbar from './components/snackbar/Snackbar'
 import DropdownDemo from './components/dropdown/DropdownDemo'
+import ModelingDemo from './components/modeling/ModelingDemo'
 import './dev.css'
 
 function App() {
@@ -820,6 +821,10 @@ function App() {
 
       <section className="component-section">
         <Icons />
+      </section>
+
+      <section className="component-section">
+        <ModelingDemo />
       </section>
     </div>
   )
