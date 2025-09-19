@@ -243,7 +243,205 @@
 /* Interactive States */
 .interactive:hover { opacity: 0.8; }
 .interactive:active { opacity: 0.6; }
-.interactive:disabled { 
+.interactive:disabled {
   opacity: 0.5;
   cursor: not-allowed;
 }
+
+/* ===== TYPOGRAPHY UTILITY CLASSES ===== */
+
+/* Font Face Declarations */
+@font-face {
+  font-family: 'Macan';
+  src: url('/fonts/Macan-Bold.woff2') format('woff2'),
+       url('/fonts/Macan-Bold.woff') format('woff');
+  font-weight: var(--font-weight-bold);
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Macan Mono Trial';
+  src: url('/fonts/Macan-Mono-Bold.woff2') format('woff2'),
+       url('/fonts/Macan-Mono-Bold.woff') format('woff');
+  font-weight: var(--font-weight-bold);
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Macan Mono Stencil Trial';
+  src: url('/fonts/Macan-Mono-Stencil-Bold.woff2') format('woff2'),
+       url('/fonts/Macan-Mono-Stencil-Bold.woff') format('woff');
+  font-weight: var(--font-weight-bold);
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Macan Mono Stencil Trial';
+  src: url('/fonts/Macan-Mono-Stencil-Regular.woff2') format('woff2'),
+       url('/fonts/Macan-Mono-Stencil-Regular.woff') format('woff');
+  font-weight: var(--font-weight-medium);
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Heading Styles */
+.heading-page {
+  font-family: var(--font-family-macan-mono-stencil);
+  font-size: var(--font-size-3xl);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-normal);
+  letter-spacing: var(--letter-spacing-wide);
+  text-transform: uppercase;
+}
+
+.heading-page-2 {
+  font-family: var(--font-family-macan-mono-stencil);
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-normal);
+  letter-spacing: var(--letter-spacing-wide);
+  text-transform: uppercase;
+}
+
+.heading-subheading-macan {
+  font-family: var(--font-family-macan);
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-normal);
+  letter-spacing: var(--letter-spacing-tight);
+}
+
+.heading-subheading-stencil {
+  font-family: var(--font-family-macan-mono-stencil);
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-tight);
+  letter-spacing: var(--letter-spacing-wide);
+  text-transform: uppercase;
+}
+
+/* Emphasis Styles */
+.emphasis-body-mono-lg {
+  font-family: var(--font-family-macan-mono);
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-tight);
+  letter-spacing: var(--letter-spacing-wider);
+  text-transform: uppercase;
+}
+
+.emphasis-body-mono-sm {
+  font-family: var(--font-family-macan-mono);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-tight);
+  letter-spacing: var(--letter-spacing-wider);
+  text-transform: uppercase;
+}
+
+/* Body Base Styles */
+.body-base-macan-semibold-lg {
+  font-family: var(--font-family-macan);
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-normal);
+  letter-spacing: var(--letter-spacing-tight);
+}
+
+.body-base-macan-semibold {
+  font-family: var(--font-family-macan);
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-normal);
+  letter-spacing: var(--letter-spacing-tight);
+}
+
+.body-base-macan-book {
+  font-family: var(--font-family-macan);
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-book);
+  line-height: var(--line-height-normal);
+  letter-spacing: var(--letter-spacing-tight);
+}
+
+.body-base-mono-medium {
+  font-family: var(--font-family-macan-mono);
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-tight);
+  letter-spacing: var(--letter-spacing-normal);
+}
+
+.body-base-mono-book-lg {
+  font-family: var(--font-family-macan-mono);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-book);
+  line-height: var(--line-height-normal);
+  letter-spacing: var(--letter-spacing-normal);
+}
+
+.body-base-mono-book {
+  font-family: var(--font-family-macan-mono);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-book);
+  line-height: var(--line-height-normal);
+  letter-spacing: var(--letter-spacing-normal);
+}
+
+/* Body Small Styles */
+.body-small-mono-book {
+  font-family: var(--font-family-macan-mono);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-book);
+  line-height: var(--line-height-normal);
+  letter-spacing: var(--letter-spacing-wider);
+}
+
+.body-small-macan-book {
+  font-family: var(--font-family-macan);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-book);
+  line-height: var(--line-height-normal);
+  letter-spacing: var(--letter-spacing-normal);
+}
+
+/* Font Family Utilities */
+.font-macan { font-family: var(--font-family-macan); }
+.font-macan-mono { font-family: var(--font-family-macan-mono); }
+.font-macan-mono-stencil { font-family: var(--font-family-macan-mono-stencil); }
+.font-inter { font-family: var(--font-family-inter); }
+
+/* Font Weight Utilities */
+.font-book { font-weight: var(--font-weight-book); }
+.font-medium { font-weight: var(--font-weight-medium); }
+.font-semibold { font-weight: var(--font-weight-semibold); }
+.font-bold { font-weight: var(--font-weight-bold); }
+
+/* Font Size Utilities */
+.text-xs { font-size: var(--font-size-xs); }
+.text-sm { font-size: var(--font-size-sm); }
+.text-base { font-size: var(--font-size-base); }
+.text-md { font-size: var(--font-size-md); }
+.text-lg { font-size: var(--font-size-lg); }
+.text-xl { font-size: var(--font-size-xl); }
+.text-2xl { font-size: var(--font-size-2xl); }
+.text-3xl { font-size: var(--font-size-3xl); }
+
+/* Line Height Utilities */
+.leading-tight { line-height: var(--line-height-tight); }
+.leading-normal { line-height: var(--line-height-normal); }
+
+/* Letter Spacing Utilities */
+.tracking-tight { letter-spacing: var(--letter-spacing-tight); }
+.tracking-normal { letter-spacing: var(--letter-spacing-normal); }
+.tracking-wide { letter-spacing: var(--letter-spacing-wide); }
+.tracking-wider { letter-spacing: var(--letter-spacing-wider); }
+
+/* Text Transform Utilities */
+.uppercase { text-transform: uppercase; }
+.lowercase { text-transform: lowercase; }
+.capitalize { text-transform: capitalize; }
+.normal-case { text-transform: none; }
