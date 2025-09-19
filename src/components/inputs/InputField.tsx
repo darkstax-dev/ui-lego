@@ -29,7 +29,6 @@ const InputField: React.FC<InputFieldProps> = ({
   id
 }) => {
   const inputId = id || `input-${Math.random().toString(36).substr(2, 9)}`
-  const hasValue = !!value
   const hasError = !!error
   const hasSuccess = !!success
 
