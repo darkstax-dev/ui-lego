@@ -23,6 +23,7 @@ import ButtonDemo from './components/buttons/ButtonDemo'
 import TabsDemo from './components/tabs/TabsDemo'
 import NavigationDemo from './components/navigation/NavigationDemo'
 import TagBadgeDemo from './components/tag-badges/TagBadgeDemo'
+import MenuDemo from './components/menu/MenuDemo'
 import './dev.css'
 
 function App() {
@@ -861,6 +862,12 @@ function App() {
         <h1>Tag & Badge Components</h1>
         <h2>Interactive tags, toggles, and status badges with multiple variants</h2>
         <TagBadgeDemo />
+      </section>
+
+      <section className="component-section">
+        <h1>Menu Components</h1>
+        <h2>Context menus and dropdown menu items with states and shortcuts</h2>
+        <MenuDemo />
       </section>
     </div>
   )
