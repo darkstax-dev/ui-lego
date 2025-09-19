@@ -1,0 +1,154 @@
+/* Icons Page Styles */
+.icons-page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.icons-page h1 {
+  color: #03053D;
+  font-family: 'Macan Mono Stencil Trial', -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 48px;
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: 1rem;
+  opacity: 0.6;
+}
+
+.icons-section {
+  margin-bottom: 3rem;
+}
+
+.icons-section h2 {
+  color: #072B56;
+  font-family: 'Macan Mono Stencil Trial', -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 32px;
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: 1.6px;
+  text-transform: uppercase;
+  margin-bottom: 2rem;
+}
+
+.icons-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.icon-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1.5rem;
+  border: 1px solid #E5E7EB;
+  border-radius: 8px;
+  background: #FFFFFF;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.icon-card:hover {
+  border-color: #03053D;
+  box-shadow: 0 4px 12px rgba(3, 5, 61, 0.1);
+  transform: translateY(-2px);
+}
+
+.icon-display {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 80px;
+  height: 80px;
+  margin-bottom: 1rem;
+  border-radius: 8px;
+  background: #F9FAFB;
+  transition: background-color 0.2s ease;
+}
+
+.icon-card:hover .icon-display {
+  background: #F3F4F6;
+}
+
+.icon-name {
+  color: #374151;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  text-align: center;
+  margin: 0;
+}
+
+.icon-category {
+  color: #6B7280;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size: 12px;
+  text-align: center;
+  margin-top: 0.25rem;
+}
+
+/* Color variations */
+.icon-variant-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.icon-variant {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem;
+  border: 1px solid #E5E7EB;
+  border-radius: 6px;
+  background: #FFFFFF;
+}
+
+.icon-variant-display {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 60px;
+  height: 60px;
+  margin-bottom: 0.75rem;
+  border-radius: 6px;
+  background: #F9FAFB;
+}
+
+.icon-variant-name {
+  color: #374151;
+  font-size: 12px;
+  font-weight: 500;
+  text-align: center;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .icons-page {
+    padding: 1rem;
+  }
+  
+  .icons-page h1 {
+    font-size: 36px;
+  }
+  
+  .icons-section h2 {
+    font-size: 24px;
+  }
+  
+  .icons-grid {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 1rem;
+  }
+  
+  .icon-card {
+    padding: 1rem;
+  }
+  
+  .icon-display {
+    width: 60px;
+    height: 60px;
+  }
+}

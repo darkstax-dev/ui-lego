@@ -12,6 +12,7 @@ import SearchField from './components/SearchField'
 import SliderField from './components/SliderField'
 import FileUpload from './components/FileUpload'
 import LoginInput from './components/LoginInput'
+import Icons from './components/icons/Icons'
 import './dev.css'
 
 function App() {
@@ -696,6 +697,10 @@ function App() {
             disabled
           />
         </div>
+      </section>
+
+      <section className="component-section">
+        <Icons />
       </section>
     </div>
   )
