@@ -40,6 +40,11 @@ function App() {
   const [sliderValue, setSliderValue] = React.useState<[number, number]>([25, 75])
   const [uploadedFiles, setUploadedFiles] = React.useState<File[]>([])
 
+  // Pagination state
+  const [currentPage, setCurrentPage] = React.useState(1)
+  const [currentPage2, setCurrentPage2] = React.useState(5)
+  const [currentPage3, setCurrentPage3] = React.useState(1)
+
   // Login input states
   const [loginEmail, setLoginEmail] = React.useState('')
   const [loginPassword, setLoginPassword] = React.useState('')
