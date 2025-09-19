@@ -839,6 +839,12 @@ function App() {
         <h2>Interactive modal dialog for creating scenarios</h2>
         <ModalDemo />
       </section>
+
+      <section className="component-section">
+        <h1>Button Components</h1>
+        <h2>Comprehensive button library with multiple variants and states</h2>
+        <ButtonDemo />
+      </section>
     </div>
   )
 }
