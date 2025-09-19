@@ -11,6 +11,7 @@ import TextareaField from './components/TextareaField'
 import SearchField from './components/SearchField'
 import SliderField from './components/SliderField'
 import FileUpload from './components/FileUpload'
+import LoginInput from './components/LoginInput'
 import './dev.css'
 
 function App() {
@@ -37,9 +38,100 @@ function App() {
   const [sliderValue, setSliderValue] = React.useState<[number, number]>([25, 75])
   const [uploadedFiles, setUploadedFiles] = React.useState<File[]>([])
 
+  // Login input states
+  const [loginEmail, setLoginEmail] = React.useState('')
+  const [loginPassword, setLoginPassword] = React.useState('')
+  const [loginActive, setLoginActive] = React.useState('Active|')
+  const [loginFilled, setLoginFilled] = React.useState('Filled')
+  const [loginError, setLoginError] = React.useState('Mistake')
+
   return (
     <div className="app">
       <h1>Input Components</h1>
+
+      <section className="component-section">
+        <h2 style={{
+          color: '#072B56',
+          fontFamily: 'Macan Mono Stencil Trial, -apple-system, Roboto, Helvetica, sans-serif',
+          fontSize: '32px',
+          fontWeight: '500',
+          lineHeight: '1.2',
+          letterSpacing: '1.6px',
+          textTransform: 'uppercase',
+          marginBottom: '2rem'
+        }}>
+          Inputs for Login
+        </h2>
+
+        <div className="demo-group">
+          <h3>Default State</h3>
+          <LoginInput
+            label="Label"
+            value=""
+            onChange={() => {}}
+            placeholder="Default"
+          />
+        </div>
+
+        <div className="demo-group">
+          <h3>Active State</h3>
+          <LoginInput
+            label="Label"
+            value={loginActive}
+            onChange={setLoginActive}
+          />
+        </div>
+
+        <div className="demo-group">
+          <h3>Filled State</h3>
+          <LoginInput
+            label="Label"
+            value={loginFilled}
+            onChange={setLoginFilled}
+          />
+        </div>
+
+        <div className="demo-group">
+          <h3>Error State</h3>
+          <LoginInput
+            label="Label"
+            value={loginError}
+            onChange={setLoginError}
+            error="Validation error"
+            helperText="Helper text"
+          />
+        </div>
+
+        <div className="demo-group">
+          <h3>Disabled State</h3>
+          <LoginInput
+            label="Label"
+            value=""
+            onChange={() => {}}
+            disabled
+          />
+        </div>
+
+        <div className="demo-group">
+          <h3>Login Form Example</h3>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', maxWidth: '400px' }}>
+            <LoginInput
+              label="Email"
+              value={loginEmail}
+              onChange={setLoginEmail}
+              type="email"
+              placeholder="Enter your email"
+            />
+            <LoginInput
+              label="Password"
+              value={loginPassword}
+              onChange={setLoginPassword}
+              type="password"
+              placeholder="Enter your password"
+            />
+          </div>
+        </div>
+      </section>
 
       <section className="component-section">
         <h2>Checkbox Field</h2>
