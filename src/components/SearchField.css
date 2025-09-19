@@ -1,0 +1,117 @@
+/* SearchField styles matching Figma design */
+.search-field {
+  width: 100%;
+}
+
+.search-field__input-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #DFDFDF;
+  padding: 8px 12px;
+  transition: all 0.2s ease;
+}
+
+.search-field__input-container:hover:not(.search-field--disabled .search-field__input-container) {
+  background: #D4D4D4;
+}
+
+.search-field__search-icon {
+  display: flex;
+  width: 16px;
+  height: 16px;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+  color: #78797A;
+}
+
+.search-field--filled .search-field__search-icon {
+  color: #00112B;
+}
+
+.search-field--disabled .search-field__search-icon {
+  color: #ADADAD;
+}
+
+.search-field__input {
+  flex: 1;
+  border: none;
+  background: transparent;
+  color: #78797A;
+  font-family: Inter, -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1;
+  outline: none;
+}
+
+.search-field__input::placeholder {
+  color: #78797A;
+}
+
+.search-field--filled .search-field__input {
+  color: #00112B;
+}
+
+.search-field__input:disabled {
+  color: #ADADAD;
+  cursor: not-allowed;
+}
+
+.search-field__input:disabled::placeholder {
+  color: #ADADAD;
+}
+
+.search-field__clear-button {
+  display: flex;
+  width: 16px;
+  height: 16px;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  padding: 0;
+  color: #00112B;
+  transition: opacity 0.2s ease;
+}
+
+.search-field__clear-button:hover {
+  opacity: 0.7;
+}
+
+.search-field__clear-button:focus {
+  outline: 2px solid rgba(0, 17, 43, 0.2);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+.search-field__clear-button:focus:not(:focus-visible) {
+  outline: none;
+}
+
+.search-field__clear-icon {
+  width: 16px;
+  height: 16px;
+}
+
+.search-field--disabled .search-field__input-container {
+  background: #CECECE;
+}
+
+/* Focus states */
+.search-field__input-container:focus-within {
+  outline: 2px solid rgba(0, 17, 43, 0.2);
+  outline-offset: 2px;
+}
+
+.search-field__input-container:focus-within:not(:focus-visible) {
+  outline: none;
+}
+
+/* Accessibility */
+.search-field__input:focus {
+  outline: none;
+}
