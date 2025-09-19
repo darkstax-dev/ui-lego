@@ -1,0 +1,126 @@
+/* InputField styles matching Figma design */
+.input-field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+}
+
+.input-field__label {
+  color: #00112B;
+  font-family: Macan, -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 14px;
+  font-weight: 450;
+  line-height: 1.2;
+  margin: 0;
+}
+
+.input-field__input {
+  display: flex;
+  height: 40px;
+  padding: 12px 16px;
+  align-items: center;
+  background: #DFDFDF;
+  border: 1px solid transparent;
+  transition: all 0.2s ease;
+  gap: 4px;
+}
+
+.input-field__input:hover:not(.input-field__input--disabled) {
+  background: #D4D4D4;
+}
+
+.input-field__input--error {
+  border-color: #D9322A;
+}
+
+.input-field__input--success {
+  border-color: #23A45A;
+}
+
+.input-field__input--disabled {
+  background: #CECECE;
+}
+
+.input-field__icon {
+  display: flex;
+  width: 20px;
+  height: 20px;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+  color: #78797A;
+}
+
+.input-field__input--disabled .input-field__icon {
+  color: #ADADAD;
+}
+
+.input-field__control {
+  flex: 1;
+  border: none;
+  background: transparent;
+  color: #00112B;
+  font-family: Macan, -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 16px;
+  font-weight: 450;
+  line-height: 1.2;
+  letter-spacing: -0.32px;
+  outline: none;
+}
+
+.input-field__control::placeholder {
+  color: #78797A;
+}
+
+.input-field__control:disabled {
+  color: #ADADAD;
+  cursor: not-allowed;
+}
+
+.input-field__control:disabled::placeholder {
+  color: #ADADAD;
+}
+
+.input-field__supporting-text {
+  color: #00112B;
+  font-family: Macan, -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 14px;
+  font-weight: 450;
+  line-height: 1.2;
+}
+
+.input-field__supporting-text--error {
+  color: #D9322A;
+}
+
+.input-field__supporting-text--success {
+  color: #23A45A;
+}
+
+.input-field--disabled .input-field__label {
+  color: #B3B3B3;
+}
+
+.input-field--disabled .input-field__supporting-text {
+  color: #B3B3B3;
+}
+
+/* Filled state styling */
+.input-field__control:not(:placeholder-shown) {
+  color: #00112B;
+}
+
+.input-field__control:not(:placeholder-shown) + .input-field__icon {
+  color: #00112B;
+}
+
+/* Focus states */
+.input-field__input:focus-within {
+  outline: 2px solid rgba(0, 17, 43, 0.2);
+  outline-offset: 2px;
+}
+
+.input-field__input:focus-within:not(:focus-visible) {
+  outline: none;
+}

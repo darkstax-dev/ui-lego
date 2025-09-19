@@ -1,0 +1,25 @@
+/* RadioGroup styles matching Figma design */
+.radio-group {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  width: 100%;
+}
+
+/* Ensure proper spacing between radio items */
+.radio-group .radio-field + .radio-field {
+  margin-top: 0;
+}
+
+/* Optional: Set a max-width to match Figma design */
+.radio-group--fixed-width {
+  width: 240px;
+}
+
+/* Responsive behavior */
+@media (max-width: 768px) {
+  .radio-group {
+    gap: 8px;
+  }
+}

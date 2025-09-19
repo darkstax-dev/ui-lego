@@ -1,0 +1,149 @@
+/* LoginInput styles matching Figma design */
+.login-input {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  width: 100%;
+  max-width: 500px;
+}
+
+.login-input__label {
+  color: #ADADAD;
+  font-family: 'Macan Mono Trial', -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+  transition: color 0.2s ease;
+}
+
+.login-input__label--filled {
+  color: #DFDFDF;
+}
+
+.login-input__label--error {
+  color: #DFDFDF;
+}
+
+.login-input__label--disabled {
+  color: #CECECE;
+}
+
+.login-input__container {
+  position: relative;
+}
+
+.login-input__field {
+  width: 100%;
+  padding: 24px 6px 24px 12px;
+  border: none;
+  border-bottom: 1px solid #CECECE;
+  background: transparent;
+  color: #78797A;
+  font-family: Macan, -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 16px;
+  font-weight: 450;
+  line-height: 1.2;
+  letter-spacing: -0.32px;
+  outline: none;
+  transition: all 0.2s ease;
+  height: 44px;
+  box-sizing: border-box;
+}
+
+.login-input__field::placeholder {
+  color: #78797A;
+}
+
+.login-input__field:focus {
+  border-bottom-color: #CECECE;
+}
+
+.login-input__field--active {
+  color: #ADADAD;
+}
+
+.login-input__field--error {
+  border-bottom-color: #FF3B31;
+  color: #FF3B31;
+}
+
+.login-input__field--disabled {
+  color: #CECECE;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.login-input__field--disabled::placeholder {
+  color: #CECECE;
+}
+
+/* Cursor indicator for active state */
+.login-input__field--active::after {
+  content: '|';
+  color: #ADADAD;
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+.login-input__helper {
+  color: #FF3B31;
+  font-family: 'Macan Mono Trial', -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+  margin-top: 8px;
+}
+
+.login-input__helper--error {
+  color: #FF3B31;
+}
+
+/* Corner borders for disabled state */
+.login-input__field--disabled {
+  position: relative;
+}
+
+.login-input__field--disabled::before,
+.login-input__field--disabled::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  width: 1px;
+  height: 8px;
+  background: #CECECE;
+}
+
+.login-input__field--disabled::before {
+  left: 0;
+}
+
+.login-input__field--disabled::after {
+  right: 0;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .login-input__field {
+    padding: 20px 6px 20px 12px;
+    height: 40px;
+  }
+  
+  .login-input__label {
+    font-size: 12px;
+    letter-spacing: 1.2px;
+  }
+  
+  .login-input__helper {
+    font-size: 12px;
+    letter-spacing: 1.2px;
+  }
+}
