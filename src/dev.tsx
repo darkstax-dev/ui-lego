@@ -814,6 +814,11 @@ function App() {
       </section>
 
       <section className="component-section">
+        <h2>Dropdown Components</h2>
+        <DropdownDemo />
+      </section>
+
+      <section className="component-section">
         <Icons />
       </section>
     </div>
