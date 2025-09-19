@@ -856,6 +856,12 @@ function App() {
         <h2>Interactive tab navigation with multiple states</h2>
         <TabsDemo />
       </section>
+
+      <section className="component-section">
+        <h1>Tag & Badge Components</h1>
+        <h2>Interactive tags, toggles, and status badges with multiple variants</h2>
+        <TagBadgeDemo />
+      </section>
     </div>
   )
 }
