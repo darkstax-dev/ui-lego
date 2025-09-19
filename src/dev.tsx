@@ -39,7 +39,7 @@ function App() {
 
   return (
     <div className="app">
-      <h1>UI Lego Components</h1>
+      <h1>Input Components</h1>
 
       <section className="component-section">
         <h2>Checkbox Field</h2>
