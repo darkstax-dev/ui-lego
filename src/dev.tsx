@@ -22,6 +22,7 @@ import NotificationDemo from './components/notifications/NotificationDemo'
 import ButtonDemo from './components/buttons/ButtonDemo'
 import TabsDemo from './components/tabs/TabsDemo'
 import NavigationDemo from './components/navigation/NavigationDemo'
+import { TopBarDemo } from './components/bar'
 import TagBadgeDemo from './components/tag-badges/TagBadgeDemo'
 import MenuDemo from './components/menu/MenuDemo'
 import TooltipDemo from './components/tooltip/TooltipDemo'
@@ -66,6 +67,12 @@ function App() {
   return (
     <div className="app">
       <NavigationDemo />
+
+      <section className="component-section">
+        <h1>Top Bar Navigation Component</h1>
+        <h2>Responsive navigation bar with menu items and user actions</h2>
+        <TopBarDemo />
+      </section>
 
       <h1>Input Components</h1>
 
