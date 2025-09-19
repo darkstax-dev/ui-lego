@@ -22,6 +22,7 @@ import NotificationDemo from './components/notifications/NotificationDemo'
 import ButtonDemo from './components/buttons/ButtonDemo'
 import TabsDemo from './components/tabs/TabsDemo'
 import NavigationDemo from './components/navigation/NavigationDemo'
+import TagBadgeDemo from './components/tag-badges/TagBadgeDemo'
 import './dev.css'
 
 function App() {
