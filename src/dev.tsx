@@ -19,6 +19,7 @@ import DropdownDemo from './components/dropdown/DropdownDemo'
 import ModelingDemo from './components/modeling/ModelingDemo'
 import ModalDemo from './components/modal/ModalDemo'
 import NotificationDemo from './components/notifications/NotificationDemo'
+import ButtonDemo from './components/buttons/ButtonDemo'
 import './dev.css'
 
 function App() {
