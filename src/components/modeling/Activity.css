@@ -1,0 +1,96 @@
+.activity {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.activity__content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  position: relative;
+}
+
+.activity--default .activity__content {
+  padding: 0;
+}
+
+.activity--hover .activity__content {
+  padding: 14px;
+  border-radius: 32px;
+  background: rgba(255, 255, 255, 0.60);
+  backdrop-filter: blur(4px);
+  min-height: 52px;
+  justify-content: center;
+}
+
+.activity__icon {
+  display: flex;
+  width: 24px;
+  height: 24px;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.activity__more-icon {
+  position: absolute;
+  right: -8px;
+  bottom: -8px;
+  width: 16px;
+  height: 16px;
+}
+
+.activity__text {
+  color: #072B56;
+  text-align: center;
+  font-family: 'Macan Mono Trial', -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 8px;
+  font-weight: 500;
+  line-height: normal;
+}
+
+/* Hover effects */
+.activity:hover .activity__content {
+  background: rgba(255, 255, 255, 0.60);
+  backdrop-filter: blur(4px);
+  border-radius: 32px;
+  padding: 14px;
+}
+
+.activity:hover .activity__more-icon {
+  opacity: 1;
+}
+
+.activity__more-icon {
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.activity--hover .activity__more-icon {
+  opacity: 1;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .activity__content {
+    scale: 0.8;
+  }
+  
+  .activity__text {
+    font-size: 7px;
+  }
+}
+
+@media (max-width: 480px) {
+  .activity__content {
+    scale: 0.7;
+  }
+  
+  .activity__text {
+    font-size: 6px;
+  }
+}
