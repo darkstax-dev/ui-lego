@@ -12,6 +12,9 @@ export { default as FileUpload } from './components/inputs/FileUpload'
 export { default as LoginInput } from './components/inputs/LoginInput'
 export { default as Icons } from './components/icons/Icons'
 
+// Button exports
+export * from './components/buttons'
+
 // Snackbar exports
 export { default as Snackbar } from './components/snackbar/Snackbar'
 
