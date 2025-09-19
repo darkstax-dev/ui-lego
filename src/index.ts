@@ -10,3 +10,7 @@ export { default as SearchField } from './components/SearchField'
 export { default as SliderField } from './components/SliderField'
 export { default as FileUpload } from './components/FileUpload'
 export { default as LoginInput } from './components/LoginInput'
+export { default as Icons } from './components/icons/Icons'
+
+// Icon exports
+export * from './components/icons'
