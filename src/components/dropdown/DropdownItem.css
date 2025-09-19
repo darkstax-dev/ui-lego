@@ -1,0 +1,137 @@
+/* DropdownItem styles matching Figma design */
+.dropdown-item {
+  display: flex;
+  padding: 12px;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: none;
+  background: transparent;
+  width: 100%;
+  text-align: left;
+  font-family: inherit;
+}
+
+/* Size variants */
+.dropdown-item--small {
+  padding: 8px 12px;
+}
+
+.dropdown-item--big {
+  padding: 12px;
+}
+
+/* Default state */
+.dropdown-item--default {
+  background: var(--Drop-down-light-Background-default, #ECECEC);
+}
+
+.dropdown-item--default:hover {
+  background: #D4D4D4;
+}
+
+/* Hover state - manually applied */
+.dropdown-item--hover {
+  background: #D4D4D4;
+}
+
+/* Danger state */
+.dropdown-item--danger {
+  background: var(--Drop-down-light-Background-default, #ECECEC);
+}
+
+.dropdown-item--danger:hover {
+  background: #D4D4D4;
+}
+
+/* Text styling */
+.dropdown-item__text {
+  flex: 1;
+  font-family: Macan, -apple-system, Roboto, Helvetica, sans-serif;
+  font-style: normal;
+  font-weight: 450;
+  line-height: 120%;
+  margin: 0;
+}
+
+/* Small text */
+.dropdown-item--small .dropdown-item__text {
+  font-size: 14px;
+}
+
+/* Big text */
+.dropdown-item--big .dropdown-item__text {
+  font-size: 16px;
+  letter-spacing: -0.32px;
+  font-feature-settings: 'liga' off, 'clig' off;
+}
+
+/* Default text color */
+.dropdown-item--default .dropdown-item__text {
+  color: var(--Text-Blue-text-Main-text, #00112B);
+}
+
+.dropdown-item--hover .dropdown-item__text {
+  color: var(--Text-Blue-text-Main-text, #00112B);
+}
+
+/* Danger text color */
+.dropdown-item--danger .dropdown-item__text {
+  color: var(--Red-500, #FF3B31);
+}
+
+/* Icon styling */
+.dropdown-item__icon {
+  display: flex;
+  width: 16px;
+  height: 16px;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+/* Default icon color */
+.dropdown-item--default .dropdown-item__icon {
+  color: var(--Text-Blue-text-Main-text, #00112B);
+}
+
+.dropdown-item--hover .dropdown-item__icon {
+  color: var(--Text-Blue-text-Main-text, #00112B);
+}
+
+/* Danger icon color */
+.dropdown-item--danger .dropdown-item__icon {
+  color: var(--Red-500, #FF3B31);
+}
+
+/* Disabled state */
+.dropdown-item:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.dropdown-item:disabled:hover {
+  background: var(--Drop-down-light-Background-default, #ECECEC);
+}
+
+/* Focus styles for accessibility */
+.dropdown-item:focus {
+  outline: 2px solid rgba(0, 17, 43, 0.2);
+  outline-offset: 2px;
+}
+
+.dropdown-item:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* Leading icon */
+.dropdown-item__leading-icon {
+  order: -1;
+}
+
+/* Trailing icon */
+.dropdown-item__trailing-icon {
+  order: 1;
+  margin-left: auto;
+}
