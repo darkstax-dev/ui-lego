@@ -12,30 +12,44 @@ interface SnackbarProps {
 
 const SnackbarIcon: React.FC<{ variant: SnackbarVariant }> = ({ variant }) => {
   const fillColor = variant === 'success' ? '#23A45A' : '#D9322A'
-  
+
+  // Create a consistent pattern that resembles the Figma design
+  const diamondPattern = [
+    [1, 0, 1, 0, 1, 0, 1, 0],
+    [0, 1, 0, 1, 0, 1, 0, 1],
+    [1, 0, 1, 0, 1, 0, 1, 0],
+    [0, 1, 0, 1, 0, 1, 0, 1],
+    [1, 0, 1, 0, 1, 0, 1, 0],
+    [0, 1, 0, 1, 0, 1, 0, 1],
+    [1, 0, 1, 0, 1, 0, 1, 0],
+    [0, 1, 0, 1, 0, 1, 0, 1]
+  ]
+
   return (
     <div className="snackbar__icon">
       <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-        {/* Simplified diamond pattern based on the complex Figma design */}
+        {/* Pattern based on the Figma design */}
         <g>
-          {Array.from({ length: 8 }, (_, row) => 
-            Array.from({ length: 8 }, (_, col) => {
-              const x = col * 5
-              const y = row * 5
-              const isLarge = (row + col) % 3 === 0
-              const size = isLarge ? '5' : '3'
-              const offset = isLarge ? '0' : '1'
-              
+          {diamondPattern.map((row, rowIndex) =>
+            row.map((shouldShow, colIndex) => {
+              if (!shouldShow) return null
+
+              const x = colIndex * 5
+              const y = rowIndex * 5
+              const isLarge = (rowIndex + colIndex) % 3 === 0
+              const size = isLarge ? '4' : '2.5'
+              const offsetX = isLarge ? x : x + 1
+              const offsetY = isLarge ? y : y + 1
+
               return (
                 <rect
-                  key={`${row}-${col}`}
-                  x={x + parseInt(offset)}
-                  y={y + parseInt(offset)}
+                  key={`${rowIndex}-${colIndex}`}
+                  x={offsetX}
+                  y={offsetY}
                   width={size}
                   height={size}
                   fill={fillColor}
-                  transform={`rotate(45 ${x + 2.5} ${y + 2.5})`}
-                  opacity={Math.random() > 0.3 ? 1 : 0}
+                  transform={`rotate(45 ${offsetX + parseFloat(size)/2} ${offsetY + parseFloat(size)/2})`}
                 />
               )
             })
