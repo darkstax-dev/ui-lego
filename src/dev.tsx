@@ -13,6 +13,7 @@ import SliderField from './components/inputs/SliderField'
 import FileUpload from './components/inputs/FileUpload'
 import LoginInput from './components/inputs/LoginInput'
 import Icons from './components/icons/Icons'
+import { Pagination } from './components/pagination'
 import './dev.css'
 
 function App() {
