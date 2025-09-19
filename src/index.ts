@@ -30,5 +30,8 @@ export * from './components/modeling'
 // Modal exports
 export * from './components/modal'
 
+// Notification exports
+export * from './components/notifications'
+
 // Snackbar types
 export type { SnackbarVariant } from './components/snackbar/Snackbar'
