@@ -12,5 +12,8 @@ export { default as FileUpload } from './components/inputs/FileUpload'
 export { default as LoginInput } from './components/inputs/LoginInput'
 export { default as Icons } from './components/icons/Icons'
 
+// Pagination exports
+export * from './components/pagination'
+
 // Icon exports
 export * from './components/icons'
