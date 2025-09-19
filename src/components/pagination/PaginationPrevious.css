@@ -1,0 +1,97 @@
+.pagination-previous {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  
+  /* Reset button styles */
+  outline: none;
+  user-select: none;
+}
+
+.pagination-previous__text {
+  color: #00112B;
+  font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 110%;
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+  transition: color 0.2s ease;
+}
+
+.pagination-previous__icon {
+  display: flex;
+  width: 16px;
+  height: 16px;
+  justify-content: center;
+  align-items: center;
+  color: #00112B;
+  transition: color 0.2s ease;
+}
+
+.pagination-previous:hover:not(.pagination-previous--disabled) {
+  background: rgba(30, 30, 30, 1);
+}
+
+.pagination-previous:hover:not(.pagination-previous--disabled) .pagination-previous__text {
+  color: #FFF;
+}
+
+.pagination-previous:hover:not(.pagination-previous--disabled) .pagination-previous__icon {
+  color: #FFF;
+}
+
+.pagination-previous:focus-visible {
+  outline: 2px solid rgba(30, 30, 30, 0.5);
+  outline-offset: 2px;
+}
+
+.pagination-previous--disabled {
+  cursor: not-allowed;
+}
+
+.pagination-previous--disabled .pagination-previous__text {
+  color: #78797A;
+}
+
+.pagination-previous--disabled .pagination-previous__icon {
+  color: #78797A;
+}
+
+.pagination-previous--disabled:hover {
+  background: transparent;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  .pagination-previous {
+    padding: 6px 10px;
+    gap: 3px;
+  }
+  
+  .pagination-previous__text {
+    font-size: 13px;
+  }
+  
+  .pagination-previous__icon {
+    width: 14px;
+    height: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .pagination-previous {
+    padding: 4px 8px;
+  }
+  
+  .pagination-previous__text {
+    font-size: 12px;
+    display: none; /* Hide text on very small screens, keep only icon */
+  }
+}
