@@ -1,0 +1,38 @@
+.pagination-gap {
+  display: inline-flex;
+  padding: 8px 16px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 8px;
+  user-select: none;
+}
+
+.pagination-gap__text {
+  color: #000;
+  font-family: 'Inter', -apple-system, 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Helvetica', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 140%;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  .pagination-gap {
+    padding: 6px 12px;
+  }
+  
+  .pagination-gap__text {
+    font-size: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .pagination-gap {
+    padding: 4px 8px;
+  }
+  
+  .pagination-gap__text {
+    font-size: 14px;
+  }
+}
