@@ -1,0 +1,215 @@
+/* Design Tokens - Variable Collection */
+/* Generated from Figma design system documentation */
+
+:root {
+  /* ===== BASE COLOR PALETTE ===== */
+  
+  /* Blue Scale */
+  --color-blue-dark-950: #00112b;
+  --color-blue-medium-950: #071f42;
+  --color-blue-950: #072b56;
+  --color-blue-800: #0451a4;
+  --color-blue-700: #0072ff;
+  --color-blue-gray-600: #868d97;
+  --color-blue-gray-500: #a3aab1;
+  --color-blue-gray-400: #b9b9b9;
+  --color-blue-60: #071f42;
+
+  /* Gray Scale */
+  --color-gray-500: #78797a;
+  --color-gray-400: #adadad;
+  --color-gray-300: #cecece;
+  --color-gray-200: #dfdfdf;
+  --color-gray-100: #ececec;
+
+  /* Red Scale */
+  --color-red-700: #b6261f;
+  --color-red-600: #d9322a;
+  --color-red-500: #ff3b31;
+  --color-red-400: #ff6c64;
+  --color-red-300: #ffa29d;
+  --color-red-200: #ffcbc8;
+  --color-red-100: #ffe3e1;
+  --color-red-50: #fef3f2;
+
+  /* Green Scale */
+  --color-green-800: #108541;
+  --color-green-600: #23a45a;
+  --color-green-500: #2eb969;
+  --color-green-400: #55d38a;
+  --color-green-300: #8ee7b3;
+  --color-green-200: #bff3d5;
+  --color-green-100: #defaea;
+
+  /* Yellow/Orange Scale */
+  --color-yellow-600: #dd6a19;
+  --color-yellow-500: #ed8b30;
+  --color-yellow-400: #f09f47;
+  --color-yellow-300: #f5c37c;
+  --color-yellow-200: #f9ddaf;
+  --color-yellow-100: #fdf0d7;
+
+  /* Neutral Colors */
+  --color-white: #ffffff;
+  --color-black: #0e0e0e;
+
+  /* ===== SEMANTIC TOKENS - LIGHT MODE ===== */
+  
+  /* Navigation */
+  --nav-main-bg: var(--color-blue-dark-950);
+  --nav-secondary-bg: var(--color-gray-300);
+
+  /* Backgrounds */
+  --bg-default: var(--color-gray-300);
+  --bg-card: var(--color-gray-200);
+
+  /* Text Colors */
+  --text-blue-main: var(--color-blue-dark-950);
+  --text-blue-secondary: var(--color-blue-medium-950);
+  --text-blue-tertiary: var(--color-blue-950);
+  
+  --text-gray-main: var(--color-gray-500);
+  --text-gray-secondary: var(--color-gray-400);
+  --text-gray-disabled: var(--color-gray-300);
+  
+  --text-white-main: var(--color-white);
+  --text-white-secondary: var(--color-gray-200);
+  --text-white-tertiary: var(--color-gray-500);
+
+  /* Input Labels */
+  --input-label-text: var(--text-blue-main);
+
+  /* Button Colors */
+  --btn-primary-red-fill: var(--color-red-600);
+  --btn-primary-red-hover: var(--color-red-400);
+  --btn-primary-red-danger: var(--color-red-50);
+
+  --btn-icon-gray-fill: var(--color-gray-200);
+  --btn-icon-white-fill: var(--color-gray-100);
+  --btn-icon-hover: var(--color-blue-dark-950);
+  --btn-icon-danger: var(--color-red-500);
+  --btn-icon-disabled: var(--color-gray-300);
+  --btn-icon-default: var(--color-gray-500);
+
+  /* Dividers */
+  --divider-light: #c8c8c8;
+  --divider-dark: var(--color-blue-950);
+}
+
+/* ===== DARK MODE OVERRIDES ===== */
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* Navigation */
+    --nav-main-bg: var(--color-blue-medium-950);
+    --nav-secondary-bg: var(--color-blue-dark-950);
+
+    /* Backgrounds */
+    --bg-default: var(--color-blue-medium-950);
+    --bg-card: var(--color-blue-dark-950);
+
+    /* Text Colors */
+    --text-blue-main: var(--color-gray-200);
+    --text-blue-secondary: var(--color-gray-300);
+    --text-blue-tertiary: var(--color-gray-400);
+    
+    --text-gray-main: var(--color-gray-200);
+    --text-gray-secondary: var(--color-gray-400);
+    --text-gray-disabled: var(--color-gray-500);
+    
+    --text-white-main: var(--color-gray-200);
+    --text-white-secondary: var(--color-gray-300);
+    --text-white-tertiary: var(--color-gray-400);
+
+    /* Input Labels */
+    --input-label-text: var(--text-white-main);
+
+    /* Button Colors */
+    --btn-primary-red-fill: var(--color-red-600);
+    --btn-primary-red-hover: var(--color-red-400);
+    --btn-primary-red-danger: var(--color-red-50);
+
+    --btn-icon-gray-fill: var(--color-blue-950);
+    --btn-icon-white-fill: var(--color-gray-200);
+    --btn-icon-hover: var(--color-blue-dark-950);
+    --btn-icon-danger: var(--color-red-500);
+    --btn-icon-disabled: var(--color-blue-60);
+    --btn-icon-default: var(--text-white-main);
+
+    /* Dividers */
+    --divider-light: var(--color-blue-950);
+    --divider-dark: #c8c8c8;
+  }
+}
+
+/* ===== MANUAL DARK MODE CLASS ===== */
+[data-theme="dark"] {
+  /* Navigation */
+  --nav-main-bg: var(--color-blue-medium-950);
+  --nav-secondary-bg: var(--color-blue-dark-950);
+
+  /* Backgrounds */
+  --bg-default: var(--color-blue-medium-950);
+  --bg-card: var(--color-blue-dark-950);
+
+  /* Text Colors */
+  --text-blue-main: var(--color-gray-200);
+  --text-blue-secondary: var(--color-gray-300);
+  --text-blue-tertiary: var(--color-gray-400);
+  
+  --text-gray-main: var(--color-gray-200);
+  --text-gray-secondary: var(--color-gray-400);
+  --text-gray-disabled: var(--color-gray-500);
+  
+  --text-white-main: var(--color-gray-200);
+  --text-white-secondary: var(--color-gray-300);
+  --text-white-tertiary: var(--color-gray-400);
+
+  /* Input Labels */
+  --input-label-text: var(--text-white-main);
+
+  /* Button Colors */
+  --btn-primary-red-fill: var(--color-red-600);
+  --btn-primary-red-hover: var(--color-red-400);
+  --btn-primary-red-danger: var(--color-red-50);
+
+  --btn-icon-gray-fill: var(--color-blue-950);
+  --btn-icon-white-fill: var(--color-gray-200);
+  --btn-icon-hover: var(--color-blue-dark-950);
+  --btn-icon-danger: var(--color-red-500);
+  --btn-icon-disabled: var(--color-blue-60);
+  --btn-icon-default: var(--text-white-main);
+
+  /* Dividers */
+  --divider-light: var(--color-blue-950);
+  --divider-dark: #c8c8c8;
+}
+
+/* ===== UTILITY CLASSES ===== */
+
+/* Status Colors */
+.status-success { color: var(--color-green-600); }
+.status-warning { color: var(--color-yellow-500); }
+.status-error { color: var(--color-red-500); }
+.status-info { color: var(--color-blue-700); }
+
+/* Background Status Colors */
+.bg-success { background-color: var(--color-green-100); }
+.bg-warning { background-color: var(--color-yellow-100); }
+.bg-error { background-color: var(--color-red-100); }
+.bg-info { background-color: rgba(0, 114, 255, 0.1); }
+
+/* Text Variants */
+.text-primary { color: var(--text-blue-main); }
+.text-secondary { color: var(--text-blue-secondary); }
+.text-tertiary { color: var(--text-blue-tertiary); }
+.text-disabled { color: var(--text-gray-disabled); }
+.text-on-dark { color: var(--text-white-main); }
+.text-on-light { color: var(--text-blue-main); }
+
+/* Interactive States */
+.interactive:hover { opacity: 0.8; }
+.interactive:active { opacity: 0.6; }
+.interactive:disabled { 
+  opacity: 0.5;
+  cursor: not-allowed;
+}
