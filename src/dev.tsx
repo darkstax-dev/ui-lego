@@ -5,6 +5,12 @@ import RadioField from './components/RadioField'
 import SwitchField from './components/SwitchField'
 import RadioGroup from './components/RadioGroup'
 import CheckboxGroup from './components/CheckboxGroup'
+import SelectField from './components/SelectField'
+import InputField from './components/InputField'
+import TextareaField from './components/TextareaField'
+import SearchField from './components/SearchField'
+import SliderField from './components/SliderField'
+import FileUpload from './components/FileUpload'
 import './dev.css'
 
 function App() {
@@ -22,6 +28,14 @@ function App() {
   // Group component states
   const [radioGroupValue, setRadioGroupValue] = React.useState('choice1')
   const [checkboxGroupValues, setCheckboxGroupValues] = React.useState(['feature1', 'feature3'])
+
+  // Input component states
+  const [selectValue, setSelectValue] = React.useState('')
+  const [inputValue, setInputValue] = React.useState('')
+  const [textareaValue, setTextareaValue] = React.useState('')
+  const [searchValue, setSearchValue] = React.useState('')
+  const [sliderValue, setSliderValue] = React.useState<[number, number]>([25, 75])
+  const [uploadedFiles, setUploadedFiles] = React.useState<File[]>([])
 
   return (
     <div className="app">
@@ -382,6 +396,213 @@ function App() {
               onChange={() => {}}
             />
           </div>
+        </div>
+      </section>
+
+      <section className="component-section">
+        <h2>Input Components</h2>
+
+        <div className="demo-group">
+          <h3>Select Field</h3>
+          <SelectField
+            label="Country"
+            options={[
+              { value: 'us', label: 'United States' },
+              { value: 'ca', label: 'Canada' },
+              { value: 'uk', label: 'United Kingdom' },
+              { value: 'au', label: 'Australia' }
+            ]}
+            value={selectValue}
+            onChange={setSelectValue}
+            placeholder="Choose a country"
+          />
+
+          <SelectField
+            label="Priority"
+            options={[
+              { value: 'low', label: 'Low' },
+              { value: 'medium', label: 'Medium' },
+              { value: 'high', label: 'High' }
+            ]}
+            value="high"
+            onChange={() => {}}
+            error="Please select a valid priority level"
+          />
+
+          <SelectField
+            label="Status"
+            options={[
+              { value: 'active', label: 'Active' },
+              { value: 'inactive', label: 'Inactive' }
+            ]}
+            value="active"
+            onChange={() => {}}
+            success="Status updated successfully"
+          />
+
+          <SelectField
+            label="Disabled Select"
+            options={[
+              { value: 'option1', label: 'Option 1' },
+              { value: 'option2', label: 'Option 2' }
+            ]}
+            value=""
+            onChange={() => {}}
+            disabled
+            supportingText="This field is currently disabled"
+          />
+        </div>
+
+        <div className="demo-group">
+          <h3>Input Field</h3>
+          <InputField
+            label="Username"
+            value={inputValue}
+            onChange={setInputValue}
+            placeholder="Enter your username"
+            supportingText="Choose a unique username"
+          />
+
+          <InputField
+            label="Email"
+            value="invalid-email"
+            onChange={() => {}}
+            placeholder="Enter your email"
+            type="email"
+            error="Please enter a valid email address"
+          />
+
+          <InputField
+            label="Website"
+            value="https://example.com"
+            onChange={() => {}}
+            placeholder="Enter website URL"
+            type="url"
+            success="URL format is valid"
+          />
+
+          <InputField
+            label="Disabled Input"
+            value="Cannot edit this"
+            onChange={() => {}}
+            disabled
+            supportingText="This field cannot be modified"
+          />
+        </div>
+
+        <div className="demo-group">
+          <h3>Textarea Field</h3>
+          <TextareaField
+            label="Message"
+            value={textareaValue}
+            onChange={setTextareaValue}
+            placeholder="Enter your message here..."
+            supportingText="Maximum 500 characters"
+            rows={4}
+          />
+
+          <TextareaField
+            label="Comments"
+            value="This field has an error"
+            onChange={() => {}}
+            error="Comment contains inappropriate content"
+            rows={3}
+          />
+
+          <TextareaField
+            label="Feedback"
+            value="Thank you for your feedback!"
+            onChange={() => {}}
+            success="Feedback submitted successfully"
+            rows={2}
+          />
+
+          <TextareaField
+            label="Disabled Textarea"
+            value="This content cannot be edited"
+            onChange={() => {}}
+            disabled
+            rows={3}
+          />
+        </div>
+
+        <div className="demo-group">
+          <h3>Search Field</h3>
+          <SearchField
+            value={searchValue}
+            onChange={setSearchValue}
+            placeholder="Search products..."
+          />
+
+          <SearchField
+            value="Filled search term"
+            onChange={() => {}}
+            placeholder="Search..."
+          />
+
+          <SearchField
+            value=""
+            onChange={() => {}}
+            placeholder="Disabled search"
+            disabled
+          />
+        </div>
+
+        <div className="demo-group">
+          <h3>Slider Field</h3>
+          <SliderField
+            label="Price Range"
+            description="Select your preferred price range"
+            value={sliderValue}
+            onChange={setSliderValue}
+            min={0}
+            max={100}
+            prefix="$"
+          />
+
+          <SliderField
+            label="Disabled Range"
+            description="This slider is disabled"
+            value={[20, 80]}
+            onChange={() => {}}
+            min={0}
+            max={100}
+            prefix="$"
+            disabled
+          />
+        </div>
+
+        <div className="demo-group">
+          <h3>File Upload</h3>
+          <FileUpload
+            onFileSelect={(files) => {
+              if (files) {
+                setUploadedFiles(Array.from(files))
+              }
+            }}
+            accept="image/*,.pdf,.doc,.docx"
+            multiple
+            title="Upload Documents"
+            description="Click to upload or drag and drop"
+          />
+
+          {uploadedFiles.length > 0 && (
+            <div style={{ marginTop: '12px' }}>
+              <h4>Uploaded Files:</h4>
+              <ul>
+                {uploadedFiles.map((file, index) => (
+                  <li key={index}>{file.name} ({(file.size / 1024).toFixed(1)} KB)</li>
+                ))}
+              </ul>
+            </div>
+          )}
+
+          <FileUpload
+            onFileSelect={() => {}}
+            title="Disabled Upload"
+            description="File upload is disabled"
+            disabled
+          />
         </div>
       </section>
     </div>
