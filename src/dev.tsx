@@ -827,6 +827,12 @@ function App() {
       <section className="component-section">
         <ModelingDemo />
       </section>
+
+      <section className="component-section">
+        <h1>Modal</h1>
+        <h2>Interactive modal dialog for creating scenarios</h2>
+        <ModalDemo />
+      </section>
     </div>
   )
 }
