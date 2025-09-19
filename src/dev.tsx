@@ -20,6 +20,7 @@ import ModelingDemo from './components/modeling/ModelingDemo'
 import ModalDemo from './components/modal/ModalDemo'
 import NotificationDemo from './components/notifications/NotificationDemo'
 import ButtonDemo from './components/buttons/ButtonDemo'
+import TabsDemo from './components/tabs/TabsDemo'
 import './dev.css'
 
 function App() {
@@ -844,6 +845,12 @@ function App() {
         <h1>Button Components</h1>
         <h2>Comprehensive button library with multiple variants and states</h2>
         <ButtonDemo />
+      </section>
+
+      <section className="component-section">
+        <h1>Tab Components</h1>
+        <h2>Interactive tab navigation with multiple states</h2>
+        <TabsDemo />
       </section>
     </div>
   )
