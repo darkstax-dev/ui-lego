@@ -18,6 +18,13 @@ import Snackbar from './components/snackbar/Snackbar'
 import DropdownDemo from './components/dropdown/DropdownDemo'
 import ModelingDemo from './components/modeling/ModelingDemo'
 import ModalDemo from './components/modal/ModalDemo'
+import NotificationDemo from './components/notifications/NotificationDemo'
+import ButtonDemo from './components/buttons/ButtonDemo'
+import TabsDemo from './components/tabs/TabsDemo'
+import NavigationDemo from './components/navigation/NavigationDemo'
+import TagBadgeDemo from './components/tag-badges/TagBadgeDemo'
+import MenuDemo from './components/menu/MenuDemo'
+import TooltipDemo from './components/tooltip/TooltipDemo'
 import './dev.css'
 
 function App() {
@@ -58,6 +65,8 @@ function App() {
 
   return (
     <div className="app">
+      <NavigationDemo />
+
       <h1>Input Components</h1>
 
       <section className="component-section">
@@ -816,6 +825,16 @@ function App() {
       </section>
 
       <section className="component-section">
+        <h1>Tooltip Components</h1>
+        <h2>Interactive tooltips with multiple placements and content options</h2>
+        <TooltipDemo />
+      </section>
+
+      <section className="component-section">
+        <NotificationDemo />
+      </section>
+
+      <section className="component-section">
         <h2>Dropdown Components</h2>
         <DropdownDemo />
       </section>
@@ -832,6 +851,30 @@ function App() {
         <h1>Modal</h1>
         <h2>Interactive modal dialog for creating scenarios</h2>
         <ModalDemo />
+      </section>
+
+      <section className="component-section">
+        <h1>Button Components</h1>
+        <h2>Comprehensive button library with multiple variants and states</h2>
+        <ButtonDemo />
+      </section>
+
+      <section className="component-section">
+        <h1>Tab Components</h1>
+        <h2>Interactive tab navigation with multiple states</h2>
+        <TabsDemo />
+      </section>
+
+      <section className="component-section">
+        <h1>Tag & Badge Components</h1>
+        <h2>Interactive tags, toggles, and status badges with multiple variants</h2>
+        <TagBadgeDemo />
+      </section>
+
+      <section className="component-section">
+        <h1>Menu Components</h1>
+        <h2>Context menus and dropdown menu items with states and shortcuts</h2>
+        <MenuDemo />
       </section>
     </div>
   )

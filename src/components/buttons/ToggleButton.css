@@ -1,0 +1,89 @@
+/* ToggleButton styles matching Figma design */
+.toggle-button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.toggle-button__icon {
+  display: flex;
+  width: 20px;
+  height: 20px;
+  justify-content: center;
+  align-items: center;
+  color: #78797A;
+  transition: color 0.2s ease;
+}
+
+.toggle-button__icon--active {
+  color: var(--Text-Blue-text-Main-text, #00112B);
+}
+
+.toggle-button__switch {
+  display: flex;
+  background: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  outline: none;
+}
+
+.toggle-button__switch:focus-visible {
+  outline: 2px solid rgba(0, 17, 43, 0.2);
+  outline-offset: 2px;
+  border-radius: 12px;
+}
+
+.toggle-button__switch:disabled {
+  cursor: not-allowed;
+}
+
+.toggle-button__track {
+  display: flex;
+  width: 34px;
+  height: 20px;
+  padding: 2px;
+  align-items: center;
+  border-radius: 12px;
+  background: var(--Primary-button-red-Fill, #D9322A);
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.toggle-button__track--right {
+  justify-content: flex-end;
+}
+
+.toggle-button__thumb {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: white;
+  box-shadow: 
+    0 1px 2px rgba(10, 13, 18, 0.06),
+    0 1px 3px rgba(10, 13, 18, 0.1);
+  transition: transform 0.2s ease;
+}
+
+/* Thumb animation */
+.toggle-button__track:not(.toggle-button__track--right) .toggle-button__thumb {
+  transform: translateX(0);
+}
+
+.toggle-button__track--right .toggle-button__thumb {
+  transform: translateX(0);
+}
+
+/* Hover effects */
+.toggle-button__switch:hover:not(:disabled) .toggle-button__track {
+  background: #C02A23;
+}
+
+/* Disabled state */
+.toggle-button__switch:disabled .toggle-button__track {
+  background: var(--Icon-Button-Disabled, #CECECE);
+}
+
+.toggle-button__switch:disabled + .toggle-button__icon {
+  color: var(--Text-Gray-text-Disabled-text, #CECECE);
+}

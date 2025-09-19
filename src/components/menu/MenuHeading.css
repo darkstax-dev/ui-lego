@@ -1,0 +1,26 @@
+/* MenuHeading styles matching Figma design */
+.menu-heading {
+  display: flex;
+  align-items: flex-start;
+  padding: 8px 16px 4px 16px;
+  border-radius: 8px;
+  font-family: Inter, -apple-system, Roboto, Helvetica, sans-serif;
+}
+
+.menu-heading__text {
+  color: rgba(117, 117, 117, 1);
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 140%;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .menu-heading {
+    padding: 12px 16px 8px 16px;
+  }
+  
+  .menu-heading__text {
+    font-size: 18px;
+  }
+}

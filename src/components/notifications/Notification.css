@@ -1,0 +1,177 @@
+/* Notification styles matching Figma design */
+.notification {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  position: relative;
+  width: 100%;
+  padding: 16px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.notification:hover {
+  background-color: rgba(0, 0, 0, 0.02);
+}
+
+.notification__content {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  flex: 1;
+}
+
+.notification__avatar-container {
+  position: relative;
+  flex-shrink: 0;
+}
+
+.notification__avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.notification__avatar-indicator {
+  position: absolute;
+  top: 30px;
+  left: 30px;
+  width: 10px;
+  height: 10px;
+}
+
+.notification__text-content {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  flex: 1;
+  min-width: 0;
+}
+
+.notification__text-and-date {
+  display: flex;
+  align-items: flex-end;
+  gap: 16px;
+  width: 100%;
+}
+
+.notification__text {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+  min-width: 0;
+}
+
+.notification__title {
+  color: rgba(30, 30, 30, 1);
+  font-family: Macan, -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.36px;
+  margin: 0;
+  word-wrap: break-word;
+}
+
+.notification__body {
+  color: rgba(30, 30, 30, 1);
+  font-family: Macan, -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.2;
+  margin: 0;
+  word-wrap: break-word;
+}
+
+.notification__date {
+  color: rgba(30, 30, 30, 1);
+  font-family: 'Macan Mono Trial', monospace, -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.1;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.notification__status-indicator {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 12px;
+  height: 12px;
+}
+
+/* Variant styles */
+.notification--new {
+  /* Default styles already applied */
+}
+
+.notification--hover {
+  background-color: rgba(0, 0, 0, 0.02);
+}
+
+.notification--read {
+  opacity: 0.7;
+}
+
+.notification--read .notification__avatar-indicator {
+  display: none;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .notification {
+    padding: 12px;
+  }
+  
+  .notification__text-and-date {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+  
+  .notification__date {
+    font-size: 11px;
+  }
+  
+  .notification__title {
+    font-size: 16px;
+  }
+  
+  .notification__body {
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 480px) {
+  .notification__avatar {
+    width: 32px;
+    height: 32px;
+  }
+  
+  .notification__avatar-indicator {
+    top: 24px;
+    left: 24px;
+    width: 8px;
+    height: 8px;
+  }
+  
+  .notification__avatar-indicator svg {
+    width: 8px;
+    height: 8px;
+  }
+  
+  .notification__status-indicator {
+    width: 10px;
+    height: 10px;
+  }
+  
+  .notification__status-indicator svg {
+    width: 10px;
+    height: 10px;
+  }
+}

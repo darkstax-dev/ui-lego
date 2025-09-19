@@ -1,0 +1,234 @@
+/* Folders Left Panel Component */
+.folders-panel {
+  width: 240px;
+  height: 100%;
+  background: var(--Inputs-Input-Background, #DFDFDF);
+  border-right: 1px solid var(--Divider-Light, #C8C8C8);
+  overflow-y: auto;
+  flex-shrink: 0;
+}
+
+.folders-panel__content {
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+  gap: 0;
+}
+
+.folders-panel__item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border-radius: 4px;
+  min-height: 40px;
+}
+
+.folders-panel__item:hover {
+  background: rgba(0, 17, 43, 0.05);
+}
+
+.folders-panel__item--selected {
+  background: var(--Background-Background-default, #CECECE);
+}
+
+.folders-panel__item--selected:hover {
+  background: var(--Background-Background-default, #CECECE);
+}
+
+.folders-panel__item svg {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  color: var(--Text-Blue-text-Main-text, #00112B);
+}
+
+.folders-panel__item-text {
+  color: var(--Text-Blue-text-Main-text, #00112B);
+  font-family: Macan, -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 14px;
+  font-weight: 450;
+  line-height: 120%;
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Divider between sections */
+.folders-panel__divider {
+  height: 1px;
+  background: var(--Divider-Light, #C8C8C8);
+  margin: 8px 0;
+  background-image: repeating-linear-gradient(
+    to right,
+    var(--Divider-Light, #C8C8C8),
+    var(--Divider-Light, #C8C8C8) 4px,
+    transparent 4px,
+    transparent 8px
+  );
+}
+
+/* Focus states */
+.folders-panel__item:focus-visible {
+  outline: 2px solid rgba(0, 17, 43, 0.2);
+  outline-offset: 2px;
+}
+
+/* Keyboard navigation */
+.folders-panel__item[tabindex="0"] {
+  position: relative;
+}
+
+.folders-panel__item[tabindex="0"]:focus {
+  outline: 2px solid rgba(0, 17, 43, 0.2);
+  outline-offset: 2px;
+}
+
+/* Scrollbar styling */
+.folders-panel::-webkit-scrollbar {
+  width: 8px;
+}
+
+.folders-panel::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.folders-panel::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+}
+
+.folders-panel::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.3);
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .folders-panel {
+    width: 200px;
+  }
+
+  .folders-panel__content {
+    padding: 12px;
+  }
+
+  .folders-panel__item-text {
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 768px) {
+  .folders-panel {
+    width: 100%;
+    max-width: 240px;
+    height: auto;
+    max-height: 400px;
+    position: relative;
+    border-right: none;
+    border-bottom: 1px solid var(--Divider-Light, #C8C8C8);
+  }
+
+  .folders-panel__content {
+    padding: 16px;
+    max-height: 350px;
+    overflow-y: auto;
+  }
+}
+
+@media (max-width: 640px) {
+  .folders-panel {
+    width: 100%;
+  }
+
+  .folders-panel__content {
+    padding: 12px;
+  }
+
+  .folders-panel__item {
+    padding: 12px 8px;
+    min-height: 44px;
+  }
+
+  .folders-panel__item-text {
+    font-size: 14px;
+  }
+
+  /* Larger touch targets on mobile */
+  .folders-panel__item svg {
+    width: 18px;
+    height: 18px;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .folders-panel {
+    border-right-color: currentColor;
+  }
+
+  .folders-panel__item:hover {
+    background: rgba(0, 0, 0, 0.1);
+  }
+
+  .folders-panel__item--selected {
+    background: rgba(0, 0, 0, 0.15);
+    border: 1px solid currentColor;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .folders-panel__item {
+    transition: none;
+  }
+}
+
+/* Dark mode support (if implemented) */
+@media (prefers-color-scheme: dark) {
+  .folders-panel {
+    background: #2a2a2a;
+    border-right-color: #404040;
+  }
+
+  .folders-panel__item-text {
+    color: #ffffff;
+  }
+
+  .folders-panel__item svg {
+    color: #ffffff;
+  }
+
+  .folders-panel__item:hover {
+    background: rgba(255, 255, 255, 0.1);
+  }
+
+  .folders-panel__item--selected {
+    background: #404040;
+  }
+
+  .folders-panel__divider {
+    background: #404040;
+    background-image: repeating-linear-gradient(
+      to right,
+      #404040,
+      #404040 4px,
+      transparent 4px,
+      transparent 8px
+    );
+  }
+
+  .folders-panel::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+  }
+
+  .folders-panel::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+  }
+
+  .folders-panel::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.3);
+  }
+}

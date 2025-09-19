@@ -1,0 +1,101 @@
+/* LinkButton styles matching Figma design */
+.link-button {
+  display: flex;
+  flex-direction: column;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-decoration: none;
+  outline: none;
+  padding: 0;
+  gap: 2px;
+}
+
+.link-button:focus-visible {
+  outline: 2px solid rgba(0, 17, 43, 0.2);
+  outline-offset: 2px;
+}
+
+.link-button__content {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.link-button__text {
+  font-family: Macan, -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 14px;
+  font-weight: 450;
+  line-height: 120%;
+}
+
+.link-button__icon {
+  display: flex;
+  width: 16px;
+  height: 16px;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.link-button__underline {
+  height: 1px;
+  width: 100%;
+  transition: background-color 0.2s ease;
+}
+
+/* Default state */
+.link-button--default .link-button__text {
+  color: var(--red-600-cta, #D9322A);
+}
+
+.link-button--default .link-button__icon {
+  color: var(--red-600-cta, #D9322A);
+}
+
+.link-button--default .link-button__underline {
+  background: var(--red-600-cta, #D9322A);
+}
+
+.link-button--default:hover:not(:disabled) .link-button__text {
+  color: var(--Red-500, #FF3B31);
+}
+
+.link-button--default:hover:not(:disabled) .link-button__icon {
+  color: var(--Red-500, #FF3B31);
+}
+
+.link-button--default:hover:not(:disabled) .link-button__underline {
+  background: var(--Red-500, #FF3B31);
+}
+
+/* Hover state */
+.link-button--hover .link-button__text {
+  color: var(--Red-500, #FF3B31);
+}
+
+.link-button--hover .link-button__icon {
+  color: var(--Red-500, #FF3B31);
+}
+
+.link-button--hover .link-button__underline {
+  background: var(--Red-500, #FF3B31);
+}
+
+/* Disabled state */
+.link-button--disabled {
+  cursor: not-allowed;
+}
+
+.link-button--disabled .link-button__text {
+  color: var(--Primary-button-red-Disabled, #ADADAD);
+}
+
+.link-button--disabled .link-button__icon {
+  color: var(--Primary-button-red-Disabled, #ADADAD);
+}
+
+.link-button--disabled .link-button__underline {
+  background: var(--Primary-button-red-Disabled, #ADADAD);
+}

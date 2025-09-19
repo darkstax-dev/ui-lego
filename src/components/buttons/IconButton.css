@@ -1,0 +1,127 @@
+/* IconButton styles matching Figma design */
+.icon-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background: transparent;
+  color: currentColor;
+  outline: none;
+}
+
+.icon-button:focus-visible {
+  outline: 2px solid rgba(0, 17, 43, 0.2);
+  outline-offset: 2px;
+}
+
+/* Sizes */
+.icon-button--small {
+  width: 32px;
+  height: 32px;
+  padding: 8px;
+}
+
+.icon-button--medium {
+  width: 40px;
+  height: 40px;
+  padding: 10px;
+}
+
+.icon-button--big {
+  width: 48px;
+  height: 48px;
+  padding: 14px;
+}
+
+/* Main variant */
+.icon-button--main {
+  background: var(--Primary-button-red-Fill, #D9322A);
+  color: var(--Primary-button-red-Icon-default, #FFF);
+}
+
+.icon-button--main:hover:not(:disabled) {
+  background: #C02A23;
+}
+
+.icon-button--main.icon-button--disabled {
+  background: var(--Primary-button-red-Disabled, #ADADAD);
+  color: var(--Text-White-text-Secondary-text, #DFDFDF);
+  cursor: not-allowed;
+}
+
+/* Secondary variant */
+.icon-button--secondary {
+  background: transparent;
+}
+
+/* Secondary variant - Default color */
+.icon-button--secondary.icon-button--default {
+  color: var(--Text-Blue-text-Main-text, #00112B);
+}
+
+.icon-button--secondary.icon-button--default:hover:not(:disabled) {
+  color: var(--Text-White-text-Secondary-text, #DFDFDF);
+}
+
+.icon-button--secondary.icon-button--default.icon-button--danger {
+  color: var(--Text-White-text-Secondary-text, #DFDFDF);
+}
+
+.icon-button--secondary.icon-button--default.icon-button--disabled {
+  color: var(--Text-White-text-Secondary-text, #DFDFDF);
+  cursor: not-allowed;
+}
+
+/* Secondary variant - Gray color */
+.icon-button--secondary.icon-button--gray {
+  background: var(--Icon-Button-Disabled, #CECECE);
+  color: #78797A;
+}
+
+.icon-button--secondary.icon-button--gray:hover:not(:disabled) {
+  background: #B8B8B8;
+}
+
+.icon-button--secondary.icon-button--gray.icon-button--selected {
+  background: #B8B8B8;
+  color: #F8F8F8;
+}
+
+.icon-button--secondary.icon-button--gray.icon-button--disabled {
+  background: var(--Icon-Button-Disabled, #CECECE);
+  color: var(--Text-Gray-text-Disabled-text, #CECECE);
+  cursor: not-allowed;
+}
+
+/* Secondary variant - White color */
+.icon-button--secondary.icon-button--white {
+  background: var(--white-white-100, #FFF);
+  color: #78797A;
+}
+
+.icon-button--secondary.icon-button--white:hover:not(:disabled) {
+  background: #F5F5F5;
+}
+
+.icon-button--secondary.icon-button--white.icon-button--disabled {
+  background: var(--white-white-100, #FFF);
+  color: var(--Text-Gray-text-Disabled-text, #CECECE);
+  cursor: not-allowed;
+}
+
+/* Danger state for secondary buttons */
+.icon-button--secondary.icon-button--danger:not(.icon-button--white) {
+  color: var(--Text-White-text-Secondary-text, #DFDFDF);
+}
+
+.icon-button--secondary.icon-button--danger.icon-button--white {
+  color: var(--Red-500, #FF3B31);
+}
+
+/* Selected state */
+.icon-button--secondary.icon-button--selected.icon-button--gray {
+  background: #B8B8B8;
+  color: #F8F8F8;
+}

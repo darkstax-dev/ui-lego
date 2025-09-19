@@ -12,6 +12,9 @@ export { default as FileUpload } from './components/inputs/FileUpload'
 export { default as LoginInput } from './components/inputs/LoginInput'
 export { default as Icons } from './components/icons/Icons'
 
+// Button exports
+export * from './components/buttons'
+
 // Snackbar exports
 export { default as Snackbar } from './components/snackbar/Snackbar'
 
@@ -29,6 +32,18 @@ export * from './components/modeling'
 
 // Modal exports
 export * from './components/modal'
+
+// Notification exports
+export * from './components/notifications'
+
+// Tabs exports
+export * from './components/tabs'
+
+// Menu exports
+export * from './components/menu'
+
+// Tooltip exports
+export * from './components/tooltip'
 
 // Snackbar types
 export type { SnackbarVariant } from './components/snackbar/Snackbar'

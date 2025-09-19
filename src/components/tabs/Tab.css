@@ -1,0 +1,91 @@
+/* Tab component styles based on Figma design */
+:root {
+  --tab-color-inactive: #78797A;
+  --tab-color-active: #00112B;
+  --tab-border-width: 1px;
+}
+
+.tab {
+  display: flex;
+  padding: 4px 12px;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  border-radius: 4px 4px 0 0;
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  position: relative;
+  outline: none;
+  font-family: 'Macan Mono Trial', -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 110%;
+  min-height: 26px;
+}
+
+.tab:focus-visible {
+  outline: 2px solid rgba(0, 17, 43, 0.2);
+  outline-offset: 2px;
+}
+
+.tab__label {
+  white-space: nowrap;
+  user-select: none;
+}
+
+/* Inactive state */
+.tab--inactive {
+  color: var(--tab-color-inactive);
+  border-bottom: var(--tab-border-width) solid var(--tab-color-inactive);
+}
+
+.tab--inactive:hover:not(.tab--disabled) {
+  color: var(--tab-color-inactive);
+  background: rgba(120, 121, 122, 0.05);
+}
+
+/* Active state */
+.tab--active {
+  color: var(--tab-color-active);
+  border-bottom: var(--tab-border-width) solid var(--tab-color-active);
+}
+
+.tab--active:hover:not(.tab--disabled) {
+  color: var(--tab-color-active);
+  background: rgba(0, 17, 43, 0.05);
+}
+
+/* Disabled state */
+.tab--disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.tab--disabled:hover {
+  background: transparent;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  .tab {
+    padding: 6px 8px;
+    font-size: 14px;
+    min-height: 32px;
+  }
+}
+
+@media (max-width: 480px) {
+  .tab {
+    padding: 8px 6px;
+    font-size: 12px;
+    min-height: 36px;
+  }
+  
+  .tab__label {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 80px;
+  }
+}

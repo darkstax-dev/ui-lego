@@ -1,0 +1,140 @@
+/* NotificationWithIcon styles matching Figma design */
+.notification-with-icon {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  position: relative;
+  width: 100%;
+  padding: 16px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.notification-with-icon:hover {
+  background-color: rgba(0, 0, 0, 0.02);
+}
+
+.notification-with-icon__content {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  flex: 1;
+}
+
+.notification-with-icon__icon {
+  flex-shrink: 0;
+}
+
+.notification-with-icon__text-content {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  flex: 1;
+  min-width: 0;
+}
+
+.notification-with-icon__text-and-date {
+  display: flex;
+  align-items: flex-end;
+  gap: 16px;
+  width: 100%;
+}
+
+.notification-with-icon__text {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+  min-width: 0;
+}
+
+.notification-with-icon__title {
+  color: rgba(30, 30, 30, 1);
+  font-family: Macan, -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.36px;
+  margin: 0;
+  word-wrap: break-word;
+}
+
+.notification-with-icon__body {
+  color: rgba(30, 30, 30, 1);
+  font-family: Macan, -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.2;
+  margin: 0;
+  word-wrap: break-word;
+}
+
+.notification-with-icon__date {
+  color: rgba(30, 30, 30, 1);
+  font-family: 'Macan Mono Trial', monospace, -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.1;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.notification-with-icon__status-indicator {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 12px;
+  height: 12px;
+}
+
+/* Variant styles */
+.notification-with-icon--new {
+  /* Default styles already applied */
+}
+
+.notification-with-icon--hover {
+  background-color: rgba(0, 0, 0, 0.02);
+}
+
+.notification-with-icon--read {
+  opacity: 0.7;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .notification-with-icon {
+    padding: 12px;
+  }
+  
+  .notification-with-icon__text-and-date {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+  
+  .notification-with-icon__date {
+    font-size: 11px;
+  }
+  
+  .notification-with-icon__title {
+    font-size: 16px;
+  }
+  
+  .notification-with-icon__body {
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 480px) {
+  .notification-with-icon__status-indicator {
+    width: 10px;
+    height: 10px;
+  }
+  
+  .notification-with-icon__status-indicator svg {
+    width: 10px;
+    height: 10px;
+  }
+}
