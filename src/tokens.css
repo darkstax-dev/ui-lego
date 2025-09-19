@@ -2,6 +2,40 @@
 /* Generated from Figma design system documentation */
 
 :root {
+  /* ===== TYPOGRAPHY TOKENS ===== */
+
+  /* Font Families */
+  --font-family-macan: 'Macan', -apple-system, Roboto, Helvetica, sans-serif;
+  --font-family-macan-mono: 'Macan Mono Trial', -apple-system, Roboto, Helvetica, sans-serif;
+  --font-family-macan-mono-stencil: 'Macan Mono Stencil Trial', -apple-system, Roboto, Helvetica, sans-serif;
+  --font-family-inter: 'Inter', -apple-system, Roboto, Helvetica, sans-serif;
+
+  /* Font Weights */
+  --font-weight-book: 450;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+
+  /* Font Sizes */
+  --font-size-xs: 12px;
+  --font-size-sm: 14px;
+  --font-size-base: 15px;
+  --font-size-md: 16px;
+  --font-size-lg: 18px;
+  --font-size-xl: 24px;
+  --font-size-2xl: 32px;
+  --font-size-3xl: 40px;
+
+  /* Line Heights */
+  --line-height-tight: 110%;
+  --line-height-normal: 120%;
+
+  /* Letter Spacing */
+  --letter-spacing-tight: -0.02em; /* -2% */
+  --letter-spacing-normal: 0;
+  --letter-spacing-wide: 0.05em; /* 5% */
+  --letter-spacing-wider: 0.1em; /* 10% */
+
   /* ===== BASE COLOR PALETTE ===== */
   
   /* Blue Scale */
