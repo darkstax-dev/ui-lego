@@ -822,6 +822,10 @@ function App() {
       <section className="component-section">
         <Icons />
       </section>
+
+      <section className="component-section">
+        <ModelingDemo />
+      </section>
     </div>
   )
 }
