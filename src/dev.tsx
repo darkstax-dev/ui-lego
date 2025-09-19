@@ -17,6 +17,7 @@ import { Pagination } from './components/pagination'
 import Snackbar from './components/snackbar/Snackbar'
 import DropdownDemo from './components/dropdown/DropdownDemo'
 import ModelingDemo from './components/modeling/ModelingDemo'
+import ModalDemo from './components/modal/ModalDemo'
 import './dev.css'
 
 function App() {
