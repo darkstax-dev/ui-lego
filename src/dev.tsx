@@ -21,6 +21,7 @@ import ModalDemo from './components/modal/ModalDemo'
 import NotificationDemo from './components/notifications/NotificationDemo'
 import ButtonDemo from './components/buttons/ButtonDemo'
 import TabsDemo from './components/tabs/TabsDemo'
+import NavigationDemo from './components/navigation/NavigationDemo'
 import './dev.css'
 
 function App() {
