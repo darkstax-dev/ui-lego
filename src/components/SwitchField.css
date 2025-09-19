@@ -1,0 +1,139 @@
+/* CSS Variables from Figma design */
+:root {
+  --switch-background-active: #D9322A;
+  --switch-background-inactive: #ADADAD;
+  --switch-background-disabled: #CECECE;
+  --switch-thumb-default: #FFFFFF;
+  --switch-thumb-disabled: #DFDFDF;
+  --switch-text-default: #00112B;
+  --switch-text-disabled: #CECECE;
+  --switch-description-color: #757575;
+  --switch-space-300: 12px;
+}
+
+.switch-field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.switch-field__main {
+  display: flex;
+  align-items: center;
+  gap: var(--switch-space-300);
+}
+
+.switch-field__switch-container {
+  position: relative;
+  flex-shrink: 0;
+}
+
+.switch-field__input {
+  position: absolute;
+  width: 40px;
+  height: 24px;
+  opacity: 0;
+  cursor: pointer;
+  margin: 0;
+}
+
+.switch-field__input:disabled {
+  cursor: not-allowed;
+}
+
+.switch-field__switch {
+  width: 40px;
+  height: 24px;
+  border-radius: 12px;
+  background: var(--switch-background-inactive);
+  display: flex;
+  align-items: center;
+  padding: 2px;
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.switch-field__switch--checked {
+  background: var(--switch-background-active);
+  justify-content: flex-end;
+}
+
+.switch-field__thumb {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--switch-thumb-default);
+  transition: all 0.2s ease;
+  box-shadow: 
+    0 1px 2px rgba(10, 13, 18, 0.06),
+    0 1px 3px rgba(10, 13, 18, 0.10);
+}
+
+.switch-field__label {
+  flex: 1;
+  color: var(--switch-text-default);
+  font-family: Macan, -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 14px;
+  font-weight: 450;
+  line-height: 1.2;
+  cursor: pointer;
+  margin: 0;
+}
+
+.switch-field__description {
+  color: var(--switch-description-color);
+  font-family: Macan, -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 14px;
+  font-weight: 450;
+  line-height: 1.2;
+}
+
+.switch-field__description--indented {
+  padding-left: 52px;
+}
+
+/* Disabled state */
+.switch-field--disabled .switch-field__switch {
+  background: var(--switch-background-disabled);
+}
+
+.switch-field--disabled .switch-field__switch--checked {
+  background: var(--switch-background-disabled);
+}
+
+.switch-field--disabled .switch-field__thumb {
+  background: var(--switch-thumb-disabled);
+}
+
+.switch-field--disabled .switch-field__label {
+  color: var(--switch-text-disabled);
+  cursor: not-allowed;
+}
+
+.switch-field--disabled .switch-field__description {
+  color: var(--switch-text-disabled);
+}
+
+/* Hover states for non-disabled switches */
+.switch-field:not(.switch-field--disabled) .switch-field__input:hover + .switch-field__switch {
+  opacity: 0.9;
+}
+
+/* Focus states */
+.switch-field__input:focus + .switch-field__switch {
+  outline: 2px solid rgba(217, 50, 42, 0.2);
+  outline-offset: 2px;
+}
+
+.switch-field__input:focus:not(:focus-visible) + .switch-field__switch {
+  outline: none;
+}
+
+/* Animation for thumb movement */
+.switch-field__switch:not(.switch-field__switch--checked) .switch-field__thumb {
+  transform: translateX(0);
+}
+
+.switch-field__switch--checked .switch-field__thumb {
+  transform: translateX(0);
+}
