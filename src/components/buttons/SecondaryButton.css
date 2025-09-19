@@ -1,0 +1,44 @@
+/* SecondaryButton styles matching Figma design */
+.secondary-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: 'Macan Mono Trial', -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 110%;
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+  text-align: center;
+  padding: 8px 16px;
+  outline: none;
+}
+
+.secondary-button:focus-visible {
+  outline: 2px solid rgba(0, 17, 43, 0.2);
+  outline-offset: 2px;
+}
+
+/* Default state */
+.secondary-button--default {
+  color: var(--red-600-cta, #D9322A);
+}
+
+.secondary-button--default:hover:not(:disabled) {
+  color: var(--Red-500, #FF3B31);
+}
+
+/* Hover state */
+.secondary-button--hover {
+  color: var(--Red-500, #FF3B31);
+}
+
+/* Disabled state */
+.secondary-button--disabled {
+  color: var(--Text-Gray-text-Disabled-text, #CECECE);
+  cursor: not-allowed;
+}

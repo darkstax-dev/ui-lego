@@ -1,0 +1,128 @@
+/* Button styles matching Figma design */
+.button {
+  display: flex;
+  align-items: center;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: 'Macan Mono Trial', -apple-system, Roboto, Helvetica, sans-serif;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1.6px;
+  line-height: 110%;
+  outline: none;
+}
+
+.button:focus-visible {
+  outline: 2px solid rgba(0, 17, 43, 0.2);
+  outline-offset: 2px;
+}
+
+.button__content {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.button__icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+/* Sizes */
+.button--small {
+  font-size: 14px;
+  letter-spacing: 1.4px;
+  padding: 8px 16px;
+  height: 32px;
+}
+
+.button--big {
+  font-size: 16px;
+  letter-spacing: 1.6px;
+  height: 40px;
+}
+
+.button--big .button__content {
+  padding: 10px 20px;
+  border-right: 1px solid currentColor;
+}
+
+.button--big .button__icon {
+  padding: 10px;
+  width: 40px;
+  height: 40px;
+}
+
+/* Primary variant */
+.button--primary {
+  background: var(--Primary-button-red-Fill, #D9322A);
+  color: var(--Primary-button-red-Icon-default, #FFF);
+}
+
+.button--primary .button__content {
+  border-right-color: var(--Primary-button-red-Icon-default, #FFF);
+}
+
+.button--primary:hover:not(:disabled) {
+  background: #C02A23;
+}
+
+.button--primary.button--disabled {
+  background: var(--Primary-button-red-Disabled, #ADADAD);
+  color: var(--Text-White-text-Secondary-text, #DFDFDF);
+  cursor: not-allowed;
+}
+
+.button--primary.button--disabled .button__content {
+  border-right-color: var(--Text-White-text-Secondary-text, #DFDFDF);
+}
+
+/* Secondary variant */
+.button--secondary {
+  background: transparent;
+  color: var(--red-600-cta, #D9322A);
+  padding: 8px 16px;
+}
+
+.button--secondary:hover:not(:disabled) {
+  color: var(--Red-500, #FF3B31);
+}
+
+.button--secondary.button--disabled {
+  color: var(--Text-Gray-text-Disabled-text, #CECECE);
+  cursor: not-allowed;
+}
+
+/* White variant */
+.button--white {
+  background: var(--white-white-100, #FFF);
+  color: var(--Text-Blue-text-Main-text, #00112B);
+}
+
+.button--white .button__content {
+  border-right-color: var(--Text-Blue-text-Main-text, #00112B);
+  padding: 12px 20px;
+}
+
+.button--white .button__icon {
+  width: 42px;
+  height: 42px;
+}
+
+.button--white:hover:not(:disabled) {
+  background: #F5F5F5;
+}
+
+.button--white.button--disabled {
+  background: var(--Primary-button-red-Disabled, #ADADAD);
+  color: var(--Text-Gray-text-Disabled-text, #CECECE);
+  cursor: not-allowed;
+}
+
+.button--white.button--disabled .button__content {
+  border-right-color: var(--Divider-Light, #C8C8C8);
+}
