@@ -76,19 +76,19 @@ function App() {
         <h1>Main Navigation Component</h1>
         <h2>Responsive navigation bar with menu items and user actions - Updated with Design Tokens</h2>
 
-        <div style={{ marginBottom: '2rem' }}>
+        <div className="section-block">
           <h3>Default State</h3>
           <p>Standard navigation with all menu items in default state</p>
           <MainNavigation variant="default" />
         </div>
 
-        <div style={{ marginBottom: '2rem' }}>
+        <div className="section-block">
           <h3>Modeling Active State (Variant 3)</h3>
           <p>Navigation with "Modeling" item in active state (red color, minus icon)</p>
           <MainNavigation variant="modeling-active" />
         </div>
 
-        <div style={{ marginBottom: '2rem' }}>
+        <div className="section-block">
           <h3>Hub Variant</h3>
           <p>Navigation showing hub-specific menu items: Dashboard, Administration, Settings</p>
           <MainNavigation variant="hub" />
