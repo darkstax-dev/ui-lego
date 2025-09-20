@@ -1,8 +1,8 @@
-/* SliderField styles matching Figma design */
+/* SliderField styles using design tokens and matching Figma design */
 .slider-field {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: var(--sds-size-space-200);
   width: 100%;
 }
 
@@ -14,10 +14,10 @@
 
 .slider-field__label {
   flex: 1;
-  color: #1E1E1E;
-  font-family: Inter, -apple-system, Roboto, Helvetica, sans-serif;
-  font-size: 16px;
-  font-weight: 400;
+  color: var(--sds-color-text-default-default);
+  font-family: var(--sds-typography-body-font-family);
+  font-size: var(--sds-typography-body-size-medium);
+  font-weight: var(--sds-typography-body-font-weight-regular);
   line-height: 1.4;
   margin: 0;
 }
@@ -30,27 +30,27 @@
 
 .slider-field__prefix,
 .slider-field__suffix {
-  color: #1E1E1E;
+  color: var(--sds-color-text-default-default);
   text-align: right;
-  font-family: Inter, -apple-system, Roboto, Helvetica, sans-serif;
-  font-size: 14px;
-  font-weight: 400;
+  font-family: var(--sds-typography-body-font-family);
+  font-size: var(--sds-typography-body-size-small);
+  font-weight: var(--sds-typography-body-font-weight-regular);
   line-height: 1.4;
 }
 
 .slider-field__value {
-  color: #1E1E1E;
+  color: var(--sds-color-text-default-default);
   text-align: right;
-  font-family: Inter, -apple-system, Roboto, Helvetica, sans-serif;
-  font-size: 14px;
-  font-weight: 400;
+  font-family: var(--sds-typography-body-font-family);
+  font-size: var(--sds-typography-body-size-small);
+  font-weight: var(--sds-typography-body-font-weight-regular);
   line-height: 1.4;
 }
 
 .slider-field__slider {
   display: flex;
   align-items: center;
-  padding: 8px 0;
+  padding: var(--sds-size-space-200) 0;
   cursor: pointer;
 }
 
@@ -60,14 +60,14 @@
   align-items: center;
   flex: 1;
   border-radius: 9999px;
-  background: #E6E6E6;
+  background: var(--sds-color-background-brand-secondary);
   position: relative;
 }
 
 .slider-field__range {
   position: absolute;
   height: 6px;
-  background: #2C2C2C;
+  background: var(--sds-color-border-brand-default);
   border-radius: 9999px;
   top: 50%;
   transform: translateY(-50%);
@@ -78,7 +78,7 @@
   width: 16px;
   height: 16px;
   border-radius: 50%;
-  background: #2C2C2C;
+  background: var(--sds-color-border-brand-default);
   cursor: grab;
   transform: translateX(-50%);
   transition: all 0.2s ease;
@@ -104,35 +104,35 @@
 }
 
 .slider-field__description {
-  color: #757575;
-  font-family: Inter, -apple-system, Roboto, Helvetica, sans-serif;
-  font-size: 16px;
-  font-weight: 400;
+  color: var(--sds-color-text-default-secondary);
+  font-family: var(--sds-typography-body-font-family);
+  font-size: var(--sds-typography-body-size-medium);
+  font-weight: var(--sds-typography-body-font-weight-regular);
   line-height: 1.4;
 }
 
 /* Disabled state */
 .slider-field--disabled .slider-field__label {
-  color: #1E1E1E;
+  color: var(--sds-color-text-default-default);
 }
 
 .slider-field--disabled .slider-field__prefix,
 .slider-field--disabled .slider-field__suffix,
 .slider-field--disabled .slider-field__value {
-  color: #1E1E1E;
+  color: var(--sds-color-text-default-default);
 }
 
 .slider-field--disabled .slider-field__track {
-  background: #E6E6E6;
+  background: var(--sds-color-background-brand-secondary);
 }
 
 .slider-field--disabled .slider-field__range {
-  background: #E6E6E6;
+  background: var(--sds-color-background-brand-secondary);
 }
 
 .slider-field--disabled .slider-field__handle {
-  background: #D9D9D9;
-  border: 1px solid #B3B3B3;
+  background: var(--sds-color-background-disabled-default);
+  border: var(--sds-size-stroke-border) solid var(--sds-color-border-disabled-default);
   cursor: not-allowed;
 }
 
@@ -146,7 +146,7 @@
 }
 
 .slider-field--disabled .slider-field__description {
-  color: #757575;
+  color: var(--sds-color-text-default-secondary);
 }
 
 .slider-field--disabled .slider-field__slider {
