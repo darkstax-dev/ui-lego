@@ -94,15 +94,9 @@ function App() {
           <MainNavigation variant="hub" />
         </div>
 
-        <div style={{
-          background: 'white',
-          padding: '24px',
-          borderRadius: '8px',
-          boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
-          marginTop: '24px'
-        }}>
-          <h3 style={{ color: '#333', marginBottom: '16px' }}>Design Token Updates & New Features</h3>
-          <ul style={{ color: '#666', lineHeight: '1.6' }}>
+        <div className="feature-card">
+          <h3 className="feature-card__title">Design Token Updates & New Features</h3>
+          <ul className="feature-card__list">
             <li><strong>Typography:</strong> Now uses proper Macan Mono Trial font with token-based sizing</li>
             <li><strong>Colors:</strong> Updated to use semantic color tokens (--color-red-600, --color-gray-200, etc.)</li>
             <li><strong>Spacing:</strong> All gaps and padding use standardized spacing tokens</li>
@@ -115,24 +109,18 @@ function App() {
           </ul>
         </div>
 
-        <div style={{
-          background: '#f8f9fa',
-          padding: '24px',
-          borderRadius: '8px',
-          border: '1px solid #e9ecef',
-          marginTop: '16px'
-        }}>
-          <h3 style={{ color: '#333', marginBottom: '16px' }}>🎯 Figma Design Compliance</h3>
-          <p style={{ color: '#666', marginBottom: '12px' }}>
+        <div className="compliance-card">
+          <h3 className="compliance-card__title">🎯 Figma Design Compliance</h3>
+          <p className="compliance-card__lead">
             Click the <strong>+</strong> icons next to menu items above to see the exact Figma behavior:
           </p>
-          <ul style={{ color: '#666', lineHeight: '1.6', marginBottom: '16px', paddingLeft: '20px' }}>
+          <ul className="compliance-card__list">
             <li><strong>Default state:</strong> All elements (icon, text, expand) are gray (#DFDFDF)</li>
             <li><strong>Open state:</strong> All elements turn red (#D9322A) with minus icon</li>
             <li><strong>Typography:</strong> Macan Mono Trial, 16px, 600 weight, 110% line height, 1.6px letter spacing, uppercase</li>
             <li><strong>Interactive:</strong> Plus icons transform to minus icons when dropdowns open</li>
           </ul>
-          <p style={{ color: '#666', fontSize: '14px', fontStyle: 'italic' }}>
+          <p className="compliance-card__note">
             ✨ The implementation now matches the Figma "Menu item" component specification exactly,
             including the two variants: "Default" and "Open" states with precise color transitions.
           </p>
