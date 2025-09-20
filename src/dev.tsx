@@ -72,7 +72,7 @@ function App() {
     <div className="app">
       <NavigationDemo />
 
-      <section className="component-section">
+      <section className="component-section component-section--white">
         <h1>Main Navigation Component</h1>
         <h2>Responsive navigation bar with menu items and user actions - Updated with Design Tokens</h2>
 
@@ -129,7 +129,7 @@ function App() {
 
       <h1>Input Components</h1>
 
-      <section className="component-section">
+      <section className="component-section component-section--white">
         <h2 className="section-title-mono-stencil">
           Inputs for Login
         </h2>

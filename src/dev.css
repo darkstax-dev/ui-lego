@@ -37,6 +37,8 @@ h1 {
   margin-bottom: 2rem;
 }
 
+.component-section--white { background: rgba(255, 255, 255, 1); }
+
 .demo-group {
   margin-bottom: 2rem;
   padding: 1rem;
