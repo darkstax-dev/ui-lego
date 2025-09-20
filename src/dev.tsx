@@ -121,14 +121,19 @@ function App() {
           border: '1px solid #e9ecef',
           marginTop: '16px'
         }}>
-          <h3 style={{ color: '#333', marginBottom: '16px' }}>🎯 Try the Dropdown Menus!</h3>
+          <h3 style={{ color: '#333', marginBottom: '16px' }}>🎯 Figma Design Compliance</h3>
           <p style={{ color: '#666', marginBottom: '12px' }}>
-            Click the <strong>+</strong> icons next to menu items above to see the dropdown functionality in action.
-            Each dropdown contains contextual menu items styled according to the Figma design specifications.
+            Click the <strong>+</strong> icons next to menu items above to see the exact Figma behavior:
           </p>
+          <ul style={{ color: '#666', lineHeight: '1.6', marginBottom: '16px', paddingLeft: '20px' }}>
+            <li><strong>Default state:</strong> All elements (icon, text, expand) are gray (#DFDFDF)</li>
+            <li><strong>Open state:</strong> All elements turn red (#D9322A) with minus icon</li>
+            <li><strong>Typography:</strong> Macan Mono Trial, 16px, 600 weight, 110% line height, 1.6px letter spacing, uppercase</li>
+            <li><strong>Interactive:</strong> Plus icons transform to minus icons when dropdowns open</li>
+          </ul>
           <p style={{ color: '#666', fontSize: '14px', fontStyle: 'italic' }}>
-            📝 Dropdown items use: Macan Mono Trial font, 14px size, 600 weight, uppercase transformation,
-            and the exact color and spacing from the Figma design tokens.
+            ✨ The implementation now matches the Figma "Menu item" component specification exactly,
+            including the two variants: "Default" and "Open" states with precise color transitions.
           </p>
         </div>
       </section>
