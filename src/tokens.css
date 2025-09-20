@@ -2,6 +2,62 @@
 /* Generated from Figma design system documentation */
 
 :root {
+  /* ===== SIMPLE DESIGN SYSTEM (SDS) TOKENS ===== */
+
+  /* Spacing Scale */
+  --sds-size-space-100: 4px;
+  --sds-size-space-200: 8px;
+  --sds-size-space-300: 12px;
+  --sds-size-space-400: 16px;
+  --sds-size-space-600: 24px;
+  --sds-size-space-800: 32px;
+  --sds-size-space-1600: 64px;
+  --sds-size-space-2400: 96px;
+  --sds-size-space-4000: 160px;
+
+  /* Negative Spacing */
+  --sds-size-space-negative-100: -4px;
+  --sds-size-space-negative-200: -8px;
+  --sds-size-space-negative-300: -12px;
+  --sds-size-space-negative-400: -16px;
+  --sds-size-space-negative-600: -24px;
+
+  /* Border Radius */
+  --sds-size-radius-100: 4px;
+  --sds-size-radius-200: 8px;
+  --sds-size-radius-400: 16px;
+  --sds-size-radius-full: 9999px;
+
+  /* Depth/Shadows */
+  --sds-size-depth-0: 0px;
+  --sds-size-depth-025: 1px;
+  --sds-size-depth-100: 4px;
+  --sds-size-depth-negative-025: -1px;
+
+  /* SDS Color System - Neutrals */
+  --sds-color-border-neutral-tertiary: rgba(178, 178, 178, 1);
+  --sds-color-background-neutral-secondary: rgba(205, 205, 205, 1);
+  --sds-color-background-neutral-tertiary: rgba(227, 227, 227, 1);
+  --sds-color-text-neutral-on-neutral-secondary: rgba(48, 48, 48, 1);
+  --sds-color-background-default-default: rgba(206, 206, 206, 1);
+
+  /* SDS Color System - Utilities */
+  --sds-color-background-utilities-measurement: rgba(250, 225, 250, 1);
+  --sds-color-border-utilities-swatch: rgba(0, 0, 0, 0.24);
+
+  /* SDS Color System - Warning States */
+  --sds-color-border-warning-default: rgba(82, 37, 4, 1);
+  --sds-color-background-warning-secondary: rgba(255, 241, 194, 1);
+  --sds-color-text-warning-on-warning-secondary: rgba(104, 45, 3, 1);
+
+  /* SDS Color System - Black/Transparency */
+  --sds-color-black-100: rgba(12, 12, 13, 0.05);
+  --sds-color-black-200: rgba(12, 12, 13, 0.1);
+
+  /* SDS Brand Colors */
+  --Gray-50: #FFF;
+  --Brown-Main-900: #403B39;
+
   /* ===== TYPOGRAPHY TOKENS ===== */
 
   /* Font Families */
