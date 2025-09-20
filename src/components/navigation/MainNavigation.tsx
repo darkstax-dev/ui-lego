@@ -105,24 +105,33 @@ export const MainNavigation: React.FC<MainNavigationProps> = ({
           {/* Hub Icon */}
           <div className="main-navigation__hub">
             <div className="main-navigation__hub-icon">
-              {/* Hub pattern SVG */}
+              {/* Hub pattern SVG - Simplified diamond pattern matching Figma design */}
               <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-                <rect x="4" y="0" width="4" height="4" fill="#D9322A"/>
-                <rect x="7" y="0" width="4" height="4" fill="#D9322A"/>
-                <rect x="11" y="0" width="4" height="4" fill="#D9322A"/>
-                <rect x="14" y="0" width="4" height="4" fill="#D9322A"/>
-                <rect x="18" y="0" width="4" height="4" fill="#D9322A"/>
-                <rect x="21" y="0" width="4" height="4" fill="#D9322A"/>
-                <rect x="25" y="0" width="4" height="4" fill="#D9322A"/>
-                <rect x="0" y="4" width="4" height="4" fill="#D9322A"/>
-                <rect x="4" y="4" width="4" height="4" fill="#D9322A"/>
-                <rect x="7" y="4" width="4" height="4" fill="#D9322A"/>
-                <rect x="11" y="4" width="4" height="4" fill="#D9322A"/>
-                <rect x="14" y="4" width="4" height="4" fill="#D9322A"/>
-                <rect x="18" y="4" width="4" height="4" fill="#D9322A"/>
-                <rect x="21" y="4" width="4" height="4" fill="#D9322A"/>
-                <rect x="25" y="4" width="4" height="4" fill="#D9322A"/>
-                <rect x="28" y="4" width="4" height="4" fill="#D9322A"/>
+                {/* Row 1 */}
+                <path d="M6.5 0L4 2L6.5 4L9 2L6.5 0Z" fill="var(--color-red-600)"/>
+                <path d="M10.5 0L8 2L10.5 4L13 2L10.5 0Z" fill="var(--color-red-600)"/>
+                <path d="M14.5 0L12 2L14.5 4L17 2L14.5 0Z" fill="var(--color-red-600)"/>
+                <path d="M18.5 0L16 2L18.5 4L21 2L18.5 0Z" fill="var(--color-red-600)"/>
+                <path d="M22.5 0L20 2L22.5 4L25 2L22.5 0Z" fill="var(--color-red-600)"/>
+                <path d="M26.5 0L24 2L26.5 4L29 2L26.5 0Z" fill="var(--color-red-600)"/>
+
+                {/* Row 2 */}
+                <path d="M2 4L0 6L2 8L4 6L2 4Z" fill="var(--color-red-600)"/>
+                <path d="M6.5 4L4 6L6.5 8L9 6L6.5 4Z" fill="var(--color-red-600)"/>
+                <path d="M10.5 4L8 6L10.5 8L13 6L10.5 4Z" fill="var(--color-red-600)"/>
+                <path d="M14.5 4L12 6L14.5 8L17 6L14.5 4Z" fill="var(--color-red-600)"/>
+                <path d="M18.5 4L16 6L18.5 8L21 6L18.5 4Z" fill="var(--color-red-600)"/>
+                <path d="M22.5 4L20 6L22.5 8L25 6L22.5 4Z" fill="var(--color-red-600)"/>
+                <path d="M26.5 4L24 6L26.5 8L29 6L26.5 4Z" fill="var(--color-red-600)"/>
+                <path d="M30 4L28 6L30 8L32 6L30 4Z" fill="var(--color-red-600)"/>
+
+                {/* Row 3 */}
+                <path d="M2 8L0 10L2 12L4 10L2 8Z" fill="var(--color-red-600)"/>
+                <path d="M6.5 8L4 10L6.5 12L9 10L6.5 8Z" fill="var(--color-red-600)"/>
+                <path d="M18.5 8L16 10L18.5 12L21 10L18.5 8Z" fill="var(--color-red-600)"/>
+                <path d="M22.5 8L20 10L22.5 12L25 10L22.5 8Z" fill="var(--color-red-600)"/>
+                <path d="M26.5 8L24 10L26.5 12L29 10L26.5 8Z" fill="var(--color-red-600)"/>
+                <path d="M30 8L28 10L30 12L32 10L30 8Z" fill="var(--color-red-600)"/>
               </svg>
             </div>
             <span className="main-navigation__hub-text">HUB</span>
