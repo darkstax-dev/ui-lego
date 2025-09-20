@@ -54,26 +54,26 @@ const Dropdown: React.FC<DropdownProps> = ({
           event.preventDefault()
           if (items.length > 0) {
             const nextIndex = currentIndex < items.length - 1 ? currentIndex + 1 : 0
-            (items[nextIndex] as HTMLElement).focus()
+            ;(items[nextIndex] as HTMLElement).focus()
           }
           break
         case 'ArrowUp':
           event.preventDefault()
           if (items.length > 0) {
             const prevIndex = currentIndex > 0 ? currentIndex - 1 : items.length - 1
-            (items[prevIndex] as HTMLElement).focus()
+            ;(items[prevIndex] as HTMLElement).focus()
           }
           break
         case 'Home':
           event.preventDefault()
           if (items.length > 0) {
-            (items[0] as HTMLElement).focus()
+            ;(items[0] as HTMLElement).focus()
           }
           break
         case 'End':
           event.preventDefault()
           if (items.length > 0) {
-            (items[items.length - 1] as HTMLElement).focus()
+            ;(items[items.length - 1] as HTMLElement).focus()
           }
           break
       }
