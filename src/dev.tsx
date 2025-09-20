@@ -857,7 +857,7 @@ function App() {
 
         <div className="demo-group">
           <h3>Custom Messages</h3>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+          <div className="stack stack--400">
             <Snackbar
               variant="success"
               title="Profile Updated"
