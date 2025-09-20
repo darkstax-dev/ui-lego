@@ -88,4 +88,4 @@ const Button = forwardRef<HTMLButtonElement, PolymorphicProps<'button', OwnProps
   )
 })
 
-export default Button
+export default React.memo(Button)
