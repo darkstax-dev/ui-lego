@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { MainNavigation } from './MainNavigation';
 import { SecondaryNavigation } from './SecondaryNavigation';
 import { FoldersLeftPanel, FolderItem } from './FoldersLeftPanel';
+import './NavigationDemo.css';
 
 const sampleFolders: FolderItem[] = [
   {
@@ -124,8 +125,7 @@ export const NavigationDemo: React.FC = () => {
 
   const handleFolderClick = (folder: FolderItem) => {
     console.log('Folder clicked:', folder);
-    
-    // Update selection
+
     const updateFolderSelection = (items: FolderItem[]): FolderItem[] => {
       return items.map(item => ({
         ...item,
@@ -158,30 +158,17 @@ export const NavigationDemo: React.FC = () => {
   };
 
   return (
-    <div style={{ background: '#f5f5f5', minHeight: '100vh' }}>
-      {/* Controls for demo */}
-      <div style={{ 
-        padding: '20px', 
-        background: 'white', 
-        borderBottom: '1px solid #ddd',
-        marginBottom: '20px'
-      }}>
-        <h3 style={{ margin: '0 0 16px 0', fontFamily: 'Macan, sans-serif' }}>Navigation Demo Controls</h3>
-        
-        <div style={{ display: 'flex', gap: '24px', flexWrap: 'wrap', alignItems: 'center' }}>
+    <div className="navigation-demo">
+      <div className="navigation-demo__controls">
+        <h3 className="navigation-demo__controls-title">Navigation Demo Controls</h3>
+
+        <div className="navigation-demo__controls-row">
           <div>
-            <label style={{ display: 'block', marginBottom: '8px', fontSize: '14px', fontWeight: '500' }}>
-              Main Navigation Variant:
-            </label>
+            <label className="navigation-demo__label">Main Navigation Variant:</label>
             <select
               value={mainNavVariant}
               onChange={(e) => setMainNavVariant(e.target.value as any)}
-              style={{ 
-                padding: '8px 12px', 
-                border: '1px solid #ddd',
-                borderRadius: '4px',
-                background: 'white'
-              }}
+              className="navigation-demo__select"
             >
               <option value="default">Default</option>
               <option value="modeling-active">Modeling Active</option>
@@ -190,18 +177,11 @@ export const NavigationDemo: React.FC = () => {
           </div>
 
           <div>
-            <label style={{ display: 'block', marginBottom: '8px', fontSize: '14px', fontWeight: '500' }}>
-              Secondary Navigation Variant:
-            </label>
+            <label className="navigation-demo__label">Secondary Navigation Variant:</label>
             <select
               value={secondaryVariant}
               onChange={(e) => setSecondaryVariant(e.target.value as any)}
-              style={{ 
-                padding: '8px 12px', 
-                border: '1px solid #ddd',
-                borderRadius: '4px',
-                background: 'white'
-              }}
+              className="navigation-demo__select"
             >
               <option value="default">Default</option>
               <option value="with-back">With Back Arrow</option>
@@ -210,10 +190,8 @@ export const NavigationDemo: React.FC = () => {
         </div>
       </div>
 
-      {/* Main Navigation */}
       <MainNavigation variant={mainNavVariant} />
 
-      {/* Secondary Navigation */}
       <SecondaryNavigation
         variant={secondaryVariant}
         scenarioTitle="[Demo Scenario]"
@@ -224,69 +202,29 @@ export const NavigationDemo: React.FC = () => {
         onCreateScenario={handleCreateScenario}
       />
 
-      {/* Content area with folders panel */}
-      <div style={{ 
-        display: 'flex', 
-        maxWidth: '1400px', 
-        margin: '0 auto',
-        minHeight: '600px',
-        background: 'white',
-        boxShadow: '0 2px 8px rgba(0,0,0,0.1)'
-      }}>
+      <div className="navigation-layout">
         <FoldersLeftPanel
           folders={folders}
           onFolderClick={handleFolderClick}
           onFolderToggle={handleFolderToggle}
         />
-        
-        {/* Main content area */}
-        <div style={{ 
-          flex: 1, 
-          padding: '24px',
-          background: 'white'
-        }}>
-          <h2 style={{ 
-            margin: '0 0 16px 0',
-            color: '#00112B',
-            fontFamily: "'Macan Mono Stencil Trial', sans-serif",
-            fontSize: '24px',
-            fontWeight: '500',
-            textTransform: 'uppercase',
-            letterSpacing: '1.2px'
-          }}>
-            Main Content Area
-          </h2>
-          <p style={{ 
-            color: '#00112B',
-            fontFamily: 'Macan, sans-serif',
-            fontSize: '16px',
-            lineHeight: '1.5'
-          }}>
+
+        <div className="navigation-content">
+          <h2 className="navigation-content__title">Main Content Area</h2>
+          <p className="navigation-content__description">
             This demo shows the three navigation components working together:
           </p>
-          <ul style={{ 
-            color: '#00112B',
-            fontFamily: 'Macan, sans-serif',
-            fontSize: '14px',
-            lineHeight: '1.5',
-            paddingLeft: '20px'
-          }}>
+          <ul className="navigation-content__list">
             <li><strong>Main Navigation:</strong> Top navigation bar with logo, menu items, and user actions</li>
             <li><strong>Secondary Navigation:</strong> Scenario-based navigation with search, filters, and actions</li>
             <li><strong>Folders Left Panel:</strong> Hierarchical folder structure with expandable items</li>
           </ul>
 
-          <div style={{ 
-            marginTop: '24px',
-            padding: '16px',
-            background: '#f8f9fa',
-            borderRadius: '8px',
-            border: '1px solid #e9ecef'
-          }}>
-            <h4 style={{ margin: '0 0 12px 0', fontSize: '14px', fontWeight: '600' }}>
+          <div className="navigation-content__panel">
+            <h4 className="navigation-content__panel-title">
               Current State:
             </h4>
-            <ul style={{ margin: 0, paddingLeft: '16px', fontSize: '12px', lineHeight: '1.4' }}>
+            <ul className="navigation-content__panel-list">
               <li>Main Nav Variant: <code>{mainNavVariant}</code></li>
               <li>Secondary Nav Variant: <code>{secondaryVariant}</code></li>
               <li>Locked Records: <code>{lockedRecords ? 'true' : 'false'}</code></li>

@@ -49,7 +49,6 @@ const FolderIcon: React.FC<{ type: 'default' | 'selected' | 'empty' | 'hover'; e
     );
   }
 
-  // Default folder icon (with add icon)
   return (
     <svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
       <g clipPath="url(#clip0_default_folder)">
@@ -84,23 +83,13 @@ const FolderTreeItem: React.FC<{
 
   const displayType = isHovered ? 'hover' : folder.type;
 
-  // Calculate proper indentation based on design
-  let paddingLeft = 8; // Base padding
-  if (level === 1) {
-    paddingLeft = 24; // Nested items like "API"
-  } else if (level === 2) {
-    paddingLeft = 48; // Deep nested items like "Resources", "Main resources"
-  }
-
+  const indentClass = `folders-panel__indent--${Math.min(level, 2)}`;
   const isTextOnly = folder.isChildItem && folder.type === 'selected' && level === 2;
 
   return (
     <>
       <div
-        className={`folders-panel__item folders-panel__item--${displayType} ${
-          folder.type === 'selected' ? 'folders-panel__item--selected' : ''
-        }`}
-        style={{ paddingLeft: `${paddingLeft}px` }}
+        className={`folders-panel__item folders-panel__item--${displayType} ${folder.type === 'selected' ? 'folders-panel__item--selected' : ''} ${indentClass}`}
         onClick={handleClick}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
@@ -130,13 +119,11 @@ export const FoldersLeftPanel: React.FC<FoldersLeftPanelProps> = ({
   onFolderToggle,
   className = '',
 }) => {
-  // Function to add divider between sections
   const renderFoldersWithDividers = () => {
     const result: React.ReactNode[] = [];
     let addedDivider = false;
 
     folders.forEach((folder, index) => {
-      // Add divider before certain sections (like after "Darkstax demo" section)
       if (!addedDivider && index > 0 && folder.name.toLowerCase().includes('galactic')) {
         result.push(
           <div key="divider" className="folders-panel__divider" />

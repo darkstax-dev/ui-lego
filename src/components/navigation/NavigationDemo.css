@@ -1,0 +1,99 @@
+/* Navigation Demo Styles */
+.navigation-demo {
+  background: #f5f5f5;
+  min-height: 100vh;
+}
+
+.navigation-demo__controls {
+  padding: 20px;
+  background: white;
+  border-bottom: 1px solid #ddd;
+  margin-bottom: 20px;
+}
+
+.navigation-demo__controls-title {
+  margin: 0 0 16px 0;
+  font-family: Macan, sans-serif;
+}
+
+.navigation-demo__controls-row {
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.navigation-demo__label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.navigation-demo__select {
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background: white;
+}
+
+.navigation-layout {
+  display: flex;
+  max-width: 1400px;
+  margin: 0 auto;
+  min-height: 600px;
+  background: white;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.navigation-content {
+  flex: 1;
+  padding: 24px;
+  background: white;
+}
+
+.navigation-content__title {
+  margin: 0 0 16px 0;
+  color: #00112B;
+  font-family: 'Macan Mono Stencil Trial', sans-serif;
+  font-size: 24px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+}
+
+.navigation-content__description {
+  color: #00112B;
+  font-family: Macan, sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.navigation-content__list {
+  color: #00112B;
+  font-family: Macan, sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+  padding-left: 20px;
+}
+
+.navigation-content__panel {
+  margin-top: 24px;
+  padding: 16px;
+  background: #f8f9fa;
+  border-radius: 8px;
+  border: 1px solid #e9ecef;
+}
+
+.navigation-content__panel-title {
+  margin: 0 0 12px 0;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.navigation-content__panel-list {
+  margin: 0;
+  padding-left: 16px;
+  font-size: 12px;
+  line-height: 1.4;
+}
