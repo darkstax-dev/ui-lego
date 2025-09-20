@@ -5,7 +5,7 @@
   padding: var(--sds-size-padding-sm);
   flex-direction: column;
   align-items: flex-start;
-  border: 1px solid var(--sds-color-border-default-default);
+  border: var(--sds-size-stroke-border) solid var(--sds-color-border-default-default);
   background: var(--Background-Card, #DFDFDF);
   box-shadow: 
     0px var(--sds-size-depth-100) var(--sds-size-depth-100) var(--sds-size-depth-negative-025) var(--sds-color-black-200),
