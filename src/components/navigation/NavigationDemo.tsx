@@ -12,7 +12,7 @@ const sampleFolders: FolderItem[] = [
   },
   {
     id: '2',
-    name: 'Trafic light',
+    name: 'Traffic light',
     type: 'default',
     level: 0
   },
@@ -52,13 +52,15 @@ const sampleFolders: FolderItem[] = [
             id: '5-2-1',
             name: 'Resources',
             type: 'selected',
-            level: 2
+            level: 2,
+            isChildItem: true
           },
           {
             id: '5-2-2',
             name: 'Main resources',
             type: 'default',
-            level: 2
+            level: 2,
+            isChildItem: true
           }
         ]
       }
