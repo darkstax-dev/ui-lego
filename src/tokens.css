@@ -252,6 +252,14 @@
 /* ===== DARK MODE OVERRIDES ===== */
 @media (prefers-color-scheme: dark) {
   :root {
+    /* Figma token aliases - dark mode */
+    --Text-Blue-text-Main-text: var(--color-gray-200);
+    --Inputs-Input-Background: var(--color-blue-dark-950);
+    --Inputs-Placeholder-text: var(--color-gray-400);
+    --Gray-200: var(--color-blue-dark-950);
+    --Gray-500: var(--color-gray-400);
+    --Icon-Button-Gray-btn-Fill: var(--color-blue-950);
+
     /* Navigation */
     --nav-main-bg: var(--color-blue-medium-950);
     --nav-secondary-bg: var(--color-blue-dark-950);
