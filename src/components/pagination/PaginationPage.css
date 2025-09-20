@@ -1,53 +1,54 @@
 .pagination-page {
   display: flex;
-  padding: 8px 12px;
+  padding: var(--sds-size-space-200) var(--sds-size-space-300);
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  border-radius: 8px;
+  border-radius: var(--sds-radius-md);
   border: none;
   background: transparent;
   cursor: pointer;
   transition: all 0.2s ease;
-  
-  /* Typography */
-  color: rgba(30, 30, 30, 1);
-  font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
-  font-size: 14px;
+
+  /* Typography - Match Figma design exactly */
+  color: var(--sds-color-text-default-default);
+  font-family: var(--font-family-macan-mono);
+  font-size: var(--font-size-sm);
   font-weight: 600;
-  line-height: 110%;
+  line-height: var(--line-height-tight);
   letter-spacing: 1.4px;
   text-transform: uppercase;
-  
+
   /* Reset button styles */
   outline: none;
   user-select: none;
 }
 
 .pagination-page:hover:not(.pagination-page--current):not(.pagination-page--disabled) {
-  background: rgba(30, 30, 30, 1);
-  color: #FFF;
+  background: var(--sds-color-text-default-default);
+  color: var(--color-white);
 }
 
 .pagination-page:focus-visible {
-  outline: 2px solid rgba(30, 30, 30, 0.5);
+  outline: 2px solid var(--sds-color-text-default-default);
   outline-offset: 2px;
+  opacity: 0.5;
 }
 
 .pagination-page--current {
-  background: #CECECE;
-  color: #00112B;
+  background: var(--color-gray-300);
+  color: var(--color-blue-dark-950);
   cursor: default;
 }
 
 .pagination-page--disabled {
-  color: #78797A;
+  color: var(--color-gray-500);
   cursor: not-allowed;
 }
 
 .pagination-page--disabled:hover {
   background: transparent;
-  color: #78797A;
+  color: var(--color-gray-500);
 }
 
 /* Mobile responsiveness */
