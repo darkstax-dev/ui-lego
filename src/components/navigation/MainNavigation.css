@@ -72,12 +72,12 @@
 }
 
 .main-navigation__menu-text {
-  color: var(--Gray-200, #DFDFDF);
-  font-family: 'Macan Mono Trial', -apple-system, Roboto, Helvetica, sans-serif;
-  font-size: 16px;
-  font-weight: 600;
-  line-height: 110%;
-  letter-spacing: 1.6px;
+  color: var(--color-gray-200);
+  font-family: var(--font-family-macan-mono);
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-tight);
+  letter-spacing: var(--letter-spacing-wider);
   text-transform: uppercase;
   white-space: nowrap;
 }
