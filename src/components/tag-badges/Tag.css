@@ -1,16 +1,17 @@
-/* Tag styles matching Figma design */
+/* Tag styles matching Figma design - strict token usage */
 .tag {
   display: inline-flex;
   align-items: center;
-  gap: var(--sds-size-space-200, 8px);
-  padding: var(--sds-size-space-100, 4px) var(--sds-size-space-200, 8px);
-  border-radius: var(--sds-size-radius-200, 8px);
-  font-family: 'Macan Mono Trial', -apple-system, Roboto, Helvetica, sans-serif;
+  gap: var(--sds-size-space-200);
+  padding: var(--sds-size-space-100) var(--sds-size-space-200);
+  border-radius: var(--sds-size-radius-200);
+  font-family: var(--font-family-macan-mono);
   font-size: 14px;
   font-weight: 450;
   line-height: 120%;
   transition: all 0.2s ease;
   cursor: default;
+  border: none;
 }
 
 .tag__label {
@@ -44,8 +45,8 @@
 
 /* Brand scheme */
 .tag--brand {
-  background: var(--sds-color-background-brand-default, rgba(44, 44, 44, 1));
-  color: var(--sds-color-text-brand-on-brand, rgba(245, 245, 245, 1));
+  background: var(--sds-color-background-brand-default);
+  color: var(--sds-color-text-brand-on-brand);
 }
 
 .tag--brand:hover,
@@ -54,28 +55,28 @@
 }
 
 .tag--brand .tag__remove svg {
-  color: white;
+  color: var(--sds-color-text-brand-on-brand);
 }
 
 /* Danger scheme */
 .tag--danger {
-  background: #D9322A;
-  color: var(--sds-color-text-danger-on-danger, rgba(254, 233, 231, 1));
+  background: var(--color-red-600);
+  color: var(--sds-color-text-danger-on-danger);
 }
 
 .tag--danger:hover,
 .tag--danger.tag--hover {
-  background: #C02A23;
+  background: var(--color-red-700);
 }
 
 .tag--danger .tag__remove svg {
-  color: white;
+  color: var(--sds-color-text-danger-on-danger);
 }
 
 /* Positive scheme */
 .tag--positive {
-  background: var(--Green-Green-800, #108541);
-  color: var(--sds-color-text-positive-on-positive, rgba(235, 255, 238, 1));
+  background: var(--color-green-800);
+  color: var(--sds-color-text-positive-on-positive);
 }
 
 .tag--positive:hover,
@@ -84,13 +85,13 @@
 }
 
 .tag--positive .tag__remove svg {
-  color: white;
+  color: var(--sds-color-text-positive-on-positive);
 }
 
 /* Warning scheme */
 .tag--warning {
-  background: var(--Yellow-500, #ED8B30);
-  color: var(--Text-Blue-text-Main-text, #00112B);
+  background: var(--Yellow-500);
+  color: var(--Text-Blue-text-Main-text);
 }
 
 .tag--warning:hover,
@@ -99,20 +100,20 @@
 }
 
 .tag--warning .tag__remove svg {
-  color: var(--Text-Blue-text-Main-text, #00112B);
+  color: var(--Text-Blue-text-Main-text);
 }
 
 /* Neutral scheme */
 .tag--neutral {
-  background: var(--sds-color-background-neutral-tertiary, rgba(227, 227, 227, 1));
-  color: var(--Text-Blue-text-Main-text, #00112B);
+  background: var(--sds-color-background-neutral-tertiary);
+  color: var(--Text-Blue-text-Main-text);
 }
 
 .tag--neutral:hover,
 .tag--neutral.tag--hover {
-  background: var(--sds-color-background-neutral-secondary, rgba(205, 205, 205, 1));
+  background: var(--sds-color-background-neutral-secondary);
 }
 
 .tag--neutral .tag__remove svg {
-  color: var(--Text-Blue-text-Main-text, #00112B);
+  color: var(--Text-Blue-text-Main-text);
 }
