@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef, forwardRef } from 'react'
 import './Menu.css'
 
 interface MenuProps {
@@ -9,14 +9,14 @@ interface MenuProps {
   'aria-labelledby'?: string
 }
 
-const Menu: React.FC<MenuProps> = ({
+const Menu = forwardRef<HTMLDivElement, MenuProps>(function Menu({
   children,
   className = '',
   role = 'menu',
   'aria-label': ariaLabel,
   'aria-labelledby': ariaLabelledBy,
   ...props
-}) => {
+}, externalRef) {
   const containerRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -63,7 +63,11 @@ const Menu: React.FC<MenuProps> = ({
 
   return (
     <div
-      ref={containerRef}
+      ref={(node) => {
+        containerRef.current = node
+        if (typeof externalRef === 'function') externalRef(node)
+        else if (externalRef) (externalRef as React.MutableRefObject<HTMLDivElement | null>).current = node
+      }}
       className={menuClass}
       role={role}
       aria-label={ariaLabel}
@@ -74,6 +78,6 @@ const Menu: React.FC<MenuProps> = ({
       {children}
     </div>
   )
-}
+})
 
-export default Menu
+export default React.memo(Menu)
