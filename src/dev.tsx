@@ -130,16 +130,7 @@ function App() {
       <h1>Input Components</h1>
 
       <section className="component-section">
-        <h2 style={{
-          color: '#072B56',
-          fontFamily: 'Macan Mono Stencil Trial, -apple-system, Roboto, Helvetica, sans-serif',
-          fontSize: '32px',
-          fontWeight: '500',
-          lineHeight: '1.2',
-          letterSpacing: '1.6px',
-          textTransform: 'uppercase',
-          marginBottom: '2rem'
-        }}>
+        <h2 className="section-title-mono-stencil">
           Inputs for Login
         </h2>
 
