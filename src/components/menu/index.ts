@@ -1,6 +1,8 @@
+export { default as Menu } from './Menu'
 export { default as MenuItem } from './MenuItem'
 export { default as MenuHeader } from './MenuHeader'
 export { default as MenuHeading } from './MenuHeading'
+export { default as MenuSection } from './MenuSection'
 export { default as MenuSeparator } from './MenuSeparator'
 export { default as MenuShortcut } from './MenuShortcut'
 export { default as MenuDemo } from './MenuDemo'
