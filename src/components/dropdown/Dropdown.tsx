@@ -54,7 +54,7 @@ const Dropdown: React.FC<DropdownProps> = ({
           event.preventDefault()
           if (items.length > 0) {
             const nextIndex = currentIndex < items.length - 1 ? currentIndex + 1 : 0
-            ;(items[nextIndex] as HTMLElement).focus()
+            (items[nextIndex] as HTMLElement).focus()
           }
           break
         case 'ArrowUp':
