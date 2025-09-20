@@ -26,6 +26,7 @@ import { TopBarDemo } from './components/bar'
 import TagBadgeDemo from './components/tag-badges/TagBadgeDemo'
 import MenuDemo from './components/menu/MenuDemo'
 import TooltipDemo from './components/tooltip/TooltipDemo'
+import { EffectsDemo } from './components/effects'
 import './dev.css'
 import './tokens.css'
 
@@ -883,6 +884,12 @@ function App() {
         <h1>Menu Components</h1>
         <h2>Context menus and dropdown menu items with states and shortcuts</h2>
         <MenuDemo />
+      </section>
+
+      <section className="component-section">
+        <h1>Effects</h1>
+        <h2>Drop shadows, inner shadows, and blur effects showcase</h2>
+        <EffectsDemo />
       </section>
     </div>
   )
