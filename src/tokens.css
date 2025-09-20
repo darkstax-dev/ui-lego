@@ -60,6 +60,9 @@
   /* SDS Color System - Borders */
   --sds-color-border-default-default: rgba(217, 217, 217, 1);
 
+  /* Background Colors from Figma */
+  --Background-Card: #DFDFDF;
+
   /* SDS Color System - Utilities */
   --sds-color-background-utilities-measurement: rgba(250, 225, 250, 1);
   --sds-color-border-utilities-swatch: rgba(0, 0, 0, 0.24);
