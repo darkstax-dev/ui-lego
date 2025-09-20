@@ -71,9 +71,44 @@ function App() {
       <NavigationDemo />
 
       <section className="component-section">
-        <h1>Top Bar Navigation Component</h1>
-        <h2>Responsive navigation bar with menu items and user actions</h2>
-        <TopBarDemo />
+        <h1>Main Navigation Component</h1>
+        <h2>Responsive navigation bar with menu items and user actions - Updated with Design Tokens</h2>
+
+        <div style={{ marginBottom: '2rem' }}>
+          <h3>Default State</h3>
+          <p>Standard navigation with all menu items in default state</p>
+          <MainNavigation variant="default" />
+        </div>
+
+        <div style={{ marginBottom: '2rem' }}>
+          <h3>Modeling Active State (Variant 3)</h3>
+          <p>Navigation with "Modeling" item in active state (red color, minus icon)</p>
+          <MainNavigation variant="modeling-active" />
+        </div>
+
+        <div style={{ marginBottom: '2rem' }}>
+          <h3>Hub Variant</h3>
+          <p>Navigation showing hub-specific menu items: Dashboard, Administration, Settings</p>
+          <MainNavigation variant="hub" />
+        </div>
+
+        <div style={{
+          background: 'white',
+          padding: '24px',
+          borderRadius: '8px',
+          boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
+          marginTop: '24px'
+        }}>
+          <h3 style={{ color: '#333', marginBottom: '16px' }}>Design Token Updates</h3>
+          <ul style={{ color: '#666', lineHeight: '1.6' }}>
+            <li><strong>Typography:</strong> Now uses proper Macan Mono Trial font with token-based sizing</li>
+            <li><strong>Colors:</strong> Updated to use semantic color tokens (--color-red-600, --color-gray-200, etc.)</li>
+            <li><strong>Spacing:</strong> All gaps and padding use standardized spacing tokens</li>
+            <li><strong>Hub Icon:</strong> Simplified diamond pattern matching Figma design</li>
+            <li><strong>Responsive Design:</strong> Maintained with token-based breakpoints</li>
+            <li><strong>Active States:</strong> Properly styled with red accent color for selected items</li>
+          </ul>
+        </div>
       </section>
 
       <h1>Input Components</h1>
