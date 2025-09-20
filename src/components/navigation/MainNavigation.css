@@ -1,7 +1,7 @@
 /* Main Navigation Component */
 .main-navigation {
   width: 100%;
-  background: var(--color-blue-dark-950);
+  background: var(--nav-main-bg, var(--color-blue-dark-950));
   padding: 0;
 }
 
@@ -67,12 +67,12 @@
   height: 20px;
   justify-content: center;
   align-items: center;
-  color: var(--color-gray-200);
+  color: var(--text-white-secondary, var(--color-gray-200));
   flex-shrink: 0;
 }
 
 .main-navigation__menu-text {
-  color: var(--color-gray-200);
+  color: var(--text-white-secondary, var(--color-gray-200));
   font-family: var(--font-family-macan-mono);
   font-size: var(--font-size-md);
   font-weight: var(--font-weight-semibold);
@@ -92,7 +92,7 @@
   height: 20px;
   justify-content: center;
   align-items: center;
-  color: var(--color-gray-200);
+  color: var(--text-white-secondary, var(--color-gray-200));
   flex-shrink: 0;
 }
 
@@ -117,7 +117,7 @@
 }
 
 .main-navigation__hub-text {
-  color: var(--color-gray-200);
+  color: var(--text-white-secondary, var(--color-gray-200));
   font-family: var(--font-family-macan-mono);
   font-size: var(--font-size-md);
   font-weight: var(--font-weight-semibold);
@@ -147,7 +147,7 @@
   align-items: center;
   background: transparent;
   border: none;
-  color: var(--color-gray-200);
+  color: var(--text-white-secondary, var(--color-gray-200));
   cursor: pointer;
   transition: all 0.2s ease;
   padding: 0;
@@ -186,7 +186,7 @@
   height: 10px;
   background: var(--color-red-500);
   border-radius: 50%;
-  border: 2px solid var(--color-blue-dark-950);
+  border: 2px solid var(--nav-main-bg, var(--color-blue-dark-950));
 }
 
 /* Responsive Design */
@@ -415,7 +415,7 @@
   border-radius: var(--sds-size-space-100);
 
   /* Typography matching Figma design */
-  color: var(--color-blue-dark-950);
+  color: var(--text-blue-main, var(--color-blue-dark-950));
   font-family: var(--font-family-macan-mono);
   font-size: var(--font-size-sm);
   font-weight: var(--font-weight-semibold);
@@ -425,8 +425,8 @@
 }
 
 .main-navigation__dropdown-item:hover {
-  background: var(--color-gray-100);
-  color: var(--color-blue-dark-950);
+  background: var(--surface-card, var(--color-gray-100));
+  color: var(--text-blue-main, var(--color-blue-dark-950));
 }
 
 .main-navigation__dropdown-item:active {
