@@ -20,25 +20,27 @@ const ModelingDemo: React.FC = () => {
         <div className="modeling-demo__grid">
           <div className="modeling-demo__item">
             <h4>Red Default</h4>
-            <Activity colour="red" state="default" />
+            <Activity colour="red" state="default" showText text="text" />
           </div>
           <div className="modeling-demo__item">
             <h4>Red Hover</h4>
-            <Activity colour="red" state="hover" />
+            <Activity colour="red" state="hover" showText text="text" />
           </div>
           <div className="modeling-demo__item">
             <h4>Blue Default</h4>
-            <Activity colour="blue" state="default" />
+            <Activity colour="blue" state="default" showText text="text" />
           </div>
           <div className="modeling-demo__item">
             <h4>Blue Hover</h4>
-            <Activity colour="blue" state="hover" />
+            <Activity colour="blue" state="hover" showText text="text" />
           </div>
           <div className="modeling-demo__item">
-            <h4>Interactive</h4>
-            <Activity 
-              colour="red" 
+            <h4>Interactive Red</h4>
+            <Activity
+              colour="red"
               state={activityState}
+              showText
+              text="text"
               onClick={() => setActivityState(prev => prev === 'default' ? 'hover' : 'default')}
             />
           </div>
@@ -50,16 +52,18 @@ const ModelingDemo: React.FC = () => {
         <div className="modeling-demo__grid">
           <div className="modeling-demo__item">
             <h4>Default</h4>
-            <Kubernetes state="default" />
+            <Kubernetes state="default" showText text="text" />
           </div>
           <div className="modeling-demo__item">
             <h4>Hover</h4>
-            <Kubernetes state="hover" />
+            <Kubernetes state="hover" showText text="text" />
           </div>
           <div className="modeling-demo__item">
             <h4>Interactive</h4>
-            <Kubernetes 
+            <Kubernetes
               state={kubernetesState}
+              showText
+              text="text"
               onClick={() => setKubernetesState(prev => prev === 'default' ? 'hover' : 'default')}
             />
           </div>
@@ -70,16 +74,16 @@ const ModelingDemo: React.FC = () => {
         <h3 className="modeling-demo__section-title">Indicators</h3>
         <div className="modeling-demo__grid">
           <div className="modeling-demo__item">
-            <h4>Green</h4>
+            <h4>Green (Property 1=green)</h4>
             <Indicator variant="green" value="2" />
           </div>
           <div className="modeling-demo__item">
-            <h4>Blue</h4>
-            <Indicator variant="blue" value="3" />
+            <h4>Blue (Property 1=Blue)</h4>
+            <Indicator variant="blue" value="2" />
           </div>
           <div className="modeling-demo__item">
-            <h4>Variant 3</h4>
-            <Indicator variant="variant3" value="1" />
+            <h4>Red (Property 1=Variant3)</h4>
+            <Indicator variant="variant3" value="2" />
           </div>
         </div>
       </section>
@@ -88,11 +92,11 @@ const ModelingDemo: React.FC = () => {
         <h3 className="modeling-demo__section-title">Plus/Minus Components</h3>
         <div className="modeling-demo__grid">
           <div className="modeling-demo__item">
-            <h4>Plus</h4>
+            <h4>Plus (Property 1=Default)</h4>
             <Plus variant="default" />
           </div>
           <div className="modeling-demo__item">
-            <h4>Minus</h4>
+            <h4>Minus (Property 1=Variant2)</h4>
             <Plus variant="minus" />
           </div>
         </div>
