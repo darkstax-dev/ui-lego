@@ -19,7 +19,7 @@ interface DropdownProps {
   'aria-labelledby'?: string
 }
 
-const Dropdown: React.FC<DropdownProps> = ({
+const Dropdown = forwardRef<HTMLDivElement, DropdownProps>(function Dropdown({
   children,
   isOpen = true,
   onClose,
@@ -32,7 +32,7 @@ const Dropdown: React.FC<DropdownProps> = ({
   role = 'menu',
   'aria-label': ariaLabel,
   'aria-labelledby': ariaLabelledBy
-}) => {
+}, externalRef) {
   const dropdownRef = useRef<HTMLDivElement>(null)
 
   // Handle keyboard navigation
@@ -122,7 +122,11 @@ const Dropdown: React.FC<DropdownProps> = ({
 
   return (
     <div
-      ref={dropdownRef}
+      ref={(node) => {
+        dropdownRef.current = node
+        if (typeof externalRef === 'function') externalRef(node)
+        else if (externalRef) (externalRef as React.MutableRefObject<HTMLDivElement | null>).current = node
+      }}
       className={classNames}
       style={style}
       role={role}
@@ -135,6 +139,6 @@ const Dropdown: React.FC<DropdownProps> = ({
       </div>
     </div>
   )
-}
+})
 
-export default Dropdown
+export default React.memo(Dropdown)
