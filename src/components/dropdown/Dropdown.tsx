@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react'
+import React, { useRef, useEffect, forwardRef } from 'react'
 import './Dropdown.css'
 
 export type DropdownPosition = 'absolute' | 'relative'
