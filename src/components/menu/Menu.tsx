@@ -17,7 +17,7 @@ const Menu = forwardRef<HTMLDivElement, MenuProps>(function Menu({
   'aria-labelledby': ariaLabelledBy,
   ...props
 }, externalRef) {
-  const containerRef = useRef<HTMLDivElement>(null)
+  const containerRef = useRef<HTMLDivElement | null>(null) as React.MutableRefObject<HTMLDivElement | null>
 
   useEffect(() => {
     const onKeyDown = (e: KeyboardEvent) => {
