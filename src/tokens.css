@@ -250,19 +250,25 @@
   --nav-main-bg: var(--color-blue-dark-950);
   --nav-secondary-bg: var(--color-gray-300);
 
-  /* Backgrounds */
-  --bg-default: var(--color-gray-300);
-  --bg-card: var(--color-gray-200);
+  /* Surfaces */
+  --surface-default: var(--bg-default, var(--color-gray-300));
+  --surface-card: var(--bg-card, var(--color-gray-200));
+  --surface-subtle: #f8f9fa;
+  --border-subtle: #e9ecef;
 
   /* Text Colors */
   --text-blue-main: var(--color-blue-dark-950);
   --text-blue-secondary: var(--color-blue-medium-950);
   --text-blue-tertiary: var(--color-blue-950);
-  
+
   --text-gray-main: var(--color-gray-500);
   --text-gray-secondary: var(--color-gray-400);
   --text-gray-disabled: var(--color-gray-300);
-  
+
+  /* Body text tokens for docs/demo surfaces */
+  --text-body-strong: #333333;
+  --text-body-muted: #666666;
+
   --text-white-main: var(--color-white);
   --text-white-secondary: var(--color-gray-200);
   --text-white-tertiary: var(--color-gray-500);
@@ -306,15 +312,25 @@
     --bg-default: var(--color-blue-medium-950);
     --bg-card: var(--color-blue-dark-950);
 
+    /* Surfaces */
+    --surface-default: var(--bg-default);
+    --surface-card: var(--bg-card);
+    --surface-subtle: var(--color-blue-60);
+    --border-subtle: var(--divider-light);
+
     /* Text Colors */
     --text-blue-main: var(--color-gray-200);
     --text-blue-secondary: var(--color-gray-300);
     --text-blue-tertiary: var(--color-gray-400);
-    
+
     --text-gray-main: var(--color-gray-200);
     --text-gray-secondary: var(--color-gray-400);
     --text-gray-disabled: var(--color-gray-500);
-    
+
+    /* Body text tokens for docs/demo surfaces */
+    --text-body-strong: var(--text-white-main);
+    --text-body-muted: var(--text-white-secondary);
+
     --text-white-main: var(--color-gray-200);
     --text-white-secondary: var(--color-gray-300);
     --text-white-tertiary: var(--color-gray-400);
@@ -358,15 +374,25 @@
   --bg-default: var(--color-blue-medium-950);
   --bg-card: var(--color-blue-dark-950);
 
+  /* Surfaces */
+  --surface-default: var(--bg-default);
+  --surface-card: var(--bg-card);
+  --surface-subtle: var(--color-blue-60);
+  --border-subtle: var(--divider-light);
+
   /* Text Colors */
   --text-blue-main: var(--color-gray-200);
   --text-blue-secondary: var(--color-gray-300);
   --text-blue-tertiary: var(--color-gray-400);
-  
+
   --text-gray-main: var(--color-gray-200);
   --text-gray-secondary: var(--color-gray-400);
   --text-gray-disabled: var(--color-gray-500);
-  
+
+  /* Body text tokens for docs/demo surfaces */
+  --text-body-strong: var(--text-white-main);
+  --text-body-muted: var(--text-white-secondary);
+
   --text-white-main: var(--color-gray-200);
   --text-white-secondary: var(--color-gray-300);
   --text-white-tertiary: var(--color-gray-400);
