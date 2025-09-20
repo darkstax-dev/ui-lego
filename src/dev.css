@@ -104,3 +104,11 @@ h1 {
 .stack--400 { gap: var(--sds-size-space-400); }
 
 .mt-300 { margin-top: var(--sds-size-space-300); }
+
+/* Component Gallery */
+.gallery-controls { display: flex; gap: var(--sds-size-space-400); align-items: center; margin-bottom: var(--sds-size-space-600); flex-wrap: wrap; }
+.gallery-search-input { padding: 8px 12px; border: 1px solid var(--border-subtle); border-radius: 6px; background: var(--surface-card); color: var(--text-body-strong); min-width: 220px; }
+.gallery-select { padding: 8px 12px; border: 1px solid var(--border-subtle); border-radius: 6px; background: var(--surface-card); color: var(--text-body-strong); min-width: 220px; }
+.gallery-preview { background: rgba(255, 255, 255, 1); border: 1px solid #e0e0e0; border-radius: 8px; padding: var(--sds-size-space-600); }
+.gallery-mini-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: var(--sds-size-space-600); }
+.gallery-column { display: flex; flex-direction: column; gap: var(--sds-size-space-400); }
