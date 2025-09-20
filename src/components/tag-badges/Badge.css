@@ -1,4 +1,4 @@
-/* Badge styles matching Figma design */
+/* Badge styles matching Figma design - strict token usage */
 .badge {
   display: inline-flex;
   align-items: center;
@@ -38,32 +38,32 @@
   display: flex;
   align-items: center;
   gap: 5px;
-  padding: 4px 6px 4px 1px;
+  padding: var(--sds-size-space-100) 6px var(--sds-size-space-100) 1px;
   background: currentColor;
   height: 20px;
   box-sizing: border-box;
 }
 
 .badge__text {
-  color: var(--Text-White-text-Main-text, #FFF);
-  font-family: 'Macan Mono Trial', -apple-system, Roboto, Helvetica, sans-serif;
-  font-size: 12px;
-  font-weight: 500;
+  color: var(--Text-White-text-Main-text);
+  font-family: var(--font-family-macan-mono);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
   line-height: 100%;
   text-transform: uppercase;
 }
 
 /* Active status */
 .badge--active {
-  color: var(--Green-Green-800, #108541);
+  color: var(--color-green-800);
 }
 
 /* Canceled status */
 .badge--canceled {
-  color: var(--Black, #0E0E0E);
+  color: var(--Black);
 }
 
 /* Pending status */
 .badge--pending {
-  color: var(--Yellow-500, #ED8B30);
+  color: var(--Yellow-500);
 }
