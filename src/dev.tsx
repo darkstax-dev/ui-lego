@@ -750,7 +750,7 @@ function App() {
           />
 
           {uploadedFiles.length > 0 && (
-            <div style={{ marginTop: '12px' }}>
+            <div className="mt-300">
               <h4>Uploaded Files:</h4>
               <ul>
                 {uploadedFiles.map((file, index) => (
