@@ -311,3 +311,13 @@
   outline-offset: 2px;
   border-radius: 4px;
 }
+
+/* Navigation text utility class to match token-based typography */
+.main-navigation .emphasis-body-mono-lg {
+  font-family: var(--font-family-macan-mono);
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-tight);
+  letter-spacing: var(--letter-spacing-wider);
+  text-transform: uppercase;
+}
