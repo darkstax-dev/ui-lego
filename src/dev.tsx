@@ -100,7 +100,7 @@ function App() {
           boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
           marginTop: '24px'
         }}>
-          <h3 style={{ color: '#333', marginBottom: '16px' }}>Design Token Updates</h3>
+          <h3 style={{ color: '#333', marginBottom: '16px' }}>Design Token Updates & New Features</h3>
           <ul style={{ color: '#666', lineHeight: '1.6' }}>
             <li><strong>Typography:</strong> Now uses proper Macan Mono Trial font with token-based sizing</li>
             <li><strong>Colors:</strong> Updated to use semantic color tokens (--color-red-600, --color-gray-200, etc.)</li>
@@ -108,7 +108,28 @@ function App() {
             <li><strong>Hub Icon:</strong> Simplified diamond pattern matching Figma design</li>
             <li><strong>Responsive Design:</strong> Maintained with token-based breakpoints</li>
             <li><strong>Active States:</strong> Properly styled with red accent color for selected items</li>
+            <li><strong>NEW - Dropdown Menus:</strong> Interactive dropdowns matching Figma design specs</li>
+            <li><strong>NEW - Accessibility:</strong> Full keyboard navigation and ARIA support</li>
+            <li><strong>NEW - Mobile Responsive:</strong> Adaptive dropdown positioning for all screen sizes</li>
           </ul>
+        </div>
+
+        <div style={{
+          background: '#f8f9fa',
+          padding: '24px',
+          borderRadius: '8px',
+          border: '1px solid #e9ecef',
+          marginTop: '16px'
+        }}>
+          <h3 style={{ color: '#333', marginBottom: '16px' }}>🎯 Try the Dropdown Menus!</h3>
+          <p style={{ color: '#666', marginBottom: '12px' }}>
+            Click the <strong>+</strong> icons next to menu items above to see the dropdown functionality in action.
+            Each dropdown contains contextual menu items styled according to the Figma design specifications.
+          </p>
+          <p style={{ color: '#666', fontSize: '14px', fontStyle: 'italic' }}>
+            📝 Dropdown items use: Macan Mono Trial font, 14px size, 600 weight, uppercase transformation,
+            and the exact color and spacing from the Figma design tokens.
+          </p>
         </div>
       </section>
 
