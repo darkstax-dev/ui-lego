@@ -1,17 +1,17 @@
-/* SelectField styles matching Figma design */
+/* SelectField styles using design tokens and matching Figma design */
 .select-field {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: var(--sds-size-space-200);
   position: relative;
   width: 100%;
 }
 
 .select-field__label {
-  color: #00112B;
-  font-family: Macan, -apple-system, Roboto, Helvetica, sans-serif;
-  font-size: 14px;
-  font-weight: 450;
+  color: var(--color-blue-dark-950);
+  font-family: var(--font-family-macan);
+  font-size: var(--sds-typography-body-size-small);
+  font-weight: var(--font-weight-book);
   line-height: 1.2;
   margin: 0;
 }
@@ -21,57 +21,57 @@
   height: 40px;
   padding: 12px 12px 12px 16px;
   align-items: center;
-  gap: 8px;
-  background: #DFDFDF;
+  gap: var(--sds-size-space-200);
+  background: var(--color-gray-200);
   cursor: pointer;
   transition: all 0.2s ease;
-  border: 1px solid transparent;
+  border: var(--sds-size-stroke-border) solid transparent;
 }
 
 .select-field__select:hover:not(.select-field__select--disabled) {
-  background: #D4D4D4;
+  background: rgba(223, 223, 223, 0.8);
 }
 
 .select-field__select--error {
-  border-color: #D9322A;
+  border-color: var(--color-red-600);
 }
 
 .select-field__select--success {
-  border-color: #23A45A;
+  border-color: var(--color-green-600);
 }
 
 .select-field__select--disabled {
-  background: #CECECE;
+  background: var(--color-gray-300);
   cursor: not-allowed;
 }
 
 .select-field__value {
   flex: 1;
-  color: #00112B;
-  font-family: Macan, -apple-system, Roboto, Helvetica, sans-serif;
-  font-size: 16px;
-  font-weight: 450;
+  color: var(--color-blue-dark-950);
+  font-family: var(--font-family-macan);
+  font-size: var(--sds-typography-body-size-medium);
+  font-weight: var(--font-weight-book);
   line-height: 1.2;
-  letter-spacing: -0.32px;
+  letter-spacing: var(--letter-spacing-tight);
 }
 
 .select-field__value--placeholder {
-  color: #78797A;
+  color: var(--color-gray-500);
 }
 
 .select-field--disabled .select-field__value {
-  color: #ADADAD;
+  color: var(--color-gray-400);
 }
 
 .select-field__arrow {
   width: 20px;
   height: 20px;
-  color: #00112B;
+  color: var(--color-blue-dark-950);
   transition: transform 0.2s ease;
 }
 
 .select-field--disabled .select-field__arrow {
-  color: #ADADAD;
+  color: var(--color-gray-400);
 }
 
 .select-field__dropdown {
@@ -79,8 +79,8 @@
   top: 100%;
   left: 0;
   right: 0;
-  background: white;
-  border: 1px solid #DFDFDF;
+  background: var(--color-white);
+  border: var(--sds-size-stroke-border) solid var(--color-gray-200);
   border-top: none;
   max-height: 200px;
   overflow-y: auto;
@@ -91,45 +91,45 @@
 .select-field__option {
   padding: 12px 16px;
   cursor: pointer;
-  color: #00112B;
-  font-family: Macan, -apple-system, Roboto, Helvetica, sans-serif;
-  font-size: 16px;
-  font-weight: 450;
+  color: var(--color-blue-dark-950);
+  font-family: var(--font-family-macan);
+  font-size: var(--sds-typography-body-size-medium);
+  font-weight: var(--font-weight-book);
   line-height: 1.2;
   transition: background-color 0.2s ease;
 }
 
 .select-field__option:hover {
-  background: #F5F5F5;
+  background: var(--color-gray-100);
 }
 
 .select-field__option--selected {
-  background: #00112B;
-  color: white;
+  background: var(--color-blue-dark-950);
+  color: var(--color-white);
 }
 
 .select-field__supporting-text {
-  color: #00112B;
-  font-family: Macan, -apple-system, Roboto, Helvetica, sans-serif;
-  font-size: 14px;
-  font-weight: 450;
+  color: var(--color-blue-dark-950);
+  font-family: var(--font-family-macan);
+  font-size: var(--sds-typography-body-size-small);
+  font-weight: var(--font-weight-book);
   line-height: 1.2;
 }
 
 .select-field__supporting-text--error {
-  color: #D9322A;
+  color: var(--color-red-600);
 }
 
 .select-field__supporting-text--success {
-  color: #23A45A;
+  color: var(--color-green-600);
 }
 
 .select-field--disabled .select-field__label {
-  color: #B3B3B3;
+  color: var(--sds-color-text-disabled-default);
 }
 
 .select-field--disabled .select-field__supporting-text {
-  color: #B3B3B3;
+  color: var(--sds-color-text-disabled-default);
 }
 
 /* Accessibility */
