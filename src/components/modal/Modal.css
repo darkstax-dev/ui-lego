@@ -1,4 +1,4 @@
-/* Modal styles matching Figma design */
+/* Modal styles using design tokens and matching Figma design */
 .modal-overlay {
   position: fixed;
   top: 0;
@@ -10,11 +10,11 @@
   align-items: center;
   justify-content: center;
   z-index: 1000;
-  padding: 16px;
+  padding: var(--sds-size-space-400);
 }
 
 .modal-container {
-  background: #00112B;
+  background: var(--color-blue-dark-950);
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -25,26 +25,26 @@
 
 .modal-header {
   display: flex;
-  padding: 16px 20px;
+  padding: var(--sds-size-space-400) 20px;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 1px dashed #072B56;
+  border-bottom: 1px dashed var(--color-blue-950);
 }
 
 .modal-title-container {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: var(--sds-size-space-200);
   flex: 1;
 }
 
 .modal-title {
-  color: #DFDFDF;
-  font-family: Macan, -apple-system, Roboto, Helvetica, sans-serif;
-  font-size: 24px;
-  font-weight: 500;
-  line-height: 1.2;
-  letter-spacing: -0.48px;
+  color: var(--color-gray-200);
+  font-family: var(--font-family-macan);
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-normal);
+  letter-spacing: var(--letter-spacing-tight);
   margin: 0;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -59,7 +59,7 @@
   align-items: center;
   background: none;
   border: none;
-  color: #072B56;
+  color: var(--color-blue-950);
   cursor: pointer;
   padding: 0;
   flex-shrink: 0;
@@ -67,7 +67,7 @@
 }
 
 .modal-close-button:hover {
-  color: #DFDFDF;
+  color: var(--color-gray-200);
 }
 
 .modal-close-button:focus {
@@ -81,39 +81,39 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 16px;
+  gap: var(--sds-size-space-400);
   flex: 1;
   overflow-y: auto;
 }
 
 .modal-actions {
   display: flex;
-  padding: 16px 20px;
+  padding: var(--sds-size-space-400) 20px;
   align-items: flex-start;
-  gap: 12px;
+  gap: var(--sds-size-space-300);
 }
 
 .modal-button {
   display: flex;
   height: 35px;
-  padding: 8px 16px;
+  padding: var(--sds-size-space-200) var(--sds-size-space-400);
   justify-content: center;
   align-items: center;
   flex: 1;
-  border: 1px solid #D9322A;
+  border: 1px solid var(--color-red-600);
   background: transparent;
   cursor: pointer;
   transition: all 0.2s ease;
-  font-family: 'Macan Mono Trial', -apple-system, Roboto, Helvetica, sans-serif;
-  font-size: 14px;
-  font-weight: 600;
-  line-height: 1.1;
+  font-family: var(--font-family-macan-mono);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-tight);
   letter-spacing: 1.4px;
   text-transform: uppercase;
 }
 
 .modal-button--secondary {
-  color: #D9322A;
+  color: var(--color-red-600);
   background: transparent;
 }
 
@@ -127,13 +127,13 @@
 }
 
 .modal-button--primary {
-  color: #DFDFDF;
-  background: #D9322A;
-  padding: 10px 16px;
+  color: var(--color-gray-200);
+  background: var(--color-red-600);
+  padding: 10px var(--sds-size-space-400);
 }
 
 .modal-button--primary:hover {
-  background: #B52A23;
+  background: var(--color-red-700);
 }
 
 .modal-button--primary:focus {
@@ -151,13 +151,13 @@
 }
 
 .modal-button--primary:disabled:hover {
-  background: #D9322A;
+  background: var(--color-red-600);
 }
 
 /* Responsive design */
 @media (max-width: 640px) {
   .modal-overlay {
-    padding: 8px;
+    padding: var(--sds-size-space-200);
   }
   
   .modal-container {
@@ -165,7 +165,7 @@
   }
   
   .modal-header {
-    padding: 12px 16px;
+    padding: var(--sds-size-space-300) var(--sds-size-space-400);
   }
   
   .modal-title {
@@ -174,24 +174,24 @@
   }
   
   .modal-content {
-    padding: 0 16px;
-    gap: 12px;
+    padding: 0 var(--sds-size-space-400);
+    gap: var(--sds-size-space-300);
   }
   
   .modal-actions {
-    padding: 12px 16px;
-    gap: 8px;
+    padding: var(--sds-size-space-300) var(--sds-size-space-400);
+    gap: var(--sds-size-space-200);
   }
   
   .modal-button {
-    font-size: 12px;
+    font-size: var(--font-size-xs);
     letter-spacing: 1.2px;
-    padding: 6px 12px;
+    padding: 6px var(--sds-size-space-300);
     height: 32px;
   }
   
   .modal-button--primary {
-    padding: 8px 12px;
+    padding: var(--sds-size-space-200) var(--sds-size-space-300);
   }
 }
 
