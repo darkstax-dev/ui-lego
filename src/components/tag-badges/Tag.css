@@ -55,7 +55,7 @@
 }
 
 .tag--brand .tag__remove svg {
-  color: var(--sds-color-text-brand-on-brand);
+  color: white;
 }
 
 /* Danger scheme */
@@ -70,7 +70,7 @@
 }
 
 .tag--danger .tag__remove svg {
-  color: var(--sds-color-text-danger-on-danger);
+  color: white;
 }
 
 /* Positive scheme */
@@ -85,7 +85,7 @@
 }
 
 .tag--positive .tag__remove svg {
-  color: var(--sds-color-text-positive-on-positive);
+  color: white;
 }
 
 /* Warning scheme */
