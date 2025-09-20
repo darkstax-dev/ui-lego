@@ -1,6 +1,6 @@
 .indicator {
   display: flex;
-  padding: 2px 4px;
+  padding: var(--sds-size-space-100) var(--sds-size-space-200);
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -9,23 +9,23 @@
 }
 
 .indicator--green {
-  background: #108541;
+  background: var(--Green-Green-800);
 }
 
 .indicator--blue {
-  background: #072B56;
+  background: var(--Text-Blue-text-Tetriary-text);
 }
 
 .indicator--variant3 {
-  background: #D9322A;
+  background: var(--color-red-600);
 }
 
 .indicator__content {
-  color: #FFF;
+  color: var(--White);
   text-align: center;
-  font-family: 'Macan Mono Stencil Trial', -apple-system, Roboto, Helvetica, sans-serif;
+  font-family: var(--font-family-macan-mono-stencil);
   font-size: 12px;
-  font-weight: 500;
+  font-weight: var(--font-weight-medium);
   line-height: 1.2;
 }
 
