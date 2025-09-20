@@ -150,42 +150,65 @@ const ModelingDemo: React.FC = () => {
       </section>
 
       <section className="modeling-demo__section">
-        <h3 className="modeling-demo__section-title">Complex Layout Example</h3>
+        <h3 className="modeling-demo__section-title">Figma Design Layout Example</h3>
         <div className="modeling-demo__complex-layout">
           <div className="modeling-demo__row">
-            <Activity colour="red" state="default" />
-            <Activity colour="blue" state="default" />
+            <div className="modeling-demo__item">
+              <h4>Activity Server Icons (as in Figma)</h4>
+              <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
+                <Activity colour="red" state="default" showText text="text" />
+                <Activity colour="blue" state="default" showText text="text" />
+              </div>
+            </div>
           </div>
           <div className="modeling-demo__row">
-            <Activity colour="red" state="hover" />
-            <Activity colour="blue" state="hover" />
+            <div className="modeling-demo__item">
+              <h4>Activity Server Icons - Hover States</h4>
+              <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
+                <Activity colour="red" state="hover" showText text="text" />
+                <Activity colour="blue" state="hover" showText text="text" />
+              </div>
+            </div>
           </div>
           <div className="modeling-demo__row">
-            <Kubernetes state="default" />
+            <div className="modeling-demo__item">
+              <h4>Kubernetes Hexagon</h4>
+              <Kubernetes state="default" showText text="text" />
+            </div>
           </div>
           <div className="modeling-demo__row">
-            <ModelingCard 
-              state="default" 
-              title="Model A"
-              indicatorVariant="green"
-              indicatorValue="5"
-            />
-            <ModelingCard 
-              state="hover" 
-              title="Model B"
-              indicatorVariant="blue" 
-              indicatorValue="3"
-            />
-            <ModelingCard 
-              state="active" 
-              title="Model C"
-              indicatorVariant="variant3"
-              indicatorValue="1"
-            />
+            <div className="modeling-demo__item">
+              <h4>Top View Cards (as in Figma)</h4>
+              <div style={{ display: 'flex', gap: '16px', alignItems: 'flex-start' }}>
+                <ModelingCard
+                  state="default"
+                  title="Top view"
+                  indicatorVariant="green"
+                  indicatorValue="2"
+                />
+                <ModelingCard
+                  state="hover"
+                  title="Top view"
+                  indicatorVariant="green"
+                  indicatorValue="2"
+                />
+                <ModelingCard
+                  state="active"
+                  title="Top view"
+                  indicatorVariant="green"
+                  indicatorValue="2"
+                />
+              </div>
+            </div>
           </div>
           <div className="modeling-demo__row">
-            <Plus variant="default" />
-            <Plus variant="minus" />
+            <div className="modeling-demo__item">
+              <h4>Plus/Minus Controls</h4>
+              <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
+                <Plus variant="default" />
+                <Plus variant="minus" />
+              </div>
+            </div>
           </div>
         </div>
       </section>
