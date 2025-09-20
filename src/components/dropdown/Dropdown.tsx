@@ -73,7 +73,7 @@ const Dropdown: React.FC<DropdownProps> = ({
         case 'End':
           event.preventDefault()
           if (items.length > 0) {
-            ;(items[items.length - 1] as HTMLElement).focus()
+            (items[items.length - 1] as HTMLElement).focus()
           }
           break
       }
