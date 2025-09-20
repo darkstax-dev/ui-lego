@@ -137,14 +137,38 @@ export const MainNavigation: React.FC<MainNavigationProps> = ({
                   )}
                 </div>
 
-                <div className={`main-navigation__menu-item ${isModelingActive ? 'main-navigation__menu-item--active' : ''}`}>
-                  <svg className="main-navigation__menu-icon" width="20" height="20" viewBox="0 0 20 20" fill="none">
-                    <path d="M2.49969 2.5H7.49969V5.83333H2.49969V2.5ZM12.4997 8.33333H17.4997V11.6667H12.4997V8.33333ZM12.4997 14.1667H17.4997V17.5H12.4997V14.1667ZM10.833 10.8333H5.83303V15H10.833V16.6667H5.83303H4.16636V7.5H5.83303V9.16667H10.833V10.8333Z" fill="currentColor"/>
-                  </svg>
-                  <span className="main-navigation__menu-text">Modeling</span>
-                  <svg className="main-navigation__menu-expand" width="20" height="20" viewBox="0 0 20 20" fill="none">
-                    <path d={isModelingActive ? "M4.16667 9.16666H15.8333V10.8333H4.16667V9.16666Z" : "M9.16667 9.16666V4.16666H10.8333V9.16666H15.8333V10.8333H10.8333V15.8333H9.16667V10.8333H4.16667V9.16666H9.16667Z"} fill="currentColor"/>
-                  </svg>
+                <div className="main-navigation__menu-item-wrapper">
+                  <button
+                    className={`main-navigation__menu-item ${isModelingActive ? 'main-navigation__menu-item--active' : ''} ${openDropdown === 'modeling' ? 'main-navigation__menu-item--open' : ''}`}
+                    onClick={() => handleMenuItemClick('modeling')}
+                    aria-expanded={openDropdown === 'modeling'}
+                    aria-haspopup="true"
+                  >
+                    <svg className="main-navigation__menu-icon" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                      <path d="M2.49969 2.5H7.49969V5.83333H2.49969V2.5ZM12.4997 8.33333H17.4997V11.6667H12.4997V8.33333ZM12.4997 14.1667H17.4997V17.5H12.4997V14.1667ZM10.833 10.8333H5.83303V15H10.833V16.6667H5.83303H4.16636V7.5H5.83303V9.16667H10.833V10.8333Z" fill="currentColor"/>
+                    </svg>
+                    <span className="main-navigation__menu-text">Modeling</span>
+                    <svg
+                      className={`main-navigation__menu-expand ${openDropdown === 'modeling' ? 'main-navigation__menu-expand--open' : ''}`}
+                      width="20" height="20" viewBox="0 0 20 20" fill="none"
+                    >
+                      <path d={(isModelingActive && openDropdown !== 'modeling') ? "M4.16667 9.16666H15.8333V10.8333H4.16667V9.16666Z" : (openDropdown === 'modeling' ? "M4.16667 9.16666H15.8333V10.8333H4.16667V9.16666Z" : "M9.16667 9.16666V4.16666H10.8333V9.16666H15.8333V10.8333H10.8333V15.8333H9.16667V10.8333H4.16667V9.16666H9.16667Z")} fill="currentColor"/>
+                    </svg>
+                  </button>
+
+                  {openDropdown === 'modeling' && (
+                    <div className="main-navigation__dropdown">
+                      {dropdownData.modeling.map((item, index) => (
+                        <button
+                          key={index}
+                          className="main-navigation__dropdown-item"
+                          onClick={() => handleDropdownItemClick(item)}
+                        >
+                          {item}
+                        </button>
+                      ))}
+                    </div>
+                  )}
                 </div>
 
                 <div className="main-navigation__menu-item">
