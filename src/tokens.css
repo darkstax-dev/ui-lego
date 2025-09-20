@@ -192,8 +192,22 @@
   --color-white: #ffffff;
   --color-black: #0e0e0e;
 
+  /* ===== FIGMA DESIGN TOKEN ALIASES ===== */
+
+  /* Figma-specific token names for SecondaryNavigation */
+  --Text-Blue-text-Main-text: var(--color-blue-dark-950);
+  --red-600-cta: var(--color-red-600);
+  --Inputs-Input-Background: var(--color-gray-200);
+  --Inputs-Placeholder-text: var(--color-gray-500);
+  --Gray-200: var(--color-gray-200);
+  --Gray-500: var(--color-gray-500);
+  --Icon-Button-Gray-btn-Fill: var(--color-gray-200);
+  --Primary-button-red-Icon-default: var(--color-white);
+  --Primary-button-red-Fill: var(--color-red-600);
+  --Text-White-text-Main-text: var(--color-white);
+
   /* ===== SEMANTIC TOKENS - LIGHT MODE ===== */
-  
+
   /* Navigation */
   --nav-main-bg: var(--color-blue-dark-950);
   --nav-secondary-bg: var(--color-gray-300);
