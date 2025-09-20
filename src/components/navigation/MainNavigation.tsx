@@ -279,13 +279,19 @@ export const MainNavigation: React.FC<MainNavigationProps> = ({
                   </button>
 
                   {openDropdown === 'administration' && (
-                    <div className="main-navigation__dropdown" id={dropdownId('administration')}>
+                    <div className="main-navigation__dropdown" id={dropdownId('administration')} role="menu" aria-label="Administration submenu">
                       {dropdownData.administration.map((item, index) => (
                         <button
                           key={index}
                           className="main-navigation__dropdown-item"
                           onClick={() => handleDropdownItemClick(item)}
+                          onKeyDown={(e) => {
+                            if (e.key === 'Escape') { e.stopPropagation(); closeAll(); }
+                            if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); handleDropdownItemClick(item) }
+                          }}
                           type="button"
+                          role="menuitem"
+                          tabIndex={0}
                         >
                           {item}
                         </button>
