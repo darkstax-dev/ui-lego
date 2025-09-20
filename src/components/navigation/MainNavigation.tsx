@@ -66,7 +66,7 @@ export const MainNavigation: React.FC<MainNavigationProps> = ({
           </div>
 
           {/* Menu Items */}
-          <div className="main-navigation__menu">
+          <div className="main-navigation__menu" ref={dropdownRef}>
             <div className="main-navigation__menu-item-wrapper">
               <button
                 className={`main-navigation__menu-item ${openDropdown === 'dashboard' ? 'main-navigation__menu-item--open' : ''}`}
