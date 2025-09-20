@@ -3,7 +3,7 @@
   display: flex;
   align-items: flex-start;
   gap: var(--sds-size-space-300);
-  padding: var(--sds-size-padding-sm) var(--sds-size-padding-lg);
+  padding: 12px var(--sds-size-padding-lg);
   border-radius: var(--sds-size-radius-200);
   cursor: pointer;
   transition: all 0.2s ease;
