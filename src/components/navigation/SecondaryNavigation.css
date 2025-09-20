@@ -248,21 +248,22 @@
 .secondary-navigation__actions {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: var(--sds-size-space-200, 8px);
+  position: relative;
 }
 
 .secondary-navigation__action-btn {
   display: flex;
-  width: 40px;
-  height: 40px;
   padding: 10px;
   justify-content: center;
   align-items: center;
-  background: var(--Icon-Button-Gray-btn-Fill, #DFDFDF);
+  gap: 10px;
+  background: var(--color-gray-200, #DFDFDF);
   border: none;
   cursor: pointer;
   transition: background-color 0.2s ease;
-  color: var(--Gray-500, #78797A);
+  color: var(--color-gray-500, #78797A);
+  position: relative;
 }
 
 .secondary-navigation__action-btn:hover {
@@ -278,8 +279,8 @@
 .secondary-navigation__create-btn {
   display: flex;
   align-items: center;
-  height: 40px;
-  background: var(--Primary-button-red-Fill, #D9322A);
+  position: relative;
+  background: var(--color-red-600, #D9322A);
   border: none;
   cursor: pointer;
   transition: background-color 0.2s ease;
@@ -295,15 +296,22 @@
 }
 
 .secondary-navigation__create-text {
+  display: flex;
+  height: 40px;
   padding: 10px 20px;
-  color: var(--Text-White-text-Main-text, #FFF);
-  font-family: 'Macan Mono Trial', -apple-system, Roboto, Helvetica, sans-serif;
+  justify-content: center;
+  align-items: center;
+  border-right: 1px solid var(--text-white-main, #FFF);
+  background: var(--color-red-600, #D9322A);
+  position: relative;
+  color: var(--text-white-main, #FFF);
+  font-family: var(--font-family-macan-mono, 'Macan Mono Trial', -apple-system, Roboto, Helvetica, sans-serif);
   font-size: 16px;
+  font-style: normal;
   font-weight: 600;
   line-height: 110%;
   letter-spacing: 1.6px;
   text-transform: uppercase;
-  border-right: 1px solid var(--Text-White-text-Main-text, #FFF);
   white-space: nowrap;
 }
 
@@ -312,9 +320,12 @@
   padding: 10px;
   justify-content: center;
   align-items: center;
+  gap: 10px;
+  background: var(--color-red-600, #D9322A);
+  position: relative;
   width: 40px;
   height: 40px;
-  color: var(--Text-White-text-Main-text, #FFF);
+  color: var(--text-white-main, #FFF);
 }
 
 /* Responsive Design */
