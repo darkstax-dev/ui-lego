@@ -430,7 +430,7 @@
 }
 
 .main-navigation__dropdown-item:active {
-  background: var(--color-gray-200);
+  background: var(--surface-card, var(--color-gray-200));
 }
 
 .main-navigation__dropdown-item:focus-visible {
