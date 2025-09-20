@@ -91,45 +91,51 @@
   color: var(--sds-color-text-default-secondary);
 }
 
-.menu-item--default:hover {
-  background: var(--sds-color-text-default-default);
+/* Interactive hover for default state */
+.menu-item--default:hover,
+.menu-item--default:focus-visible {
+  background: var(--sds-color-text-default-default) !important;
 }
 
-.menu-item--default:hover .menu-item__icon {
-  color: var(--sds-color-text-brand-on-brand);
+.menu-item--default:hover .menu-item__icon,
+.menu-item--default:focus-visible .menu-item__icon {
+  color: var(--sds-color-text-brand-on-brand) !important;
 }
 
-.menu-item--default:hover .menu-item__label {
-  color: var(--sds-color-text-brand-on-brand);
+.menu-item--default:hover .menu-item__label,
+.menu-item--default:focus-visible .menu-item__label {
+  color: var(--sds-color-text-brand-on-brand) !important;
 }
 
-.menu-item--default:hover .menu-item__shortcut {
-  color: var(--sds-color-text-brand-on-brand);
+.menu-item--default:hover .menu-item__shortcut,
+.menu-item--default:focus-visible .menu-item__shortcut {
+  color: var(--sds-color-text-brand-on-brand) !important;
 }
 
-.menu-item--default:hover .menu-item__description {
-  color: var(--sds-color-text-brand-on-brand);
+.menu-item--default:hover .menu-item__description,
+.menu-item--default:focus-visible .menu-item__description {
+  color: var(--sds-color-text-brand-on-brand) !important;
 }
 
-/* Hover state */
+/* Static hover state for demo/forced state */
 .menu-item--hover {
-  background: var(--sds-color-text-default-default);
+  background: var(--sds-color-text-default-default) !important;
 }
 
 .menu-item--hover .menu-item__icon {
-  color: var(--sds-color-text-brand-on-brand);
+  color: var(--sds-color-text-brand-on-brand) !important;
 }
 
 .menu-item--hover .menu-item__label {
-  color: var(--sds-color-text-brand-on-brand);
+  color: var(--sds-color-text-brand-on-brand) !important;
 }
 
 .menu-item--hover .menu-item__shortcut {
-  color: var(--sds-color-text-brand-on-brand);
+  color: var(--sds-color-text-brand-on-brand) !important;
 }
 
 .menu-item--hover .menu-item__description {
-  color: var(--sds-color-text-brand-on-brand);
+  color: var(--sds-color-text-brand-on-brand) !important;
 }
 
 /* Disabled state */
