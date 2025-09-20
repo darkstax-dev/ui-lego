@@ -77,7 +77,7 @@
   font-size: var(--font-size-md);
   font-weight: var(--font-weight-semibold);
   line-height: var(--line-height-tight);
-  letter-spacing: var(--letter-spacing-wider);
+  letter-spacing: 1.6px; /* Exact Figma specification */
   text-transform: uppercase;
   white-space: nowrap;
 }
