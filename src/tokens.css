@@ -23,6 +23,7 @@
   /* SDS Size Scale for Radius */
   --sds-radius-md: 0px;
   --sds-size-radius-400: 0px;
+  --sds-size-radius-200: 8px;
 
   /* Negative Spacing */
   --sds-size-space-negative-100: -4px;
@@ -205,6 +206,17 @@
   --Primary-button-red-Icon-default: var(--color-white);
   --Primary-button-red-Fill: var(--color-red-600);
   --Text-White-text-Main-text: var(--color-white);
+
+  /* Additional Figma design tokens for buttons */
+  --Primary-button-red-Disabled: #ADADAD;
+  --Text-White-text-Secondary-text: #DFDFDF;
+  --Blue-Dark-blue-950: #00112B;
+  --white-white-100: #FFF;
+  --Text-Gray-text-Disabled-text: #CECECE;
+  --Red-500: #FF3B31;
+  --Icon-Button-Disabled: #CECECE;
+  --Divider-Light: #C8C8C8;
+  --Divider-dark: #072B56;
 
   /* ===== SEMANTIC TOKENS - LIGHT MODE ===== */
 
