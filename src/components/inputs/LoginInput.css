@@ -1,4 +1,4 @@
-/* LoginInput styles matching Figma design */
+/* LoginInput styles using design tokens and matching Figma design */
 .login-input {
   display: flex;
   flex-direction: column;
@@ -8,27 +8,27 @@
 }
 
 .login-input__label {
-  color: #ADADAD;
-  font-family: 'Macan Mono Trial', -apple-system, Roboto, Helvetica, sans-serif;
-  font-size: 14px;
-  font-weight: 600;
+  color: var(--color-gray-400);
+  font-family: var(--font-family-macan-mono);
+  font-size: var(--sds-typography-body-size-small);
+  font-weight: var(--font-weight-semibold);
   line-height: 1.1;
-  letter-spacing: 1.4px;
+  letter-spacing: var(--letter-spacing-wider);
   text-transform: uppercase;
-  margin-bottom: 8px;
+  margin-bottom: var(--sds-size-space-200);
   transition: color 0.2s ease;
 }
 
 .login-input__label--filled {
-  color: #DFDFDF;
+  color: var(--color-gray-200);
 }
 
 .login-input__label--error {
-  color: #DFDFDF;
+  color: var(--color-gray-200);
 }
 
 .login-input__label--disabled {
-  color: #CECECE;
+  color: var(--color-gray-300);
 }
 
 .login-input__container {
@@ -39,14 +39,14 @@
   width: 100%;
   padding: 24px 6px 24px 12px;
   border: none;
-  border-bottom: 1px solid #CECECE;
+  border-bottom: var(--sds-size-stroke-border) solid var(--color-gray-300);
   background: transparent;
-  color: #78797A;
-  font-family: Macan, -apple-system, Roboto, Helvetica, sans-serif;
-  font-size: 16px;
-  font-weight: 450;
+  color: var(--color-gray-500);
+  font-family: var(--font-family-macan);
+  font-size: var(--sds-typography-body-size-medium);
+  font-weight: var(--font-weight-book);
   line-height: 1.2;
-  letter-spacing: -0.32px;
+  letter-spacing: var(--letter-spacing-tight);
   outline: none;
   transition: all 0.2s ease;
   height: 44px;
@@ -54,36 +54,36 @@
 }
 
 .login-input__field::placeholder {
-  color: #78797A;
+  color: var(--color-gray-500);
 }
 
 .login-input__field:focus {
-  border-bottom-color: #CECECE;
+  border-bottom-color: var(--color-gray-300);
 }
 
 .login-input__field--active {
-  color: #ADADAD;
+  color: var(--color-gray-400);
 }
 
 .login-input__field--error {
-  border-bottom-color: #FF3B31;
-  color: #FF3B31;
+  border-bottom-color: var(--color-red-500);
+  color: var(--color-red-500);
 }
 
 .login-input__field--disabled {
-  color: #CECECE;
+  color: var(--color-gray-300);
   cursor: not-allowed;
   opacity: 0.6;
 }
 
 .login-input__field--disabled::placeholder {
-  color: #CECECE;
+  color: var(--color-gray-300);
 }
 
 /* Cursor indicator for active state */
 .login-input__field--active::after {
   content: '|';
-  color: #ADADAD;
+  color: var(--color-gray-400);
   animation: blink 1s infinite;
 }
 
@@ -93,18 +93,18 @@
 }
 
 .login-input__helper {
-  color: #FF3B31;
-  font-family: 'Macan Mono Trial', -apple-system, Roboto, Helvetica, sans-serif;
-  font-size: 14px;
-  font-weight: 600;
+  color: var(--color-red-500);
+  font-family: var(--font-family-macan-mono);
+  font-size: var(--sds-typography-body-size-small);
+  font-weight: var(--font-weight-semibold);
   line-height: 1.1;
-  letter-spacing: 1.4px;
+  letter-spacing: var(--letter-spacing-wider);
   text-transform: uppercase;
-  margin-top: 8px;
+  margin-top: var(--sds-size-space-200);
 }
 
 .login-input__helper--error {
-  color: #FF3B31;
+  color: var(--color-red-500);
 }
 
 /* Corner borders for disabled state */
@@ -119,7 +119,7 @@
   bottom: -1px;
   width: 1px;
   height: 8px;
-  background: #CECECE;
+  background: var(--color-gray-300);
 }
 
 .login-input__field--disabled::before {
