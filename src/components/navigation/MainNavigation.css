@@ -19,7 +19,7 @@
 .main-navigation__left {
   display: flex;
   align-items: center;
-  gap: 64px;
+  gap: var(--sds-size-space-1600);
   flex: 1;
 }
 
@@ -36,16 +36,16 @@
 .main-navigation__menu {
   display: flex;
   align-items: center;
-  gap: 48px;
+  gap: calc(var(--sds-size-space-1600) - var(--sds-size-space-400));
 }
 
 .main-navigation__menu-item {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: var(--sds-size-space-200);
   cursor: pointer;
   transition: all 0.2s ease;
-  padding: 8px 0;
+  padding: var(--sds-size-space-200) 0;
 }
 
 .main-navigation__menu-item:hover {
