@@ -1,26 +1,18 @@
-import React, { useState, useCallback } from 'react'
-import Tab, { TabProps } from './Tab'
+import React, { useState, useCallback, useMemo, useRef } from 'react'
+import Tab from './Tab'
 import './Tabs.css'
 
 export interface TabItem {
-  /** Unique identifier for the tab */
   value: string
-  /** Display label for the tab */
   label: string
-  /** Whether this tab is disabled */
   disabled?: boolean
 }
 
 export interface TabsProps {
-  /** Array of tab items */
   items: TabItem[]
-  /** Currently active tab value */
   activeTab?: string
-  /** Callback when tab changes */
   onChange?: (value: string) => void
-  /** Additional CSS class names */
   className?: string
-  /** Whether to allow no active tab */
   allowEmpty?: boolean
 }
 
@@ -35,16 +27,61 @@ const Tabs: React.FC<TabsProps> = ({
   const [internalActiveTab, setInternalActiveTab] = useState<string | undefined>(
     activeTab || (!allowEmpty && items.length > 0 ? items[0].value : undefined)
   )
+  const listRef = useRef<HTMLDivElement>(null)
 
   const currentActiveTab = activeTab !== undefined ? activeTab : internalActiveTab
 
-  const handleTabClick = useCallback((value: string) => {
-    if (onChange) {
-      onChange(value)
-    } else {
-      setInternalActiveTab(value)
+  const enabledItems = useMemo(() => items.filter(i => !i.disabled), [items])
+  const currentIndex = useMemo(() => enabledItems.findIndex(i => i.value === currentActiveTab), [enabledItems, currentActiveTab])
+
+  const focusTabByIndex = (index: number) => {
+    const el = listRef.current
+    if (!el) return
+    const tabs = el.querySelectorAll<HTMLButtonElement>('[role="tab"]:not([disabled])')
+    if (tabs[index]) tabs[index].focus()
+  }
+
+  const setActiveByIndex = (index: number) => {
+    const target = enabledItems[index]
+    if (!target) return
+    if (onChange) onChange(target.value)
+    else setInternalActiveTab(target.value)
+  }
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
+    const count = enabledItems.length
+    if (count === 0) return
+    let next = currentIndex >= 0 ? currentIndex : 0
+    switch (e.key) {
+      case 'ArrowRight':
+      case 'ArrowDown': {
+        e.preventDefault()
+        next = (next + 1) % count
+        setActiveByIndex(next)
+        focusTabByIndex(next)
+        break
+      }
+      case 'ArrowLeft':
+      case 'ArrowUp': {
+        e.preventDefault()
+        next = (next - 1 + count) % count
+        setActiveByIndex(next)
+        focusTabByIndex(next)
+        break
+      }
+      case 'Home': {
+        e.preventDefault(); setActiveByIndex(0); focusTabByIndex(0); break
+      }
+      case 'End': {
+        e.preventDefault(); setActiveByIndex(count - 1); focusTabByIndex(count - 1); break
+      }
+      case 'Enter':
+      case ' ': {
+        // no-op since we already set active on arrow
+        break
+      }
     }
-  }, [onChange])
+  }
 
   const tabsClass = [
     'tabs',
@@ -52,7 +89,13 @@ const Tabs: React.FC<TabsProps> = ({
   ].filter(Boolean).join(' ')
 
   return (
-    <div className={tabsClass} role="tablist" {...props}>
+    <div
+      ref={listRef}
+      className={tabsClass}
+      role="tablist"
+      onKeyDown={handleKeyDown}
+      {...props}
+    >
       {items.map((item) => (
         <Tab
           key={item.value}
@@ -60,7 +103,8 @@ const Tabs: React.FC<TabsProps> = ({
           value={item.value}
           active={currentActiveTab === item.value}
           disabled={item.disabled}
-          onClick={() => handleTabClick(item.value)}
+          onClick={() => setActiveByIndex(enabledItems.findIndex(i => i.value === item.value))}
+          tabIndex={item.disabled ? -1 : currentActiveTab === item.value ? 0 : -1}
         />
       ))}
     </div>
