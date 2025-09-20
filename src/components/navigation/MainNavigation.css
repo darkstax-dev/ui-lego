@@ -129,7 +129,7 @@
 .main-navigation__divider {
   width: var(--sds-size-stroke-border);
   height: 16px;
-  background: var(--color-gray-200);
+  background: var(--text-white-secondary, var(--color-gray-200));
   transform: rotate(90deg);
 }
 
