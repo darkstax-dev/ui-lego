@@ -303,6 +303,38 @@
     width: 8px;
     height: 8px;
   }
+
+  /* Hide dropdowns on mobile to prevent overflow */
+  .main-navigation__dropdown {
+    display: none;
+  }
+}
+
+/* Tablet responsive adjustments */
+@media (max-width: 1024px) {
+  .main-navigation__dropdown {
+    min-width: 220px;
+    left: auto;
+    right: 0;
+  }
+
+  .main-navigation__dropdown-item {
+    font-size: 13px;
+    padding: var(--sds-size-space-200) var(--sds-size-space-300);
+  }
+}
+
+/* Ensure dropdown stays within viewport */
+@media (max-width: 768px) {
+  .main-navigation__dropdown {
+    position: fixed;
+    top: 72px;
+    left: var(--sds-size-space-400);
+    right: var(--sds-size-space-400);
+    min-width: auto;
+    max-height: 60vh;
+    overflow-y: auto;
+  }
 }
 
 /* Focus states */
