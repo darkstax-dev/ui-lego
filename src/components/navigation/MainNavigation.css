@@ -378,8 +378,14 @@
   opacity: 1;
 }
 
+/* Open state - all elements should be red as per Figma design */
+.main-navigation__menu-item--open .main-navigation__menu-icon,
+.main-navigation__menu-item--open .main-navigation__menu-text,
+.main-navigation__menu-item--open .main-navigation__menu-expand {
+  color: var(--color-red-600);
+}
+
 .main-navigation__menu-expand--open {
-  transform: rotate(180deg);
   transition: transform 0.2s ease;
 }
 
