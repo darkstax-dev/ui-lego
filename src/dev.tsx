@@ -68,8 +68,136 @@ function App() {
   const [loginFilled, setLoginFilled] = React.useState('Filled')
   const [loginError, setLoginError] = React.useState('Mistake')
 
+  // Component Gallery state and registry
+  type GalleryItem = { id: string; name: string; render: () => React.ReactNode }
+
+  const InputsQuickPreview: React.FC = () => {
+    const [username, setUsername] = React.useState('')
+    const [country, setCountry] = React.useState('')
+    const [acceptTerms, setAcceptTerms] = React.useState(false)
+    const [notif, setNotif] = React.useState(true)
+    const [search, setSearch] = React.useState('')
+
+    return (
+      <div className="gallery-mini-grid">
+        <InputField
+          label="Username"
+          value={username}
+          onChange={setUsername}
+          placeholder="Enter your username"
+          supportingText="Choose a unique username"
+        />
+        <SelectField
+          label="Country"
+          options={[
+            { value: 'us', label: 'United States' },
+            { value: 'ca', label: 'Canada' },
+            { value: 'uk', label: 'United Kingdom' },
+          ]}
+          value={country}
+          onChange={setCountry}
+          placeholder="Choose a country"
+        />
+        <CheckboxField
+          label="Accept terms"
+          checked={acceptTerms}
+          onChange={setAcceptTerms}
+        />
+        <SwitchField
+          label="Notifications"
+          description="Enable alerts"
+          checked={notif}
+          onChange={setNotif}
+        />
+        <SearchField
+          value={search}
+          onChange={setSearch}
+          placeholder="Search..."
+        />
+      </div>
+    )
+  }
+
+  const galleryItemsBase: GalleryItem[] = [
+    { id: 'navigation-suite', name: 'Navigation (Suite)', render: () => <NavigationDemo /> },
+    { id: 'main-navigation', name: 'Main Navigation', render: () => <MainNavigation variant="default" /> },
+    { id: 'top-bar', name: 'Top Bar', render: () => <TopBarDemo /> },
+    { id: 'accordion', name: 'Accordion', render: () => <AccordionDemo /> },
+    { id: 'buttons', name: 'Buttons', render: () => <ButtonDemo /> },
+    { id: 'dropdown', name: 'Dropdown', render: () => <DropdownDemo /> },
+    { id: 'effects', name: 'Effects', render: () => <EffectsDemo /> },
+    { id: 'icons', name: 'Icons', render: () => <Icons /> },
+    { id: 'inputs', name: 'Inputs', render: () => <InputsQuickPreview /> },
+    { id: 'menu', name: 'Menu', render: () => <MenuDemo /> },
+    { id: 'modal', name: 'Modal', render: () => <ModalDemo /> },
+    { id: 'modeling', name: 'Modeling', render: () => <ModelingDemo /> },
+    { id: 'notifications', name: 'Notifications', render: () => <NotificationDemo /> },
+    { id: 'pagination', name: 'Pagination', render: () => (
+      <div className="gallery-column">
+        <Pagination currentPage={3} totalPages={10} onPageChange={() => {}} />
+      </div>
+    ) },
+    { id: 'snackbar', name: 'Snackbar', render: () => (
+      <div className="gallery-column">
+        <Snackbar
+          variant="success"
+          title="Success"
+          message="Your changes have been saved."
+        />
+      </div>
+    ) },
+    { id: 'tabs', name: 'Tabs', render: () => <TabsDemo /> },
+    { id: 'tag-badges', name: 'Tag & Badges', render: () => <TagBadgeDemo /> },
+    { id: 'tooltip', name: 'Tooltip', render: () => <TooltipDemo /> },
+  ]
+
+  const [galleryQuery, setGalleryQuery] = React.useState('')
+  const galleryItems = React.useMemo<GalleryItem[]>(() => {
+    const q = galleryQuery.trim().toLowerCase()
+    const items = [...galleryItemsBase].sort((a, b) => a.name.localeCompare(b.name))
+    if (!q) return items
+    return items.filter((i) => i.name.toLowerCase().includes(q))
+  }, [galleryQuery])
+
+  const [selectedGalleryId, setSelectedGalleryId] = React.useState<string>(
+    galleryItemsBase[0].id,
+  )
+
+  React.useEffect(() => {
+    if (galleryItems.length === 0) return
+    if (!galleryItems.some((i) => i.id === selectedGalleryId)) {
+      setSelectedGalleryId(galleryItems[0].id)
+    }
+  }, [galleryItems, selectedGalleryId])
+
   return (
     <div className="app">
+      <section className="component-section component-section--white">
+        <h1>Component Gallery</h1>
+        <div className="gallery-controls">
+          <input
+            className="gallery-search-input"
+            type="search"
+            value={galleryQuery}
+            onChange={(e) => setGalleryQuery(e.target.value)}
+            placeholder="Search components"
+            aria-label="Search components"
+          />
+          <select
+            className="gallery-select"
+            value={selectedGalleryId}
+            onChange={(e) => setSelectedGalleryId(e.target.value)}
+            aria-label="Select component"
+          >
+            {galleryItems.map((item) => (
+              <option key={item.id} value={item.id}>{item.name}</option>
+            ))}
+          </select>
+        </div>
+        <div className="gallery-preview">
+          {galleryItems.find((i) => i.id === selectedGalleryId)?.render()}
+        </div>
+      </section>
       <NavigationDemo />
 
       <section className="component-section component-section--white">
