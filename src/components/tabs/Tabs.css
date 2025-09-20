@@ -3,7 +3,7 @@
   display: inline-flex;
   align-items: flex-start;
   gap: 0;
-  border-bottom: 1px solid transparent;
+  border-bottom: var(--sds-size-stroke-border) solid transparent;
   position: relative;
   overflow-x: auto;
   scrollbar-width: none;
@@ -39,10 +39,11 @@
 
 @media (max-width: 480px) {
   .tabs {
-    padding: 0 4px;
+    padding: 0 var(--sds-size-space-100);
   }
-  
+
   .tabs .tab {
     min-width: 60px;
+    flex-shrink: 1;
   }
 }
