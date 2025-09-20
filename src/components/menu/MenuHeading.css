@@ -2,14 +2,14 @@
 .menu-heading {
   display: flex;
   align-items: flex-start;
-  padding: 8px 16px 4px 16px;
-  border-radius: 8px;
-  font-family: Inter, -apple-system, Roboto, Helvetica, sans-serif;
+  padding: var(--sds-size-padding-sm) var(--sds-size-padding-lg) var(--sds-size-padding-xs) var(--sds-size-padding-lg);
+  border-radius: var(--sds-size-radius-200);
+  font-family: var(--font-family-inter);
 }
 
 .menu-heading__text {
-  color: rgba(117, 117, 117, 1);
-  font-size: 16px;
+  color: var(--sds-color-text-default-secondary);
+  font-size: var(--font-size-md);
   font-weight: 700;
   line-height: 140%;
 }
