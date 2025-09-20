@@ -22,7 +22,7 @@ const TagBadgeDemo: React.FC = () => {
     neutral: true,
   })
 
-  const handleToggle = (key: string) => {
+  const handleToggle = (key: keyof typeof toggleStates) => {
     setToggleStates(prev => ({
       ...prev,
       [key]: !prev[key]
