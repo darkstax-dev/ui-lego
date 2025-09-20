@@ -1,27 +1,16 @@
-/* CSS Variables from Figma design */
-:root {
-  --radio-background-brand-secondary: #E6E6E6;
-  --radio-border-brand-default: #2C2C2C;
-  --radio-text-default: #1E1E1E;
-  --radio-text-secondary: #757575;
-  --radio-background-default: #CECECE;
-  --radio-border-tertiary: #757575;
-  --radio-background-disabled: #D9D9D9;
-  --radio-border-disabled: #B3B3B3;
-  --radio-text-disabled: #B3B3B3;
-  --radio-space-300: 12px;
-}
+/* RadioField styles using design tokens */
+/* Design tokens are imported from tokens.css */
 
 .radio-field {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: var(--sds-size-space-200);
 }
 
 .radio-field__main {
   display: flex;
   align-items: center;
-  gap: var(--radio-space-300);
+  gap: var(--sds-size-space-300);
 }
 
 .radio-field__radio-container {
@@ -47,34 +36,34 @@
 .radio-field__radio {
   width: 16px;
   height: 16px;
-  border: 1px solid var(--radio-border-tertiary);
+  border: 1px solid var(--color-gray-500);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: var(--radio-background-default);
+  background: var(--color-gray-300);
   transition: all 0.2s ease;
   position: relative;
 }
 
 .radio-field__radio--checked {
-  border-color: var(--radio-border-brand-default);
-  background: var(--radio-background-brand-secondary);
+  border-color: var(--sds-color-border-brand-default);
+  background: var(--sds-color-background-brand-secondary);
 }
 
 .radio-field__inner-circle {
-  width: 10px;
-  height: 10px;
+  width: 5px;
+  height: 5px;
   border-radius: 50%;
-  background: var(--radio-border-brand-default);
+  background: var(--sds-color-text-default-default);
 }
 
 .radio-field__label {
   flex: 1;
-  color: var(--radio-text-default);
-  font-family: Inter, -apple-system, Roboto, Helvetica, sans-serif;
-  font-size: 16px;
-  font-weight: 400;
+  color: var(--sds-color-text-default-default);
+  font-family: var(--sds-typography-body-font-family);
+  font-size: var(--sds-typography-body-size-medium);
+  font-weight: var(--sds-typography-body-font-weight-regular);
   line-height: 1.4;
   cursor: pointer;
   margin: 0;
@@ -83,7 +72,7 @@
 .radio-field__description-row {
   display: flex;
   align-items: flex-start;
-  gap: var(--radio-space-300);
+  gap: var(--sds-size-space-300);
 }
 
 .radio-field__spacer {
@@ -94,41 +83,42 @@
 
 .radio-field__description {
   flex: 1;
-  color: var(--radio-text-secondary);
-  font-family: Inter, -apple-system, Roboto, Helvetica, sans-serif;
-  font-size: 16px;
-  font-weight: 400;
+  color: var(--sds-color-text-default-secondary);
+  font-family: var(--sds-typography-body-font-family);
+  font-size: var(--sds-typography-body-size-medium);
+  font-weight: var(--sds-typography-body-font-weight-regular);
   line-height: 1.4;
 }
 
 /* Disabled state */
 .radio-field--disabled .radio-field__radio {
-  border-color: var(--radio-border-disabled);
-  background: var(--radio-background-disabled);
+  border-color: var(--sds-color-border-disabled-default);
+  background: var(--sds-color-background-disabled-default);
 }
 
 .radio-field--disabled .radio-field__radio--checked {
-  border-color: var(--radio-border-disabled);
-  background: var(--radio-background-disabled);
+  border-color: var(--sds-color-border-disabled-default);
+  background: var(--sds-color-background-disabled-default);
 }
 
 .radio-field--disabled .radio-field__inner-circle {
-  background: var(--radio-border-disabled);
+  background: var(--sds-color-text-disabled-default);
 }
 
 .radio-field--disabled .radio-field__label {
-  color: var(--radio-text-disabled);
+  color: var(--sds-color-text-disabled-default);
   cursor: not-allowed;
 }
 
 .radio-field--disabled .radio-field__description {
-  color: var(--radio-text-disabled);
+  color: var(--sds-color-text-disabled-default);
+  opacity: 0.5;
 }
 
 /* Hover states for non-disabled radios */
 .radio-field:not(.radio-field--disabled) .radio-field__input:hover + .radio-field__radio {
-  border-color: var(--radio-border-brand-default);
-  background-color: var(--radio-background-brand-secondary);
+  border-color: var(--sds-color-border-brand-default);
+  background-color: var(--sds-color-background-brand-secondary);
 }
 
 /* Focus states */
