@@ -105,6 +105,16 @@
   --font-family-macan-mono-stencil: 'Macan Mono Stencil Trial', -apple-system, Roboto, Helvetica, sans-serif;
   --font-family-inter: 'Inter', -apple-system, Roboto, Helvetica, sans-serif;
 
+  /* SDS Typography System */
+  --sds-typography-body-font-family: 'Inter', -apple-system, Roboto, Helvetica, sans-serif;
+  --sds-typography-body-size-small: 14px;
+  --sds-typography-body-size-medium: 16px;
+  --sds-typography-body-font-weight-regular: 400;
+  --sds-typography-body-font-weight-strong: 700;
+  --sds-typography-family-mono: 'Roboto Mono', -apple-system, Roboto, Helvetica, sans-serif;
+  --sds-typography-scale-03: 16px;
+  --sds-typography-weight-regular: 400;
+
   /* Font Weights */
   --font-weight-book: 450;
   --font-weight-medium: 500;
