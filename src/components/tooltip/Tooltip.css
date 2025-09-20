@@ -2,7 +2,7 @@
   display: inline-flex;
   position: relative;
   max-width: 280px;
-  background: var(--Background-Card);
+  background: var(--surface-card, var(--Background-Card));
   border-radius: var(--sds-size-radius-200);
   z-index: 1000;
 }
