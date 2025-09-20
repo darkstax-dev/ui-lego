@@ -76,4 +76,4 @@ const IconButton = forwardRef<HTMLButtonElement, PolymorphicProps<'button', OwnP
   )
 })
 
-export default IconButton
+export default React.memo(IconButton)
