@@ -1,9 +1,9 @@
-/* CheckboxGroup styles matching Figma design */
+/* CheckboxGroup styles using design tokens */
 .checkbox-group {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 12px;
+  gap: var(--sds-size-space-300);
   width: 100%;
 }
 
@@ -20,6 +20,6 @@
 /* Responsive behavior */
 @media (max-width: 768px) {
   .checkbox-group {
-    gap: 8px;
+    gap: var(--sds-size-space-200);
   }
 }
