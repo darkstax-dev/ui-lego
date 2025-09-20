@@ -162,6 +162,17 @@
 
 .menu-item--disabled:hover {
   background: transparent;
+  cursor: not-allowed;
+}
+
+.menu-item--disabled:hover .menu-item__icon,
+.menu-item--disabled:hover .menu-item__label,
+.menu-item--disabled:hover .menu-item__description {
+  color: rgba(179, 179, 179, 1);
+}
+
+.menu-item--disabled:hover .menu-item__shortcut {
+  color: rgba(30, 30, 30, 1);
 }
 
 /* Responsive design */
