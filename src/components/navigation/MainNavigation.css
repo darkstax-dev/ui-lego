@@ -321,3 +321,81 @@
   letter-spacing: var(--letter-spacing-wider);
   text-transform: uppercase;
 }
+
+/* Dropdown Menu Styles */
+.main-navigation__menu-item-wrapper {
+  position: relative;
+}
+
+.main-navigation__menu-item {
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: var(--sds-size-space-200);
+  transition: all 0.2s ease;
+  padding: var(--sds-size-space-200) 0;
+}
+
+.main-navigation__menu-item:hover {
+  opacity: 0.8;
+}
+
+.main-navigation__menu-item--open {
+  opacity: 1;
+}
+
+.main-navigation__menu-expand--open {
+  transform: rotate(180deg);
+  transition: transform 0.2s ease;
+}
+
+.main-navigation__dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  min-width: 259px;
+  background: var(--color-white);
+  border: var(--sds-size-stroke-border) solid var(--color-gray-300);
+  border-radius: var(--sds-radius-md);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  z-index: 1000;
+  padding: var(--sds-size-space-200);
+  margin-top: var(--sds-size-space-100);
+}
+
+.main-navigation__dropdown-item {
+  display: block;
+  width: 100%;
+  background: none;
+  border: none;
+  padding: var(--sds-size-space-300) var(--sds-size-space-400);
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border-radius: var(--sds-size-space-100);
+
+  /* Typography matching Figma design */
+  color: var(--color-blue-dark-950);
+  font-family: var(--font-family-macan-mono);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-tight);
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+}
+
+.main-navigation__dropdown-item:hover {
+  background: var(--color-gray-100);
+  color: var(--color-blue-dark-950);
+}
+
+.main-navigation__dropdown-item:active {
+  background: var(--color-gray-200);
+}
+
+.main-navigation__dropdown-item:focus-visible {
+  outline: 2px solid var(--color-blue-700);
+  outline-offset: 2px;
+}
