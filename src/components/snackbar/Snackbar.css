@@ -95,18 +95,18 @@
 /* Responsive design */
 @media (max-width: 768px) {
   .snackbar {
-    margin: 0 16px;
-    max-width: calc(100% - 32px);
+    margin: 0 var(--sds-size-space-400);
+    max-width: calc(100% - var(--sds-size-space-800));
   }
-  
+
   .snackbar__content {
-    gap: 24px;
+    gap: var(--sds-size-space-600);
   }
-  
+
   .snackbar__title {
-    font-size: 16px;
+    font-size: var(--font-size-md);
   }
-  
+
   .snackbar__message {
     font-size: 13px;
   }
@@ -114,29 +114,29 @@
 
 @media (max-width: 480px) {
   .snackbar {
-    padding: 12px;
+    padding: var(--sds-size-space-300);
   }
-  
+
   .snackbar__content {
-    gap: 16px;
+    gap: var(--sds-size-space-400);
   }
-  
+
   .snackbar__icon {
-    width: 32px;
-    height: 32px;
+    width: var(--sds-size-space-800);
+    height: var(--sds-size-space-800);
   }
-  
+
   .snackbar__icon svg {
-    width: 32px;
-    height: 32px;
+    width: var(--sds-size-space-800);
+    height: var(--sds-size-space-800);
   }
-  
+
   .snackbar__title {
-    font-size: 15px;
+    font-size: var(--font-size-base);
   }
-  
+
   .snackbar__message {
-    font-size: 12px;
+    font-size: var(--font-size-xs);
   }
 }
 
