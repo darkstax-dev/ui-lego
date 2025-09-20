@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useMemo, useRef } from 'react'
+import React, { useState, useMemo, useRef } from 'react'
 import Tab from './Tab'
 import './Tabs.css'
 
