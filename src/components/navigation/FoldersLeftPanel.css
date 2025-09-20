@@ -12,6 +12,11 @@
   flex-shrink: 0;
 }
 
+/* Indentation levels */
+.folders-panel__indent--0 { padding-left: 8px; }
+.folders-panel__indent--1 { padding-left: 24px; }
+.folders-panel__indent--2 { padding-left: 48px; }
+
 .folders-panel__content {
   display: flex;
   flex-direction: column;
