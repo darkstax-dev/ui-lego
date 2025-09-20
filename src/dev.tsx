@@ -895,8 +895,33 @@ function App() {
   )
 }
 
-ReactDOM.createRoot(document.getElementById('root')!).render(
+import type { Root } from 'react-dom/client'
+
+const container = document.getElementById('root')!
+const ROOT_KEY = '__ui_lego_root__'
+let root = (globalThis as any)[ROOT_KEY] as Root | undefined
+
+if (!root) {
+  root = ReactDOM.createRoot(container)
+  ;(globalThis as any)[ROOT_KEY] = root
+}
+
+root.render(
   <React.StrictMode>
     <App />
   </React.StrictMode>,
 )
+
+// Cleanup on HMR to avoid memory leaks and allow re-creation
+// Vite provides import.meta.hot in dev
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
+if (import.meta && import.meta.hot) {
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
+  import.meta.hot.dispose(() => {
+    const existing = (globalThis as any)[ROOT_KEY] as Root | undefined
+    existing?.unmount()
+    ;(globalThis as any)[ROOT_KEY] = undefined
+  })
+}
