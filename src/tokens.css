@@ -203,7 +203,7 @@
   /* ===== FIGMA DESIGN TOKEN ALIASES ===== */
 
   /* Figma-specific token names for SecondaryNavigation */
-  --Text-Blue-text-Main-text: var(--color-blue-dark-950);
+  --Text-Blue-text-Main-text: var(--text-blue-main, var(--color-blue-dark-950));
   --red-600-cta: var(--color-red-600);
   --Inputs-Input-Background: var(--color-gray-200);
   --Inputs-Placeholder-text: var(--color-gray-500);
@@ -223,7 +223,8 @@
   --White: var(--color-white);
   --white-white-40: rgba(255, 255, 255, 0.40);
   --Dark-blue: var(--color-blue-dark-950);
-  --Gray-50: #F8F8F8;
+  --color-gray-50: #F8F8F8;
+  --Gray-50: var(--color-gray-50);
   --white-white-20: rgba(255, 255, 255, 0.20);
   --Gray-100: var(--color-gray-100);
 
@@ -239,7 +240,7 @@
   --Divider-dark: #072B56;
 
   /* Figma dropdown design tokens */
-  --Text-Blue-text-Main-text: #00112B;
+  --Text-Blue-text-Main-text: var(--text-blue-main, #00112B);
   --Blue-Dark-blue-950: #00112B;
   --Drop-down-light-Background-default: #ECECEC;
   --Gray-300: #CECECE;
