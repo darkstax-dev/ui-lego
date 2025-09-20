@@ -209,14 +209,38 @@ export const MainNavigation: React.FC<MainNavigationProps> = ({
 
             {isHubVariant && (
               <>
-                <div className="main-navigation__menu-item">
-                  <svg className="main-navigation__menu-icon" width="20" height="20" viewBox="0 0 20 20" fill="none">
-                    <path d="M3.33304 18.3333C3.33304 16.5652 4.03542 14.8695 5.28566 13.6193C6.5359 12.369 8.2316 11.6666 9.9997 11.6666C11.7678 11.6666 13.4635 12.369 14.7137 13.6193C15.964 14.8695 16.6664 16.5652 16.6664 18.3333H14.9997C14.9997 17.0072 14.4729 15.7355 13.5352 14.7978C12.5976 13.8601 11.3258 13.3333 9.9997 13.3333C8.67362 13.3333 7.40185 13.8601 6.46417 14.7978C5.52649 15.7355 4.9997 17.0072 4.9997 18.3333H3.33304ZM9.9997 10.8333C7.2372 10.8333 4.9997 8.59581 4.9997 5.83331C4.9997 3.07081 7.2372 0.833313 9.9997 0.833313C12.7622 0.833313 14.9997 3.07081 14.9997 5.83331C14.9997 8.59581 12.7622 10.8333 9.9997 10.8333Z" fill="currentColor"/>
-                  </svg>
-                  <span className="main-navigation__menu-text">Administration</span>
-                  <svg className="main-navigation__menu-expand" width="20" height="20" viewBox="0 0 20 20" fill="none">
-                    <path d="M9.16667 9.16666V4.16666H10.8333V9.16666H15.8333V10.8333H10.8333V15.8333H9.16667V10.8333H4.16667V9.16666H9.16667Z" fill="currentColor"/>
-                  </svg>
+                <div className="main-navigation__menu-item-wrapper">
+                  <button
+                    className={`main-navigation__menu-item ${openDropdown === 'administration' ? 'main-navigation__menu-item--open' : ''}`}
+                    onClick={() => handleMenuItemClick('administration')}
+                    aria-expanded={openDropdown === 'administration'}
+                    aria-haspopup="true"
+                  >
+                    <svg className="main-navigation__menu-icon" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                      <path d="M3.33304 18.3333C3.33304 16.5652 4.03542 14.8695 5.28566 13.6193C6.5359 12.369 8.2316 11.6666 9.9997 11.6666C11.7678 11.6666 13.4635 12.369 14.7137 13.6193C15.964 14.8695 16.6664 16.5652 16.6664 18.3333H14.9997C14.9997 17.0072 14.4729 15.7355 13.5352 14.7978C12.5976 13.8601 11.3258 13.3333 9.9997 13.3333C8.67362 13.3333 7.40185 13.8601 6.46417 14.7978C5.52649 15.7355 4.9997 17.0072 4.9997 18.3333H3.33304ZM9.9997 10.8333C7.2372 10.8333 4.9997 8.59581 4.9997 5.83331C4.9997 3.07081 7.2372 0.833313 9.9997 0.833313C12.7622 0.833313 14.9997 3.07081 14.9997 5.83331C14.9997 8.59581 12.7622 10.8333 9.9997 10.8333Z" fill="currentColor"/>
+                    </svg>
+                    <span className="main-navigation__menu-text">Administration</span>
+                    <svg
+                      className={`main-navigation__menu-expand ${openDropdown === 'administration' ? 'main-navigation__menu-expand--open' : ''}`}
+                      width="20" height="20" viewBox="0 0 20 20" fill="none"
+                    >
+                      <path d={openDropdown === 'administration' ? "M4.16667 9.16666H15.8333V10.8333H4.16667V9.16666Z" : "M9.16667 9.16666V4.16666H10.8333V9.16666H15.8333V10.8333H10.8333V15.8333H9.16667V10.8333H4.16667V9.16666H9.16667Z"} fill="currentColor"/>
+                    </svg>
+                  </button>
+
+                  {openDropdown === 'administration' && (
+                    <div className="main-navigation__dropdown">
+                      {dropdownData.administration.map((item, index) => (
+                        <button
+                          key={index}
+                          className="main-navigation__dropdown-item"
+                          onClick={() => handleDropdownItemClick(item)}
+                        >
+                          {item}
+                        </button>
+                      ))}
+                    </div>
+                  )}
                 </div>
 
                 <div className="main-navigation__menu-item">
