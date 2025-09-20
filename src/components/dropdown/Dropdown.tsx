@@ -33,7 +33,7 @@ const Dropdown = forwardRef<HTMLDivElement, DropdownProps>(function Dropdown({
   'aria-label': ariaLabel,
   'aria-labelledby': ariaLabelledBy
 }, externalRef) {
-  const dropdownRef = useRef<HTMLDivElement>(null)
+  const dropdownRef = useRef<HTMLDivElement | null>(null) as React.MutableRefObject<HTMLDivElement | null>
 
   // Handle keyboard navigation
   useEffect(() => {
