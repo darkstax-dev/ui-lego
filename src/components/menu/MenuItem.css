@@ -17,18 +17,6 @@
   outline-offset: 2px;
 }
 
-/* General hover behavior for menu items without specific state */
-.menu-item:not(.menu-item--disabled):hover {
-  background: rgba(30, 30, 30, 1);
-}
-
-.menu-item:not(.menu-item--disabled):hover .menu-item__icon,
-.menu-item:not(.menu-item--disabled):hover .menu-item__label,
-.menu-item:not(.menu-item--disabled):hover .menu-item__shortcut,
-.menu-item:not(.menu-item--disabled):hover .menu-item__description {
-  color: rgba(245, 245, 245, 1);
-}
-
 .menu-item__icon {
   display: flex;
   align-items: center;
