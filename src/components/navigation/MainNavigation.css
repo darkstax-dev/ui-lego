@@ -127,9 +127,9 @@
 }
 
 .main-navigation__divider {
-  width: 1px;
+  width: var(--sds-size-stroke-border);
   height: 16px;
-  background: var(--Gray-200, #DFDFDF);
+  background: var(--color-gray-200);
   transform: rotate(90deg);
 }
 
@@ -147,7 +147,7 @@
   align-items: center;
   background: transparent;
   border: none;
-  color: var(--Gray-200, #DFDFDF);
+  color: var(--color-gray-200);
   cursor: pointer;
   transition: all 0.2s ease;
   padding: 0;
@@ -184,9 +184,9 @@
   left: 30px;
   width: 10px;
   height: 10px;
-  background: #FF3B31;
+  background: var(--color-red-500);
   border-radius: 50%;
-  border: 2px solid var(--Blue-Dark-blue-950, #00112B);
+  border: 2px solid var(--color-blue-dark-950);
 }
 
 /* Responsive Design */
