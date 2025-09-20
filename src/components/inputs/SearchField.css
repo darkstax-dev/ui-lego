@@ -1,4 +1,4 @@
-/* SearchField styles matching Figma design */
+/* SearchField styles using design tokens and matching Figma design */
 .search-field {
   width: 100%;
 }
@@ -6,14 +6,14 @@
 .search-field__input-container {
   display: flex;
   align-items: center;
-  gap: 8px;
-  background: #DFDFDF;
-  padding: 8px 12px;
+  gap: var(--sds-size-space-200);
+  background: var(--color-gray-200);
+  padding: var(--sds-size-space-200) var(--sds-size-space-300);
   transition: all 0.2s ease;
 }
 
 .search-field__input-container:hover:not(.search-field--disabled .search-field__input-container) {
-  background: #D4D4D4;
+  background: rgba(223, 223, 223, 0.8);
 }
 
 .search-field__search-icon {
@@ -23,44 +23,44 @@
   justify-content: center;
   align-items: center;
   flex-shrink: 0;
-  color: #78797A;
+  color: var(--color-gray-500);
 }
 
 .search-field--filled .search-field__search-icon {
-  color: #00112B;
+  color: var(--color-blue-dark-950);
 }
 
 .search-field--disabled .search-field__search-icon {
-  color: #ADADAD;
+  color: var(--color-gray-400);
 }
 
 .search-field__input {
   flex: 1;
   border: none;
   background: transparent;
-  color: #78797A;
-  font-family: Inter, -apple-system, Roboto, Helvetica, sans-serif;
-  font-size: 16px;
-  font-weight: 400;
+  color: var(--color-gray-500);
+  font-family: var(--sds-typography-body-font-family);
+  font-size: var(--sds-typography-body-size-medium);
+  font-weight: var(--sds-typography-body-font-weight-regular);
   line-height: 1;
   outline: none;
 }
 
 .search-field__input::placeholder {
-  color: #78797A;
+  color: var(--color-gray-500);
 }
 
 .search-field--filled .search-field__input {
-  color: #00112B;
+  color: var(--color-blue-dark-950);
 }
 
 .search-field__input:disabled {
-  color: #ADADAD;
+  color: var(--color-gray-400);
   cursor: not-allowed;
 }
 
 .search-field__input:disabled::placeholder {
-  color: #ADADAD;
+  color: var(--color-gray-400);
 }
 
 .search-field__clear-button {
@@ -74,7 +74,7 @@
   background: transparent;
   cursor: pointer;
   padding: 0;
-  color: #00112B;
+  color: var(--color-blue-dark-950);
   transition: opacity 0.2s ease;
 }
 
@@ -98,7 +98,7 @@
 }
 
 .search-field--disabled .search-field__input-container {
-  background: #CECECE;
+  background: var(--color-gray-300);
 }
 
 /* Focus states */
