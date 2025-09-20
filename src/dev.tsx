@@ -511,7 +511,7 @@ function App() {
 
         <div className="demo-group">
           <h3>Fixed Width (240px - Figma Design)</h3>
-          <div style={{ display: 'flex', gap: '2rem' }}>
+          <div className="example-row">
             <RadioGroup
               name="design-demo"
               className="radio-group--fixed-width"
