@@ -43,7 +43,7 @@ const Tooltip: React.FC<TooltipProps> = ({
       case 'top':
         return (
           <svg {...beakProps}>
-            <path d="M6 0.0500031L11.6569 5.70686L6 11.3637L0.343146 5.70686L6 0.0500031Z" fill="var(--tooltip-background)" />
+            <path d="M6 0.0500031L11.6569 5.70686L6 11.3637L0.343146 5.70686L6 0.0500031Z" fill="#DFDFDF" />
           </svg>
         )
       case 'bottom':
