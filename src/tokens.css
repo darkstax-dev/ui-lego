@@ -63,6 +63,9 @@
   --sds-color-text-default-default: rgba(30, 30, 30, 1);
   --sds-color-text-default-secondary: rgba(117, 117, 117, 1);
   --sds-color-text-brand-on-brand: rgba(245, 245, 245, 1);
+  --sds-color-text-brand-tertiary: rgba(117, 117, 117, 1);
+  --sds-color-text-danger-on-danger: rgba(254, 233, 231, 1);
+  --sds-color-text-positive-on-positive: rgba(235, 255, 238, 1);
   --sds-color-text-disabled-default: rgba(179, 179, 179, 1);
 
   /* SDS Color System - Borders */
@@ -95,8 +98,12 @@
   --sds-size-padding-xl: 24px;
 
   /* SDS Brand Colors */
+  --sds-color-background-brand-default: rgba(44, 44, 44, 1);
+  --sds-color-background-brand-tertiary: rgba(245, 245, 245, 1);
   --Gray-50: #FFF;
   --Brown-Main-900: #403B39;
+  --Black: #0E0E0E;
+  --Yellow-500: #ED8B30;
 
   /* ===== TYPOGRAPHY TOKENS ===== */
 
