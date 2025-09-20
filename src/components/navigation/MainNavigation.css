@@ -53,12 +53,12 @@
 }
 
 .main-navigation__menu-item--active {
-  color: var(--red-600-cta, #D9322A);
+  color: var(--color-red-600);
 }
 
 .main-navigation__menu-item--active .main-navigation__menu-icon,
 .main-navigation__menu-item--active .main-navigation__menu-expand {
-  color: var(--red-600-cta, #D9322A);
+  color: var(--color-red-600);
 }
 
 .main-navigation__menu-icon {
@@ -67,7 +67,7 @@
   height: 20px;
   justify-content: center;
   align-items: center;
-  color: var(--Gray-200, #DFDFDF);
+  color: var(--color-gray-200);
   flex-shrink: 0;
 }
 
