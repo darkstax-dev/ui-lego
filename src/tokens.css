@@ -33,7 +33,7 @@
 
   /* Border Radius - All set to 0 (none) */
   --sds-size-radius-100: 0px;
-  --sds-size-radius-200: 8px;
+  --sds-size-radius-200: 0px;
   --sds-size-radius-400: 0px;
   --sds-size-radius-full: 0px;
 
