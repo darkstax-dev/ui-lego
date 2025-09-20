@@ -218,6 +218,12 @@
   --Divider-Light: #C8C8C8;
   --Divider-dark: #072B56;
 
+  /* Figma dropdown design tokens */
+  --Text-Blue-text-Main-text: #00112B;
+  --Blue-Dark-blue-950: #00112B;
+  --Drop-down-light-Background-default: #ECECEC;
+  --Gray-300: #CECECE;
+
   /* ===== SEMANTIC TOKENS - LIGHT MODE ===== */
 
   /* Navigation */
