@@ -67,7 +67,7 @@ const Dropdown: React.FC<DropdownProps> = ({
         case 'Home':
           event.preventDefault()
           if (items.length > 0) {
-            ;(items[0] as HTMLElement).focus()
+            (items[0] as HTMLElement).focus()
           }
           break
         case 'End':
