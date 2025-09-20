@@ -101,4 +101,4 @@ const MenuItem = forwardRef<HTMLDivElement, PolymorphicProps<'div', MenuItemOwnP
   )
 })
 
-export default MenuItem
+export default React.memo(MenuItem)
