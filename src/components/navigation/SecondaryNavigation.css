@@ -2,44 +2,41 @@
 .secondary-navigation {
   width: 100%;
   background: transparent;
-  padding: 24px 0;
 }
 
 .secondary-navigation__container {
   display: flex;
-  width: 100%;
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 0 40px;
+  height: 48px;
   justify-content: space-between;
   align-items: center;
-  gap: 24px;
-  min-height: 48px;
+  align-self: stretch;
+  position: relative;
 }
 
 .secondary-navigation__left {
   display: flex;
   align-items: center;
-  gap: 16px;
-  flex: 1;
+  gap: var(--sds-size-space-400, 16px);
+  position: relative;
 }
 
 .secondary-navigation__back-btn {
-  display: flex;
-  width: 32px;
-  height: 32px;
-  justify-content: center;
-  align-items: center;
+  width: 25.456px;
+  height: 15.556px;
+  transform: rotate(-90deg);
+  fill: var(--Gray-500, #78797A);
   background: transparent;
   border: none;
   cursor: pointer;
   transition: all 0.2s ease;
-  border-radius: 4px;
-  transform: rotate(-90deg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
 }
 
 .secondary-navigation__back-btn:hover {
-  background: rgba(120, 121, 122, 0.1);
+  opacity: 0.8;
 }
 
 .secondary-navigation__back-btn:focus-visible {
@@ -48,13 +45,15 @@
 }
 
 .secondary-navigation__title {
-  color: var(--Text-Blue-text-Main-text, #00112B);
-  font-family: 'Macan Mono Stencil Trial', -apple-system, Roboto, Helvetica, sans-serif;
+  color: var(--text-blue-main, #00112B);
+  font-family: var(--font-family-macan-mono-stencil, 'Macan Mono Stencil Trial', -apple-system, Roboto, Helvetica, sans-serif);
   font-size: 32px;
+  font-style: normal;
   font-weight: 500;
   line-height: 120%;
   letter-spacing: 1.6px;
   text-transform: uppercase;
+  position: relative;
   margin: 0;
   white-space: nowrap;
 }
@@ -62,8 +61,8 @@
 .secondary-navigation__right {
   display: flex;
   align-items: center;
-  gap: 12px;
-  flex-shrink: 0;
+  gap: var(--sds-size-space-300, 12px);
+  position: relative;
 }
 
 /* Toggle Switch */
