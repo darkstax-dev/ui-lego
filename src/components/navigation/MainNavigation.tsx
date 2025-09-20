@@ -1,9 +1,13 @@
-import React from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import './MainNavigation.css';
 
 export interface MainNavigationProps {
   variant?: 'default' | 'hub' | 'modeling-active';
   className?: string;
+}
+
+interface DropdownMenuData {
+  [key: string]: string[];
 }
 
 export const MainNavigation: React.FC<MainNavigationProps> = ({
@@ -12,6 +16,41 @@ export const MainNavigation: React.FC<MainNavigationProps> = ({
 }) => {
   const isModelingActive = variant === 'modeling-active';
   const isHubVariant = variant === 'hub';
+  const [openDropdown, setOpenDropdown] = useState<string | null>(null);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+
+  // Sample dropdown data - can be customized per menu item
+  const dropdownData: DropdownMenuData = {
+    dashboard: ['Kubernetes Dashboard', 'System Overview', 'Cluster Metrics'],
+    topology: ['Network Topology', 'Service Mesh', 'Infrastructure Map'],
+    modeling: ['Data Models', 'Process Models', 'System Architecture'],
+    template: ['Deployment Templates', 'Configuration Templates', 'Workflow Templates'],
+    administration: ['User Management', 'Role Configuration', 'Security Settings'],
+    settings: ['General Settings', 'Advanced Configuration', 'Integration Settings']
+  };
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setOpenDropdown(null);
+      }
+    }
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
+
+  const handleMenuItemClick = (menuKey: string) => {
+    setOpenDropdown(openDropdown === menuKey ? null : menuKey);
+  };
+
+  const handleDropdownItemClick = (item: string) => {
+    console.log('Dropdown item clicked:', item);
+    setOpenDropdown(null);
+  };
 
   return (
     <nav className={`main-navigation ${className}`}>
