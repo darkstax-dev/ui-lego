@@ -207,6 +207,19 @@
   --Primary-button-red-Fill: var(--color-red-600);
   --Text-White-text-Main-text: var(--color-white);
 
+  /* Figma modeling component tokens */
+  --Text-Blue-text-Tetriary-text: var(--color-blue-950);
+  --Modeling-Items-Modeling-item-hover: rgba(255, 255, 255, 0.60);
+  --Modeling-Items-Modeling-item: rgba(255, 255, 255, 0.40);
+  --white-white-100: var(--color-white);
+  --Green-Green-800: var(--color-green-800);
+  --White: var(--color-white);
+  --white-white-40: rgba(255, 255, 255, 0.40);
+  --Dark-blue: var(--color-blue-dark-950);
+  --Gray-50: #F8F8F8;
+  --white-white-20: rgba(255, 255, 255, 0.20);
+  --Gray-100: var(--color-gray-100);
+
   /* Additional Figma design tokens for buttons */
   --Primary-button-red-Disabled: #ADADAD;
   --Text-White-text-Secondary-text: #DFDFDF;
