@@ -22,7 +22,7 @@
   --sds-size-space-negative-400: -16px;
   --sds-size-space-negative-600: -24px;
 
-  /* Border Radius */
+  /* Border Radius - All set to 0 (none) */
   --sds-size-radius-100: 0px;
   --sds-size-radius-200: 0px;
   --sds-size-radius-400: 0px;
@@ -32,7 +32,11 @@
   --sds-size-depth-0: 0px;
   --sds-size-depth-025: 1px;
   --sds-size-depth-100: 4px;
+  --sds-size-depth-400: 16px;
+  --sds-size-depth-800: 32px;
   --sds-size-depth-negative-025: -1px;
+  --sds-size-depth-negative-100: -4px;
+  --sds-size-depth-negative-200: -8px;
 
   /* SDS Color System - Neutrals */
   --sds-color-border-neutral-tertiary: rgba(178, 178, 178, 1);
@@ -53,6 +57,16 @@
   /* SDS Color System - Black/Transparency */
   --sds-color-black-100: rgba(12, 12, 13, 0.05);
   --sds-color-black-200: rgba(12, 12, 13, 0.1);
+  --sds-color-black-400: rgba(12, 12, 13, 0.4);
+
+  /* SDS Blur and Effect Utilities */
+  --sds-size-blur-100: 4px;
+  --sds-color-background-utilities-overlay: rgba(0, 0, 0, 0.5);
+  --sds-color-background-utilities-blanket: rgba(0, 0, 0, 0.7);
+  --sds-color-background-utilities-scrim: rgba(255, 255, 255, 0.8);
+
+  /* SDS Padding */
+  --sds-size-padding-xl: 24px;
 
   /* SDS Brand Colors */
   --Gray-50: #FFF;
