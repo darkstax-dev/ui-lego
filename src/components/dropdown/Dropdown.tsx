@@ -125,7 +125,7 @@ const Dropdown = forwardRef<HTMLDivElement, DropdownProps>(function Dropdown({
       ref={(node) => {
         dropdownRef.current = node
         if (typeof externalRef === 'function') externalRef(node)
-        else if (externalRef) (externalRef as React.MutableRefObject<HTMLDivElement | null>).current = node
+        else if (externalRef && typeof (externalRef as any) === 'object') (externalRef as any).current = node
       }}
       className={classNames}
       style={style}
