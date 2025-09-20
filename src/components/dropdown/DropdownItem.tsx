@@ -92,4 +92,4 @@ const DropdownItem = forwardRef<HTMLButtonElement, PolymorphicProps<'button', Dr
   )
 })
 
-export default DropdownItem
+export default React.memo(DropdownItem)
