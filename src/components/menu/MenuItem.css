@@ -91,51 +91,51 @@
   color: var(--sds-color-text-default-secondary);
 }
 
-/* Interactive hover for default state */
+/* Interactive hover for default state - exact colors from Figma */
 .menu-item--default:hover,
 .menu-item--default:focus-visible {
-  background: var(--sds-color-text-default-default) !important;
+  background: rgba(30, 30, 30, 1);
 }
 
 .menu-item--default:hover .menu-item__icon,
 .menu-item--default:focus-visible .menu-item__icon {
-  color: var(--sds-color-text-brand-on-brand) !important;
+  color: rgba(245, 245, 245, 1);
 }
 
 .menu-item--default:hover .menu-item__label,
 .menu-item--default:focus-visible .menu-item__label {
-  color: var(--sds-color-text-brand-on-brand) !important;
+  color: rgba(245, 245, 245, 1);
 }
 
 .menu-item--default:hover .menu-item__shortcut,
 .menu-item--default:focus-visible .menu-item__shortcut {
-  color: var(--sds-color-text-brand-on-brand) !important;
+  color: rgba(245, 245, 245, 1);
 }
 
 .menu-item--default:hover .menu-item__description,
 .menu-item--default:focus-visible .menu-item__description {
-  color: var(--sds-color-text-brand-on-brand) !important;
+  color: rgba(245, 245, 245, 1);
 }
 
-/* Static hover state for demo/forced state */
+/* Static hover state for demo/forced state - exact colors from Figma */
 .menu-item--hover {
-  background: var(--sds-color-text-default-default) !important;
+  background: rgba(30, 30, 30, 1);
 }
 
 .menu-item--hover .menu-item__icon {
-  color: var(--sds-color-text-brand-on-brand) !important;
+  color: rgba(245, 245, 245, 1);
 }
 
 .menu-item--hover .menu-item__label {
-  color: var(--sds-color-text-brand-on-brand) !important;
+  color: rgba(245, 245, 245, 1);
 }
 
 .menu-item--hover .menu-item__shortcut {
-  color: var(--sds-color-text-brand-on-brand) !important;
+  color: rgba(245, 245, 245, 1);
 }
 
 .menu-item--hover .menu-item__description {
-  color: var(--sds-color-text-brand-on-brand) !important;
+  color: rgba(245, 245, 245, 1);
 }
 
 /* Disabled state */
