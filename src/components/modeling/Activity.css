@@ -10,7 +10,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 2px;
+  gap: var(--sds-size-space-100);
   position: relative;
 }
 
@@ -21,8 +21,8 @@
 .activity--hover .activity__content {
   padding: 14px;
   border-radius: 32px;
-  background: rgba(255, 255, 255, 0.60);
-  backdrop-filter: blur(4px);
+  background: var(--Modeling-Items-Modeling-item-hover);
+  backdrop-filter: blur(var(--sds-size-blur-100));
   min-height: 52px;
   justify-content: center;
 }
@@ -45,18 +45,18 @@
 }
 
 .activity__text {
-  color: #072B56;
+  color: var(--Text-Blue-text-Tetriary-text);
   text-align: center;
-  font-family: 'Macan Mono Trial', -apple-system, Roboto, Helvetica, sans-serif;
+  font-family: var(--font-family-macan-mono);
   font-size: 8px;
-  font-weight: 500;
+  font-weight: var(--font-weight-medium);
   line-height: normal;
 }
 
 /* Hover effects */
 .activity:hover .activity__content {
-  background: rgba(255, 255, 255, 0.60);
-  backdrop-filter: blur(4px);
+  background: var(--Modeling-Items-Modeling-item-hover);
+  backdrop-filter: blur(var(--sds-size-blur-100));
   border-radius: 32px;
   padding: 14px;
 }
