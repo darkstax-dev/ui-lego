@@ -101,13 +101,19 @@ export const MainNavigation: React.FC<MainNavigationProps> = ({
               </button>
 
               {openDropdown === 'dashboard' && (
-                <div className="main-navigation__dropdown" id={dropdownId('dashboard')}>
+                <div className="main-navigation__dropdown" id={dropdownId('dashboard')} role="menu" aria-label="Dashboard submenu">
                   {dropdownData.dashboard.map((item, index) => (
                     <button
                       key={index}
                       className="main-navigation__dropdown-item"
                       onClick={() => handleDropdownItemClick(item)}
+                      onKeyDown={(e) => {
+                        if (e.key === 'Escape') { e.stopPropagation(); closeAll(); }
+                        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); handleDropdownItemClick(item) }
+                      }}
                       type="button"
+                      role="menuitem"
+                      tabIndex={0}
                     >
                       {item}
                     </button>
