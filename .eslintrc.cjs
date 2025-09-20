@@ -1,23 +1,19 @@
 module.exports = {
   root: true,
   parser: '@typescript-eslint/parser',
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    ecmaFeatures: { jsx: true }
-  },
-  env: { browser: true, es2021: true, node: true },
   plugins: ['@typescript-eslint', 'react-refresh', 'react-hooks'],
   extends: [
     'eslint:recommended',
     'plugin:@typescript-eslint/recommended',
-    'plugin:react-hooks/recommended'
   ],
+  env: { browser: true, node: true, es2022: true },
   settings: { react: { version: 'detect' } },
-  ignorePatterns: ['dist', 'node_modules'],
+  parserOptions: { ecmaVersion: 'latest', sourceType: 'module', ecmaFeatures: { jsx: true } },
   rules: {
     'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
-    '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_', varsIgnorePattern: '^_', ignoreRestSiblings: true }],
-    '@typescript-eslint/ban-ts-comment': 'off'
-  }
+    'react-hooks/rules-of-hooks': 'error',
+    'react-hooks/exhaustive-deps': 'warn',
+    '@typescript-eslint/no-unused-vars': ['warn', { argsIgnorePattern: '^_', varsIgnorePattern: '^_' }],
+  },
+  ignorePatterns: ['dist', 'node_modules']
 }
