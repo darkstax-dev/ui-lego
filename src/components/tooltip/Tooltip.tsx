@@ -36,7 +36,9 @@ const Tooltip: React.FC<TooltipProps> = ({
       viewBox: "0 0 12 12",
       fill: "none",
       xmlns: "http://www.w3.org/2000/svg",
-      className: `tooltip__beak tooltip__beak--${placement}`
+      className: `tooltip__beak tooltip__beak--${placement}`,
+      'aria-hidden': true as unknown as undefined,
+      focusable: false as unknown as undefined
     }
 
     switch (placement) {
@@ -70,7 +72,7 @@ const Tooltip: React.FC<TooltipProps> = ({
   }
 
   return (
-    <div className={tooltipClass}>
+    <div className={tooltipClass} role="tooltip" aria-hidden={!visible}>
       {(placement === 'bottom' || placement === 'right') && (
         <div className="tooltip__beak-container">
           {renderBeak()}
