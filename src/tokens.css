@@ -26,7 +26,7 @@
   --sds-size-radius-100: 0px;
   --sds-size-radius-200: 0px;
   --sds-size-radius-400: 0px;
-  --sds-size-radius-full: 9999px;
+  --sds-size-radius-full: 0px;
 
   /* Depth/Shadows */
   --sds-size-depth-0: 0px;
