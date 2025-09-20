@@ -1,11 +1,12 @@
-import React from 'react'
+import React, { forwardRef } from 'react'
 import './DropdownItem.css'
 import ImageIcon from '../icons/ImageIcon'
+import { Slot, PolymorphicProps } from '../../utils/Slot'
 
 export type DropdownItemVariant = 'default' | 'hover' | 'danger'
 export type DropdownItemSize = 'small' | 'big'
 
-interface DropdownItemProps {
+type DropdownItemOwnProps = {
   children: React.ReactNode
   variant?: DropdownItemVariant
   size?: DropdownItemSize
@@ -16,9 +17,10 @@ interface DropdownItemProps {
   onClick?: () => void
   disabled?: boolean
   className?: string
+  asChild?: boolean
 }
 
-const DropdownItem: React.FC<DropdownItemProps> = ({
+const DropdownItem = forwardRef<HTMLButtonElement, PolymorphicProps<'button', DropdownItemOwnProps>>(function DropdownItem({
   children,
   variant = 'default',
   size = 'big',
@@ -28,8 +30,10 @@ const DropdownItem: React.FC<DropdownItemProps> = ({
   showTrailingIcon = true,
   onClick,
   disabled = false,
-  className = ''
-}) => {
+  className = '',
+  asChild = false,
+  ...props
+}, ref) {
   const classNames = [
     'dropdown-item',
     `dropdown-item--${variant}`,
@@ -37,7 +41,6 @@ const DropdownItem: React.FC<DropdownItemProps> = ({
     className
   ].filter(Boolean).join(' ')
 
-  // Default icons based on Figma design
   const defaultLeadingIcon = <ImageIcon width={16} height={16} />
   const defaultTrailingIcon = <ImageIcon width={16} height={16} />
 
@@ -56,8 +59,10 @@ const DropdownItem: React.FC<DropdownItemProps> = ({
     }
   }
 
+  const Comp: any = asChild ? Slot : (props.as ?? 'button')
+
   return (
-    <button
+    <Comp
       className={classNames}
       onClick={handleClick}
       onKeyDown={handleKeyDown}
@@ -65,24 +70,26 @@ const DropdownItem: React.FC<DropdownItemProps> = ({
       type="button"
       role="menuitem"
       tabIndex={disabled ? -1 : 0}
+      ref={ref}
+      {...props}
     >
       {showLeadingIcon && (
-        <div className="dropdown-item__icon dropdown-item__leading-icon">
+        <div className="dropdown-item__icon dropdown-item__leading-icon" aria-hidden="true">
           {leadingIcon || defaultLeadingIcon}
         </div>
       )}
-      
+
       <div className="dropdown-item__text">
         {children}
       </div>
-      
+
       {showTrailingIcon && (
-        <div className="dropdown-item__icon dropdown-item__trailing-icon">
+        <div className="dropdown-item__icon dropdown-item__trailing-icon" aria-hidden="true">
           {trailingIcon || defaultTrailingIcon}
         </div>
       )}
-    </button>
+    </Comp>
   )
-}
+})
 
-export default DropdownItem
+export default React.memo(DropdownItem)

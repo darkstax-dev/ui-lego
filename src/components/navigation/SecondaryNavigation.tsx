@@ -73,15 +73,19 @@ export const SecondaryNavigation: React.FC<SecondaryNavigationProps> = ({
           </div>
 
           <div className="secondary-navigation__search">
-            <svg className="secondary-navigation__search-icon" width="20" height="20" viewBox="0 0 20 20" fill="none">
-              <path d="M15.0259 13.8475L18.595 17.4158L17.4159 18.595L13.8475 15.0258C12.5198 16.0901 10.8684 16.669 9.16669 16.6666C5.02669 16.6666 1.66669 13.3066 1.66669 9.16663C1.66669 5.02663 5.02669 1.66663 9.16669 1.66663C13.3067 1.66663 16.6667 5.02663 16.6667 9.16663C16.6691 10.8683 16.0902 12.5197 15.0259 13.8475Z" fill="#78797A"/>
-            </svg>
-            <input
-              type="text"
-              placeholder="Search"
-              className="secondary-navigation__search-input"
-              onChange={(e) => onSearch?.(e.target.value)}
-            />
+            <div className="secondary-navigation__search-input-wrapper">
+              <div className="secondary-navigation__search-input-content">
+                <svg className="secondary-navigation__search-icon" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                  <path d="M15.0259 13.8475L18.595 17.4158L17.4159 18.595L13.8475 15.0258C12.5198 16.0901 10.8684 16.669 9.16669 16.6666C5.02669 16.6666 1.66669 13.3066 1.66669 9.16663C1.66669 5.02663 5.02669 1.66663 9.16669 1.66663C13.3067 1.66663 16.6667 5.02663 16.6667 9.16663C16.6691 10.8683 16.0902 12.5197 15.0259 13.8475Z" fill="currentColor"/>
+                </svg>
+                <input
+                  type="text"
+                  placeholder="Search"
+                  className="secondary-navigation__search-input"
+                  onChange={(e) => onSearch?.(e.target.value)}
+                />
+              </div>
+            </div>
           </div>
 
           <div className="secondary-navigation__actions">

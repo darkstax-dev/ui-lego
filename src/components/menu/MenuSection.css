@@ -1,0 +1,15 @@
+/* MenuSection styles matching Figma design */
+.menu-section {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  align-self: stretch;
+  border-radius: var(--sds-size-radius-200);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .menu-section {
+    gap: var(--sds-size-space-100);
+  }
+}

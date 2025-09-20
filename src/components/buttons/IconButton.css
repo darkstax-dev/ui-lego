@@ -9,6 +9,8 @@
   background: transparent;
   color: currentColor;
   outline: none;
+  border-radius: var(--sds-size-radius-200);
+  aspect-ratio: 1;
 }
 
 .icon-button:focus-visible {
@@ -20,19 +22,19 @@
 .icon-button--small {
   width: 32px;
   height: 32px;
-  padding: 8px;
+  padding: var(--sds-size-space-200);
 }
 
 .icon-button--medium {
   width: 40px;
   height: 40px;
-  padding: 10px;
+  padding: var(--sds-size-space-300);
 }
 
 .icon-button--big {
   width: 48px;
   height: 48px;
-  padding: 14px;
+  padding: var(--sds-size-space-300);
 }
 
 /* Main variant */
@@ -58,7 +60,8 @@
 
 /* Secondary variant - Default color */
 .icon-button--secondary.icon-button--default {
-  color: var(--Text-Blue-text-Main-text, #00112B);
+  background: transparent;
+  color: var(--Blue-Dark-blue-950, #00112B);
 }
 
 .icon-button--secondary.icon-button--default:hover:not(:disabled) {
@@ -76,38 +79,36 @@
 
 /* Secondary variant - Gray color */
 .icon-button--secondary.icon-button--gray {
-  background: var(--Icon-Button-Disabled, #CECECE);
+  background: transparent;
   color: #78797A;
 }
 
 .icon-button--secondary.icon-button--gray:hover:not(:disabled) {
-  background: #B8B8B8;
+  color: var(--Text-White-text-Secondary-text, #DFDFDF);
 }
 
 .icon-button--secondary.icon-button--gray.icon-button--selected {
-  background: #B8B8B8;
+  background: var(--Blue-Dark-blue-950, #00112B);
   color: #F8F8F8;
 }
 
 .icon-button--secondary.icon-button--gray.icon-button--disabled {
-  background: var(--Icon-Button-Disabled, #CECECE);
-  color: var(--Text-Gray-text-Disabled-text, #CECECE);
+  color: var(--Text-White-text-Secondary-text, #DFDFDF);
   cursor: not-allowed;
 }
 
 /* Secondary variant - White color */
 .icon-button--secondary.icon-button--white {
-  background: var(--white-white-100, #FFF);
+  background: transparent;
   color: #78797A;
 }
 
 .icon-button--secondary.icon-button--white:hover:not(:disabled) {
-  background: #F5F5F5;
+  color: var(--Text-White-text-Secondary-text, #DFDFDF);
 }
 
 .icon-button--secondary.icon-button--white.icon-button--disabled {
-  background: var(--white-white-100, #FFF);
-  color: var(--Text-Gray-text-Disabled-text, #CECECE);
+  color: var(--Text-White-text-Secondary-text, #DFDFDF);
   cursor: not-allowed;
 }
 
@@ -122,6 +123,6 @@
 
 /* Selected state */
 .icon-button--secondary.icon-button--selected.icon-button--gray {
-  background: #B8B8B8;
+  background: var(--Blue-Dark-blue-950, #00112B);
   color: #F8F8F8;
 }

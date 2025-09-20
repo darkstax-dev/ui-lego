@@ -2,12 +2,12 @@
 .menu-item {
   display: flex;
   align-items: flex-start;
-  gap: 12px;
-  padding: 8px 16px;
-  border-radius: 8px;
+  gap: var(--sds-size-space-300);
+  padding: 12px var(--sds-size-padding-lg);
+  border-radius: var(--sds-size-radius-200);
   cursor: pointer;
   transition: all 0.2s ease;
-  font-family: Inter, -apple-system, Roboto, Helvetica, sans-serif;
+  font-family: var(--font-family-inter);
   outline: none;
   user-select: none;
 }
@@ -30,7 +30,7 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 4px;
+  gap: var(--sds-size-space-100);
   flex: 1;
   min-width: 0;
 }
@@ -40,12 +40,12 @@
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  gap: 12px;
+  gap: var(--sds-size-space-300);
 }
 
 .menu-item__label {
   flex: 1;
-  font-size: 16px;
+  font-size: var(--font-size-md);
   font-weight: 400;
   line-height: 140%;
   min-width: 0;
@@ -56,7 +56,7 @@
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  font-size: 16px;
+  font-size: var(--font-size-md);
   font-weight: 400;
   line-height: 100%;
   flex-shrink: 0;
@@ -64,13 +64,13 @@
 
 .menu-item__description {
   width: 100%;
-  font-size: 14px;
+  font-size: var(--font-size-sm);
   font-weight: 400;
   line-height: 140%;
   word-wrap: break-word;
 }
 
-/* Default state */
+/* Default state - exact colors from Figma design */
 .menu-item--default {
   background: transparent;
 }
@@ -91,27 +91,33 @@
   color: rgba(117, 117, 117, 1);
 }
 
-.menu-item--default:hover {
+/* Interactive hover for default state - exact colors from Figma */
+.menu-item--default:hover,
+.menu-item--default:focus-visible {
   background: rgba(30, 30, 30, 1);
 }
 
-.menu-item--default:hover .menu-item__icon {
+.menu-item--default:hover .menu-item__icon,
+.menu-item--default:focus-visible .menu-item__icon {
   color: rgba(245, 245, 245, 1);
 }
 
-.menu-item--default:hover .menu-item__label {
+.menu-item--default:hover .menu-item__label,
+.menu-item--default:focus-visible .menu-item__label {
   color: rgba(245, 245, 245, 1);
 }
 
-.menu-item--default:hover .menu-item__shortcut {
+.menu-item--default:hover .menu-item__shortcut,
+.menu-item--default:focus-visible .menu-item__shortcut {
   color: rgba(245, 245, 245, 1);
 }
 
-.menu-item--default:hover .menu-item__description {
+.menu-item--default:hover .menu-item__description,
+.menu-item--default:focus-visible .menu-item__description {
   color: rgba(245, 245, 245, 1);
 }
 
-/* Hover state */
+/* Static hover state for demo/forced state - exact colors from Figma */
 .menu-item--hover {
   background: rgba(30, 30, 30, 1);
 }
@@ -132,7 +138,7 @@
   color: rgba(245, 245, 245, 1);
 }
 
-/* Disabled state */
+/* Disabled state - exact colors from Figma design */
 .menu-item--disabled {
   background: transparent;
   cursor: not-allowed;
@@ -156,6 +162,17 @@
 
 .menu-item--disabled:hover {
   background: transparent;
+  cursor: not-allowed;
+}
+
+.menu-item--disabled:hover .menu-item__icon,
+.menu-item--disabled:hover .menu-item__label,
+.menu-item--disabled:hover .menu-item__description {
+  color: rgba(179, 179, 179, 1);
+}
+
+.menu-item--disabled:hover .menu-item__shortcut {
+  color: rgba(30, 30, 30, 1);
 }
 
 /* Responsive design */

@@ -1,12 +1,12 @@
-/* TagToggle styles matching Figma design */
+/* TagToggle styles matching Figma design - strict token usage */
 .tag-toggle {
   display: inline-flex;
   align-items: center;
-  gap: var(--sds-size-space-200, 8px);
-  padding: var(--sds-size-space-200, 8px);
+  gap: var(--sds-size-space-200);
+  padding: var(--sds-size-space-200);
   border: none;
-  border-radius: var(--sds-size-radius-200, 8px);
-  font-family: 'Macan Mono Trial', -apple-system, Roboto, Helvetica, sans-serif;
+  border-radius: var(--sds-size-radius-200);
+  font-family: var(--font-family-macan-mono);
   font-size: 15px;
   font-weight: 450;
   line-height: 120%;
@@ -33,8 +33,8 @@
 
 /* Off state (inactive) */
 .tag-toggle--off {
-  background: var(--sds-color-background-brand-tertiary, rgba(245, 245, 245, 1));
-  color: var(--sds-color-text-brand-tertiary, rgba(117, 117, 117, 1));
+  background: var(--sds-color-background-brand-tertiary);
+  color: var(--sds-color-text-brand-tertiary);
 }
 
 .tag-toggle--off:hover {
@@ -43,8 +43,8 @@
 
 /* On state (active) */
 .tag-toggle--on {
-  background: var(--sds-color-background-brand-default, rgba(44, 44, 44, 1));
-  color: var(--Text-White-text-Main-text, #FFF);
+  background: var(--sds-color-background-brand-default);
+  color: var(--Text-White-text-Main-text);
 }
 
 .tag-toggle--on:hover {

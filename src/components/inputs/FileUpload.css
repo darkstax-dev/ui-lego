@@ -1,32 +1,32 @@
-/* FileUpload styles matching Figma design */
+/* FileUpload styles using design tokens and matching Figma design */
 .file-upload {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   min-height: 157px;
-  padding: 24px;
-  border: 2px dashed #D9D9D9;
-  background: #FAFAFA;
+  padding: var(--sds-size-padding-xl);
+  border: 2px dashed var(--sds-color-border-default-default);
+  background: var(--color-gray-100);
   cursor: pointer;
   transition: all 0.2s ease;
   position: relative;
 }
 
 .file-upload:hover:not(.file-upload--disabled) {
-  border-color: #D9322A;
-  background: #FFF8F8;
+  border-color: var(--color-red-600);
+  background: rgba(255, 248, 248, 1);
 }
 
 .file-upload--drag-over {
-  border-color: #D9322A;
-  background: #FFF8F8;
+  border-color: var(--color-red-600);
+  background: rgba(255, 248, 248, 1);
 }
 
 .file-upload--disabled {
   cursor: not-allowed;
   opacity: 0.6;
-  background: #F5F5F5;
+  background: var(--color-gray-100);
 }
 
 .file-upload__input {
@@ -45,7 +45,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 12px;
+  gap: var(--sds-size-space-300);
   pointer-events: none;
 }
 
@@ -54,7 +54,7 @@
   padding: 6px;
   justify-content: center;
   align-items: center;
-  background: #D9322A;
+  background: var(--color-red-600);
   border-radius: 4px;
   width: 32px;
   height: 32px;
@@ -63,7 +63,7 @@
 .file-upload__icon {
   width: 20px;
   height: 20px;
-  color: white;
+  color: var(--color-white);
 }
 
 .file-upload__text {
@@ -75,12 +75,12 @@
 }
 
 .file-upload__title {
-  color: #00112B;
-  font-family: Macan, -apple-system, Roboto, Helvetica, sans-serif;
-  font-size: 16px;
-  font-weight: 600;
+  color: var(--color-blue-dark-950);
+  font-family: var(--font-family-macan);
+  font-size: var(--sds-typography-body-size-medium);
+  font-weight: var(--font-weight-semibold);
   line-height: 1.2;
-  letter-spacing: -0.32px;
+  letter-spacing: var(--letter-spacing-tight);
 }
 
 .file-upload__description {
@@ -92,10 +92,10 @@
 }
 
 .file-upload__link {
-  color: #D9322A;
-  font-family: Macan, -apple-system, Roboto, Helvetica, sans-serif;
-  font-size: 14px;
-  font-weight: 450;
+  color: var(--color-red-600);
+  font-family: var(--font-family-macan);
+  font-size: var(--sds-typography-body-size-small);
+  font-weight: var(--font-weight-book);
   line-height: 1.2;
   text-decoration: underline;
   text-decoration-thickness: 1px;
@@ -103,32 +103,32 @@
 }
 
 .file-upload__or {
-  color: #072B56;
-  font-family: Macan, -apple-system, Roboto, Helvetica, sans-serif;
-  font-size: 14px;
-  font-weight: 450;
+  color: var(--color-blue-950);
+  font-family: var(--font-family-macan);
+  font-size: var(--sds-typography-body-size-small);
+  font-weight: var(--font-weight-book);
   line-height: 1.2;
 }
 
 .file-upload--disabled .file-upload__title {
-  color: #ADADAD;
+  color: var(--color-gray-400);
 }
 
 .file-upload--disabled .file-upload__link {
-  color: #ADADAD;
+  color: var(--color-gray-400);
   text-decoration: none;
 }
 
 .file-upload--disabled .file-upload__or {
-  color: #ADADAD;
+  color: var(--color-gray-400);
 }
 
 .file-upload--disabled .file-upload__icon-button {
-  background: #CECECE;
+  background: var(--color-gray-300);
 }
 
 .file-upload--disabled .file-upload__icon {
-  color: #ADADAD;
+  color: var(--color-gray-400);
 }
 
 /* Focus states */
@@ -150,7 +150,7 @@
 @media (max-width: 768px) {
   .file-upload {
     min-height: 120px;
-    padding: 16px;
+    padding: var(--sds-size-space-400);
   }
   
   .file-upload__description {

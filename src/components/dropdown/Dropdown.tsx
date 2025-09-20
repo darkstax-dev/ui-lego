@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react'
+import React, { useRef, useEffect, forwardRef } from 'react'
 import './Dropdown.css'
 
 export type DropdownPosition = 'absolute' | 'relative'
@@ -19,7 +19,7 @@ interface DropdownProps {
   'aria-labelledby'?: string
 }
 
-const Dropdown: React.FC<DropdownProps> = ({
+const Dropdown = forwardRef<HTMLDivElement, DropdownProps>(function Dropdown({
   children,
   isOpen = true,
   onClose,
@@ -32,8 +32,8 @@ const Dropdown: React.FC<DropdownProps> = ({
   role = 'menu',
   'aria-label': ariaLabel,
   'aria-labelledby': ariaLabelledBy
-}) => {
-  const dropdownRef = useRef<HTMLDivElement>(null)
+}, externalRef) {
+  const dropdownRef = useRef<HTMLDivElement | null>(null) as React.MutableRefObject<HTMLDivElement | null>
 
   // Handle keyboard navigation
   useEffect(() => {
@@ -122,7 +122,11 @@ const Dropdown: React.FC<DropdownProps> = ({
 
   return (
     <div
-      ref={dropdownRef}
+      ref={(node) => {
+        dropdownRef.current = node
+        if (typeof externalRef === 'function') externalRef(node)
+        else if (externalRef && typeof (externalRef as any) === 'object') (externalRef as any).current = node
+      }}
       className={classNames}
       style={style}
       role={role}
@@ -135,6 +139,6 @@ const Dropdown: React.FC<DropdownProps> = ({
       </div>
     </div>
   )
-}
+})
 
-export default Dropdown
+export default React.memo(Dropdown)

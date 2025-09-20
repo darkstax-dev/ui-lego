@@ -1,19 +1,20 @@
 /* DropdownItem styles matching Figma design */
 .dropdown-item {
   display: flex;
-  padding: 12px;
   align-items: center;
   gap: 8px;
   cursor: pointer;
   transition: all 0.2s ease;
   border: none;
-  background: transparent;
+  background: var(--Drop-down-light-Background-default, #ECECEC);
   width: 100%;
   text-align: left;
   font-family: inherit;
+  align-self: stretch;
+  position: relative;
 }
 
-/* Size variants */
+/* Size variants - matching Figma padding */
 .dropdown-item--small {
   padding: 8px 12px;
 }
@@ -45,7 +46,7 @@
   background: #D4D4D4;
 }
 
-/* Text styling */
+/* Text styling matching Figma */
 .dropdown-item__text {
   flex: 1;
   font-family: Macan, -apple-system, Roboto, Helvetica, sans-serif;
@@ -53,14 +54,16 @@
   font-weight: 450;
   line-height: 120%;
   margin: 0;
+  position: relative;
 }
 
-/* Small text */
+/* Small text - 14px */
 .dropdown-item--small .dropdown-item__text {
   font-size: 14px;
+  letter-spacing: normal;
 }
 
-/* Big text */
+/* Big text - 16px with specific font features */
 .dropdown-item--big .dropdown-item__text {
   font-size: 16px;
   letter-spacing: -0.32px;
@@ -81,7 +84,7 @@
   color: var(--Red-500, #FF3B31);
 }
 
-/* Icon styling */
+/* Icon styling matching Figma */
 .dropdown-item__icon {
   display: flex;
   width: 16px;
@@ -89,20 +92,22 @@
   justify-content: center;
   align-items: center;
   flex-shrink: 0;
+  aspect-ratio: 1/1;
+  position: relative;
 }
 
 /* Default icon color */
-.dropdown-item--default .dropdown-item__icon {
-  color: var(--Text-Blue-text-Main-text, #00112B);
+.dropdown-item--default .dropdown-item__icon svg {
+  fill: var(--Text-Blue-text-Main-text, #00112B);
 }
 
-.dropdown-item--hover .dropdown-item__icon {
-  color: var(--Text-Blue-text-Main-text, #00112B);
+.dropdown-item--hover .dropdown-item__icon svg {
+  fill: var(--Text-Blue-text-Main-text, #00112B);
 }
 
 /* Danger icon color */
-.dropdown-item--danger .dropdown-item__icon {
-  color: var(--Red-500, #FF3B31);
+.dropdown-item--danger .dropdown-item__icon svg {
+  fill: var(--Red-500, #FF3B31);
 }
 
 /* Disabled state */
@@ -118,20 +123,28 @@
 /* Focus styles for accessibility */
 .dropdown-item:focus {
   outline: 2px solid rgba(0, 17, 43, 0.2);
-  outline-offset: 2px;
+  outline-offset: -2px;
 }
 
 .dropdown-item:focus:not(:focus-visible) {
   outline: none;
 }
 
-/* Leading icon */
+/* Leading icon positioning */
 .dropdown-item__leading-icon {
   order: -1;
 }
 
-/* Trailing icon */
+/* Trailing icon positioning */
 .dropdown-item__trailing-icon {
   order: 1;
   margin-left: auto;
+}
+
+/* Ensure proper text color inheritance for spans */
+.dropdown-item__text span {
+  color: inherit;
+  font-family: inherit;
+  font-weight: inherit;
+  font-size: inherit;
 }

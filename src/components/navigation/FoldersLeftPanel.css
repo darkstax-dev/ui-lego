@@ -1,9 +1,13 @@
-/* Folders Left Panel Component */
+/* Folders Left Panel Component - Updated to match Figma design */
 .folders-panel {
+  display: flex;
   width: 240px;
-  height: 100%;
-  background: var(--Inputs-Input-Background, #DFDFDF);
-  border-right: 1px solid var(--Divider-Light, #C8C8C8);
+  height: 749px;
+  padding: 16px;
+  align-items: flex-start;
+  gap: 10px;
+  border-right: 1px solid var(--divider-light, #C8C8C8);
+  background: #DFDFDF;
   overflow-y: auto;
   flex-shrink: 0;
 }
@@ -11,19 +15,21 @@
 .folders-panel__content {
   display: flex;
   flex-direction: column;
-  padding: 16px;
-  gap: 0;
+  align-items: flex-start;
+  gap: 16px;
+  flex: 1 0 0;
+  position: relative;
 }
 
 .folders-panel__item {
   display: flex;
+  width: 200px;
+  padding: 8px;
   align-items: center;
   gap: 8px;
-  padding: 8px;
   cursor: pointer;
   transition: all 0.2s ease;
-  border-radius: 4px;
-  min-height: 40px;
+  position: relative;
 }
 
 .folders-panel__item:hover {
@@ -31,44 +37,49 @@
 }
 
 .folders-panel__item--selected {
-  background: var(--Background-Background-default, #CECECE);
+  background: var(--sds-color-background-default-default, #CECECE);
 }
 
 .folders-panel__item--selected:hover {
-  background: var(--Background-Background-default, #CECECE);
+  background: var(--sds-color-background-default-default, #CECECE);
 }
 
 .folders-panel__item svg {
+  display: flex;
   width: 16px;
   height: 16px;
+  justify-content: center;
+  align-items: center;
   flex-shrink: 0;
-  color: var(--Text-Blue-text-Main-text, #00112B);
+  aspect-ratio: 1/1;
+  position: relative;
 }
 
 .folders-panel__item-text {
-  color: var(--Text-Blue-text-Main-text, #00112B);
-  font-family: Macan, -apple-system, Roboto, Helvetica, sans-serif;
+  color: var(--text-blue-main, #00112B);
+  font-family: var(--font-family-macan, 'Macan', -apple-system, Roboto, Helvetica, sans-serif);
   font-size: 14px;
+  font-style: normal;
   font-weight: 450;
-  line-height: 120%;
+  line-height: 120%; /* 16.8px */
+  position: relative;
   flex: 1;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
-/* Divider between sections */
+/* Divider between sections - dashed line */
 .folders-panel__divider {
-  height: 1px;
-  background: var(--Divider-Light, #C8C8C8);
-  margin: 8px 0;
-  background-image: repeating-linear-gradient(
-    to right,
-    var(--Divider-Light, #C8C8C8),
-    var(--Divider-Light, #C8C8C8) 4px,
-    transparent 4px,
-    transparent 8px
-  );
+  height: 0;
+  align-self: stretch;
+  stroke-width: 1px;
+  stroke: var(--divider-light, #C8C8C8);
+  position: relative;
+  width: 200px;
+  border: none;
+  border-top: 1px dashed var(--divider-light, #C8C8C8);
+  margin: 0;
 }
 
 /* Focus states */
@@ -118,6 +129,10 @@
   .folders-panel__item-text {
     font-size: 13px;
   }
+
+  .folders-panel__item {
+    width: 176px;
+  }
 }
 
 @media (max-width: 768px) {
@@ -128,13 +143,17 @@
     max-height: 400px;
     position: relative;
     border-right: none;
-    border-bottom: 1px solid var(--Divider-Light, #C8C8C8);
+    border-bottom: 1px solid var(--divider-light, #C8C8C8);
   }
 
   .folders-panel__content {
     padding: 16px;
     max-height: 350px;
     overflow-y: auto;
+  }
+
+  .folders-panel__item {
+    width: calc(100% - 32px);
   }
 }
 
@@ -150,6 +169,7 @@
   .folders-panel__item {
     padding: 12px 8px;
     min-height: 44px;
+    width: calc(100% - 24px);
   }
 
   .folders-panel__item-text {
@@ -210,14 +230,7 @@
   }
 
   .folders-panel__divider {
-    background: #404040;
-    background-image: repeating-linear-gradient(
-      to right,
-      #404040,
-      #404040 4px,
-      transparent 4px,
-      transparent 8px
-    );
+    border-top-color: #404040;
   }
 
   .folders-panel::-webkit-scrollbar-track {

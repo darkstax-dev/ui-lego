@@ -21,7 +21,7 @@ const Plus: React.FC<PlusProps> = ({
       <g clipPath="url(#clip0_plus)">
         <path 
           d="M9.16669 9.16663V4.16663H10.8334V9.16663H15.8334V10.8333H10.8334V15.8333H9.16669V10.8333H4.16669V9.16663H9.16669Z" 
-          fill="#00112B"
+          fill="var(--Dark-blue)"
         />
       </g>
       <defs>

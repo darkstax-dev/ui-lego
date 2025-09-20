@@ -1,0 +1,427 @@
+/* Effects Demo Component */
+.effects-demo {
+  position: relative;
+  width: 100%;
+  background: var(--sds-color-background-neutral-tertiary);
+  padding: 2rem;
+  min-height: 100vh;
+}
+
+.effects-container {
+  display: flex;
+  gap: 2rem;
+  max-width: 1400px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.effects-section {
+  position: relative;
+  flex: 1;
+  min-height: 1088px;
+}
+
+.effects-header {
+  margin-bottom: 2rem;
+}
+
+.effects-header h3 {
+  font-family: 'Roboto Mono', -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--sds-color-text-neutral-on-neutral-secondary);
+  margin: 0;
+}
+
+/* Component Annotations */
+.annotation {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  z-index: 10;
+}
+
+.annotation-label {
+  display: flex;
+  padding: 4px 8px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 0;
+  border: 1px solid var(--sds-color-border-neutral-tertiary);
+  background: var(--sds-color-background-neutral-secondary);
+}
+
+.annotation-label span {
+  color: var(--sds-color-text-neutral-on-neutral-secondary);
+  font-family: 'Roboto Mono', -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 140%;
+}
+
+.annotation-pointer {
+  width: 24px;
+  height: 2px;
+  background: var(--sds-color-background-neutral-tertiary);
+}
+
+/* Annotation Positions for Drop Shadows and Inner Shadows */
+.drop-shadows .annotation-100,
+.inner-shadows .annotation-100 {
+  left: 100px;
+  top: 149px;
+}
+
+.drop-shadows .annotation-200,
+.inner-shadows .annotation-200 {
+  left: 100px;
+  top: 301px;
+}
+
+.drop-shadows .annotation-300,
+.inner-shadows .annotation-300 {
+  left: 100px;
+  top: 453px;
+}
+
+.drop-shadows .annotation-400,
+.inner-shadows .annotation-400 {
+  left: 100px;
+  top: 605px;
+}
+
+.drop-shadows .annotation-500,
+.inner-shadows .annotation-500 {
+  left: 100px;
+  top: 757px;
+}
+
+.drop-shadows .annotation-600,
+.inner-shadows .annotation-600 {
+  left: 100px;
+  top: 909px;
+}
+
+/* Annotation Positions for Blur */
+.blur-effects .annotation-overlay {
+  left: 100px;
+  top: 141px;
+}
+
+.blur-effects .annotation-blanket {
+  left: 100px;
+  top: 285px;
+}
+
+.blur-effects .annotation-layer {
+  left: 119px;
+  top: 429px;
+}
+
+.blur-effects .annotation-glass {
+  left: 119px;
+  top: 573px;
+}
+
+/* Effects Grid */
+.effects-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin-left: 169px;
+  margin-top: 0;
+}
+
+.effect-card {
+  display: flex;
+  padding: 24px;
+  align-items: flex-start;
+  border-radius: 0;
+  background: var(--sds-color-background-utilities-measurement);
+  width: 128px;
+  height: 128px;
+}
+
+.effect-item {
+  width: 80px;
+  height: 80px;
+  border-radius: 0;
+  background: var(--sds-color-background-default-default);
+}
+
+/* Drop Shadow Effects */
+.drop-shadow-100 {
+  box-shadow: 0px 1px 4px 0px var(--sds-color-black-100);
+}
+
+.drop-shadow-100-border {
+  border: 1px solid var(--sds-color-border-utilities-swatch);
+  box-shadow: 0px 1px 4px 0px var(--sds-color-black-100);
+}
+
+.drop-shadow-200 {
+  box-shadow: 0px 1px 4px 0px var(--sds-color-black-200), 0px 1px 4px 0px var(--sds-color-black-100);
+}
+
+.drop-shadow-200-border {
+  border: 1px solid var(--sds-color-border-utilities-swatch);
+  box-shadow: 0px 1px 4px 0px var(--sds-color-black-200), 0px 1px 4px 0px var(--sds-color-black-100);
+}
+
+.drop-shadow-300 {
+  box-shadow: 0px 4px 4px -1px var(--sds-color-black-200), 0px 4px 4px -1px var(--sds-color-black-100);
+}
+
+.drop-shadow-300-border {
+  border: 1px solid var(--sds-color-border-utilities-swatch);
+  box-shadow: 0px 4px 4px -1px var(--sds-color-black-200), 0px 4px 4px -1px var(--sds-color-black-100);
+}
+
+.drop-shadow-400 {
+  box-shadow: 0px 16px 32px -4px var(--sds-color-black-200), 0px 4px 4px -4px var(--sds-color-black-100);
+}
+
+.drop-shadow-400-border {
+  border: 1px solid var(--sds-color-border-utilities-swatch);
+  box-shadow: 0px 16px 32px -4px var(--sds-color-black-200), 0px 4px 4px -4px var(--sds-color-black-100);
+}
+
+.drop-shadow-500 {
+  box-shadow: 0px 16px 16px -8px var(--sds-color-black-200), 0px 4px 4px -4px var(--sds-color-black-100);
+}
+
+.drop-shadow-500-border {
+  border: 1px solid var(--sds-color-border-utilities-swatch);
+  box-shadow: 0px 16px 16px -8px var(--sds-color-black-200), 0px 4px 4px -4px var(--sds-color-black-100);
+}
+
+.drop-shadow-600 {
+  box-shadow: 0px 16px 32px -8px rgba(12, 12, 13, 0.4);
+}
+
+.drop-shadow-600-border {
+  border: 1px solid var(--sds-color-border-utilities-swatch);
+  box-shadow: 0px 16px 32px -8px rgba(12, 12, 13, 0.4);
+}
+
+/* Inner Shadow Effects */
+.inner-shadow-100 {
+  box-shadow: 0 1px 4px 0 var(--sds-color-black-100) inset;
+}
+
+.inner-shadow-100-border {
+  border: 1px solid var(--sds-color-border-utilities-swatch);
+  box-shadow: 0 1px 4px 0 var(--sds-color-black-100) inset;
+}
+
+.inner-shadow-200 {
+  box-shadow: 0px 1px 4px 0px var(--sds-color-black-100) inset;
+}
+
+.inner-shadow-200-border {
+  border: 1px solid var(--sds-color-border-utilities-swatch);
+  box-shadow: 0px 1px 4px 0px var(--sds-color-black-100) inset;
+}
+
+.inner-shadow-300 {
+  box-shadow: 0px 4px 4px -1px var(--sds-color-black-100) inset;
+}
+
+.inner-shadow-300-border {
+  border: 1px solid var(--sds-color-border-utilities-swatch);
+  box-shadow: 0px 4px 4px -1px var(--sds-color-black-100) inset;
+}
+
+.inner-shadow-400 {
+  box-shadow: 0px 16px 32px -4px var(--sds-color-black-200) inset;
+}
+
+.inner-shadow-400-border {
+  border: 1px solid var(--sds-color-border-utilities-swatch);
+  box-shadow: 0px 16px 32px -4px var(--sds-color-black-200) inset;
+}
+
+.inner-shadow-500 {
+  box-shadow: 0px 16px 16px -8px var(--sds-color-black-200) inset;
+}
+
+.inner-shadow-500-border {
+  border: 1px solid var(--sds-color-border-utilities-swatch);
+  box-shadow: 0px 16px 16px -8px var(--sds-color-black-200) inset;
+}
+
+.inner-shadow-600 {
+  box-shadow: 0px 16px 32px -8px rgba(12, 12, 13, 0.4) inset;
+}
+
+.inner-shadow-600-border {
+  border: 1px solid var(--sds-color-border-utilities-swatch);
+  box-shadow: 0px 16px 32px -8px rgba(12, 12, 13, 0.4) inset;
+}
+
+/* Blur Grid */
+.blur-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  margin-left: 208px;
+  margin-top: 0;
+}
+
+.blur-effects .effect-card {
+  width: 120px;
+  height: 120px;
+  position: relative;
+  padding: 20px;
+}
+
+/* Blur Images */
+.blur-image {
+  width: 80px;
+  height: 80px;
+  border-radius: 0;
+  position: absolute;
+  top: 20px;
+  left: 20px;
+}
+
+.blur-layer {
+  width: 80px;
+  height: 80px;
+  border-radius: 0;
+  position: absolute;
+  top: 20px;
+  left: 20px;
+}
+
+/* Overlay Blur */
+.overlay-blur {
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(2px);
+}
+
+/* Blanket Blur */
+.blanket-blur {
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(2px);
+}
+
+/* Layer Blur (applied directly to image) */
+.layer-image-blur {
+  filter: blur(2px);
+}
+
+/* Glass Blur */
+.glass-blur {
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(2px);
+}
+
+/* Documentation Note */
+.documentation-note {
+  position: absolute;
+  left: 100px;
+  top: 100px;
+  display: flex;
+  width: 320px;
+  flex-direction: column;
+  align-items: flex-start;
+  border-radius: 0;
+  border: 1px solid var(--sds-color-border-warning-default);
+  background: var(--sds-color-background-warning-secondary);
+  box-shadow: 0px 4px 4px -1px var(--sds-color-black-200), 0px 4px 4px -1px var(--sds-color-black-100);
+  height: 143px;
+}
+
+.note-header {
+  display: flex;
+  padding: 16px;
+  align-items: flex-start;
+  gap: 12px;
+  align-self: stretch;
+}
+
+.note-header svg {
+  flex-shrink: 0;
+}
+
+.note-header span {
+  flex: 1 0 0;
+  color: var(--sds-color-text-warning-on-warning-secondary);
+  font-family: 'Roboto Mono', -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 140%;
+}
+
+.note-divider {
+  height: 1px;
+  align-self: stretch;
+  border: 1px solid var(--sds-color-border-warning-default);
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+  .effects-container {
+    flex-direction: column;
+    gap: 3rem;
+  }
+  
+  .effects-section {
+    min-height: auto;
+  }
+  
+  .effects-grid {
+    margin-left: 0;
+    margin-top: 3rem;
+  }
+  
+  .blur-grid {
+    margin-left: 0;
+    margin-top: 3rem;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .annotation {
+    position: relative;
+    margin-bottom: 1rem;
+    left: auto !important;
+    top: auto !important;
+  }
+  
+  .documentation-note {
+    position: relative;
+    left: auto;
+    top: auto;
+    margin-top: 2rem;
+    width: 100%;
+    max-width: 320px;
+  }
+}
+
+@media (max-width: 768px) {
+  .effects-demo {
+    padding: 1rem;
+  }
+  
+  .effects-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .blur-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .effect-card {
+    width: 100%;
+    max-width: 128px;
+    margin: 0 auto;
+  }
+  
+  .blur-effects .effect-card {
+    max-width: 120px;
+  }
+}

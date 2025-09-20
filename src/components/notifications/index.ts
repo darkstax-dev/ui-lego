@@ -1,6 +1,7 @@
 export { default as Notification } from './Notification'
 export { default as NotificationWithIcon } from './NotificationWithIcon'
 export { default as FeaturedIcon } from './FeaturedIcon'
+export { default as NotificationDemo } from './NotificationDemo'
 
 export type { NotificationVariant } from './Notification'
 export type { NotificationWithIconVariant } from './NotificationWithIcon'

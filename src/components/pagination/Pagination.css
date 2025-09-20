@@ -8,7 +8,7 @@
 .pagination__container {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: var(--sds-size-space-200);
   flex-wrap: wrap;
   justify-content: center;
 }
@@ -16,7 +16,7 @@
 .pagination__pages {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
+  gap: var(--sds-size-space-200);
   flex-wrap: wrap;
 }
 
@@ -25,7 +25,7 @@
   .pagination__container {
     gap: 6px;
   }
-  
+
   .pagination__pages {
     gap: 6px;
   }
@@ -33,26 +33,26 @@
 
 @media (max-width: 480px) {
   .pagination__container {
-    gap: 4px;
-    padding: 0 8px;
+    gap: var(--sds-size-space-100);
+    padding: 0 var(--sds-size-space-200);
   }
-  
+
   .pagination__pages {
-    gap: 4px;
+    gap: var(--sds-size-space-100);
   }
-  
+
   /* Stack pagination on very small screens if needed */
   .pagination__pages {
     max-width: 100%;
     overflow-x: auto;
-    padding: 4px 0;
+    padding: var(--sds-size-space-100) 0;
   }
 }
 
 /* High contrast mode support */
 @media (prefers-contrast: high) {
   .pagination {
-    border: 1px solid;
+    border: 0px solid;
   }
 }
 

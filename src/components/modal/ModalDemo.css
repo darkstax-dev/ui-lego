@@ -1,0 +1,130 @@
+/* Modal Demo styles */
+.modal-demo {
+  padding: var(--sds-size-space-800);
+  background: var(--bg-default);
+  min-height: 100vh;
+}
+
+.modal-demo__container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.modal-demo__header {
+  margin-bottom: var(--sds-size-space-800);
+}
+
+.modal-demo__title {
+  color: var(--text-blue-main);
+  font-family: var(--font-family-macan-mono-stencil);
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-normal);
+  letter-spacing: var(--letter-spacing-wide);
+  text-transform: uppercase;
+  margin: 0 0 var(--sds-size-space-400) 0;
+}
+
+.modal-demo__description {
+  color: var(--text-blue-secondary);
+  font-family: var(--font-family-macan);
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-book);
+  line-height: var(--line-height-normal);
+  margin: 0;
+  max-width: 600px;
+}
+
+.modal-demo__controls {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sds-size-space-800);
+}
+
+.modal-demo__control-group {
+  background: var(--bg-card);
+  padding: var(--sds-size-space-600);
+  border: 1px solid var(--divider-light);
+}
+
+.modal-demo__control-title {
+  color: var(--text-blue-main);
+  font-family: var(--font-family-macan);
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-normal);
+  letter-spacing: var(--letter-spacing-tight);
+  margin: 0 0 var(--sds-size-space-300) 0;
+}
+
+.modal-demo__control-description {
+  color: var(--text-blue-secondary);
+  font-family: var(--font-family-macan);
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-book);
+  line-height: var(--line-height-normal);
+  margin: 0 0 var(--sds-size-space-600) 0;
+  max-width: 500px;
+}
+
+.modal-demo__result {
+  background: var(--bg-success);
+  padding: var(--sds-size-space-400);
+  border: 1px solid var(--color-green-600);
+  border-radius: var(--sds-size-radius-200);
+}
+
+.modal-demo__result-title {
+  color: var(--color-green-600);
+  font-family: var(--font-family-macan);
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-normal);
+  margin: 0 0 var(--sds-size-space-300) 0;
+}
+
+.modal-demo__result-details {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sds-size-space-200);
+}
+
+.modal-demo__result-details p {
+  color: var(--text-blue-main);
+  font-family: var(--font-family-macan);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-book);
+  line-height: var(--line-height-normal);
+  margin: 0;
+}
+
+.modal-demo__result-details strong {
+  font-weight: var(--font-weight-semibold);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .modal-demo {
+    padding: var(--sds-size-space-400);
+  }
+  
+  .modal-demo__title {
+    font-size: var(--font-size-xl);
+  }
+  
+  .modal-demo__description {
+    font-size: var(--font-size-md);
+  }
+  
+  .modal-demo__control-group {
+    padding: var(--sds-size-space-400);
+  }
+  
+  .modal-demo__control-title {
+    font-size: var(--font-size-lg);
+  }
+  
+  .modal-demo__control-description {
+    font-size: var(--font-size-sm);
+  }
+}

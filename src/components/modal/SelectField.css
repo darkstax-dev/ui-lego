@@ -1,19 +1,19 @@
-/* SelectField styles matching Figma design */
+/* SelectField styles using design tokens and matching Figma design */
 .select-field {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 8px;
+  gap: var(--sds-size-space-200);
   width: 100%;
   position: relative;
 }
 
 .select-field__label {
-  color: #DFDFDF;
-  font-family: Macan, -apple-system, Roboto, Helvetica, sans-serif;
-  font-size: 14px;
-  font-weight: 450;
-  line-height: 1.2;
+  color: var(--color-gray-200);
+  font-family: var(--font-family-macan);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-book);
+  line-height: var(--line-height-normal);
   margin: 0;
 }
 
@@ -25,18 +25,18 @@
 .select-field__trigger {
   display: flex;
   height: 40px;
-  padding: 12px 12px 12px 16px;
+  padding: var(--sds-size-space-300) var(--sds-size-space-300) var(--sds-size-space-300) var(--sds-size-space-400);
   align-items: center;
-  gap: 8px;
+  gap: var(--sds-size-space-200);
   width: 100%;
-  background: #072B56;
+  background: var(--color-blue-950);
   border: 1px solid transparent;
   cursor: pointer;
   transition: all 0.2s ease;
 }
 
 .select-field__trigger:hover:not(:disabled) {
-  background: #0A3766;
+  background: rgba(7, 43, 86, 0.8);
 }
 
 .select-field__trigger:focus {
@@ -45,22 +45,22 @@
 }
 
 .select-field__trigger--error {
-  border-color: #D9322A;
+  border-color: var(--color-red-600);
 }
 
 .select-field__trigger:disabled {
-  background: #041a33;
+  background: rgba(7, 43, 86, 0.4);
   cursor: not-allowed;
   opacity: 0.6;
 }
 
 .select-field__value {
-  color: #DFDFDF;
-  font-family: Macan, -apple-system, Roboto, Helvetica, sans-serif;
-  font-size: 16px;
-  font-weight: 450;
-  line-height: 1.2;
-  letter-spacing: -0.32px;
+  color: var(--color-gray-200);
+  font-family: var(--font-family-macan);
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-book);
+  line-height: var(--line-height-normal);
+  letter-spacing: var(--letter-spacing-tight);
   flex: 1;
   text-align: left;
   overflow: hidden;
@@ -69,7 +69,7 @@
 }
 
 .select-field__value--placeholder {
-  color: #ADADAD;
+  color: var(--color-gray-400);
 }
 
 .select-field__arrow {
@@ -79,7 +79,7 @@
   justify-content: center;
   align-items: center;
   flex-shrink: 0;
-  color: #DFDFDF;
+  color: var(--color-gray-200);
   transition: transform 0.2s ease;
 }
 
@@ -92,8 +92,8 @@
   top: 100%;
   left: 0;
   right: 0;
-  background: #072B56;
-  border: 1px solid #0A3766;
+  background: var(--color-blue-950);
+  border: 1px solid rgba(7, 43, 86, 0.8);
   border-top: none;
   z-index: 100;
   max-height: 200px;
@@ -104,52 +104,52 @@
 .select-field__option {
   display: flex;
   width: 100%;
-  padding: 12px 16px;
+  padding: var(--sds-size-space-300) var(--sds-size-space-400);
   align-items: center;
   background: transparent;
   border: none;
-  color: #DFDFDF;
-  font-family: Macan, -apple-system, Roboto, Helvetica, sans-serif;
-  font-size: 16px;
-  font-weight: 450;
-  line-height: 1.2;
-  letter-spacing: -0.32px;
+  color: var(--color-gray-200);
+  font-family: var(--font-family-macan);
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-book);
+  line-height: var(--line-height-normal);
+  letter-spacing: var(--letter-spacing-tight);
   cursor: pointer;
   transition: background-color 0.2s ease;
   text-align: left;
 }
 
 .select-field__option:hover {
-  background: #0A3766;
+  background: rgba(7, 43, 86, 0.8);
 }
 
 .select-field__option--selected {
-  background: #0A3766;
-  color: #DFDFDF;
+  background: rgba(7, 43, 86, 0.8);
+  color: var(--color-gray-200);
 }
 
 .select-field__option--selected:hover {
-  background: #0F4A85;
+  background: rgba(7, 43, 86, 1);
 }
 
 .select-field__error {
-  color: #D9322A;
-  font-family: Macan, -apple-system, Roboto, Helvetica, sans-serif;
-  font-size: 14px;
-  font-weight: 450;
-  line-height: 1.2;
+  color: var(--color-red-600);
+  font-family: var(--font-family-macan);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-book);
+  line-height: var(--line-height-normal);
 }
 
 .select-field--disabled .select-field__label {
-  color: #72828E;
+  color: var(--color-gray-400);
 }
 
 .select-field--disabled .select-field__value {
-  color: #72828E;
+  color: var(--color-gray-400);
 }
 
 .select-field--disabled .select-field__arrow {
-  color: #72828E;
+  color: var(--color-gray-400);
 }
 
 /* Responsive adjustments */
@@ -158,13 +158,13 @@
     height: 36px;
     padding: 10px 10px 10px 14px;
   }
-  
+
   .select-field__value {
-    font-size: 15px;
+    font-size: var(--font-size-base);
   }
-  
+
   .select-field__option {
     padding: 10px 14px;
-    font-size: 15px;
+    font-size: var(--font-size-base);
   }
 }

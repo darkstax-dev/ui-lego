@@ -2,12 +2,12 @@
 .notification {
   display: flex;
   align-items: flex-start;
-  gap: 12px;
+  gap: var(--sds-size-space-300);
   position: relative;
   width: 100%;
-  padding: 16px;
   cursor: pointer;
   transition: background-color 0.2s ease;
+  flex: 1 0 0;
 }
 
 .notification:hover {
@@ -17,20 +17,24 @@
 .notification__content {
   display: flex;
   align-items: flex-start;
-  gap: 12px;
-  flex: 1;
+  gap: var(--sds-size-space-300);
+  flex: 1 0 0;
 }
 
 .notification__avatar-container {
   position: relative;
   flex-shrink: 0;
+  width: var(--sds-size-icon-large, 40px);
+  height: var(--sds-size-icon-large, 40px);
+  border-radius: var(--sds-size-radius-full, 9999px);
 }
 
 .notification__avatar {
   width: 40px;
   height: 40px;
-  border-radius: 50%;
+  border-radius: var(--sds-size-radius-full, 1000px);
   object-fit: cover;
+  flex-shrink: 0;
 }
 
 .notification__avatar-indicator {
@@ -39,58 +43,59 @@
   left: 30px;
   width: 10px;
   height: 10px;
+  flex-shrink: 0;
 }
 
 .notification__text-content {
   display: flex;
   flex-direction: column;
-  gap: 16px;
-  flex: 1;
-  min-width: 0;
+  align-items: flex-start;
+  gap: var(--sds-size-space-400);
+  flex: 1 0 0;
 }
 
 .notification__text-and-date {
   display: flex;
   align-items: flex-end;
-  gap: 16px;
-  width: 100%;
+  gap: var(--sds-size-space-400);
+  align-self: stretch;
 }
 
 .notification__text {
   display: flex;
   flex-direction: column;
-  gap: 4px;
-  flex: 1;
-  min-width: 0;
+  align-items: flex-start;
+  gap: var(--sds-size-space-100);
+  flex: 1 0 0;
 }
 
 .notification__title {
-  color: rgba(30, 30, 30, 1);
-  font-family: Macan, -apple-system, Roboto, Helvetica, sans-serif;
-  font-size: 18px;
-  font-weight: 700;
-  line-height: 1.2;
-  letter-spacing: -0.36px;
+  color: var(--sds-color-text-default-default);
+  font-family: var(--font-family-macan);
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-normal);
+  letter-spacing: var(--letter-spacing-tight);
   margin: 0;
-  word-wrap: break-word;
+  align-self: stretch;
 }
 
 .notification__body {
-  color: rgba(30, 30, 30, 1);
-  font-family: Macan, -apple-system, Roboto, Helvetica, sans-serif;
-  font-size: 14px;
-  font-weight: 400;
-  line-height: 1.2;
+  color: var(--sds-color-text-default-default);
+  font-family: var(--font-family-macan);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-book);
+  line-height: var(--line-height-normal);
   margin: 0;
-  word-wrap: break-word;
+  align-self: stretch;
 }
 
 .notification__date {
-  color: rgba(30, 30, 30, 1);
-  font-family: 'Macan Mono Trial', monospace, -apple-system, Roboto, Helvetica, sans-serif;
-  font-size: 12px;
-  font-weight: 400;
-  line-height: 1.1;
+  color: var(--sds-color-text-default-default);
+  font-family: var(--font-family-macan-mono);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-book);
+  line-height: var(--line-height-tight);
   letter-spacing: 1.2px;
   text-transform: uppercase;
   white-space: nowrap;
@@ -98,9 +103,9 @@
 }
 
 .notification__status-indicator {
-  position: absolute;
-  top: 10px;
+  position: relative;
   right: 10px;
+  top: 10px;
   width: 12px;
   height: 12px;
 }
@@ -115,7 +120,7 @@
 }
 
 .notification--read {
-  opacity: 0.7;
+  /* Read state uses same styles but different indicator visibility */
 }
 
 .notification--read .notification__avatar-indicator {
@@ -124,24 +129,20 @@
 
 /* Responsive design */
 @media (max-width: 768px) {
-  .notification {
-    padding: 12px;
-  }
-  
   .notification__text-and-date {
     flex-direction: column;
     align-items: flex-start;
-    gap: 8px;
+    gap: var(--sds-size-space-200);
   }
-  
+
   .notification__date {
     font-size: 11px;
   }
-  
+
   .notification__title {
-    font-size: 16px;
+    font-size: var(--font-size-md);
   }
-  
+
   .notification__body {
     font-size: 13px;
   }
@@ -152,24 +153,29 @@
     width: 32px;
     height: 32px;
   }
-  
+
+  .notification__avatar-container {
+    width: 32px;
+    height: 32px;
+  }
+
   .notification__avatar-indicator {
     top: 24px;
     left: 24px;
     width: 8px;
     height: 8px;
   }
-  
+
   .notification__avatar-indicator svg {
     width: 8px;
     height: 8px;
   }
-  
+
   .notification__status-indicator {
     width: 10px;
     height: 10px;
   }
-  
+
   .notification__status-indicator svg {
     width: 10px;
     height: 10px;

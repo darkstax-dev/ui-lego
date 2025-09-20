@@ -1,0 +1,14 @@
+.accordion {
+  display: flex;
+  width: 640px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--sds-size-space-400);
+}
+
+@media (max-width: 768px) {
+  .accordion {
+    width: 100%;
+    max-width: 640px;
+  }
+}

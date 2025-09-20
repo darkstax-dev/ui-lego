@@ -1,9 +1,10 @@
-import React from 'react'
+import React, { forwardRef } from 'react'
 import './MenuItem.css'
+import { Slot, PolymorphicProps } from '../../utils/Slot'
 
 export type MenuItemState = 'default' | 'hover' | 'disabled'
 
-interface MenuItemProps {
+type MenuItemOwnProps = {
   label: string
   description?: string
   icon?: React.ReactNode
@@ -15,9 +16,10 @@ interface MenuItemProps {
   onClick?: () => void
   disabled?: boolean
   className?: string
+  asChild?: boolean
 }
 
-const MenuItem: React.FC<MenuItemProps> = ({
+const MenuItem = forwardRef<HTMLDivElement, PolymorphicProps<'div', MenuItemOwnProps>>(function MenuItem({
   label,
   description,
   icon,
@@ -29,10 +31,11 @@ const MenuItem: React.FC<MenuItemProps> = ({
   onClick,
   disabled = false,
   className = '',
+  asChild = false,
   ...props
-}) => {
+}, ref) {
   const actualState = disabled ? 'disabled' : state
-  
+
   const menuItemClass = [
     'menu-item',
     `menu-item--${actualState}`,
@@ -40,24 +43,36 @@ const MenuItem: React.FC<MenuItemProps> = ({
   ].filter(Boolean).join(' ')
 
   const defaultIcon = (
-    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-      <path 
-        d="M9.99999 1.66669L12.575 6.88335L18.3333 7.72502L14.1667 11.7834L15.15 17.5167L9.99999 14.8084L4.84999 17.5167L5.83332 11.7834L1.66666 7.72502L7.42499 6.88335L9.99999 1.66669Z" 
-        stroke="currentColor" 
-        strokeWidth="2" 
-        strokeLinecap="round" 
+    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true" focusable="false">
+      <path
+        d="M9.99999 1.66669L12.575 6.88335L18.3333 7.72502L14.1667 11.7834L15.15 17.5167L9.99999 14.8084L4.84999 17.5167L5.83332 11.7834L1.66666 7.72502L7.42499 6.88335L9.99999 1.66669Z"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
         strokeLinejoin="round"
       />
     </svg>
   )
 
+  const Comp: any = asChild ? Slot : (props.as ?? 'div')
+
+  const onKeyDown = (e: React.KeyboardEvent) => {
+    if (disabled) return
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault()
+      onClick?.()
+    }
+  }
+
   return (
-    <div
+    <Comp
       className={menuItemClass}
       onClick={!disabled ? onClick : undefined}
+      onKeyDown={onKeyDown}
       role="menuitem"
       tabIndex={disabled ? -1 : 0}
       aria-disabled={disabled}
+      ref={ref}
       {...props}
     >
       {hasIcon && (
@@ -82,8 +97,8 @@ const MenuItem: React.FC<MenuItemProps> = ({
           </div>
         )}
       </div>
-    </div>
+    </Comp>
   )
-}
+})
 
-export default MenuItem
+export default React.memo(MenuItem)

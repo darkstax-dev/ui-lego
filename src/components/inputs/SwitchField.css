@@ -1,15 +1,4 @@
-/* CSS Variables from Figma design */
-:root {
-  --switch-background-active: #D9322A;
-  --switch-background-inactive: #ADADAD;
-  --switch-background-disabled: #CECECE;
-  --switch-thumb-default: #FFFFFF;
-  --switch-thumb-disabled: #DFDFDF;
-  --switch-text-default: #00112B;
-  --switch-text-disabled: #CECECE;
-  --switch-description-color: #757575;
-  --switch-space-300: 12px;
-}
+/* SwitchField styles using design tokens and matching Figma design */
 
 .switch-field {
   display: flex;
@@ -20,7 +9,7 @@
 .switch-field__main {
   display: flex;
   align-items: center;
-  gap: var(--switch-space-300);
+  gap: var(--sds-size-space-300);
 }
 
 .switch-field__switch-container {
@@ -45,7 +34,7 @@
   width: 40px;
   height: 24px;
   border-radius: 12px;
-  background: var(--switch-background-inactive);
+  background: var(--color-gray-400);
   display: flex;
   align-items: center;
   padding: 2px;
@@ -54,7 +43,7 @@
 }
 
 .switch-field__switch--checked {
-  background: var(--switch-background-active);
+  background: var(--color-red-600);
   justify-content: flex-end;
 }
 
@@ -62,7 +51,7 @@
   width: 20px;
   height: 20px;
   border-radius: 50%;
-  background: var(--switch-thumb-default);
+  background: var(--color-white);
   transition: all 0.2s ease;
   box-shadow: 
     0 1px 2px rgba(10, 13, 18, 0.06),
@@ -71,20 +60,20 @@
 
 .switch-field__label {
   flex: 1;
-  color: var(--switch-text-default);
-  font-family: Macan, -apple-system, Roboto, Helvetica, sans-serif;
-  font-size: 14px;
-  font-weight: 450;
+  color: var(--color-blue-dark-950);
+  font-family: var(--font-family-macan);
+  font-size: var(--sds-typography-body-size-small);
+  font-weight: var(--font-weight-book);
   line-height: 1.2;
   cursor: pointer;
   margin: 0;
 }
 
 .switch-field__description {
-  color: var(--switch-description-color);
-  font-family: Macan, -apple-system, Roboto, Helvetica, sans-serif;
-  font-size: 14px;
-  font-weight: 450;
+  color: var(--sds-color-text-default-secondary);
+  font-family: var(--font-family-macan);
+  font-size: var(--sds-typography-body-size-small);
+  font-weight: var(--font-weight-book);
   line-height: 1.2;
 }
 
@@ -94,24 +83,24 @@
 
 /* Disabled state */
 .switch-field--disabled .switch-field__switch {
-  background: var(--switch-background-disabled);
+  background: var(--color-gray-300);
 }
 
 .switch-field--disabled .switch-field__switch--checked {
-  background: var(--switch-background-disabled);
+  background: var(--color-gray-300);
 }
 
 .switch-field--disabled .switch-field__thumb {
-  background: var(--switch-thumb-disabled);
+  background: var(--color-gray-200);
 }
 
 .switch-field--disabled .switch-field__label {
-  color: var(--switch-text-disabled);
+  color: var(--color-gray-300);
   cursor: not-allowed;
 }
 
 .switch-field--disabled .switch-field__description {
-  color: var(--switch-text-disabled);
+  color: var(--color-gray-300);
 }
 
 /* Hover states for non-disabled switches */

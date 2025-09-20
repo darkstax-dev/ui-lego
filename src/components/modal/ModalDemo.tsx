@@ -1,92 +1,70 @@
 import React, { useState } from 'react'
-import Modal from './Modal'
-import SelectField from './SelectField'
+import CreateScenarioModal from './CreateScenarioModal'
+import Button from '../buttons/Button'
+import './ModalDemo.css'
 
 const ModalDemo: React.FC = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false)
-  const [cloudProvider, setCloudProvider] = useState('')
-  const [cloudCluster, setCloudCluster] = useState('')
-
-  const cloudProviderOptions = [
-    { value: 'aws', label: 'Amazon Web Services (AWS)' },
-    { value: 'azure', label: 'Microsoft Azure' },
-    { value: 'gcp', label: 'Google Cloud Platform (GCP)' },
-    { value: 'digitalocean', label: 'DigitalOcean' }
-  ]
-
-  const cloudClusterOptions = [
-    { value: 'cluster-1', label: 'Production Cluster' },
-    { value: 'cluster-2', label: 'Staging Cluster' },
-    { value: 'cluster-3', label: 'Development Cluster' },
-    { value: 'cluster-4', label: 'Testing Cluster' }
-  ]
+  const [isCreateScenarioModalOpen, setIsCreateScenarioModalOpen] = useState(false)
+  const [lastCreatedScenario, setLastCreatedScenario] = useState<{
+    cloudProvider: string
+    cloudCluster: string
+  } | null>(null)
 
   const handleOpenModal = () => {
-    setIsModalOpen(true)
+    setIsCreateScenarioModalOpen(true)
   }
 
   const handleCloseModal = () => {
-    setIsModalOpen(false)
+    setIsCreateScenarioModalOpen(false)
   }
 
-  const handleConfirm = () => {
-    console.log('Creating scenario with:', { cloudProvider, cloudCluster })
-    // Reset form
-    setCloudProvider('')
-    setCloudCluster('')
-    setIsModalOpen(false)
-  }
-
-  const handleCancel = () => {
-    // Reset form
-    setCloudProvider('')
-    setCloudCluster('')
-    setIsModalOpen(false)
+  const handleCreateScenario = (data: { cloudProvider: string; cloudCluster: string }) => {
+    setLastCreatedScenario(data)
+    console.log('Created scenario:', data)
   }
 
   return (
-    <div style={{ padding: '20px' }}>
-      <button 
-        onClick={handleOpenModal}
-        style={{
-          padding: '10px 20px',
-          background: '#D9322A',
-          color: '#DFDFDF',
-          border: 'none',
-          cursor: 'pointer',
-          fontFamily: 'Macan, -apple-system, Roboto, Helvetica, sans-serif',
-          fontSize: '16px',
-          fontWeight: '500'
-        }}
-      >
-        Open Create Scenario Modal
-      </button>
+    <div className="modal-demo">
+      <div className="modal-demo__container">
+        <div className="modal-demo__header">
+          <h2 className="modal-demo__title">Modal Components</h2>
+          <p className="modal-demo__description">
+            Interactive modal components with form fields and actions, styled to match the design system.
+          </p>
+        </div>
 
-      <Modal
-        isOpen={isModalOpen}
-        onClose={handleCloseModal}
-        title="Create scenario"
-        onConfirm={handleConfirm}
-        onCancel={handleCancel}
-        cancelText="Cancel"
-        confirmText="Create scenario"
-      >
-        <SelectField
-          label="Cloud provider"
-          value={cloudProvider}
-          onChange={setCloudProvider}
-          placeholder="Select cloud provider"
-          options={cloudProviderOptions}
+        <div className="modal-demo__controls">
+          <div className="modal-demo__control-group">
+            <h3 className="modal-demo__control-title">Create Scenario Modal</h3>
+            <p className="modal-demo__control-description">
+              A modal for creating cloud scenarios with provider and cluster selection.
+            </p>
+            <Button
+              variant="primary"
+              size="big"
+              onClick={handleOpenModal}
+            >
+              Open Create Scenario Modal
+            </Button>
+          </div>
+
+          {lastCreatedScenario && (
+            <div className="modal-demo__result">
+              <h4 className="modal-demo__result-title">Last Created Scenario:</h4>
+              <div className="modal-demo__result-details">
+                <p><strong>Cloud Provider:</strong> {lastCreatedScenario.cloudProvider}</p>
+                <p><strong>Cloud Cluster:</strong> {lastCreatedScenario.cloudCluster}</p>
+              </div>
+            </div>
+          )}
+        </div>
+
+        <CreateScenarioModal
+          isOpen={isCreateScenarioModalOpen}
+          onClose={handleCloseModal}
+          onCreateScenario={handleCreateScenario}
         />
-        
-        <SelectField
-          label="Cloud cluster"
-          value={cloudCluster}
-          onChange={setCloudCluster}
-          placeholder="Select cluster"
-          options={cloudClusterOptions}
-        />
-      </Modal>
+      </div>
     </div>
   )
 }

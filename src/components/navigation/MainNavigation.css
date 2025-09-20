@@ -1,7 +1,7 @@
 /* Main Navigation Component */
 .main-navigation {
   width: 100%;
-  background: var(--Blue-Dark-blue-950, #00112B);
+  background: var(--nav-main-bg, var(--color-blue-dark-950));
   padding: 0;
 }
 
@@ -19,7 +19,7 @@
 .main-navigation__left {
   display: flex;
   align-items: center;
-  gap: 64px;
+  gap: var(--sds-size-space-1600);
   flex: 1;
 }
 
@@ -36,16 +36,16 @@
 .main-navigation__menu {
   display: flex;
   align-items: center;
-  gap: 48px;
+  gap: calc(var(--sds-size-space-1600) - var(--sds-size-space-400));
 }
 
 .main-navigation__menu-item {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: var(--sds-size-space-200);
   cursor: pointer;
   transition: all 0.2s ease;
-  padding: 8px 0;
+  padding: var(--sds-size-space-200) 0;
 }
 
 .main-navigation__menu-item:hover {
@@ -53,12 +53,12 @@
 }
 
 .main-navigation__menu-item--active {
-  color: var(--red-600-cta, #D9322A);
+  color: var(--color-red-600);
 }
 
 .main-navigation__menu-item--active .main-navigation__menu-icon,
 .main-navigation__menu-item--active .main-navigation__menu-expand {
-  color: var(--red-600-cta, #D9322A);
+  color: var(--color-red-600);
 }
 
 .main-navigation__menu-icon {
@@ -67,23 +67,23 @@
   height: 20px;
   justify-content: center;
   align-items: center;
-  color: var(--Gray-200, #DFDFDF);
+  color: var(--text-white-secondary, var(--color-gray-200));
   flex-shrink: 0;
 }
 
 .main-navigation__menu-text {
-  color: var(--Gray-200, #DFDFDF);
-  font-family: 'Macan Mono Trial', -apple-system, Roboto, Helvetica, sans-serif;
-  font-size: 16px;
-  font-weight: 600;
-  line-height: 110%;
-  letter-spacing: 1.6px;
+  color: var(--text-white-secondary, var(--color-gray-200));
+  font-family: var(--font-family-macan-mono);
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-tight);
+  letter-spacing: 1.6px; /* Exact Figma specification */
   text-transform: uppercase;
   white-space: nowrap;
 }
 
 .main-navigation__menu-item--active .main-navigation__menu-text {
-  color: var(--red-600-cta, #D9322A);
+  color: var(--color-red-600);
 }
 
 .main-navigation__menu-expand {
@@ -92,21 +92,21 @@
   height: 20px;
   justify-content: center;
   align-items: center;
-  color: var(--Gray-200, #DFDFDF);
+  color: var(--text-white-secondary, var(--color-gray-200));
   flex-shrink: 0;
 }
 
 .main-navigation__right {
   display: flex;
   align-items: center;
-  gap: 32px;
+  gap: var(--sds-size-space-800);
   flex-shrink: 0;
 }
 
 .main-navigation__hub {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: var(--sds-size-space-200);
 }
 
 .main-navigation__hub-icon {
@@ -117,19 +117,19 @@
 }
 
 .main-navigation__hub-text {
-  color: var(--Gray-200, #DFDFDF);
-  font-family: 'Macan Mono Trial', -apple-system, Roboto, Helvetica, sans-serif;
-  font-size: 16px;
-  font-weight: 600;
-  line-height: 110%;
-  letter-spacing: 1.6px;
+  color: var(--text-white-secondary, var(--color-gray-200));
+  font-family: var(--font-family-macan-mono);
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-tight);
+  letter-spacing: 1.6px; /* Exact Figma specification */
   text-transform: uppercase;
 }
 
 .main-navigation__divider {
-  width: 1px;
+  width: var(--sds-size-stroke-border);
   height: 16px;
-  background: var(--Gray-200, #DFDFDF);
+  background: var(--text-white-secondary, var(--color-gray-200));
   transform: rotate(90deg);
 }
 
@@ -147,7 +147,7 @@
   align-items: center;
   background: transparent;
   border: none;
-  color: var(--Gray-200, #DFDFDF);
+  color: var(--text-white-secondary, var(--color-gray-200));
   cursor: pointer;
   transition: all 0.2s ease;
   padding: 0;
@@ -160,7 +160,7 @@
 .main-navigation__action-btn:focus-visible {
   outline: 2px solid rgba(255, 255, 255, 0.2);
   outline-offset: 2px;
-  border-radius: 4px;
+  border-radius: 0px;
 }
 
 .main-navigation__avatar {
@@ -184,9 +184,9 @@
   left: 30px;
   width: 10px;
   height: 10px;
-  background: #FF3B31;
+  background: var(--color-red-500);
   border-radius: 50%;
-  border: 2px solid var(--Blue-Dark-blue-950, #00112B);
+  border: 2px solid var(--nav-main-bg, var(--color-blue-dark-950));
 }
 
 /* Responsive Design */
@@ -197,15 +197,15 @@
   }
 
   .main-navigation__left {
-    gap: 32px;
+    gap: var(--sds-size-space-800);
   }
 
   .main-navigation__menu {
-    gap: 32px;
+    gap: var(--sds-size-space-800);
   }
 
   .main-navigation__right {
-    gap: 24px;
+    gap: var(--sds-size-space-600);
   }
 
   .main-navigation__menu-text {
@@ -226,11 +226,11 @@
   }
 
   .main-navigation__left {
-    gap: 24px;
+    gap: var(--sds-size-space-600);
   }
 
   .main-navigation__menu {
-    gap: 24px;
+    gap: var(--sds-size-space-600);
     overflow-x: auto;
     scrollbar-width: none;
     -ms-overflow-style: none;
@@ -272,12 +272,12 @@
   }
 
   .main-navigation__menu {
-    gap: 16px;
+    gap: var(--sds-size-space-400);
   }
 
   .main-navigation__menu-item {
-    padding: 8px;
-    border-radius: 8px;
+    padding: var(--sds-size-space-200);
+    border-radius: var(--sds-radius-md);
     background: rgba(255, 255, 255, 0.05);
     min-width: 40px;
     justify-content: center;
@@ -303,11 +303,137 @@
     width: 8px;
     height: 8px;
   }
+
+  /* Hide dropdowns on mobile to prevent overflow */
+  .main-navigation__dropdown {
+    display: none;
+  }
+}
+
+/* Tablet responsive adjustments */
+@media (max-width: 1024px) {
+  .main-navigation__dropdown {
+    min-width: 220px;
+    left: auto;
+    right: 0;
+  }
+
+  .main-navigation__dropdown-item {
+    font-size: 13px;
+    padding: var(--sds-size-space-200) var(--sds-size-space-300);
+  }
+}
+
+/* Ensure dropdown stays within viewport */
+@media (max-width: 768px) {
+  .main-navigation__dropdown {
+    position: fixed;
+    top: 72px;
+    left: var(--sds-size-space-400);
+    right: var(--sds-size-space-400);
+    min-width: auto;
+    max-height: 60vh;
+    overflow-y: auto;
+  }
 }
 
 /* Focus states */
 .main-navigation__menu-item:focus-visible {
   outline: 2px solid rgba(255, 255, 255, 0.2);
   outline-offset: 2px;
-  border-radius: 4px;
+  border-radius: 0px;
+}
+
+/* Navigation text utility class to match token-based typography */
+.main-navigation .emphasis-body-mono-lg {
+  font-family: var(--font-family-macan-mono);
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-tight);
+  letter-spacing: var(--letter-spacing-wider);
+  text-transform: uppercase;
+}
+
+/* Dropdown Menu Styles */
+.main-navigation__menu-item-wrapper {
+  position: relative;
+}
+
+.main-navigation__menu-item {
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: var(--sds-size-space-200);
+  transition: all 0.2s ease;
+  padding: var(--sds-size-space-200) 0;
+}
+
+.main-navigation__menu-item:hover {
+  opacity: 0.8;
+}
+
+.main-navigation__menu-item--open {
+  opacity: 1;
+}
+
+/* Open state - all elements should be red as per Figma design */
+.main-navigation__menu-item--open .main-navigation__menu-icon,
+.main-navigation__menu-item--open .main-navigation__menu-text,
+.main-navigation__menu-item--open .main-navigation__menu-expand {
+  color: var(--color-red-600);
+}
+
+.main-navigation__menu-expand--open {
+  transition: transform 0.2s ease;
+}
+
+.main-navigation__dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  min-width: 259px;
+  background: var(--color-white);
+  border: var(--sds-size-stroke-border) solid var(--color-gray-300);
+  border-radius: var(--sds-radius-md);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  z-index: 1000;
+  padding: var(--sds-size-space-200);
+  margin-top: var(--sds-size-space-100);
+}
+
+.main-navigation__dropdown-item {
+  display: block;
+  width: 100%;
+  background: none;
+  border: none;
+  padding: var(--sds-size-space-300) var(--sds-size-space-400);
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border-radius: var(--sds-size-space-100);
+
+  /* Typography matching Figma design */
+  color: var(--text-blue-main, var(--color-blue-dark-950));
+  font-family: var(--font-family-macan-mono);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-tight);
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+}
+
+.main-navigation__dropdown-item:hover {
+  background: var(--surface-card, var(--color-gray-100));
+  color: var(--text-blue-main, var(--color-blue-dark-950));
+}
+
+.main-navigation__dropdown-item:active {
+  background: var(--surface-card, var(--color-gray-200));
+}
+
+.main-navigation__dropdown-item:focus-visible {
+  outline: 2px solid var(--color-blue-700);
+  outline-offset: 2px;
 }

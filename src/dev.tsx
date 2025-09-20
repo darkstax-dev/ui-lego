@@ -22,10 +22,13 @@ import NotificationDemo from './components/notifications/NotificationDemo'
 import ButtonDemo from './components/buttons/ButtonDemo'
 import TabsDemo from './components/tabs/TabsDemo'
 import NavigationDemo from './components/navigation/NavigationDemo'
+import { MainNavigation } from './components/navigation/MainNavigation'
 import { TopBarDemo } from './components/bar'
 import TagBadgeDemo from './components/tag-badges/TagBadgeDemo'
 import MenuDemo from './components/menu/MenuDemo'
 import TooltipDemo from './components/tooltip/TooltipDemo'
+import { EffectsDemo } from './components/effects'
+import AccordionDemo from './components/accordion/AccordionDemo'
 import './dev.css'
 import './tokens.css'
 
@@ -70,24 +73,64 @@ function App() {
       <NavigationDemo />
 
       <section className="component-section">
-        <h1>Top Bar Navigation Component</h1>
-        <h2>Responsive navigation bar with menu items and user actions</h2>
-        <TopBarDemo />
+        <h1>Main Navigation Component</h1>
+        <h2>Responsive navigation bar with menu items and user actions - Updated with Design Tokens</h2>
+
+        <div className="section-block">
+          <h3>Default State</h3>
+          <p>Standard navigation with all menu items in default state</p>
+          <MainNavigation variant="default" />
+        </div>
+
+        <div className="section-block">
+          <h3>Modeling Active State (Variant 3)</h3>
+          <p>Navigation with "Modeling" item in active state (red color, minus icon)</p>
+          <MainNavigation variant="modeling-active" />
+        </div>
+
+        <div className="section-block">
+          <h3>Hub Variant</h3>
+          <p>Navigation showing hub-specific menu items: Dashboard, Administration, Settings</p>
+          <MainNavigation variant="hub" />
+        </div>
+
+        <div className="feature-card">
+          <h3 className="feature-card__title">Design Token Updates & New Features</h3>
+          <ul className="feature-card__list">
+            <li><strong>Typography:</strong> Now uses proper Macan Mono Trial font with token-based sizing</li>
+            <li><strong>Colors:</strong> Updated to use semantic color tokens (--color-red-600, --color-gray-200, etc.)</li>
+            <li><strong>Spacing:</strong> All gaps and padding use standardized spacing tokens</li>
+            <li><strong>Hub Icon:</strong> Simplified diamond pattern matching Figma design</li>
+            <li><strong>Responsive Design:</strong> Maintained with token-based breakpoints</li>
+            <li><strong>Active States:</strong> Properly styled with red accent color for selected items</li>
+            <li><strong>NEW - Dropdown Menus:</strong> Interactive dropdowns matching Figma design specs</li>
+            <li><strong>NEW - Accessibility:</strong> Full keyboard navigation and ARIA support</li>
+            <li><strong>NEW - Mobile Responsive:</strong> Adaptive dropdown positioning for all screen sizes</li>
+          </ul>
+        </div>
+
+        <div className="compliance-card">
+          <h3 className="compliance-card__title">🎯 Figma Design Compliance</h3>
+          <p className="compliance-card__lead">
+            Click the <strong>+</strong> icons next to menu items above to see the exact Figma behavior:
+          </p>
+          <ul className="compliance-card__list">
+            <li><strong>Default state:</strong> All elements (icon, text, expand) are gray (#DFDFDF)</li>
+            <li><strong>Open state:</strong> All elements turn red (#D9322A) with minus icon</li>
+            <li><strong>Typography:</strong> Macan Mono Trial, 16px, 600 weight, 110% line height, 1.6px letter spacing, uppercase</li>
+            <li><strong>Interactive:</strong> Plus icons transform to minus icons when dropdowns open</li>
+          </ul>
+          <p className="compliance-card__note">
+            ✨ The implementation now matches the Figma "Menu item" component specification exactly,
+            including the two variants: "Default" and "Open" states with precise color transitions.
+          </p>
+        </div>
       </section>
 
       <h1>Input Components</h1>
 
       <section className="component-section">
-        <h2 style={{
-          color: '#072B56',
-          fontFamily: 'Macan Mono Stencil Trial, -apple-system, Roboto, Helvetica, sans-serif',
-          fontSize: '32px',
-          fontWeight: '500',
-          lineHeight: '1.2',
-          letterSpacing: '1.6px',
-          textTransform: 'uppercase',
-          marginBottom: '2rem'
-        }}>
+        <h2 className="section-title-mono-stencil">
           Inputs for Login
         </h2>
 
@@ -142,7 +185,7 @@ function App() {
 
         <div className="demo-group">
           <h3>Login Form Example</h3>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', maxWidth: '400px' }}>
+          <div className="form-vertical form-vertical--narrow">
             <LoginInput
               label="Email"
               value={loginEmail}
@@ -468,7 +511,7 @@ function App() {
 
         <div className="demo-group">
           <h3>Fixed Width (240px - Figma Design)</h3>
-          <div style={{ display: 'flex', gap: '2rem' }}>
+          <div className="example-row">
             <RadioGroup
               name="design-demo"
               className="radio-group--fixed-width"
@@ -707,7 +750,7 @@ function App() {
           />
 
           {uploadedFiles.length > 0 && (
-            <div style={{ marginTop: '12px' }}>
+            <div className="mt-300">
               <h4>Uploaded Files:</h4>
               <ul>
                 {uploadedFiles.map((file, index) => (
@@ -737,7 +780,7 @@ function App() {
             totalPages={10}
             onPageChange={setCurrentPage}
           />
-          <p style={{ marginTop: '12px', fontSize: '14px', color: '#666' }}>
+          <p className="caption-text">
             Current page: {currentPage} of 10
           </p>
         </div>
@@ -750,7 +793,7 @@ function App() {
             totalPages={68}
             onPageChange={setCurrentPage2}
           />
-          <p style={{ marginTop: '12px', fontSize: '14px', color: '#666' }}>
+          <p className="caption-text">
             Current page: {currentPage2} of 68
           </p>
         </div>
@@ -763,7 +806,7 @@ function App() {
             totalPages={5}
             onPageChange={setCurrentPage3}
           />
-          <p style={{ marginTop: '12px', fontSize: '14px', color: '#666' }}>
+          <p className="caption-text">
             Current page: {currentPage3} of 5
           </p>
         </div>
@@ -814,7 +857,7 @@ function App() {
 
         <div className="demo-group">
           <h3>Custom Messages</h3>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+          <div className="stack stack--400">
             <Snackbar
               variant="success"
               title="Profile Updated"
@@ -884,12 +927,49 @@ function App() {
         <h2>Context menus and dropdown menu items with states and shortcuts</h2>
         <MenuDemo />
       </section>
+
+      <section className="component-section">
+        <h1>Accordion Components</h1>
+        <h2>Collapsible content sections with expand/collapse functionality</h2>
+        <AccordionDemo />
+      </section>
+
+      <section className="component-section">
+        <h1>Effects</h1>
+        <h2>Drop shadows, inner shadows, and blur effects showcase</h2>
+        <EffectsDemo />
+      </section>
     </div>
   )
 }
 
-ReactDOM.createRoot(document.getElementById('root')!).render(
+import type { Root } from 'react-dom/client'
+
+const container = document.getElementById('root')!
+const ROOT_KEY = '__ui_lego_root__'
+let root = (globalThis as any)[ROOT_KEY] as Root | undefined
+
+if (!root) {
+  root = ReactDOM.createRoot(container)
+  ;(globalThis as any)[ROOT_KEY] = root
+}
+
+root.render(
   <React.StrictMode>
     <App />
   </React.StrictMode>,
 )
+
+// Cleanup on HMR to avoid memory leaks and allow re-creation
+// Vite provides import.meta.hot in dev
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
+if (import.meta && import.meta.hot) {
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
+  import.meta.hot.dispose(() => {
+    const existing = (globalThis as any)[ROOT_KEY] as Root | undefined
+    existing?.unmount()
+    ;(globalThis as any)[ROOT_KEY] = undefined
+  })
+}

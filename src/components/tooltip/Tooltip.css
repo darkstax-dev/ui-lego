@@ -1,20 +1,9 @@
-:root {
-  --tooltip-background: #DFDFDF;
-  --tooltip-text-color: #000;
-  --tooltip-border-radius: 8px;
-  --tooltip-padding: 12px 16px;
-  --tooltip-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  --tooltip-beak-size: 8px;
-  --tooltip-gap: 8px;
-}
-
 .tooltip {
   display: inline-flex;
   position: relative;
   max-width: 280px;
-  background: var(--tooltip-background);
-  border-radius: var(--tooltip-border-radius);
-  box-shadow: var(--tooltip-shadow);
+  background: var(--surface-card, var(--Background-Card));
+  border-radius: var(--sds-size-radius-200);
   z-index: 1000;
 }
 
@@ -28,29 +17,29 @@
 
 /* Content container */
 .tooltip__content {
-  padding: var(--tooltip-padding);
+  padding: var(--sds-size-space-300) var(--sds-size-space-400);
   text-align: center;
   flex: 1;
 }
 
 /* Title styles */
 .tooltip__title {
-  color: var(--tooltip-text-color);
-  font-family: Inter, -apple-system, Roboto, Helvetica, sans-serif;
-  font-size: 16px;
-  font-weight: 700;
-  line-height: 1.4;
+  color: #000;
+  font-family: var(--sds-typography-body-font-family);
+  font-size: var(--sds-typography-body-size-medium);
+  font-weight: var(--sds-typography-body-font-weight-strong);
+  line-height: 140%;
   margin: 0;
 }
 
 /* Body text styles */
 .tooltip__body {
-  color: var(--tooltip-text-color);
-  font-family: Inter, -apple-system, Roboto, Helvetica, sans-serif;
-  font-size: 14px;
-  font-weight: 400;
-  line-height: 1.4;
-  margin: 4px 0 0 0;
+  color: #000;
+  font-family: var(--sds-typography-body-font-family);
+  font-size: var(--sds-typography-body-size-small);
+  font-weight: var(--sds-typography-body-font-weight-regular);
+  line-height: 140%;
+  margin: var(--sds-size-space-100) 0 0 0;
 }
 
 /* Beak container */
@@ -63,8 +52,8 @@
 }
 
 .tooltip__beak {
-  width: var(--tooltip-beak-size);
-  height: var(--tooltip-beak-size);
+  width: 8px;
+  height: 8px;
 }
 
 /* Placement-specific styles */
@@ -73,7 +62,7 @@
 }
 
 .tooltip--top .tooltip__beak-container {
-  bottom: calc(-1 * var(--tooltip-beak-size) / 2);
+  bottom: -4px;
   left: 50%;
   transform: translateX(-50%) rotate(45deg);
 }
@@ -83,7 +72,7 @@
 }
 
 .tooltip--bottom .tooltip__beak-container {
-  top: calc(-1 * var(--tooltip-beak-size) / 2);
+  top: -4px;
   left: 50%;
   transform: translateX(-50%);
 }
@@ -93,7 +82,7 @@
 }
 
 .tooltip--left .tooltip__beak-container {
-  right: calc(-1 * var(--tooltip-beak-size) / 2);
+  right: -4px;
   top: 50%;
   transform: translateY(-50%) rotate(-45deg);
 }
@@ -103,7 +92,7 @@
 }
 
 .tooltip--right .tooltip__beak-container {
-  left: calc(-1 * var(--tooltip-beak-size) / 2);
+  left: -4px;
   top: 50%;
   transform: translateY(-50%) rotate(135deg);
 }

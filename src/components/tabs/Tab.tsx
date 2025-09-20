@@ -1,22 +1,16 @@
-import React from 'react'
+import React, { forwardRef } from 'react'
 import './Tab.css'
 
-export interface TabProps {
-  /** The label text for the tab */
+export interface TabProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   label: string
-  /** Whether the tab is currently active */
   active?: boolean
-  /** Whether the tab is disabled */
   disabled?: boolean
-  /** Click handler for the tab */
   onClick?: () => void
-  /** Additional CSS class names */
   className?: string
-  /** Value to identify this tab */
   value?: string
 }
 
-const Tab: React.FC<TabProps> = ({
+const Tab = forwardRef<HTMLButtonElement, TabProps>(function Tab({
   label,
   active = false,
   disabled = false,
@@ -24,7 +18,7 @@ const Tab: React.FC<TabProps> = ({
   className = '',
   value,
   ...props
-}) => {
+}, ref) {
   const handleClick = () => {
     if (!disabled && onClick) {
       onClick()
@@ -40,6 +34,7 @@ const Tab: React.FC<TabProps> = ({
 
   return (
     <button
+      ref={ref}
       className={tabClass}
       onClick={handleClick}
       disabled={disabled}
@@ -52,6 +47,6 @@ const Tab: React.FC<TabProps> = ({
       <span className="tab__label">{label}</span>
     </button>
   )
-}
+})
 
 export default Tab

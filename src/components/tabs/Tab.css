@@ -1,33 +1,29 @@
-/* Tab component styles based on Figma design */
-:root {
-  --tab-color-inactive: #78797A;
-  --tab-color-active: #00112B;
-  --tab-border-width: 1px;
-}
+/* Tab component styles aligned with design tokens */
 
 .tab {
   display: flex;
-  padding: 4px 12px;
+  padding: var(--sds-size-space-100) var(--sds-size-space-300);
   justify-content: center;
   align-items: center;
   border: none;
-  border-radius: 4px 4px 0 0;
+  border-radius: var(--sds-size-radius-100) var(--sds-size-radius-100) 0 0;
   background: transparent;
   cursor: pointer;
   transition: all 0.2s ease;
   position: relative;
   outline: none;
-  font-family: 'Macan Mono Trial', -apple-system, Roboto, Helvetica, sans-serif;
-  font-size: 16px;
+  font-family: var(--font-family-macan-mono);
+  font-size: var(--font-size-md);
   font-style: normal;
-  font-weight: 500;
-  line-height: 110%;
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-tight);
   min-height: 26px;
 }
 
 .tab:focus-visible {
-  outline: 2px solid rgba(0, 17, 43, 0.2);
+  outline: 2px solid var(--color-blue-dark-950);
   outline-offset: 2px;
+  opacity: 0.2;
 }
 
 .tab__label {
@@ -37,24 +33,24 @@
 
 /* Inactive state */
 .tab--inactive {
-  color: var(--tab-color-inactive);
-  border-bottom: var(--tab-border-width) solid var(--tab-color-inactive);
+  color: var(--color-gray-500);
+  border-bottom: var(--sds-size-stroke-border) solid var(--color-gray-500);
 }
 
 .tab--inactive:hover:not(.tab--disabled) {
-  color: var(--tab-color-inactive);
-  background: rgba(120, 121, 122, 0.05);
+  color: var(--color-gray-500);
+  background: var(--sds-color-black-100);
 }
 
 /* Active state */
 .tab--active {
-  color: var(--tab-color-active);
-  border-bottom: var(--tab-border-width) solid var(--tab-color-active);
+  color: var(--color-blue-dark-950);
+  border-bottom: var(--sds-size-stroke-border) solid var(--color-blue-dark-950);
 }
 
 .tab--active:hover:not(.tab--disabled) {
-  color: var(--tab-color-active);
-  background: rgba(0, 17, 43, 0.05);
+  color: var(--color-blue-dark-950);
+  background: var(--sds-color-black-100);
 }
 
 /* Disabled state */
@@ -70,19 +66,19 @@
 /* Mobile responsiveness */
 @media (max-width: 768px) {
   .tab {
-    padding: 6px 8px;
-    font-size: 14px;
+    padding: var(--sds-size-space-200) var(--sds-size-space-200);
+    font-size: var(--font-size-sm);
     min-height: 32px;
   }
 }
 
 @media (max-width: 480px) {
   .tab {
-    padding: 8px 6px;
-    font-size: 12px;
+    padding: var(--sds-size-space-200) var(--sds-size-space-200);
+    font-size: var(--font-size-xs);
     min-height: 36px;
   }
-  
+
   .tab__label {
     overflow: hidden;
     text-overflow: ellipsis;

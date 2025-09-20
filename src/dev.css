@@ -25,12 +25,12 @@ body {
 }
 
 h1 {
-  color: #333;
+  color: var(--text-body-strong);
   margin-bottom: 2rem;
 }
 
 .component-section {
-  background: white;
+  background: var(--surface-card);
   padding: 2rem;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -55,3 +55,50 @@ h1 {
 .demo-group > * + * {
   margin-top: 1rem;
 }
+
+/* Extracted from inline styles in dev.tsx */
+.section-block { margin-bottom: var(--sds-size-space-800); }
+
+.feature-card {
+  background: var(--surface-card);
+  padding: var(--sds-size-space-600);
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  margin-top: var(--sds-size-space-600);
+}
+.feature-card__title { color: var(--text-body-strong); margin: 0 0 var(--sds-size-space-400); }
+.feature-card__list { color: var(--text-body-muted); line-height: 1.6; margin: 0; padding: 0 0 0 1.25rem; }
+
+.compliance-card {
+  background: var(--surface-subtle);
+  padding: var(--sds-size-space-600);
+  border-radius: 8px;
+  border: 1px solid var(--border-subtle);
+  margin-top: var(--sds-size-space-400);
+}
+.compliance-card__title { color: var(--text-body-strong); margin: 0 0 var(--sds-size-space-400); }
+.compliance-card__lead { color: var(--text-body-muted); margin: 0 0 var(--sds-size-space-300); }
+.compliance-card__list { color: var(--text-body-muted); line-height: 1.6; margin: 0 0 var(--sds-size-space-400); padding-left: 20px; }
+.compliance-card__note { color: var(--text-body-muted); font-size: 14px; font-style: italic; margin: 0; }
+
+.section-title-mono-stencil {
+  color: var(--Divider-dark);
+  font-family: var(--font-family-macan-mono-stencil);
+  font-size: 32px;
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: 1.6px;
+  text-transform: uppercase;
+  margin-bottom: var(--sds-size-space-800);
+}
+
+.example-row { display: flex; gap: var(--sds-size-space-800); }
+.form-vertical { display: flex; flex-direction: column; gap: var(--sds-size-space-600); }
+.form-vertical--narrow { max-width: 400px; }
+
+.caption-text { margin-top: var(--sds-size-space-300); font-size: 14px; color: var(--text-body-muted); }
+
+.stack { display: flex; flex-direction: column; }
+.stack--400 { gap: var(--sds-size-space-400); }
+
+.mt-300 { margin-top: var(--sds-size-space-300); }

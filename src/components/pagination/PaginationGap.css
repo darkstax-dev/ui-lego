@@ -1,18 +1,18 @@
 .pagination-gap {
   display: inline-flex;
-  padding: 8px 16px;
+  padding: var(--sds-size-space-200) var(--sds-size-space-400);
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  border-radius: 8px;
+  border-radius: var(--sds-radius-md);
   user-select: none;
 }
 
 .pagination-gap__text {
-  color: #000;
-  font-family: 'Inter', -apple-system, 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Helvetica', sans-serif;
-  font-size: 16px;
-  font-weight: 700;
+  color: var(--color-black);
+  font-family: var(--font-family-inter);
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-bold);
   line-height: 140%;
 }
 

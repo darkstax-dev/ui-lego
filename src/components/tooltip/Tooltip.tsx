@@ -36,32 +36,34 @@ const Tooltip: React.FC<TooltipProps> = ({
       viewBox: "0 0 12 12",
       fill: "none",
       xmlns: "http://www.w3.org/2000/svg",
-      className: `tooltip__beak tooltip__beak--${placement}`
+      className: `tooltip__beak tooltip__beak--${placement}`,
+      'aria-hidden': true as unknown as undefined,
+      focusable: false as unknown as undefined
     }
 
     switch (placement) {
       case 'top':
         return (
           <svg {...beakProps}>
-            <path d="M6 0.0500031L11.6569 5.70686L6 11.3637L0.343146 5.70686L6 0.0500031Z" fill="var(--tooltip-background)" />
+            <path d="M6 0.0500031L11.6569 5.70686L6 11.3637L0.343146 5.70686L6 0.0500031Z" fill="#DFDFDF" />
           </svg>
         )
       case 'bottom':
         return (
           <svg {...beakProps}>
-            <path d="M6 11.95L11.6569 6.29315L6 0.636292L0.343146 6.29315L6 11.95Z" fill="var(--tooltip-background)" />
+            <path d="M6 11.95L11.6569 6.29315L6 0.636292L0.343146 6.29315L6 11.95Z" fill="#DFDFDF" />
           </svg>
         )
       case 'left':
         return (
           <svg {...beakProps}>
-            <path d="M0.0500031 6L5.70686 11.6569L11.3637 6L5.70686 0.343146L0.0500031 6Z" fill="var(--tooltip-background)" />
+            <path d="M0.0500031 6L5.70686 11.6569L11.3637 6L5.70686 0.343146L0.0500031 6Z" fill="#DFDFDF" />
           </svg>
         )
       case 'right':
         return (
           <svg {...beakProps}>
-            <path d="M11.95 6L6.29314 11.6569L0.636289 6L6.29314 0.343146L11.95 6Z" fill="var(--tooltip-background)" />
+            <path d="M11.95 6L6.29314 11.6569L0.636289 6L6.29314 0.343146L11.95 6Z" fill="#DFDFDF" />
           </svg>
         )
       default:
@@ -70,7 +72,7 @@ const Tooltip: React.FC<TooltipProps> = ({
   }
 
   return (
-    <div className={tooltipClass}>
+    <div className={tooltipClass} role="tooltip" aria-hidden={!visible}>
       {(placement === 'bottom' || placement === 'right') && (
         <div className="tooltip__beak-container">
           {renderBeak()}

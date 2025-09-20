@@ -2,6 +2,153 @@
 /* Generated from Figma design system documentation */
 
 :root {
+  /* ===== SIMPLE DESIGN SYSTEM (SDS) TOKENS ===== */
+
+  /* Spacing Scale */
+  --sds-size-space-100: 4px;
+  --sds-size-space-200: 8px;
+  --sds-size-space-300: 12px;
+  --sds-size-space-400: 16px;
+  --sds-size-space-600: 24px;
+  --sds-size-space-800: 32px;
+  --sds-size-space-1600: 64px;
+  --sds-size-space-2400: 96px;
+  --sds-size-space-4000: 160px;
+
+  /* SDS Padding Scale */
+  --sds-size-padding-xs: 4px;
+  --sds-size-padding-sm: 8px;
+  --sds-size-padding-lg: 16px;
+
+  /* SDS Size Scale for Radius */
+  --sds-radius-md: 0px;
+  --sds-size-radius-400: 0px;
+  --sds-size-radius-200: 0px;
+
+  /* Negative Spacing */
+  --sds-size-space-negative-100: -4px;
+  --sds-size-space-negative-200: -8px;
+  --sds-size-space-negative-300: -12px;
+  --sds-size-space-negative-400: -16px;
+  --sds-size-space-negative-600: -24px;
+
+  /* Border Radius - All set to 0 (none) */
+  --sds-size-radius-100: 0px;
+  --sds-size-radius-200: 0px;
+  --sds-size-radius-400: 0px;
+  --sds-size-radius-full: 0px;
+
+  /* Depth/Shadows */
+  --sds-size-depth-0: 0px;
+  --sds-size-depth-025: 1px;
+  --sds-size-depth-100: 4px;
+  --sds-size-depth-400: 16px;
+  --sds-size-depth-800: 32px;
+  --sds-size-depth-negative-025: -1px;
+  --sds-size-depth-negative-100: -4px;
+  --sds-size-depth-negative-200: -8px;
+
+  /* Stroke/Border Sizes */
+  --sds-size-stroke-border: 1px;
+
+  /* SDS Color System - Neutrals */
+  --sds-color-border-neutral-tertiary: rgba(178, 178, 178, 1);
+  --sds-color-background-neutral-secondary: rgba(205, 205, 205, 1);
+  --sds-color-background-neutral-tertiary: rgba(227, 227, 227, 1);
+  --sds-color-text-neutral-on-neutral-secondary: rgba(48, 48, 48, 1);
+  --sds-color-text-neutral-on-neutral-tertiary: rgba(67, 67, 67, 1);
+  --sds-color-background-default-default: rgba(206, 206, 206, 1);
+
+  /* SDS Color System - Text */
+  --sds-color-text-default-default: rgba(30, 30, 30, 1);
+  --sds-color-text-default-secondary: rgba(117, 117, 117, 1);
+  --sds-color-text-brand-on-brand: rgba(245, 245, 245, 1);
+  --sds-color-text-brand-tertiary: rgba(117, 117, 117, 1);
+  --sds-color-text-danger-on-danger: rgba(254, 233, 231, 1);
+  --sds-color-text-positive-on-positive: rgba(235, 255, 238, 1);
+  --sds-color-text-disabled-default: rgba(179, 179, 179, 1);
+
+  /* SDS Color System - Borders */
+  --sds-color-border-default-default: rgba(217, 217, 217, 1);
+
+  /* Background Colors from Figma */
+  --Background-Card: #DFDFDF;
+
+  /* SDS Color System - Utilities */
+  --sds-color-background-utilities-measurement: rgba(250, 225, 250, 1);
+  --sds-color-border-utilities-swatch: rgba(0, 0, 0, 0.24);
+
+  /* SDS Color System - Warning States */
+  --sds-color-border-warning-default: rgba(82, 37, 4, 1);
+  --sds-color-background-warning-secondary: rgba(255, 241, 194, 1);
+  --sds-color-text-warning-on-warning-secondary: rgba(104, 45, 3, 1);
+
+  /* SDS Color System - Black/Transparency */
+  --sds-color-black-100: rgba(12, 12, 13, 0.05);
+  --sds-color-black-200: rgba(12, 12, 13, 0.1);
+  --sds-color-black-400: rgba(12, 12, 13, 0.4);
+
+  /* SDS Blur and Effect Utilities */
+  --sds-size-blur-100: 4px;
+  --sds-color-background-utilities-overlay: rgba(0, 0, 0, 0.5);
+  --sds-color-background-utilities-blanket: rgba(0, 0, 0, 0.7);
+  --sds-color-background-utilities-scrim: rgba(255, 255, 255, 0.8);
+
+  /* SDS Padding */
+  --sds-size-padding-xl: 24px;
+
+  /* SDS Brand Colors */
+  --sds-color-background-brand-default: rgba(44, 44, 44, 1);
+  --sds-color-background-brand-tertiary: rgba(245, 245, 245, 1);
+  --Gray-50: #FFF;
+  --Brown-Main-900: #403B39;
+  --Black: #0E0E0E;
+  --Yellow-500: #ED8B30;
+
+  /* ===== TYPOGRAPHY TOKENS ===== */
+
+  /* Font Families */
+  --font-family-macan: 'Macan', -apple-system, Roboto, Helvetica, sans-serif;
+  --font-family-macan-mono: 'Macan Mono Trial', -apple-system, Roboto, Helvetica, sans-serif;
+  --font-family-macan-mono-stencil: 'Macan Mono Stencil Trial', -apple-system, Roboto, Helvetica, sans-serif;
+  --font-family-inter: 'Inter', -apple-system, Roboto, Helvetica, sans-serif;
+
+  /* SDS Typography System */
+  --sds-typography-body-font-family: 'Inter', -apple-system, Roboto, Helvetica, sans-serif;
+  --sds-typography-body-size-small: 14px;
+  --sds-typography-body-size-medium: 16px;
+  --sds-typography-body-font-weight-regular: 400;
+  --sds-typography-body-font-weight-strong: 700;
+  --sds-typography-family-mono: 'Roboto Mono', -apple-system, Roboto, Helvetica, sans-serif;
+  --sds-typography-scale-03: 16px;
+  --sds-typography-weight-regular: 400;
+
+  /* Font Weights */
+  --font-weight-book: 450;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+
+  /* Font Sizes */
+  --font-size-xs: 12px;
+  --font-size-sm: 14px;
+  --font-size-base: 15px;
+  --font-size-md: 16px;
+  --font-size-lg: 18px;
+  --font-size-xl: 24px;
+  --font-size-2xl: 32px;
+  --font-size-3xl: 40px;
+
+  /* Line Heights */
+  --line-height-tight: 110%;
+  --line-height-normal: 120%;
+
+  /* Letter Spacing */
+  --letter-spacing-tight: -0.02em; /* -2% */
+  --letter-spacing-normal: 0;
+  --letter-spacing-wide: 0.05em; /* 5% */
+  --letter-spacing-wider: 0.1em; /* 10% */
+
   /* ===== BASE COLOR PALETTE ===== */
   
   /* Blue Scale */
@@ -53,25 +200,76 @@
   --color-white: #ffffff;
   --color-black: #0e0e0e;
 
+  /* ===== FIGMA DESIGN TOKEN ALIASES ===== */
+
+  /* Figma-specific token names for SecondaryNavigation */
+  --Text-Blue-text-Main-text: var(--text-blue-main, var(--color-blue-dark-950));
+  --red-600-cta: var(--color-red-600);
+  --Inputs-Input-Background: var(--color-gray-200);
+  --Inputs-Placeholder-text: var(--color-gray-500);
+  --Gray-200: var(--color-gray-200);
+  --Gray-500: var(--color-gray-500);
+  --Icon-Button-Gray-btn-Fill: var(--color-gray-200);
+  --Primary-button-red-Icon-default: var(--color-white);
+  --Primary-button-red-Fill: var(--color-red-600);
+  --Text-White-text-Main-text: var(--color-white);
+
+  /* Figma modeling component tokens */
+  --Text-Blue-text-Tetriary-text: var(--color-blue-950);
+  --Modeling-Items-Modeling-item-hover: rgba(255, 255, 255, 0.60);
+  --Modeling-Items-Modeling-item: rgba(255, 255, 255, 0.40);
+  --white-white-100: var(--color-white);
+  --Green-Green-800: var(--color-green-800);
+  --White: var(--color-white);
+  --white-white-40: rgba(255, 255, 255, 0.40);
+  --Dark-blue: var(--color-blue-dark-950);
+  --color-gray-50: #F8F8F8;
+  --Gray-50: var(--color-gray-50);
+  --white-white-20: rgba(255, 255, 255, 0.20);
+  --Gray-100: var(--color-gray-100);
+
+  /* Additional Figma design tokens for buttons */
+  --Primary-button-red-Disabled: #ADADAD;
+  --Text-White-text-Secondary-text: #DFDFDF;
+  --Blue-Dark-blue-950: #00112B;
+  --white-white-100: #FFF;
+  --Text-Gray-text-Disabled-text: #CECECE;
+  --Red-500: #FF3B31;
+  --Icon-Button-Disabled: #CECECE;
+  --Divider-Light: #C8C8C8;
+  --Divider-dark: #072B56;
+
+  /* Figma dropdown design tokens */
+  --Text-Blue-text-Main-text: var(--text-blue-main, #00112B);
+  --Blue-Dark-blue-950: #00112B;
+  --Drop-down-light-Background-default: #ECECEC;
+  --Gray-300: #CECECE;
+
   /* ===== SEMANTIC TOKENS - LIGHT MODE ===== */
-  
+
   /* Navigation */
   --nav-main-bg: var(--color-blue-dark-950);
   --nav-secondary-bg: var(--color-gray-300);
 
-  /* Backgrounds */
-  --bg-default: var(--color-gray-300);
-  --bg-card: var(--color-gray-200);
+  /* Surfaces */
+  --surface-default: var(--bg-default, var(--color-gray-300));
+  --surface-card: var(--bg-card, var(--color-gray-200));
+  --surface-subtle: #f8f9fa;
+  --border-subtle: #e9ecef;
 
   /* Text Colors */
   --text-blue-main: var(--color-blue-dark-950);
   --text-blue-secondary: var(--color-blue-medium-950);
   --text-blue-tertiary: var(--color-blue-950);
-  
+
   --text-gray-main: var(--color-gray-500);
   --text-gray-secondary: var(--color-gray-400);
   --text-gray-disabled: var(--color-gray-300);
-  
+
+  /* Body text tokens for docs/demo surfaces */
+  --text-body-strong: #333333;
+  --text-body-muted: #666666;
+
   --text-white-main: var(--color-white);
   --text-white-secondary: var(--color-gray-200);
   --text-white-tertiary: var(--color-gray-500);
@@ -99,6 +297,14 @@
 /* ===== DARK MODE OVERRIDES ===== */
 @media (prefers-color-scheme: dark) {
   :root {
+    /* Figma token aliases - dark mode */
+    --Text-Blue-text-Main-text: var(--color-gray-200);
+    --Inputs-Input-Background: var(--color-blue-dark-950);
+    --Inputs-Placeholder-text: var(--color-gray-400);
+    --Gray-200: var(--color-blue-dark-950);
+    --Gray-500: var(--color-gray-400);
+    --Icon-Button-Gray-btn-Fill: var(--color-blue-950);
+
     /* Navigation */
     --nav-main-bg: var(--color-blue-medium-950);
     --nav-secondary-bg: var(--color-blue-dark-950);
@@ -107,15 +313,25 @@
     --bg-default: var(--color-blue-medium-950);
     --bg-card: var(--color-blue-dark-950);
 
+    /* Surfaces */
+    --surface-default: var(--bg-default);
+    --surface-card: var(--bg-card);
+    --surface-subtle: var(--color-blue-60);
+    --border-subtle: var(--divider-light);
+
     /* Text Colors */
     --text-blue-main: var(--color-gray-200);
     --text-blue-secondary: var(--color-gray-300);
     --text-blue-tertiary: var(--color-gray-400);
-    
+
     --text-gray-main: var(--color-gray-200);
     --text-gray-secondary: var(--color-gray-400);
     --text-gray-disabled: var(--color-gray-500);
-    
+
+    /* Body text tokens for docs/demo surfaces */
+    --text-body-strong: var(--text-white-main);
+    --text-body-muted: var(--text-white-secondary);
+
     --text-white-main: var(--color-gray-200);
     --text-white-secondary: var(--color-gray-300);
     --text-white-tertiary: var(--color-gray-400);
@@ -143,6 +359,14 @@
 
 /* ===== MANUAL DARK MODE CLASS ===== */
 [data-theme="dark"] {
+  /* Figma token aliases - manual dark mode */
+  --Text-Blue-text-Main-text: var(--color-gray-200);
+  --Inputs-Input-Background: var(--color-blue-dark-950);
+  --Inputs-Placeholder-text: var(--color-gray-400);
+  --Gray-200: var(--color-blue-dark-950);
+  --Gray-500: var(--color-gray-400);
+  --Icon-Button-Gray-btn-Fill: var(--color-blue-950);
+
   /* Navigation */
   --nav-main-bg: var(--color-blue-medium-950);
   --nav-secondary-bg: var(--color-blue-dark-950);
@@ -151,15 +375,25 @@
   --bg-default: var(--color-blue-medium-950);
   --bg-card: var(--color-blue-dark-950);
 
+  /* Surfaces */
+  --surface-default: var(--bg-default);
+  --surface-card: var(--bg-card);
+  --surface-subtle: var(--color-blue-60);
+  --border-subtle: var(--divider-light);
+
   /* Text Colors */
   --text-blue-main: var(--color-gray-200);
   --text-blue-secondary: var(--color-gray-300);
   --text-blue-tertiary: var(--color-gray-400);
-  
+
   --text-gray-main: var(--color-gray-200);
   --text-gray-secondary: var(--color-gray-400);
   --text-gray-disabled: var(--color-gray-500);
-  
+
+  /* Body text tokens for docs/demo surfaces */
+  --text-body-strong: var(--text-white-main);
+  --text-body-muted: var(--text-white-secondary);
+
   --text-white-main: var(--color-gray-200);
   --text-white-secondary: var(--color-gray-300);
   --text-white-tertiary: var(--color-gray-400);
@@ -209,7 +443,205 @@
 /* Interactive States */
 .interactive:hover { opacity: 0.8; }
 .interactive:active { opacity: 0.6; }
-.interactive:disabled { 
+.interactive:disabled {
   opacity: 0.5;
   cursor: not-allowed;
 }
+
+/* ===== TYPOGRAPHY UTILITY CLASSES ===== */
+
+/* Font Face Declarations */
+@font-face {
+  font-family: 'Macan';
+  src: url('/fonts/Macan-Bold.woff2') format('woff2'),
+       url('/fonts/Macan-Bold.woff') format('woff');
+  font-weight: var(--font-weight-bold);
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Macan Mono Trial';
+  src: url('/fonts/Macan-Mono-Bold.woff2') format('woff2'),
+       url('/fonts/Macan-Mono-Bold.woff') format('woff');
+  font-weight: var(--font-weight-bold);
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Macan Mono Stencil Trial';
+  src: url('/fonts/Macan-Mono-Stencil-Bold.woff2') format('woff2'),
+       url('/fonts/Macan-Mono-Stencil-Bold.woff') format('woff');
+  font-weight: var(--font-weight-bold);
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Macan Mono Stencil Trial';
+  src: url('/fonts/Macan-Mono-Stencil-Regular.woff2') format('woff2'),
+       url('/fonts/Macan-Mono-Stencil-Regular.woff') format('woff');
+  font-weight: var(--font-weight-medium);
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Heading Styles */
+.heading-page {
+  font-family: var(--font-family-macan-mono-stencil);
+  font-size: var(--font-size-3xl);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-normal);
+  letter-spacing: var(--letter-spacing-wide);
+  text-transform: uppercase;
+}
+
+.heading-page-2 {
+  font-family: var(--font-family-macan-mono-stencil);
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-normal);
+  letter-spacing: var(--letter-spacing-wide);
+  text-transform: uppercase;
+}
+
+.heading-subheading-macan {
+  font-family: var(--font-family-macan);
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-normal);
+  letter-spacing: var(--letter-spacing-tight);
+}
+
+.heading-subheading-stencil {
+  font-family: var(--font-family-macan-mono-stencil);
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-tight);
+  letter-spacing: var(--letter-spacing-wide);
+  text-transform: uppercase;
+}
+
+/* Emphasis Styles */
+.emphasis-body-mono-lg {
+  font-family: var(--font-family-macan-mono);
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-tight);
+  letter-spacing: var(--letter-spacing-wider);
+  text-transform: uppercase;
+}
+
+.emphasis-body-mono-sm {
+  font-family: var(--font-family-macan-mono);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-tight);
+  letter-spacing: var(--letter-spacing-wider);
+  text-transform: uppercase;
+}
+
+/* Body Base Styles */
+.body-base-macan-semibold-lg {
+  font-family: var(--font-family-macan);
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-normal);
+  letter-spacing: var(--letter-spacing-tight);
+}
+
+.body-base-macan-semibold {
+  font-family: var(--font-family-macan);
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-normal);
+  letter-spacing: var(--letter-spacing-tight);
+}
+
+.body-base-macan-book {
+  font-family: var(--font-family-macan);
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-book);
+  line-height: var(--line-height-normal);
+  letter-spacing: var(--letter-spacing-tight);
+}
+
+.body-base-mono-medium {
+  font-family: var(--font-family-macan-mono);
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-tight);
+  letter-spacing: var(--letter-spacing-normal);
+}
+
+.body-base-mono-book-lg {
+  font-family: var(--font-family-macan-mono);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-book);
+  line-height: var(--line-height-normal);
+  letter-spacing: var(--letter-spacing-normal);
+}
+
+.body-base-mono-book {
+  font-family: var(--font-family-macan-mono);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-book);
+  line-height: var(--line-height-normal);
+  letter-spacing: var(--letter-spacing-normal);
+}
+
+/* Body Small Styles */
+.body-small-mono-book {
+  font-family: var(--font-family-macan-mono);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-book);
+  line-height: var(--line-height-normal);
+  letter-spacing: var(--letter-spacing-wider);
+}
+
+.body-small-macan-book {
+  font-family: var(--font-family-macan);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-book);
+  line-height: var(--line-height-normal);
+  letter-spacing: var(--letter-spacing-normal);
+}
+
+/* Font Family Utilities */
+.font-macan { font-family: var(--font-family-macan); }
+.font-macan-mono { font-family: var(--font-family-macan-mono); }
+.font-macan-mono-stencil { font-family: var(--font-family-macan-mono-stencil); }
+.font-inter { font-family: var(--font-family-inter); }
+
+/* Font Weight Utilities */
+.font-book { font-weight: var(--font-weight-book); }
+.font-medium { font-weight: var(--font-weight-medium); }
+.font-semibold { font-weight: var(--font-weight-semibold); }
+.font-bold { font-weight: var(--font-weight-bold); }
+
+/* Font Size Utilities */
+.text-xs { font-size: var(--font-size-xs); }
+.text-sm { font-size: var(--font-size-sm); }
+.text-base { font-size: var(--font-size-base); }
+.text-md { font-size: var(--font-size-md); }
+.text-lg { font-size: var(--font-size-lg); }
+.text-xl { font-size: var(--font-size-xl); }
+.text-2xl { font-size: var(--font-size-2xl); }
+.text-3xl { font-size: var(--font-size-3xl); }
+
+/* Line Height Utilities */
+.leading-tight { line-height: var(--line-height-tight); }
+.leading-normal { line-height: var(--line-height-normal); }
+
+/* Letter Spacing Utilities */
+.tracking-tight { letter-spacing: var(--letter-spacing-tight); }
+.tracking-normal { letter-spacing: var(--letter-spacing-normal); }
+.tracking-wide { letter-spacing: var(--letter-spacing-wide); }
+.tracking-wider { letter-spacing: var(--letter-spacing-wider); }
+
+/* Text Transform Utilities */
+.uppercase { text-transform: uppercase; }
+.lowercase { text-transform: lowercase; }
+.capitalize { text-transform: capitalize; }
+.normal-case { text-transform: none; }

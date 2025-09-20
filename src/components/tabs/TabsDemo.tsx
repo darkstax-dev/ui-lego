@@ -3,25 +3,26 @@ import Tabs from './Tabs'
 import Tab from './Tab'
 
 const TabsDemo: React.FC = () => {
-  const [activeTab1, setActiveTab1] = useState('tab1')
+  const [activeTab1, setActiveTab1] = useState('label1')
   const [activeTab2, setActiveTab2] = useState('overview')
 
   const basicTabs = [
-    { value: 'tab1', label: 'Tab 1' },
-    { value: 'tab2', label: 'Tab 2' },
-    { value: 'tab3', label: 'Tab 3' },
+    { value: 'label1', label: 'Label' },
+    { value: 'label2', label: 'Label' },
+    { value: 'label3', label: 'Label' },
   ]
 
   const complexTabs = [
-    { value: 'overview', label: 'Overview' },
-    { value: 'analytics', label: 'Analytics' },
-    { value: 'reports', label: 'Reports' },
-    { value: 'settings', label: 'Settings' },
-    { value: 'disabled', label: 'Disabled', disabled: true },
+    { value: 'overview', label: 'Label' },
+    { value: 'analytics', label: 'Label' },
+    { value: 'reports', label: 'Label' },
+    { value: 'settings', label: 'Label' },
+    { value: 'disabled', label: 'Label', disabled: true },
+    { value: 'extra', label: 'Label' },
   ]
 
   return (
-    <div style={{ padding: '20px', display: 'flex', flexDirection: 'column', gap: '40px' }}>
+    <div style={{ padding: 'var(--sds-size-space-600)', display: 'flex', flexDirection: 'column', gap: 'var(--sds-size-space-1600)' }}>
       <div>
         <h3>Basic Tabs</h3>
         <Tabs

@@ -56,3 +56,7 @@ export { default as SendPlaneFill } from './SendPlaneFill'
 export { default as BookmarkFill } from './BookmarkFill'
 export { default as ArchiveFill } from './ArchiveFill'
 export { default as ImageIcon } from './ImageIcon'
+
+// Chevron icons
+export { default as ChevronUp } from './ChevronUp'
+export { default as ChevronDown } from './ChevronDown'

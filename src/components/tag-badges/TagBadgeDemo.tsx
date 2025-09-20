@@ -5,7 +5,7 @@ import Badge from './Badge'
 
 const TagBadgeDemo: React.FC = () => {
   const [toggleStates, setToggleStates] = useState({
-    label1: false,
+    label1: true,
     label2: false,
     label3: false,
     label4: false,
@@ -22,7 +22,7 @@ const TagBadgeDemo: React.FC = () => {
     neutral: true,
   })
 
-  const handleToggle = (key: string) => {
+  const handleToggle = (key: keyof typeof toggleStates) => {
     setToggleStates(prev => ({
       ...prev,
       [key]: !prev[key]
@@ -37,12 +37,39 @@ const TagBadgeDemo: React.FC = () => {
   }
 
   return (
-    <div style={{ padding: '20px', background: '#f5f5f5', minHeight: '100vh' }}>
-      <h2>Tag Components</h2>
+    <div style={{ 
+      padding: '40px', 
+      background: 'var(--bg-default)', 
+      minHeight: '100vh',
+      fontFamily: 'var(--font-family-macan)' 
+    }}>
+      <h1 style={{ 
+        marginBottom: '40px',
+        color: 'var(--text-blue-main)',
+        fontSize: '32px',
+        fontWeight: '600'
+      }}>
+        Tag and Badge Components
+      </h1>
       
-      <div style={{ marginBottom: '40px' }}>
-        <h3>Tags - Primary Variant</h3>
-        <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap', marginBottom: '20px' }}>
+      <div style={{ marginBottom: '60px' }}>
+        <h2 style={{ 
+          marginBottom: '20px',
+          color: 'var(--text-blue-main)',
+          fontSize: '20px',
+          fontWeight: '500'
+        }}>
+          Tags - Primary Variant (Default States)
+        </h2>
+        <div style={{ 
+          display: 'flex', 
+          gap: '12px', 
+          flexWrap: 'wrap',
+          marginBottom: '20px',
+          padding: '20px',
+          background: 'var(--bg-card)',
+          borderRadius: '8px'
+        }}>
           {activeTags.brand && (
             <Tag 
               scheme="brand" 
@@ -85,8 +112,22 @@ const TagBadgeDemo: React.FC = () => {
           )}
         </div>
         
-        <h3>Tags - Hover States</h3>
-        <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap', marginBottom: '20px' }}>
+        <h3 style={{ 
+          marginBottom: '20px',
+          color: 'var(--text-blue-main)',
+          fontSize: '18px',
+          fontWeight: '500'
+        }}>
+          Tags - Hover States
+        </h3>
+        <div style={{ 
+          display: 'flex', 
+          gap: '12px', 
+          flexWrap: 'wrap',
+          padding: '20px',
+          background: 'var(--bg-card)',
+          borderRadius: '8px'
+        }}>
           <Tag scheme="brand" state="hover">Tag</Tag>
           <Tag scheme="danger" state="hover">Tag</Tag>
           <Tag scheme="positive" state="hover">Tag</Tag>
@@ -95,9 +136,23 @@ const TagBadgeDemo: React.FC = () => {
         </div>
       </div>
 
-      <div style={{ marginBottom: '40px' }}>
-        <h3>Tag Toggle Group</h3>
-        <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
+      <div style={{ marginBottom: '60px' }}>
+        <h2 style={{ 
+          marginBottom: '20px',
+          color: 'var(--text-blue-main)',
+          fontSize: '20px',
+          fontWeight: '500'
+        }}>
+          Tag Toggle Group
+        </h2>
+        <div style={{ 
+          display: 'flex', 
+          gap: 'var(--sds-size-space-200)', 
+          flexWrap: 'wrap',
+          padding: '20px',
+          background: 'var(--bg-card)',
+          borderRadius: '8px'
+        }}>
           <TagToggle 
             state={toggleStates.label1 ? 'on' : 'off'}
             onClick={() => handleToggle('label1')}
@@ -144,12 +199,51 @@ const TagBadgeDemo: React.FC = () => {
       </div>
 
       <div>
-        <h3>Badges</h3>
-        <div style={{ display: 'flex', gap: '16px', flexWrap: 'wrap' }}>
-          <Badge status="active" />
-          <Badge status="canceled" />
-          <Badge status="pending" />
+        <h2 style={{ 
+          marginBottom: '20px',
+          color: 'var(--text-blue-main)',
+          fontSize: '20px',
+          fontWeight: '500'
+        }}>
+          Badges
+        </h2>
+        <div style={{ 
+          display: 'flex', 
+          gap: '24px', 
+          flexWrap: 'wrap',
+          padding: '20px',
+          background: 'var(--bg-card)',
+          borderRadius: '8px'
+        }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', alignItems: 'center' }}>
+            <Badge status="active" />
+            <span style={{ fontSize: '12px', color: 'var(--text-blue-secondary)' }}>Active</span>
+          </div>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', alignItems: 'center' }}>
+            <Badge status="canceled" />
+            <span style={{ fontSize: '12px', color: 'var(--text-blue-secondary)' }}>Canceled</span>
+          </div>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', alignItems: 'center' }}>
+            <Badge status="pending" />
+            <span style={{ fontSize: '12px', color: 'var(--text-blue-secondary)' }}>Pending</span>
+          </div>
         </div>
+      </div>
+
+      <div style={{ 
+        marginTop: '40px',
+        padding: '20px',
+        background: 'var(--bg-card)',
+        borderRadius: '8px',
+        fontSize: '14px',
+        color: 'var(--text-blue-secondary)'
+      }}>
+        <p><strong>Note:</strong> All components strictly use design tokens from the token system and match the Figma design specifications.</p>
+        <ul style={{ marginTop: '8px', paddingLeft: '20px' }}>
+          <li>Tags support Brand, Danger, Positive, Warning, and Neutral color schemes</li>
+          <li>TagToggles have On/Off states for filtering functionality</li>
+          <li>Badges show status with distinctive flag shapes and color coding</li>
+        </ul>
       </div>
     </div>
   )

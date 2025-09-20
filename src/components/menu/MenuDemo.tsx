@@ -1,7 +1,9 @@
 import React, { useState } from 'react'
+import Menu from './Menu'
 import MenuItem from './MenuItem'
 import MenuHeader from './MenuHeader'
 import MenuHeading from './MenuHeading'
+import MenuSection from './MenuSection'
 import MenuSeparator from './MenuSeparator'
 import MenuShortcut from './MenuShortcut'
 
@@ -81,71 +83,87 @@ const MenuDemo: React.FC = () => {
         </div>
       </div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '40px' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))', gap: '40px' }}>
         <div>
-          <h3>Complete Menu Example</h3>
-          <div style={{ 
-            width: '284px', 
-            background: 'white', 
-            border: '1px solid #e0e0e0', 
-            borderRadius: '8px',
-            padding: '8px 0'
-          }}>
-            <MenuHeader 
-              heading="Account Settings" 
-              subheading="Manage your account"
+          <h3>Complete Menu Example (Figma Design)</h3>
+          <Menu>
+            <MenuHeader
+              heading="Heading"
+              subheading="Heading"
             />
-            
-            <MenuItem
-              label="Profile"
-              description="Update your personal information"
-              icon={starIcon}
-              shortcut="⌘P"
-              state={selectedVariant}
-              onClick={() => console.log('Profile clicked')}
-            />
-            
-            <MenuItem
-              label="Preferences"
-              description="Customize your experience"
-              icon={heartIcon}
-              shortcut="⌘,"
-              state={selectedVariant}
-              onClick={() => console.log('Preferences clicked')}
-            />
-            
+
             <MenuSeparator />
-            
-            <MenuHeading>Actions</MenuHeading>
-            
-            <MenuItem
-              label="Sign Out"
-              description="Sign out of your account"
-              icon={starIcon}
-              shortcut="⇧⌘Q"
-              state={selectedVariant}
-              onClick={() => console.log('Sign out clicked')}
-            />
-          </div>
+
+            <MenuSection>
+              <MenuItem
+                label="Menu Label"
+                description="Menu description."
+                icon={starIcon}
+                shortcut="⇧A"
+                state={selectedVariant}
+                onClick={() => console.log('Menu item 1 clicked')}
+              />
+
+              <MenuItem
+                label="Menu Label"
+                description="Menu description."
+                icon={starIcon}
+                shortcut="⇧A"
+                state={selectedVariant}
+                onClick={() => console.log('Menu item 2 clicked')}
+              />
+
+              <MenuItem
+                label="Menu Label"
+                description="Menu description."
+                icon={starIcon}
+                shortcut="⇧A"
+                state={selectedVariant}
+                onClick={() => console.log('Menu item 3 clicked')}
+              />
+            </MenuSection>
+
+            <MenuSeparator />
+
+            <MenuSection>
+              <MenuItem
+                label="Menu Label"
+                description="Menu description."
+                icon={starIcon}
+                shortcut="⇧A"
+                state={selectedVariant}
+                onClick={() => console.log('Menu item 4 clicked')}
+              />
+
+              <MenuItem
+                label="Menu Label"
+                description="Menu description."
+                icon={starIcon}
+                shortcut="⇧A"
+                state={selectedVariant}
+                onClick={() => console.log('Menu item 5 clicked')}
+              />
+            </MenuSection>
+          </Menu>
         </div>
 
         <div>
-          <h3>Individual Components</h3>
-          
-          <div style={{ marginBottom: '20px' }}>
+          <h3>Individual Primitive Components</h3>
+
+          <div style={{ marginBottom: '20px', background: '#f8f9fa', padding: '16px', borderRadius: '8px' }}>
             <h4>Menu Header</h4>
-            <MenuHeader 
-              heading="Settings" 
-              subheading="Configuration"
+            <MenuHeader
+              heading="Heading"
+              subheading="Heading"
             />
           </div>
 
-          <div style={{ marginBottom: '20px' }}>
+          <div style={{ marginBottom: '20px', background: '#f8f9fa', padding: '16px', borderRadius: '8px' }}>
             <h4>Menu Heading</h4>
-            <MenuHeading>Navigation</MenuHeading>
+            <MenuHeading>Heading</MenuHeading>
           </div>
 
-          <div style={{ marginBottom: '20px' }}>
+          <div style={{ marginBottom: '20px', background: '#f8f9fa', padding: '16px', borderRadius: '8px' }}>
             <h4>Menu Item ({selectedVariant})</h4>
             <MenuItem
               label="Menu Label"
@@ -157,26 +175,57 @@ const MenuDemo: React.FC = () => {
             />
           </div>
 
-          <div style={{ marginBottom: '20px' }}>
+          <div style={{ marginBottom: '20px', background: '#f8f9fa', padding: '16px', borderRadius: '8px' }}>
             <h4>Menu Separator</h4>
             <MenuSeparator />
           </div>
 
-          <div style={{ marginBottom: '20px' }}>
+          <div style={{ marginBottom: '20px', background: '#f8f9fa', padding: '16px', borderRadius: '8px' }}>
             <h4>Menu Shortcut</h4>
             <MenuShortcut shortcut="⇧A" />
           </div>
 
-          <div style={{ marginBottom: '20px' }}>
-            <h4>Without Icon/Description</h4>
-            <MenuItem
-              label="Simple Item"
-              hasIcon={false}
-              hasDescription={false}
-              shortcut="⌘S"
-              state={selectedVariant}
-              onClick={() => console.log('Simple item clicked')}
-            />
+          <div style={{ marginBottom: '20px', background: '#f8f9fa', padding: '16px', borderRadius: '8px' }}>
+            <h4>Custom Example</h4>
+            <Menu>
+              <MenuHeader
+                heading="Account Settings"
+                subheading="Manage your account"
+              />
+
+              <MenuSection>
+                <MenuItem
+                  label="Profile"
+                  description="Update your personal information"
+                  icon={starIcon}
+                  shortcut="⌘P"
+                  state={selectedVariant}
+                  onClick={() => console.log('Profile clicked')}
+                />
+
+                <MenuItem
+                  label="Preferences"
+                  description="Customize your experience"
+                  icon={heartIcon}
+                  shortcut="⌘,"
+                  state={selectedVariant}
+                  onClick={() => console.log('Preferences clicked')}
+                />
+              </MenuSection>
+
+              <MenuSeparator />
+
+              <MenuSection>
+                <MenuItem
+                  label="Sign Out"
+                  description="Sign out of your account"
+                  icon={starIcon}
+                  shortcut="⇧⌘Q"
+                  state={selectedVariant}
+                  onClick={() => console.log('Sign out clicked')}
+                />
+              </MenuSection>
+            </Menu>
           </div>
         </div>
       </div>

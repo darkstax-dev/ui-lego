@@ -20,25 +20,27 @@ const ModelingDemo: React.FC = () => {
         <div className="modeling-demo__grid">
           <div className="modeling-demo__item">
             <h4>Red Default</h4>
-            <Activity colour="red" state="default" />
+            <Activity colour="red" state="default" showText text="text" />
           </div>
           <div className="modeling-demo__item">
             <h4>Red Hover</h4>
-            <Activity colour="red" state="hover" />
+            <Activity colour="red" state="hover" showText text="text" />
           </div>
           <div className="modeling-demo__item">
             <h4>Blue Default</h4>
-            <Activity colour="blue" state="default" />
+            <Activity colour="blue" state="default" showText text="text" />
           </div>
           <div className="modeling-demo__item">
             <h4>Blue Hover</h4>
-            <Activity colour="blue" state="hover" />
+            <Activity colour="blue" state="hover" showText text="text" />
           </div>
           <div className="modeling-demo__item">
-            <h4>Interactive</h4>
-            <Activity 
-              colour="red" 
+            <h4>Interactive Red</h4>
+            <Activity
+              colour="red"
               state={activityState}
+              showText
+              text="text"
               onClick={() => setActivityState(prev => prev === 'default' ? 'hover' : 'default')}
             />
           </div>
@@ -50,16 +52,18 @@ const ModelingDemo: React.FC = () => {
         <div className="modeling-demo__grid">
           <div className="modeling-demo__item">
             <h4>Default</h4>
-            <Kubernetes state="default" />
+            <Kubernetes state="default" showText text="text" />
           </div>
           <div className="modeling-demo__item">
             <h4>Hover</h4>
-            <Kubernetes state="hover" />
+            <Kubernetes state="hover" showText text="text" />
           </div>
           <div className="modeling-demo__item">
             <h4>Interactive</h4>
-            <Kubernetes 
+            <Kubernetes
               state={kubernetesState}
+              showText
+              text="text"
               onClick={() => setKubernetesState(prev => prev === 'default' ? 'hover' : 'default')}
             />
           </div>
@@ -70,16 +74,16 @@ const ModelingDemo: React.FC = () => {
         <h3 className="modeling-demo__section-title">Indicators</h3>
         <div className="modeling-demo__grid">
           <div className="modeling-demo__item">
-            <h4>Green</h4>
+            <h4>Green (Property 1=green)</h4>
             <Indicator variant="green" value="2" />
           </div>
           <div className="modeling-demo__item">
-            <h4>Blue</h4>
-            <Indicator variant="blue" value="3" />
+            <h4>Blue (Property 1=Blue)</h4>
+            <Indicator variant="blue" value="2" />
           </div>
           <div className="modeling-demo__item">
-            <h4>Variant 3</h4>
-            <Indicator variant="variant3" value="1" />
+            <h4>Red (Property 1=Variant3)</h4>
+            <Indicator variant="variant3" value="2" />
           </div>
         </div>
       </section>
@@ -88,11 +92,11 @@ const ModelingDemo: React.FC = () => {
         <h3 className="modeling-demo__section-title">Plus/Minus Components</h3>
         <div className="modeling-demo__grid">
           <div className="modeling-demo__item">
-            <h4>Plus</h4>
+            <h4>Plus (Property 1=Default)</h4>
             <Plus variant="default" />
           </div>
           <div className="modeling-demo__item">
-            <h4>Minus</h4>
+            <h4>Minus (Property 1=Variant2)</h4>
             <Plus variant="minus" />
           </div>
         </div>
@@ -146,42 +150,65 @@ const ModelingDemo: React.FC = () => {
       </section>
 
       <section className="modeling-demo__section">
-        <h3 className="modeling-demo__section-title">Complex Layout Example</h3>
+        <h3 className="modeling-demo__section-title">Figma Design Layout Example</h3>
         <div className="modeling-demo__complex-layout">
           <div className="modeling-demo__row">
-            <Activity colour="red" state="default" />
-            <Activity colour="blue" state="default" />
+            <div className="modeling-demo__item">
+              <h4>Activity Server Icons (as in Figma)</h4>
+              <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
+                <Activity colour="red" state="default" showText text="text" />
+                <Activity colour="blue" state="default" showText text="text" />
+              </div>
+            </div>
           </div>
           <div className="modeling-demo__row">
-            <Activity colour="red" state="hover" />
-            <Activity colour="blue" state="hover" />
+            <div className="modeling-demo__item">
+              <h4>Activity Server Icons - Hover States</h4>
+              <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
+                <Activity colour="red" state="hover" showText text="text" />
+                <Activity colour="blue" state="hover" showText text="text" />
+              </div>
+            </div>
           </div>
           <div className="modeling-demo__row">
-            <Kubernetes state="default" />
+            <div className="modeling-demo__item">
+              <h4>Kubernetes Hexagon</h4>
+              <Kubernetes state="default" showText text="text" />
+            </div>
           </div>
           <div className="modeling-demo__row">
-            <ModelingCard 
-              state="default" 
-              title="Model A"
-              indicatorVariant="green"
-              indicatorValue="5"
-            />
-            <ModelingCard 
-              state="hover" 
-              title="Model B"
-              indicatorVariant="blue" 
-              indicatorValue="3"
-            />
-            <ModelingCard 
-              state="active" 
-              title="Model C"
-              indicatorVariant="variant3"
-              indicatorValue="1"
-            />
+            <div className="modeling-demo__item">
+              <h4>Top View Cards (as in Figma)</h4>
+              <div style={{ display: 'flex', gap: '16px', alignItems: 'flex-start' }}>
+                <ModelingCard
+                  state="default"
+                  title="Top view"
+                  indicatorVariant="green"
+                  indicatorValue="2"
+                />
+                <ModelingCard
+                  state="hover"
+                  title="Top view"
+                  indicatorVariant="green"
+                  indicatorValue="2"
+                />
+                <ModelingCard
+                  state="active"
+                  title="Top view"
+                  indicatorVariant="green"
+                  indicatorValue="2"
+                />
+              </div>
+            </div>
           </div>
           <div className="modeling-demo__row">
-            <Plus variant="default" />
-            <Plus variant="minus" />
+            <div className="modeling-demo__item">
+              <h4>Plus/Minus Controls</h4>
+              <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
+                <Plus variant="default" />
+                <Plus variant="minus" />
+              </div>
+            </div>
           </div>
         </div>
       </section>

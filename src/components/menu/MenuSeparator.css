@@ -4,14 +4,14 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 8px 16px;
-  border-radius: 8px;
+  padding: var(--sds-size-padding-sm) var(--sds-size-padding-lg);
+  border-radius: var(--sds-size-radius-200);
 }
 
 .menu-separator__line {
   height: 1px;
   width: 100%;
-  background: rgba(217, 217, 217, 1);
+  background: var(--sds-color-border-default-default);
 }
 
 /* Responsive design */

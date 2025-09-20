@@ -4,16 +4,16 @@
   align-items: center;
   cursor: pointer;
   transition: all 0.2s ease;
-  padding: 8px;
-  border-radius: 4px;
+  padding: var(--sds-size-space-200);
+  border-radius: var(--sds-size-radius-200);
 }
 
 .plus:hover {
-  background: rgba(0, 17, 43, 0.1);
+  background: var(--sds-color-black-100);
 }
 
 .plus:active {
-  background: rgba(0, 17, 43, 0.2);
+  background: var(--sds-color-black-200);
   transform: scale(0.95);
 }
 
