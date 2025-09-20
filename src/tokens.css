@@ -15,6 +15,11 @@
   --sds-size-space-2400: 96px;
   --sds-size-space-4000: 160px;
 
+  /* SDS Padding Scale */
+  --sds-size-padding-xs: 4px;
+  --sds-size-padding-sm: 8px;
+  --sds-size-padding-lg: 16px;
+
   /* Negative Spacing */
   --sds-size-space-negative-100: -4px;
   --sds-size-space-negative-200: -8px;
@@ -24,7 +29,7 @@
 
   /* Border Radius - All set to 0 (none) */
   --sds-size-radius-100: 0px;
-  --sds-size-radius-200: 0px;
+  --sds-size-radius-200: 8px;
   --sds-size-radius-400: 0px;
   --sds-size-radius-full: 0px;
 
@@ -43,7 +48,17 @@
   --sds-color-background-neutral-secondary: rgba(205, 205, 205, 1);
   --sds-color-background-neutral-tertiary: rgba(227, 227, 227, 1);
   --sds-color-text-neutral-on-neutral-secondary: rgba(48, 48, 48, 1);
+  --sds-color-text-neutral-on-neutral-tertiary: rgba(67, 67, 67, 1);
   --sds-color-background-default-default: rgba(206, 206, 206, 1);
+
+  /* SDS Color System - Text */
+  --sds-color-text-default-default: rgba(30, 30, 30, 1);
+  --sds-color-text-default-secondary: rgba(117, 117, 117, 1);
+  --sds-color-text-brand-on-brand: rgba(245, 245, 245, 1);
+  --sds-color-text-disabled-default: rgba(179, 179, 179, 1);
+
+  /* SDS Color System - Borders */
+  --sds-color-border-default-default: rgba(217, 217, 217, 1);
 
   /* SDS Color System - Utilities */
   --sds-color-background-utilities-measurement: rgba(250, 225, 250, 1);
