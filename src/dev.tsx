@@ -28,6 +28,7 @@ import TagBadgeDemo from './components/tag-badges/TagBadgeDemo'
 import MenuDemo from './components/menu/MenuDemo'
 import TooltipDemo from './components/tooltip/TooltipDemo'
 import { EffectsDemo } from './components/effects'
+import AccordionDemo from './components/accordion/AccordionDemo'
 import './dev.css'
 import './tokens.css'
 
@@ -946,6 +947,12 @@ function App() {
         <h1>Menu Components</h1>
         <h2>Context menus and dropdown menu items with states and shortcuts</h2>
         <MenuDemo />
+      </section>
+
+      <section className="component-section">
+        <h1>Accordion Components</h1>
+        <h2>Collapsible content sections with expand/collapse functionality</h2>
+        <AccordionDemo />
       </section>
 
       <section className="component-section">

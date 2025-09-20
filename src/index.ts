@@ -53,3 +53,6 @@ export * from './components/bar'
 
 // Snackbar types
 export type { SnackbarVariant } from './components/snackbar/Snackbar'
+
+// Accordion exports
+export * from './components/accordion'
