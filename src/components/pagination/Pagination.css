@@ -52,7 +52,7 @@
 /* High contrast mode support */
 @media (prefers-contrast: high) {
   .pagination {
-    border: 1px solid;
+    border: 0px solid;
   }
 }
 
