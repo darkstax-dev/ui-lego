@@ -103,14 +103,38 @@ export const MainNavigation: React.FC<MainNavigationProps> = ({
 
             {!isHubVariant && (
               <>
-                <div className="main-navigation__menu-item">
-                  <svg className="main-navigation__menu-icon" width="20" height="20" viewBox="0 0 20 20" fill="none">
-                    <path d="M5.62471 2.08331C6.0898 2.08331 6.55035 2.17492 6.98004 2.35291C7.40974 2.53089 7.80017 2.79177 8.12904 3.12064C8.45792 3.44952 8.71879 3.83995 8.89678 4.26964C9.07477 4.69934 9.16637 5.15988 9.16637 5.62498V9.16665H5.62471C4.6854 9.16665 3.78456 8.79351 3.12037 8.12932C2.45618 7.46513 2.08304 6.56429 2.08304 5.62498C2.08304 4.68567 2.45618 3.78483 3.12037 3.12064C3.78456 2.45645 4.6854 2.08331 5.62471 2.08331Z" fill="currentColor"/>
-                  </svg>
-                  <span className="main-navigation__menu-text">Topology</span>
-                  <svg className="main-navigation__menu-expand" width="20" height="20" viewBox="0 0 20 20" fill="none">
-                    <path d="M9.16667 9.16666V4.16666H10.8333V9.16666H15.8333V10.8333H10.8333V15.8333H9.16667V10.8333H4.16667V9.16666H9.16667Z" fill="currentColor"/>
-                  </svg>
+                <div className="main-navigation__menu-item-wrapper">
+                  <button
+                    className={`main-navigation__menu-item ${openDropdown === 'topology' ? 'main-navigation__menu-item--open' : ''}`}
+                    onClick={() => handleMenuItemClick('topology')}
+                    aria-expanded={openDropdown === 'topology'}
+                    aria-haspopup="true"
+                  >
+                    <svg className="main-navigation__menu-icon" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                      <path d="M5.62471 2.08331C6.0898 2.08331 6.55035 2.17492 6.98004 2.35291C7.40974 2.53089 7.80017 2.79177 8.12904 3.12064C8.45792 3.44952 8.71879 3.83995 8.89678 4.26964C9.07477 4.69934 9.16637 5.15988 9.16637 5.62498V9.16665H5.62471C4.6854 9.16665 3.78456 8.79351 3.12037 8.12932C2.45618 7.46513 2.08304 6.56429 2.08304 5.62498C2.08304 4.68567 2.45618 3.78483 3.12037 3.12064C3.78456 2.45645 4.6854 2.08331 5.62471 2.08331Z" fill="currentColor"/>
+                    </svg>
+                    <span className="main-navigation__menu-text">Topology</span>
+                    <svg
+                      className={`main-navigation__menu-expand ${openDropdown === 'topology' ? 'main-navigation__menu-expand--open' : ''}`}
+                      width="20" height="20" viewBox="0 0 20 20" fill="none"
+                    >
+                      <path d={openDropdown === 'topology' ? "M4.16667 9.16666H15.8333V10.8333H4.16667V9.16666Z" : "M9.16667 9.16666V4.16666H10.8333V9.16666H15.8333V10.8333H10.8333V15.8333H9.16667V10.8333H4.16667V9.16666H9.16667Z"} fill="currentColor"/>
+                    </svg>
+                  </button>
+
+                  {openDropdown === 'topology' && (
+                    <div className="main-navigation__dropdown">
+                      {dropdownData.topology.map((item, index) => (
+                        <button
+                          key={index}
+                          className="main-navigation__dropdown-item"
+                          onClick={() => handleDropdownItemClick(item)}
+                        >
+                          {item}
+                        </button>
+                      ))}
+                    </div>
+                  )}
                 </div>
 
                 <div className={`main-navigation__menu-item ${isModelingActive ? 'main-navigation__menu-item--active' : ''}`}>
