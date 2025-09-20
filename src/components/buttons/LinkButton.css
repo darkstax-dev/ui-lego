@@ -20,7 +20,7 @@
 .link-button__content {
   display: flex;
   align-items: center;
-  gap: 4px;
+  gap: var(--sds-size-space-100);
 }
 
 .link-button__text {
@@ -37,12 +37,14 @@
   justify-content: center;
   align-items: center;
   flex-shrink: 0;
+  aspect-ratio: 1;
 }
 
 .link-button__underline {
   height: 1px;
   width: 100%;
   transition: background-color 0.2s ease;
+  align-self: stretch;
 }
 
 /* Default state */
