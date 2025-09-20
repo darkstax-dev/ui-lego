@@ -23,7 +23,7 @@
   /* SDS Size Scale for Radius */
   --sds-radius-md: 0px;
   --sds-size-radius-400: 0px;
-  --sds-size-radius-200: 8px;
+  --sds-size-radius-200: 0px;
 
   /* Negative Spacing */
   --sds-size-space-negative-100: -4px;
