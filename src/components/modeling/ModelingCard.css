@@ -16,17 +16,17 @@
   padding: 12px;
   justify-content: center;
   align-items: center;
-  background: rgba(255, 255, 255, 0.20);
+  background: var(--white-white-20);
 }
 
 .modeling-card--hover .modeling-card__icon-section {
-  border-top: 1px solid #F8F8F8;
-  border-right: 1px solid #F8F8F8;
-  border-left: 1px solid #F8F8F8;
+  border-top: var(--sds-size-stroke-border) solid var(--Gray-50);
+  border-right: var(--sds-size-stroke-border) solid var(--Gray-50);
+  border-left: var(--sds-size-stroke-border) solid var(--Gray-50);
 }
 
 .modeling-card--active .modeling-card__icon-section {
-  background: rgba(255, 255, 255, 0.40);
+  background: var(--white-white-40);
 }
 
 .modeling-card__icon-container {
@@ -36,13 +36,13 @@
   padding: 9px;
   align-items: center;
   border-radius: 35.5px;
-  border: 1px solid #FFF;
+  border: var(--sds-size-stroke-border) solid var(--white-white-100);
   position: relative;
 }
 
 .modeling-card--hover .modeling-card__icon-container,
 .modeling-card--active .modeling-card__icon-container {
-  background: #ECECEC;
+  background: var(--Gray-100);
 }
 
 .modeling-card__hexagon-container {
@@ -88,21 +88,21 @@
 
 .modeling-card__title-section {
   display: flex;
-  padding: 4px 0;
+  padding: var(--sds-size-space-100) 0;
   justify-content: center;
   align-items: center;
-  background: rgba(255, 255, 255, 0.40);
+  background: var(--white-white-40);
 }
 
 .modeling-card--hover .modeling-card__title-section {
-  border-right: 1px solid #F8F8F8;
-  border-bottom: 1px solid #F8F8F8;
-  border-left: 1px solid #F8F8F8;
-  background: rgba(255, 255, 255, 0.20);
+  border-right: var(--sds-size-stroke-border) solid var(--Gray-50);
+  border-bottom: var(--sds-size-stroke-border) solid var(--Gray-50);
+  border-left: var(--sds-size-stroke-border) solid var(--Gray-50);
+  background: var(--white-white-20);
 }
 
 .modeling-card--active .modeling-card__title-section {
-  background: rgba(255, 255, 255, 0.40);
+  background: var(--white-white-40);
 }
 
 .modeling-card__title {
@@ -111,11 +111,11 @@
   height: 17px;
   flex-direction: column;
   justify-content: center;
-  color: #00112B;
+  color: var(--Dark-blue);
   text-align: center;
-  font-family: 'Macan Mono Trial', -apple-system, Roboto, Helvetica, sans-serif;
+  font-family: var(--font-family-macan-mono);
   font-size: 14px;
-  font-weight: 450;
+  font-weight: var(--font-weight-book);
   line-height: 1.2;
 }
 
@@ -125,21 +125,21 @@
 }
 
 .modeling-card:hover .modeling-card__icon-section {
-  border-top: 1px solid #F8F8F8;
-  border-right: 1px solid #F8F8F8;
-  border-left: 1px solid #F8F8F8;
-  background: rgba(255, 255, 255, 0.20);
+  border-top: var(--sds-size-stroke-border) solid var(--Gray-50);
+  border-right: var(--sds-size-stroke-border) solid var(--Gray-50);
+  border-left: var(--sds-size-stroke-border) solid var(--Gray-50);
+  background: var(--white-white-20);
 }
 
 .modeling-card:hover .modeling-card__title-section {
-  border-right: 1px solid #F8F8F8;
-  border-bottom: 1px solid #F8F8F8;
-  border-left: 1px solid #F8F8F8;
-  background: rgba(255, 255, 255, 0.20);
+  border-right: var(--sds-size-stroke-border) solid var(--Gray-50);
+  border-bottom: var(--sds-size-stroke-border) solid var(--Gray-50);
+  border-left: var(--sds-size-stroke-border) solid var(--Gray-50);
+  background: var(--white-white-20);
 }
 
 .modeling-card:hover .modeling-card__icon-container {
-  background: #ECECEC;
+  background: var(--Gray-100);
 }
 
 /* Responsive design */
