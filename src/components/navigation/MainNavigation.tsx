@@ -67,16 +67,38 @@ export const MainNavigation: React.FC<MainNavigationProps> = ({
 
           {/* Menu Items */}
           <div className="main-navigation__menu">
-            <div className="main-navigation__menu-item">
-              <svg className="main-navigation__menu-icon" width="20" height="20" viewBox="0 0 20 20" fill="none">
-                <path d="M10.833 17.5V9.16667H17.4997V17.5H10.833ZM2.49969 10.8333V2.5H9.16636V10.8333H2.49969ZM7.49969 9.16667V4.16667H4.16636V9.16667H7.49969ZM2.49969 17.5V12.5H9.16636V17.5H2.49969ZM4.16636 15.8333H7.49969V14.1667H4.16636V15.8333ZM12.4997 15.8333H15.833V10.8333H12.4997V15.8333ZM10.833 2.5H17.4997V7.5H10.833V2.5ZM12.4997 4.16667V5.83333H15.833V4.16667H12.4997Z" fill="currentColor"/>
-              </svg>
-              <span className="main-navigation__menu-text">
-                {isHubVariant ? 'Dashboard' : 'Dashboard'}
-              </span>
-              <svg className="main-navigation__menu-expand" width="20" height="20" viewBox="0 0 20 20" fill="none">
-                <path d="M9.16667 9.16666V4.16666H10.8333V9.16666H15.8333V10.8333H10.8333V15.8333H9.16667V10.8333H4.16667V9.16666H9.16667Z" fill="currentColor"/>
-              </svg>
+            <div className="main-navigation__menu-item-wrapper" ref={dropdownRef}>
+              <button
+                className={`main-navigation__menu-item ${openDropdown === 'dashboard' ? 'main-navigation__menu-item--open' : ''}`}
+                onClick={() => handleMenuItemClick('dashboard')}
+                aria-expanded={openDropdown === 'dashboard'}
+                aria-haspopup="true"
+              >
+                <svg className="main-navigation__menu-icon" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                  <path d="M10.833 17.5V9.16667H17.4997V17.5H10.833ZM2.49969 10.8333V2.5H9.16636V10.8333H2.49969ZM7.49969 9.16667V4.16667H4.16636V9.16667H7.49969ZM2.49969 17.5V12.5H9.16636V17.5H2.49969ZM4.16636 15.8333H7.49969V14.1667H4.16636V15.8333ZM12.4997 15.8333H15.833V10.8333H12.4997V15.8333ZM10.833 2.5H17.4997V7.5H10.833V2.5ZM12.4997 4.16667V5.83333H15.833V4.16667H12.4997Z" fill="currentColor"/>
+                </svg>
+                <span className="main-navigation__menu-text">Dashboard</span>
+                <svg
+                  className={`main-navigation__menu-expand ${openDropdown === 'dashboard' ? 'main-navigation__menu-expand--open' : ''}`}
+                  width="20" height="20" viewBox="0 0 20 20" fill="none"
+                >
+                  <path d={openDropdown === 'dashboard' ? "M4.16667 9.16666H15.8333V10.8333H4.16667V9.16666Z" : "M9.16667 9.16666V4.16666H10.8333V9.16666H15.8333V10.8333H10.8333V15.8333H9.16667V10.8333H4.16667V9.16666H9.16667Z"} fill="currentColor"/>
+                </svg>
+              </button>
+
+              {openDropdown === 'dashboard' && (
+                <div className="main-navigation__dropdown">
+                  {dropdownData.dashboard.map((item, index) => (
+                    <button
+                      key={index}
+                      className="main-navigation__dropdown-item"
+                      onClick={() => handleDropdownItemClick(item)}
+                    >
+                      {item}
+                    </button>
+                  ))}
+                </div>
+              )}
             </div>
 
             {!isHubVariant && (
