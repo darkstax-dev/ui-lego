@@ -171,14 +171,38 @@ export const MainNavigation: React.FC<MainNavigationProps> = ({
                   )}
                 </div>
 
-                <div className="main-navigation__menu-item">
-                  <svg className="main-navigation__menu-icon" width="20" height="20" viewBox="0 0 20 20" fill="none">
-                    <path d="M6.66636 3.33335H17.4997V5.00002H6.66636V3.33335ZM2.49969 2.91669H4.99969V5.41669H2.49969V2.91669ZM2.49969 8.75002H4.99969V11.25H2.49969V8.75002ZM2.49969 14.5834H4.99969V17.0834H2.49969V14.5834ZM6.66636 9.16669H17.4997V10.8334H6.66636V9.16669ZM6.66636 15H17.4997V16.6667H6.66636V15Z" fill="currentColor"/>
-                  </svg>
-                  <span className="main-navigation__menu-text">Template</span>
-                  <svg className="main-navigation__menu-expand" width="20" height="20" viewBox="0 0 20 20" fill="none">
-                    <path d="M9.16667 9.16666V4.16666H10.8333V9.16666H15.8333V10.8333H10.8333V15.8333H9.16667V10.8333H4.16667V9.16666H9.16667Z" fill="currentColor"/>
-                  </svg>
+                <div className="main-navigation__menu-item-wrapper">
+                  <button
+                    className={`main-navigation__menu-item ${openDropdown === 'template' ? 'main-navigation__menu-item--open' : ''}`}
+                    onClick={() => handleMenuItemClick('template')}
+                    aria-expanded={openDropdown === 'template'}
+                    aria-haspopup="true"
+                  >
+                    <svg className="main-navigation__menu-icon" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                      <path d="M6.66636 3.33335H17.4997V5.00002H6.66636V3.33335ZM2.49969 2.91669H4.99969V5.41669H2.49969V2.91669ZM2.49969 8.75002H4.99969V11.25H2.49969V8.75002ZM2.49969 14.5834H4.99969V17.0834H2.49969V14.5834ZM6.66636 9.16669H17.4997V10.8334H6.66636V9.16669ZM6.66636 15H17.4997V16.6667H6.66636V15Z" fill="currentColor"/>
+                    </svg>
+                    <span className="main-navigation__menu-text">Template</span>
+                    <svg
+                      className={`main-navigation__menu-expand ${openDropdown === 'template' ? 'main-navigation__menu-expand--open' : ''}`}
+                      width="20" height="20" viewBox="0 0 20 20" fill="none"
+                    >
+                      <path d={openDropdown === 'template' ? "M4.16667 9.16666H15.8333V10.8333H4.16667V9.16666Z" : "M9.16667 9.16666V4.16666H10.8333V9.16666H15.8333V10.8333H10.8333V15.8333H9.16667V10.8333H4.16667V9.16666H9.16667Z"} fill="currentColor"/>
+                    </svg>
+                  </button>
+
+                  {openDropdown === 'template' && (
+                    <div className="main-navigation__dropdown">
+                      {dropdownData.template.map((item, index) => (
+                        <button
+                          key={index}
+                          className="main-navigation__dropdown-item"
+                          onClick={() => handleDropdownItemClick(item)}
+                        >
+                          {item}
+                        </button>
+                      ))}
+                    </div>
+                  )}
                 </div>
               </>
             )}
