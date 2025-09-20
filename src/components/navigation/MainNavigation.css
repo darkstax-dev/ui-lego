@@ -1,7 +1,7 @@
 /* Main Navigation Component */
 .main-navigation {
   width: 100%;
-  background: var(--Blue-Dark-blue-950, #00112B);
+  background: var(--color-blue-dark-950);
   padding: 0;
 }
 
