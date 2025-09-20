@@ -243,14 +243,38 @@ export const MainNavigation: React.FC<MainNavigationProps> = ({
                   )}
                 </div>
 
-                <div className="main-navigation__menu-item">
-                  <svg className="main-navigation__menu-icon" width="20" height="20" viewBox="0 0 20 20" fill="none">
-                    <path d="M9.99967 0.833313L17.9163 5.41665V14.5833L9.99967 19.1666L2.08301 14.5833V5.41665L9.99967 0.833313ZM9.99967 2.75915L3.74967 6.37748V13.6225L9.99967 17.2408L16.2497 13.6225V6.37748L9.99967 2.75915ZM9.99967 13.3333C9.11562 13.3333 8.26777 12.9821 7.64265 12.357C7.01753 11.7319 6.66634 10.884 6.66634 9.99998C6.66634 9.11592 7.01753 8.26808 7.64265 7.64296C8.26777 7.01784 9.11562 6.66665 9.99967 6.66665C10.8837 6.66665 11.7316 7.01784 12.3567 7.64296C12.9818 8.26808 13.333 9.11592 13.333 9.99998C13.333 10.884 12.9818 11.7319 12.3567 12.357C11.7316 12.9821 10.8837 13.3333 9.99967 13.3333Z" fill="currentColor"/>
-                  </svg>
-                  <span className="main-navigation__menu-text">Settings</span>
-                  <svg className="main-navigation__menu-expand" width="20" height="20" viewBox="0 0 20 20" fill="none">
-                    <path d="M9.16667 9.16666V4.16666H10.8333V9.16666H15.8333V10.8333H10.8333V15.8333H9.16667V10.8333H4.16667V9.16666H9.16667Z" fill="currentColor"/>
-                  </svg>
+                <div className="main-navigation__menu-item-wrapper">
+                  <button
+                    className={`main-navigation__menu-item ${openDropdown === 'settings' ? 'main-navigation__menu-item--open' : ''}`}
+                    onClick={() => handleMenuItemClick('settings')}
+                    aria-expanded={openDropdown === 'settings'}
+                    aria-haspopup="true"
+                  >
+                    <svg className="main-navigation__menu-icon" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                      <path d="M9.99967 0.833313L17.9163 5.41665V14.5833L9.99967 19.1666L2.08301 14.5833V5.41665L9.99967 0.833313ZM9.99967 2.75915L3.74967 6.37748V13.6225L9.99967 17.2408L16.2497 13.6225V6.37748L9.99967 2.75915ZM9.99967 13.3333C9.11562 13.3333 8.26777 12.9821 7.64265 12.357C7.01753 11.7319 6.66634 10.884 6.66634 9.99998C6.66634 9.11592 7.01753 8.26808 7.64265 7.64296C8.26777 7.01784 9.11562 6.66665 9.99967 6.66665C10.8837 6.66665 11.7316 7.01784 12.3567 7.64296C12.9818 8.26808 13.333 9.11592 13.333 9.99998C13.333 10.884 12.9818 11.7319 12.3567 12.357C11.7316 12.9821 10.8837 13.3333 9.99967 13.3333Z" fill="currentColor"/>
+                    </svg>
+                    <span className="main-navigation__menu-text">Settings</span>
+                    <svg
+                      className={`main-navigation__menu-expand ${openDropdown === 'settings' ? 'main-navigation__menu-expand--open' : ''}`}
+                      width="20" height="20" viewBox="0 0 20 20" fill="none"
+                    >
+                      <path d={openDropdown === 'settings' ? "M4.16667 9.16666H15.8333V10.8333H4.16667V9.16666Z" : "M9.16667 9.16666V4.16666H10.8333V9.16666H15.8333V10.8333H10.8333V15.8333H9.16667V10.8333H4.16667V9.16666H9.16667Z"} fill="currentColor"/>
+                    </svg>
+                  </button>
+
+                  {openDropdown === 'settings' && (
+                    <div className="main-navigation__dropdown">
+                      {dropdownData.settings.map((item, index) => (
+                        <button
+                          key={index}
+                          className="main-navigation__dropdown-item"
+                          onClick={() => handleDropdownItemClick(item)}
+                        >
+                          {item}
+                        </button>
+                      ))}
+                    </div>
+                  )}
                 </div>
               </>
             )}
