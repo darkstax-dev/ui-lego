@@ -47,6 +47,9 @@
   --sds-size-depth-negative-100: -4px;
   --sds-size-depth-negative-200: -8px;
 
+  /* Stroke/Border Sizes */
+  --sds-size-stroke-border: 1px;
+
   /* SDS Color System - Neutrals */
   --sds-color-border-neutral-tertiary: rgba(178, 178, 178, 1);
   --sds-color-background-neutral-secondary: rgba(205, 205, 205, 1);
