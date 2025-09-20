@@ -70,25 +70,25 @@
   word-wrap: break-word;
 }
 
-/* Default state */
+/* Default state - exact colors from Figma design */
 .menu-item--default {
   background: transparent;
 }
 
 .menu-item--default .menu-item__icon {
-  color: var(--sds-color-text-default-default);
+  color: rgba(30, 30, 30, 1);
 }
 
 .menu-item--default .menu-item__label {
-  color: var(--sds-color-text-default-default);
+  color: rgba(30, 30, 30, 1);
 }
 
 .menu-item--default .menu-item__shortcut {
-  color: var(--sds-color-text-default-default);
+  color: rgba(30, 30, 30, 1);
 }
 
 .menu-item--default .menu-item__description {
-  color: var(--sds-color-text-default-secondary);
+  color: rgba(117, 117, 117, 1);
 }
 
 /* Interactive hover for default state - exact colors from Figma */
