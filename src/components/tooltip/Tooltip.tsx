@@ -49,19 +49,19 @@ const Tooltip: React.FC<TooltipProps> = ({
       case 'bottom':
         return (
           <svg {...beakProps}>
-            <path d="M6 11.95L11.6569 6.29315L6 0.636292L0.343146 6.29315L6 11.95Z" fill="var(--tooltip-background)" />
+            <path d="M6 11.95L11.6569 6.29315L6 0.636292L0.343146 6.29315L6 11.95Z" fill="#DFDFDF" />
           </svg>
         )
       case 'left':
         return (
           <svg {...beakProps}>
-            <path d="M0.0500031 6L5.70686 11.6569L11.3637 6L5.70686 0.343146L0.0500031 6Z" fill="var(--tooltip-background)" />
+            <path d="M0.0500031 6L5.70686 11.6569L11.3637 6L5.70686 0.343146L0.0500031 6Z" fill="#DFDFDF" />
           </svg>
         )
       case 'right':
         return (
           <svg {...beakProps}>
-            <path d="M11.95 6L6.29314 11.6569L0.636289 6L6.29314 0.343146L11.95 6Z" fill="var(--tooltip-background)" />
+            <path d="M11.95 6L6.29314 11.6569L0.636289 6L6.29314 0.343146L11.95 6Z" fill="#DFDFDF" />
           </svg>
         )
       default:
