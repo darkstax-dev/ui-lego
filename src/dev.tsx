@@ -204,7 +204,7 @@ function App() {
         </div>
       </section>
 
-      <section className="component-section">
+      <section className="component-section component-section--white">
         <h2>Checkbox Field</h2>
 
         <div className="demo-group">
@@ -253,7 +253,7 @@ function App() {
         </div>
       </section>
 
-      <section className="component-section">
+      <section className="component-section component-section--white">
         <h2>Radio Field</h2>
 
         <div className="demo-group">
@@ -321,7 +321,7 @@ function App() {
         </div>
       </section>
 
-      <section className="component-section">
+      <section className="component-section component-section--white">
         <h2>Switch Field</h2>
 
         <div className="demo-group">
@@ -398,7 +398,7 @@ function App() {
         </div>
       </section>
 
-      <section className="component-section">
+      <section className="component-section component-section--white">
         <h2>Radio Group</h2>
 
         <div className="demo-group">
@@ -455,7 +455,7 @@ function App() {
         </div>
       </section>
 
-      <section className="component-section">
+      <section className="component-section component-section--white">
         <h2>Checkbox Group</h2>
 
         <div className="demo-group">
@@ -562,7 +562,7 @@ function App() {
         </div>
       </section>
 
-      <section className="component-section">
+      <section className="component-section component-section--white">
         <h2>Input Components</h2>
 
         <div className="demo-group">
@@ -769,7 +769,7 @@ function App() {
         </div>
       </section>
 
-      <section className="component-section">
+      <section className="component-section component-section--white">
         <h2>Pagination Components</h2>
 
         <div className="demo-group">
@@ -823,7 +823,7 @@ function App() {
         </div>
       </section>
 
-      <section className="component-section">
+      <section className="component-section component-section--white">
         <h2>Snackbar Components</h2>
 
         <div className="demo-group">
@@ -875,42 +875,42 @@ function App() {
         </div>
       </section>
 
-      <section className="component-section">
+      <section className="component-section component-section--white">
         <h1>Tooltip Components</h1>
         <h2>Interactive tooltips with multiple placements and content options</h2>
         <TooltipDemo />
       </section>
 
-      <section className="component-section">
+      <section className="component-section component-section--white">
         <NotificationDemo />
       </section>
 
-      <section className="component-section">
+      <section className="component-section component-section--white">
         <h2>Dropdown Components</h2>
         <DropdownDemo />
       </section>
 
-      <section className="component-section">
+      <section className="component-section component-section--white">
         <Icons />
       </section>
 
-      <section className="component-section">
+      <section className="component-section component-section--white">
         <ModelingDemo />
       </section>
 
-      <section className="component-section">
+      <section className="component-section component-section--white">
         <h1>Modal</h1>
         <h2>Interactive modal dialog for creating scenarios</h2>
         <ModalDemo />
       </section>
 
-      <section className="component-section">
+      <section className="component-section component-section--white">
         <h1>Button Components</h1>
         <h2>Comprehensive button library with multiple variants and states</h2>
         <ButtonDemo />
       </section>
 
-      <section className="component-section">
+      <section className="component-section component-section--white">
         <h1>Tab Components</h1>
         <h2>Interactive tab navigation with multiple states</h2>
         <TabsDemo />
