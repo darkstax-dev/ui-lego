@@ -66,7 +66,7 @@ const Menu = forwardRef<HTMLDivElement, MenuProps>(function Menu({
       ref={(node) => {
         containerRef.current = node
         if (typeof externalRef === 'function') externalRef(node)
-        else if (externalRef) (externalRef as React.MutableRefObject<HTMLDivElement | null>).current = node
+        else if (externalRef && typeof (externalRef as any) === 'object') (externalRef as any).current = node
       }}
       className={menuClass}
       role={role}
