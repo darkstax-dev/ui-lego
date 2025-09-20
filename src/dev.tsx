@@ -780,7 +780,7 @@ function App() {
             totalPages={10}
             onPageChange={setCurrentPage}
           />
-          <p style={{ marginTop: '12px', fontSize: '14px', color: '#666' }}>
+          <p className="caption-text">
             Current page: {currentPage} of 10
           </p>
         </div>
@@ -793,7 +793,7 @@ function App() {
             totalPages={68}
             onPageChange={setCurrentPage2}
           />
-          <p style={{ marginTop: '12px', fontSize: '14px', color: '#666' }}>
+          <p className="caption-text">
             Current page: {currentPage2} of 68
           </p>
         </div>
@@ -806,7 +806,7 @@ function App() {
             totalPages={5}
             onPageChange={setCurrentPage3}
           />
-          <p style={{ marginTop: '12px', fontSize: '14px', color: '#666' }}>
+          <p className="caption-text">
             Current page: {currentPage3} of 5
           </p>
         </div>
