@@ -1,31 +1,15 @@
-/* CSS Variables for snackbar */
-:root {
-  --snackbar-bg: #1A1B23;
-  --snackbar-text-primary: #FFFFFF;
-  --snackbar-text-secondary: #FFFFFF;
-  --snackbar-close-color: #DFDFDF;
-  --snackbar-success-color: #23A45A;
-  --snackbar-error-color: #D9322A;
-  --snackbar-border-radius: 8px;
-  --snackbar-padding: 16px;
-  --snackbar-gap: 12px;
-  --snackbar-max-width: 647px;
-}
-
 .snackbar {
-  background-color: var(--snackbar-bg);
-  border-radius: var(--snackbar-border-radius);
-  padding: var(--snackbar-padding);
-  max-width: var(--snackbar-max-width);
+  background-color: #1A1B23;
+  border-radius: var(--sds-size-radius-200);
+  padding: var(--sds-size-space-400);
+  max-width: 647px;
   width: 100%;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
   margin: 0 auto;
 }
 
 .snackbar__content {
   display: flex;
   align-items: center;
-  justify-content: space-between;
   gap: 66px;
   width: 100%;
 }
@@ -33,7 +17,7 @@
 .snackbar__icon-text {
   display: flex;
   align-items: center;
-  gap: var(--snackbar-gap);
+  gap: var(--sds-size-space-300);
   flex: 1;
   min-width: 0;
 }
@@ -53,24 +37,25 @@
   gap: 6px;
   flex: 1;
   min-width: 0;
+  width: 421px;
 }
 
 .snackbar__title {
-  color: var(--snackbar-text-primary);
-  font-family: Macan, -apple-system, Roboto, Helvetica, sans-serif;
-  font-size: 18px;
-  font-weight: 600;
-  line-height: 1.2;
+  color: var(--Text-White-text-Main-text);
+  font-family: var(--font-family-macan);
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-normal);
   letter-spacing: -0.36px;
   margin: 0;
 }
 
 .snackbar__message {
-  color: var(--snackbar-text-secondary);
-  font-family: Macan, -apple-system, Roboto, Helvetica, sans-serif;
-  font-size: 14px;
-  font-weight: 450;
-  line-height: 1.2;
+  color: var(--Text-White-text-Main-text);
+  font-family: var(--font-family-macan);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-book);
+  line-height: var(--line-height-normal);
   margin: 0;
 }
 
@@ -84,13 +69,13 @@
   justify-content: center;
   width: 24px;
   height: 24px;
-  color: var(--snackbar-close-color);
+  color: #DFDFDF;
   transition: color 0.2s ease, transform 0.1s ease;
   flex-shrink: 0;
 }
 
 .snackbar__close-button:hover {
-  color: var(--snackbar-text-primary);
+  color: var(--Text-White-text-Main-text);
 }
 
 .snackbar__close-button:active {
