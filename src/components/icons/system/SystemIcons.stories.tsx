@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
 import * as SystemIcons from './index'
-import '../../Icons.stories.css'
+import '../Icons.stories.css'
 import '../../../tokens.css'
 
 const meta: Meta = {
