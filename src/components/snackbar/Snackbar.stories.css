@@ -1,0 +1,28 @@
+.snackbar-story-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1.5rem;
+}
+
+.snackbar-story-button {
+  appearance: none;
+  border: 1px solid var(--border-color, #ddd);
+  background: var(--background-secondary, #fff);
+  color: var(--text-primary, #222);
+  border-radius: 6px;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.snackbar-story-button:hover {
+  background: var(--hover-color, #f5f5f5);
+}
+
+.snackbar-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 1.5rem;
+}

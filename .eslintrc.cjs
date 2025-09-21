@@ -2,10 +2,7 @@ module.exports = {
   root: true,
   parser: '@typescript-eslint/parser',
   plugins: ['@typescript-eslint', 'react-refresh', 'react-hooks'],
-  extends: [
-    'eslint:recommended',
-    'plugin:@typescript-eslint/recommended',
-  ],
+  extends: ['eslint:recommended', 'plugin:@typescript-eslint/recommended', 'plugin:storybook/recommended'],
   env: { browser: true, node: true, es2022: true },
   settings: { react: { version: 'detect' } },
   parserOptions: { ecmaVersion: 'latest', sourceType: 'module', ecmaFeatures: { jsx: true } },
@@ -17,5 +14,13 @@ module.exports = {
     '@typescript-eslint/no-explicit-any': 'off',
     'no-extra-semi': 'off',
   },
+  overrides: [
+    {
+      files: ['*.stories.tsx'],
+      rules: {
+        'react-hooks/rules-of-hooks': 'off',
+      },
+    },
+  ],
   ignorePatterns: ['dist', 'node_modules']
 }

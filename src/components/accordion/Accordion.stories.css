@@ -1,0 +1,20 @@
+.accordion-story {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 1.5rem;
+}
+
+.accordion-story .accordion {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+/* Optional visual helpers for docs */
+.accordion-story .accordion-item__body {
+  line-height: 1.6;
+}
+
+.accordion-story .accordion-item__title {
+  font-weight: 600;
+}

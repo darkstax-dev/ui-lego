@@ -1,0 +1,77 @@
+.input-story {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.form-example {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 2rem;
+  background-color: var(--background-primary);
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.form-example h3 {
+  margin: 0 0 1.5rem 0;
+  color: var(--text-primary);
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.form-field {
+  margin-bottom: 2rem;
+}
+
+.form-field:last-child {
+  margin-bottom: 0;
+}
+
+.form-summary {
+  margin-top: 2rem;
+  padding: 1rem;
+  background-color: var(--background-secondary);
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+}
+
+.form-summary h4 {
+  margin: 0 0 0.5rem 0;
+  color: var(--text-primary);
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.form-summary pre {
+  margin: 0;
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  background-color: transparent;
+  border: none;
+  padding: 0;
+  font-family: inherit;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .input-story,
+  .form-example {
+    margin: 0 1rem;
+    padding: 1.5rem;
+  }
+
+  .form-field {
+    margin-bottom: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .input-story,
+  .form-example {
+    margin: 0 0.5rem;
+    padding: 1rem;
+  }
+}

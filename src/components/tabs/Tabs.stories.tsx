@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react'
+import type { Meta, StoryObj } from '@storybook/react-vite'
 import Tabs from './Tabs'
 
 const meta: Meta<typeof Tabs> = {
@@ -12,10 +12,9 @@ const meta: Meta<typeof Tabs> = {
     ],
     activeTab: 'one'
   },
-  parameters: { docs: { description: { component: 'Tablist with roving tabindex and keyboard navigation.' } } }
-}
-export default meta
+};
 
-type Story = StoryObj<typeof Tabs>
+export default meta;
+type Story = StoryObj<typeof Tabs>;
 
-export const Default: Story = {}
+export const Default: Story = {};

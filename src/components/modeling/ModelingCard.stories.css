@@ -1,0 +1,15 @@
+.modeling-cards-container {
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 2rem;
+  background-color: #f5f5f5;
+  border-radius: 8px;
+}
+
+/* Ensure proper spacing in the docs view */
+.sb-docs .modeling-cards-container {
+  max-width: 800px;
+  margin: 0 auto;
+}

@@ -1,22 +1,90 @@
-import type { Meta, StoryObj } from '@storybook/react'
-import Button from './Button'
+import type { Meta, StoryObj } from '@storybook/react-vite';
+import Button from './Button';
+import './Button.stories.css';
 
 const meta: Meta<typeof Button> = {
-  title: 'Components/Buttons/Button',
+  title: 'Components/Button',
   component: Button,
-  args: { children: 'Button', variant: 'primary', size: 'big' },
-  argTypes: {
-    variant: { control: 'inline-radio', options: ['primary', 'secondary', 'white'] },
-    size: { control: 'inline-radio', options: ['small', 'big'] },
-    state: { control: 'inline-radio', options: ['default', 'hover', 'disabled'] },
+  tags: ['autodocs'],
+  args: {
+    children: 'Button',
+    variant: 'primary',
+    size: 'big',
+    disabled: false,
   },
-  parameters: { docs: { description: { component: 'Primary action button with semantic tokens and a11y focus states.' } } }
-}
-export default meta
+  argTypes: {
+    variant: {
+      control: 'select',
+      options: ['primary', 'secondary', 'white'],
+      description: 'Visual style variant of the button',
+      table: {
+        type: { summary: 'string' },
+        defaultValue: { summary: 'primary' },
+      },
+    },
+    size: {
+      control: 'select',
+      options: ['small', 'big'],
+      description: 'Size of the button',
+      table: {
+        type: { summary: 'string' },
+        defaultValue: { summary: 'big' },
+      },
+    },
+    disabled: {
+      control: 'boolean',
+      description: 'Whether the button is disabled',
+      table: {
+        type: { summary: 'boolean' },
+        defaultValue: { summary: 'false' },
+      },
+    },
+    onClick: {
+      action: 'clicked',
+      description: 'Handler for when the button is clicked',
+    },
+  },
+};
 
-type Story = StoryObj<typeof Button>
+export default meta;
+type Story = StoryObj<typeof Button>;
 
-export const Primary: Story = {}
-export const Secondary: Story = { args: { variant: 'secondary' } }
-export const White: Story = { args: { variant: 'white' } }
-export const Disabled: Story = { args: { state: 'disabled', disabled: true } }
+export const Primary: Story = {
+  args: {
+    variant: 'primary',
+    children: 'Primary Button',
+  },
+};
+
+export const Secondary: Story = {
+  args: {
+    variant: 'secondary',
+    children: 'Secondary Button',
+  },
+};
+
+export const White: Story = {
+  args: {
+    variant: 'white',
+    children: 'White Button',
+  },
+  parameters: {
+    backgrounds: { default: 'dark' },
+  },
+};
+
+export const Disabled: Story = {
+  args: {
+    disabled: true,
+    children: 'Disabled Button',
+  },
+};
+
+export const Sizes: Story = {
+  render: () => (
+    <div className="button-sizes-container">
+      <Button size="small">Small Button</Button>
+      <Button size="big">Big Button</Button>
+    </div>
+  ),
+};

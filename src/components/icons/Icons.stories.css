@@ -1,0 +1,187 @@
+.icons-catalog {
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.icons-header {
+  margin-bottom: 2rem;
+}
+
+.icons-header h1 {
+  margin: 0 0 1.5rem 0;
+  font-size: 2.5rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.icons-controls {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.icons-search,
+.icons-category-select {
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  font-size: 1rem;
+  background-color: var(--background-primary);
+  color: var(--text-primary);
+}
+
+.icons-search {
+  flex: 1;
+  min-width: 300px;
+}
+
+.icons-category-select {
+  min-width: 200px;
+}
+
+.icons-results {
+  margin-bottom: 1.5rem;
+}
+
+.icons-count {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+}
+
+.icons-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1.5rem;
+}
+
+.icon-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1.5rem;
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  background-color: var(--background-primary);
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.icon-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  border-color: var(--primary-color);
+}
+
+.icon-preview {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  margin-bottom: 1rem;
+  border-radius: 8px;
+  background-color: var(--background-secondary);
+}
+
+.icon-info {
+  text-align: center;
+  margin-bottom: 0.75rem;
+}
+
+.icon-name {
+  margin: 0 0 0.25rem 0;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.icon-category {
+  display: inline-block;
+  padding: 0.25rem 0.5rem;
+  background-color: var(--background-secondary);
+  color: var(--text-secondary);
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.025em;
+}
+
+.icon-copy {
+  padding: 0.5rem 0.75rem;
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.025em;
+}
+
+.icon-copy:hover {
+  background-color: var(--primary-color-hover);
+}
+
+.icon-copy:active {
+  transform: scale(0.95);
+}
+
+.icons-empty {
+  text-align: center;
+  padding: 4rem 2rem;
+  color: var(--text-secondary);
+}
+
+.icons-empty p {
+  margin: 0;
+  font-size: 1.125rem;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .icons-catalog {
+    padding: 1rem;
+  }
+
+  .icons-controls {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .icons-search {
+    min-width: auto;
+  }
+
+  .icons-grid {
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 1rem;
+  }
+
+  .icon-item {
+    padding: 1rem;
+  }
+
+  .icon-preview {
+    width: 48px;
+    height: 48px;
+  }
+}
+
+@media (max-width: 480px) {
+  .icons-grid {
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  }
+
+  .icon-name {
+    font-size: 0.8rem;
+  }
+
+  .icon-category {
+    font-size: 0.7rem;
+  }
+}
