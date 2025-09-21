@@ -1,0 +1,180 @@
+/* Design Icons Stories Styles - Using CSS Tokens */
+
+.design-icons-showcase {
+  padding: var(--sds-size-space-600);
+  background-color: var(--surface-default);
+  color: var(--text-blue-main);
+  font-family: var(--sds-typography-body-font-family);
+}
+
+.showcase-title {
+  font-family: var(--font-family-macan-mono-stencil);
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-normal);
+  letter-spacing: var(--letter-spacing-wide);
+  text-transform: uppercase;
+  color: var(--text-blue-main);
+  margin-bottom: var(--sds-size-space-600);
+  border-bottom: var(--sds-size-stroke-border) solid var(--sds-color-border-default-default);
+  padding-bottom: var(--sds-size-space-400);
+}
+
+.icons-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: var(--sds-size-space-600);
+  padding: var(--sds-size-space-400);
+}
+
+.icon-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--sds-size-space-300);
+  padding: var(--sds-size-space-400);
+  background-color: var(--surface-card);
+  border-radius: var(--sds-size-radius-200);
+  border: var(--sds-size-stroke-border) solid var(--sds-color-border-default-default);
+  transition: all 0.2s ease-in-out;
+}
+
+.icon-item:hover {
+  background-color: var(--sds-color-background-neutral-tertiary);
+  border-color: var(--text-blue-secondary);
+  transform: translateY(-2px);
+  box-shadow: 0 var(--sds-size-depth-100) var(--sds-size-depth-400) var(--sds-color-black-200);
+}
+
+.icon-name {
+  font-family: var(--font-family-macan-mono);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
+  letter-spacing: var(--letter-spacing-wider);
+  text-transform: uppercase;
+  color: var(--text-blue-secondary);
+  text-align: center;
+  line-height: var(--line-height-tight);
+}
+
+/* Size Variations Styles */
+.size-variations {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sds-size-space-800);
+}
+
+.size-group {
+  padding: var(--sds-size-space-400);
+  background-color: var(--surface-card);
+  border-radius: var(--sds-size-radius-200);
+  border: var(--sds-size-stroke-border) solid var(--sds-color-border-default-default);
+}
+
+.size-group h3 {
+  font-family: var(--font-family-macan);
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-blue-main);
+  margin-bottom: var(--sds-size-space-400);
+  letter-spacing: var(--letter-spacing-tight);
+}
+
+.icons-row {
+  display: flex;
+  align-items: center;
+  gap: var(--sds-size-space-600);
+  padding: var(--sds-size-space-400);
+  background-color: var(--sds-color-background-neutral-tertiary);
+  border-radius: var(--sds-size-radius-100);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .icons-grid {
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: var(--sds-size-space-400);
+  }
+  
+  .showcase-title {
+    font-size: var(--font-size-xl);
+  }
+  
+  .size-variations {
+    gap: var(--sds-size-space-600);
+  }
+  
+  .icons-row {
+    gap: var(--sds-size-space-400);
+    flex-wrap: wrap;
+  }
+}
+
+/* Dark Theme Support */
+@media (prefers-color-scheme: dark), [data-theme="dark"] {
+  .icon-item:hover {
+    background-color: var(--color-blue-950);
+    border-color: var(--text-white-secondary);
+  }
+  
+  .size-group {
+    background-color: var(--color-blue-dark-950);
+    border-color: var(--divider-light);
+  }
+  
+  .icons-row {
+    background-color: var(--color-blue-950);
+  }
+}
+
+/* Icon Interaction States */
+.icon-item svg {
+  transition: transform 0.2s ease-in-out;
+}
+
+.icon-item:hover svg {
+  transform: scale(1.1);
+}
+
+.icon-item:active svg {
+  transform: scale(0.95);
+}
+
+/* Focus States for Accessibility */
+.icon-item:focus-within {
+  outline: 2px solid var(--color-blue-700);
+  outline-offset: var(--sds-size-space-100);
+}
+
+/* Category Grouping Styles (if needed for future expansion) */
+.category-section {
+  margin-bottom: var(--sds-size-space-1600);
+}
+
+.category-title {
+  font-family: var(--font-family-macan);
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-blue-main);
+  margin-bottom: var(--sds-size-space-400);
+  letter-spacing: var(--letter-spacing-tight);
+  border-left: var(--sds-size-space-100) solid var(--color-blue-700);
+  padding-left: var(--sds-size-space-400);
+}
+
+/* Utility Classes for Token Demonstration */
+.token-demo {
+  padding: var(--sds-size-padding-lg);
+  margin: var(--sds-size-space-400);
+  background: var(--sds-color-background-brand-tertiary);
+  border: var(--sds-size-stroke-border) solid var(--sds-color-border-default-default);
+  border-radius: var(--sds-size-radius-400);
+}
+
+.token-demo code {
+  font-family: var(--font-family-macan-mono);
+  background: var(--sds-color-background-neutral-secondary);
+  padding: var(--sds-size-padding-xs);
+  border-radius: var(--sds-size-radius-100);
+  font-size: var(--font-size-sm);
+}
