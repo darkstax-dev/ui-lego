@@ -1,6 +1,7 @@
-import type { Meta, StoryObj } from '@storybook/react'
+import type { Meta, StoryObj } from '@storybook/react-vite'
 import React from 'react'
 import './DevelopmentIcons.stories.css'
+import '../../../tokens.css'
 import * as DevIcons from './index'
 
 const meta: Meta = {
