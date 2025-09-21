@@ -82,6 +82,20 @@ const iconCategories = {
   'Navigation': [
     { name: 'Chevron Up', component: Icons.ChevronUp, category: 'Navigation' },
     { name: 'Chevron Down', component: Icons.ChevronDown, category: 'Navigation' }
+  ],
+  'Kubernetes': [
+    { name: 'Kubernetes Namespace', component: Icons.KubernetesNamespace, category: 'Workloads' },
+    { name: 'Kubernetes Service', component: Icons.KubernetesService, category: 'Networking' },
+    { name: 'Kubernetes Deployment', component: Icons.KubernetesDeployment, category: 'Workloads' },
+    { name: 'Kubernetes Job', component: Icons.KubernetesJob, category: 'Workloads' },
+    { name: 'Kubernetes Ingress', component: Icons.KubernetesIngress, category: 'Networking' },
+    { name: 'Kubernetes Pod', component: Icons.KubernetesPod, category: 'Workloads' },
+    { name: 'Kubernetes Secret', component: Icons.KubernetesSecret, category: 'Config' },
+    { name: 'Kubernetes ConfigMap', component: Icons.KubernetesConfigMap, category: 'Config' },
+    { name: 'Kubernetes PersistentVolume', component: Icons.KubernetesPersistentVolume, category: 'Storage' },
+    { name: 'Kubernetes PersistentVolumeClaim', component: Icons.KubernetesPersistentVolumeClaim, category: 'Storage' },
+    { name: 'Kubernetes StatefulSet', component: Icons.KubernetesStatefulSet, category: 'Workloads' },
+    { name: 'Kubernetes Node', component: Icons.KubernetesNode, category: 'Cluster' }
   ]
 };
 
