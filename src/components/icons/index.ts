@@ -80,3 +80,6 @@ export * from './alerts'
 
 // Graphics icons
 export * from './graphics'
+
+// System icons
+export * from './system'
