@@ -1,0 +1,34 @@
+.editor-icons-catalog { padding: var(--sds-size-space-800); color: var(--text-blue-main); }
+.editor-icons-header { margin-bottom: var(--sds-size-space-800); }
+.editor-icons-header h1 { font-family: var(--font-family-macan-mono-stencil); font-size: var(--font-size-2xl); margin: 0 0 var(--sds-size-space-300); }
+.editor-icons-description { color: var(--text-gray-main); margin: 0 0 var(--sds-size-space-600); }
+
+.editor-icons-controls { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: var(--sds-size-space-400); align-items: end; }
+.editor-icons-control-group { display: flex; flex-direction: column; gap: var(--sds-size-space-200); }
+.editor-icons-control-group label { font-weight: var(--font-weight-semibold); }
+.editor-icons-search, .editor-icons-select, .editor-icons-size-slider { padding: var(--sds-size-padding-sm); border: var(--sds-size-stroke-border) solid var(--sds-color-border-default-default); background: var(--surface-card); color: var(--text-blue-main); border-radius: var(--sds-size-radius-200); }
+.editor-icons-size-value { margin-left: var(--sds-size-space-200); color: var(--text-gray-main); }
+
+.editor-icons-results { margin: var(--sds-size-space-600) 0; }
+.editor-icons-count { color: var(--text-gray-main); }
+
+.editor-icons-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: var(--sds-size-space-600); }
+.editor-icon-item { background: var(--surface-card); border: var(--sds-size-stroke-border) solid var(--divider-light); padding: var(--sds-size-space-400); border-radius: var(--sds-size-radius-200); display: flex; flex-direction: column; gap: var(--sds-size-space-300); }
+.editor-icon-preview { display: flex; justify-content: center; align-items: center; height: 72px; }
+.editor-icon-info { display: flex; justify-content: space-between; align-items: center; }
+.editor-icon-name { margin: 0; font-size: var(--font-size-md); }
+.editor-icon-semantic { font-size: var(--font-size-sm); }
+.editor-icon-copy { align-self: flex-end; padding: var(--sds-size-padding-sm) var(--sds-size-padding-lg); background: var(--Icon-Button-Gray-btn-Fill); color: var(--text-blue-main); border: none; cursor: pointer; border-radius: var(--sds-size-radius-200); }
+.editor-icon-copy:hover { background: var(--Gray-200); }
+
+.editor-icons-empty { text-align: center; padding: var(--sds-size-space-800); color: var(--text-gray-main); }
+
+.editor-icons-usage-examples { margin-top: var(--sds-size-space-800); }
+.usage-example-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: var(--sds-size-space-600); }
+.usage-example { background: var(--surface-subtle); border: var(--sds-size-stroke-border) solid var(--border-subtle); padding: var(--sds-size-space-600); border-radius: var(--sds-size-radius-200); }
+.editor-toolbar-example { display: flex; gap: var(--sds-size-space-400); background: var(--surface-card); padding: var(--sds-size-space-300); border: var(--sds-size-stroke-border) solid var(--divider-light); }
+
+.design-tokens-example { margin-top: var(--sds-size-space-800); }
+.token-examples { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: var(--sds-size-space-400); }
+.token-example { background: var(--surface-card); border: var(--sds-size-stroke-border) solid var(--divider-light); padding: var(--sds-size-space-400); border-radius: var(--sds-size-radius-200); display: flex; flex-direction: column; gap: var(--sds-size-space-200); }
+.token-description { color: var(--text-gray-main); }
