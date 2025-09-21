@@ -77,3 +77,6 @@ export { default as KubernetesNode } from './kubernetes/KubernetesNode'
 
 // Alert icons
 export * from './alerts'
+
+// Graphics icons
+export * from './graphics'
