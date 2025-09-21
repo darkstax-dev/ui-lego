@@ -74,3 +74,6 @@ export { default as KubernetesPersistentVolume } from './kubernetes/KubernetesPe
 export { default as KubernetesPersistentVolumeClaim } from './kubernetes/KubernetesPersistentVolumeClaim'
 export { default as KubernetesStatefulSet } from './kubernetes/KubernetesStatefulSet'
 export { default as KubernetesNode } from './kubernetes/KubernetesNode'
+
+// Alert icons
+export * from './alerts'
