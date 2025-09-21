@@ -83,3 +83,6 @@ export * from './graphics'
 
 // System icons
 export * from './system'
+
+// User icons
+export * from './users'
