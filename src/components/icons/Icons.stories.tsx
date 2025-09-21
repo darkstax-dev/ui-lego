@@ -96,6 +96,38 @@ const iconCategories = {
     { name: 'Kubernetes PersistentVolumeClaim', component: Icons.KubernetesPersistentVolumeClaim, category: 'Storage' },
     { name: 'Kubernetes StatefulSet', component: Icons.KubernetesStatefulSet, category: 'Workloads' },
     { name: 'Kubernetes Node', component: Icons.KubernetesNode, category: 'Cluster' }
+  ],
+  'Graphics & Design': [
+    { name: 'Union', component: Icons.Union, category: 'Boolean' },
+    { name: 'Subtract', component: Icons.Subtract, category: 'Boolean' },
+    { name: 'Intersect', component: Icons.Intersect, category: 'Boolean' },
+    { name: 'Exclude', component: Icons.Exclude, category: 'Boolean' },
+    { name: 'Vector Pen', component: Icons.VectorPen, category: 'Drawing' },
+    { name: 'Bezier', component: Icons.Bezier, category: 'Drawing' },
+    { name: 'Eyedropper', component: Icons.Eyedropper, category: 'Tools' },
+    { name: 'Eraser', component: Icons.Eraser, category: 'Tools' },
+    { name: 'Palette', component: Icons.Palette, category: 'Color' },
+    { name: 'Layers', component: Icons.Layers, category: 'Layers' },
+    { name: 'Layers Fill', component: Icons.LayersFill, category: 'Layers' },
+    { name: 'Mask', component: Icons.Mask, category: 'Effects' },
+    { name: 'Align Start', component: Icons.AlignStart, category: 'Alignment' },
+    { name: 'Align End', component: Icons.AlignEnd, category: 'Alignment' },
+    { name: 'Align Center', component: Icons.AlignCenter, category: 'Alignment' },
+    { name: 'Align Top', component: Icons.AlignTop, category: 'Alignment' },
+    { name: 'Align Bottom', component: Icons.AlignBottom, category: 'Alignment' },
+    { name: 'Align Middle', component: Icons.AlignMiddle, category: 'Alignment' },
+    { name: 'Distribute Horizontal', component: Icons.DistributeHorizontal, category: 'Distribution' },
+    { name: 'Distribute Vertical', component: Icons.DistributeVertical, category: 'Distribution' },
+    { name: 'Symmetry Horizontal', component: Icons.SymmetryHorizontal, category: 'Transform' },
+    { name: 'Symmetry Vertical', component: Icons.SymmetryVertical, category: 'Transform' },
+    { name: 'Stack', component: Icons.Stack, category: 'Layers' },
+    { name: 'Zoom In', component: Icons.ZoomIn, category: 'View' },
+    { name: 'Zoom Out', component: Icons.ZoomOut, category: 'View' },
+    { name: 'Bounding Box', component: Icons.BoundingBox, category: 'Selection' },
+    { name: 'Crop', component: Icons.Crop, category: 'Tools' },
+    { name: 'Sliders', component: Icons.Sliders, category: 'Controls' },
+    { name: 'Node Plus', component: Icons.NodePlus, category: 'Nodes' },
+    { name: 'Node Minus', component: Icons.NodeMinus, category: 'Nodes' }
   ]
 };
 
