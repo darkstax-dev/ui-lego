@@ -60,3 +60,17 @@ export { default as ImageIcon } from './ImageIcon'
 // Chevron icons
 export { default as ChevronUp } from './ChevronUp'
 export { default as ChevronDown } from './ChevronDown'
+
+// Kubernetes icons
+export { default as KubernetesNamespace } from './kubernetes/KubernetesNamespace'
+export { default as KubernetesService } from './kubernetes/KubernetesService'
+export { default as KubernetesDeployment } from './kubernetes/KubernetesDeployment'
+export { default as KubernetesJob } from './kubernetes/KubernetesJob'
+export { default as KubernetesIngress } from './kubernetes/KubernetesIngress'
+export { default as KubernetesPod } from './kubernetes/KubernetesPod'
+export { default as KubernetesSecret } from './kubernetes/KubernetesSecret'
+export { default as KubernetesConfigMap } from './kubernetes/KubernetesConfigMap'
+export { default as KubernetesPersistentVolume } from './kubernetes/KubernetesPersistentVolume'
+export { default as KubernetesPersistentVolumeClaim } from './kubernetes/KubernetesPersistentVolumeClaim'
+export { default as KubernetesStatefulSet } from './kubernetes/KubernetesStatefulSet'
+export { default as KubernetesNode } from './kubernetes/KubernetesNode'
