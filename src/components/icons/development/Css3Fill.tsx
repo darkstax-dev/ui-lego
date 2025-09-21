@@ -1,0 +1,40 @@
+import React from 'react'
+
+interface IconProps {
+  width?: number
+  height?: number
+  className?: string
+  fill?: string
+}
+
+const Css3Fill: React.FC<IconProps> = ({ 
+  width = 24, 
+  height = 24, 
+  className = '', 
+  fill = 'var(--text-blue-main)' 
+}) => {
+  return (
+    <svg
+      width={width}
+      height={height}
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      className={className}
+    >
+      <g clipPath="url(#clip0_css3_fill)">
+        <path
+          d="M5 3L4.35 6.34H17.94L17.5 8.5H3.92L3.26 11.83H16.85L16.09 15.64L10.61 17.45L5.86 15.64L6.19 14H2.85L2.06 18L9.91 21L18.96 18L20.16 11.97L20.4 10.76L21.94 3H5Z"
+          fill={fill}
+        />
+      </g>
+      <defs>
+        <clipPath id="clip0_css3_fill">
+          <rect width="24" height="24" fill="white"/>
+        </clipPath>
+      </defs>
+    </svg>
+  )
+}
+
+export default Css3Fill

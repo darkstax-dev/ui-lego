@@ -1,0 +1,234 @@
+/* Graphics Icons Storybook Styles */
+.graphics-catalog {
+  padding: var(--sds-size-space-600);
+  background: var(--surface-default);
+  color: var(--text-blue-main);
+  font-family: var(--sds-typography-body-font-family);
+}
+
+.graphics-header {
+  margin-bottom: var(--sds-size-space-800);
+}
+
+.graphics-header h1 {
+  margin: 0 0 var(--sds-size-space-200) 0;
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--text-blue-main);
+}
+
+.graphics-header p {
+  margin: 0 0 var(--sds-size-space-600) 0;
+  font-size: var(--font-size-md);
+  color: var(--text-blue-secondary);
+}
+
+.graphics-controls {
+  display: flex;
+  gap: var(--sds-size-space-400);
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.graphics-search,
+.graphics-category-select,
+.graphics-size-select {
+  padding: var(--sds-size-space-200) var(--sds-size-space-300);
+  border: var(--sds-size-stroke-border) solid var(--sds-color-border-default-default);
+  border-radius: var(--sds-size-radius-200);
+  background: var(--surface-card);
+  color: var(--text-blue-main);
+  font-family: var(--sds-typography-body-font-family);
+  font-size: var(--sds-typography-body-size-small);
+}
+
+.graphics-search {
+  min-width: 250px;
+}
+
+.graphics-search:focus,
+.graphics-category-select:focus,
+.graphics-size-select:focus {
+  outline: 2px solid var(--btn-primary-red-fill);
+  outline-offset: 1px;
+  border-color: var(--btn-primary-red-fill);
+}
+
+.graphics-results {
+  margin: var(--sds-size-space-600) 0 var(--sds-size-space-400) 0;
+}
+
+.graphics-count {
+  margin: 0;
+  font-size: var(--sds-typography-body-size-small);
+  color: var(--text-blue-secondary);
+}
+
+.graphics-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: var(--sds-size-space-400);
+  margin-top: var(--sds-size-space-400);
+}
+
+.graphics-item {
+  display: flex;
+  flex-direction: column;
+  padding: var(--sds-size-space-400);
+  border: var(--sds-size-stroke-border) solid var(--sds-color-border-default-default);
+  border-radius: var(--sds-size-radius-200);
+  background: var(--surface-card);
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.graphics-item:hover {
+  border-color: var(--btn-primary-red-fill);
+  box-shadow: 0 2px 8px var(--sds-color-black-200);
+}
+
+.graphics-preview {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 64px;
+  margin-bottom: var(--sds-size-space-300);
+  color: var(--text-blue-main);
+}
+
+.graphics-info {
+  flex: 1;
+}
+
+.graphics-name {
+  margin: 0 0 var(--sds-size-space-100) 0;
+  font-size: var(--sds-typography-body-size-small);
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-blue-main);
+}
+
+.graphics-description {
+  margin: 0;
+  font-size: var(--font-size-xs);
+  color: var(--text-blue-secondary);
+  line-height: var(--line-height-normal);
+}
+
+.graphics-copy {
+  position: absolute;
+  top: var(--sds-size-space-200);
+  right: var(--sds-size-space-200);
+  padding: var(--sds-size-space-100) var(--sds-size-space-200);
+  border: none;
+  border-radius: var(--sds-size-radius-200);
+  background: var(--btn-icon-gray-fill);
+  color: var(--text-blue-main);
+  font-size: var(--font-size-xs);
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.graphics-item:hover .graphics-copy {
+  opacity: 1;
+}
+
+.graphics-copy:hover {
+  background: var(--btn-primary-red-fill);
+  color: var(--text-white-main);
+}
+
+.graphics-empty {
+  text-align: center;
+  padding: var(--sds-size-space-2400);
+  color: var(--text-blue-secondary);
+}
+
+.graphics-showcase {
+  padding: var(--sds-size-space-600);
+  background: var(--surface-default);
+  color: var(--text-blue-main);
+}
+
+.graphics-showcase h2 {
+  margin: 0 0 var(--sds-size-space-600) 0;
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-blue-main);
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  .graphics-catalog,
+  .graphics-showcase {
+    background: var(--surface-default);
+    color: var(--text-white-main);
+  }
+  
+  .graphics-header h1,
+  .graphics-name,
+  .graphics-showcase h2 {
+    color: var(--text-white-main);
+  }
+  
+  .graphics-header p,
+  .graphics-description,
+  .graphics-count {
+    color: var(--text-white-secondary);
+  }
+  
+  .graphics-search,
+  .graphics-category-select,
+  .graphics-size-select,
+  .graphics-item {
+    background: var(--surface-card);
+    color: var(--text-white-main);
+    border-color: var(--divider-light);
+  }
+  
+  .graphics-copy {
+    background: var(--btn-icon-gray-fill);
+    color: var(--text-white-main);
+  }
+  
+  .graphics-empty {
+    color: var(--text-white-secondary);
+  }
+}
+
+/* Manual dark mode class */
+[data-theme="dark"] .graphics-catalog,
+[data-theme="dark"] .graphics-showcase {
+  background: var(--surface-default);
+  color: var(--text-white-main);
+}
+
+[data-theme="dark"] .graphics-header h1,
+[data-theme="dark"] .graphics-name,
+[data-theme="dark"] .graphics-showcase h2 {
+  color: var(--text-white-main);
+}
+
+[data-theme="dark"] .graphics-header p,
+[data-theme="dark"] .graphics-description,
+[data-theme="dark"] .graphics-count {
+  color: var(--text-white-secondary);
+}
+
+[data-theme="dark"] .graphics-search,
+[data-theme="dark"] .graphics-category-select,
+[data-theme="dark"] .graphics-size-select,
+[data-theme="dark"] .graphics-item {
+  background: var(--surface-card);
+  color: var(--text-white-main);
+  border-color: var(--divider-light);
+}
+
+[data-theme="dark"] .graphics-copy {
+  background: var(--btn-icon-gray-fill);
+  color: var(--text-white-main);
+}
+
+[data-theme="dark"] .graphics-empty {
+  color: var(--text-white-secondary);
+}

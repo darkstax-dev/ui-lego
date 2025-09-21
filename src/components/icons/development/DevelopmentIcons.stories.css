@@ -1,0 +1,22 @@
+@import '../../../tokens.css';
+
+.dev-icons-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: var(--sds-size-space-400);
+  padding: var(--sds-size-space-800);
+}
+
+.dev-icon-card {
+  display: flex;
+  align-items: center;
+  gap: var(--sds-size-space-300);
+  background: var(--surface-card);
+  border: var(--sds-size-stroke-border) solid var(--divider-light);
+  padding: var(--sds-size-space-300) var(--sds-size-space-400);
+}
+
+.dev-icon-label {
+  font: inherit;
+  color: var(--text-blue-main);
+}
