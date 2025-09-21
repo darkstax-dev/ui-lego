@@ -1,4 +1,5 @@
 export * from './alerts'
+export * from './editor'
 export * from './graphics'
 export * from './kubernetes'
 export * from './system'
