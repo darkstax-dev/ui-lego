@@ -128,6 +128,28 @@ const iconCategories = {
     { name: 'Sliders', component: Icons.Sliders, category: 'Controls' },
     { name: 'Node Plus', component: Icons.NodePlus, category: 'Nodes' },
     { name: 'Node Minus', component: Icons.NodeMinus, category: 'Nodes' }
+  ],
+  'Users & People': [
+    { name: 'User Line', component: Icons.UserLine, category: 'Basic' },
+    { name: 'User Fill', component: Icons.UserFill, category: 'Basic' },
+    { name: 'User Add Line', component: Icons.UserAddLine, category: 'Actions' },
+    { name: 'User Add Fill', component: Icons.UserAddFill, category: 'Actions' },
+    { name: 'User Search Line', component: Icons.UserSearchLine, category: 'Actions' },
+    { name: 'User Search Fill', component: Icons.UserSearchFill, category: 'Actions' },
+    { name: 'User Voice Line', component: Icons.UserVoiceLine, category: 'Communication' },
+    { name: 'Account Circle Fill', component: Icons.AccountCircleFill, category: 'Account' },
+    { name: 'Team Line', component: Icons.TeamLine, category: 'Groups' },
+    { name: 'Team Fill', component: Icons.TeamFill, category: 'Groups' },
+    { name: 'Group Line', component: Icons.GroupLine, category: 'Groups' },
+    { name: 'Group Fill', component: Icons.GroupFill, category: 'Groups' },
+    { name: 'Admin Line', component: Icons.AdminLine, category: 'Roles' },
+    { name: 'Admin Fill', component: Icons.AdminFill, category: 'Roles' },
+    { name: 'Robot Line', component: Icons.RobotLine, category: 'AI/Bot' },
+    { name: 'Robot Fill', component: Icons.RobotFill, category: 'AI/Bot' },
+    { name: 'Contacts Line', component: Icons.ContactsLine, category: 'Management' },
+    { name: 'Contacts Fill', component: Icons.ContactsFill, category: 'Management' },
+    { name: 'Emotion Happy Line', component: Icons.EmotionHappyLine, category: 'Emotions' },
+    { name: 'Emotion Happy Fill', component: Icons.EmotionHappyFill, category: 'Emotions' }
   ]
 };
 
