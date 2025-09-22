@@ -1,5 +1,5 @@
 import React from 'react';
-import { ResponsivePie } from '@nivo/pie';
+import { Pie } from '@nivo/pie';
 import { ChartColorPalette, getPalette, resolvePalette } from '../palette';
 import './PieChart.css';
 
@@ -96,7 +96,7 @@ export const PieChart: React.FC<PieChartProps> = ({
   return (
     <div className={`pie-chart ${className}`}>
       <div className="pie-chart__container" style={{ height }}>
-        <ResponsivePie
+        <Pie
           data={chartData}
           margin={{ top: 40, right: 40, bottom: 40, left: 40 }}
           innerRadius={innerRadius}
@@ -113,6 +113,8 @@ export const PieChart: React.FC<PieChartProps> = ({
           onClick={onSliceClick}
           onMouseEnter={onSliceHover}
           tooltip={CustomTooltip}
+          width={width ?? 512}
+          height={height}
           theme={{
             background: 'transparent',
             text: {
