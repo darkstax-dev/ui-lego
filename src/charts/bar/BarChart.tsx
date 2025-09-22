@@ -60,22 +60,22 @@ export const BarChart: React.FC<BarChartProps> = ({
   interactive = true,
   animate = true,
   className = '',
-  margin = { top: 40, right: 40, bottom: 60, left: 60 },
+  margin = { top: 50, right: 20, bottom: 50, left: 60 },
   axisLeft = {
-    tickSize: 0,
-    tickPadding: 16,
+    tickSize: 5,
+    tickPadding: 5,
     tickRotation: 0,
     legend: 'Food',
     legendPosition: 'middle',
-    legendOffset: -50,
+    legendOffset: -40,
   },
   axisBottom = {
-    tickSize: 0,
-    tickPadding: 16,
+    tickSize: 5,
+    tickPadding: 5,
     tickRotation: 0,
     legend: 'Country',
     legendPosition: 'middle',
-    legendOffset: 40,
+    legendOffset: 32,
   },
   onBarClick,
   onBarHover,
@@ -131,7 +131,7 @@ export const BarChart: React.FC<BarChartProps> = ({
           keys={keys}
           indexBy={indexBy}
           margin={margin}
-          padding={0.6}
+          padding={0.3}
           valueScale={{ type: 'linear' }}
           indexScale={{ type: 'band', round: true }}
           colors={() => resolvedPalette.colors[0]} // Use single color for all bars
@@ -159,7 +159,7 @@ export const BarChart: React.FC<BarChartProps> = ({
           enableLabel={false}
           labelSkipWidth={12}
           labelSkipHeight={12}
-          labelTextColor="inherit:darker(1.6)"
+          labelTextColor={{ from: 'color', modifiers: [['darker', 1.6]] }}
           animate={animate}
           motionConfig="gentle"
           isInteractive={interactive}
@@ -176,7 +176,7 @@ export const BarChart: React.FC<BarChartProps> = ({
             axis: {
               domain: {
                 line: {
-                  stroke: 'transparent',
+                  stroke: '#777777',
                   strokeWidth: 0,
                 },
               },
@@ -185,21 +185,17 @@ export const BarChart: React.FC<BarChartProps> = ({
                   fontFamily: 'var(--font-family-macan-mono)',
                   fontSize: 12,
                   fill: 'var(--Text-Gray-text-Main-text)',
-                  fontWeight: 450,
-                  letterSpacing: '1.2px',
                 },
               },
               ticks: {
                 line: {
-                  stroke: 'transparent',
-                  strokeWidth: 0,
+                  stroke: '#777777',
+                  strokeWidth: 1,
                 },
                 text: {
                   fontFamily: 'var(--font-family-macan-mono)',
                   fontSize: 12,
                   fill: 'var(--Text-Blue-text-Secondary-text)',
-                  fontWeight: 450,
-                  letterSpacing: '1.2px',
                 },
               },
             },
