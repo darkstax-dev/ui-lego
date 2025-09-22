@@ -19,7 +19,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: var(--sds-size-space-400);
+  padding: var(--sds-size-space-200) var(--sds-size-space-400);
+  box-sizing: border-box;
 }
 
 .bar-chart__legend {
