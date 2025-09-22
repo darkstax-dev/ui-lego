@@ -26,10 +26,10 @@ export const Catalog: Story = {
       <h2 className="logo-heading">Logo Catalog</h2>
       <div className="logo-grid">
         <LogoTile name="SG Mark" backgroundClass="bg-sg-mark" description="Stratagem symbol" />
-        <LogoTile name="Stratagem AI" backgroundClass="bg-stratagem-wordmark" description="Wordmark" height={140} />
-        <LogoTile name="Darkstax" backgroundClass="bg-darkstax-wordmark" description="Wordmark" height={140} />
+        <LogoTile name="Stratagem AI" backgroundClass="bg-stratagem-wordmark" description="Wordmark" size="tall" />
+        <LogoTile name="Darkstax" backgroundClass="bg-darkstax-wordmark" description="Wordmark" size="tall" />
         <LogoTile name="Darkstax Mark" backgroundClass="bg-darkstax-mark" description="Glyph" />
-        <LogoTile name="Nexora" backgroundClass="bg-nexora-wordmark" description="Wordmark" height={140} />
+        <LogoTile name="Nexora" backgroundClass="bg-nexora-wordmark" description="Wordmark" size="tall" />
         <LogoTile name="Nexora Mark" backgroundClass="bg-nexora-mark" description="Glyph" />
       </div>
     </div>
