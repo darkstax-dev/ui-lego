@@ -22,7 +22,7 @@ export const defaultPalette: ChartColorPalette = {
     'var(--color-red-600)',       // Lighter red for additional data
     'var(--color-green-600)',     // Lighter green for additional data
   ],
-  background: 'var(--color-white)',
+  background: 'var(--Gray-200)',
   text: 'var(--Text-Blue-text-Main-text)',
   border: 'var(--Stroke-Table-header)',
 };
@@ -40,7 +40,7 @@ export const bluePalette: ChartColorPalette = {
     'var(--color-blue-gray-500)',
     'var(--color-blue-gray-400)',
   ],
-  background: 'var(--color-white)',
+  background: 'var(--Gray-200)',
   text: 'var(--Text-Blue-text-Main-text)',
   border: 'var(--Stroke-Table-header)',
 };
@@ -57,7 +57,7 @@ export const warmPalette: ChartColorPalette = {
     'var(--color-red-400)',
     'var(--color-yellow-300)',
   ],
-  background: 'var(--color-white)',
+  background: 'var(--Gray-200)',
   text: 'var(--Text-Blue-text-Main-text)',
   border: 'var(--Stroke-Table-header)',
 };
@@ -74,7 +74,7 @@ export const coolPalette: ChartColorPalette = {
     'var(--color-blue-gray-600)',
     'var(--color-green-400)',
   ],
-  background: 'var(--color-white)',
+  background: 'var(--Gray-200)',
   text: 'var(--Text-Blue-text-Main-text)',
   border: 'var(--Stroke-Table-header)',
 };
