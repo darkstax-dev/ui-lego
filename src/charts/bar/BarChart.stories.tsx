@@ -14,6 +14,13 @@ const meta: Meta<typeof BarChart> = {
     },
   },
   tags: ['autodocs'],
+  decorators: [
+    (Story) => (
+      <div style={{ width: '100%', maxWidth: 960 }}>
+        <Story />
+      </div>
+    ),
+  ],
   args: {
     data: [
       { id: 'ssh', label: 'SSH', value: 0.43 },
