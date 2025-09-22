@@ -245,21 +245,24 @@ const BarChartDemo: React.FC = () => {
           interactive={interactive}
           onBarClick={handleBarClick}
           onBarHover={handleBarHover}
+          keys={currentDataset.keys || ['value']}
+          showLegend={selectedDataset === 'grouped' ? true : showLegend}
+          margin={selectedDataset === 'grouped' ? { top: 50, right: 130, bottom: 50, left: 60 } : undefined}
           axisLeft={{
-            tickSize: 0,
-            tickPadding: 16,
+            tickSize: 5,
+            tickPadding: 5,
             tickRotation: 0,
-            legend: selectedDataset === 'protocol' ? 'Food' : 'Value',
+            legend: selectedDataset === 'protocol' ? 'Food' : selectedDataset === 'grouped' ? 'Values' : 'Value',
             legendPosition: 'middle',
-            legendOffset: -50,
+            legendOffset: -40,
           }}
           axisBottom={{
-            tickSize: 0,
-            tickPadding: 16,
+            tickSize: 5,
+            tickPadding: 5,
             tickRotation: 0,
-            legend: selectedDataset === 'protocol' ? 'Country' : 'Category',
+            legend: selectedDataset === 'protocol' ? 'Country' : selectedDataset === 'grouped' ? 'Countries' : 'Category',
             legendPosition: 'middle',
-            legendOffset: 40,
+            legendOffset: 32,
           }}
         />
       </div>
