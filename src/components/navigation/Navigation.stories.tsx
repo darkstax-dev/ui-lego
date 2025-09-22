@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { SecondaryNavigation } from './SecondaryNavigation';
 import './Navigation.stories.css';
 
-const meta: Meta<typeof SecondaryNavigation> = {
+const meta: Meta = {
   title: 'Components/Navigation',
   component: SecondaryNavigation,
   tags: ['autodocs'],
@@ -47,7 +47,7 @@ const meta: Meta<typeof SecondaryNavigation> = {
 };
 
 export default meta;
-type Story = StoryObj<typeof SecondaryNavigation>;
+type Story = StoryObj;
 
 // Interactive example with state management
 const InteractiveNavigation = (args: any) => {

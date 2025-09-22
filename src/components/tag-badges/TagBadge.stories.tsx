@@ -11,8 +11,8 @@ const meta: Meta = {
 export default meta;
 
 // Tag Stories
-const TagTemplate: Story = {
-  render: (args) => (
+const TagTemplate: StoryObj<typeof Tag> = {
+  render: (args: React.ComponentProps<typeof Tag>) => (
     <div className="tag-story">
       <Tag {...args} />
     </div>
@@ -25,7 +25,7 @@ export const TagBasic = {
     children: 'React',
     scheme: 'brand',
   },
-};
+} as const satisfies StoryObj<typeof Tag>;
 
 export const TagSchemes = {
   render: () => (
@@ -39,7 +39,7 @@ export const TagSchemes = {
       </div>
     </div>
   ),
-};
+} as const satisfies StoryObj<typeof Tag>;
 
 export const TagRemovable = {
   render: () => {
@@ -66,7 +66,7 @@ export const TagRemovable = {
       </div>
     );
   },
-};
+} as const satisfies StoryObj<typeof Tag>;
 
 export const TagNonRemovable = {
   ...TagTemplate,
@@ -75,7 +75,7 @@ export const TagNonRemovable = {
     scheme: 'neutral',
     removable: false,
   },
-};
+} as const satisfies StoryObj<typeof Tag>;
 
 export const TagHoverState = {
   ...TagTemplate,
@@ -84,11 +84,11 @@ export const TagHoverState = {
     scheme: 'brand',
     state: 'hover',
   },
-};
+} as const satisfies StoryObj<typeof Tag>;
 
 // Badge Stories
-const BadgeTemplate: Story = {
-  render: (args) => (
+const BadgeTemplate: StoryObj<typeof Badge> = {
+  render: (args: React.ComponentProps<typeof Badge>) => (
     <div className="badge-story">
       <Badge {...args} />
     </div>
@@ -101,7 +101,7 @@ export const BadgeBasic = {
     status: 'active',
     children: 'Active',
   },
-};
+} as const satisfies StoryObj<typeof Badge>;
 
 export const BadgeStatuses = {
   render: () => (
@@ -113,7 +113,7 @@ export const BadgeStatuses = {
       </div>
     </div>
   ),
-};
+} as const satisfies StoryObj<typeof Badge>;
 
 export const BadgeWithoutText = {
   render: () => (
@@ -126,7 +126,7 @@ export const BadgeWithoutText = {
       <p className="badge-instructions">Badges show default text when no children provided</p>
     </div>
   ),
-};
+} as const satisfies StoryObj<typeof Badge>;
 
 // Combined Example
 export const TagsAndBadges = {
@@ -164,4 +164,4 @@ export const TagsAndBadges = {
       </div>
     </div>
   ),
-};
+} as const satisfies StoryObj<typeof Tag>;

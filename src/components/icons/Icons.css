@@ -6,8 +6,8 @@
 }
 
 .icons-page h1 {
-  color: #03053D;
-  font-family: 'Macan Mono Stencil Trial', -apple-system, Roboto, Helvetica, sans-serif;
+  color: var(--text-blue-secondary);
+  font-family: var(--font-family-macan-mono-stencil);
   font-size: 48px;
   font-weight: 700;
   line-height: 1.2;
@@ -20,8 +20,8 @@
 }
 
 .icons-section h2 {
-  color: #072B56;
-  font-family: 'Macan Mono Stencil Trial', -apple-system, Roboto, Helvetica, sans-serif;
+  color: var(--text-blue-tertiary);
+  font-family: var(--font-family-macan-mono-stencil);
   font-size: 32px;
   font-weight: 500;
   line-height: 1.2;
@@ -42,16 +42,18 @@
   flex-direction: column;
   align-items: center;
   padding: 1.5rem;
-  border: 1px solid #E5E7EB;
+  border: 1px solid var(--border-subtle);
   border-radius: 8px;
-  background: #FFFFFF;
+  background: var(--surface-card);
   transition: all 0.2s ease;
   cursor: pointer;
 }
 
 .icon-card:hover {
-  border-color: #03053D;
-  box-shadow: 0 4px 12px rgba(3, 5, 61, 0.1);
+  border-color: var(--divider-dark);
+  box-shadow: 
+    0px var(--sds-size-depth-100) var(--sds-size-depth-100) var(--sds-size-depth-negative-025) var(--sds-color-black-200),
+    0px var(--sds-size-depth-100) var(--sds-size-depth-100) var(--sds-size-depth-negative-025) var(--sds-color-black-100);
   transform: translateY(-2px);
 }
 
@@ -59,20 +61,20 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 80px;
+  width: 100%;
   height: 80px;
   margin-bottom: 1rem;
   border-radius: 8px;
-  background: #F9FAFB;
+  background: var(--surface-subtle);
   transition: background-color 0.2s ease;
 }
 
 .icon-card:hover .icon-display {
-  background: #F3F4F6;
+  background: var(--surface-card);
 }
 
 .icon-name {
-  color: #374151;
+  color: var(--text-gray-main);
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   font-size: 14px;
   font-weight: 500;
@@ -81,7 +83,7 @@
 }
 
 .icon-category {
-  color: #6B7280;
+  color: var(--text-gray-secondary);
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   font-size: 12px;
   text-align: center;
@@ -96,29 +98,29 @@
   margin-bottom: 2rem;
 }
 
-.icon-variant {
+.icon-variant-card {
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 1rem;
-  border: 1px solid #E5E7EB;
+  border: 1px solid var(--border-subtle);
   border-radius: 6px;
-  background: #FFFFFF;
+  background: var(--surface-card);
 }
 
 .icon-variant-display {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 60px;
+  width: 100%;
   height: 60px;
   margin-bottom: 0.75rem;
   border-radius: 6px;
-  background: #F9FAFB;
+  background: var(--surface-subtle);
 }
 
 .icon-variant-name {
-  color: #374151;
+  color: var(--text-gray-main);
   font-size: 12px;
   font-weight: 500;
   text-align: center;

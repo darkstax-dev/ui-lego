@@ -5,8 +5,8 @@
 }
 
 .modeling-demo__title {
-  color: #00112B;
-  font-family: 'Macan', -apple-system, Roboto, Helvetica, sans-serif;
+  color: var(--text-blue-main);
+  font-family: var(--font-family-macan);
   font-size: 2rem;
   font-weight: 600;
   margin-bottom: 2rem;
@@ -16,18 +16,19 @@
 .modeling-demo__section {
   margin-bottom: 3rem;
   padding: 1.5rem;
-  background: rgba(255, 255, 255, 0.1);
+  background: var(--surface-subtle);
   border-radius: 12px;
+  -webkit-backdrop-filter: blur(8px);
   backdrop-filter: blur(8px);
 }
 
 .modeling-demo__section-title {
-  color: #00112B;
-  font-family: 'Macan', -apple-system, Roboto, Helvetica, sans-serif;
+  color: var(--text-blue-main);
+  font-family: var(--font-family-macan);
   font-size: 1.5rem;
   font-weight: 500;
   margin-bottom: 1.5rem;
-  border-bottom: 1px solid rgba(0, 17, 43, 0.2);
+  border-bottom: 1px solid var(--divider-light);
   padding-bottom: 0.5rem;
 }
 
@@ -48,19 +49,19 @@
   align-items: center;
   gap: 1rem;
   padding: 1rem;
-  background: rgba(255, 255, 255, 0.8);
+  background: var(--surface-card);
   border-radius: 8px;
   transition: all 0.2s ease;
 }
 
 .modeling-demo__item:hover {
-  background: rgba(255, 255, 255, 0.9);
+  background: var(--surface-card);
   transform: translateY(-2px);
 }
 
 .modeling-demo__item h4 {
-  color: #00112B;
-  font-family: 'Macan Mono Trial', -apple-system, Roboto, Helvetica, sans-serif;
+  color: var(--text-blue-main);
+  font-family: var(--font-family-macan-mono);
   font-size: 0.875rem;
   font-weight: 500;
   margin: 0;
@@ -73,9 +74,9 @@
   align-items: center;
   gap: 2rem;
   padding: 2rem;
-  background: rgba(0, 17, 43, 0.05);
+  background: var(--sds-color-black-100);
   border-radius: 12px;
-  border: 1px dashed rgba(0, 17, 43, 0.2);
+  border: 1px dashed var(--divider-light);
 }
 
 .modeling-demo__row {

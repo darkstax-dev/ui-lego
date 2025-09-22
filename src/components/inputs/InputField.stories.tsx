@@ -1,10 +1,12 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { useState } from 'react';
+import { within, userEvent } from '@storybook/testing-library';
+import { expect } from '@storybook/jest';
 import InputField from './InputField';
 import { FiMail, FiLock, FiSearch } from 'react-icons/fi';
 import './InputField.stories.css';
 
-const meta: Meta<typeof InputField> = {
+const meta: Meta = {
   title: 'Components/Inputs/InputField',
   component: InputField,
   tags: ['autodocs'],
@@ -49,7 +51,7 @@ const meta: Meta<typeof InputField> = {
       description: 'Helper text to display below the input',
     },
     leadingIcon: {
-      control: { type: null },
+      control: false,
       description: 'Icon to display at the start of the input',
     },
     type: {
@@ -61,7 +63,7 @@ const meta: Meta<typeof InputField> = {
 };
 
 export default meta;
-type Story = StoryObj<typeof InputField>;
+type Story = StoryObj;
 
 // Interactive example with state management
 const InteractiveInputField = (args: any) => {
@@ -93,6 +95,16 @@ const WithIconTemplate: Story = {
     placeholder: 'email@example.com',
     leadingIcon: <FiMail className="input-icon" />,
   },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const input = canvas.getByLabelText(/email/i);
+    
+    // Type an email address
+    await userEvent.type(input, 'test@example.com');
+    
+    // Verify the input has the expected value
+    expect(input).toHaveValue('test@example.com');
+  },
 };
 
 // Password Field
@@ -104,6 +116,16 @@ const PasswordTemplate: Story = {
     type: 'password',
     placeholder: 'Enter your password',
     leadingIcon: <FiLock className="input-icon" />,
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const input = canvas.getByLabelText(/password/i);
+    
+    // Type a password
+    await userEvent.type(input, 'secretpassword123');
+    
+    // Verify the input has the expected value
+    expect(input).toHaveValue('secretpassword123');
   },
 };
 
@@ -138,6 +160,19 @@ const DisabledTemplate: Story = {
     disabled: true,
     supportingText: 'This field cannot be edited',
   },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const input = canvas.getByLabelText(/username/i);
+    
+    // Verify the input is disabled
+    expect(input).toBeDisabled();
+    
+    // Try to type (should not work)
+    await userEvent.type(input, 'should not work');
+    
+    // Verify value didn't change
+    expect(input).toHaveValue('readonly@example.com');
+  },
 };
 
 // Search Input
@@ -147,7 +182,17 @@ const SearchTemplate: Story = {
     label: 'Search',
     placeholder: 'Search...',
     leadingIcon: <FiSearch className="input-icon" />,
-    type: 'search',
+    type: 'text',
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const input = canvas.getByLabelText(/search/i);
+    
+    // Type a search query
+    await userEvent.type(input, 'react components');
+    
+    // Verify the input has the expected value
+    expect(input).toHaveValue('react components');
   },
 };
 

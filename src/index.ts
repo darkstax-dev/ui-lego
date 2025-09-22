@@ -28,7 +28,14 @@ export * from './components/icons'
 export * from './components/dropdown'
 
 // Modeling exports
-export * from './components/modeling'
+export {
+  Activity,
+  Kubernetes,
+  Indicator,
+  ModelingCard,
+  ModelingDemo,
+  Plus as ModelingPlus,
+} from './components/modeling'
 
 // Modal exports
 export * from './components/modal'
@@ -45,14 +52,17 @@ export * from './components/menu'
 // Tooltip exports
 export * from './components/tooltip'
 
-// Navigation components
-export * from './components/navigation'
+// Monaco Editor exports
+export * from './components/monaco-editor'
+
+// Accordion exports
+export * from './components/accordion'
 
 // TopBar components
 export * from './components/bar'
 
+// Navigation components
+export * from './components/navigation'
+
 // Snackbar types
 export type { SnackbarVariant } from './components/snackbar/Snackbar'
-
-// Accordion exports
-export * from './components/accordion'

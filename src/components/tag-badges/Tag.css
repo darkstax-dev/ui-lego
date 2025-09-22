@@ -81,7 +81,7 @@
 
 .tag--positive:hover,
 .tag--positive.tag--hover {
-  background: #0D6D35;
+  background: var(--color-green-600);
 }
 
 .tag--positive .tag__remove svg {
@@ -96,7 +96,7 @@
 
 .tag--warning:hover,
 .tag--warning.tag--hover {
-  background: #E57A1A;
+  background: var(--color-yellow-600);
 }
 
 .tag--warning .tag__remove svg {

@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { useState, useMemo } from 'react';
 import * as Icons from './index';
+import { AlignCenterGraphic } from './graphics';
 import './Icons.stories.css';
 
 const meta: Meta = {
@@ -112,7 +113,7 @@ const iconCategories = {
     { name: 'Mask', component: Icons.Mask, category: 'Effects' },
     { name: 'Align Start', component: Icons.AlignStart, category: 'Alignment' },
     { name: 'Align End', component: Icons.AlignEnd, category: 'Alignment' },
-    { name: 'Align Center', component: Icons.AlignCenter, category: 'Alignment' },
+    { name: 'Align Center', component: AlignCenterGraphic, category: 'Alignment' },
     { name: 'Align Top', component: Icons.AlignTop, category: 'Alignment' },
     { name: 'Align Bottom', component: Icons.AlignBottom, category: 'Alignment' },
     { name: 'Align Middle', component: Icons.AlignMiddle, category: 'Alignment' },
@@ -198,6 +199,7 @@ const IconsCatalog = () => {
             value={selectedCategory}
             onChange={(e) => setSelectedCategory(e.target.value)}
             className="icons-category-select"
+            aria-label="Select icon category"
           >
             {categories.map(category => (
               <option key={category} value={category}>{category}</option>

@@ -2,7 +2,7 @@
   display: inline-flex;
   position: relative;
   max-width: 280px;
-  background: var(--surface-card, var(--Background-Card));
+  background: var(--surface-card);
   border-radius: var(--sds-size-radius-200);
   z-index: 1000;
 }
@@ -24,7 +24,7 @@
 
 /* Title styles */
 .tooltip__title {
-  color: #000;
+  color: var(--text-blue-main);
   font-family: var(--sds-typography-body-font-family);
   font-size: var(--sds-typography-body-size-medium);
   font-weight: var(--sds-typography-body-font-weight-strong);
@@ -34,7 +34,7 @@
 
 /* Body text styles */
 .tooltip__body {
-  color: #000;
+  color: var(--text-blue-main);
   font-family: var(--sds-typography-body-font-family);
   font-size: var(--sds-typography-body-size-small);
   font-weight: var(--sds-typography-body-font-weight-regular);

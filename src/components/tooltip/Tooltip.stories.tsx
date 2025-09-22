@@ -29,7 +29,7 @@ const meta: Meta<typeof Tooltip> = {
       description: 'Controls the visibility of the tooltip',
       table: {
         type: { summary: 'boolean' },
-        defaultValue: { summary: true },
+        defaultValue: { summary: 'true' },
       },
     },
     hasBody: {
@@ -37,7 +37,7 @@ const meta: Meta<typeof Tooltip> = {
       description: 'Whether to show the body text',
       table: {
         type: { summary: 'boolean' },
-        defaultValue: { summary: true },
+        defaultValue: { summary: 'true' },
       },
     },
     title: {

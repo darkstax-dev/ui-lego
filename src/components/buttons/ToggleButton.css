@@ -11,12 +11,12 @@
   height: 20px;
   justify-content: center;
   align-items: center;
-  color: #78797A;
+  color: var(--color-gray-500);
   transition: color 0.2s ease;
 }
 
 .toggle-button__icon--active {
-  color: var(--Text-Blue-text-Main-text, #00112B);
+  color: var(--text-blue-main);
 }
 
 .toggle-button__switch {
@@ -45,7 +45,7 @@
   padding: 2px;
   align-items: center;
   border-radius: 12px;
-  background: var(--Primary-button-red-Fill, #D9322A);
+  background: var(--btn-primary-red-fill);
   transition: all 0.2s ease;
   position: relative;
 }
@@ -76,7 +76,7 @@
 
 /* Hover effects */
 .toggle-button__switch:hover:not(:disabled) .toggle-button__track {
-  background: #C02A23;
+  background: var(--btn-primary-red-hover);
 }
 
 /* Disabled state */

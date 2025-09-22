@@ -1,36 +1,92 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# UI Lego
+
+A React component library built with TypeScript and Vite.
 
 ## Getting Started
 
-First, run the development server:
+### Development
+
+Run the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Storybook
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Start Storybook to view and develop components:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run storybook
+```
 
-## Learn More
+Open [http://localhost:6006](http://localhost:6006) to view Storybook.
 
-To learn more about Next.js, take a look at the following resources:
+### Build
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Build the library:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```bash
+npm run build
+```
 
-## Deploy on Vercel
+Build Storybook for production:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```bash
+npm run build-storybook
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Testing
+
+This project uses Storybook Test Runner with Playwright for automated testing of components.
+
+### Run Tests
+
+To run component tests:
+
+```bash
+npm run test-storybook
+```
+
+This will start Storybook and run tests against all stories, including:
+
+- **Interaction tests** (if `play` functions are defined in stories) - ✅ **Added to Button and InputField components**
+- **Accessibility tests** using `@storybook/addon-a11y`
+- **Visual regression tests** (screenshots are automatically captured and compared) - ✅ **115 visual baselines created**
+
+For CI environments:
+
+```bash
+npm run test-storybook:ci
+```
+
+### Adding Tests
+
+- **Interaction Tests**: Add `play` functions to your stories to test user interactions. Example:
+
+  ```tsx
+  export const MyStory: Story = {
+    // ... story config
+    play: async ({ canvasElement }) => {
+      const canvas = within(canvasElement);
+      const button = canvas.getByRole('button');
+      await userEvent.click(button);
+      expect(someElement).toHaveTextContent('expected text');
+    },
+  };
+  ```
+
+- **Accessibility**: Tests run automatically using `@storybook/addon-a11y`.
+- **Visual Regression**: Screenshots are taken automatically on each test run and compared against baselines. Run tests once to create baselines, then they will detect visual changes.
+
+## Scripts
+
+- `npm run dev` - Start Vite dev server
+- `npm run build` - Build the library
+- `npm run preview` - Preview the built library
+- `npm run storybook` - Start Storybook
+- `npm run build-storybook` - Build Storybook for production
+- `npm run test-storybook` - Run component tests
+- `npm run typecheck` - Run TypeScript type checking
+- `npm run lint` - Run ESLint
+- `npm run check` - Run typecheck, lint, and build

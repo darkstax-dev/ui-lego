@@ -1,0 +1,218 @@
+/* Monaco Editor Component Styles */
+/* Uses design tokens for consistent theming */
+
+.monaco-editor {
+  position: relative;
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--sds-color-border-default-default);
+  border-radius: var(--sds-size-radius-200, 0px);
+  overflow: hidden;
+  background: var(--surface-default);
+  transition: border-color 0.2s ease;
+}
+
+.monaco-editor:focus-within {
+  outline: 2px solid rgba(0, 114, 255, 0.2);
+  outline-offset: 2px;
+}
+
+/* Loading state */
+.monaco-editor__loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  gap: var(--sds-size-space-400);
+  background: var(--surface-default);
+  color: var(--text-blue-main);
+}
+
+.monaco-editor__loading-spinner {
+  width: 24px;
+  height: 24px;
+  border: 2px solid var(--sds-color-black-200);
+  border-top: 2px solid var(--text-blue-main);
+  border-radius: 50%;
+  animation: monaco-editor-spin 1s linear infinite;
+}
+
+@keyframes monaco-editor-spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Monaco Editor Overrides */
+/* These override Monaco's default styles to use our design tokens */
+
+/* Editor container */
+.monaco-editor .monaco-editor {
+  background: var(--surface-default) !important;
+}
+
+/* Editor background and text */
+.monaco-editor .monaco-editor-background {
+  background: var(--surface-default) !important;
+}
+
+.monaco-editor .monaco-editor .margin {
+  background: var(--surface-default) !important;
+}
+
+/* Line numbers */
+.monaco-editor .line-numbers {
+  color: var(--text-gray-secondary) !important;
+  font-family: var(--font-family-macan-mono) !important;
+}
+
+.monaco-editor .current-line ~ .line-numbers {
+  color: var(--text-blue-main) !important;
+}
+
+/* Editor content */
+.monaco-editor .view-lines {
+  color: var(--text-blue-main) !important;
+}
+
+/* Syntax highlighting */
+.monaco-editor .mtk1 { /* keywords */
+  color: var(--color-blue-700) !important;
+}
+
+.monaco-editor .mtk5 { /* strings */
+  color: var(--color-green-600) !important;
+}
+
+.monaco-editor .mtk6 { /* numbers */
+  color: var(--color-yellow-500) !important;
+}
+
+.monaco-editor .mtk7 { /* comments */
+  color: var(--color-gray-500) !important;
+  font-style: italic;
+}
+
+.monaco-editor .mtk9 { /* types */
+  color: var(--color-blue-600) !important;
+}
+
+/* Selection */
+.monaco-editor .selected-text {
+  background: rgba(0, 114, 255, 0.2) !important;
+}
+
+.monaco-editor .focused .selected-text {
+  background: rgba(0, 114, 255, 0.3) !important;
+}
+
+/* Cursor */
+.monaco-editor .cursor {
+  background: var(--text-blue-main) !important;
+}
+
+/* Line highlight */
+.monaco-editor .current-line {
+  background: var(--surface-subtle) !important;
+}
+
+/* Scrollbar */
+.monaco-editor .scrollbar {
+  background: var(--surface-default) !important;
+}
+
+.monaco-editor .slider {
+  background: var(--sds-color-black-200) !important;
+}
+
+.monaco-editor .slider:hover {
+  background: var(--sds-color-black-400) !important;
+}
+
+.monaco-editor .slider.active {
+  background: var(--sds-color-black-400) !important;
+}
+
+/* Context menu and widgets */
+.monaco-editor .context-view.monaco-menu-container {
+  background: var(--surface-card) !important;
+  border: 1px solid var(--border-subtle) !important;
+  border-radius: var(--sds-size-radius-200, 0px) !important;
+}
+
+.monaco-editor .monaco-menu .monaco-action-bar .action-item:hover {
+  background: var(--surface-subtle) !important;
+}
+
+/* Suggestions widget */
+.monaco-editor .suggest-widget {
+  background: var(--surface-card) !important;
+  border: 1px solid var(--border-subtle) !important;
+  border-radius: var(--sds-size-radius-200, 0px) !important;
+}
+
+.monaco-editor .suggest-widget .monaco-list-row.focused {
+  background: var(--surface-subtle) !important;
+}
+
+/* Hover widget */
+.monaco-editor .monaco-hover {
+  background: var(--surface-card) !important;
+  border: 1px solid var(--border-subtle) !important;
+  border-radius: var(--sds-size-radius-200, 0px) !important;
+}
+
+/* Error/warning markers */
+.monaco-editor .squiggly-error {
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 6 3'%3E%3Cpath fill='var(--color-red-500)' d='m0 2.5 1.5-2.5 1.5 2.5h-3z'/%3E%3C/svg%3E") repeat-x bottom !important;
+}
+
+.monaco-editor .squiggly-warning {
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 6 3'%3E%3Cpath fill='var(--color-yellow-500)' d='m0 2.5 1.5-2.5 1.5 2.5h-3z'/%3E%3C/svg%3E") repeat-x bottom !important;
+}
+
+/* Minimap */
+.monaco-editor .minimap {
+  background: var(--surface-subtle) !important;
+}
+
+.monaco-editor .minimap .minimap-slider {
+  background: var(--sds-color-black-200) !important;
+}
+
+.monaco-editor .minimap .minimap-slider:hover {
+  background: var(--sds-color-black-400) !important;
+}
+
+/* Diff editor support */
+.monaco-editor .diffOverviewRuler {
+  background: var(--surface-subtle) !important;
+}
+
+/* Bracket matching */
+.monaco-editor .bracket-match {
+  background: rgba(0, 114, 255, 0.1) !important;
+}
+
+.monaco-editor .bracket-match:hover {
+  background: rgba(0, 114, 255, 0.2) !important;
+}
+
+/* Find widget */
+.monaco-editor .find-widget {
+  background: var(--surface-card) !important;
+  border: 1px solid var(--border-subtle) !important;
+  border-radius: var(--sds-size-radius-200, 0px) !important;
+}
+
+.monaco-editor .find-widget .monaco-inputbox {
+  background: var(--surface-default) !important;
+  border: 1px solid var(--border-subtle) !important;
+}
+
+/* Go to definition link */
+.monaco-editor .goto-definition-link {
+  color: var(--color-blue-700) !important;
+}
+
+/* Dark mode overrides can be added here if needed */

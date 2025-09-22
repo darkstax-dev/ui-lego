@@ -2,10 +2,9 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { useState } from 'react';
 import Modal from './Modal';
 import Button from '../buttons/Button';
-import InputField from '../inputs/InputField';
 import './Modal.stories.css';
 
-const meta: Meta<typeof Modal> = {
+const meta: Meta = {
   title: 'Components/Modal',
   component: Modal,
   tags: ['autodocs'],
@@ -54,14 +53,14 @@ const meta: Meta<typeof Modal> = {
       description: 'Whether to show the action buttons',
     },
     children: {
-      control: { type: null },
+      control: false,
       description: 'Modal content',
     },
   },
 };
 
 export default meta;
-type Story = StoryObj<typeof Modal>;
+type Story = StoryObj;
 
 // Interactive example with state management
 const InteractiveModal = (args: any) => {
@@ -110,17 +109,12 @@ const FormTemplate: Story = {
     children: (
       <div className="modal-content">
         <div className="form-group">
-          <InputField 
-            label="Item Name" 
-            placeholder="Enter item name"
-          />
+          <label htmlFor="item-name">Item Name</label>
+          <input id="item-name" placeholder="Enter item name" />
         </div>
         <div className="form-group">
-          <InputField 
-            label="Description" 
-            placeholder="Enter description"
-            type="textarea"
-          />
+          <label htmlFor="item-desc">Description</label>
+          <textarea id="item-desc" placeholder="Enter description" />
         </div>
       </div>
     ),

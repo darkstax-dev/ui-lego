@@ -1,0 +1,49 @@
+/* Storybook-specific styles for MonacoEditor stories */
+
+.monaco-story-root {
+  padding: var(--sds-size-space-400);
+}
+
+.monaco-story-controls {
+  display: flex;
+  gap: var(--sds-size-space-300);
+  align-items: center;
+  margin-bottom: var(--sds-size-space-400);
+}
+
+.monaco-story-label {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sds-size-space-200);
+  color: var(--text-blue-main);
+}
+
+.monaco-story-select {
+  padding: 4px 8px;
+  border: 1px solid var(--sds-color-border-default-default);
+  border-radius: 4px;
+  background: var(--surface-default);
+  color: var(--text-blue-main);
+  font-family: var(--font-family-macan), system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+}
+
+.monaco-story-button {
+  padding: 4px 12px;
+  border: 1px solid var(--sds-color-border-default-default);
+  background: var(--surface-card);
+  color: var(--text-blue-main);
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.monaco-story-button:hover {
+  background: var(--surface-subtle);
+}
+
+.monaco-story-metadata {
+  margin-top: var(--sds-size-space-400);
+  padding: var(--sds-size-space-300);
+  background: var(--surface-subtle);
+  border-radius: 4px;
+  color: var(--text-blue-main);
+}

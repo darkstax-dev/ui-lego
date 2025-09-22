@@ -1,4 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
+import { within, userEvent } from '@storybook/testing-library';
+import { expect } from '@storybook/jest';
 import Button from './Button';
 import './Button.stories.css';
 
@@ -54,6 +56,11 @@ export const Primary: Story = {
     variant: 'primary',
     children: 'Primary Button',
   },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const button = canvas.getByRole('button', { name: /primary button/i });
+    await userEvent.click(button);
+  },
 };
 
 export const Secondary: Story = {
@@ -78,6 +85,16 @@ export const Disabled: Story = {
     disabled: true,
     children: 'Disabled Button',
   },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const button = canvas.getByRole('button', { name: /disabled button/i });
+    
+    // Verify the button is disabled and cannot be clicked
+    expect(button).toBeDisabled();
+    
+    // Try to click (should not trigger onClick)
+    await userEvent.click(button);
+  },
 };
 
 export const Sizes: Story = {
@@ -87,4 +104,12 @@ export const Sizes: Story = {
       <Button size="big">Big Button</Button>
     </div>
   ),
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const smallButton = canvas.getByRole('button', { name: /small button/i });
+    const bigButton = canvas.getByRole('button', { name: /big button/i });
+    
+    await userEvent.click(smallButton);
+    await userEvent.click(bigButton);
+  },
 };

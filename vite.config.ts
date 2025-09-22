@@ -8,6 +8,7 @@ export default defineConfig({
     react(),
     dts({
       insertTypesEntry: true,
+      exclude: ['src/**/*.stories.tsx', 'src/**/*.stories.ts'],
     }),
   ],
   build: {

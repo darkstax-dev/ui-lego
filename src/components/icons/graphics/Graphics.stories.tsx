@@ -103,6 +103,8 @@ const GraphicsCatalog = () => {
             value={selectedCategory}
             onChange={(e) => setSelectedCategory(e.target.value)}
             className="graphics-category-select"
+            aria-label="Select icon category"
+            title="Select icon category"
           >
             {categories.map(category => (
               <option key={category} value={category}>{category}</option>
@@ -113,6 +115,8 @@ const GraphicsCatalog = () => {
             value={selectedSize}
             onChange={(e) => setSelectedSize(Number(e.target.value))}
             className="graphics-size-select"
+            aria-label="Select icon size"
+            title="Select icon size"
           >
             {sizes.map(size => (
               <option key={size} value={size}>{size}px</option>
@@ -128,7 +132,9 @@ const GraphicsCatalog = () => {
       </div>
 
       <div className="graphics-grid">
-        {filteredIcons.map((icon, index) => {
+        {filteredIcons
+          .filter(icon => Boolean(icon.component))
+          .map((icon, index) => {
           const IconComponent = icon.component
           return (
             <div key={index} className="graphics-item">
@@ -166,7 +172,7 @@ export const Catalog: Story = {
 
 export const BooleanOperations: Story = {
   render: () => {
-    const icons = graphicsCategories['Boolean Operations']
+    const icons = graphicsCategories['Boolean Operations'].filter(i => Boolean(i.component))
     return (
       <div className="graphics-showcase">
         <h2>Boolean Operations</h2>
@@ -193,7 +199,7 @@ export const BooleanOperations: Story = {
 
 export const DrawingTools: Story = {
   render: () => {
-    const icons = graphicsCategories['Drawing Tools']
+    const icons = graphicsCategories['Drawing Tools'].filter(i => Boolean(i.component))
     return (
       <div className="graphics-showcase">
         <h2>Drawing Tools</h2>
@@ -220,7 +226,7 @@ export const DrawingTools: Story = {
 
 export const Alignment: Story = {
   render: () => {
-    const icons = graphicsCategories['Alignment']
+    const icons = graphicsCategories['Alignment'].filter(i => Boolean(i.component))
     return (
       <div className="graphics-showcase">
         <h2>Alignment Tools</h2>

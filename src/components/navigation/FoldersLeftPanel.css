@@ -7,7 +7,7 @@
   align-items: flex-start;
   gap: 10px;
   border-right: 1px solid var(--divider-light, #C8C8C8);
-  background: #DFDFDF;
+  background: var(--nav-secondary-bg);
   overflow-y: auto;
   flex-shrink: 0;
 }
@@ -38,7 +38,7 @@
 }
 
 .folders-panel__item:hover {
-  background: rgba(0, 17, 43, 0.05);
+  background: var(--sds-color-black-100);
 }
 
 .folders-panel__item--selected {
@@ -211,42 +211,30 @@
   }
 }
 
-/* Dark mode support (if implemented) */
+/* Dark mode support uses tokens (overrides come from tokens.css media query) */
 @media (prefers-color-scheme: dark) {
   .folders-panel {
-    background: #2a2a2a;
-    border-right-color: #404040;
+    background: var(--nav-secondary-bg);
+    border-right-color: var(--border-subtle);
   }
 
   .folders-panel__item-text {
-    color: #ffffff;
+    color: var(--text-white-main);
   }
 
   .folders-panel__item svg {
-    color: #ffffff;
+    color: var(--text-white-main);
   }
 
   .folders-panel__item:hover {
-    background: rgba(255, 255, 255, 0.1);
+    background: var(--sds-color-black-200);
   }
 
   .folders-panel__item--selected {
-    background: #404040;
+    background: var(--surface-subtle);
   }
 
   .folders-panel__divider {
-    border-top-color: #404040;
-  }
-
-  .folders-panel::-webkit-scrollbar-track {
-    background: rgba(255, 255, 255, 0.05);
-  }
-
-  .folders-panel::-webkit-scrollbar-thumb {
-    background: rgba(255, 255, 255, 0.2);
-  }
-
-  .folders-panel::-webkit-scrollbar-thumb:hover {
-    background: rgba(255, 255, 255, 0.3);
+    border-top-color: var(--border-subtle);
   }
 }

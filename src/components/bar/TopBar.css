@@ -2,7 +2,7 @@
 
 .top-bar {
   width: 100%;
-  background: #071F42;
+  background: var(--nav-main-bg);
   padding: 16px 20px;
   min-height: 72px;
   display: flex;
@@ -51,7 +51,7 @@
   cursor: pointer;
   transition: all 0.2s ease;
   padding: 8px 0;
-  color: #DFDFDF;
+  color: var(--text-white-secondary);
 }
 
 .top-bar__menu-item:hover {
@@ -59,7 +59,7 @@
 }
 
 .top-bar__menu-item--active {
-  color: #D9322A;
+  color: var(--btn-primary-red-fill);
 }
 
 .top-bar__menu-icon {
@@ -72,7 +72,7 @@
 }
 
 .top-bar__menu-text {
-  font-family: 'Macan Mono Trial', -apple-system, Roboto, Helvetica, sans-serif;
+  font-family: var(--font-family-macan-mono);
   font-size: 16px;
   font-weight: 600;
   line-height: 110%;
@@ -112,8 +112,8 @@
 }
 
 .top-bar__hub-text {
-  color: #DFDFDF;
-  font-family: 'Macan Mono Trial', -apple-system, Roboto, Helvetica, sans-serif;
+  color: var(--text-white-secondary);
+  font-family: var(--font-family-macan-mono);
   font-size: 16px;
   font-weight: 600;
   line-height: 110%;
@@ -124,7 +124,7 @@
 .top-bar__divider {
   width: 16px;
   height: 1px;
-  background: #DFDFDF;
+  background: var(--text-white-secondary);
   transform: rotate(90deg);
   flex-shrink: 0;
 }
@@ -143,7 +143,7 @@
   align-items: center;
   background: transparent;
   border: none;
-  color: #DFDFDF;
+  color: var(--text-white-secondary);
   cursor: pointer;
   transition: all 0.2s ease;
   padding: 0;
@@ -188,9 +188,9 @@
   left: 30px;
   width: 10px;
   height: 10px;
-  background: #FF3B31;
+  background: var(--color-red-500);
   border-radius: 50%;
-  border: 2px solid #071F42;
+  border: 2px solid var(--nav-main-bg);
 }
 
 /* Focus states */
@@ -401,13 +401,13 @@
 /* High contrast mode support */
 @media (prefers-contrast: high) {
   .top-bar {
-    border-bottom: 1px solid #DFDFDF;
+    border-bottom: 1px solid var(--text-white-secondary);
   }
 
   .top-bar__menu-item:focus-visible,
   .top-bar__action-btn:focus-visible,
   .top-bar__avatar:focus-visible {
-    outline: 2px solid #DFDFDF;
+    outline: 2px solid var(--text-white-secondary);
     outline-offset: 2px;
   }
 }
