@@ -5,13 +5,14 @@ export type LogoTileProps = {
   name: string
   backgroundClass: string
   description?: string
-  height?: number
+  size?: 'default' | 'tall'
 }
 
-const LogoTile: React.FC<LogoTileProps> = ({ name, backgroundClass, description, height = 120 }) => {
+const LogoTile: React.FC<LogoTileProps> = ({ name, backgroundClass, description, size = 'default' }) => {
+  const heightClass = size === 'tall' ? 'logo-art--tall' : ''
   return (
     <div className="logo-card">
-      <div className={`logo-art ${backgroundClass}`} style={{ height }} aria-label={name} role="img" />
+      <div className={`logo-art ${heightClass} ${backgroundClass}`} aria-label={name} role="img" />
       <div className="logo-meta">
         <span className="logo-name">{name}</span>
         {description ? <span className="logo-desc">{description}</span> : null}
