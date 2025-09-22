@@ -207,9 +207,3 @@
 .bar-chart svg {
   overflow: visible;
 }
-
-/* Y-axis legend rotation for "Food" label */
-.bar-chart g[data-testid="axis-left"] text[dominant-baseline="central"] {
-  transform: rotate(-90deg);
-  transform-origin: center;
-}
