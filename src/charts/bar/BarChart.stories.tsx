@@ -207,13 +207,13 @@ export const Compact: Story = {
     height: 300,
     margin: { top: 20, right: 20, bottom: 40, left: 40 },
     axisLeft: {
-      tickSize: 0,
-      tickPadding: 12,
+      tickSize: 5,
+      tickPadding: 5,
       tickRotation: 0,
     },
     axisBottom: {
-      tickSize: 0,
-      tickPadding: 12,
+      tickSize: 5,
+      tickPadding: 5,
       tickRotation: 0,
     },
   },
