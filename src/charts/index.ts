@@ -9,7 +9,7 @@ export type { PieChartProps, PieChartData } from './pie/PieChart';
 // Bar Chart exports
 export { default as BarChart } from './bar/BarChart';
 export { default as BarChartDemo } from './bar/BarChartDemo';
-export type { BarChartProps, BarChartData } from './bar/BarChart';
+export type { BarChartProps, BarChartData, GroupedBarChartData } from './bar/BarChart';
 
 // Color Palette exports
 export {
