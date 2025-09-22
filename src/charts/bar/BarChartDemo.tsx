@@ -31,8 +31,15 @@ const regionData: BarChartData[] = [
   { id: 'australia', label: 'Australia', value: 89 },
 ];
 
+// Type for dataset entries
+type DatasetEntry = {
+  name: string;
+  data: BarChartData[] | GroupedBarChartData[];
+  keys?: string[];
+};
+
 // Grouped data with multiple categories per item (inspired by Nivo examples)
-const groupedData = [
+const groupedData: GroupedBarChartData[] = [
   { id: 'AD', Sales: 150, Marketing: 200, Support: 140, Engineering: 80 },
   { id: 'AE', Sales: 65, Marketing: 175, Support: 155, Engineering: 120 },
   { id: 'AF', Sales: 140, Marketing: 167, Support: 110, Engineering: 85 },
