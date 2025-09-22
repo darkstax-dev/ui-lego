@@ -1,0 +1,174 @@
+/* Pie Chart Component Styles */
+/* Using design tokens from tokens.css */
+
+.pie-chart {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  background: var(--color-white);
+  border-radius: var(--sds-size-radius-400);
+}
+
+.pie-chart__container {
+  position: relative;
+  width: 100%;
+  height: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pie-chart__legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sds-size-space-400);
+  padding: var(--sds-size-space-600);
+  justify-content: center;
+  align-items: center;
+}
+
+.pie-chart__legend-item {
+  display: flex;
+  align-items: center;
+  gap: var(--sds-size-space-200);
+  padding: var(--sds-size-space-100) var(--sds-size-space-300);
+  border-bottom: 1px solid var(--Stroke-Table-header);
+  min-width: 70px;
+}
+
+.pie-chart__legend-color {
+  width: 6px;
+  height: 30px;
+  border-radius: var(--sds-size-radius-100);
+  flex-shrink: 0;
+}
+
+.pie-chart__legend-text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+}
+
+.pie-chart__legend-label {
+  font-family: var(--font-family-macan-mono);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-book);
+  line-height: 120%;
+  color: var(--Text-Blue-text-Tetriary-text);
+  text-transform: lowercase;
+}
+
+.pie-chart__legend-value {
+  font-family: var(--font-family-macan-mono);
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-semibold);
+  line-height: 110%;
+  letter-spacing: 1.6px;
+  text-transform: uppercase;
+  color: var(--Text-Blue-text-Main-text);
+}
+
+.pie-chart__center-label {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.pie-chart__center-title {
+  font-family: var(--font-family-macan-mono);
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-book);
+  line-height: 120%;
+  letter-spacing: 0.1em;
+  color: var(--Text-Blue-text-Tetriary-text);
+  text-transform: uppercase;
+  margin-bottom: var(--sds-size-space-100);
+}
+
+.pie-chart__center-value {
+  font-family: var(--font-family-macan-mono-stencil);
+  font-size: var(--font-size-3xl);
+  font-weight: var(--font-weight-medium);
+  line-height: 110%;
+  letter-spacing: 0.05em;
+  color: var(--Text-Blue-text-Tetriary-text);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .pie-chart__container {
+    height: 300px;
+  }
+  
+  .pie-chart__legend {
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--sds-size-space-200);
+  }
+  
+  .pie-chart__legend-item {
+    justify-content: space-between;
+    min-width: auto;
+    width: 100%;
+  }
+  
+  .pie-chart__center-value {
+    font-size: var(--font-size-2xl);
+  }
+}
+
+@media (max-width: 480px) {
+  .pie-chart__container {
+    height: 250px;
+  }
+  
+  .pie-chart__center-value {
+    font-size: var(--font-size-xl);
+  }
+  
+  .pie-chart__legend {
+    padding: var(--sds-size-space-400);
+  }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  .pie-chart {
+    background: var(--surface-card);
+  }
+}
+
+[data-theme="dark"] .pie-chart {
+  background: var(--surface-card);
+}
+
+/* Custom Nivo tooltip styling */
+.pie-chart .nivo-tooltip {
+  background: var(--surface-card) !important;
+  border: 1px solid var(--border-subtle) !important;
+  border-radius: var(--sds-size-radius-100) !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+  font-family: var(--font-family-macan-mono) !important;
+  font-size: var(--font-size-sm) !important;
+  color: var(--text-primary) !important;
+}
+
+/* Cursor pointer for interactive elements */
+.pie-chart__container [role="img"] {
+  cursor: pointer;
+}
+
+/* Animation for hover states */
+.pie-chart__legend-item:hover {
+  background-color: var(--surface-subtle);
+  border-radius: var(--sds-size-radius-100);
+  transition: background-color 0.2s ease;
+}
