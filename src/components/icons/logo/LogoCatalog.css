@@ -1,0 +1,81 @@
+@import '../../..//tokens.css';
+
+.logo-catalog {
+  padding: var(--sds-size-space-600);
+  background-color: var(--nav-main-bg);
+  color: var(--text-white-main);
+  font-family: var(--sds-typography-body-font-family);
+}
+
+.logo-heading {
+  font-family: var(--font-family-macan-mono-stencil);
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-normal);
+  letter-spacing: var(--letter-spacing-wide);
+  text-transform: uppercase;
+  color: var(--text-white-main);
+  margin: 0 0 var(--sds-size-space-600) 0;
+  border-bottom: var(--sds-size-stroke-border) solid var(--divider-light);
+  padding-bottom: var(--sds-size-space-400);
+}
+
+.logo-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: var(--sds-size-space-600);
+}
+
+.logo-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sds-size-space-300);
+  padding: var(--sds-size-space-400);
+  background-color: var(--color-blue-60);
+  color: var(--text-white-main);
+  border-radius: var(--sds-size-radius-200);
+  border: var(--sds-size-stroke-border) solid var(--divider-light);
+}
+
+.logo-art {
+  width: 100%;
+  background-color: var(--nav-main-bg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  border-radius: var(--sds-size-radius-100);
+}
+
+.logo-meta {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sds-size-space-100);
+}
+
+.logo-name {
+  font-family: var(--font-family-macan);
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: var(--letter-spacing-tight);
+}
+
+.logo-desc {
+  font-family: var(--font-family-macan-mono);
+  font-size: var(--font-size-xs);
+  color: var(--text-white-secondary);
+  letter-spacing: var(--letter-spacing-wider);
+  text-transform: uppercase;
+}
+
+/* Background image classes for each brand logo */
+.bg-sg-mark { background-image: url('https://cdn.builder.io/api/v1/image/assets%2F02e850346d0644a8a586de0c50a0af62%2Fb8a94bc95e4440c5a4d09029f81b61f0?format=webp&width=800'); }
+.bg-stratagem-wordmark { background-image: url('https://cdn.builder.io/api/v1/image/assets%2F02e850346d0644a8a586de0c50a0af62%2F95cbedb054e84d8884425be61c996168?format=webp&width=800'); }
+.bg-darkstax-wordmark { background-image: url('https://cdn.builder.io/api/v1/image/assets%2F02e850346d0644a8a586de0c50a0af62%2F52732d4132cb42d1b8d841d4acc5f490?format=webp&width=800'); }
+.bg-darkstax-mark { background-image: url('https://cdn.builder.io/api/v1/image/assets%2F02e850346d0644a8a586de0c50a0af62%2Ff57c310f79af44b2abab884bfdead97c?format=webp&width=800'); }
+.bg-nexora-wordmark { background-image: url('https://cdn.builder.io/api/v1/image/assets%2F02e850346d0644a8a586de0c50a0af62%2Fd85f50a0d99142df89e40b0dc629f596?format=webp&width=800'); }
+.bg-nexora-mark { background-image: url('https://cdn.builder.io/api/v1/image/assets%2F02e850346d0644a8a586de0c50a0af62%2Fbf3089bcfe804d488c0c6fd90568874d?format=webp&width=800'); }
+
+/* Responsive */
+@media (max-width: 768px) {
+  .logo-grid { gap: var(--sds-size-space-400); grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); }
+}
