@@ -313,6 +313,45 @@ export const NoGrid: Story = {
   },
 };
 
+export const Grouped: Story = {
+  args: {
+    data: groupedCountryData,
+    keys: ['Sales', 'Marketing', 'Support', 'Engineering'],
+    indexBy: 'id',
+    palette: 'default',
+    showLegend: true,
+    showGrid: true,
+    interactive: true,
+    animate: true,
+    height: 400,
+    groupMode: 'grouped',
+    margin: { top: 50, right: 130, bottom: 50, left: 60 },
+    axisLeft: {
+      tickSize: 5,
+      tickPadding: 5,
+      tickRotation: 0,
+      legend: 'Values',
+      legendPosition: 'middle',
+      legendOffset: -40,
+    },
+    axisBottom: {
+      tickSize: 5,
+      tickPadding: 5,
+      tickRotation: 0,
+      legend: 'Countries',
+      legendPosition: 'middle',
+      legendOffset: 32,
+    },
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Grouped bar chart showing multiple categories (Sales, Marketing, Support, Engineering) per country. This example demonstrates how different data series are represented with distinct colors, similar to Nivo\'s grouped bar chart examples. Each category uses a different color from the palette to clearly distinguish between data series.',
+      },
+    },
+  },
+};
+
 export const Demo: Story = {
   render: () => <BarChartDemo />,
   parameters: {
