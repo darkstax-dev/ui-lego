@@ -153,7 +153,14 @@ export const BarChart: React.FC<BarChartProps> = ({
           padding={0.3}
           valueScale={{ type: 'linear' }}
           indexScale={{ type: 'band', round: true }}
-          colors={() => resolvedPalette.colors[0]}
+          colors={({ id }) => {
+            if (keys.length > 1) {
+              // Use different colors for each category in grouped mode
+              const keyIndex = keys.indexOf(id as string);
+              return resolvedPalette.colors[keyIndex % resolvedPalette.colors.length];
+            }
+            return resolvedPalette.colors[0];
+          }}
           borderColor="transparent"
           borderWidth={0}
           axisTop={null}
