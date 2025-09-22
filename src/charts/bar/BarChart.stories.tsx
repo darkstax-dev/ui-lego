@@ -305,7 +305,7 @@ export const NoGrid: Story = {
 export const Demo: Story = {
   render: () => <BarChartDemo />,
   parameters: {
-    layout: 'fullscreen',
+    layout: 'centered',
     docs: {
       description: {
         story: 'Complete demo with multiple datasets, palette switching, and interactive controls.',
