@@ -31,11 +31,22 @@ const regionData: BarChartData[] = [
   { id: 'australia', label: 'Australia', value: 89 },
 ];
 
+// Grouped data with multiple categories per item (inspired by Nivo examples)
+const groupedData = [
+  { id: 'AD', Sales: 150, Marketing: 200, Support: 140, Engineering: 80 },
+  { id: 'AE', Sales: 65, Marketing: 175, Support: 155, Engineering: 120 },
+  { id: 'AF', Sales: 140, Marketing: 167, Support: 110, Engineering: 85 },
+  { id: 'AG', Sales: 48, Marketing: 102, Support: 180, Engineering: 82 },
+  { id: 'AI', Sales: 82, Marketing: 115, Support: 190, Engineering: 35 },
+  { id: 'AL', Sales: 67, Marketing: 45, Support: 155, Engineering: 95 },
+];
+
 const datasets = {
   protocol: { name: 'Protocol Usage', data: protocolData },
   sales: { name: 'Quarterly Sales', data: salesData },
   metrics: { name: 'Server Metrics', data: serverMetrics },
   regions: { name: 'Regional Activity', data: regionData },
+  grouped: { name: 'Grouped Categories', data: groupedData, keys: ['Sales', 'Marketing', 'Support', 'Engineering'] },
 };
 
 const palettes = ['default', 'blue', 'warm', 'cool'] as const;
