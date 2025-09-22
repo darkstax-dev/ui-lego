@@ -30,7 +30,7 @@ export const Catalog: Story = {
         <LogoTile name="Stratagem AI" backgroundClass="bg-stratagem-wordmark" description="Wordmark" size="tall" />
         <LogoTile name="Darkstax" backgroundClass="bg-darkstax-wordmark" description="Wordmark" size="tall" />
         <LogoTile name="Darkstax Mark" backgroundClass="bg-darkstax-mark" description="Glyph" />
-        <LogoTile name="Nexora" backgroundClass="bg-nexora-wordmark" description="Wordmark" size="tall" />
+        <LogoTile name="Nexora" description="Wordmark" size="tall" art={<NexoraWordmarkWhite width={320} />} />
         <LogoTile name="Nexora Mark" backgroundClass="bg-nexora-mark" description="Glyph" />
       </div>
     </div>
