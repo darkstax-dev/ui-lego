@@ -171,7 +171,7 @@ export const BarChart: React.FC<BarChartProps> = ({
             text: {
               fontFamily: 'var(--font-family-macan-mono)',
               fontSize: 12,
-              fill: resolvedPalette.text || 'var(--Text-Blue-text-Secondary-text)',
+              fill: resolvedPalette.text || 'var(--Text-Blue-text-Main-text)',
             },
             axis: {
               domain: {
@@ -195,7 +195,7 @@ export const BarChart: React.FC<BarChartProps> = ({
                 text: {
                   fontFamily: 'var(--font-family-macan-mono)',
                   fontSize: 12,
-                  fill: 'var(--Text-Blue-text-Secondary-text)',
+                  fill: 'var(--Text-Blue-text-Main-text)',
                 },
               },
             },
