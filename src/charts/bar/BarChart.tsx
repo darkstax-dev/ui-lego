@@ -67,6 +67,8 @@ export const BarChart: React.FC<BarChartProps> = ({
   interactive = true,
   animate = true,
   className = '',
+  groupMode = 'grouped',
+  layout = 'vertical',
   margin = { top: 50, right: 20, bottom: 50, left: 60 },
   axisLeft = {
     tickSize: 5,
