@@ -88,12 +88,12 @@
 
 /* Y-axis labels styling */
 .bar-chart g[transform*="translate"] text {
-  fill: var(--Text-Blue-text-Secondary-text, #071F42) !important;
+  fill: var(--Text-Blue-text-Main-text) !important;
 }
 
 /* X-axis labels styling */
 .bar-chart g[data-testid="axis-bottom"] text {
-  fill: var(--Text-Blue-text-Secondary-text, #071F42) !important;
+  fill: var(--Text-Blue-text-Main-text) !important;
 }
 
 /* Axis legend text styling */
