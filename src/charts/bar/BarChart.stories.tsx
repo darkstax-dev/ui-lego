@@ -109,28 +109,6 @@ const regionData = [
 export const Default: Story = {
   args: {
     data: protocolData,
-    palette: 'default',
-    showLegend: false,
-    showGrid: true,
-    interactive: true,
-    animate: true,
-    height: 400,
-    axisLeft: {
-      tickSize: 0,
-      tickPadding: 16,
-      tickRotation: 0,
-      legend: 'Food',
-      legendPosition: 'middle',
-      legendOffset: -50,
-    },
-    axisBottom: {
-      tickSize: 0,
-      tickPadding: 16,
-      tickRotation: 0,
-      legend: 'Country',
-      legendPosition: 'middle',
-      legendOffset: 40,
-    },
   },
 };
 
