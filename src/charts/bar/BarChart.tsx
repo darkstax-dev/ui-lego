@@ -126,7 +126,7 @@ export const BarChart: React.FC<BarChartProps> = ({
   return (
     <div className={`bar-chart ${className}`}>
       <div className="bar-chart__container" style={{ height }}>
-        <ResponsiveBar
+        <Bar
           data={chartData}
           keys={keys}
           indexBy={indexBy}
@@ -134,22 +134,22 @@ export const BarChart: React.FC<BarChartProps> = ({
           padding={0.3}
           valueScale={{ type: 'linear' }}
           indexScale={{ type: 'band', round: true }}
-          colors={() => resolvedPalette.colors[0]} // Use single color for all bars
+          colors={() => resolvedPalette.colors[0]}
           borderColor="transparent"
           borderWidth={0}
           axisTop={null}
           axisRight={null}
           axisBottom={{
             ...axisBottom,
-            tickSize: 0,
-            tickPadding: 16,
+            tickSize: 5,
+            tickPadding: 5,
             tickRotation: 0,
             legendPosition: axisBottom.legendPosition as any,
           }}
           axisLeft={{
             ...axisLeft,
-            tickSize: 0,
-            tickPadding: 16,
+            tickSize: 5,
+            tickPadding: 5,
             tickRotation: 0,
             legendPosition: axisLeft.legendPosition as any,
           }}
@@ -166,6 +166,8 @@ export const BarChart: React.FC<BarChartProps> = ({
           onClick={onBarClick}
           onMouseEnter={onBarHover}
           tooltip={CustomTooltip}
+          width={width ?? 640}
+          height={height}
           theme={{
             background: 'transparent',
             text: {
