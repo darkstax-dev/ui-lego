@@ -112,10 +112,7 @@
   stroke-dasharray: 3.2 3.2 !important;
 }
 
-/* Bar color override */
-.bar-chart rect[fill] {
-  fill: var(--Blue-Blue-950, #072B56) !important;
-}
+/* Prefer setting colors via Nivo API; no global overrides needed */
 
 /* Responsive Design */
 @media (max-width: 768px) {
