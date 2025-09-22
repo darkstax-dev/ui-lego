@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import BarChart, { BarChartData } from './BarChart';
+import BarChart, { BarChartData, GroupedBarChartData } from './BarChart';
 
 // Sample data based on Figma design
 const protocolData: BarChartData[] = [
