@@ -10,6 +10,11 @@ export interface BarChartData {
   color?: string;
 }
 
+// Interface for grouped bar chart data (multiple categories per item)
+export interface GroupedBarChartData {
+  [key: string]: string | number;
+}
+
 export interface BarChartProps {
   data: BarChartData[];
   palette?: string | ChartColorPalette;
