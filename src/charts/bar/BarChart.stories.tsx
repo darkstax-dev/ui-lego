@@ -14,6 +14,36 @@ const meta: Meta<typeof BarChart> = {
     },
   },
   tags: ['autodocs'],
+  args: {
+    data: [
+      { id: 'ssh', label: 'SSH', value: 0.43 },
+      { id: 'ftp', label: 'FTP', value: 0.3 },
+      { id: 'http', label: 'HTTP', value: 0.065 },
+      { id: 'other', label: 'Other', value: 0.15 },
+    ],
+    palette: 'default',
+    showLegend: false,
+    showGrid: true,
+    interactive: true,
+    animate: true,
+    height: 400,
+    axisLeft: {
+      tickSize: 5,
+      tickPadding: 5,
+      tickRotation: 0,
+      legend: 'Food',
+      legendPosition: 'middle',
+      legendOffset: -40,
+    },
+    axisBottom: {
+      tickSize: 5,
+      tickPadding: 5,
+      tickRotation: 0,
+      legend: 'Country',
+      legendPosition: 'middle',
+      legendOffset: 32,
+    },
+  },
   argTypes: {
     palette: {
       control: 'select',
