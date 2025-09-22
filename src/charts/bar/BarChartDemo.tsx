@@ -48,7 +48,7 @@ const groupedData: GroupedBarChartData[] = [
   { id: 'AL', Sales: 67, Marketing: 45, Support: 155, Engineering: 95 },
 ];
 
-const datasets = {
+const datasets: Record<string, DatasetEntry> = {
   protocol: { name: 'Protocol Usage', data: protocolData },
   sales: { name: 'Quarterly Sales', data: salesData },
   metrics: { name: 'Server Metrics', data: serverMetrics },
