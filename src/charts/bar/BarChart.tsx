@@ -1,5 +1,5 @@
 import React from 'react';
-import { ResponsiveBar } from '@nivo/bar';
+import { Bar } from '@nivo/bar';
 import { ChartColorPalette, getPalette, resolvePalette } from '../palette';
 import './BarChart.css';
 
