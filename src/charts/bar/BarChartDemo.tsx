@@ -94,7 +94,15 @@ const BarChartDemo: React.FC = () => {
           }}
         >
           Interactive bar chart component built with Nivo and design tokens.
-          Switch between different datasets and customize the appearance.
+          Switch between different datasets and customize the appearance. The "Grouped Categories" dataset demonstrates multi-category visualization with different colors for each data series, similar to{' '}
+          <a
+            href="https://cdn.builder.io/api/v1/image/assets%2F02e850346d0644a8a586de0c50a0af62%2Fd9e9ea00d1fd4472af3c053fa5c44311?format=webp&width=800"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{ color: 'var(--color-blue-700)', textDecoration: 'underline' }}
+          >
+            Nivo's grouped bar chart examples
+          </a>.
         </p>
       </div>
 
