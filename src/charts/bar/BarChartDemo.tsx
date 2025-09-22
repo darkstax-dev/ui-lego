@@ -297,39 +297,59 @@ const BarChartDemo: React.FC = () => {
         >
           Current Dataset: {currentDataset.name}
         </h3>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '8px' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '12px' }}>
           {currentDataset.data.map((item) => (
             <div
               key={item.id}
               style={{
-                display: 'flex',
-                justifyContent: 'space-between',
-                alignItems: 'center',
-                padding: '8px 12px',
+                padding: '12px',
                 background: 'var(--surface-card)',
                 borderRadius: 'var(--sds-size-radius-100)',
                 border: '1px solid var(--border-subtle)',
               }}
             >
-              <span
-                style={{
-                  fontFamily: 'var(--font-family-macan-mono)',
-                  fontSize: 'var(--font-size-sm)',
-                  color: 'var(--text-blue-secondary)',
-                }}
-              >
-                {item.label}
-              </span>
-              <span
+              <div
                 style={{
                   fontFamily: 'var(--font-family-macan-mono)',
                   fontSize: 'var(--font-size-sm)',
                   fontWeight: 'var(--font-weight-semibold)',
                   color: 'var(--text-blue-main)',
+                  marginBottom: '8px',
                 }}
               >
-                {item.value.toLocaleString()}
-              </span>
+                {selectedDataset === 'grouped' ? `Country ${item.id}` : (item as any).label || item.id}
+              </div>
+              {selectedDataset === 'grouped' ? (
+                // Show all categories for grouped data
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
+                  {currentDataset.keys?.map((key) => (
+                    <div
+                      key={key}
+                      style={{
+                        display: 'flex',
+                        justifyContent: 'space-between',
+                        fontSize: 'var(--font-size-xs)',
+                      }}
+                    >
+                      <span style={{ color: 'var(--text-blue-secondary)' }}>{key}:</span>
+                      <span style={{ color: 'var(--text-blue-main)', fontWeight: 'var(--font-weight-medium)' }}>
+                        {((item as any)[key] || 0).toLocaleString()}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                // Show single value for simple data
+                <span
+                  style={{
+                    fontFamily: 'var(--font-family-macan-mono)',
+                    fontSize: 'var(--font-size-sm)',
+                    color: 'var(--text-blue-main)',
+                  }}
+                >
+                  {((item as any).value || 0).toLocaleString()}
+                </span>
+              )}
             </div>
           ))}
         </div>
