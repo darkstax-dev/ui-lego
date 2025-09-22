@@ -249,7 +249,7 @@ export const CustomMargins: Story = {
     height: 450,
     margin: { top: 60, right: 80, bottom: 80, left: 80 },
     axisLeft: {
-      tickSize: 0,
+      tickSize: 5,
       tickPadding: 20,
       tickRotation: 0,
       legend: 'Revenue ($)',
@@ -257,7 +257,7 @@ export const CustomMargins: Story = {
       legendOffset: -60,
     },
     axisBottom: {
-      tickSize: 0,
+      tickSize: 5,
       tickPadding: 20,
       tickRotation: 0,
       legend: 'Quarter',
