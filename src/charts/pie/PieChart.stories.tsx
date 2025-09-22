@@ -57,7 +57,7 @@ const programmingLanguagesData = [
 
 const salesData = [
   { id: 'q1', label: 'Q1 Sales', value: 125000 },
-  { id: 'q2\', label: Q2 Sales', value: 148000 },
+  { id: 'q2', label: 'Q2 Sales', value: 148000 },
   { id: 'q3', label: 'Q3 Sales', value: 167000 },
   { id: 'q4', label: 'Q4 Sales', value: 152000 },
 ];
