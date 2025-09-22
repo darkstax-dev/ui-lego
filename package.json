@@ -9,6 +9,7 @@
     "dist"
   ],
   "scripts": {
+    "start": "npm run storybook",
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
@@ -23,6 +24,7 @@
   },
   "dependencies": {
     "@monaco-editor/react": "^4.7.0",
+    "@nivo/bar": "^0.99.0",
     "@nivo/core": "^0.99.0",
     "@nivo/pie": "^0.99.0",
     "@react-spring/web": "^10.0.3",

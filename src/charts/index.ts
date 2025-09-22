@@ -6,6 +6,11 @@ export { default as PieChart } from './pie/PieChart';
 export { default as PieChartDemo } from './pie/PieChartDemo';
 export type { PieChartProps, PieChartData } from './pie/PieChart';
 
+// Bar Chart exports
+export { default as BarChart } from './bar/BarChart';
+export { default as BarChartDemo } from './bar/BarChartDemo';
+export type { BarChartProps, BarChartData, GroupedBarChartData } from './bar/BarChart';
+
 // Color Palette exports
 export {
   defaultPalette,
@@ -21,4 +26,5 @@ export type { ChartColorPalette } from './palette';
 
 // Re-export for convenience
 export * from './pie/PieChart';
+export * from './bar/BarChart';
 export * from './palette';
