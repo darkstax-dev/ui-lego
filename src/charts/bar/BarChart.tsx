@@ -94,12 +94,22 @@ export const BarChart: React.FC<BarChartProps> = ({
   const resolvedPalette = resolvePalette(colorPalette);
 
   // Transform data for Nivo bar chart format
-  const chartData = data.map((item, index) => ({
-    [indexBy]: item.id,
-    label: item.label,
-    value: item.value,
-    color: item.color || resolvedPalette.colors[0], // Use first color for all bars to match design
-  }));
+  const chartData = data.map((item, index) => {
+    // Handle grouped data (multiple categories)
+    if (keys.length > 1 && typeof item === 'object' && 'id' in item) {
+      return {
+        [indexBy]: (item as any).id || (item as any)[indexBy],
+        ...(item as any),
+      };
+    }
+    // Handle simple data (single category)
+    return {
+      [indexBy]: (item as BarChartData).id,
+      label: (item as BarChartData).label,
+      value: (item as BarChartData).value,
+      color: (item as BarChartData).color || resolvedPalette.colors[0],
+    };
+  });
 
   // Custom tooltip component
   const CustomTooltip = ({ id, value, color, data }: any) => (
