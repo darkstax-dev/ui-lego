@@ -66,3 +66,6 @@ export * from './components/navigation'
 
 // Snackbar types
 export type { SnackbarVariant } from './components/snackbar/Snackbar'
+
+// Charts exports
+export * from './charts'
