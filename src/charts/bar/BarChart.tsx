@@ -16,7 +16,7 @@ export interface GroupedBarChartData {
 }
 
 export interface BarChartProps {
-  data: BarChartData[];
+  data: BarChartData[] | GroupedBarChartData[];
   palette?: string | ChartColorPalette;
   width?: number;
   height?: number;
@@ -27,6 +27,8 @@ export interface BarChartProps {
   interactive?: boolean;
   animate?: boolean;
   className?: string;
+  groupMode?: 'grouped' | 'stacked';
+  layout?: 'vertical' | 'horizontal';
   margin?: {
     top: number;
     right: number;
