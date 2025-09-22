@@ -113,6 +113,17 @@ const regionData = [
   { id: 'australia', label: 'Australia', value: 89 },
 ];
 
+// Grouped data with multiple categories per item (inspired by Nivo examples)
+const groupedCountryData = [
+  { id: 'AD', Sales: 150, Marketing: 200, Support: 140, Engineering: 80 },
+  { id: 'AE', Sales: 65, Marketing: 175, Support: 155, Engineering: 120 },
+  { id: 'AF', Sales: 140, Marketing: 167, Support: 110, Engineering: 85 },
+  { id: 'AG', Sales: 48, Marketing: 102, Support: 180, Engineering: 82 },
+  { id: 'AI', Sales: 82, Marketing: 115, Support: 190, Engineering: 35 },
+  { id: 'AL', Sales: 67, Marketing: 45, Support: 155, Engineering: 95 },
+  { id: 'AM', Sales: 85, Marketing: 25, Support: 195, Engineering: 180 },
+];
+
 export const Default: Story = {
   args: {
     data: protocolData,
