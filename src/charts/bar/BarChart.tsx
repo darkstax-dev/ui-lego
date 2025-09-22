@@ -144,12 +144,14 @@ export const BarChart: React.FC<BarChartProps> = ({
             tickSize: 0,
             tickPadding: 16,
             tickRotation: 0,
+            legendPosition: axisBottom.legendPosition as any,
           }}
           axisLeft={{
             ...axisLeft,
             tickSize: 0,
             tickPadding: 16,
             tickRotation: 0,
+            legendPosition: axisLeft.legendPosition as any,
           }}
           enableGridX={false}
           enableGridY={showGrid}
