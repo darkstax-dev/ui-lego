@@ -6,7 +6,7 @@ const meta: Meta<typeof BarChart> = {
   title: 'Charts/Bar Chart',
   component: BarChart,
   parameters: {
-    layout: 'fullscreen',
+    layout: 'centered',
     docs: {
       description: {
         component: 'A configurable bar chart component built with Nivo that uses design tokens for consistent styling. Based on the Figma design with protocol usage data.',
