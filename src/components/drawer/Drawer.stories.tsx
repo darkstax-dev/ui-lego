@@ -27,14 +27,14 @@ export const Default: Story = {
       const [open, setOpen] = React.useState(false)
       return (
         <div className="drawer-story">
-          <button className="drawer-trigger" onClick={() => setOpen(true)}>
+          <Button onClick={() => setOpen(true)}>
             Open Drawer
-          </button>
+          </Button>
 
           <Drawer isOpen={open} onClose={() => setOpen(false)} title="Default Drawer">
             <div className="drawer-sample-content">
               <p>This is the default drawer content. Use the close button or click the backdrop to close.</p>
-              <button onClick={() => setOpen(false)} className="drawer-sample-close">Close</button>
+              <Button variant="secondary" onClick={() => setOpen(false)}>Close</Button>
             </div>
           </Drawer>
         </div>
@@ -52,10 +52,10 @@ export const Positions: Story = {
       return (
         <div className="drawer-story drawer-positions">
           <div className="drawer-position-buttons">
-            <button className="drawer-trigger" onClick={() => setOpenPos('right')}>Open Right</button>
-            <button className="drawer-trigger" onClick={() => setOpenPos('left')}>Open Left</button>
-            <button className="drawer-trigger" onClick={() => setOpenPos('top')}>Open Top</button>
-            <button className="drawer-trigger" onClick={() => setOpenPos('bottom')}>Open Bottom</button>
+            <Button onClick={() => setOpenPos('right')}>Open Right</Button>
+            <Button onClick={() => setOpenPos('left')}>Open Left</Button>
+            <Button onClick={() => setOpenPos('top')}>Open Top</Button>
+            <Button onClick={() => setOpenPos('bottom')}>Open Bottom</Button>
           </div>
 
           <Drawer
@@ -110,9 +110,9 @@ export const Sizes: Story = {
       return (
         <div className="drawer-story drawer-sizes">
           <div className="drawer-position-buttons">
-            <button className="drawer-trigger" onClick={() => setSizeOpen('small')}>Small</button>
-            <button className="drawer-trigger" onClick={() => setSizeOpen('standard')}>Standard</button>
-            <button className="drawer-trigger" onClick={() => setSizeOpen('large')}>Large</button>
+            <Button onClick={() => setSizeOpen('small')}>Small</Button>
+            <Button onClick={() => setSizeOpen('standard')}>Standard</Button>
+            <Button onClick={() => setSizeOpen('large')}>Large</Button>
           </div>
 
           <Drawer
@@ -155,7 +155,7 @@ export const NoBackdrop: Story = {
       const [open, setOpen] = React.useState(false)
       return (
         <div className="drawer-story">
-          <button className="drawer-trigger" onClick={() => setOpen(true)}>Open without Backdrop</button>
+          <Button onClick={() => setOpen(true)}>Open without Backdrop</Button>
 
           <Drawer isOpen={open} onClose={() => setOpen(false)} hasBackdrop={false} title="No Backdrop">
             <div className="drawer-sample-content">Drawer without a backdrop</div>
