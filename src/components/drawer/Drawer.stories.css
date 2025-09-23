@@ -1,0 +1,30 @@
+.drawer-story {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.drawer-position-buttons {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+/* Button styling is now handled by the Button component */
+
+.drawer-sample-content {
+  padding: 16px;
+}
+
+/* Close button styling is now handled by the Button component */
+.drawer-sample-content .button {
+  margin-top: 12px;
+}
+
+@media (max-width: 600px) {
+  .drawer-story {
+    padding: 12px;
+  }
+}

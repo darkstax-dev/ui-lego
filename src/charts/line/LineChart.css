@@ -1,0 +1,232 @@
+/* LineChart Component Styles */
+
+.line-chart {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  background: var(--Background-Card);
+  border-radius: 8px;
+  padding: 24px;
+  box-sizing: border-box;
+}
+
+.line-chart__container {
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Tooltip styles extracted from inline styles */
+.line-chart__tooltip {
+  background: var(--Tooltip-Background, #fff);
+  padding: 12px;
+  border: 1px solid var(--Tooltip-Border, #ddd);
+  border-radius: 4px;
+  font-family: var(--font-family-macan-mono);
+  font-size: 14px;
+  color: var(--Tooltip-Text, #000);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.line-chart__tooltip-title {
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.line-chart__tooltip-sub {
+  margin-bottom: 4px;
+  font-size: 12px;
+  color: var(--Text-Gray-text-Main-text);
+}
+
+.line-chart__tooltip-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.line-chart__tooltip-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.line-chart__tooltip-value {
+  font-size: 13px;
+}
+
+/* Custom Legend Styles */
+.line-chart__legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-top: 24px;
+  justify-content: center;
+  width: 100%;
+  max-width: 600px;
+}
+
+.line-chart__legend-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+
+.line-chart__legend-color {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.line-chart__legend-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.line-chart__legend-label {
+  font-family: var(--font-family-macan-mono);
+  font-size: 12px;
+  font-weight: 450;
+  line-height: 1.2;
+  letter-spacing: 1.2px;
+  color: var(--Text-Blue-text-Main-text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.line-chart__legend-value {
+  font-family: var(--font-family-macan-mono);
+  font-size: 11px;
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--Text-Gray-text-Main-text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Point Styles */
+.line-chart svg circle {
+  transition: all 0.2s ease;
+}
+
+.line-chart__point {
+  transition: all 0.2s ease;
+  filter: drop-shadow(0px 1px 2px rgba(12, 12, 13, 0.1));
+}
+
+.line-chart__point-inner {
+}
+
+.line-chart svg circle:hover {
+  transform: scale(1.1);
+  filter: drop-shadow(0px 2px 4px rgba(12, 12, 13, 0.2));
+}
+
+/* Line Styles */
+.line-chart svg path[stroke] {
+  transition: stroke-width 0.2s ease;
+}
+
+.line-chart:hover svg path[stroke] {
+  stroke-width: 4;
+}
+
+/* Area Styles */
+.line-chart svg path[fill] {
+  transition: fill-opacity 0.2s ease;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .line-chart {
+    padding: 16px;
+  }
+  
+  .line-chart__container {
+    overflow-x: auto;
+  }
+  
+  .line-chart__legend {
+    gap: 12px;
+    margin-top: 16px;
+  }
+  
+  .line-chart__legend-item {
+    gap: 6px;
+  }
+  
+  .line-chart__legend-label,
+  .line-chart__legend-value {
+    font-size: 11px;
+  }
+}
+
+@media (max-width: 480px) {
+  .line-chart {
+    padding: 12px;
+  }
+  
+  .line-chart__legend {
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  .line-chart__legend-item {
+    justify-content: center;
+  }
+}
+
+/* Dark theme support */
+@media (prefers-color-scheme: dark) {
+  .line-chart {
+    background: var(--Background-Card, #2a2a2a);
+  }
+  
+  .line-chart__legend-label {
+    color: var(--Text-Blue-text-Main-text, #ffffff);
+  }
+  
+  .line-chart__legend-value {
+    color: var(--Text-Gray-text-Main-text, #cccccc);
+  }
+}
+
+/* Tooltip Enhancement */
+.line-chart svg .tooltip {
+  pointer-events: none;
+}
+
+/* Grid Lines Enhancement */
+.line-chart svg .grid line {
+  stroke-dasharray: 3.2 3.2;
+  stroke: #C8C8C8;
+  stroke-width: 1;
+}
+
+/* Animation Enhancement */
+.line-chart svg path,
+.line-chart svg circle {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Focus States for Accessibility */
+.line-chart:focus-within svg circle {
+  outline: 2px solid var(--color-blue-dark-950);
+  outline-offset: 2px;
+}
+
+/* Enhanced Hover States */
+.line-chart svg g:hover circle {
+  filter: drop-shadow(0px 4px 8px rgba(7, 31, 66, 0.3));
+}
