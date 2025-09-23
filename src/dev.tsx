@@ -29,6 +29,7 @@ import MenuDemo from './components/menu/MenuDemo'
 import TooltipDemo from './components/tooltip/TooltipDemo'
 import { EffectsDemo } from './components/effects'
 import AccordionDemo from './components/accordion/AccordionDemo'
+import MultiSelectDemo from './components/multiselect/MultiSelectDemo'
 import './dev.css'
 import './tokens.css'
 
@@ -888,6 +889,12 @@ function App() {
       <section className="component-section component-section--white">
         <h2>Dropdown Components</h2>
         <DropdownDemo />
+      </section>
+
+      <section className="component-section component-section--white">
+        <h1>MultiSelect Components</h1>
+        <h2>Multi-select input with tag display and dropdown options</h2>
+        <MultiSelectDemo />
       </section>
 
       <section className="component-section component-section--white">
