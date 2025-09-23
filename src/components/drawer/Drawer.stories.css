@@ -1,0 +1,45 @@
+.drawer-story {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.drawer-position-buttons {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.drawer-trigger {
+  background: var(--brand, #276ef1);
+  color: #fff;
+  border: none;
+  padding: 10px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.drawer-sample-content {
+  padding: 16px;
+}
+
+.drawer-sample-close {
+  margin-top: 12px;
+  background: transparent;
+  border: 1px solid rgba(0,0,0,0.08);
+  padding: 8px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+@media (max-width: 600px) {
+  .drawer-story {
+    padding: 12px;
+  }
+  .drawer-trigger {
+    padding: 8px 10px;
+  }
+}
