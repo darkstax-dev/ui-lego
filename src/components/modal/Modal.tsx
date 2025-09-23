@@ -1,15 +1,27 @@
 import React, { useEffect, useRef, useCallback, useId } from 'react'
 import './Modal.css'
 
+/**
+ * Props for the Modal component
+ */
 interface ModalProps {
+  /** Controls the visibility of the modal */
   isOpen: boolean
+  /** Handler called when the modal should be closed */
   onClose: () => void
+  /** Title displayed in the modal header */
   title?: string
+  /** Content to display inside the modal */
   children?: React.ReactNode
+  /** Handler called when the cancel action is triggered */
   onCancel?: () => void
+  /** Handler called when the confirm action is triggered */
   onConfirm?: () => void
+  /** Text for the cancel button */
   cancelText?: string
+  /** Text for the confirm button */
   confirmText?: string
+  /** Whether to show action buttons at the bottom */
   showActions?: boolean
 }
 

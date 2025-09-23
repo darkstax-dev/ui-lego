@@ -8,6 +8,13 @@ const meta: Meta<typeof Menu> = {
   title: 'Components/Menu',
   component: Menu,
   tags: ['autodocs'],
+  parameters: {
+    docs: {
+      description: {
+        component: 'A comprehensive menu system with sections, headers, separators, and various item types. Supports icons, actions, and customizable layouts for navigation and action menus.',
+      },
+    },
+  },
 };
 
 export default meta;

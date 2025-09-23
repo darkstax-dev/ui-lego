@@ -8,6 +8,13 @@ const meta: Meta = {
   title: 'Components/Modal',
   component: Modal,
   tags: ['autodocs'],
+  parameters: {
+    docs: {
+      description: {
+        component: 'A fully accessible modal component with focus management, keyboard navigation, and customizable actions. Includes proper ARIA attributes and focus trapping for screen readers.',
+      },
+    },
+  },
   args: {
     isOpen: false,
     title: 'Modal Title',

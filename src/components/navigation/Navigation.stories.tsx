@@ -7,6 +7,13 @@ const meta: Meta = {
   title: 'Components/Navigation',
   component: SecondaryNavigation,
   tags: ['autodocs'],
+  parameters: {
+    docs: {
+      description: {
+        component: 'A secondary navigation component with scenario management features. Includes title display, locked records toggle, and navigation state management.',
+      },
+    },
+  },
   args: {
     variant: 'default',
     scenarioTitle: 'Project Dashboard',

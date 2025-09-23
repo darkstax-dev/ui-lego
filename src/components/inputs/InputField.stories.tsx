@@ -10,6 +10,13 @@ const meta: Meta = {
   title: 'Components/Inputs/InputField',
   component: InputField,
   tags: ['autodocs'],
+  parameters: {
+    docs: {
+      description: {
+        component: 'A comprehensive input field component with validation states, icons, and accessibility features. Supports various input types and provides clear visual feedback for user interactions.',
+      },
+    },
+  },
   args: {
     label: 'Email',
     placeholder: 'Enter your email',

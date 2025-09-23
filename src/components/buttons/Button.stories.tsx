@@ -8,6 +8,13 @@ const meta: Meta<typeof Button> = {
   title: 'Components/Button',
   component: Button,
   tags: ['autodocs'],
+  parameters: {
+    docs: {
+      description: {
+        component: 'A versatile button component that supports multiple variants, sizes, and states. It provides consistent styling and accessibility features across the application.',
+      },
+    },
+  },
   args: {
     children: 'Button',
     variant: 'primary',

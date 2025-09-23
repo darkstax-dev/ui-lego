@@ -7,6 +7,13 @@ const meta: Meta<typeof Accordion> = {
   title: 'Components/Accordion',
   component: Accordion,
   tags: ['autodocs'],
+  parameters: {
+    docs: {
+      description: {
+        component: 'A collapsible accordion component for organizing content in expandable sections. Supports multiple items, custom headers, and smooth animations.',
+      },
+    },
+  },
 };
 
 export default meta;

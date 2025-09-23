@@ -7,6 +7,13 @@ const meta: Meta<typeof Tooltip> = {
   title: 'Components/Tooltip',
   component: Tooltip,
   tags: ['autodocs'],
+  parameters: {
+    docs: {
+      description: {
+        component: 'A tooltip component that displays contextual information on hover or focus. Supports multiple placements, custom content, and accessibility features.',
+      },
+    },
+  },
   args: {
     title: 'Tooltip Title',
     body: 'This is a helpful tooltip message that provides additional context.',

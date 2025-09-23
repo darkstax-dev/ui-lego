@@ -7,15 +7,27 @@ export type ButtonSizeLegacy = 'small' | 'big'
 export type ButtonSize = 'sm' | 'md' | 'lg' | ButtonSizeLegacy
 export type ButtonState = 'default' | 'hover' | 'disabled'
 
+/**
+ * Props for the Button component
+ */
 type OwnProps = {
+  /** The content to display inside the button */
   children: React.ReactNode
+  /** The visual style variant of the button */
   variant?: ButtonVariant
+  /** The size of the button */
   size?: ButtonSize
+  /** The interaction state of the button */
   state?: ButtonState
+  /** Whether the button is disabled */
   disabled?: boolean
+  /** Optional icon to display in the button */
   icon?: React.ReactNode
+  /** Additional CSS classes */
   className?: string
+  /** The button type attribute */
   type?: 'button' | 'submit' | 'reset'
+  /** Whether to render as a child component using Slot pattern */
   asChild?: boolean
 }
 

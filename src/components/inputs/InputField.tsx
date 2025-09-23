@@ -1,17 +1,31 @@
 import React, { useId } from 'react'
 import './InputField.css'
 
+/**
+ * Props for the InputField component
+ */
 interface InputFieldProps {
+  /** Label text displayed above the input */
   label?: string
+  /** Current value of the input field */
   value: string
+  /** Handler called when the input value changes */
   onChange: (value: string) => void
+  /** Placeholder text shown when input is empty */
   placeholder?: string
+  /** Whether the input is disabled */
   disabled?: boolean
+  /** Error message to display */
   error?: string
+  /** Success message to display */
   success?: string
+  /** Additional helper text below the input */
   supportingText?: string
+  /** Icon displayed at the start of the input */
   leadingIcon?: React.ReactNode
+  /** HTML input type */
   type?: 'text' | 'email' | 'password' | 'number' | 'tel' | 'url'
+  /** Custom ID for the input element */
   id?: string
 }
 

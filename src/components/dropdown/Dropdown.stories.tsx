@@ -5,6 +5,14 @@ import DropdownItem from './DropdownItem'
 const meta: Meta<typeof Dropdown> = {
   title: 'Components/Dropdown/Dropdown',
   component: Dropdown,
+  tags: ['autodocs'],
+  parameters: {
+    docs: {
+      description: {
+        component: 'A flexible dropdown component that supports various sizes, positions, and custom content. Used for navigation menus, action lists, and selection interfaces.',
+      },
+    },
+  },
   args: { isOpen: true, position: 'relative', size: 'standard' },
 }
 
