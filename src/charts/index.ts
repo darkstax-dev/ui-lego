@@ -11,6 +11,11 @@ export { default as BarChart } from './bar/BarChart';
 export { default as BarChartDemo } from './bar/BarChartDemo';
 export type { BarChartProps, BarChartData, GroupedBarChartData } from './bar/BarChart';
 
+// Line Chart exports
+export { default as LineChart } from './line/LineChart';
+export { default as LineChartDemo } from './line/LineChartDemo';
+export type { LineChartProps, LineChartData } from './line/LineChart';
+
 // Stream Chart exports
 export { default as StreamChart } from './stream/StreamChart';
 export { default as StreamChartDemo } from './stream/StreamChartDemo';
@@ -32,5 +37,6 @@ export type { ChartColorPalette } from './palette';
 // Re-export for convenience
 export * from './pie/PieChart';
 export * from './bar/BarChart';
+export * from './line/LineChart';
 export * from './stream/StreamChart';
 export * from './palette';
