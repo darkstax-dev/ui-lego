@@ -88,14 +88,14 @@ export const LineChart: React.FC<LineChartProps> = ({
   enableGridX = false,
   enableGridY = true,
   enableSlices = 'x',
-  margin = { top: 50, right: 60, bottom: 50, left: 60 },
+  margin = { top: 50, right: 60, bottom: 70, left: 80 },
   axisLeft = {
     tickSize: 5,
-    tickPadding: 5,
+    tickPadding: 8,
     tickRotation: 0,
     legend: 'Value',
     legendPosition: 'middle',
-    legendOffset: -40,
+    legendOffset: -60,
   },
   axisBottom = {
     tickSize: 5,
@@ -103,7 +103,7 @@ export const LineChart: React.FC<LineChartProps> = ({
     tickRotation: 0,
     legend: 'Time',
     legendPosition: 'middle',
-    legendOffset: 36,
+    legendOffset: 40,
   },
   yScale = {
     type: 'linear',
@@ -126,55 +126,38 @@ export const LineChart: React.FC<LineChartProps> = ({
     color: series.color || resolvedPalette.colors[index % resolvedPalette.colors.length],
   }));
 
+  // compute a sensible baseline for the area so the shaded area doesn't overflow the axis region
+  const numericValues = data.flatMap(s => s.data.map(p => Number(p.y)));
+  const computedAreaBaseline = typeof yScale?.min === 'number'
+    ? (yScale as any).min
+    : Math.min(...(numericValues.length ? numericValues : [0]));
+
   // Custom tooltip component
   const CustomTooltip = ({ point }: any) => (
-    <div
-      style={{
-        background: resolvedPalette.background || '#ffffff',
-        padding: '12px',
-        border: `1px solid ${resolvedPalette.border || '#ddd'}`,
-        borderRadius: '4px',
-        fontFamily: 'var(--font-family-macan-mono)',
-        fontSize: '14px',
-        color: resolvedPalette.text || '#000',
-        boxShadow: '0 4px 12px rgba(0, 0, 0, 0.15)',
-      }}
-    >
-      <div style={{ fontWeight: 600, marginBottom: '4px' }}>
-        {point.serieId}
-      </div>
-      <div style={{ marginBottom: '4px', fontSize: '12px', color: 'var(--Text-Gray-text-Main-text)' }}>
-        X: {point.data.xFormatted} | Y: {point.data.yFormatted}
-      </div>
-      <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-        <div
-          style={{
-            width: '12px',
-            height: '12px',
-            backgroundColor: point.serieColor,
-            borderRadius: '50%',
-          }}
-        />
-        <span>Value: {point.data.y}</span>
+    <div className="line-chart__tooltip">
+      <div className="line-chart__tooltip-title">{point.serieId}</div>
+      <div className="line-chart__tooltip-sub">X: {point.data.xFormatted} | Y: {point.data.yFormatted}</div>
+      <div className="line-chart__tooltip-row">
+        <div className="line-chart__tooltip-dot" style={{ backgroundColor: point.serieColor }} />
+        <span className="line-chart__tooltip-value">Value: {point.data.y}</span>
       </div>
     </div>
   );
 
   // Custom point component with enhanced styling
   const CustomPoint = ({ point }: any) => (
-    <g>
+    <g className="line-chart__point-group">
       <circle
+        className="line-chart__point"
         cx={point.x}
         cy={point.y}
         r={pointSize}
         fill={point.serieColor}
         stroke="white"
         strokeWidth={pointBorderWidth}
-        style={{
-          filter: 'drop-shadow(0px 1px 2px rgba(12, 12, 13, 0.1))',
-        }}
       />
       <circle
+        className="line-chart__point-inner"
         cx={point.x}
         cy={point.y}
         r={pointSize / 2}
@@ -195,16 +178,16 @@ export const LineChart: React.FC<LineChartProps> = ({
           axisRight={null}
           axisBottom={{
             ...axisBottom,
-            tickSize: 5,
-            tickPadding: 5,
-            tickRotation: 0,
+            tickSize: axisBottom.tickSize,
+            tickPadding: axisBottom.tickPadding,
+            tickRotation: axisBottom.tickRotation,
             legendPosition: axisBottom.legendPosition as any,
           }}
           axisLeft={{
             ...axisLeft,
-            tickSize: 5,
-            tickPadding: 5,
-            tickRotation: 0,
+            tickSize: axisLeft.tickSize,
+            tickPadding: axisLeft.tickPadding,
+            tickRotation: axisLeft.tickRotation,
             legendPosition: axisLeft.legendPosition as any,
           }}
           enableGridX={enableGridX}
@@ -218,6 +201,7 @@ export const LineChart: React.FC<LineChartProps> = ({
           enablePoints={enablePoints}
           enableArea={enableArea}
           areaOpacity={areaOpacity}
+          areaBaselineValue={computedAreaBaseline}
           curve={curve}
           lineWidth={3}
           enableSlices={enableSlices}

@@ -151,13 +151,13 @@ export const TrafficVolume: Story = {
     axisLeft: {
       legend: 'Traffic volume in %',
       legendPosition: 'middle',
-      legendOffset: -50,
+      legendOffset: -60,
       format: (value: any) => value.toFixed(2),
     },
     axisBottom: {
       legend: 'Time (Hour)',
       legendPosition: 'middle',
-      legendOffset: 36,
+      legendOffset: 40,
     },
   },
 };
@@ -170,6 +170,46 @@ export const MultiSeries: Story = {
     enableArea: false,
     pointSize: 6,
     curve: 'catmullRom',
+  },
+};
+
+export const AreaBaseline: Story = {
+  args: {
+    data: trafficData,
+    height: 420,
+    showLegend: false,
+    enableArea: true,
+    areaOpacity: 0.5,
+    curve: 'catmullRom',
+    yScale: { type: 'linear', min: 0.5, max: 0.9 },
+    axisLeft: { legend: 'Value', legendPosition: 'middle', legendOffset: -70, tickPadding: 10, format: (v: any) => Number(v).toFixed(2) },
+    axisBottom: { legend: 'Time', legendPosition: 'middle', legendOffset: 40 },
+  },
+};
+
+export const SmoothVsStepped: Story = {
+  args: {
+    data: generateLineData(2),
+    height: 380,
+    showLegend: true,
+    enableArea: true,
+    areaOpacity: 0.25,
+    curve: 'catmullRom',
+    pointSize: 6,
+  },
+};
+
+export const LargeMarginSpacing: Story = {
+  args: {
+    ...Default.args,
+    data: generateLineData(1),
+    height: 400,
+    curve: 'catmullRom',
+    enableArea: true,
+    areaOpacity: 0.3,
+    axisLeft: { legend: 'Value', legendPosition: 'middle', legendOffset: -80, tickPadding: 12 },
+    axisBottom: { legend: 'Time', legendPosition: 'middle', legendOffset: 44 },
+    margin: { top: 50, right: 60, bottom: 80, left: 90 },
   },
 };
 
