@@ -72,3 +72,6 @@ export * from './components/multiselect'
 
 // Charts exports
 export * from './charts'
+
+// Drawer exports
+export * from './components/drawer'
