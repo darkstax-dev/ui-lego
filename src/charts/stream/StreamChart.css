@@ -1,0 +1,149 @@
+/* StreamChart Component Styles */
+
+.stream-chart {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  background: var(--Background-Card);
+  border-radius: 8px;
+  padding: 24px;
+  box-sizing: border-box;
+}
+
+.stream-chart__container {
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Custom Legend Styles */
+.stream-chart__legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-top: 24px;
+  justify-content: center;
+  width: 100%;
+  max-width: 600px;
+}
+
+.stream-chart__legend-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+
+.stream-chart__legend-color {
+  width: 12px;
+  height: 12px;
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+.stream-chart__legend-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.stream-chart__legend-label {
+  font-family: var(--font-family-macan-mono);
+  font-size: 12px;
+  font-weight: 450;
+  line-height: 1.2;
+  letter-spacing: 1.2px;
+  color: var(--Text-Blue-text-Main-text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.stream-chart__legend-value {
+  font-family: var(--font-family-macan-mono);
+  font-size: 11px;
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--Text-Gray-text-Main-text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .stream-chart {
+    padding: 16px;
+  }
+  
+  .stream-chart__container {
+    overflow-x: auto;
+  }
+  
+  .stream-chart__legend {
+    gap: 12px;
+    margin-top: 16px;
+  }
+  
+  .stream-chart__legend-item {
+    gap: 6px;
+  }
+  
+  .stream-chart__legend-label,
+  .stream-chart__legend-value {
+    font-size: 11px;
+  }
+}
+
+@media (max-width: 480px) {
+  .stream-chart {
+    padding: 12px;
+  }
+  
+  .stream-chart__legend {
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  .stream-chart__legend-item {
+    justify-content: center;
+  }
+}
+
+/* Dark theme support */
+@media (prefers-color-scheme: dark) {
+  .stream-chart {
+    background: var(--Background-Card, #2a2a2a);
+  }
+  
+  .stream-chart__legend-label {
+    color: var(--Text-Blue-text-Main-text, #ffffff);
+  }
+  
+  .stream-chart__legend-value {
+    color: var(--Text-Gray-text-Main-text, #cccccc);
+  }
+}
+
+/* Animation styles */
+.stream-chart svg {
+  overflow: visible;
+}
+
+.stream-chart path {
+  transition: opacity 0.2s ease;
+}
+
+.stream-chart:hover path {
+  opacity: 0.8;
+}
+
+.stream-chart path:hover {
+  opacity: 1 !important;
+  filter: brightness(1.1);
+}
