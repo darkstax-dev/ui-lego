@@ -41,10 +41,13 @@ const MultiSelect: React.FC<MultiSelectProps> = ({
   const inputRef = useRef<HTMLInputElement>(null)
 
   const selectedIds = new Set(value.map(item => item.id))
-  const filteredOptions = options.filter(option => 
+  const filteredOptions = options.filter(option =>
     !selectedIds.has(option.id) &&
     option.label.toLowerCase().includes(query.toLowerCase())
   )
+  const exactMatch = query.trim().length > 0 && filteredOptions.some(opt => opt.label.toLowerCase() === query.trim().toLowerCase())
+  const showCreate = allowCreate && query.trim().length > 0 && !exactMatch
+  const optionsCount = filteredOptions.length + (showCreate ? 1 : 0)
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newQuery = e.target.value
@@ -57,7 +60,10 @@ const MultiSelect: React.FC<MultiSelectProps> = ({
     if (e.key === 'ArrowDown') {
       e.preventDefault()
       setIsOpen(true)
-      setActiveIndex(prev => Math.min(prev + 1, filteredOptions.length - (allowCreate && query ? 0 : 1)))
+      setActiveIndex(prev => {
+        const next = prev + 1
+        return Math.min(next, optionsCount - 1)
+      })
     } else if (e.key === 'ArrowUp') {
       e.preventDefault()
       setActiveIndex(prev => Math.max(prev - 1, -1))
@@ -65,10 +71,9 @@ const MultiSelect: React.FC<MultiSelectProps> = ({
       e.preventDefault()
       
       if (activeIndex >= 0 && activeIndex < filteredOptions.length) {
-        // Select existing option
         const selectedOption = filteredOptions[activeIndex]
         addItem(selectedOption)
-      } else if (allowCreate && query.trim()) {
+      } else if (showCreate || (allowCreate && query.trim())) {
         // Create new item
         let newItem: MultiSelectOption
         if (createNewItemFromQuery) {
@@ -132,23 +137,26 @@ const MultiSelect: React.FC<MultiSelectProps> = ({
   const multiSelectClass = [
     'multiselect',
     disabled && 'multiselect--disabled',
+    value.length > 0 && 'multiselect--has-tags',
     className
   ].filter(Boolean).join(' ')
 
   return (
     <div className={multiSelectClass}>
-      <div className="multiselect__field-body">
-        {value.map((item, index) => (
-          <Tag
-            key={`${item.id}-${index}`}
-            scheme="neutral"
-            removable={!disabled}
-            onRemove={() => removeItem(item, index)}
-          >
-            {item.label}
-          </Tag>
-        ))}
-      </div>
+      {value.length > 0 && (
+        <div className="multiselect__field-body">
+          {value.map((item, index) => (
+            <Tag
+              key={`${item.id}-${index}`}
+              scheme="neutral"
+              removable={!disabled}
+              onRemove={() => removeItem(item, index)}
+            >
+              {item.label}
+            </Tag>
+          ))}
+        </div>
+      )}
 
       <div className="multiselect__input-container">
         <input
@@ -168,6 +176,7 @@ const MultiSelect: React.FC<MultiSelectProps> = ({
           <button
             type="button"
             className="multiselect__toggle"
+            onMouseDown={(e) => e.preventDefault()}
             onClick={toggleDropdown}
             disabled={disabled}
             aria-label="Toggle dropdown"
@@ -195,8 +204,8 @@ const MultiSelect: React.FC<MultiSelectProps> = ({
         </div>
       </div>
 
-      {isOpen && (filteredOptions.length > 0 || (allowCreate && query)) && (
-        <div className="multiselect__dropdown" style={{ maxHeight }}>
+      {isOpen && (filteredOptions.length > 0 || showCreate) && (
+        <div className="multiselect__dropdown" style={{ maxHeight }} role="listbox" aria-label="Options">
           <ul className="multiselect__options">
             {filteredOptions.map((option, index) => (
               <li
@@ -208,7 +217,7 @@ const MultiSelect: React.FC<MultiSelectProps> = ({
                 {option.label}
               </li>
             ))}
-            {allowCreate && query && !filteredOptions.some(opt => opt.label.toLowerCase() === query.toLowerCase()) && (
+            {showCreate && (
               <li
                 className={`multiselect__option multiselect__option--create ${activeIndex === filteredOptions.length ? 'multiselect__option--active' : ''}`}
                 onClick={() => {
