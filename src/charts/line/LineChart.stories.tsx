@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { LineChart } from './LineChart';
+import LineChartDemo from './LineChartDemo';
 
 // Generate sample data for stories
 const generateLineData = (series: number = 1) => {
@@ -115,7 +116,7 @@ const meta: Meta<typeof LineChart> = {
 };
 
 export default meta;
-type Story = StoryObj<typeof meta>;
+export type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
@@ -199,154 +200,13 @@ export const SmoothVsStepped: Story = {
   },
 };
 
-export const LargeMarginSpacing: Story = {
-  args: {
-    ...Default.args,
-    data: generateLineData(1),
-    height: 400,
-    curve: 'catmullRom',
-    enableArea: true,
-    areaOpacity: 0.3,
-    axisLeft: { legend: 'Value', legendPosition: 'middle', legendOffset: -80, tickPadding: 12 },
-    axisBottom: { legend: 'Time', legendPosition: 'middle', legendOffset: 44 },
-    margin: { top: 50, right: 60, bottom: 80, left: 90 },
-  },
-};
-
-export const BluePalette: Story = {
-  args: {
-    ...Default.args,
-    palette: 'blue',
-    data: generateLineData(2),
-    showLegend: true,
-  },
-};
-
-export const WarmPalette: Story = {
-  args: {
-    ...Default.args,
-    palette: 'warm',
-    data: generateLineData(2),
-    showLegend: true,
-    enableArea: false,
-  },
-};
-
-export const CoolPalette: Story = {
-  args: {
-    ...Default.args,
-    palette: 'cool',
-    data: generateLineData(2),
-    showLegend: true,
-    curve: 'cardinal',
-  },
-};
-
-export const LinearCurve: Story = {
-  args: {
-    ...Default.args,
-    curve: 'linear',
-    enableArea: false,
-    pointSize: 10,
-  },
-};
-
-export const StepCurve: Story = {
-  args: {
-    ...Default.args,
-    curve: 'step',
-    enableArea: false,
-    enableGridX: true,
-    pointSize: 6,
-  },
-};
-
-export const AreaChart: Story = {
-  args: {
-    ...Default.args,
-    data: generateLineData(3),
-    showLegend: true,
-    enableArea: true,
-    areaOpacity: 0.4,
-    enablePoints: false,
-    curve: 'cardinal',
-  },
-};
-
-export const NoPoints: Story = {
-  args: {
-    ...Default.args,
-    enablePoints: false,
-    curve: 'basis',
-  },
-};
-
-export const NoArea: Story = {
-  args: {
-    ...Default.args,
-    enableArea: false,
-    pointSize: 10,
-  },
-};
-
-export const CustomSize: Story = {
-  args: {
-    ...Default.args,
-    width: 600,
-    height: 300,
-  },
-};
-
-export const NonInteractive: Story = {
-  args: {
-    ...Default.args,
-    interactive: false,
-    animate: false,
-    enableSlices: false,
-  },
-};
-
-// Performance data example
-export const PerformanceMetrics: Story = {
-  args: {
-    data: [
-      {
-        id: 'CPU Usage',
-        data: Array.from({ length: 24 }, (_, i) => ({
-          x: i,
-          y: Math.random() * 30 + 20 + Math.sin(i * 0.5) * 10,
-        })),
+export const Demo: Story = {
+  render: () => <LineChartDemo />,
+  parameters: {
+    docs: {
+      description: {
+        story: 'Complete demo with multiple datasets and palette switching.',
       },
-      {
-        id: 'Memory Usage',
-        data: Array.from({ length: 24 }, (_, i) => ({
-          x: i,
-          y: Math.random() * 40 + 30 + Math.cos(i * 0.3) * 8,
-        })),
-      },
-      {
-        id: 'Network I/O',
-        data: Array.from({ length: 24 }, (_, i) => ({
-          x: i,
-          y: Math.random() * 20 + 10 + Math.sin(i * 0.8) * 5,
-        })),
-      },
-    ],
-    height: 400,
-    showLegend: true,
-    palette: 'cool',
-    enableArea: true,
-    areaOpacity: 0.2,
-    curve: 'catmullRom',
-    axisLeft: {
-      legend: 'Usage (%)',
-      legendPosition: 'middle',
-      legendOffset: -40,
-    },
-    axisBottom: {
-      legend: 'Time (Hours)',
-      legendPosition: 'middle',
-      legendOffset: 36,
     },
   },
 };

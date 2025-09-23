@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { StreamChart } from './StreamChart';
+import StreamChartDemo from './StreamChartDemo';
 
 // Generate sample data for stories
 const generateData = (points: number = 11) => {
@@ -83,7 +84,7 @@ const meta: Meta<typeof StreamChart> = {
 };
 
 export default meta;
-type Story = StoryObj<typeof meta>;
+export type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
@@ -203,5 +204,16 @@ export const ManyCategories: Story = {
     height: 400,
     showLegend: true,
     palette: 'default',
+  },
+};
+
+export const Demo: Story = {
+  render: () => <StreamChartDemo />,
+  parameters: {
+    docs: {
+      description: {
+        story: 'Complete demo with multiple datasets and palette switching.',
+      },
+    },
   },
 };

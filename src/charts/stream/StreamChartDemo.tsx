@@ -1,140 +1,82 @@
-import React from 'react';
-import { StreamChart, StreamChartData } from './StreamChart';
+import React, { useState } from 'react';
+import { StreamChart } from './StreamChart';
+import { chartPalettes } from '../palette';
+import './StreamChartDemo.css';
 
-// Generate sample stream data similar to the Figma design
-const generateStreamData = (): StreamChartData[] => {
-  const data: StreamChartData[] = [];
-  
-  for (let i = 0; i <= 10; i++) {
-    const baseValues = {
+const generateData = (points = 11) => {
+  const data: any[] = [];
+  for (let i = 0; i < points; i++) {
+    data.push({
       x: i,
-      // Primary layer (dark blue) - largest values
-      Engineering: Math.floor(Math.random() * 200) + 300,
-      // Secondary layer (green) - medium values  
-      Design: Math.floor(Math.random() * 150) + 150,
-      // Tertiary layer (orange) - medium values
-      Marketing: Math.floor(Math.random() * 120) + 100,
-      // Top layer (red) - smaller values
-      Sales: Math.floor(Math.random() * 80) + 50,
-    };
-    
-    // Add some realistic variations to make it look more like the Figma design
-    if (i === 2 || i === 5 || i === 9) {
-      // Create peaks at certain points
-      baseValues.Engineering *= 1.4;
-      baseValues.Design *= 1.3;
-      baseValues.Marketing *= 1.2;
-      baseValues.Sales *= 1.1;
-    }
-    
-    if (i === 1 || i === 6) {
-      // Create valleys at certain points
-      baseValues.Engineering *= 0.6;
-      baseValues.Design *= 0.7;
-      baseValues.Marketing *= 0.8;
-      baseValues.Sales *= 0.9;
-    }
-    
-    data.push(baseValues);
+      Engineering: Math.floor(Math.random() * 200) + 300 + Math.sin(i * 0.5) * 100,
+      Design: Math.floor(Math.random() * 150) + 150 + Math.cos(i * 0.3) * 80,
+      Marketing: Math.floor(Math.random() * 120) + 100 + Math.sin(i * 0.8) * 60,
+      Sales: Math.floor(Math.random() * 80) + 50 + Math.cos(i * 0.6) * 40,
+    });
   }
-  
   return data;
 };
 
-const streamData = generateStreamData();
+const sampleData = generateData();
 
 const StreamChartDemo: React.FC = () => {
+  const [palette, setPalette] = useState<string>('default');
+  const [offsetType, setOffsetType] = useState<string>('wiggle');
+  const [order, setOrder] = useState<string>('none');
+
   return (
-    <div style={{ padding: '20px' }}>
-      <h2 style={{ 
-        fontFamily: 'var(--font-family-macan-mono)', 
-        marginBottom: '20px',
-        color: 'var(--Text-Blue-text-Main-text)'
-      }}>
-        Stream Chart Demo
-      </h2>
-      
-      <div style={{ marginBottom: '40px' }}>
-        <h3 style={{ 
-          fontFamily: 'var(--font-family-macan-mono)', 
-          marginBottom: '16px',
-          color: 'var(--Text-Blue-text-Main-text)'
-        }}>
-          Default Stream Chart
-        </h3>
-        <StreamChart
-          data={streamData}
-          keys={['Engineering', 'Design', 'Marketing', 'Sales']}
-          height={400}
-          showLegend={true}
-          axisBottom={{
-            legend: 'Time Period',
-            legendPosition: 'middle',
-            legendOffset: 36,
-          }}
-          axisLeft={{
-            legend: 'Value',
-            legendPosition: 'middle',
-            legendOffset: -40,
-          }}
-        />
+    <div className="stream-chart-demo">
+      <div className="demo-controls">
+        <div className="control-group">
+          <label className="control-label" htmlFor="palette-select">Color Palette</label>
+          <select id="palette-select" className="control-select" value={palette} onChange={(e) => setPalette(e.target.value)}>
+            {Object.keys(chartPalettes).map((p) => (
+              <option key={p} value={p}>{chartPalettes[p].name}</option>
+            ))}
+          </select>
+        </div>
+
+        <div className="control-group">
+          <label className="control-label" htmlFor="offset-select">Offset Type</label>
+          <select id="offset-select" className="control-select" value={offsetType} onChange={(e) => setOffsetType(e.target.value)}>
+            <option value="diverging">diverging</option>
+            <option value="expand">expand</option>
+            <option value="none">none</option>
+            <option value="silhouette">silhouette</option>
+            <option value="wiggle">wiggle</option>
+          </select>
+        </div>
+
+        <div className="control-group">
+          <label className="control-label" htmlFor="order-select">Order</label>
+          <select id="order-select" className="control-select" value={order} onChange={(e) => setOrder(e.target.value)}>
+            <option value="ascending">ascending</option>
+            <option value="descending">descending</option>
+            <option value="insideOut">insideOut</option>
+            <option value="none">none</option>
+            <option value="reverse">reverse</option>
+          </select>
+        </div>
       </div>
 
-      <div style={{ marginBottom: '40px' }}>
-        <h3 style={{ 
-          fontFamily: 'var(--font-family-macan-mono)', 
-          marginBottom: '16px',
-          color: 'var(--Text-Blue-text-Main-text)'
-        }}>
-          Blue Palette Stream Chart
-        </h3>
-        <StreamChart
-          data={streamData}
-          keys={['Engineering', 'Design', 'Marketing', 'Sales']}
-          palette="blue"
-          height={400}
-          showLegend={true}
-          offsetType="silhouette"
-          curve="basis"
-        />
+      <div className="demo-section">
+        <h3 className="section-title">Stream Chart Demo</h3>
+        <StreamChart data={sampleData} keys={["Engineering","Design","Marketing","Sales"]} palette={palette} height={420} offsetType={offsetType as any} order={order as any} />
       </div>
 
-      <div style={{ marginBottom: '40px' }}>
-        <h3 style={{ 
-          fontFamily: 'var(--font-family-macan-mono)', 
-          marginBottom: '16px',
-          color: 'var(--Text-Blue-text-Main-text)'
-        }}>
-          Warm Palette Stream Chart
-        </h3>
-        <StreamChart
-          data={streamData}
-          keys={['Engineering', 'Design', 'Marketing', 'Sales']}
-          palette="warm"
-          height={400}
-          showLegend={true}
-          offsetType="expand"
-          curve="cardinal"
-        />
-      </div>
+      <div className="demo-section">
+        <h4 className="section-subtitle">Variations</h4>
+        <div className="chart-variations">
+          <div className="variation-card">
+            <div className="variation-title">Blue Palette</div>
+            <StreamChart data={generateData(9)} keys={["Engineering","Design","Marketing","Sales"]} palette="blue" height={260} showLegend={true} />
+          </div>
 
-      <div style={{ marginBottom: '40px' }}>
-        <h3 style={{ 
-          fontFamily: 'var(--font-family-macan-mono)', 
-          marginBottom: '16px',
-          color: 'var(--Text-Blue-text-Main-text)'
-        }}>
-          Cool Palette Stream Chart
-        </h3>
-        <StreamChart
-          data={streamData}
-          keys={['Engineering', 'Design', 'Marketing', 'Sales']}
-          palette="cool"
-          height={400}
-          showLegend={true}
-          offsetType="diverging"
-          curve="natural"
-        />
+          <div className="variation-card">
+            <div className="variation-title">Many Categories</div>
+            <StreamChart data={Array.from({length:10},(_,i)=>({x:i, A:Math.random()*100+20,B:Math.random()*80+10,C:Math.random()*60+5,D:Math.random()*50+3}))} keys={["A","B","C","D"]} palette="cool" height={260} showLegend={true} />
+          </div>
+        </div>
       </div>
     </div>
   );
