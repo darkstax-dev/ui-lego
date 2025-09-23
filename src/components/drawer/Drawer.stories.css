@@ -18,13 +18,9 @@
   padding: 16px;
 }
 
-.drawer-sample-close {
+/* Close button styling is now handled by the Button component */
+.drawer-sample-content .button {
   margin-top: 12px;
-  background: transparent;
-  border: 1px solid rgba(0,0,0,0.08);
-  padding: 8px 10px;
-  border-radius: 4px;
-  cursor: pointer;
 }
 
 @media (max-width: 600px) {
