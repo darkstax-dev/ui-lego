@@ -67,5 +67,8 @@ export * from './components/navigation'
 // Snackbar types
 export type { SnackbarVariant } from './components/snackbar/Snackbar'
 
+// MultiSelect exports
+export * from './components/multiselect'
+
 // Charts exports
 export * from './charts'
