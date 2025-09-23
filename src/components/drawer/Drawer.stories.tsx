@@ -1,6 +1,7 @@
 import React from 'react'
 import type { Meta, StoryObj } from '@storybook/react-vite'
 import Drawer, { DrawerSize } from './Drawer'
+import Button from '../buttons/Button'
 import './Drawer.stories.css'
 
 const meta: Meta<typeof Drawer> = {
