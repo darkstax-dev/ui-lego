@@ -1,4 +1,4 @@
-import React, { useState, useRef, useKeyboardEvent } from 'react'
+import React, { useState, useRef } from 'react'
 import Tag from '../tag-badges/Tag'
 import './MultiSelect.css'
 
