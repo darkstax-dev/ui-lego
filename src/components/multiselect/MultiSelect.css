@@ -30,6 +30,9 @@
   gap: var(--sds-size-space-200);
   padding: var(--sds-size-space-300) var(--sds-size-space-400) var(--sds-size-space-300) var(--sds-size-space-400);
   background: var(--Inputs-Input-Background);
+}
+
+.multiselect--has-tags .multiselect__input-container {
   border-top: 1px solid rgba(0, 0, 0, 0.1);
 }
 
