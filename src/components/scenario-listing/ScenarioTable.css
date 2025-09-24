@@ -31,7 +31,7 @@
 }
 
 .scenario-table__header-cell:hover {
-  background-color: rgba(0, 17, 43, 0.04);
+  background-color: rgba(120, 121, 122, 1);
 }
 
 .scenario-table__header-cell--checkbox {
