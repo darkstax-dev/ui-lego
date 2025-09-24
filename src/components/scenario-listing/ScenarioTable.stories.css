@@ -7,7 +7,6 @@
   padding: 0;
 }
 
-/* Override default Storybook padding for fullscreen layout */
 .docs-story>div:first-child {
   background-color: rgba(173, 173, 173, 1);
   /* match ScenarioTable background */
@@ -28,7 +27,7 @@
 .scenario-listing-story-container h1,
 .scenario-listing-story-container h2,
 .scenario-listing-story-container h3 {
-  color: rgba(223, 223, 223, 1);
+  color: rgba(0, 17, 43, 1);
   /* match ScenarioTable text */
   font-family: var(--font-family-macan-mono-stencil);
   margin-bottom: var(--sds-size-space-600);
@@ -40,7 +39,7 @@
 .scenario-listing-story-container .scenario-table {
   background: rgba(173, 173, 173, 1);
   /* match ScenarioTable background */
-  color: rgba(223, 223, 223, 1);
+  color: rgba(0, 17, 43, 1);
   /* match ScenarioTable text */
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   border-radius: 0;
@@ -49,13 +48,16 @@
 /* Override table text + header text inside Storybook */
 .scenario-listing-story-container .scenario-table__text,
 .scenario-listing-story-container .scenario-table__header-text {
-  color: rgba(223, 223, 223, 1);
+  color: rgba(0, 17, 43, 1);
 }
 
 /* Override icons for consistency */
-.scenario-listing-story-container .scenario-table__lock-icon--unlocked,
+.scenario-listing-story-container .scenario-table__lock-icon--unlocked {
+  color: rgba(0, 17, 43, 1);
+}
+
 .scenario-listing-story-container .scenario-table__options-icon {
-  color: rgba(223, 223, 223, 1);
+  color: rgba(120, 121, 122, 1);
 }
 
 /* Documentation styles */
@@ -68,7 +70,7 @@
   margin: 0 auto;
   max-width: 100%;
   background: rgba(173, 173, 173, 1);
-  color: rgba(223, 223, 223, 1);
+  color: rgba(0, 17, 43, 1);
 }
 
 /* Control panel override for better token usage */
@@ -90,6 +92,6 @@
   .scenario-listing-story-container .scenario-table,
   .sbdocs .docs-story .scenario-table {
     background: rgba(173, 173, 173, 1);
-    color: rgba(223, 223, 223, 1);
+    color: rgba(0, 17, 43, 1);
   }
 }
