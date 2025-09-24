@@ -5,7 +5,7 @@
   flex-direction: column;
   width: 100%;
   max-width: 1200px;
-  background: rgba(223, 223, 223, 1);
+  background: var(--color-white);
   border-radius: 0;
   overflow: hidden;
 }
@@ -31,7 +31,7 @@
 }
 
 .scenario-table__header-cell:hover {
-  background-color: rgba(223, 223, 223, 1);
+  background-color: rgba(0, 17, 43, 0.04);
 }
 
 .scenario-table__header-cell--checkbox {
