@@ -28,7 +28,7 @@ const ScenarioTable: React.FC<ScenarioTableProps> = ({
         sortColumn={sortColumn}
         sortDirection={sortDirection}
       />
-      
+
       <div className="scenario-table__body">
         {scenarios.map((scenario) => (
           <ScenarioTableRow
