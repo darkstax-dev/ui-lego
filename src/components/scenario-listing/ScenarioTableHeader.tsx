@@ -24,7 +24,7 @@ const ScenarioTableHeader: React.FC<ScenarioTableHeaderProps> = ({
     const showArrow = isActive && sortDirection
 
     return (
-      <div 
+      <div
         className={`scenario-table__header-cell ${width || ''}`}
         onClick={() => handleSort(column)}
         role="button"
@@ -60,27 +60,27 @@ const ScenarioTableHeader: React.FC<ScenarioTableHeaderProps> = ({
           aria-label="Select all scenarios"
         />
       </div>
-      
+
       <div className="scenario-table__header-cell scenario-table__header-cell--name">
         <span className="scenario-table__header-text">Name</span>
       </div>
-      
+
       <div className="scenario-table__header-cell scenario-table__header-cell--lock">
         {/* Empty for lock icon column */}
       </div>
-      
+
       <div className="scenario-table__header-cell scenario-table__header-cell--cluster">
         <span className="scenario-table__header-text">Cluster</span>
       </div>
-      
+
       <div className="scenario-table__header-cell scenario-table__header-cell--version">
         <span className="scenario-table__header-text">Version</span>
       </div>
-      
+
       {renderSortableHeader('lastModified', 'Last modified', 'scenario-table__header-cell--last-modified')}
-      
+
       {renderSortableHeader('createdBy', 'Created by', 'scenario-table__header-cell--created-by')}
-      
+
       <div className="scenario-table__header-cell scenario-table__header-cell--options">
         <span className="scenario-table__header-text">Options</span>
       </div>
