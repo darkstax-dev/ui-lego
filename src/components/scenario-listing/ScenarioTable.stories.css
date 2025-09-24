@@ -1,0 +1,64 @@
+/* Storybook-specific styles for Scenario Listing stories */
+
+.sb-show-main {
+  background-color: var(--surface-default);
+  padding: 0;
+}
+
+/* Override default Storybook padding for fullscreen layout */
+.docs-story > div:first-child {
+  background-color: var(--surface-default);
+  border-radius: 0;
+  margin: 0;
+  padding: 0;
+}
+
+/* Custom story container for better presentation */
+.scenario-listing-story-container {
+  background: var(--surface-default);
+  min-height: 100vh;
+  padding: var(--sds-size-space-800);
+}
+
+.scenario-listing-story-container h1,
+.scenario-listing-story-container h2,
+.scenario-listing-story-container h3 {
+  color: var(--text-blue-main);
+  font-family: var(--font-family-macan-mono-stencil);
+  margin-bottom: var(--sds-size-space-600);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Ensure proper spacing in story layout */
+.scenario-listing-story-container .scenario-table {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 0;
+}
+
+/* Documentation styles */
+.sbdocs .docs-story {
+  background: var(--surface-default);
+}
+
+.sbdocs .docs-story .scenario-table {
+  margin: 0 auto;
+  max-width: 100%;
+}
+
+/* Control panel override for better token usage */
+.sb-bar .sb-addon-panel {
+  background: var(--surface-card);
+  border-color: var(--border-subtle);
+}
+
+/* Make sure tokens work in dark mode for Storybook */
+@media (prefers-color-scheme: dark) {
+  .sb-show-main {
+    background-color: var(--surface-default);
+  }
+  
+  .scenario-listing-story-container {
+    background: var(--surface-default);
+  }
+}
