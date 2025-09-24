@@ -1,13 +1,16 @@
 /* Storybook-specific styles for Scenario Listing stories */
 
+/* Main Storybook background */
 .sb-show-main {
-  background-color: rgba(223, 223, 223, 1);
+  background-color: rgba(173, 173, 173, 1);
+  /* match ScenarioTable background */
   padding: 0;
 }
 
 /* Override default Storybook padding for fullscreen layout */
-.docs-story > div:first-child {
-  background-color: var(--surface-default);
+.docs-story>div:first-child {
+  background-color: rgba(173, 173, 173, 1);
+  /* match ScenarioTable background */
   border-radius: 0;
   margin: 0;
   padding: 0;
@@ -15,50 +18,78 @@
 
 /* Custom story container for better presentation */
 .scenario-listing-story-container {
-  background: var(--surface-default);
+  background: rgba(173, 173, 173, 1);
+  /* match ScenarioTable background */
   min-height: 100vh;
   padding: var(--sds-size-space-800);
 }
 
+/* Headings inside story container */
 .scenario-listing-story-container h1,
 .scenario-listing-story-container h2,
 .scenario-listing-story-container h3 {
-  color: var(--text-blue-main);
+  color: rgba(223, 223, 223, 1);
+  /* match ScenarioTable text */
   font-family: var(--font-family-macan-mono-stencil);
   margin-bottom: var(--sds-size-space-600);
   text-transform: uppercase;
   letter-spacing: 0.05em;
 }
 
-/* Ensure proper spacing in story layout */
+/* Ensure proper spacing and style in story layout */
 .scenario-listing-story-container .scenario-table {
+  background: rgba(173, 173, 173, 1);
+  /* match ScenarioTable background */
+  color: rgba(223, 223, 223, 1);
+  /* match ScenarioTable text */
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   border-radius: 0;
 }
 
+/* Override table text + header text inside Storybook */
+.scenario-listing-story-container .scenario-table__text,
+.scenario-listing-story-container .scenario-table__header-text {
+  color: rgba(223, 223, 223, 1);
+}
+
+/* Override icons for consistency */
+.scenario-listing-story-container .scenario-table__lock-icon--unlocked,
+.scenario-listing-story-container .scenario-table__options-icon {
+  color: rgba(223, 223, 223, 1);
+}
+
 /* Documentation styles */
 .sbdocs .docs-story {
-  background: var(--surface-default);
+  background: rgba(173, 173, 173, 1);
+  /* match ScenarioTable background */
 }
 
 .sbdocs .docs-story .scenario-table {
   margin: 0 auto;
   max-width: 100%;
+  background: rgba(173, 173, 173, 1);
+  color: rgba(223, 223, 223, 1);
 }
 
 /* Control panel override for better token usage */
 .sb-bar .sb-addon-panel {
-  background: var(--surface-card);
-  border-color: var(--border-subtle);
+  background: rgba(173, 173, 173, 1);
+  border-color: rgba(223, 223, 223, 0.5);
 }
 
-/* Make sure tokens work in dark mode for Storybook */
+/* Dark mode adjustments */
 @media (prefers-color-scheme: dark) {
   .sb-show-main {
-    background-color: var(--surface-default);
+    background-color: rgba(173, 173, 173, 1);
   }
-  
+
   .scenario-listing-story-container {
-    background: var(--surface-default);
+    background: rgba(173, 173, 173, 1);
+  }
+
+  .scenario-listing-story-container .scenario-table,
+  .sbdocs .docs-story .scenario-table {
+    background: rgba(173, 173, 173, 1);
+    color: rgba(223, 223, 223, 1);
   }
 }
