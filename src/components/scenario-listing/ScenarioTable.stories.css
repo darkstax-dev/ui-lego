@@ -1,7 +1,7 @@
 /* Storybook-specific styles for Scenario Listing stories */
 
 .sb-show-main {
-  background-color: var(--surface-default);
+  background-color: rgba(223, 223, 223, 1);
   padding: 0;
 }
 
