@@ -5,7 +5,8 @@ import ScenarioListingDemo from './ScenarioListingDemo'
 import { ScenarioItem, SortableColumn, SortDirection } from './types'
 
 const meta: Meta<typeof ScenarioTable> = {
-  title: 'Components/Scenario Listing/ScenarioTable',
+  id: 'components-scenario-listing-scenariotable-component',
+  title: 'Components/Scenario Listing/ScenarioTable (Component)',
   component: ScenarioTable,
   parameters: {
     layout: 'fullscreen',
@@ -145,9 +146,9 @@ export const Interactive: Story = {
       const [sortDirection, setSortDirection] = useState<SortDirection>(null)
 
       const handleScenarioSelect = (scenarioId: string, selected: boolean) => {
-        setScenarios(prev => 
-          prev.map(scenario => 
-            scenario.id === scenarioId 
+        setScenarios(prev =>
+          prev.map(scenario =>
+            scenario.id === scenarioId
               ? { ...scenario, isSelected: selected }
               : scenario
           )
@@ -155,14 +156,14 @@ export const Interactive: Story = {
       }
 
       const handleSelectAll = (selected: boolean) => {
-        setScenarios(prev => 
+        setScenarios(prev =>
           prev.map(scenario => ({ ...scenario, isSelected: selected }))
         )
       }
 
       const handleSort = (column: SortableColumn) => {
         let newDirection: SortDirection = 'asc'
-        
+
         if (sortColumn === column) {
           if (sortDirection === 'asc') {
             newDirection = 'desc'
@@ -173,22 +174,22 @@ export const Interactive: Story = {
             return
           }
         }
-        
+
         setSortColumn(column)
         setSortDirection(newDirection)
-        
+
         setScenarios(prev => {
           const sorted = [...prev].sort((a, b) => {
             const aValue = a[column]
             const bValue = b[column]
-            
+
             if (newDirection === 'asc') {
               return aValue.localeCompare(bValue)
             } else {
               return bValue.localeCompare(aValue)
             }
           })
-          
+
           return sorted
         })
       }
@@ -225,8 +226,8 @@ export const EmptyState: Story = {
   render: (args) => (
     <div style={{ padding: '24px', background: 'var(--surface-default)' }}>
       <ScenarioTable {...args} />
-      <div style={{ 
-        textAlign: 'center', 
+      <div style={{
+        textAlign: 'center',
         padding: '48px',
         color: 'var(--color-gray-500)',
         fontFamily: 'var(--font-family-macan)',
