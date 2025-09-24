@@ -5,7 +5,7 @@
   flex-direction: column;
   width: 100%;
   max-width: 1200px;
-  background: var(--color-white);
+  background: rgba(173, 173, 173, 1);
   border-radius: 0;
   overflow: hidden;
 }
@@ -93,7 +93,7 @@
 }
 
 .scenario-table__header-text {
-  color: var(--color-blue-dark-950);
+  color: rgba(223, 223, 223, 1);
   font-family: var(--font-family-macan-mono);
   font-size: var(--sds-typography-body-size-small);
   font-weight: var(--font-weight-semibold);
@@ -178,7 +178,7 @@
 }
 
 .scenario-table__text {
-  color: var(--color-blue-dark-950);
+  color: rgba(223, 223, 223, 1);
   font-family: var(--font-family-macan-mono);
   font-size: var(--font-size-base);
   font-weight: var(--font-weight-book);
