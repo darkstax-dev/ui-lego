@@ -1,0 +1,328 @@
+/* Scenario Table styles using design tokens */
+
+.scenario-table {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 1200px;
+  background: rgba(173, 173, 173, 1);
+  border-radius: 0;
+  overflow: hidden;
+}
+
+/* Header Styles */
+.scenario-table__header {
+  display: flex;
+  height: 48px;
+  padding: 0 var(--sds-size-space-400);
+  align-items: center;
+  border-bottom: 1px solid var(--divider-light);
+  background: var(--Background-Card);
+  position: relative;
+}
+
+.scenario-table__header-cell {
+  display: flex;
+  padding: var(--sds-size-space-600) var(--sds-size-space-400);
+  align-items: center;
+  gap: var(--sds-size-space-200);
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.scenario-table__header-cell:hover {
+  background-color: rgba(0, 17, 43, 0.04);
+}
+
+.scenario-table__header-cell--checkbox {
+  width: 48px;
+  justify-content: center;
+  cursor: default;
+}
+
+.scenario-table__header-cell--checkbox:hover {
+  background-color: transparent;
+}
+
+.scenario-table__header-cell--name {
+  width: 268px;
+}
+
+.scenario-table__header-cell--lock {
+  width: 48px;
+  justify-content: center;
+  cursor: default;
+}
+
+.scenario-table__header-cell--lock:hover {
+  background-color: transparent;
+}
+
+.scenario-table__header-cell--cluster {
+  width: 240px;
+}
+
+.scenario-table__header-cell--version {
+  width: 95px;
+  justify-content: center;
+}
+
+.scenario-table__header-cell--last-modified {
+  width: 206px;
+}
+
+.scenario-table__header-cell--created-by {
+  flex: 1;
+  min-width: 0;
+}
+
+.scenario-table__header-cell--options {
+  width: 95px;
+  justify-content: center;
+  cursor: default;
+}
+
+.scenario-table__header-cell--options:hover {
+  background-color: transparent;
+}
+
+.scenario-table__header-content {
+  display: flex;
+  align-items: center;
+  gap: var(--sds-size-space-100);
+}
+
+.scenario-table__header-text {
+  color: rgba(223, 223, 223, 1);
+  font-family: var(--font-family-macan-mono);
+  font-size: var(--sds-typography-body-size-small);
+  font-weight: var(--font-weight-semibold);
+  line-height: 120%;
+  letter-spacing: 0.7px;
+  text-transform: uppercase;
+}
+
+.scenario-table__sort-arrow {
+  width: 8px;
+  height: 10px;
+  color: var(--color-red-500);
+  transition: transform 0.2s ease;
+}
+
+.scenario-table__sort-arrow--desc {
+  transform: rotate(180deg);
+}
+
+/* Body Styles */
+.scenario-table__body {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Row Styles */
+.scenario-table__row {
+  display: flex;
+  min-height: 52px;
+  padding: 0 var(--sds-size-space-400);
+  align-items: center;
+  border-bottom: 1px dashed var(--color-gray-400);
+  transition: background-color 0.2s ease;
+}
+
+.scenario-table__row:hover {
+  background-color: rgba(0, 17, 43, 0.02);
+}
+
+.scenario-table__cell {
+  display: flex;
+  padding: var(--sds-size-space-600) var(--sds-size-space-400);
+  align-items: center;
+  gap: var(--sds-size-space-200);
+}
+
+.scenario-table__cell--checkbox {
+  width: 48px;
+  justify-content: center;
+}
+
+.scenario-table__cell--name {
+  width: 268px;
+}
+
+.scenario-table__cell--lock {
+  width: 48px;
+  justify-content: center;
+}
+
+.scenario-table__cell--cluster {
+  width: 240px;
+}
+
+.scenario-table__cell--version {
+  width: 95px;
+  justify-content: center;
+}
+
+.scenario-table__cell--last-modified {
+  width: 206px;
+}
+
+.scenario-table__cell--created-by {
+  flex: 1;
+  min-width: 0;
+}
+
+.scenario-table__cell--options {
+  width: 95px;
+  justify-content: center;
+}
+
+.scenario-table__text {
+  color: rgba(223, 223, 223, 1);
+  font-family: var(--font-family-macan-mono);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-book);
+  line-height: 120%;
+}
+
+.scenario-table__text--ellipsis {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  flex: 1;
+}
+
+/* Checkbox Styles */
+.scenario-table__checkbox {
+  width: 16px;
+  height: 16px;
+  border: 1.5px solid var(--color-blue-dark-950);
+  border-radius: 0;
+  background: transparent;
+  cursor: pointer;
+  margin: 0;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  position: relative;
+  transition: all 0.2s ease;
+}
+
+.scenario-table__checkbox:checked {
+  background-color: transparent;
+  border-color: var(--color-blue-dark-950);
+}
+
+.scenario-table__checkbox:checked::after {
+  content: '';
+  position: absolute;
+  left: 2px;
+  top: -1px;
+  width: 10px;
+  height: 6px;
+  border: solid var(--color-blue-dark-950);
+  border-width: 0 0 2px 2px;
+  transform: rotate(-45deg);
+}
+
+.scenario-table__checkbox:hover {
+  background-color: rgba(0, 17, 43, 0.04);
+}
+
+.scenario-table__checkbox:focus {
+  outline: 2px solid rgba(0, 17, 43, 0.2);
+  outline-offset: 2px;
+}
+
+.scenario-table__checkbox:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* Lock Icon Styles */
+.scenario-table__lock-icon {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
+
+.scenario-table__lock-icon--locked {
+  color: var(--color-gray-500);
+  opacity: 0.6;
+}
+
+.scenario-table__lock-icon--unlocked {
+  color: var(--color-blue-dark-950);
+}
+
+/* Options Button Styles */
+.scenario-table__options-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  border-radius: 0;
+  transition: background-color 0.2s ease;
+}
+
+.scenario-table__options-button:hover {
+  background-color: rgba(0, 17, 43, 0.08);
+}
+
+.scenario-table__options-button:focus {
+  outline: 2px solid rgba(0, 17, 43, 0.2);
+  outline-offset: 2px;
+}
+
+.scenario-table__options-button:focus:not(:focus-visible) {
+  outline: none;
+}
+
+.scenario-table__options-icon {
+  width: 24px;
+  height: 24px;
+  color: var(--color-gray-500);
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+  .scenario-table {
+    max-width: 100%;
+    overflow-x: auto;
+  }
+  
+  .scenario-table__header,
+  .scenario-table__row {
+    min-width: 1200px;
+  }
+}
+
+@media (max-width: 768px) {
+  .scenario-table__header-cell--name,
+  .scenario-table__cell--name {
+    width: 200px;
+  }
+  
+  .scenario-table__header-cell--cluster,
+  .scenario-table__cell--cluster {
+    width: 180px;
+  }
+  
+  .scenario-table__header-cell--last-modified,
+  .scenario-table__cell--last-modified {
+    width: 160px;
+  }
+  
+  .scenario-table__text {
+    font-size: var(--sds-typography-body-size-small);
+  }
+  
+  .scenario-table__header-text {
+    font-size: var(--font-size-xs);
+  }
+}
