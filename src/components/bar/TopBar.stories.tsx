@@ -4,6 +4,7 @@ import { within, userEvent } from '@storybook/testing-library';
 import { expect } from '@storybook/jest';
 import { TopBar } from './TopBar';
 import type { TopBarProps } from './TopBar';
+import './TopBar.stories.css';
 
 const meta: Meta<typeof TopBar> = {
   title: 'Components/TopBar',
