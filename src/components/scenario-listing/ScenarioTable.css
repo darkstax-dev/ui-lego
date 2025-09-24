@@ -5,7 +5,7 @@
   flex-direction: column;
   width: 100%;
   max-width: 1200px;
-  background: var(--color-white);
+  background: rgba(223, 223, 223, 1);
   border-radius: 0;
   overflow: hidden;
 }
