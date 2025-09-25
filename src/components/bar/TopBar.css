@@ -346,6 +346,16 @@
     display: none;
   }
 
+  .top-bar__dropdown {
+    min-width: 240px;
+    left: -50%;
+  }
+
+  .top-bar__dropdown-text {
+    font-size: 12px;
+    letter-spacing: 1.2px;
+  }
+
   .top-bar__hub {
     display: none;
   }
@@ -390,6 +400,10 @@
 
   .top-bar__menu-item--active {
     background: rgba(217, 50, 42, 0.2);
+  }
+
+  .top-bar__dropdown {
+    display: none; /* Hide dropdown on mobile for simplicity */
   }
 
   .top-bar__actions {
