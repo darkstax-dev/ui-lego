@@ -88,6 +88,22 @@
   justify-content: center;
   align-items: center;
   flex-shrink: 0;
+  transition: transform 0.18s ease;
+}
+
+/* When the menu is open rotate or change the expand icon */
+.top-bar__menu-expand--open {
+  transform: rotate(180deg);
+}
+
+/* Selected state for dropdown items (mimics Select Field Basic selected option) */
+.top-bar__dropdown-item--selected {
+  background: rgba(7, 43, 86, 0.08);
+}
+
+.top-bar__dropdown-item--selected .top-bar__dropdown-text {
+  color: var(--Blue-Dark-blue-950, #00112B);
+  font-weight: 700;
 }
 
 /* Right Section */
