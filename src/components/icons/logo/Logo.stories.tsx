@@ -1,5 +1,5 @@
 import React from 'react'
-import type { Meta, StoryObj } from '@storybook/react'
+import type { Meta, StoryObj } from '@storybook/react-vite'
 import LogoTile from './LogoTile'
 import NexoraWordmarkWhite from './NexoraWordmarkWhite'
 import './LogoCatalog.css'
