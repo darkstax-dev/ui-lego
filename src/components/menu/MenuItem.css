@@ -91,10 +91,10 @@
   color: rgba(117, 117, 117, 1);
 }
 
-/* Interactive hover for default state - exact colors from Figma */
+/* Interactive hover for default state - dark blue background */
 .menu-item--default:hover,
 .menu-item--default:focus-visible {
-  background: rgba(30, 30, 30, 1);
+  background: var(--color-blue-dark-950);
 }
 
 .menu-item--default:hover .menu-item__icon,
