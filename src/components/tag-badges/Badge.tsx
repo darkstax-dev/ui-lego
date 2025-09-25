@@ -3,7 +3,7 @@ import './Badge.css'
 
 export type BadgeStatus = 'active' | 'canceled' | 'pending'
 
-interface BadgeProps {
+export interface BadgeProps {
   status: BadgeStatus
   children?: React.ReactNode
   className?: string

@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { useState } from 'react';
-import Tag from './Tag';
-import Badge from './Badge';
+import Tag, { type TagProps } from './Tag';
+import Badge, { type BadgeProps } from './Badge';
 import './TagBadge.stories.css';
 
 const meta: Meta = {
@@ -12,22 +12,22 @@ export default meta;
 
 // Tag Stories
 const TagTemplate: StoryObj<typeof Tag> = {
-  render: (args: React.ComponentProps<typeof Tag>) => (
+  render: (args: TagProps) => (
     <div className="tag-story">
       <Tag {...args} />
     </div>
   ),
 };
 
-export const TagBasic = {
+export const TagBasic: StoryObj<typeof Tag> = {
   ...TagTemplate,
   args: {
     children: 'React',
     scheme: 'brand',
   },
-} as const satisfies StoryObj<typeof Tag>;
+};
 
-export const TagSchemes = {
+export const TagSchemes: StoryObj<typeof Tag> = {
   render: () => (
     <div className="tag-story">
       <div className="tag-grid">
@@ -39,9 +39,9 @@ export const TagSchemes = {
       </div>
     </div>
   ),
-} as const satisfies StoryObj<typeof Tag>;
+};
 
-export const TagRemovable = {
+export const TagRemovable: StoryObj<typeof Tag> = {
   render: () => {
     const [tags, setTags] = useState(['React', 'TypeScript', 'JavaScript', 'CSS']);
     
@@ -66,44 +66,44 @@ export const TagRemovable = {
       </div>
     );
   },
-} as const satisfies StoryObj<typeof Tag>;
+};
 
-export const TagNonRemovable = {
+export const TagNonRemovable: StoryObj<typeof Tag> = {
   ...TagTemplate,
   args: {
     children: 'Read-only',
     scheme: 'neutral',
     removable: false,
   },
-} as const satisfies StoryObj<typeof Tag>;
+};
 
-export const TagHoverState = {
+export const TagHoverState: StoryObj<typeof Tag> = {
   ...TagTemplate,
   args: {
     children: 'Hover me',
     scheme: 'brand',
     state: 'hover',
   },
-} as const satisfies StoryObj<typeof Tag>;
+};
 
 // Badge Stories
 const BadgeTemplate: StoryObj<typeof Badge> = {
-  render: (args: React.ComponentProps<typeof Badge>) => (
+  render: (args: BadgeProps) => (
     <div className="badge-story">
       <Badge {...args} />
     </div>
   ),
 };
 
-export const BadgeBasic = {
+export const BadgeBasic: StoryObj<typeof Badge> = {
   ...BadgeTemplate,
   args: {
     status: 'active',
     children: 'Active',
   },
-} as const satisfies StoryObj<typeof Badge>;
+};
 
-export const BadgeStatuses = {
+export const BadgeStatuses: StoryObj<typeof Badge> = {
   render: () => (
     <div className="badge-story">
       <div className="badge-grid">
@@ -113,9 +113,9 @@ export const BadgeStatuses = {
       </div>
     </div>
   ),
-} as const satisfies StoryObj<typeof Badge>;
+};
 
-export const BadgeWithoutText = {
+export const BadgeWithoutText: StoryObj<typeof Badge> = {
   render: () => (
     <div className="badge-story">
       <div className="badge-grid">
@@ -126,10 +126,10 @@ export const BadgeWithoutText = {
       <p className="badge-instructions">Badges show default text when no children provided</p>
     </div>
   ),
-} as const satisfies StoryObj<typeof Badge>;
+};
 
 // Combined Example
-export const TagsAndBadges = {
+export const TagsAndBadges: StoryObj<typeof Tag> = {
   render: () => (
     <div className="combined-story">
       <div className="example-card">
@@ -164,4 +164,4 @@ export const TagsAndBadges = {
       </div>
     </div>
   ),
-} as const satisfies StoryObj<typeof Tag>;
+};
