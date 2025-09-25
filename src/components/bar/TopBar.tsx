@@ -18,7 +18,8 @@ export const TopBar: React.FC<TopBarProps> = ({
   onActionClick,
   onTopologyItemClick,
 }) => {
-  const [expandedTopologyItems, setExpandedTopologyItems] = React.useState<TopologyItem[]>([]);
+  const [isTopologyOpen, setIsTopologyOpen] = React.useState<boolean>(activeSection === 'topology');
+  const [selectedTopologyItem, setSelectedTopologyItem] = React.useState<TopologyItem | null>(null);
 
   const topologyOptions: { key: TopologyItem; label: string }[] = [
     { key: 'kubernetes-dashboard', label: 'Kubernetes Dashboard' },
@@ -27,17 +28,25 @@ export const TopBar: React.FC<TopBarProps> = ({
     { key: 'metamapper', label: 'Metamapper' },
   ];
 
-  const toggleTopologyItem = (item: TopologyItem) => {
-    setExpandedTopologyItems(prev => 
-      prev.includes(item) 
-        ? prev.filter(i => i !== item)
-        : [...prev, item]
-    );
-    onTopologyItemClick?.(item);
-  };
+  // Sync open state with external activeSection prop.
+  React.useEffect(() => {
+    setIsTopologyOpen(activeSection === 'topology');
+  }, [activeSection]);
 
   const handleMenuClick = (section: string) => {
+    if (section === 'topology') {
+      // toggle open/close for topology menu
+      setIsTopologyOpen(prev => !prev);
+    } else {
+      setIsTopologyOpen(false);
+    }
     onMenuItemClick?.(section);
+  };
+
+  const handleTopologySelect = (item: TopologyItem) => {
+    setSelectedTopologyItem(item);
+    setIsTopologyOpen(false);
+    onTopologyItemClick?.(item);
   };
 
   const handleActionClick = (action: string) => {
@@ -88,15 +97,16 @@ export const TopBar: React.FC<TopBarProps> = ({
               </svg>
             </button>
 
-            {/* Topology Section with Dropdown */}
+            {/* Topology Section with Select-like Dropdown */}
             <div className="top-bar__menu-section">
               <button 
                 className={`top-bar__menu-item ${activeSection === 'topology' ? 'top-bar__menu-item--active' : ''}`}
                 onClick={() => handleMenuClick('topology')}
+                aria-expanded={isTopologyOpen}
               >
                 <svg className="top-bar__menu-icon" width="20" height="20" viewBox="0 0 20 20" fill="none">
                   <g clipPath="url(#clip0_topology)">
-                    <path d="M5.62468 2.08325C6.08977 2.08325 6.55032 2.17486 6.98001 2.35285C7.40971 2.53083 7.80014 2.79171 8.12901 3.12058C8.45789 3.44946 8.71876 3.83989 8.89675 4.26958C9.07473 4.69928 9.16634 5.15982 9.16634 5.62492V9.16658H5.62468C4.68537 9.16658 3.78453 8.79345 3.12034 8.12926C2.45615 7.46506 2.08301 6.56423 2.08301 5.62492C2.08301 4.68561 2.45615 3.78477 3.12034 3.12058C3.78453 2.45639 4.68537 2.08325 5.62468 2.08325ZM7.49968 7.49992V5.62492C7.49968 5.25408 7.38971 4.89157 7.18368 4.58322C6.97765 4.27488 6.68482 4.03456 6.34221 3.89264C5.9996 3.75073 5.6226 3.7136 5.25888 3.78595C4.89517 3.85829 4.56107 4.03687 4.29885 4.29909C4.03663 4.56132 3.85805 4.89541 3.7857 5.25912C3.71336 5.62284 3.75049 5.99984 3.8924 6.34245C4.03432 6.68506 4.27464 6.9779 4.58298 7.18392C4.89132 7.38995 5.25384 7.49992 5.62468 7.49992H7.49968ZM5.62468 10.8333H9.16634V14.3749C9.16634 15.0754 8.95863 15.7601 8.56946 16.3426C8.1803 16.925 7.62717 17.3789 6.98001 17.647C6.33286 17.9151 5.62075 17.9852 4.93373 17.8485C4.24672 17.7119 3.61565 17.3746 3.12034 16.8793C2.62503 16.3839 2.28772 15.7529 2.15106 15.0659C2.01441 14.3788 2.08454 13.6667 2.3526 13.0196C2.62066 12.3724 3.07461 11.8193 3.65703 11.4301C4.23946 11.041 4.9242 10.8333 5.62468 10.8333ZM5.62468 12.4999C5.25384 12.4999 4.89132 12.6099 4.58298 12.8159C4.27464 13.0219 4.03432 13.3148 3.8924 13.6574C3.75049 14 3.71336 14.377 3.7857 14.7407C3.85805 15.1044 4.03663 15.4385 4.29885 15.7007C4.56107 15.963 4.89517 16.1415 5.25888 16.1869C5.62259 16.2323 5.9996 16.1436 6.34221 16.0017C6.68482 15.8598 6.97765 15.6701 7.18368 15.4518C7.38971 15.2334 7.49968 14.9953 7.49968 14.7499C7.49968 14.3791 7.38971 14.0166 7.18368 13.7082C6.97765 13.3999 6.68482 13.1596 6.34221 13.0177C5.9996 12.8758 5.6226 12.8386 5.25888 12.911C4.89517 12.9833 4.56107 13.1619 4.29885 13.4241C4.03663 13.6863 3.85805 14.0204 3.7857 14.3841Z" fill="currentColor"/>
+                    <path d="M5.62468 2.08325C6.08977 2.08325 6.55032 2.17486 6.98001 2.35285C7.40971 2.53083 7.80014 2.79171 8.12901 3.12058C8.45789 3.44946 8.71876 3.83989 8.89675 4.26958C9.07473 4.69928 9.16634 5.15982 9.16634 5.62492V9.16658H5.62468C4.68537 9.16658 3.78453 8.79345 3.12034 8.12926C2.45615 7.46506 2.08301 6.56423 2.08301 5.62492C2.08301 4.68561 2.45615 3.78477 3.12034 3.12058C3.78453 2.45639 4.68537 2.08325 5.62468 2.08325ZM7.49968 7.49992V5.62492C7.49968 5.25408 7.38971 4.89157 7.18368 4.58322C6.97765 4.27488 6.68482 4.03456 6.34221 3.89264C5.9996 3.75073 5.6226 3.7136 5.25888 3.78595C4.89517 3.85829 4.56107 4.03687 4.29885 4.29909C4.03663 4.56132 3.85805 4.89541 3.7857 5.25912C3.71336 5.62284 3.75049 5.99984 3.8924 6.34245C4.03432 6.68506 4.27464 6.9779 4.58298 7.18392C4.89132 7.38995 5.25384 7.49992 5.62468 7.49992H7.49968ZM5.62468 10.8333H9.16634V14.3749C9.16634 15.0754 8.95863 15.7601 8.56946 16.3426C8.1803 16.925 7.62717 17.3789 6.98001 17.647C6.33286 17.9151 5.62075 17.9852 4.93373 17.8485C4.24672 17.7119 3.61565 17.3746 3.12034 16.8793C2.62503 16.3839 2.28772 15.7529 2.15106 15.0659C2.01441 14.3788 2.08454 13.6667 2.3526 13.0196C2.62066 12.3724 3.07461 11.8193 3.65703 11.4301C4.23946 11.041 4.9242 10.8333 5.62468 10.8333ZM5.62468 12.4999C5.25384 12.4999 4.89132 12.6099 4.58298 12.8159C4.27464 13.0219 4.03432 13.3148 3.8924 13.6574C3.75049 14 3.71336 14.377 3.7857 14.7407C3.85805 15.1044 4.03663 15.4385 4.29885 15.7007C4.56107 15.963 4.89517 16.1415 ..." fill="currentColor"/>
                   </g>
                   <defs>
                     <clipPath id="clip0_topology">
@@ -105,7 +115,7 @@ export const TopBar: React.FC<TopBarProps> = ({
                   </defs>
                 </svg>
                 <span className="top-bar__menu-text">Topology</span>
-                <svg className="top-bar__menu-expand" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                <svg className={`top-bar__menu-expand ${isTopologyOpen ? 'top-bar__menu-expand--open' : ''}`} width="20" height="20" viewBox="0 0 20 20" fill="none">
                   <g clipPath="url(#clip0_subtract)">
                     <path d="M4.16602 9.16675H15.8327V10.8334H4.16602V9.16675Z" fill="currentColor"/>
                   </g>
@@ -116,42 +126,30 @@ export const TopBar: React.FC<TopBarProps> = ({
                   </defs>
                 </svg>
               </button>
-              
-              {/* Topology Dropdown Menu */}
-              {activeSection === 'topology' && (
-                <div className="top-bar__dropdown">
+
+              {/* Topology Dropdown Menu - select-like behaviour */}
+              {isTopologyOpen && (
+                <div className="top-bar__dropdown" role="menu">
                   {topologyOptions.map((option) => (
                     <button
                       key={option.key}
-                      className="top-bar__dropdown-item"
-                      onClick={() => toggleTopologyItem(option.key)}
+                      className={`top-bar__dropdown-item ${selectedTopologyItem === option.key ? 'top-bar__dropdown-item--selected' : ''}`}
+                      onClick={() => handleTopologySelect(option.key)}
+                      role="menuitem"
                     >
                       <span className="top-bar__dropdown-text">{option.label}</span>
-                      <svg 
-                        className="top-bar__dropdown-expand" 
-                        width="20" 
-                        height="20" 
-                        viewBox="0 0 20 20" 
-                        fill="none"
-                      >
-                        {expandedTopologyItems.includes(option.key) ? (
-                          <g clipPath="url(#clip0_minus)">
-                            <path d="M4.16602 9.16675H15.8327V10.8334H4.16602V9.16675Z" fill="currentColor"/>
+                      {selectedTopologyItem === option.key ? (
+                        <svg className="top-bar__dropdown-expand" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                          <g clipPath="url(#clip0_check)">
+                            <path d="M7.5 13.5L4 10L5.16667 8.83333L7.5 11.1667L14.8333 3.83333L16 5L7.5 13.5Z" fill="currentColor" />
                           </g>
-                        ) : (
-                          <g clipPath="url(#clip0_plus)">
-                            <path d="M9.16602 9.16675V4.16675H10.8327V9.16675H15.8327V10.8334H10.8327V15.8334H9.16602V10.8334H4.16602V9.16675H9.16602Z" fill="currentColor"/>
-                          </g>
-                        )}
-                        <defs>
-                          <clipPath id="clip0_minus">
-                            <rect width="20" height="20" fill="white" transform="translate(-0.000488281)"/>
-                          </clipPath>
-                          <clipPath id="clip0_plus">
-                            <rect width="20" height="20" fill="white" transform="translate(-0.000488281)"/>
-                          </clipPath>
-                        </defs>
-                      </svg>
+                          <defs>
+                            <clipPath id="clip0_check">
+                              <rect width="20" height="20" fill="white" />
+                            </clipPath>
+                          </defs>
+                        </svg>
+                      ) : null}
                     </button>
                   ))}
                 </div>
