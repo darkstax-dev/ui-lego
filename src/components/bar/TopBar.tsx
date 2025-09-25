@@ -6,14 +6,35 @@ export interface TopBarProps {
   className?: string;
   onMenuItemClick?: (section: string) => void;
   onActionClick?: (action: string) => void;
+  onTopologyItemClick?: (item: string) => void;
 }
+
+type TopologyItem = 'kubernetes-dashboard' | 'scenario' | 'resource-template' | 'metamapper';
 
 export const TopBar: React.FC<TopBarProps> = ({
   activeSection = 'topology',
   className = '',
   onMenuItemClick,
   onActionClick,
+  onTopologyItemClick,
 }) => {
+  const [expandedTopologyItems, setExpandedTopologyItems] = React.useState<TopologyItem[]>([]);
+
+  const topologyOptions: { key: TopologyItem; label: string }[] = [
+    { key: 'kubernetes-dashboard', label: 'Kubernetes Dashboard' },
+    { key: 'scenario', label: 'Scenario' },
+    { key: 'resource-template', label: 'Resource Template' },
+    { key: 'metamapper', label: 'Metamapper' },
+  ];
+
+  const toggleTopologyItem = (item: TopologyItem) => {
+    setExpandedTopologyItems(prev =>
+      prev.includes(item)
+        ? prev.filter(i => i !== item)
+        : [...prev, item]
+    );
+    onTopologyItemClick?.(item);
+  };
   const handleMenuClick = (section: string) => {
     onMenuItemClick?.(section);
   };
