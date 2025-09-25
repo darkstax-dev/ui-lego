@@ -4,7 +4,7 @@
   flex-direction: column;
   align-items: flex-start;
   padding: var(--sds-size-padding-sm) var(--sds-size-padding-lg) var(--sds-size-padding-xs) var(--sds-size-padding-lg);
-  border-radius: var(--sds-size-radius-200);
+  border-radius: 8px;
   font-family: var(--font-family-inter);
 }
 
