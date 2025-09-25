@@ -31,6 +31,8 @@ const icons: { name: string; Component: React.ComponentType<any> }[] = [
   { name: 'DownloadLine', Component: SystemIcons.DownloadLine },
   { name: 'DeleteBinLine', Component: SystemIcons.DeleteBinLine },
   { name: 'AddFill', Component: SystemIcons.AddFill },
+  { name: 'LockFill', Component: SystemIcons.LockFill },
+  { name: 'LockUnlockFill', Component: SystemIcons.LockUnlockFill },
 ]
 
 export const Catalog: Story = {
