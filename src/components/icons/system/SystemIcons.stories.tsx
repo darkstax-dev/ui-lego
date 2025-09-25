@@ -27,10 +27,14 @@ const icons: { name: string; Component: React.ComponentType<any> }[] = [
   { name: 'SettingsFill', Component: SystemIcons.SettingsFill },
   { name: 'EyeLine', Component: SystemIcons.EyeLine },
   { name: 'EyeOffLine', Component: SystemIcons.EyeOffLine },
+  { name: 'FolderMinus', Component: SystemIcons.FolderMinus },
+  { name: 'FolderPlus', Component: SystemIcons.FolderPlus },
   { name: 'UploadFill', Component: SystemIcons.UploadFill },
   { name: 'DownloadLine', Component: SystemIcons.DownloadLine },
   { name: 'DeleteBinLine', Component: SystemIcons.DeleteBinLine },
   { name: 'AddFill', Component: SystemIcons.AddFill },
+  { name: 'LockFill', Component: SystemIcons.LockFill },
+  { name: 'LockUnlockFill', Component: SystemIcons.LockUnlockFill },
 ]
 
 export const Catalog: Story = {

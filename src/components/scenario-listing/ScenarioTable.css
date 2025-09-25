@@ -5,7 +5,7 @@
   flex-direction: column;
   width: 100%;
   max-width: 1200px;
-  background: rgba(173, 173, 173, 1);
+  background: var(--background-primary);
   border-radius: 0;
   overflow: hidden;
 }
@@ -17,7 +17,7 @@
   padding: 0 var(--sds-size-space-400);
   align-items: center;
   border-bottom: 1px solid var(--divider-light);
-  background: var(--Background-Card);
+  background: rgba(223, 223, 223, 1);
   position: relative;
 }
 
@@ -93,7 +93,7 @@
 }
 
 .scenario-table__header-text {
-  color: rgba(223, 223, 223, 1);
+  color: rgba(0, 17, 43, 1);
   font-family: var(--font-family-macan-mono);
   font-size: var(--sds-typography-body-size-small);
   font-weight: var(--font-weight-semibold);
@@ -178,7 +178,7 @@
 }
 
 .scenario-table__text {
-  color: rgba(223, 223, 223, 1);
+  color: rgba(0, 17, 43, 1);
   font-family: var(--font-family-macan-mono);
   font-size: var(--font-size-base);
   font-weight: var(--font-weight-book);
@@ -198,7 +198,7 @@
 .scenario-table__checkbox {
   width: 16px;
   height: 16px;
-  border: 1.5px solid var(--color-blue-dark-950);
+  border: 1.5px solid var(--Checkbox-Stroke-default, #00112B);
   border-radius: 0;
   background: transparent;
   cursor: pointer;
@@ -208,11 +208,13 @@
   -moz-appearance: none;
   position: relative;
   transition: all 0.2s ease;
+  flex-shrink: 0;
+  aspect-ratio: 1/1;
 }
 
 .scenario-table__checkbox:checked {
   background-color: transparent;
-  border-color: var(--color-blue-dark-950);
+  border-color: var(--Checkbox-Stroke-default, #00112B);
 }
 
 .scenario-table__checkbox:checked::after {
@@ -222,7 +224,7 @@
   top: -1px;
   width: 10px;
   height: 6px;
-  border: solid var(--color-blue-dark-950);
+  border: solid var(--Checkbox-Stroke-default, #00112B);
   border-width: 0 0 2px 2px;
   transform: rotate(-45deg);
 }
@@ -286,7 +288,7 @@
 .scenario-table__options-icon {
   width: 24px;
   height: 24px;
-  color: var(--color-gray-500);
+  color: rgba(120, 121, 122, 1);
 }
 
 /* Responsive Design */
@@ -295,7 +297,7 @@
     max-width: 100%;
     overflow-x: auto;
   }
-  
+
   .scenario-table__header,
   .scenario-table__row {
     min-width: 1200px;
@@ -303,25 +305,26 @@
 }
 
 @media (max-width: 768px) {
+
   .scenario-table__header-cell--name,
   .scenario-table__cell--name {
     width: 200px;
   }
-  
+
   .scenario-table__header-cell--cluster,
   .scenario-table__cell--cluster {
     width: 180px;
   }
-  
+
   .scenario-table__header-cell--last-modified,
   .scenario-table__cell--last-modified {
     width: 160px;
   }
-  
+
   .scenario-table__text {
     font-size: var(--sds-typography-body-size-small);
   }
-  
+
   .scenario-table__header-text {
     font-size: var(--font-size-xs);
   }

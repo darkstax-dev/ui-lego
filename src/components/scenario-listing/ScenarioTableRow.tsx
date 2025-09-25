@@ -28,11 +28,11 @@ const ScenarioTableRow: React.FC<ScenarioTableRowProps> = ({
           aria-label={`Select ${scenario.name}`}
         />
       </div>
-      
+
       <div className="scenario-table__cell scenario-table__cell--name">
         <span className="scenario-table__text scenario-table__text--ellipsis">{scenario.name}</span>
       </div>
-      
+
       <div className="scenario-table__cell scenario-table__cell--lock">
         {scenario.isLocked ? (
           <LockIcon className="scenario-table__lock-icon scenario-table__lock-icon--locked" />
@@ -40,23 +40,23 @@ const ScenarioTableRow: React.FC<ScenarioTableRowProps> = ({
           <UnlockIcon className="scenario-table__lock-icon scenario-table__lock-icon--unlocked" />
         )}
       </div>
-      
+
       <div className="scenario-table__cell scenario-table__cell--cluster">
         <span className="scenario-table__text">{scenario.cluster}</span>
       </div>
-      
+
       <div className="scenario-table__cell scenario-table__cell--version">
         <span className="scenario-table__text">{scenario.version}</span>
       </div>
-      
+
       <div className="scenario-table__cell scenario-table__cell--last-modified">
         <span className="scenario-table__text">{scenario.lastModified}</span>
       </div>
-      
+
       <div className="scenario-table__cell scenario-table__cell--created-by">
         <span className="scenario-table__text">{scenario.createdBy}</span>
       </div>
-      
+
       <div className="scenario-table__cell scenario-table__cell--options">
         <button
           className="scenario-table__options-button"
