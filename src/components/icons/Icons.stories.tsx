@@ -179,6 +179,7 @@ const iconCategories = {
     { name: 'Git Commit Line', component: Icons.GitCommitLine, category: 'Git' },
     { name: 'Git Merge Fill', component: Icons.GitMergeFill, category: 'Git' },
     { name: 'Git Merge Line', component: Icons.GitMergeLine, category: 'Git' },
+    { name: 'Git Pull Request Fill', component: Icons.GitPullRequestFill, category: 'Git' },
     { name: 'Git Repository Fill', component: Icons.GitRepositoryFill, category: 'Git' },
     { name: 'Git Repository Line', component: Icons.GitRepositoryLine, category: 'Git' },
     { name: 'Git Repository Commits Fill', component: Icons.GitRepositoryCommitsFill, category: 'Git' },
