@@ -4,7 +4,7 @@
   align-items: flex-start;
   gap: var(--sds-size-space-300);
   padding: 12px var(--sds-size-padding-lg);
-  border-radius: var(--sds-size-radius-200);
+  border-radius: 8px;
   cursor: pointer;
   transition: all 0.2s ease;
   font-family: var(--font-family-inter);
