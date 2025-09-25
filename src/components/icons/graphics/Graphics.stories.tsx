@@ -30,7 +30,7 @@ const graphicsCategories = {
   'Alignment': [
     { name: 'Align Start', component: GraphicsIcons.AlignStart, description: 'Align to start edge' },
     { name: 'Align End', component: GraphicsIcons.AlignEnd, description: 'Align to end edge' },
-    { name: 'Align Center', component: GraphicsIcons.AlignCenter, description: 'Align to center' },
+    { name: 'Align Center', component: GraphicsIcons.AlignCenterGraphic, description: 'Align to center' },
     { name: 'Align Top', component: GraphicsIcons.AlignTop, description: 'Align to top edge' },
     { name: 'Align Bottom', component: GraphicsIcons.AlignBottom, description: 'Align to bottom edge' },
     { name: 'Align Middle', component: GraphicsIcons.AlignMiddle, description: 'Align to middle' },

@@ -154,7 +154,6 @@ export const StreamChart: React.FC<StreamChartProps> = ({
           isInteractive={interactive}
           animate={animate}
           motionConfig="gentle"
-          onMouseEnter={onLayerHover}
           tooltip={CustomTooltip}
           width={width ?? 800}
           height={height}
