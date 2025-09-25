@@ -88,7 +88,7 @@ export const WithSections: Story = {
   render: () => (
     <div className="menu-story">
       <Menu>
-        <MenuHeader title="My App" />
+        <MenuHeader heading="My App" subheading="Application Menu" />
         <MenuSection>
           <MenuHeading>File</MenuHeading>
           <MenuItem

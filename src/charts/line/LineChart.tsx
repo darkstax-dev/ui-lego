@@ -193,7 +193,6 @@ export const LineChart: React.FC<LineChartProps> = ({
           enableGridX={enableGridX}
           enableGridY={enableGridY}
           colors={({ color }) => color}
-          pointComponent={CustomPoint}
           pointSize={pointSize}
           pointColor={{ theme: 'background' }}
           pointBorderWidth={pointBorderWidth}
