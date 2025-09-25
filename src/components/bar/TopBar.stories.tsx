@@ -46,6 +46,10 @@ const meta: Meta<typeof TopBar> = {
       action: 'action-clicked',
       description: 'Handler for when an action button is clicked',
     },
+    onTopologyItemClick: {
+      action: 'topology-item-clicked',
+      description: 'Handler for when a topology dropdown item is clicked',
+    },
   },
 };
 
@@ -101,6 +105,7 @@ export const Template: Story = {
 export const InteractiveDemo: Story = {
   render: (args) => {
     const [activeSection, setActiveSection] = React.useState<TopBarProps['activeSection']>('topology');
+    const [selectedTopologyItems, setSelectedTopologyItems] = React.useState<string[]>([]);
     
     const handleMenuItemClick = (section: string) => {
       setActiveSection(section as TopBarProps['activeSection']);
@@ -111,12 +116,22 @@ export const InteractiveDemo: Story = {
       args.onActionClick?.(action);
     };
 
+    const handleTopologyItemClick = (item: string) => {
+      setSelectedTopologyItems(prev =>
+        prev.includes(item)
+          ? prev.filter(i => i !== item)
+          : [...prev, item]
+      );
+      args.onTopologyItemClick?.(item);
+    };
+
     return (
       <div style={{ minHeight: '100vh', background: '#f8f9fa' }}>
         <TopBar
           activeSection={activeSection}
           onMenuItemClick={handleMenuItemClick}
           onActionClick={handleActionClick}
+          onTopologyItemClick={handleTopologyItemClick}
         />
         <div style={{ 
           padding: '40px 24px',
@@ -135,9 +150,27 @@ export const InteractiveDemo: Story = {
             <p style={{ margin: '0 0 16px 0', color: '#666' }}>
               Current active section: <strong style={{ color: '#071F42' }}>{activeSection}</strong>
             </p>
-            <p style={{ margin: '0', color: '#666', fontSize: '14px' }}>
+            <p style={{ margin: '0 0 16px 0', color: '#666', fontSize: '14px' }}>
               Click on menu items or action buttons to see the interactions. Check the Actions panel below for event logs.
             </p>
+            {activeSection === 'topology' && (
+              <div style={{
+                padding: '12px',
+                background: '#f8f9fa',
+                borderRadius: '4px',
+                border: '1px solid #e0e0e0'
+              }}>
+                <strong style={{ color: '#071F42' }}>Topology Dropdown Active:</strong>
+                <p style={{ margin: '8px 0 0 0', fontSize: '14px', color: '#666' }}>
+                  Click on topology dropdown items (Kubernetes Dashboard, Scenario, Resource Template, Metamapper) to expand/collapse them.
+                </p>
+                {selectedTopologyItems.length > 0 && (
+                  <p style={{ margin: '8px 0 0 0', fontSize: '14px', color: '#28a745' }}>
+                    <strong>Expanded items:</strong> {selectedTopologyItems.join(', ')}
+                  </p>
+                )}
+              </div>
+            )}
           </div>
           
           <div style={{
