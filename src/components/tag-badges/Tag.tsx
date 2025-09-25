@@ -4,7 +4,7 @@ import './Tag.css'
 export type TagScheme = 'brand' | 'danger' | 'positive' | 'warning' | 'neutral'
 export type TagState = 'default' | 'hover'
 
-interface TagProps {
+export interface TagProps {
   children: React.ReactNode
   scheme?: TagScheme
   state?: TagState
