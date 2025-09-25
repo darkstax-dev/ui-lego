@@ -255,7 +255,6 @@ const BarChartDemo: React.FC = () => {
           data={currentDataset.data}
           palette={selectedPalette}
           height={500}
-          showLegend={showLegend}
           showGrid={showGrid}
           interactive={interactive}
           onBarClick={handleBarClick}

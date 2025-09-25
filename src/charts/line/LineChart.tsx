@@ -172,8 +172,8 @@ export const LineChart: React.FC<LineChartProps> = ({
         <Line
           data={chartData}
           margin={margin}
-          xScale={xScale}
-          yScale={yScale}
+          xScale={xScale as any}
+          yScale={yScale as any}
           axisTop={null}
           axisRight={null}
           axisBottom={{

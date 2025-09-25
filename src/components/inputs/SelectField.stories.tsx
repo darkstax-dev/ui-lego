@@ -31,9 +31,11 @@ const checkboxOptions = [
   { value: 'updates', label: 'Product updates', description: 'New features and improvements' },
 ];
 
+type Story = StoryObj;
+
 // SelectField Stories
 const SelectFieldTemplate: Story = {
-  render: (args) => {
+  render: (args: any) => {
     const [value, setValue] = useState(args.value || '');
     return (
       <div className="input-story">
@@ -89,7 +91,7 @@ export const SelectFieldDisabled = {
 
 // RadioGroup Stories
 const RadioGroupTemplate: Story = {
-  render: (args) => {
+  render: (args: any) => {
     const [selectedValue, setSelectedValue] = useState(args.selectedValue || '');
     return (
       <div className="input-story">
@@ -127,7 +129,7 @@ export const RadioGroupDisabled = {
 
 // CheckboxGroup Stories
 const CheckboxGroupTemplate: Story = {
-  render: (args) => {
+  render: (args: any) => {
     const [selectedValues, setSelectedValues] = useState(args.selectedValues || []);
     return (
       <div className="input-story">
