@@ -21,6 +21,11 @@ export { default as StreamChart } from './stream/StreamChart';
 export { default as StreamChartDemo } from './stream/StreamChartDemo';
 export type { StreamChartProps, StreamChartData } from './stream/StreamChart';
 
+// Circle Packing Chart exports
+export { default as CirclePackingChart } from './circle-packing/CirclePackingChart';
+// export { default as CirclePackingChartDemo } from './circle-packing/CirclePackingChartDemo';
+export type { CirclePackingChartProps, CirclePackingData, CirclePackingNode } from './circle-packing/CirclePackingChart';
+
 // Color Palette exports
 export {
   defaultPalette,
@@ -39,4 +44,5 @@ export * from './pie/PieChart';
 export * from './bar/BarChart';
 export * from './line/LineChart';
 export * from './stream/StreamChart';
+export * from './circle-packing/CirclePackingChart';
 export * from './palette';
