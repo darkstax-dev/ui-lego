@@ -6,6 +6,7 @@
   width: 240px;
   background: var(--surface-card, var(--Drop-down-light-Background-default, #ECECEC));
   border: none;
+  border-radius: 0;
   position: relative;
 }
 

@@ -21,7 +21,7 @@ const ScenarioTableHeader: React.FC<ScenarioTableHeaderProps> = ({
 
   const renderSortableHeader = (column: SortableColumn, label: string, width?: string) => {
     const isActive = sortColumn === column
-    const showArrow = isActive && sortDirection
+    const showArrow = true // Always show arrow for sortable columns
 
     return (
       <div
@@ -39,7 +39,7 @@ const ScenarioTableHeader: React.FC<ScenarioTableHeaderProps> = ({
         <div className="scenario-table__header-content">
           <span className="scenario-table__header-text">{label}</span>
           {showArrow && (
-            <SortArrowIcon className={`scenario-table__sort-arrow ${sortDirection === 'desc' ? 'scenario-table__sort-arrow--desc' : ''}`} />
+            <SortArrowIcon className={`scenario-table__sort-arrow ${isActive && sortDirection === 'desc' ? 'scenario-table__sort-arrow--desc' : ''} ${!isActive ? 'scenario-table__sort-arrow--inactive' : ''}`} />
           )}
         </div>
       </div>
