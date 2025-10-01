@@ -35,6 +35,14 @@ const icons: { name: string; Component: React.ComponentType<any> }[] = [
   { name: 'AddFill', Component: SystemIcons.AddFill },
   { name: 'LockFill', Component: SystemIcons.LockFill },
   { name: 'LockUnlockFill', Component: SystemIcons.LockUnlockFill },
+  { name: 'Timer2Line', Component: SystemIcons.Timer2Line },
+  { name: 'EditLine', Component: SystemIcons.EditLine },
+  { name: 'ShieldLine', Component: SystemIcons.ShieldLine },
+  { name: 'Shape2Line', Component: SystemIcons.Shape2Line },
+  { name: 'InboxUnarchiveFill', Component: SystemIcons.InboxUnarchiveFill },
+  { name: 'PlayCircleLine', Component: SystemIcons.PlayCircleLine },
+  { name: 'DeleteBack2Line', Component: SystemIcons.DeleteBack2Line },
+  { name: 'DeleteBin7Line', Component: SystemIcons.DeleteBin7Line },
 ]
 
 export const Catalog: Story = {
