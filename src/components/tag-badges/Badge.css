@@ -1,46 +1,23 @@
-/* Badge styles matching Figma design - strict token usage */
+/* Badge Component - Figma Design Match */
+
 .badge {
   display: inline-flex;
-  align-items: flex-start;
   justify-content: flex-end;
+  align-items: flex-start;
   height: 20px;
-  position: relative;
 }
 
 .badge__flag {
   width: 9px;
   height: 20px;
-  position: relative;
   flex-shrink: 0;
-}
-
-.badge__flag::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 9px;
-  height: 11.67px;
-  background: currentColor;
-}
-
-.badge__flag::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 0;
-  height: 0;
-  border-left: 9px solid currentColor;
-  border-bottom: 8.33px solid transparent;
 }
 
 .badge__content {
   display: flex;
+  padding: var(--sds-size-space-100) 6px var(--sds-size-space-100) 1px;
   align-items: center;
   gap: 5px;
-  padding: var(--sds-size-space-100) 6px var(--sds-size-space-100) 1px;
-  background: currentColor;
   height: 20px;
   box-sizing: border-box;
 }
@@ -55,16 +32,16 @@
 }
 
 /* Active status - Green */
-.badge--active {
-  color: var(--color-green-800);
+.badge--active .badge__content {
+  background: var(--color-green-800);
 }
 
 /* Canceled status - Black */
-.badge--canceled {
-  color: var(--color-black);
+.badge--canceled .badge__content {
+  background: var(--color-black);
 }
 
-/* Pending status - Yellow/Orange */
-.badge--pending {
-  color: var(--color-yellow-500);
+/* Pending status - Orange */
+.badge--pending .badge__content {
+  background: var(--color-yellow-500);
 }
