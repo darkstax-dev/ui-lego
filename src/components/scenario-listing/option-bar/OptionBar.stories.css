@@ -1,0 +1,79 @@
+/* Storybook specific styles for OptionBar */
+
+.sb-show-main {
+  background: var(--color-gray-100);
+}
+
+.option-bar-story-container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sds-size-space-800);
+  padding: var(--sds-size-space-800);
+  background: var(--color-gray-100);
+  min-height: 100vh;
+}
+
+.option-bar-story-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sds-size-space-400);
+}
+
+.option-bar-story-title {
+  font-family: var(--font-family-macan);
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-blue-main);
+  line-height: var(--line-height-normal);
+}
+
+.option-bar-story-description {
+  font-family: var(--font-family-macan);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-book);
+  color: var(--text-blue-secondary);
+  line-height: var(--line-height-normal);
+}
+
+.option-bar-story-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: var(--sds-size-space-800);
+  max-width: 800px;
+}
+
+.option-bar-story-item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sds-size-space-300);
+}
+
+.option-bar-story-label {
+  font-family: var(--font-family-macan-mono);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-blue-main);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Dark mode overrides for storybook */
+@media (prefers-color-scheme: dark) {
+  .sb-show-main {
+    background: var(--color-blue-medium-950);
+  }
+
+  .option-bar-story-container {
+    background: var(--color-blue-medium-950);
+  }
+}
+
+[data-theme="dark"] {
+  .sb-show-main {
+    background: var(--color-blue-medium-950);
+  }
+
+  .option-bar-story-container {
+    background: var(--color-blue-medium-950);
+  }
+}
