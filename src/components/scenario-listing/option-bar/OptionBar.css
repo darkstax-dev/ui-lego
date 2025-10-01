@@ -1,0 +1,158 @@
+/* OptionBar Component Styles */
+
+.option-bar {
+  display: flex;
+  width: 220px;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--sds-size-space-200);
+  background: var(--color-blue-dark-950);
+  position: relative;
+}
+
+.option-bar__container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-self: stretch;
+  position: relative;
+}
+
+.option-bar__item {
+  display: flex;
+  padding: var(--sds-size-space-300);
+  align-items: center;
+  gap: var(--sds-size-space-300);
+  align-self: stretch;
+  position: relative;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  user-select: none;
+}
+
+.option-bar__item:hover {
+  background-color: rgba(255, 255, 255, 0.08);
+}
+
+.option-bar__item:active {
+  background-color: rgba(255, 255, 255, 0.12);
+}
+
+.option-bar__item:focus {
+  outline: 2px solid rgba(255, 255, 255, 0.3);
+  outline-offset: -2px;
+}
+
+.option-bar__item:focus:not(:focus-visible) {
+  outline: none;
+}
+
+.option-bar__item--highlighted {
+  background: var(--color-blue-950);
+}
+
+.option-bar__item--highlighted:hover {
+  background: rgba(7, 43, 86, 0.8);
+}
+
+.option-bar__item--danger:hover {
+  background-color: rgba(255, 59, 49, 0.1);
+}
+
+.option-bar__item--disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.option-bar__icon {
+  display: flex;
+  width: 18px;
+  height: 18px;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+  aspect-ratio: 1/1;
+  position: relative;
+}
+
+.option-bar__label {
+  color: var(--text-white-main);
+  font-family: var(--font-family-macan);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-book);
+  line-height: 120%;
+  position: relative;
+}
+
+.option-bar__label--danger {
+  color: var(--color-red-500);
+}
+
+.option-bar__divider {
+  width: 220px;
+  height: 0;
+  position: relative;
+}
+
+.option-bar__divider svg {
+  width: 220px;
+  height: 2px;
+  stroke-width: 1px;
+  position: relative;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .option-bar {
+    width: 100%;
+    max-width: 220px;
+  }
+
+  .option-bar__item {
+    padding: var(--sds-size-space-400) var(--sds-size-space-300);
+  }
+
+  .option-bar__label {
+    font-size: var(--font-size-xs);
+  }
+}
+
+/* Dark mode adjustments */
+@media (prefers-color-scheme: dark) {
+  .option-bar {
+    background: var(--color-blue-dark-950);
+  }
+
+  .option-bar__item--highlighted {
+    background: var(--color-blue-950);
+  }
+}
+
+[data-theme="dark"] {
+  .option-bar {
+    background: var(--color-blue-dark-950);
+  }
+
+  .option-bar__item--highlighted {
+    background: var(--color-blue-950);
+  }
+}
+
+/* Accessibility improvements */
+@media (prefers-reduced-motion: reduce) {
+  .option-bar__item {
+    transition: none;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .option-bar__item:focus {
+    outline-width: 3px;
+  }
+
+  .option-bar__divider svg path {
+    stroke-opacity: 1;
+  }
+}
