@@ -106,11 +106,16 @@
   width: 8px;
   height: 10px;
   color: var(--color-red-500);
-  transition: transform 0.2s ease;
+  transition: transform 0.2s ease, opacity 0.2s ease;
 }
 
 .scenario-table__sort-arrow--desc {
   transform: rotate(180deg);
+}
+
+.scenario-table__sort-arrow--inactive {
+  opacity: 0.3;
+  color: var(--color-gray-500);
 }
 
 /* Body Styles */

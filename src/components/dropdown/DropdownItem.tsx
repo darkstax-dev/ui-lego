@@ -1,6 +1,5 @@
 import React, { forwardRef } from 'react'
 import './DropdownItem.css'
-import ImageIcon from '../icons/ImageIcon'
 import { Slot, PolymorphicProps } from '../../utils/Slot'
 
 export type DropdownItemVariant = 'default' | 'hover' | 'danger'
@@ -41,9 +40,6 @@ const DropdownItem = forwardRef<HTMLButtonElement, PolymorphicProps<'button', Dr
     className
   ].filter(Boolean).join(' ')
 
-  const defaultLeadingIcon = <ImageIcon width={16} height={16} />
-  const defaultTrailingIcon = <ImageIcon width={16} height={16} />
-
   const handleClick = () => {
     if (!disabled && onClick) {
       onClick()
@@ -73,9 +69,9 @@ const DropdownItem = forwardRef<HTMLButtonElement, PolymorphicProps<'button', Dr
       ref={ref}
       {...props}
     >
-      {showLeadingIcon && (
+      {showLeadingIcon && leadingIcon && (
         <div className="dropdown-item__icon dropdown-item__leading-icon" aria-hidden="true">
-          {leadingIcon || defaultLeadingIcon}
+          {leadingIcon}
         </div>
       )}
 
@@ -83,9 +79,9 @@ const DropdownItem = forwardRef<HTMLButtonElement, PolymorphicProps<'button', Dr
         {children}
       </div>
 
-      {showTrailingIcon && (
+      {showTrailingIcon && trailingIcon && (
         <div className="dropdown-item__icon dropdown-item__trailing-icon" aria-hidden="true">
-          {trailingIcon || defaultTrailingIcon}
+          {trailingIcon}
         </div>
       )}
     </Comp>

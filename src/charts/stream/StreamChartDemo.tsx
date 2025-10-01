@@ -69,12 +69,32 @@ const StreamChartDemo: React.FC = () => {
         <div className="chart-variations">
           <div className="variation-card">
             <div className="variation-title">Blue Palette</div>
-            <StreamChart data={generateData(9)} keys={["Engineering","Design","Marketing","Sales"]} palette="blue" height={260} showLegend={true} />
+            <StreamChart 
+              data={generateData(9)} 
+              keys={["Engineering","Design","Marketing","Sales"]} 
+              palette="blue" 
+              height={300} 
+              width={400}
+              showLegend={true} 
+            />
           </div>
 
           <div className="variation-card">
             <div className="variation-title">Many Categories</div>
-            <StreamChart data={Array.from({length:10},(_,i)=>({x:i, A:Math.random()*100+20,B:Math.random()*80+10,C:Math.random()*60+5,D:Math.random()*50+3}))} keys={["A","B","C","D"]} palette="cool" height={260} showLegend={true} />
+            <StreamChart 
+              data={Array.from({length:9},(_,i)=>({
+                x:i, 
+                A:Math.random()*100+20,
+                B:Math.random()*80+10,
+                C:Math.random()*60+5,
+                D:Math.random()*50+3
+              }))} 
+              keys={["A","B","C","D"]} 
+              palette="cool" 
+              height={300}
+              width={400}
+              showLegend={true} 
+            />
           </div>
         </div>
       </div>

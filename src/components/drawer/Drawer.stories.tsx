@@ -27,14 +27,14 @@ export const Default: Story = {
       const [open, setOpen] = React.useState(false)
       return (
         <div className="drawer-story">
-          <Button onClick={() => setOpen(true)}>
+          <Button onClick={() => setOpen(true)} icon={<></>}>
             Open Drawer
           </Button>
 
           <Drawer isOpen={open} onClose={() => setOpen(false)} title="Default Drawer">
             <div className="drawer-sample-content">
               <p>This is the default drawer content. Use the close button or click the backdrop to close.</p>
-              <Button variant="secondary" onClick={() => setOpen(false)}>Close</Button>
+              <Button variant="secondary" onClick={() => setOpen(false)} icon={<></>}>Close</Button>
             </div>
           </Drawer>
         </div>
@@ -52,10 +52,10 @@ export const Positions: Story = {
       return (
         <div className="drawer-story drawer-positions">
           <div className="drawer-position-buttons">
-            <Button onClick={() => setOpenPos('right')}>Open Right</Button>
-            <Button onClick={() => setOpenPos('left')}>Open Left</Button>
-            <Button onClick={() => setOpenPos('top')}>Open Top</Button>
-            <Button onClick={() => setOpenPos('bottom')}>Open Bottom</Button>
+            <Button onClick={() => setOpenPos('right')} icon={<></>}>Open Right</Button>
+            <Button onClick={() => setOpenPos('left')} icon={<></>}>Open Left</Button>
+            <Button onClick={() => setOpenPos('top')} icon={<></>}>Open Top</Button>
+            <Button onClick={() => setOpenPos('bottom')} icon={<></>}>Open Bottom</Button>
           </div>
 
           <Drawer
@@ -110,9 +110,9 @@ export const Sizes: Story = {
       return (
         <div className="drawer-story drawer-sizes">
           <div className="drawer-position-buttons">
-            <Button onClick={() => setSizeOpen('small')}>Small</Button>
-            <Button onClick={() => setSizeOpen('standard')}>Standard</Button>
-            <Button onClick={() => setSizeOpen('large')}>Large</Button>
+            <Button onClick={() => setSizeOpen('small')} icon={<></>}>Small</Button>
+            <Button onClick={() => setSizeOpen('standard')} icon={<></>}>Standard</Button>
+            <Button onClick={() => setSizeOpen('large')} icon={<></>}>Large</Button>
           </div>
 
           <Drawer
@@ -155,7 +155,7 @@ export const NoBackdrop: Story = {
       const [open, setOpen] = React.useState(false)
       return (
         <div className="drawer-story">
-          <Button onClick={() => setOpen(true)}>Open without Backdrop</Button>
+          <Button onClick={() => setOpen(true)} icon={<></>}>Open without Backdrop</Button>
 
           <Drawer isOpen={open} onClose={() => setOpen(false)} hasBackdrop={false} title="No Backdrop">
             <div className="drawer-sample-content">Drawer without a backdrop</div>

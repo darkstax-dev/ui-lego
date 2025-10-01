@@ -84,6 +84,11 @@
   gap: var(--sds-size-space-400);
   flex: 1;
   overflow-y: auto;
+  color: var(--color-gray-200);
+}
+
+.modal-content * {
+  color: var(--color-gray-200);
 }
 
 .modal-actions {

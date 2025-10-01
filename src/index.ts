@@ -64,6 +64,9 @@ export * from './components/bar'
 // Navigation components
 export * from './components/navigation'
 
+// SideBar exports
+export * from './components/sidebar/index.ts'
+
 // Snackbar types
 export type { SnackbarVariant } from './components/snackbar/Snackbar'
 

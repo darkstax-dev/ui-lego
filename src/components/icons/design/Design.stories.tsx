@@ -220,8 +220,7 @@ export const AllDesignIcons: Story = {
         </div>
       </div>
     </div>
-  ),
-  name: 'All Design Icons'
+  )
 }
 
 // Customization examples
@@ -303,6 +302,5 @@ export const DifferentSizes: Story = {
         </div>
       </div>
     </div>
-  ),
-  name: 'Different Sizes'
+  )
 }

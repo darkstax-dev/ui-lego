@@ -107,7 +107,7 @@ export const Disabled: Story = {
 export const Sizes: Story = {
   render: () => (
     <div className="button-sizes-container">
-      <Button size="small">Small Button</Button>
+      <Button size="small" icon={<></>}>Small Button</Button>
       <Button size="big">Big Button</Button>
     </div>
   ),
