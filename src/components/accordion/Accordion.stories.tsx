@@ -1,8 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import Accordion from './Accordion';
 import AccordionItem from './AccordionItem';
-import ResourceTemplateFolder from './ResourceTemplateFolder';
-import ResourceTemplatesList from './ResourceTemplatesList';
+import ResourceTemplates from './ResourceTemplates';
 import './Accordion.stories.css';
 
 const meta: Meta<typeof Accordion> = {
@@ -97,25 +96,38 @@ export const LongContent: Story = {
   ),
 };
 
-// Resource Templates with folder structure
-export const ResourceTemplates: Story = {
+// Resource Templates with unified component
+export const ResourceTemplatesExample: Story = {
   render: () => {
-    const podTemplates = [
-      { name: 'nginx-pod.yaml', type: 'pod' as const },
-      { name: 'redis-pod.yaml', type: 'pod' as const },
-      { name: 'postgres-pod.yaml', type: 'pod' as const },
-    ];
-
-    const serviceTemplates = [
-      { name: 'loadbalancer-service.yaml', type: 'service' as const },
-      { name: 'nodeport-service.yaml', type: 'service' as const },
-      { name: 'clusterip-service.yaml', type: 'service' as const },
-    ];
-
-    const deploymentTemplates = [
-      { name: 'web-deployment.yaml', type: 'deployment' as const },
-      { name: 'api-deployment.yaml', type: 'deployment' as const },
-      { name: 'worker-deployment.yaml', type: 'deployment' as const },
+    const categories = [
+      {
+        id: 'pods',
+        name: 'Pods',
+        defaultOpen: true,
+        templates: [
+          { id: '1', name: 'nginx-pod.yaml', type: 'pod' as const },
+          { id: '2', name: 'redis-pod.yaml', type: 'pod' as const },
+          { id: '3', name: 'postgres-pod.yaml', type: 'pod' as const },
+        ]
+      },
+      {
+        id: 'services',
+        name: 'Services',
+        templates: [
+          { id: '4', name: 'loadbalancer-service.yaml', type: 'service' as const },
+          { id: '5', name: 'nodeport-service.yaml', type: 'service' as const },
+          { id: '6', name: 'clusterip-service.yaml', type: 'service' as const },
+        ]
+      },
+      {
+        id: 'deployments',
+        name: 'Deployments',
+        templates: [
+          { id: '7', name: 'web-deployment.yaml', type: 'deployment' as const },
+          { id: '8', name: 'api-deployment.yaml', type: 'deployment' as const },
+          { id: '9', name: 'worker-deployment.yaml', type: 'deployment' as const },
+        ]
+      }
     ];
 
     return (
@@ -124,21 +136,9 @@ export const ResourceTemplates: Story = {
           <AccordionItem
             title="Resource Templates"
             content={
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                <ResourceTemplateFolder
-                  name="Pods"
-                  items={podTemplates}
-                  defaultOpen={true}
-                />
-                <ResourceTemplateFolder
-                  name="Services"
-                  items={serviceTemplates}
-                />
-                <ResourceTemplateFolder
-                  name="Deployments"
-                  items={deploymentTemplates}
-                />
-              </div>
+              <ResourceTemplates
+                categories={categories}
+              />
             }
             defaultOpen={true}
           />
@@ -148,13 +148,3 @@ export const ResourceTemplates: Story = {
   },
 };
 
-// Resource Templates with Icons and Search
-export const ResourceTemplatesWithSearch: Story = {
-  render: () => {
-    return (
-      <div className="accordion-story">
-        <ResourceTemplatesList />
-      </div>
-    );
-  },
-};

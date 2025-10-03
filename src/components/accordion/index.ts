@@ -1,6 +1,5 @@
 export { default as Accordion } from './Accordion'
 export { default as AccordionItem } from './AccordionItem'
 export { default as AccordionDemo } from './AccordionDemo'
-export { default as ResourceTemplateFolder } from './ResourceTemplateFolder'
-export { default as ResourceTemplatesDemo } from './ResourceTemplatesDemo'
-export { default as ResourceTemplatesList } from './ResourceTemplatesList'
+export { default as ResourceTemplates } from './ResourceTemplates'
+export type { ResourceTemplate, ResourceCategory, ResourceTemplatesProps } from './ResourceTemplates'
