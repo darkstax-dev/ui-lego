@@ -2,7 +2,7 @@
 .menu {
   display: flex;
   width: 301px;
-  padding: var(--sds-size-padding-sm);
+  padding: var(--sds-size-padding-xs);
   flex-direction: column;
   align-items: flex-start;
   border: var(--sds-size-stroke-border) solid var(--sds-color-border-default-default);
@@ -10,7 +10,6 @@
   box-shadow: 
     0px var(--sds-size-depth-100) var(--sds-size-depth-100) var(--sds-size-depth-negative-025) var(--sds-color-black-200),
     0px var(--sds-size-depth-100) var(--sds-size-depth-100) var(--sds-size-depth-negative-025) var(--sds-color-black-100);
-  border-radius: 8px;
   font-family: var(--font-family-inter);
 }
 

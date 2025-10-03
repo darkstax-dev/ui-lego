@@ -4,8 +4,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: var(--sds-size-padding-sm) var(--sds-size-padding-lg);
-  border-radius: 8px;
+  padding: var(--sds-size-padding-xs) var(--sds-size-padding-md);
 }
 
 .menu-separator__line {

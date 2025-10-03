@@ -2,8 +2,7 @@
 .menu-heading {
   display: flex;
   align-items: flex-start;
-  padding: var(--sds-size-padding-sm) var(--sds-size-padding-lg) var(--sds-size-padding-xs) var(--sds-size-padding-lg);
-  border-radius: var(--sds-size-radius-200);
+  padding: var(--sds-size-padding-xs) var(--sds-size-padding-md) var(--sds-size-padding-xxs) var(--sds-size-padding-md);
   font-family: var(--font-family-inter);
 }
 
