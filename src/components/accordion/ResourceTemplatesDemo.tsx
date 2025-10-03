@@ -2,8 +2,11 @@ import React from 'react'
 import Accordion from './Accordion'
 import AccordionItem from './AccordionItem'
 import ResourceTemplateFolder from './ResourceTemplateFolder'
+import './ResourceTemplatesDemo.css'
 
 const ResourceTemplatesDemo: React.FC = () => {
+  const [query, setQuery] = React.useState('')
+
   const podTemplates = [
     { name: 'nginx-pod.yaml', type: 'pod' as const },
     { name: 'redis-pod.yaml', type: 'pod' as const },
@@ -22,36 +25,64 @@ const ResourceTemplatesDemo: React.FC = () => {
     { name: 'worker-deployment.yaml', type: 'deployment' as const },
   ]
 
+  const q = query.trim().toLowerCase()
+  const filterItems = (items: { name: string }[]) => (q ? items.filter(i => i.name.toLowerCase().includes(q)) : items)
+
+  const filteredPods = filterItems(podTemplates)
+  const filteredServices = filterItems(serviceTemplates)
+  const filteredDeployments = filterItems(deploymentTemplates)
+
+  const totalMatches = filteredPods.length + filteredServices.length + filteredDeployments.length
+  const hasQuery = q.length > 0
+
   const resourceTemplatesContent = (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-      <ResourceTemplateFolder 
-        name="Pods" 
-        items={podTemplates}
-        defaultOpen={true}
-      />
-      <ResourceTemplateFolder 
-        name="Services" 
-        items={serviceTemplates}
-      />
-      <ResourceTemplateFolder 
-        name="Deployments" 
-        items={deploymentTemplates}
-      />
+    <div className="rt-folders">
+      {hasQuery && totalMatches === 0 ? (
+        <div className="rt-no-results">No resource templates found</div>
+      ) : (
+        <>
+          {filteredPods.length > 0 && (
+            <ResourceTemplateFolder
+              name="Pods"
+              items={filteredPods}
+              defaultOpen={hasQuery ? true : true}
+            />
+          )}
+
+          {filteredServices.length > 0 && (
+            <ResourceTemplateFolder
+              name="Services"
+              items={filteredServices}
+              defaultOpen={hasQuery ? true : false}
+            />
+          )}
+
+          {filteredDeployments.length > 0 && (
+            <ResourceTemplateFolder
+              name="Deployments"
+              items={filteredDeployments}
+              defaultOpen={hasQuery ? true : false}
+            />
+          )}
+        </>
+      )}
     </div>
   )
 
   return (
-    <div style={{ padding: '24px', maxWidth: '400px' }}>
-      <h2 style={{ 
-        marginBottom: '24px', 
-        fontFamily: 'var(--font-family-macan-mono)', 
-        textTransform: 'uppercase',
-        fontSize: '18px',
-        fontWeight: '600',
-      }}>
-        Resource Template Mockup
-      </h2>
-      
+    <div className="rt-container">
+      <h2 className="rt-title">Resource Template Mockup</h2>
+
+      <div className="rt-search-wrapper">
+        <input
+          className="rt-search"
+          aria-label="Search resource templates"
+          placeholder="Search resource templates..."
+          value={query}
+          onChange={e => setQuery(e.target.value)}
+        />
+      </div>
+
       <Accordion>
         <AccordionItem
           title="Resource Templates"
