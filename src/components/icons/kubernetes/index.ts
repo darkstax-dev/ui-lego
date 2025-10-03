@@ -10,3 +10,4 @@ export { default as KubernetesPersistentVolume } from './KubernetesPersistentVol
 export { default as KubernetesPersistentVolumeClaim } from './KubernetesPersistentVolumeClaim'
 export { default as KubernetesStatefulSet } from './KubernetesStatefulSet'
 export { default as KubernetesNode } from './KubernetesNode'
+export { default as KubernetesMultus } from './KubernetesMultus'
