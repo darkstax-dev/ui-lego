@@ -5,7 +5,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 17, 43, 0.30);
+  background: #00112b4d;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -71,7 +71,7 @@
 }
 
 .modal-close-button:focus {
-  outline: 2px solid rgba(223, 223, 223, 0.2);
+  outline: 2px solid #dfdfdf33;
   outline-offset: 2px;
 }
 
@@ -123,11 +123,11 @@
 }
 
 .modal-button--secondary:hover {
-  background: rgba(217, 50, 42, 0.1);
+  background: #d9322a1a;
 }
 
 .modal-button--secondary:focus {
-  outline: 2px solid rgba(217, 50, 42, 0.2);
+  outline: 2px solid #d9322a33;
   outline-offset: 2px;
 }
 
@@ -142,7 +142,7 @@
 }
 
 .modal-button--primary:focus {
-  outline: 2px solid rgba(217, 50, 42, 0.4);
+  outline: 2px solid #d9322a66;
   outline-offset: 2px;
 }
 

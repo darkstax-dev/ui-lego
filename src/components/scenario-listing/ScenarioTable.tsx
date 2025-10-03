@@ -35,7 +35,7 @@ const ScenarioTable: React.FC<ScenarioTableProps> = ({
             key={scenario.id}
             scenario={scenario}
             onSelect={onScenarioSelect}
-            onOptionsClick={onOptionsClick}
+            onOptionsClick={(scenarioId, event) => onOptionsClick?.(scenarioId, event)}
           />
         ))}
       </div>

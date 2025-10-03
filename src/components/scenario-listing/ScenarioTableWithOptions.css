@@ -1,0 +1,60 @@
+/* ScenarioTableWithOptions Component Styles using design tokens */
+
+.scenario-table-with-options {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 1200px;
+  background: var(--background-primary);
+  border-radius: 0;
+  overflow: hidden;
+  position: relative;
+}
+
+.scenario-table-with-options__overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: transparent;
+  z-index: 999;
+}
+
+.scenario-table-with-options__option-bar {
+  position: fixed;
+  z-index: 1000;
+  box-shadow: 0px 8px 24px rgba(0, 0, 0, 0.15);
+  border-radius: 0;
+  animation: option-bar-appear 0.2s ease-out;
+  background: var(--color-blue-dark-950);
+}
+
+@keyframes option-bar-appear {
+  from {
+    opacity: 0;
+    transform: translateY(var(--sds-size-space-negative-200));
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+  .scenario-table-with-options {
+    max-width: 100%;
+    overflow-x: auto;
+  }
+}
+
+@media (max-width: 768px) {
+  .scenario-table-with-options__option-bar {
+    position: fixed;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%);
+    box-shadow: 0px 16px 32px rgba(0, 0, 0, 0.2);
+  }
+}

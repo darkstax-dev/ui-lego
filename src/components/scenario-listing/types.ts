@@ -20,7 +20,7 @@ export interface ScenarioTableProps {
   onSort?: (column: SortableColumn) => void
   sortColumn?: SortableColumn
   sortDirection?: SortDirection
-  onOptionsClick?: (scenarioId: string) => void
+  onOptionsClick?: (scenarioId: string, event?: React.MouseEvent) => void
   className?: string
 }
 
@@ -36,5 +36,5 @@ export interface ScenarioTableHeaderProps {
 export interface ScenarioTableRowProps {
   scenario: ScenarioItem
   onSelect?: (scenarioId: string, selected: boolean) => void
-  onOptionsClick?: (scenarioId: string) => void
+  onOptionsClick?: (scenarioId: string, event?: React.MouseEvent) => void
 }

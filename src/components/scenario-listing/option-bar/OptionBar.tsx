@@ -93,12 +93,6 @@ const defaultItems = (props: OptionBarProps): OptionBarItem[] => [
     variant: 'default'
   },
   {
-    id: 'divider',
-    label: '',
-    icon: null,
-    variant: 'default'
-  },
-  {
     id: 'delete',
     label: 'Delete',
     icon: <DeleteBin7Line width={18} height={18} fill="#FF3B31" />,
@@ -127,40 +121,28 @@ const OptionBar: React.FC<OptionBarProps> = (props) => {
   return (
     <div className={`option-bar ${className}`}>
       <div className="option-bar__container">
-        {optionItems.map((item) => {
-          if (item.id === 'divider') {
-            return (
-              <div key={item.id} className="option-bar__divider">
-                <svg width="220" height="2" viewBox="0 0 220 2" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M0 1H220" stroke="#9A9B9C" strokeOpacity="0.4" strokeDasharray="4 4"/>
-                </svg>
+        {optionItems.map((item) => (
+          <div
+            key={item.id}
+            className={`option-bar__item ${item.variant === 'highlighted' ? 'option-bar__item--highlighted' : ''} ${item.variant === 'danger' ? 'option-bar__item--danger' : ''} ${item.disabled ? 'option-bar__item--disabled' : ''}`}
+            onClick={() => handleItemClick(item)}
+            onKeyDown={(e) => handleKeyDown(e, item)}
+            role="button"
+            tabIndex={item.disabled ? -1 : 0}
+            aria-disabled={item.disabled}
+          >
+            {item.icon && (
+              <div className="option-bar__icon">
+                {item.icon}
               </div>
-            )
-          }
-
-          return (
-            <div
-              key={item.id}
-              className={`option-bar__item ${item.variant === 'highlighted' ? 'option-bar__item--highlighted' : ''} ${item.variant === 'danger' ? 'option-bar__item--danger' : ''} ${item.disabled ? 'option-bar__item--disabled' : ''}`}
-              onClick={() => handleItemClick(item)}
-              onKeyDown={(e) => handleKeyDown(e, item)}
-              role="button"
-              tabIndex={item.disabled ? -1 : 0}
-              aria-disabled={item.disabled}
-            >
-              {item.icon && (
-                <div className="option-bar__icon">
-                  {item.icon}
-                </div>
-              )}
-              {item.label && (
-                <div className={`option-bar__label ${item.variant === 'danger' ? 'option-bar__label--danger' : ''}`}>
-                  {item.label}
-                </div>
-              )}
-            </div>
-          )
-        })}
+            )}
+            {item.label && (
+              <div className={`option-bar__label ${item.variant === 'danger' ? 'option-bar__label--danger' : ''}`}>
+                {item.label}
+              </div>
+            )}
+          </div>
+        ))}
       </div>
     </div>
   )

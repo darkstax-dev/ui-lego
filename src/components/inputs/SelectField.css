@@ -29,7 +29,7 @@
 }
 
 .select-field__select:hover:not(.select-field__select--disabled) {
-  background: rgba(223, 223, 223, 0.8);
+  background: #dfdfdfcc;
 }
 
 .select-field__select--error {
@@ -85,7 +85,7 @@
   max-height: 200px;
   overflow-y: auto;
   z-index: 1000;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 6px #0000001a;
 }
 
 .select-field__option {
@@ -134,7 +134,7 @@
 
 /* Accessibility */
 .select-field__select:focus {
-  outline: 2px solid rgba(0, 17, 43, 0.2);
+  outline: 2px solid #00112b33;
   outline-offset: 2px;
 }
 

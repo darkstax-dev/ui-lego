@@ -117,12 +117,12 @@
 /* Hover states for non-disabled checkboxes */
 .checkbox-field:not(.checkbox-field--disabled) .checkbox-field__input:hover + .checkbox-field__checkbox {
   border-color: var(--color-blue-dark-950);
-  background-color: rgba(0, 17, 43, 0.04);
+  background-color: #00112b0a;
 }
 
 /* Focus states */
 .checkbox-field__input:focus + .checkbox-field__checkbox {
-  outline: 2px solid rgba(0, 17, 43, 0.2);
+  outline: 2px solid #00112b33;
   outline-offset: 2px;
 }
 

@@ -13,8 +13,10 @@ const ScenarioTableRow: React.FC<ScenarioTableRowProps> = ({
     onSelect?.(scenario.id, event.target.checked)
   }
 
-  const handleOptionsClick = () => {
-    onOptionsClick?.(scenario.id)
+  const handleOptionsClick = (event: React.MouseEvent) => {
+    event.preventDefault()
+    event.stopPropagation()
+    onOptionsClick?.(scenario.id, event)
   }
 
   return (

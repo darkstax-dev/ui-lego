@@ -40,7 +40,7 @@
 }
 
 .secondary-navigation__back-btn:focus-visible {
-  outline: 2px solid rgba(0, 17, 43, 0.2);
+  outline: 2px solid #00112b33;
   outline-offset: 2px;
 }
 
@@ -113,8 +113,8 @@
   background: white;
   border-radius: 50%;
   transition: all 0.2s ease;
-  box-shadow: 0 1px 1px rgba(10, 13, 18, 0.06), 0 1px 3px rgba(10, 13, 18, 0.1);
-  filter: drop-shadow(0px 1px 1px rgba(10, 13, 18, 0.06)) drop-shadow(0px 1px 3px rgba(10, 13, 18, 0.1));
+  box-shadow: 0 1px 1px #0a0d120f, 0 1px 3px #0a0d121a;
+  filter: drop-shadow(0px 1px 1px #0a0d120f) drop-shadow(0px 1px 3px #0a0d121a);
 }
 
 .secondary-navigation__toggle-text {
@@ -167,7 +167,7 @@
 }
 
 .secondary-navigation__select-input:focus {
-  outline: 2px solid rgba(0, 17, 43, 0.2);
+  outline: 2px solid #00112b33;
   outline-offset: 2px;
 }
 
@@ -213,7 +213,7 @@
 }
 
 .secondary-navigation__search-input-wrapper:focus-within {
-  outline: 2px solid rgba(0, 17, 43, 0.2);
+  outline: 2px solid #00112b33;
   outline-offset: 2px;
 }
 
@@ -281,7 +281,7 @@
 }
 
 .secondary-navigation__action-btn:focus-visible {
-  outline: 2px solid rgba(0, 17, 43, 0.2);
+  outline: 2px solid #00112b33;
   outline-offset: 2px;
 }
 
@@ -301,7 +301,7 @@
 }
 
 .secondary-navigation__create-btn:focus-visible {
-  outline: 2px solid rgba(0, 17, 43, 0.2);
+  outline: 2px solid #00112b33;
   outline-offset: 2px;
 }
 

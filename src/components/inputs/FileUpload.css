@@ -15,12 +15,12 @@
 
 .file-upload:hover:not(.file-upload--disabled) {
   border-color: var(--color-red-600);
-  background: rgba(255, 248, 248, 1);
+  background: #fff8f8;
 }
 
 .file-upload--drag-over {
   border-color: var(--color-red-600);
-  background: rgba(255, 248, 248, 1);
+  background: #fff8f8;
 }
 
 .file-upload--disabled {
@@ -133,7 +133,7 @@
 
 /* Focus states */
 .file-upload:focus {
-  outline: 2px solid rgba(217, 50, 42, 0.2);
+  outline: 2px solid #d9322a33;
   outline-offset: 2px;
 }
 

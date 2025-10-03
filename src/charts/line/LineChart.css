@@ -28,7 +28,7 @@
   font-family: var(--font-family-macan-mono);
   font-size: 14px;
   color: var(--Tooltip-Text, #000);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 4px 12px #00000026;
 }
 
 .line-chart__tooltip-title {
@@ -121,15 +121,13 @@
 
 .line-chart__point {
   transition: all 0.2s ease;
-  filter: drop-shadow(0px 1px 2px rgba(12, 12, 13, 0.1));
+  filter: drop-shadow(0px 1px 2px #0c0c0d1a);
 }
 
-.line-chart__point-inner {
-}
 
 .line-chart svg circle:hover {
   transform: scale(1.1);
-  filter: drop-shadow(0px 2px 4px rgba(12, 12, 13, 0.2));
+  filter: drop-shadow(0px 2px 4px #0c0c0d33);
 }
 
 /* Line Styles */
@@ -228,5 +226,5 @@
 
 /* Enhanced Hover States */
 .line-chart svg g:hover circle {
-  filter: drop-shadow(0px 4px 8px rgba(7, 31, 66, 0.3));
+  filter: drop-shadow(0px 4px 8px #071f424d);
 }

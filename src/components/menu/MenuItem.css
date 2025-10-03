@@ -13,7 +13,7 @@
 }
 
 .menu-item:focus-visible {
-  outline: 2px solid rgba(30, 30, 30, 0.2);
+  outline: 2px solid #1e1e1e33;
   outline-offset: 2px;
 }
 
@@ -76,19 +76,19 @@
 }
 
 .menu-item--default .menu-item__icon {
-  color: rgba(30, 30, 30, 1);
+  color: #1e1e1e;
 }
 
 .menu-item--default .menu-item__label {
-  color: rgba(30, 30, 30, 1);
+  color: #1e1e1e;
 }
 
 .menu-item--default .menu-item__shortcut {
-  color: rgba(30, 30, 30, 1);
+  color: #1e1e1e;
 }
 
 .menu-item--default .menu-item__description {
-  color: rgba(117, 117, 117, 1);
+  color: #757575;
 }
 
 /* Interactive hover for default state - dark blue background */
@@ -99,22 +99,22 @@
 
 .menu-item--default:hover .menu-item__icon,
 .menu-item--default:focus-visible .menu-item__icon {
-  color: rgba(245, 245, 245, 1);
+  color: #f5f5f5;
 }
 
 .menu-item--default:hover .menu-item__label,
 .menu-item--default:focus-visible .menu-item__label {
-  color: rgba(245, 245, 245, 1);
+  color: #f5f5f5;
 }
 
 .menu-item--default:hover .menu-item__shortcut,
 .menu-item--default:focus-visible .menu-item__shortcut {
-  color: rgba(245, 245, 245, 1);
+  color: #f5f5f5;
 }
 
 .menu-item--default:hover .menu-item__description,
 .menu-item--default:focus-visible .menu-item__description {
-  color: rgba(245, 245, 245, 1);
+  color: #f5f5f5;
 }
 
 /* Static hover state for demo/forced state - dark blue background */
@@ -123,19 +123,19 @@
 }
 
 .menu-item--hover .menu-item__icon {
-  color: rgba(245, 245, 245, 1);
+  color: #f5f5f5;
 }
 
 .menu-item--hover .menu-item__label {
-  color: rgba(245, 245, 245, 1);
+  color: #f5f5f5;
 }
 
 .menu-item--hover .menu-item__shortcut {
-  color: rgba(245, 245, 245, 1);
+  color: #f5f5f5;
 }
 
 .menu-item--hover .menu-item__description {
-  color: rgba(245, 245, 245, 1);
+  color: #f5f5f5;
 }
 
 /* Disabled state - exact colors from Figma design */
@@ -145,19 +145,19 @@
 }
 
 .menu-item--disabled .menu-item__icon {
-  color: rgba(179, 179, 179, 1);
+  color: #b3b3b3;
 }
 
 .menu-item--disabled .menu-item__label {
-  color: rgba(179, 179, 179, 1);
+  color: #b3b3b3;
 }
 
 .menu-item--disabled .menu-item__shortcut {
-  color: rgba(30, 30, 30, 1);
+  color: #1e1e1e;
 }
 
 .menu-item--disabled .menu-item__description {
-  color: rgba(179, 179, 179, 1);
+  color: #b3b3b3;
 }
 
 .menu-item--disabled:hover {
@@ -168,11 +168,11 @@
 .menu-item--disabled:hover .menu-item__icon,
 .menu-item--disabled:hover .menu-item__label,
 .menu-item--disabled:hover .menu-item__description {
-  color: rgba(179, 179, 179, 1);
+  color: #b3b3b3;
 }
 
 .menu-item--disabled:hover .menu-item__shortcut {
-  color: rgba(30, 30, 30, 1);
+  color: #1e1e1e;
 }
 
 /* Responsive design */

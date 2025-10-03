@@ -98,7 +98,7 @@
 
 /* Selected state for dropdown items (mimics Select Field Basic selected option) */
 .top-bar__dropdown-item--selected {
-  background: rgba(7, 43, 86, 0.08);
+  background: #072b5614;
 }
 
 .top-bar__dropdown-item--selected .top-bar__dropdown-text {
@@ -172,7 +172,7 @@
 }
 
 .top-bar__action-btn:focus-visible {
-  outline: 2px solid rgba(223, 223, 223, 0.3);
+  outline: 2px solid #dfdfdf4d;
   outline-offset: 2px;
   border-radius: 4px;
 }
@@ -247,7 +247,7 @@
 }
 
 .top-bar__dropdown-item:hover {
-  background: rgba(0, 17, 43, 0.05);
+  background: #00112b0d;
 }
 
 .top-bar__dropdown-text {
@@ -274,19 +274,19 @@
 
 /* Focus states */
 .top-bar__menu-item:focus-visible {
-  outline: 2px solid rgba(223, 223, 223, 0.3);
+  outline: 2px solid #dfdfdf4d;
   outline-offset: 2px;
   border-radius: 4px;
 }
 
 .top-bar__dropdown-item:focus-visible {
-  outline: 2px solid rgba(0, 17, 43, 0.3);
+  outline: 2px solid #00112b4d;
   outline-offset: 2px;
-  background: rgba(0, 17, 43, 0.1);
+  background: #00112b1a;
 }
 
 .top-bar__avatar:focus-visible {
-  outline: 2px solid rgba(223, 223, 223, 0.3);
+  outline: 2px solid #dfdfdf4d;
   outline-offset: 2px;
 }
 
@@ -405,17 +405,17 @@
   .top-bar__menu-item {
     padding: 8px;
     border-radius: 8px;
-    background: rgba(223, 223, 223, 0.1);
+    background: #dfdfdf1a;
     min-width: 40px;
     justify-content: center;
   }
 
   .top-bar__menu-item:hover {
-    background: rgba(223, 223, 223, 0.15);
+    background: #dfdfdf26;
   }
 
   .top-bar__menu-item--active {
-    background: rgba(217, 50, 42, 0.2);
+    background: #d9322a33;
   }
 
   .top-bar__dropdown {

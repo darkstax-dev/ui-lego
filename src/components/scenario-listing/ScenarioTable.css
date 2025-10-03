@@ -17,7 +17,7 @@
   padding: 0 var(--sds-size-space-400);
   align-items: center;
   border-bottom: 1px solid var(--divider-light);
-  background: rgba(223, 223, 223, 1);
+  background: #dfdfdf;
   position: relative;
 }
 
@@ -31,7 +31,7 @@
 }
 
 .scenario-table__header-cell:hover {
-  background-color: rgba(0, 17, 43, 0.04);
+  background-color: #00112b0a;
 }
 
 .scenario-table__header-cell--checkbox {
@@ -93,7 +93,7 @@
 }
 
 .scenario-table__header-text {
-  color: rgba(0, 17, 43, 1);
+  color: #00112b;
   font-family: var(--font-family-macan-mono);
   font-size: var(--sds-typography-body-size-small);
   font-weight: var(--font-weight-semibold);
@@ -135,7 +135,7 @@
 }
 
 .scenario-table__row:hover {
-  background-color: rgba(0, 17, 43, 0.02);
+  background-color: #00112b05;
 }
 
 .scenario-table__cell {
@@ -183,7 +183,7 @@
 }
 
 .scenario-table__text {
-  color: rgba(0, 17, 43, 1);
+  color: #00112b;
   font-family: var(--font-family-macan-mono);
   font-size: var(--font-size-base);
   font-weight: var(--font-weight-book);
@@ -194,6 +194,7 @@
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 1;
+  line-clamp: 1;
   overflow: hidden;
   text-overflow: ellipsis;
   flex: 1;
@@ -235,11 +236,11 @@
 }
 
 .scenario-table__checkbox:hover {
-  background-color: rgba(0, 17, 43, 0.04);
+  background-color: #00112b0a;
 }
 
 .scenario-table__checkbox:focus {
-  outline: 2px solid rgba(0, 17, 43, 0.2);
+  outline: 2px solid #00112b33;
   outline-offset: 2px;
 }
 
@@ -278,11 +279,11 @@
 }
 
 .scenario-table__options-button:hover {
-  background-color: rgba(0, 17, 43, 0.08);
+  background-color: #00112b14;
 }
 
 .scenario-table__options-button:focus {
-  outline: 2px solid rgba(0, 17, 43, 0.2);
+  outline: 2px solid #00112b33;
   outline-offset: 2px;
 }
 
@@ -293,7 +294,7 @@
 .scenario-table__options-icon {
   width: 24px;
   height: 24px;
-  color: rgba(120, 121, 122, 1);
+  color: #78797a;
 }
 
 /* Responsive Design */

@@ -89,18 +89,6 @@
   color: var(--color-red-500);
 }
 
-.option-bar__divider {
-  width: 220px;
-  height: 0;
-  position: relative;
-}
-
-.option-bar__divider svg {
-  width: 220px;
-  height: 2px;
-  stroke-width: 1px;
-  position: relative;
-}
 
 /* Responsive Design */
 @media (max-width: 768px) {
@@ -150,9 +138,5 @@
 @media (prefers-contrast: high) {
   .option-bar__item:focus {
     outline-width: 3px;
-  }
-
-  .option-bar__divider svg path {
-    stroke-opacity: 1;
   }
 }
