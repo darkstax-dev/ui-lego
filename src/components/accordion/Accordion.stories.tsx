@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import Accordion from './Accordion';
 import AccordionItem from './AccordionItem';
+import ResourceTemplateFolder from './ResourceTemplateFolder';
 import './Accordion.stories.css';
 
 const meta: Meta<typeof Accordion> = {
@@ -79,7 +80,7 @@ export const LongContent: Story = {
   render: () => (
     <div className="accordion-story">
       <Accordion>
-        <AccordionItem 
+        <AccordionItem
           title="Release Notes"
           content={
             'Version 1.2.0\n\n' +
@@ -93,4 +94,55 @@ export const LongContent: Story = {
       </Accordion>
     </div>
   ),
+};
+
+// Resource Templates with folder structure
+export const ResourceTemplates: Story = {
+  render: () => {
+    const podTemplates = [
+      { name: 'nginx-pod.yaml', type: 'pod' as const },
+      { name: 'redis-pod.yaml', type: 'pod' as const },
+      { name: 'postgres-pod.yaml', type: 'pod' as const },
+    ];
+
+    const serviceTemplates = [
+      { name: 'loadbalancer-service.yaml', type: 'service' as const },
+      { name: 'nodeport-service.yaml', type: 'service' as const },
+      { name: 'clusterip-service.yaml', type: 'service' as const },
+    ];
+
+    const deploymentTemplates = [
+      { name: 'web-deployment.yaml', type: 'deployment' as const },
+      { name: 'api-deployment.yaml', type: 'deployment' as const },
+      { name: 'worker-deployment.yaml', type: 'deployment' as const },
+    ];
+
+    return (
+      <div className="accordion-story">
+        <Accordion>
+          <AccordionItem
+            title="Resource Templates"
+            content={
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                <ResourceTemplateFolder
+                  name="Pods"
+                  items={podTemplates}
+                  defaultOpen={true}
+                />
+                <ResourceTemplateFolder
+                  name="Services"
+                  items={serviceTemplates}
+                />
+                <ResourceTemplateFolder
+                  name="Deployments"
+                  items={deploymentTemplates}
+                />
+              </div>
+            }
+            defaultOpen={true}
+          />
+        </Accordion>
+      </div>
+    );
+  },
 };

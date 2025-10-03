@@ -5,7 +5,7 @@ import './AccordionItem.css'
 
 interface AccordionItemProps {
   title: string
-  content: string
+  content: string | React.ReactNode
   defaultOpen?: boolean
   className?: string
 }
