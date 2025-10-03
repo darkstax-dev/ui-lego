@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import Accordion from './Accordion';
 import AccordionItem from './AccordionItem';
 import ResourceTemplateFolder from './ResourceTemplateFolder';
+import ResourceTemplatesList from './ResourceTemplatesList';
 import './Accordion.stories.css';
 
 const meta: Meta<typeof Accordion> = {
@@ -142,6 +143,17 @@ export const ResourceTemplates: Story = {
             defaultOpen={true}
           />
         </Accordion>
+      </div>
+    );
+  },
+};
+
+// Resource Templates with Icons and Search
+export const ResourceTemplatesWithSearch: Story = {
+  render: () => {
+    return (
+      <div className="accordion-story">
+        <ResourceTemplatesList />
       </div>
     );
   },
