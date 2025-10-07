@@ -1,3 +1,6 @@
+export { default as ResourceListingPage } from './ResourceListingPage'
+export * from './ResourceListingPage'
+
 export { default as CreateScenarioPage } from './CreateScenarioPage'
 export * from './CreateScenarioPage'
 
