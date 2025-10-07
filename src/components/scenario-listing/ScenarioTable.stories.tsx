@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react-vite'
+import type { Meta, StoryObj } from '@storybook/react'
 import { useState } from 'react'
 import ScenarioTable from './ScenarioTable'
 import ScenarioListingDemo from './ScenarioListingDemo'
@@ -33,9 +33,41 @@ const meta: Meta<typeof ScenarioTable> = {
       description: 'Callback fired when a column is sorted',
       action: 'sort'
     },
-    onOptionsClick: {
-      description: 'Callback fired when options menu is clicked',
-      action: 'options-clicked'
+    onOpen: {
+      description: 'Callback fired when Open action is clicked',
+      action: 'open'
+    },
+    onVersionHistory: {
+      description: 'Callback fired when Version History action is clicked',
+      action: 'version-history'
+    },
+    onEdit: {
+      description: 'Callback fired when Edit action is clicked',
+      action: 'edit'
+    },
+    onScenarioAccessibility: {
+      description: 'Callback fired when Scenario Accessibility action is clicked',
+      action: 'scenario-accessibility'
+    },
+    onScenarioNodes: {
+      description: 'Callback fired when Scenario Nodes action is clicked',
+      action: 'scenario-nodes'
+    },
+    onDeploy: {
+      description: 'Callback fired when Deploy action is clicked',
+      action: 'deploy'
+    },
+    onRun: {
+      description: 'Callback fired when Run action is clicked',
+      action: 'run'
+    },
+    onDeleteNamespace: {
+      description: 'Callback fired when Delete Namespace action is clicked',
+      action: 'delete-namespace'
+    },
+    onDelete: {
+      description: 'Callback fired when Delete action is clicked',
+      action: 'delete'
     }
   }
 }
@@ -194,10 +226,6 @@ export const Interactive: Story = {
         })
       }
 
-      const handleOptionsClick = (scenarioId: string) => {
-        console.log('Options clicked for scenario:', scenarioId)
-      }
-
       return (
         <div style={{ padding: '24px', background: 'var(--surface-default)' }}>
           <ScenarioTable
@@ -207,7 +235,15 @@ export const Interactive: Story = {
             onSort={handleSort}
             sortColumn={sortColumn}
             sortDirection={sortDirection}
-            onOptionsClick={handleOptionsClick}
+            onOpen={(scenarioId) => console.log('Open scenario:', scenarioId)}
+            onVersionHistory={(scenarioId) => console.log('Version history:', scenarioId)}
+            onEdit={(scenarioId) => console.log('Edit scenario:', scenarioId)}
+            onScenarioAccessibility={(scenarioId) => console.log('Scenario accessibility:', scenarioId)}
+            onScenarioNodes={(scenarioId) => console.log('Scenario nodes:', scenarioId)}
+            onDeploy={(scenarioId) => console.log('Deploy scenario:', scenarioId)}
+            onRun={(scenarioId) => console.log('Run scenario:', scenarioId)}
+            onDeleteNamespace={(scenarioId, namespaces) => console.log('Delete namespace:', scenarioId, namespaces)}
+            onDelete={(scenarioId) => console.log('Delete scenario:', scenarioId)}
           />
         </div>
       )

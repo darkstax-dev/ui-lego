@@ -1,0 +1,216 @@
+/* BackButtonDemo styles */
+@import '../../tokens.css';
+
+.back-button-demo {
+  padding: var(--sds-size-space-600);
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.back-button-demo__container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sds-size-space-800);
+}
+
+.back-button-demo__title {
+  margin: 0;
+  font-family: var(--font-family-macan);
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-semibold);
+  color: var(--sds-color-text-default-default);
+  text-align: center;
+}
+
+.back-button-demo__section {
+  background: var(--color-gray-100);
+  padding: var(--sds-size-space-600);
+  border: 1px solid var(--sds-color-border-default-default);
+}
+
+.back-button-demo__section h3 {
+  margin: 0 0 var(--sds-size-space-400) 0;
+  font-family: var(--font-family-macan);
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-medium);
+  color: var(--sds-color-text-default-default);
+}
+
+.back-button-demo__section h4 {
+  margin: 0 0 var(--sds-size-space-300) 0;
+  font-family: var(--font-family-macan);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--sds-color-text-default-default);
+}
+
+.back-button-demo__example {
+  padding: var(--sds-size-space-600);
+  background: var(--color-white);
+  border: 1px solid var(--sds-color-border-default-default);
+  margin-bottom: var(--sds-size-space-400);
+}
+
+.back-button-demo__info {
+  margin: 0;
+  font-family: var(--font-family-macan);
+  font-size: var(--sds-typography-body-size-small);
+  color: var(--sds-color-text-default-secondary);
+  font-style: italic;
+}
+
+.back-button-demo__controls {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sds-size-space-600);
+}
+
+.back-button-demo__control-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sds-size-space-300);
+}
+
+.back-button-demo__label-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sds-size-space-300);
+}
+
+.back-button-demo__label-btn {
+  padding: var(--sds-size-space-200) var(--sds-size-space-400);
+  background: var(--color-white);
+  border: 1px solid var(--sds-color-border-default-default);
+  cursor: pointer;
+  font-family: var(--font-family-macan);
+  font-size: var(--sds-typography-body-size-small);
+  transition: all 0.2s ease;
+}
+
+.back-button-demo__label-btn:hover {
+  background: var(--color-gray-200);
+}
+
+.back-button-demo__label-btn.active {
+  background: var(--sds-color-background-brand-default);
+  color: var(--color-white);
+  border-color: var(--sds-color-background-brand-default);
+}
+
+.back-button-demo__checkbox {
+  display: flex;
+  align-items: center;
+  gap: var(--sds-size-space-300);
+  font-family: var(--font-family-macan);
+  font-size: var(--sds-typography-body-size-medium);
+  cursor: pointer;
+}
+
+.back-button-demo__contexts {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--sds-size-space-600);
+}
+
+.back-button-demo__context {
+  padding: var(--sds-size-space-600);
+  border: 1px solid var(--sds-color-border-default-default);
+}
+
+.back-button-demo__context--light {
+  background: var(--color-white);
+  color: var(--sds-color-text-default-default);
+}
+
+.back-button-demo__context--dark {
+  background: var(--color-blue-dark-950);
+  color: var(--color-white);
+}
+
+.back-button-demo__usage {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sds-size-space-600);
+}
+
+.back-button-demo__usage-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--sds-size-space-300);
+  padding: var(--sds-size-space-400);
+  background: var(--color-white);
+  border: 1px solid var(--sds-color-border-default-default);
+  min-width: 150px;
+}
+
+.back-button-demo__usage-item span {
+  font-family: var(--font-family-macan);
+  font-size: var(--sds-typography-body-size-small);
+  color: var(--sds-color-text-default-secondary);
+  text-align: center;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .back-button-demo {
+    padding: var(--sds-size-space-400);
+  }
+  
+  .back-button-demo__contexts {
+    grid-template-columns: 1fr;
+  }
+  
+  .back-button-demo__usage {
+    justify-content: center;
+  }
+  
+  .back-button-demo__label-buttons {
+    justify-content: center;
+  }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  .back-button-demo__title {
+    color: var(--color-white);
+  }
+  
+  .back-button-demo__section {
+    background: var(--color-blue-medium-950);
+    border-color: var(--color-blue-950);
+  }
+  
+  .back-button-demo__section h3,
+  .back-button-demo__section h4 {
+    color: var(--color-white);
+  }
+  
+  .back-button-demo__example {
+    background: var(--color-blue-dark-950);
+    border-color: var(--color-blue-950);
+  }
+  
+  .back-button-demo__info {
+    color: var(--color-gray-400);
+  }
+  
+  .back-button-demo__label-btn {
+    background: var(--color-blue-950);
+    border-color: var(--color-blue-800);
+    color: var(--color-white);
+  }
+  
+  .back-button-demo__label-btn:hover {
+    background: var(--color-blue-800);
+  }
+  
+  .back-button-demo__usage-item {
+    background: var(--color-blue-dark-950);
+    border-color: var(--color-blue-950);
+  }
+  
+  .back-button-demo__usage-item span {
+    color: var(--color-gray-400);
+  }
+}

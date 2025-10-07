@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react-vite'
+import type { Meta, StoryObj } from '@storybook/react'
 import OptionBar from './OptionBar'
 import OptionBarDemo from './OptionBarDemo'
 import './OptionBar.css'

@@ -2,7 +2,7 @@ import React, { forwardRef } from 'react'
 import './Button.css'
 import { Slot, PolymorphicProps } from '../../utils/Slot'
 
-export type ButtonVariant = 'primary' | 'secondary' | 'white'
+export type ButtonVariant = 'primary' | 'primary-simple' | 'secondary' | 'white'
 export type ButtonSizeLegacy = 'small' | 'big'
 export type ButtonSize = 'sm' | 'md' | 'lg' | ButtonSizeLegacy
 export type ButtonState = 'default' | 'hover' | 'disabled'
@@ -23,6 +23,8 @@ type OwnProps = {
   disabled?: boolean
   /** Optional icon to display in the button */
   icon?: React.ReactNode
+  /** Hide the icon area entirely (no default icon, no separator) */
+  hideIcon?: boolean
   /** Additional CSS classes */
   className?: string
   /** The button type attribute */
@@ -44,6 +46,7 @@ const Button = forwardRef<HTMLButtonElement, PolymorphicProps<'button', OwnProps
     state = 'default',
     disabled = false,
     icon,
+    hideIcon = false,
     className = '',
     type = 'button',
     asChild = false,
@@ -59,6 +62,7 @@ const Button = forwardRef<HTMLButtonElement, PolymorphicProps<'button', OwnProps
     `button--${variant}`,
     `button--${sizeClass}`,
     `button--${actualState}`,
+    hideIcon ? 'button--noicon' : '',
     className
   ].filter(Boolean).join(' ')
 
@@ -91,7 +95,7 @@ const Button = forwardRef<HTMLButtonElement, PolymorphicProps<'button', OwnProps
       <div className="button__content">
         {children}
       </div>
-      {(variant === 'primary' || variant === 'white') && (
+      {(variant === 'primary' || variant === 'white') && !hideIcon && (
         <div className="button__icon" aria-hidden="true">
           {icon || defaultIcon}
         </div>

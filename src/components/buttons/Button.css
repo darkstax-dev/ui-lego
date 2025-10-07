@@ -66,6 +66,12 @@
   border-right: 1px solid var(--Primary-button-red-Icon-default, #FFF);
 }
 
+/* When icon is hidden, remove the separator and extra spacing */
+.button.button--noicon .button__content {
+  border-right: none !important;
+  padding-right: var(--sds-size-space-400);
+}
+
 .button--primary:hover:not(:disabled) {
   background: #C02A23;
 }
@@ -78,6 +84,29 @@
 
 .button--primary.button--disabled.button--big .button__content {
   border-right-color: var(--Text-White-text-Secondary-text, #DFDFDF);
+}
+
+/* Primary Simple variant - no icon, no square styling */
+.button--primary-simple {
+  background: var(--Primary-button-red-Fill, #D9322A);
+  color: var(--Primary-button-red-Icon-default, #FFF);
+  padding: var(--sds-size-space-300) var(--sds-size-space-600);
+  border-radius: 0;
+}
+
+.button--primary-simple .button__content {
+  border-right: none;
+  padding: 0;
+}
+
+.button--primary-simple:hover:not(:disabled) {
+  background: #C02A23;
+}
+
+.button--primary-simple.button--disabled {
+  background: var(--Primary-button-red-Disabled, #ADADAD);
+  color: var(--Text-White-text-Secondary-text, #DFDFDF);
+  cursor: not-allowed;
 }
 
 /* Secondary variant */

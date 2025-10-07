@@ -1,0 +1,156 @@
+/* ScenarioAccessibilityRoles styles using design tokens */
+@import '../../tokens.css';
+
+.scenario-accessibility-roles {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: var(--sds-size-space-400);
+}
+
+.scenario-accessibility-roles__container {
+  background: #ffffff;
+  width: 100%;
+  max-width: 500px;
+  max-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  border: var(--sds-size-stroke-border) solid var(--sds-color-border-default-default);
+}
+
+.scenario-accessibility-roles__header {
+  padding: var(--sds-size-space-600) var(--sds-size-space-600) var(--sds-size-space-400) var(--sds-size-space-600);
+  border-bottom: var(--sds-size-stroke-border) solid var(--sds-color-border-default-default);
+}
+
+.scenario-accessibility-roles__title {
+  margin: 0;
+  font-family: var(--font-family-macan);
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-medium);
+  color: var(--sds-color-text-default-default);
+  line-height: var(--line-height-normal);
+}
+
+.scenario-accessibility-roles__content {
+  flex: 1;
+  overflow-y: auto;
+  padding: var(--sds-size-space-400) var(--sds-size-space-600);
+}
+
+.scenario-accessibility-roles__roles-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sds-size-space-600);
+}
+
+.scenario-accessibility-roles__role-item {
+  display: flex;
+  align-items: center;
+  padding: var(--sds-size-space-300) 0;
+  border-bottom: var(--sds-size-stroke-border) solid var(--sds-color-border-default-default);
+}
+
+.scenario-accessibility-roles__role-item:last-child {
+  border-bottom: none;
+}
+
+.scenario-accessibility-roles__footer {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: var(--sds-size-space-300);
+  padding: var(--sds-size-space-400) var(--sds-size-space-600);
+  border-top: var(--sds-size-stroke-border) solid var(--sds-color-border-default-default);
+  background: var(--color-gray-100);
+}
+
+.scenario-accessibility-roles__close-button {
+  background: var(--color-red-500);
+  color: var(--color-white);
+  border: none;
+  font-weight: var(--font-weight-medium);
+  text-transform: uppercase;
+  letter-spacing: var(--letter-spacing-wide);
+}
+
+.scenario-accessibility-roles__close-button:hover {
+  background: var(--color-red-600);
+}
+
+.scenario-accessibility-roles__save-button {
+  background: var(--color-gray-400);
+  color: var(--sds-color-text-default-default);
+  border: none;
+  font-weight: var(--font-weight-medium);
+  text-transform: uppercase;
+  letter-spacing: var(--letter-spacing-wide);
+}
+
+.scenario-accessibility-roles__save-button:hover {
+  background: var(--color-gray-500);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .scenario-accessibility-roles {
+    padding: var(--sds-size-space-200);
+  }
+  
+  .scenario-accessibility-roles__container {
+    max-width: 100%;
+    max-height: 90vh;
+  }
+  
+  .scenario-accessibility-roles__header {
+    padding: var(--sds-size-space-400);
+  }
+  
+  .scenario-accessibility-roles__content {
+    padding: var(--sds-size-space-300) var(--sds-size-space-400);
+  }
+  
+  .scenario-accessibility-roles__footer {
+    padding: var(--sds-size-space-300) var(--sds-size-space-400);
+    flex-direction: column;
+    gap: var(--sds-size-space-200);
+  }
+  
+  .scenario-accessibility-roles__close-button,
+  .scenario-accessibility-roles__save-button {
+    width: 100%;
+  }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  .scenario-accessibility-roles__container {
+    background: var(--color-blue-dark-950);
+    color: #ffffff;
+  }
+  
+  .scenario-accessibility-roles__title {
+    color: #ffffff;
+  }
+  
+  .scenario-accessibility-roles__header {
+    border-bottom-color: var(--color-blue-950);
+  }
+  
+  .scenario-accessibility-roles__role-item {
+    border-bottom-color: var(--color-blue-950);
+  }
+  
+  .scenario-accessibility-roles__footer {
+    border-top-color: var(--color-blue-950);
+    background: var(--color-blue-medium-950);
+  }
+}

@@ -163,7 +163,7 @@
 }
 
 .secondary-navigation__select-input:hover {
-  background: #D4D4D4;
+  background: var(--color-white);
 }
 
 .secondary-navigation__select-input:focus {
@@ -209,7 +209,7 @@
 }
 
 .secondary-navigation__search-input-wrapper:hover {
-  background: #D4D4D4;
+  background: var(--color-white);
 }
 
 .secondary-navigation__search-input-wrapper:focus-within {
@@ -277,7 +277,7 @@
 }
 
 .secondary-navigation__action-btn:hover {
-  background: #D4D4D4;
+  background: var(--color-white);
 }
 
 .secondary-navigation__action-btn:focus-visible {

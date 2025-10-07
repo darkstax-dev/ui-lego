@@ -248,6 +248,22 @@
   outline: none;
 }
 
+/* Option Bar Overlay and Positioning */
+.scenario-table__overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: transparent;
+  z-index: 999;
+}
+
+.scenario-table__option-bar {
+  position: fixed;
+  z-index: 1000;
+}
+
 /* Lock Icon Styles */
 .scenario-table__lock-icon {
   width: 20px;

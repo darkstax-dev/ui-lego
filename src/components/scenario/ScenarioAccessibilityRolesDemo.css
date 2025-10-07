@@ -1,0 +1,163 @@
+/* ScenarioAccessibilityRolesDemo styles using design tokens */
+@import '../../tokens.css';
+
+.scenario-accessibility-roles-demo {
+  padding: var(--sds-size-space-600);
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.scenario-accessibility-roles-demo__container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sds-size-space-600);
+}
+
+.scenario-accessibility-roles-demo__title {
+  margin: 0;
+  font-family: var(--font-family-macan);
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-semibold);
+  color: var(--sds-color-text-default-default);
+  text-align: center;
+}
+
+.scenario-accessibility-roles-demo__controls {
+  display: flex;
+  gap: var(--sds-size-space-300);
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.scenario-accessibility-roles-demo__info {
+  background: var(--color-gray-100);
+  padding: var(--sds-size-space-600);
+  border: var(--sds-size-stroke-border) solid var(--sds-color-border-default-default);
+}
+
+.scenario-accessibility-roles-demo__info h3 {
+  margin: 0 0 var(--sds-size-space-400) 0;
+  font-family: var(--font-family-macan);
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-medium);
+  color: var(--sds-color-text-default-default);
+}
+
+.scenario-accessibility-roles-demo__selected-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sds-size-space-200);
+}
+
+.scenario-accessibility-roles-demo__selected-item {
+  background: var(--color-blue-700);
+  color: var(--color-white);
+  padding: var(--sds-size-space-200) var(--sds-size-space-400);
+  font-family: var(--font-family-macan);
+  font-size: var(--sds-typography-body-size-small);
+  font-weight: var(--font-weight-medium);
+  display: inline-block;
+  width: fit-content;
+}
+
+.scenario-accessibility-roles-demo__empty {
+  color: var(--sds-color-text-default-secondary);
+  font-size: var(--sds-typography-body-size-medium);
+  font-style: italic;
+  margin: 0;
+}
+
+.scenario-accessibility-roles-demo__all-roles {
+  background: #ffffff;
+  padding: var(--sds-size-space-600);
+  border: var(--sds-size-stroke-border) solid var(--sds-color-border-default-default);
+}
+
+.scenario-accessibility-roles-demo__all-roles h3 {
+  margin: 0 0 var(--sds-size-space-400) 0;
+  font-family: var(--font-family-macan);
+  font-size: var(--font-size-md);
+  color: var(--sds-color-text-default-default);
+}
+
+.scenario-accessibility-roles-demo__roles-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sds-size-space-300);
+}
+
+.scenario-accessibility-roles-demo__role-badge {
+  background: var(--color-gray-200);
+  color: var(--sds-color-text-default-default);
+  padding: var(--sds-size-space-200) var(--sds-size-space-400);
+  font-family: var(--font-family-macan);
+  font-size: var(--sds-typography-body-size-small);
+  font-weight: var(--font-weight-book);
+  border: var(--sds-size-stroke-border) solid var(--sds-color-border-default-default);
+  transition: all 0.2s ease;
+}
+
+.scenario-accessibility-roles-demo__role-badge--selected {
+  background: var(--color-green-500);
+  color: var(--color-white);
+  border-color: var(--color-green-600);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .scenario-accessibility-roles-demo {
+    padding: var(--sds-size-space-400);
+  }
+  
+  .scenario-accessibility-roles-demo__controls {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .scenario-accessibility-roles-demo__info,
+  .scenario-accessibility-roles-demo__all-roles {
+    padding: var(--sds-size-space-400);
+  }
+  
+  .scenario-accessibility-roles-demo__roles-grid {
+    justify-content: center;
+  }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  .scenario-accessibility-roles-demo__title {
+    color: var(--color-white);
+  }
+  
+  .scenario-accessibility-roles-demo__info {
+    background: var(--color-blue-medium-950);
+    border-color: var(--color-blue-950);
+  }
+  
+  .scenario-accessibility-roles-demo__info h3 {
+    color: var(--color-white);
+  }
+  
+  .scenario-accessibility-roles-demo__empty {
+    color: var(--color-gray-400);
+  }
+  
+  .scenario-accessibility-roles-demo__all-roles {
+    background: var(--color-blue-dark-950);
+    border-color: var(--color-blue-950);
+  }
+  
+  .scenario-accessibility-roles-demo__all-roles h3 {
+    color: var(--color-white);
+  }
+  
+  .scenario-accessibility-roles-demo__role-badge {
+    background: var(--color-blue-950);
+    color: var(--color-white);
+    border-color: var(--color-blue-800);
+  }
+}

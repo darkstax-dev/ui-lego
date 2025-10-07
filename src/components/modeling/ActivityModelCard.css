@@ -1,0 +1,49 @@
+@import '../../tokens.css';
+
+.activity-model-card {
+  display: grid;
+  grid-template-columns: 56px 1fr auto;
+  gap: var(--sds-size-space-400);
+  align-items: center;
+  background: var(--color-white);
+  border: 1px solid var(--divider-light);
+  box-shadow: 0 4px 6px #0000001a;
+}
+
+.activity-model-card__left {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--sds-size-space-200);
+}
+
+.activity-model-card__icon {
+  width: 36px;
+  height: 36px;
+}
+
+.activity-model-card__body {
+  padding: var(--sds-size-space-200) 0;
+}
+
+.activity-model-card__title {
+  font-family: var(--font-family-macan);
+  font-weight: var(--font-weight-semibold);
+  margin-bottom: var(--sds-size-space-100);
+}
+
+.activity-model-card__meta {
+  display: flex;
+  gap: var(--sds-size-space-800);
+  color: var(--text-gray-main);
+  font-size: var(--font-size-sm);
+}
+
+.activity-model-card__close {
+  border: none;
+  background: transparent;
+  color: var(--text-gray-main);
+  font-size: 18px;
+  padding: var(--sds-size-space-200) var(--sds-size-space-300);
+  cursor: pointer;
+}

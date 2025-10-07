@@ -1,0 +1,103 @@
+/* CheckboxDemo styles */
+@import '../../tokens.css';
+
+.checkbox-demo {
+  padding: var(--sds-size-space-600);
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.checkbox-demo__container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sds-size-space-800);
+}
+
+.checkbox-demo__title {
+  margin: 0;
+  font-family: var(--font-family-macan);
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-semibold);
+  color: var(--sds-color-text-default-default);
+  text-align: center;
+}
+
+.checkbox-demo__section {
+  background: var(--color-gray-100);
+  padding: var(--sds-size-space-600);
+  border: 1px solid var(--sds-color-border-default-default);
+}
+
+.checkbox-demo__section h3 {
+  margin: 0 0 var(--sds-size-space-400) 0;
+  font-family: var(--font-family-macan);
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-medium);
+  color: var(--sds-color-text-default-default);
+}
+
+.checkbox-demo__group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sds-size-space-400);
+}
+
+.checkbox-demo__log-levels {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sds-size-space-600);
+}
+
+.checkbox-demo__state {
+  background: var(--color-white);
+  padding: var(--sds-size-space-400);
+  border: 1px solid var(--sds-color-border-default-default);
+}
+
+.checkbox-demo__state p {
+  margin: var(--sds-size-space-200) 0;
+  font-family: var(--font-family-macan);
+  font-size: var(--sds-typography-body-size-medium);
+  color: var(--sds-color-text-default-default);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .checkbox-demo {
+    padding: var(--sds-size-space-400);
+  }
+  
+  .checkbox-demo__log-levels {
+    flex-direction: column;
+    gap: var(--sds-size-space-400);
+  }
+  
+  .checkbox-demo__section {
+    padding: var(--sds-size-space-400);
+  }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  .checkbox-demo__title {
+    color: var(--color-white);
+  }
+  
+  .checkbox-demo__section {
+    background: var(--color-blue-medium-950);
+    border-color: var(--color-blue-950);
+  }
+  
+  .checkbox-demo__section h3 {
+    color: var(--color-white);
+  }
+  
+  .checkbox-demo__state {
+    background: var(--color-blue-dark-950);
+    border-color: var(--color-blue-950);
+  }
+  
+  .checkbox-demo__state p {
+    color: var(--color-white);
+  }
+}

@@ -24,6 +24,18 @@ export interface ScenarioTableProps {
   className?: string
 }
 
+export interface ScenarioTableWithOptionsProps extends Omit<ScenarioTableProps, 'onOptionsClick'> {
+  onOpen?: (scenarioId: string) => void
+  onVersionHistory?: (scenarioId: string) => void
+  onEdit?: (scenarioId: string) => void
+  onScenarioAccessibility?: (scenarioId: string) => void
+  onScenarioNodes?: (scenarioId: string) => void
+  onDeploy?: (scenarioId: string) => void
+  onRun?: (scenarioId: string) => void
+  onDeleteNamespace?: (scenarioId: string, namespaces: string[]) => void
+  onDelete?: (scenarioId: string) => void
+}
+
 export interface ScenarioTableHeaderProps {
   onSelectAll?: (selected: boolean) => void
   allSelected?: boolean

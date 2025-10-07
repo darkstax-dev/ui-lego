@@ -49,8 +49,6 @@ export * from './components/tabs'
 // Menu exports
 export * from './components/menu'
 
-// Tooltip exports
-export * from './components/tooltip'
 
 // Monaco Editor exports
 export * from './components/monaco-editor'
@@ -63,9 +61,11 @@ export * from './components/bar'
 
 // Navigation components
 export * from './components/navigation'
-
 // SideBar exports
 export * from './components/sidebar/index.ts'
+
+// Pages exports
+export * from './Pages'
 
 // Snackbar types
 export type { SnackbarVariant } from './components/snackbar/Snackbar'
@@ -84,3 +84,9 @@ export * from './components/scenario-listing'
 
 // GanttChart exports
 export * from './components/gantt-chart'
+
+// Scenario exports
+export * from './components/scenario'
+
+// Checkbox exports
+export * from './components/checkbox'

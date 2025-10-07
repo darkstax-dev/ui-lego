@@ -42,3 +42,47 @@
     width: 100%;
   }
 }
+
+/* Enhanced form field visuals to match DS modal example */
+.modal-content .form-group label {
+  display: block;
+  margin: 0 0 8px 0;
+  color: var(--text-white-secondary);
+  font-family: var(--font-family-macan);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-normal);
+}
+
+.modal-content .form-group input,
+.modal-content .form-group textarea {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 10px 12px;
+  background: #0e2b4d; /* slightly lighter than panel */
+  color: var(--text-white-main);
+  border: 1px solid var(--divider-dark);
+  outline: none;
+  font-family: var(--font-family-macan);
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-book);
+  line-height: var(--line-height-normal);
+  letter-spacing: var(--letter-spacing-tight);
+  border-radius: 0; /* sharp */
+}
+
+.modal-content .form-group textarea {
+  min-height: 96px;
+  resize: vertical;
+}
+
+.modal-content .form-group input::placeholder,
+.modal-content .form-group textarea::placeholder {
+  color: var(--text-white-tertiary);
+}
+
+.modal-content .form-group input:focus,
+.modal-content .form-group textarea:focus {
+  border-color: var(--color-blue-800);
+  box-shadow: 0 0 0 2px rgba(0, 114, 255, 0.2);
+}

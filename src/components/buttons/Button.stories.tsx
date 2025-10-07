@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react-vite';
+import type { Meta, StoryObj } from '@storybook/react';
 import { within, userEvent } from '@storybook/testing-library';
 import { expect } from '@storybook/jest';
 import Button from './Button';
@@ -24,7 +24,7 @@ const meta: Meta<typeof Button> = {
   argTypes: {
     variant: {
       control: 'select',
-      options: ['primary', 'secondary', 'white'],
+      options: ['primary', 'primary-simple', 'secondary', 'white'],
       description: 'Visual style variant of the button',
       table: {
         type: { summary: 'string' },
@@ -74,6 +74,20 @@ export const Secondary: Story = {
   args: {
     variant: 'secondary',
     children: 'Secondary Button',
+  },
+};
+
+export const PrimarySimple: Story = {
+  args: {
+    variant: 'primary-simple',
+    children: 'DELETE',
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Primary simple variant without the + icon and square styling. Perfect for action buttons like DELETE, SAVE, etc.',
+      },
+    },
   },
 };
 

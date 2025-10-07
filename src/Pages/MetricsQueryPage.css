@@ -1,0 +1,183 @@
+/* MetricsQueryPage styles using design tokens */
+@import '../tokens.css';
+
+.metrics-query-page {
+  background: var(--surface-default);
+  color: var(--text-blue-main);
+  min-height: 100vh;
+  font-family: var(--font-family-macan);
+}
+
+.metrics-query-back-section {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: var(--sds-size-space-600) var(--sds-size-space-800) 0 var(--sds-size-space-800);
+}
+
+.metrics-query-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: var(--sds-size-space-800) var(--sds-size-space-800);
+}
+
+.metrics-query-header {
+  margin-bottom: var(--sds-size-space-600);
+}
+
+.metrics-query-title {
+  margin: 0;
+  font-family: var(--font-family-macan-mono-stencil);
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-medium);
+  letter-spacing: var(--letter-spacing-wide);
+  line-height: var(--line-height-normal);
+  text-transform: uppercase;
+}
+
+/* Form Layout - matching CreateScenarioPage */
+.metrics-query-form {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) 280px;
+  gap: var(--sds-size-space-600);
+  align-items: start;
+}
+
+.metrics-query-form-grid {
+  grid-column: 1 / span 3;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--sds-size-space-600) var(--sds-size-space-800);
+}
+
+.metrics-query-form-aside {
+  grid-column: 4 / span 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sds-size-space-600);
+}
+
+.metrics-query-section-title {
+  margin: 0 0 var(--sds-size-space-400) 0;
+  font-family: var(--font-family-macan);
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-semibold);
+  color: var(--sds-color-text-default-default);
+  text-transform: uppercase;
+  letter-spacing: var(--letter-spacing-normal);
+}
+
+.metrics-query-editor-section {
+  grid-column: 1 / span 4;
+  margin-top: var(--sds-size-space-600);
+}
+
+.metrics-query-editor-container {
+  border: var(--sds-size-stroke-border) solid var(--sds-color-border-default-default);
+  background: var(--color-gray-100);
+  min-height: 200px;
+}
+
+/* Footer section for actions */
+.metrics-query-footer {
+  grid-column: 1 / span 4;
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--sds-size-space-400);
+  margin-top: var(--sds-size-space-600);
+}
+
+/* Monaco Editor overrides */
+.metrics-query-editor-container .monaco-editor {
+  background: var(--color-gray-100) !important;
+}
+
+.metrics-query-editor-container .monaco-editor .margin {
+  background: var(--color-gray-200) !important;
+}
+
+.metrics-query-editor-container .monaco-editor .monaco-editor-background {
+  background: var(--color-gray-100) !important;
+}
+
+/* Responsive design - matching CreateScenarioPage */
+@media (max-width: 1024px) {
+  .metrics-query-form {
+    grid-template-columns: 1fr;
+    gap: var(--sds-size-space-600);
+  }
+  
+  .metrics-query-form-grid {
+    grid-column: 1;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--sds-size-space-600);
+  }
+  
+  .metrics-query-form-aside {
+    grid-column: 1;
+  }
+  
+  .metrics-query-editor-section {
+    grid-column: 1;
+  }
+  
+  .metrics-query-footer {
+    grid-column: 1;
+  }
+}
+
+@media (max-width: 768px) {
+  .metrics-query-form-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .metrics-query-content {
+    padding: var(--sds-size-space-600);
+  }
+  
+  .metrics-query-back-section {
+    padding: var(--sds-size-space-600) var(--sds-size-space-600) 0 var(--sds-size-space-600);
+  }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  .metrics-query-page {
+    background: var(--color-blue-dark-950);
+    color: var(--color-white);
+  }
+  
+  .metrics-query-title {
+    color: var(--color-white);
+  }
+  
+  .metrics-query-header {
+    border-bottom-color: var(--color-blue-950);
+  }
+  
+  .metrics-query-form-section,
+  .metrics-query-editor-section {
+    background: var(--color-blue-medium-950);
+    border-color: var(--color-blue-950);
+  }
+  
+  .metrics-query-section-title {
+    color: var(--color-white);
+  }
+  
+  .metrics-query-editor-container {
+    background: var(--color-blue-dark-950);
+    border-color: var(--color-blue-950);
+  }
+  
+  .metrics-query-editor-container .monaco-editor {
+    background: var(--color-blue-dark-950) !important;
+  }
+  
+  .metrics-query-editor-container .monaco-editor .margin {
+    background: var(--color-blue-950) !important;
+  }
+  
+  .metrics-query-editor-container .monaco-editor .monaco-editor-background {
+    background: var(--color-blue-dark-950) !important;
+  }
+}
