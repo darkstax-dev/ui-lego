@@ -17,6 +17,12 @@ export interface Attachment {
   timestamp: string
 }
 
+export interface ChecklistItem {
+  id: string
+  text: string
+  done?: boolean
+}
+
 export interface KanbanCard {
   id: string
   title: string
@@ -34,6 +40,7 @@ export interface KanbanCard {
     name: string
     avatar: string
   }
+  checklist?: ChecklistItem[]
 }
 
 export interface KanbanColumn {
