@@ -3,6 +3,9 @@ import type { KanbanBoardData, KanbanCard } from './types'
 import KanbanColumn from './KanbanColumn'
 import KanbanHeader from './KanbanHeader'
 import './KanbanBoard.css'
+import TaskDrawer from './TaskDrawer'
+import type { JSONSchemaRoot, DescriptionRule } from '../schema/SchemaTypes'
+import { defaultTaskSchema, defaultDescriptionRule } from './taskSchema'
 
 export interface KanbanBoardProps {
   data: KanbanBoardData
@@ -20,6 +23,8 @@ export interface KanbanBoardProps {
   onEditCardName?: (card: KanbanCard) => void
   onMoveCard?: (card: KanbanCard) => void
   onDeleteCard?: (card: KanbanCard) => void
+  taskSchema?: JSONSchemaRoot
+  descriptionRule?: DescriptionRule
 }
 
 const KanbanBoard: React.FC<KanbanBoardProps> = ({
@@ -37,12 +42,19 @@ const KanbanBoard: React.FC<KanbanBoardProps> = ({
   onOpenTask,
   onEditCardName,
   onMoveCard,
-  onDeleteCard
+  onDeleteCard,
+  taskSchema,
+  descriptionRule,
 }) => {
   const [boardData, setBoardData] = useState<KanbanBoardData>(data)
   const [draggedCard, setDraggedCard] = useState<{ card: KanbanCard; columnId: string } | null>(null)
   const [searchValue, setSearchValue] = useState('')
   const [filterActive, setFilterActive] = useState(false)
+  const [selectedCard, setSelectedCard] = useState<KanbanCard | null>(null)
+  const [drawerOpen, setDrawerOpen] = useState(false)
+
+  const effectiveSchema = taskSchema ?? defaultTaskSchema
+  const effectiveRule = descriptionRule ?? defaultDescriptionRule
 
   const handleDragStart = (card: KanbanCard, columnId: string) => {
     setDraggedCard({ card, columnId })
@@ -101,6 +113,12 @@ const KanbanBoard: React.FC<KanbanBoardProps> = ({
     }
   }
 
+  const handleCardClickInternal = (card: KanbanCard) => {
+    onCardClick?.(card)
+    setSelectedCard(card)
+    setDrawerOpen(true)
+  }
+
   const filteredData = useMemo(() => {
     if (!searchValue) return boardData
 
@@ -137,7 +155,7 @@ const KanbanBoard: React.FC<KanbanBoardProps> = ({
             <KanbanColumn
               key={column.id}
               column={column}
-              onCardClick={onCardClick}
+              onCardClick={handleCardClickInternal}
               onDragStart={handleDragStart}
               onDragEnd={handleDragEnd}
               onDrop={handleDrop}
@@ -154,6 +172,15 @@ const KanbanBoard: React.FC<KanbanBoardProps> = ({
           ))}
         </div>
       </div>
+
+      <TaskDrawer
+        isOpen={drawerOpen}
+        onClose={() => setDrawerOpen(false)}
+        card={selectedCard}
+        schema={effectiveSchema}
+        descriptionRule={effectiveRule}
+        onSave={() => setDrawerOpen(false)}
+      />
     </div>
   )
 }
