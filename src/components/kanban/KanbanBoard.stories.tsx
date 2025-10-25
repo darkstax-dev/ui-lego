@@ -1,7 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
 import KanbanBoard from './KanbanBoard'
 import { mockKanbanData } from './mockData'
-import { userEvent, within, screen, waitFor, expect, fireEvent } from '@storybook/test'
+import { userEvent, within, screen, waitFor, fireEvent } from '@storybook/testing-library'
+import { expect } from '@storybook/jest'
 
 const meta: Meta<typeof KanbanBoard> = {
   title: 'Components/Kanban/KanbanBoard',
