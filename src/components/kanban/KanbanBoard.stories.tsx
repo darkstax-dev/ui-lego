@@ -16,7 +16,17 @@ const meta: Meta<typeof KanbanBoard> = {
 export default meta
 type Story = StoryObj<typeof KanbanBoard>
 
-export const Default: Story = {}
+export const Default: Story = {
+  args: {
+    onRenameColumn: (columnId) => console.log('Rename column:', columnId),
+    onArchiveColumn: (columnId) => console.log('Archive column:', columnId),
+    onDeleteColumn: (columnId) => console.log('Delete column:', columnId),
+    onOpenTask: (card) => console.log('Open task:', card.title),
+    onEditCardName: (card) => console.log('Edit card name:', card.title),
+    onMoveCard: (card) => console.log('Move card:', card.title),
+    onDeleteCard: (card) => console.log('Delete card:', card.title),
+  },
+}
 
 export const WithCardClickHandler: Story = {
   args: {
@@ -25,6 +35,13 @@ export const WithCardClickHandler: Story = {
       console.log('Card clicked:', card)
       alert(`Clicked on: ${card.title}`)
     },
+    onRenameColumn: (columnId) => console.log('Rename column:', columnId),
+    onArchiveColumn: (columnId) => console.log('Archive column:', columnId),
+    onDeleteColumn: (columnId) => console.log('Delete column:', columnId),
+    onOpenTask: (card) => console.log('Open task:', card.title),
+    onEditCardName: (card) => console.log('Edit card name:', card.title),
+    onMoveCard: (card) => console.log('Move card:', card.title),
+    onDeleteCard: (card) => console.log('Delete card:', card.title),
   },
 }
 
@@ -37,6 +54,13 @@ export const WithDragAndDrop: Story = {
     onCardClick: (card) => {
       console.log('Card clicked:', card)
     },
+    onRenameColumn: (columnId) => console.log('Rename column:', columnId),
+    onArchiveColumn: (columnId) => console.log('Archive column:', columnId),
+    onDeleteColumn: (columnId) => console.log('Delete column:', columnId),
+    onOpenTask: (card) => console.log('Open task:', card.title),
+    onEditCardName: (card) => console.log('Edit card name:', card.title),
+    onMoveCard: (card) => console.log('Move card:', card.title),
+    onDeleteCard: (card) => console.log('Delete card:', card.title),
   },
 }
 
@@ -56,6 +80,13 @@ export const WithHeaderAndSearch: Story = {
     onCardMove: (cardId, fromColumnId, toColumnId) => {
       console.log(`Card ${cardId} moved from ${fromColumnId} to ${toColumnId}`)
     },
+    onRenameColumn: (columnId) => console.log('Rename column:', columnId),
+    onArchiveColumn: (columnId) => console.log('Archive column:', columnId),
+    onDeleteColumn: (columnId) => console.log('Delete column:', columnId),
+    onOpenTask: (card) => console.log('Open task:', card.title),
+    onEditCardName: (card) => console.log('Edit card name:', card.title),
+    onMoveCard: (card) => console.log('Move card:', card.title),
+    onDeleteCard: (card) => console.log('Delete card:', card.title),
   },
 }
 
@@ -63,6 +94,13 @@ export const WithoutHeader: Story = {
   args: {
     data: mockKanbanData,
     showHeader: false,
+    onRenameColumn: (columnId) => console.log('Rename column:', columnId),
+    onArchiveColumn: (columnId) => console.log('Archive column:', columnId),
+    onDeleteColumn: (columnId) => console.log('Delete column:', columnId),
+    onOpenTask: (card) => console.log('Open task:', card.title),
+    onEditCardName: (card) => console.log('Edit card name:', card.title),
+    onMoveCard: (card) => console.log('Move card:', card.title),
+    onDeleteCard: (card) => console.log('Delete card:', card.title),
   },
 }
 
@@ -71,6 +109,13 @@ export const SingleColumn: Story = {
     data: {
       columns: [mockKanbanData.columns[0]],
     },
+    onRenameColumn: (columnId) => console.log('Rename column:', columnId),
+    onArchiveColumn: (columnId) => console.log('Archive column:', columnId),
+    onDeleteColumn: (columnId) => console.log('Delete column:', columnId),
+    onOpenTask: (card) => console.log('Open task:', card.title),
+    onEditCardName: (card) => console.log('Edit card name:', card.title),
+    onMoveCard: (card) => console.log('Move card:', card.title),
+    onDeleteCard: (card) => console.log('Delete card:', card.title),
   },
 }
 
@@ -79,6 +124,13 @@ export const TwoColumns: Story = {
     data: {
       columns: [mockKanbanData.columns[0], mockKanbanData.columns[1]],
     },
+    onRenameColumn: (columnId) => console.log('Rename column:', columnId),
+    onArchiveColumn: (columnId) => console.log('Archive column:', columnId),
+    onDeleteColumn: (columnId) => console.log('Delete column:', columnId),
+    onOpenTask: (card) => console.log('Open task:', card.title),
+    onEditCardName: (card) => console.log('Edit card name:', card.title),
+    onMoveCard: (card) => console.log('Move card:', card.title),
+    onDeleteCard: (card) => console.log('Delete card:', card.title),
   },
 }
 
@@ -108,5 +160,12 @@ export const EmptyBoard: Story = {
         },
       ],
     },
+    onRenameColumn: (columnId) => console.log('Rename column:', columnId),
+    onArchiveColumn: (columnId) => console.log('Archive column:', columnId),
+    onDeleteColumn: (columnId) => console.log('Delete column:', columnId),
+    onOpenTask: (card) => console.log('Open task:', card.title),
+    onEditCardName: (card) => console.log('Edit card name:', card.title),
+    onMoveCard: (card) => console.log('Move card:', card.title),
+    onDeleteCard: (card) => console.log('Delete card:', card.title),
   },
 }
