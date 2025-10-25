@@ -90,3 +90,6 @@ export * from './components/scenario'
 
 // Checkbox exports
 export * from './components/checkbox'
+
+// Kanban exports
+export * from './components/kanban'
