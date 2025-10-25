@@ -20,11 +20,11 @@
 .info-two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
 
 .badge-status { display: inline-flex; padding: 4px 10px; border-radius: 999px; font-size: 12px; font-weight: 700; letter-spacing: .03em; }
-.status-user { background: rgba(255, 88, 88, 0.15); color: #FF6B6B; border: 1px solid rgba(255, 88, 88, 0.3); }
-.status-customer { background: rgba(255, 180, 0, 0.12); color: #FFC24B; border: 1px solid rgba(255, 180, 0, 0.28); }
-.status-agents { background: rgba(52, 211, 153, .15); color: #34D399; border: 1px solid rgba(52, 211, 153, .3); }
-.status-blocked { background: rgba(255, 59, 48, .15); color: #FF3B30; border: 1px solid rgba(255,59,48,.3); }
-.status-waiting { background: rgba(147, 197, 253, .15); color: #93C5FD; border: 1px solid rgba(147,197,253,.3); }
+.status-user { background: color-mix(in srgb, var(--color-red-400) 15%, transparent); color: var(--color-red-400); border: 1px solid color-mix(in srgb, var(--color-red-400) 30%, transparent); }
+.status-customer { background: color-mix(in srgb, var(--color-yellow-400) 12%, transparent); color: var(--color-yellow-400); border: 1px solid color-mix(in srgb, var(--color-yellow-400) 28%, transparent); }
+.status-agents { background: color-mix(in srgb, var(--color-green-400) 15%, transparent); color: var(--color-green-400); border: 1px solid color-mix(in srgb, var(--color-green-400) 30%, transparent); }
+.status-blocked { background: color-mix(in srgb, var(--color-red-500) 15%, transparent); color: var(--color-red-500); border: 1px solid color-mix(in srgb, var(--color-red-500) 30%, transparent); }
+.status-waiting { background: color-mix(in srgb, var(--color-blue-800) 15%, transparent); color: var(--color-blue-800); border: 1px solid color-mix(in srgb, var(--color-blue-800) 30%, transparent); }
 .status-review { background: rgba(255, 255, 255, .12); color: #E5E7EB; border: 1px solid rgba(255,255,255,.2); }
 .status-done { background: rgba(16, 185, 129, .15); color: #10B981; border: 1px solid rgba(16,185,129,.3); }
 .status-archived { background: rgba(148, 163, 184, .15); color: #94A3B8; border: 1px solid rgba(148,163,184,.3); }
