@@ -4,7 +4,10 @@ import './KanbanCard.css'
 
 interface KanbanCardProps {
   card: KanbanCardType
+  columnId: string
   onCardClick?: (card: KanbanCardType) => void
+  onDragStart?: (card: KanbanCardType, columnId: string) => void
+  onDragEnd?: () => void
 }
 
 const statusColors: Record<Status, string> = {
@@ -32,8 +35,9 @@ const fileTypeIcons: Record<string, string> = {
   yml: 'YML'
 }
 
-const KanbanCard: React.FC<KanbanCardProps> = ({ card, onCardClick }) => {
+const KanbanCard: React.FC<KanbanCardProps> = ({ card, columnId, onCardClick, onDragStart, onDragEnd }) => {
   const [menuOpen, setMenuOpen] = useState(false)
+  const [isDragging, setIsDragging] = useState(false)
 
   const handleMenuToggle = (e: React.MouseEvent) => {
     e.stopPropagation()
@@ -46,8 +50,31 @@ const KanbanCard: React.FC<KanbanCardProps> = ({ card, onCardClick }) => {
     }
   }
 
+  const handleDragStart = (e: React.DragEvent) => {
+    setIsDragging(true)
+    e.dataTransfer.effectAllowed = 'move'
+    e.dataTransfer.setData('text/plain', card.id)
+    
+    if (onDragStart) {
+      onDragStart(card, columnId)
+    }
+  }
+
+  const handleDragEnd = (e: React.DragEvent) => {
+    setIsDragging(false)
+    if (onDragEnd) {
+      onDragEnd()
+    }
+  }
+
   return (
-    <div className="kanban-card" onClick={handleCardClick}>
+    <div 
+      className={`kanban-card ${isDragging ? 'kanban-card-dragging' : ''}`}
+      onClick={handleCardClick}
+      draggable
+      onDragStart={handleDragStart}
+      onDragEnd={handleDragEnd}
+    >
       <div className="kanban-card-header">
         <div className="kanban-card-header-left">
           <div className="kanban-card-title">{card.title}</div>

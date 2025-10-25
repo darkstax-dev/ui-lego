@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import type { KanbanColumn as KanbanColumnType, KanbanCard as KanbanCardType } from './types'
 import KanbanCard from './KanbanCard'
 import './KanbanColumn.css'
@@ -6,11 +6,52 @@ import './KanbanColumn.css'
 interface KanbanColumnProps {
   column: KanbanColumnType
   onCardClick?: (card: KanbanCardType) => void
+  onDragStart?: (card: KanbanCardType, columnId: string) => void
+  onDragEnd?: () => void
+  onDrop?: (columnId: string) => void
+  isDragging?: boolean
+  isDropTarget?: boolean
 }
 
-const KanbanColumn: React.FC<KanbanColumnProps> = ({ column, onCardClick }) => {
+const KanbanColumn: React.FC<KanbanColumnProps> = ({ 
+  column, 
+  onCardClick, 
+  onDragStart, 
+  onDragEnd,
+  onDrop,
+  isDragging = false,
+  isDropTarget = false
+}) => {
+  const [isDragOver, setIsDragOver] = useState(false)
+
+  const handleDragOver = (e: React.DragEvent) => {
+    e.preventDefault()
+    e.dataTransfer.dropEffect = 'move'
+    if (isDropTarget) {
+      setIsDragOver(true)
+    }
+  }
+
+  const handleDragLeave = (e: React.DragEvent) => {
+    e.preventDefault()
+    setIsDragOver(false)
+  }
+
+  const handleDrop = (e: React.DragEvent) => {
+    e.preventDefault()
+    setIsDragOver(false)
+    if (onDrop) {
+      onDrop(column.id)
+    }
+  }
+
   return (
-    <div className="kanban-column">
+    <div 
+      className={`kanban-column ${isDragOver ? 'kanban-column-drag-over' : ''}`}
+      onDragOver={handleDragOver}
+      onDragLeave={handleDragLeave}
+      onDrop={handleDrop}
+    >
       <div className="kanban-column-header">
         <div className="kanban-column-title">{column.title}</div>
         <button className="kanban-column-menu" aria-label="Column options">
@@ -21,7 +62,14 @@ const KanbanColumn: React.FC<KanbanColumnProps> = ({ column, onCardClick }) => {
       </div>
       <div className="kanban-column-cards">
         {column.cards.map((card) => (
-          <KanbanCard key={card.id} card={card} onCardClick={onCardClick} />
+          <KanbanCard 
+            key={card.id} 
+            card={card} 
+            columnId={column.id}
+            onCardClick={onCardClick}
+            onDragStart={onDragStart}
+            onDragEnd={onDragEnd}
+          />
         ))}
       </div>
     </div>
