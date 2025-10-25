@@ -1,3 +1,5 @@
+@import url('../../tokens.css');
+
 .kanban-column {
   display: flex;
   flex-direction: column;
@@ -10,12 +12,12 @@
 }
 
 .kanban-column-drag-over {
-  background-color: rgba(134, 141, 151, 0.1);
+  background-color: color-mix(in srgb, var(--color-blue-gray-600) 10%, transparent);
   border-radius: 4px;
 }
 
 .kanban-column-drag-over .kanban-column-cards {
-  background-color: rgba(134, 141, 151, 0.05);
+  background-color: color-mix(in srgb, var(--color-blue-gray-600) 5%, transparent);
   border-radius: 4px;
 }
 
@@ -25,14 +27,14 @@
   align-items: center;
   gap: 32px;
   align-self: stretch;
-  background: #DFDFDF;
-  box-shadow: 0 2px 10px rgba(134, 141, 151, 0.2);
+  background: var(--surface-card);
+  box-shadow: 0 2px 10px color-mix(in srgb, var(--color-blue-gray-600) 20%, transparent);
   justify-content: space-between;
 }
 
 .kanban-column-title {
-  color: #00112B;
-  font-family: 'Macan Mono Trial', -apple-system, Roboto, Helvetica, sans-serif;
+  color: var(--text-blue-main);
+  font-family: var(--font-family-macan-mono);
   font-size: 16px;
   font-weight: 500;
   line-height: 110%;
@@ -79,10 +81,10 @@
 }
 
 .kanban-column-cards::-webkit-scrollbar-thumb {
-  background: #C8C8C8;
+  background: var(--divider-light);
   border-radius: 3px;
 }
 
 .kanban-column-cards::-webkit-scrollbar-thumb:hover {
-  background: #B0B0B0;
+  background: var(--text-gray-secondary);
 }

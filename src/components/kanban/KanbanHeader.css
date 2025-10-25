@@ -7,7 +7,7 @@
   flex-direction: column;
   align-items: flex-start;
   gap: 10px;
-  background: #CECECE;
+  background: var(--surface-default);
 }
 
 .kanban-header-content {
@@ -25,8 +25,8 @@
 }
 
 .kanban-header-title {
-  color: #00112B;
-  font-family: 'Macan Mono Stencil Trial', -apple-system, Roboto, Helvetica, sans-serif;
+  color: var(--text-blue-main);
+  font-family: var(--font-family-macan-mono-stencil);
   font-size: 32px;
   font-style: normal;
   font-weight: 500;
@@ -49,11 +49,11 @@
 .kanban-header-search .search-field__input-container {
   height: 40px;
   padding: 12px 16px;
-  background: #DFDFDF;
+  background: var(--surface-card);
 }
 
 .kanban-header-search .search-field__input {
-  color: #78797A;
+  color: var(--text-gray-main);
   font-family: Inter, -apple-system, Roboto, Helvetica, sans-serif;
   font-size: 16px;
   font-weight: 400;
@@ -61,11 +61,11 @@
 }
 
 .kanban-header-search .search-field__input::placeholder {
-  color: #78797A;
+  color: var(--text-gray-main);
 }
 
 .kanban-header-search .search-field__search-icon {
-  color: #78797A;
+  color: var(--text-gray-main);
 }
 
 .kanban-header-actions {
@@ -78,22 +78,22 @@
   width: 40px;
   height: 40px;
   padding: 10px;
-  background: #DFDFDF;
+  background: var(--surface-card);
 }
 
 .kanban-header-actions .icon-button--gray {
-  color: #78797A;
+  color: var(--text-gray-main);
 }
 
 .kanban-header-actions .icon-button--gray:hover {
-  background: #00112B;
-  color: #DFDFDF;
+  background: var(--nav-main-bg);
+  color: var(--text-white-secondary);
 }
 
 .kanban-header-filter-active,
 .kanban-header-actions .icon-button--selected {
-  background: #00112B !important;
-  color: #DFDFDF !important;
+  background: var(--nav-main-bg) !important;
+  color: var(--text-white-secondary) !important;
 }
 
 @media (max-width: 768px) {

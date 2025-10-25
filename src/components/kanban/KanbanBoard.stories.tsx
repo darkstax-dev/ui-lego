@@ -1,6 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
 import KanbanBoard from './KanbanBoard'
 import { mockKanbanData } from './mockData'
+import { userEvent, within, screen, waitFor, fireEvent } from '@storybook/testing-library'
+import { expect } from '@storybook/jest'
 
 const meta: Meta<typeof KanbanBoard> = {
   title: 'Components/Kanban/KanbanBoard',
@@ -33,7 +35,6 @@ export const WithCardClickHandler: Story = {
     data: mockKanbanData,
     onCardClick: (card) => {
       console.log('Card clicked:', card)
-      alert(`Clicked on: ${card.title}`)
     },
     onRenameColumn: (columnId) => console.log('Rename column:', columnId),
     onArchiveColumn: (columnId) => console.log('Archive column:', columnId),
@@ -43,6 +44,13 @@ export const WithCardClickHandler: Story = {
     onMoveCard: (card) => console.log('Move card:', card.title),
     onDeleteCard: (card) => console.log('Delete card:', card.title),
   },
+  play: async () => {
+    await userEvent.click(screen.getByText('Design Login Screen'))
+    const dialog = await screen.findByRole('dialog')
+    await expect(dialog).toBeInTheDocument()
+    await userEvent.click(screen.getByRole('button', { name: /close drawer/i }))
+    await waitFor(() => expect(screen.queryByRole('dialog')).not.toBeInTheDocument())
+  }
 }
 
 export const WithDragAndDrop: Story = {
@@ -62,6 +70,28 @@ export const WithDragAndDrop: Story = {
     onMoveCard: (card) => console.log('Move card:', card.title),
     onDeleteCard: (card) => console.log('Delete card:', card.title),
   },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement)
+
+    const sourceCardTitle = 'Design Login Screen'
+    const sourceEl = canvas.getByText(sourceCardTitle)
+    const sourceCard = sourceEl.closest('.kanban-card') as HTMLElement
+
+    const targetColumnTitle = canvas.getByText('In Progress')
+    const targetColumn = targetColumnTitle.closest('.kanban-column') as HTMLElement
+
+    const dataTransfer = new DataTransfer()
+
+    fireEvent.dragStart(sourceCard, { dataTransfer })
+    fireEvent.dragOver(targetColumn, { dataTransfer })
+    fireEvent.drop(targetColumn, { dataTransfer })
+    fireEvent.dragEnd(sourceCard)
+
+    await waitFor(() => {
+      const inTarget = targetColumn.querySelector('.kanban-column-cards') as HTMLElement
+      expect(within(inTarget).getByText(sourceCardTitle)).toBeInTheDocument()
+    })
+  }
 }
 
 export const WithHeaderAndSearch: Story = {
@@ -88,6 +118,22 @@ export const WithHeaderAndSearch: Story = {
     onMoveCard: (card) => console.log('Move card:', card.title),
     onDeleteCard: (card) => console.log('Delete card:', card.title),
   },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement)
+    const input = canvas.getByPlaceholderText('Search') as HTMLInputElement
+
+    await userEvent.type(input, 'API')
+
+    await waitFor(() => {
+      expect(canvas.queryByText('Design Login Screen')).not.toBeInTheDocument()
+      expect(canvas.getByText('API Endpoint Spec — Orders')).toBeInTheDocument()
+    })
+
+    await userEvent.clear(input)
+    await waitFor(() => {
+      expect(canvas.getByText('Design Login Screen')).toBeInTheDocument()
+    })
+  }
 }
 
 export const WithoutHeader: Story = {
