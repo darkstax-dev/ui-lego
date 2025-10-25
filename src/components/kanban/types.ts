@@ -23,6 +23,13 @@ export interface ChecklistItem {
   done?: boolean
 }
 
+export interface TaskLogEvent {
+  id: string
+  eventType: 'Lock' | 'Unlock'
+  eventBy: string
+  eventDatetime: string
+}
+
 export interface KanbanCard {
   id: string
   title: string
@@ -41,6 +48,7 @@ export interface KanbanCard {
     avatar: string
   }
   checklist?: ChecklistItem[]
+  taskLog?: TaskLogEvent[]
 }
 
 export interface KanbanColumn {
