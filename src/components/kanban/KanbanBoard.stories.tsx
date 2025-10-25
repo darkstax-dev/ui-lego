@@ -28,6 +28,18 @@ export const WithCardClickHandler: Story = {
   },
 }
 
+export const WithDragAndDrop: Story = {
+  args: {
+    data: mockKanbanData,
+    onCardMove: (cardId, fromColumnId, toColumnId) => {
+      console.log(`Card ${cardId} moved from ${fromColumnId} to ${toColumnId}`)
+    },
+    onCardClick: (card) => {
+      console.log('Card clicked:', card)
+    },
+  },
+}
+
 export const SingleColumn: Story = {
   args: {
     data: {
