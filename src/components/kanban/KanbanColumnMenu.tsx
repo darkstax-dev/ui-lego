@@ -47,7 +47,7 @@ const KanbanColumnMenu: React.FC<KanbanColumnMenuProps> = ({
         size="compact"
       >
         <DropdownItem
-          leadingIcon={<EditLine width={18} height={18} fill="white" />}
+          leadingIcon={<EditLine width={18} height={18} />}
           onClick={() => {
             onRename?.()
             onClose()
@@ -57,7 +57,7 @@ const KanbanColumnMenu: React.FC<KanbanColumnMenuProps> = ({
         </DropdownItem>
 
         <DropdownItem
-          leadingIcon={<ArchiveLine width={18} height={18} fill="white" />}
+          leadingIcon={<ArchiveLine width={18} height={18} />}
           onClick={() => {
             onArchive?.()
             onClose()
@@ -70,7 +70,7 @@ const KanbanColumnMenu: React.FC<KanbanColumnMenuProps> = ({
 
         <DropdownItem
           variant="danger"
-          leadingIcon={<DeleteBin7Line width={18} height={18} fill="#FF3B31" />}
+          leadingIcon={<DeleteBin7Line width={18} height={18} />}
           onClick={() => {
             onDelete?.()
             onClose()
