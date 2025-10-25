@@ -1,0 +1,340 @@
+.kanban-card {
+  display: flex;
+  padding: 16px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+  background: #DFDFDF;
+  cursor: grab;
+  transition: box-shadow 0.2s ease, opacity 0.2s ease, transform 0.2s ease;
+  margin-bottom: 16px;
+  box-shadow: 0 16px 32px -8px rgba(12, 12, 13, 0.4);
+}
+
+.kanban-card:hover {
+  box-shadow: 0 18px 36px -8px rgba(12, 12, 13, 0.5);
+  transform: translateY(-2px);
+}
+
+.kanban-card:active {
+  cursor: grabbing;
+}
+
+.kanban-card-dragging {
+  opacity: 0.5;
+  cursor: grabbing;
+  transform: rotate(3deg);
+}
+
+.kanban-card-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  align-self: stretch;
+  justify-content: space-between;
+}
+
+.kanban-card-header-left {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  flex: 1;
+}
+
+.kanban-card-title {
+  align-self: stretch;
+  color: #00112B;
+  font-family: 'Macan', -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 120%;
+  letter-spacing: -0.36px;
+}
+
+.kanban-card-status {
+  display: flex;
+  align-items: flex-start;
+  position: relative;
+}
+
+.status-flag {
+  width: 9px;
+  height: 20px;
+  clip-path: polygon(0 0, 100% 0, 100% 58.33%, 95.45% 100%, 0 58.33%);
+}
+
+.status-text {
+  display: flex;
+  padding: 4px 6px 4px 1px;
+  align-items: center;
+  gap: 5px;
+  font-family: 'Macan Mono Trial', -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 100%;
+  text-transform: uppercase;
+}
+
+.status-user-action .status-flag { background: rgba(255, 59, 49, 0.2); }
+.status-user-action .status-text { background: rgba(255, 59, 49, 0.2); color: #FF3B31; }
+
+.status-customer-action .status-flag { background: rgba(134, 141, 151, 0.2); }
+.status-customer-action .status-text { background: rgba(134, 141, 151, 0.2); color: #868D97; }
+
+.status-agents-active .status-flag { background: rgba(4, 81, 164, 0.2); }
+.status-agents-active .status-text { background: rgba(4, 81, 164, 0.2); color: #0451A4; }
+
+.status-blocked .status-flag { background: rgba(182, 38, 31, 0.2); }
+.status-blocked .status-text { background: rgba(182, 38, 31, 0.2); color: #B6261F; }
+
+.status-waiting .status-flag { background: rgba(245, 195, 124, 0.2); }
+.status-waiting .status-text { background: rgba(245, 195, 124, 0.2); color: #F09F47; }
+
+.status-review .status-flag { background: rgba(85, 211, 138, 0.2); }
+.status-review .status-text { background: rgba(85, 211, 138, 0.2); color: #2EB969; }
+
+.status-done .status-flag { background: rgba(16, 133, 65, 0.2); }
+.status-done .status-text { background: rgba(16, 133, 65, 0.2); color: #108541; }
+
+.status-archived .status-flag { background: rgba(120, 121, 122, 0.2); }
+.status-archived .status-text { background: rgba(120, 121, 122, 0.2); color: #78797A; }
+
+.kanban-card-menu {
+  display: flex;
+  width: 24px;
+  height: 24px;
+  justify-content: center;
+  align-items: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  position: relative;
+}
+
+.kanban-card-menu:hover {
+  opacity: 0.7;
+}
+
+.kanban-card-menu:active {
+  opacity: 0.5;
+}
+
+.kanban-card-meta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  align-self: stretch;
+}
+
+.kanban-card-meta-row {
+  display: flex;
+  align-items: flex-start;
+  align-content: flex-start;
+  gap: 8px;
+  align-self: stretch;
+  flex-wrap: wrap;
+}
+
+.kanban-card-meta-item {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 3px;
+  min-width: 170px;
+}
+
+.meta-label {
+  color: #78797A;
+  font-family: 'Macan Mono Trial', -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 12px;
+  font-weight: 450;
+  line-height: 120%;
+  letter-spacing: 1.2px;
+}
+
+.meta-value {
+  color: #00112B;
+  font-family: 'Macan Mono Trial', -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 14px;
+  font-weight: 450;
+  line-height: 120%;
+}
+
+.priority-badge {
+  display: flex;
+  padding: 4px 6px;
+  align-items: center;
+  gap: 5px;
+  font-family: 'Macan Mono Trial', -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 100%;
+  text-transform: uppercase;
+}
+
+.priority-high {
+  background: rgba(237, 139, 48, 0.2);
+  color: #ED8B30;
+}
+
+.priority-medium {
+  background: rgba(4, 81, 164, 0.2);
+  color: #0451A4;
+}
+
+.priority-normal {
+  background: rgba(120, 121, 122, 0.2);
+  color: #78797A;
+}
+
+.priority-low {
+  background: rgba(120, 121, 122, 0.15);
+  color: #868D97;
+}
+
+.kanban-card-comment {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  align-self: stretch;
+}
+
+.comment-text {
+  align-self: stretch;
+  color: #00112B;
+  font-family: 'Macan', -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 16px;
+  font-weight: 450;
+  line-height: 120%;
+  letter-spacing: -0.32px;
+}
+
+.kanban-card-customer {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+}
+
+.customer-value {
+  color: #00112B;
+  font-family: 'Macan', -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 16px;
+  font-weight: 450;
+  line-height: 120%;
+  letter-spacing: -0.32px;
+}
+
+.kanban-card-assignee {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.assignee-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.assignee-avatar {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.assignee-name {
+  color: #00112B;
+  font-family: 'Macan Mono Trial', -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 15px;
+  font-weight: 450;
+  line-height: 120%;
+}
+
+.kanban-card-attachments {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  align-self: stretch;
+}
+
+.attachments-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-self: stretch;
+}
+
+.attachment-item {
+  display: flex;
+  padding: 8px;
+  align-items: center;
+  gap: 8px;
+  align-self: stretch;
+  background: #CECECE;
+  justify-content: space-between;
+}
+
+.attachment-icon {
+  display: flex;
+  align-items: center;
+}
+
+.file-type-icon {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Macan Mono Trial', -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 10px;
+  font-weight: 600;
+  color: #00112B;
+  background: #DFDFDF;
+  border: 1px solid #C8C8C8;
+}
+
+.attachment-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 2px;
+  flex: 1;
+}
+
+.attachment-name {
+  color: #00112B;
+  font-family: 'Macan', -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 14px;
+  font-weight: 450;
+  line-height: 120%;
+}
+
+.attachment-time {
+  color: #78797A;
+  font-family: 'Macan Mono Trial', -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 12px;
+  font-weight: 450;
+  line-height: 120%;
+  letter-spacing: 1.2px;
+}
+
+.attachment-menu {
+  display: flex;
+  width: 24px;
+  height: 24px;
+  justify-content: center;
+  align-items: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}

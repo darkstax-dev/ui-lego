@@ -1,0 +1,61 @@
+/* Kanban Column Menu Container */
+.kanban-column-menu-container {
+  position: absolute;
+  top: 40px;
+  right: 8px;
+  z-index: 1000;
+}
+
+/* Dark theme dropdown for Kanban menus */
+.kanban-column-menu-container .dropdown {
+  background: #00112B;
+  width: 220px;
+  box-shadow: 0px 16px 32px -8px rgba(12, 12, 13, 0.4);
+}
+
+/* Dark theme dropdown items */
+.kanban-column-menu-container .dropdown-item {
+  background: #00112B;
+}
+
+.kanban-column-menu-container .dropdown-item:hover {
+  background: #0A1A3A;
+}
+
+.kanban-column-menu-container .dropdown-item__text {
+  color: #FFFFFF;
+  font-family: Macan, -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 14px;
+  font-weight: 450;
+  line-height: 120%;
+}
+
+/* Danger item */
+.kanban-column-menu-container .dropdown-item--danger {
+  background: #00112B;
+}
+
+.kanban-column-menu-container .dropdown-item--danger:hover {
+  background: #0A1A3A;
+}
+
+.kanban-column-menu-container .dropdown-item--danger .dropdown-item__text {
+  color: #FF3B31;
+}
+
+/* Divider */
+.kanban-column-menu-container .dropdown-divider {
+  width: 220px;
+  height: 0;
+  border-bottom: 1px dashed rgba(154, 155, 156, 0.4);
+  margin: 0;
+}
+
+/* Icon colors */
+.kanban-column-menu-container .dropdown-item__icon svg {
+  fill: #FFFFFF;
+}
+
+.kanban-column-menu-container .dropdown-item--danger .dropdown-item__icon svg {
+  fill: #FF3B31;
+}
