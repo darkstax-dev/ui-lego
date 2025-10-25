@@ -24,6 +24,38 @@ export const mockKanbanData: KanbanBoardData = {
               fileType: 'json',
               timestamp: 'January 08, 2025 [7:15 AM]'
             }
+          ],
+          taskLog: [
+            {
+              id: 'log-1',
+              eventType: 'Unlock',
+              eventBy: 'Maria N.',
+              eventDatetime: '02/12/2025 [3:29PM]'
+            },
+            {
+              id: 'log-2',
+              eventType: 'Lock',
+              eventBy: 'Maria N.',
+              eventDatetime: '01/12/2025 [6:29PM]'
+            },
+            {
+              id: 'log-3',
+              eventType: 'Lock',
+              eventBy: 'Maria N.',
+              eventDatetime: '02/12/2025 [2:29PM]'
+            },
+            {
+              id: 'log-4',
+              eventType: 'Unlock',
+              eventBy: 'Maria N.',
+              eventDatetime: '02/12/2025 [9:29AM]'
+            },
+            {
+              id: 'log-5',
+              eventType: 'Lock',
+              eventBy: 'Maria N.',
+              eventDatetime: '02/12/2025 [13:29PM]'
+            }
           ]
         },
         {
