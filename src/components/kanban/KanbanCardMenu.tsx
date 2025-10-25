@@ -50,7 +50,7 @@ const KanbanCardMenu: React.FC<KanbanCardMenuProps> = ({
         size="compact"
       >
         <DropdownItem
-          leadingIcon={<FullscreenFill width={18} height={18} fill="white" />}
+          leadingIcon={<FullscreenFill width={18} height={18} />}
           onClick={() => {
             onOpenTask?.()
             onClose()
@@ -60,7 +60,7 @@ const KanbanCardMenu: React.FC<KanbanCardMenuProps> = ({
         </DropdownItem>
 
         <DropdownItem
-          leadingIcon={<EditLine width={18} height={18} fill="white" />}
+          leadingIcon={<EditLine width={18} height={18} />}
           onClick={() => {
             onEditName?.()
             onClose()
@@ -70,8 +70,8 @@ const KanbanCardMenu: React.FC<KanbanCardMenuProps> = ({
         </DropdownItem>
 
         <DropdownItem
-          leadingIcon={<ArrowRightLine width={18} height={18} fill="white" />}
-          trailingIcon={<ArrowRightLine width={18} height={18} fill="white" />}
+          leadingIcon={<ArrowRightLine width={18} height={18} />}
+          trailingIcon={<ArrowRightLine width={18} height={18} />}
           onClick={() => {
             onMoveTo?.()
             onClose()
@@ -84,7 +84,7 @@ const KanbanCardMenu: React.FC<KanbanCardMenuProps> = ({
 
         <DropdownItem
           variant="danger"
-          leadingIcon={<DeleteBin7Line width={18} height={18} fill="#FF3B31" />}
+          leadingIcon={<DeleteBin7Line width={18} height={18} />}
           onClick={() => {
             onDelete?.()
             onClose()
