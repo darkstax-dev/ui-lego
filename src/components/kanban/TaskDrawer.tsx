@@ -199,7 +199,89 @@ const TaskDrawer: React.FC<TaskDrawerProps> = ({ card, isOpen, onClose, schema, 
         )}
 
         {activeTab === Tab.Log && (
-          <div className="taskdrawer-log">No activity yet.</div>
+          <div className="taskdrawer-log-container">
+            <div className="task-log-table">
+              <div className="task-log-header">
+                <div className="task-log-header-cell">Event type</div>
+                <div className="task-log-header-cell">Event By</div>
+                <div className="task-log-header-cell">Event Datetime</div>
+              </div>
+              <div className="task-log-body">
+                {card?.taskLog && card.taskLog.length > 0 ? (
+                  card.taskLog.slice((currentPage - 1) * rowsPerPage, currentPage * rowsPerPage).map((event) => (
+                    <div key={event.id} className="task-log-row">
+                      <div className="task-log-cell">{event.eventType}</div>
+                      <div className="task-log-cell">{event.eventBy}</div>
+                      <div className="task-log-cell">{event.eventDatetime}</div>
+                    </div>
+                  ))
+                ) : (
+                  <div className="task-log-empty">No activity yet.</div>
+                )}
+              </div>
+            </div>
+            {card?.taskLog && card.taskLog.length > 0 && (
+              <div className="task-log-pagination">
+                <div className="pagination-left">
+                  <span className="pagination-label">Rows per page</span>
+                  <div className="pagination-select">
+                    <span>{rowsPerPage}</span>
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M7.99999 8.78047L11.3 5.48047L12.2427 6.42314L7.99999 10.6658L3.75732 6.42314L4.69999 5.48047L7.99999 8.78047Z" fill="#00112B"/>
+                    </svg>
+                  </div>
+                </div>
+                <div className="pagination-right">
+                  <button
+                    className="pagination-nav pagination-prev"
+                    disabled={currentPage === 1}
+                    onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
+                  >
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M7.21859 8.00048L10.5186 11.3005L9.57592 12.2431L5.33325 8.00048L9.57592 3.75781L10.5186 4.70048L7.21859 8.00048Z" fill="currentColor"/>
+                    </svg>
+                  </button>
+                  <div className="pagination-pages">
+                    {[...Array(Math.min(3, Math.ceil(card.taskLog.length / rowsPerPage)))].map((_, i) => (
+                      <button
+                        key={i + 1}
+                        className={`pagination-page ${currentPage === i + 1 ? 'is-active' : ''}`}
+                        onClick={() => setCurrentPage(i + 1)}
+                      >
+                        {i + 1}
+                      </button>
+                    ))}
+                    {Math.ceil(card.taskLog.length / rowsPerPage) > 5 && (
+                      <>
+                        <span className="pagination-gap">...</span>
+                        {[...Array(2)].map((_, i) => {
+                          const page = Math.ceil(card.taskLog.length / rowsPerPage) - 1 + i
+                          return (
+                            <button
+                              key={page}
+                              className={`pagination-page ${currentPage === page ? 'is-active' : ''}`}
+                              onClick={() => setCurrentPage(page)}
+                            >
+                              {page}
+                            </button>
+                          )
+                        })}
+                      </>
+                    )}
+                  </div>
+                  <button
+                    className="pagination-nav pagination-next"
+                    disabled={currentPage >= Math.ceil(card.taskLog.length / rowsPerPage)}
+                    onClick={() => setCurrentPage(p => Math.min(Math.ceil(card.taskLog.length / rowsPerPage), p + 1))}
+                  >
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M8.78145 8.00048L5.48145 4.70048L6.42411 3.75781L10.6668 8.00048L6.42411 12.2431L5.48145 11.3005L8.78145 8.00048Z" fill="currentColor"/>
+                    </svg>
+                  </button>
+                </div>
+              </div>
+            )}
+          </div>
         )}
 
         <div className="taskdrawer-actions">
