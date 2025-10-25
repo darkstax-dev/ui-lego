@@ -1,0 +1,140 @@
+@import url('../../tokens.css');
+
+.kanban-header {
+  display: flex;
+  width: 100%;
+  padding: 16px 20px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  background: #CECECE;
+}
+
+.kanban-header-content {
+  display: flex;
+  height: 48px;
+  justify-content: space-between;
+  align-items: center;
+  align-self: stretch;
+}
+
+.kanban-header-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.kanban-header-title {
+  color: #00112B;
+  font-family: 'Macan Mono Stencil Trial', -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 120%;
+  letter-spacing: 1.6px;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.kanban-header-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.kanban-header-search {
+  width: 240px;
+}
+
+.kanban-header-search .search-field__input-container {
+  height: 40px;
+  padding: 12px 16px;
+  background: #DFDFDF;
+}
+
+.kanban-header-search .search-field__input {
+  color: #78797A;
+  font-family: Inter, -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 100%;
+}
+
+.kanban-header-search .search-field__input::placeholder {
+  color: #78797A;
+}
+
+.kanban-header-search .search-field__search-icon {
+  color: #78797A;
+}
+
+.kanban-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.kanban-header-actions .icon-button {
+  width: 40px;
+  height: 40px;
+  padding: 10px;
+  background: #DFDFDF;
+}
+
+.kanban-header-actions .icon-button--gray {
+  color: #78797A;
+}
+
+.kanban-header-actions .icon-button--gray:hover {
+  background: #00112B;
+  color: #DFDFDF;
+}
+
+.kanban-header-filter-active,
+.kanban-header-actions .icon-button--selected {
+  background: #00112B !important;
+  color: #DFDFDF !important;
+}
+
+@media (max-width: 768px) {
+  .kanban-header {
+    padding: 12px 16px;
+  }
+
+  .kanban-header-content {
+    flex-direction: column;
+    height: auto;
+    gap: 16px;
+  }
+
+  .kanban-header-left,
+  .kanban-header-right {
+    width: 100%;
+  }
+
+  .kanban-header-title {
+    font-size: 24px;
+  }
+
+  .kanban-header-search {
+    width: 100%;
+    flex: 1;
+  }
+}
+
+@media (max-width: 480px) {
+  .kanban-header-title {
+    font-size: 20px;
+    letter-spacing: 1px;
+  }
+
+  .kanban-header-actions {
+    gap: 4px;
+  }
+
+  .kanban-header-actions .icon-button {
+    width: 36px;
+    height: 36px;
+    padding: 8px;
+  }
+}

@@ -1,17 +1,34 @@
-import React, { useState } from 'react'
+import React, { useState, useMemo } from 'react'
 import type { KanbanBoardData, KanbanCard } from './types'
 import KanbanColumn from './KanbanColumn'
+import KanbanHeader from './KanbanHeader'
 import './KanbanBoard.css'
 
 export interface KanbanBoardProps {
   data: KanbanBoardData
   onCardClick?: (card: KanbanCard) => void
   onCardMove?: (cardId: string, fromColumnId: string, toColumnId: string) => void
+  onSearchChange?: (value: string) => void
+  onSettingsClick?: () => void
+  onFilterClick?: () => void
+  showHeader?: boolean
+  headerTitle?: string
 }
 
-const KanbanBoard: React.FC<KanbanBoardProps> = ({ data, onCardClick, onCardMove }) => {
+const KanbanBoard: React.FC<KanbanBoardProps> = ({
+  data,
+  onCardClick,
+  onCardMove,
+  onSearchChange,
+  onSettingsClick,
+  onFilterClick,
+  showHeader = true,
+  headerTitle = '[Kanban board]'
+}) => {
   const [boardData, setBoardData] = useState<KanbanBoardData>(data)
   const [draggedCard, setDraggedCard] = useState<{ card: KanbanCard; columnId: string } | null>(null)
+  const [searchValue, setSearchValue] = useState('')
+  const [filterActive, setFilterActive] = useState(false)
 
   const handleDragStart = (card: KanbanCard, columnId: string) => {
     setDraggedCard({ card, columnId })
@@ -48,7 +65,7 @@ const KanbanBoard: React.FC<KanbanBoardProps> = ({ data, onCardClick, onCardMove
     })
 
     setBoardData({ columns: newColumns })
-    
+
     if (onCardMove) {
       onCardMove(card.id, sourceColumnId, targetColumnId)
     }
@@ -56,21 +73,65 @@ const KanbanBoard: React.FC<KanbanBoardProps> = ({ data, onCardClick, onCardMove
     setDraggedCard(null)
   }
 
+  const handleSearchChange = (value: string) => {
+    setSearchValue(value)
+    if (onSearchChange) {
+      onSearchChange(value)
+    }
+  }
+
+  const handleFilterClick = () => {
+    setFilterActive(!filterActive)
+    if (onFilterClick) {
+      onFilterClick()
+    }
+  }
+
+  const filteredData = useMemo(() => {
+    if (!searchValue) return boardData
+
+    const searchLower = searchValue.toLowerCase()
+    const filteredColumns = boardData.columns.map(column => ({
+      ...column,
+      cards: column.cards.filter(card =>
+        card.title.toLowerCase().includes(searchLower) ||
+        card.customer.toLowerCase().includes(searchLower) ||
+        card.agentComment.toLowerCase().includes(searchLower) ||
+        card.agentName.toLowerCase().includes(searchLower)
+      )
+    }))
+
+    return { columns: filteredColumns }
+  }, [boardData, searchValue])
+
   return (
-    <div className="kanban-board">
-      <div className="kanban-board-columns">
-        {boardData.columns.map((column) => (
-          <KanbanColumn 
-            key={column.id} 
-            column={column} 
-            onCardClick={onCardClick}
-            onDragStart={handleDragStart}
-            onDragEnd={handleDragEnd}
-            onDrop={handleDrop}
-            isDragging={draggedCard !== null}
-            isDropTarget={draggedCard !== null && draggedCard.columnId !== column.id}
-          />
-        ))}
+    <div className="kanban-board-container">
+      {showHeader && (
+        <KanbanHeader
+          title={headerTitle}
+          searchValue={searchValue}
+          onSearchChange={handleSearchChange}
+          onSettingsClick={onSettingsClick}
+          onFilterClick={handleFilterClick}
+          filterActive={filterActive}
+        />
+      )}
+
+      <div className="kanban-board">
+        <div className="kanban-board-columns">
+          {filteredData.columns.map((column) => (
+            <KanbanColumn
+              key={column.id}
+              column={column}
+              onCardClick={onCardClick}
+              onDragStart={handleDragStart}
+              onDragEnd={handleDragEnd}
+              onDrop={handleDrop}
+              isDragging={draggedCard !== null}
+              isDropTarget={draggedCard !== null && draggedCard.columnId !== column.id}
+            />
+          ))}
+        </div>
       </div>
     </div>
   )

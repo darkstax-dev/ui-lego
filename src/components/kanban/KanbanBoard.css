@@ -1,11 +1,19 @@
 @import url('../../tokens.css');
 
+.kanban-board-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-height: 100vh;
+  background: #CECECE;
+}
+
 .kanban-board {
   display: flex;
   width: 100%;
   background: #CECECE;
   padding: 20px;
-  min-height: 100vh;
+  flex: 1;
   box-sizing: border-box;
 }
 

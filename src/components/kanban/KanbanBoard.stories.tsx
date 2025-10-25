@@ -40,6 +40,32 @@ export const WithDragAndDrop: Story = {
   },
 }
 
+export const WithHeaderAndSearch: Story = {
+  args: {
+    data: mockKanbanData,
+    showHeader: true,
+    onSearchChange: (value) => {
+      console.log('Search value:', value)
+    },
+    onSettingsClick: () => {
+      console.log('Settings clicked')
+    },
+    onFilterClick: () => {
+      console.log('Filter clicked')
+    },
+    onCardMove: (cardId, fromColumnId, toColumnId) => {
+      console.log(`Card ${cardId} moved from ${fromColumnId} to ${toColumnId}`)
+    },
+  },
+}
+
+export const WithoutHeader: Story = {
+  args: {
+    data: mockKanbanData,
+    showHeader: false,
+  },
+}
+
 export const SingleColumn: Story = {
   args: {
     data: {
