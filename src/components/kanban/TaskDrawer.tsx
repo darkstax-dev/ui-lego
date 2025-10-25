@@ -26,7 +26,17 @@ const TaskDrawer: React.FC<TaskDrawerProps> = ({ card, isOpen, onClose, schema, 
   const [editing, setEditing] = useState(false)
   const [formValue, setFormValue] = useState<Record<string, any>>({})
 
-  const data = useMemo(() => (card ? { ...card } : {}), [card])
+  const data = useMemo(() => {
+    if (!card) return {}
+    const flat: Record<string, any> = { ...card }
+    if ((card as any).assignee && typeof (card as any).assignee === 'object') {
+      flat.assignee = (card as any).assignee.name
+    }
+    if (Array.isArray(card.attachments)) {
+      flat.attachments = card.attachments.map((a) => a.fileName)
+    }
+    return flat
+  }, [card])
 
   const title = useMemo(() => {
     if (!card) return ''
