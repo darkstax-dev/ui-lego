@@ -52,8 +52,23 @@ export type JSONSchemaProperty =
   | JSONSchemaArray
   | JSONSchemaObject
 
+export interface TaskLayoutSection {
+  title: string
+  field: string
+  type: 'text' | 'textarea' | 'checklist' | 'attachments'
+}
+
+export interface TaskLayoutConfig {
+  headerFields?: { created?: string; dueDate?: string; status?: string; priority?: string }
+  assigneeField?: string
+  productField?: string
+  customerField?: string
+  sections?: TaskLayoutSection[]
+}
+
 export interface JSONSchemaRoot extends JSONSchemaObject {
   type: 'object'
+  layout?: TaskLayoutConfig
 }
 
 export type DescriptionRule = {
