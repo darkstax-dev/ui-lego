@@ -5,13 +5,13 @@
   flex-direction: column;
   width: 100%;
   min-height: 100vh;
-  background: #CECECE;
+  background: var(--surface-default);
 }
 
 .kanban-board {
   display: flex;
   width: 100%;
-  background: #CECECE;
+  background: var(--surface-default);
   padding: 20px;
   flex: 1;
   box-sizing: border-box;
@@ -31,15 +31,15 @@
 }
 
 .kanban-board-columns::-webkit-scrollbar-track {
-  background: #DFDFDF;
+  background: var(--surface-card);
   border-radius: 4px;
 }
 
 .kanban-board-columns::-webkit-scrollbar-thumb {
-  background: #C8C8C8;
+  background: var(--divider-light);
   border-radius: 4px;
 }
 
 .kanban-board-columns::-webkit-scrollbar-thumb:hover {
-  background: #B0B0B0;
+  background: var(--text-gray-secondary);
 }
