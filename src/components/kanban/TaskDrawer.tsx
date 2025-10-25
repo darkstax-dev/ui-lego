@@ -63,6 +63,8 @@ const TaskDrawer: React.FC<TaskDrawerProps> = ({ card, isOpen, onClose, schema, 
   const [activeTab, setActiveTab] = useState<typeof Tab[keyof typeof Tab]>(Tab.Details)
   const [editing, setEditing] = useState(false)
   const [formValue, setFormValue] = useState<Record<string, any>>({})
+  const [currentPage, setCurrentPage] = useState(1)
+  const [rowsPerPage, setRowsPerPage] = useState(20)
 
   const flat = useMemo(() => {
     if (!card) return {}
