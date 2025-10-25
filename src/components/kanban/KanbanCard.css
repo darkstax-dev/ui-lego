@@ -78,29 +78,29 @@
   text-transform: uppercase;
 }
 
-.status-user-action .status-flag { background: rgba(255, 59, 49, 0.2); }
-.status-user-action .status-text { background: rgba(255, 59, 49, 0.2); color: #FF3B31; }
+.status-user-action .status-flag { background: color-mix(in srgb, var(--color-red-500) 20%, transparent); }
+.status-user-action .status-text { background: color-mix(in srgb, var(--color-red-500) 20%, transparent); color: var(--color-red-500); }
 
-.status-customer-action .status-flag { background: rgba(134, 141, 151, 0.2); }
-.status-customer-action .status-text { background: rgba(134, 141, 151, 0.2); color: #868D97; }
+.status-customer-action .status-flag { background: color-mix(in srgb, var(--color-blue-gray-600) 20%, transparent); }
+.status-customer-action .status-text { background: color-mix(in srgb, var(--color-blue-gray-600) 20%, transparent); color: var(--color-blue-gray-600); }
 
-.status-agents-active .status-flag { background: rgba(4, 81, 164, 0.2); }
-.status-agents-active .status-text { background: rgba(4, 81, 164, 0.2); color: #0451A4; }
+.status-agents-active .status-flag { background: color-mix(in srgb, var(--color-blue-800) 20%, transparent); }
+.status-agents-active .status-text { background: color-mix(in srgb, var(--color-blue-800) 20%, transparent); color: var(--color-blue-800); }
 
-.status-blocked .status-flag { background: rgba(182, 38, 31, 0.2); }
-.status-blocked .status-text { background: rgba(182, 38, 31, 0.2); color: #B6261F; }
+.status-blocked .status-flag { background: color-mix(in srgb, var(--color-red-700) 20%, transparent); }
+.status-blocked .status-text { background: color-mix(in srgb, var(--color-red-700) 20%, transparent); color: var(--color-red-700); }
 
-.status-waiting .status-flag { background: rgba(245, 195, 124, 0.2); }
-.status-waiting .status-text { background: rgba(245, 195, 124, 0.2); color: #F09F47; }
+.status-waiting .status-flag { background: color-mix(in srgb, var(--color-yellow-400) 20%, transparent); }
+.status-waiting .status-text { background: color-mix(in srgb, var(--color-yellow-400) 20%, transparent); color: var(--color-yellow-400); }
 
-.status-review .status-flag { background: rgba(85, 211, 138, 0.2); }
-.status-review .status-text { background: rgba(85, 211, 138, 0.2); color: #2EB969; }
+.status-review .status-flag { background: color-mix(in srgb, var(--color-green-400) 20%, transparent); }
+.status-review .status-text { background: color-mix(in srgb, var(--color-green-400) 20%, transparent); color: var(--color-green-500); }
 
-.status-done .status-flag { background: rgba(16, 133, 65, 0.2); }
-.status-done .status-text { background: rgba(16, 133, 65, 0.2); color: #108541; }
+.status-done .status-flag { background: color-mix(in srgb, var(--color-green-800) 20%, transparent); }
+.status-done .status-text { background: color-mix(in srgb, var(--color-green-800) 20%, transparent); color: var(--color-green-800); }
 
-.status-archived .status-flag { background: rgba(120, 121, 122, 0.2); }
-.status-archived .status-text { background: rgba(120, 121, 122, 0.2); color: #78797A; }
+.status-archived .status-flag { background: color-mix(in srgb, var(--color-gray-500) 20%, transparent); }
+.status-archived .status-text { background: color-mix(in srgb, var(--color-gray-500) 20%, transparent); color: var(--color-gray-500); }
 
 .kanban-card-menu {
   display: flex;
@@ -178,23 +178,23 @@
 }
 
 .priority-high {
-  background: rgba(237, 139, 48, 0.2);
-  color: #ED8B30;
+  background: color-mix(in srgb, var(--color-yellow-500) 20%, transparent);
+  color: var(--color-yellow-500);
 }
 
 .priority-medium {
-  background: rgba(4, 81, 164, 0.2);
-  color: #0451A4;
+  background: color-mix(in srgb, var(--color-blue-800) 20%, transparent);
+  color: var(--color-blue-800);
 }
 
 .priority-normal {
-  background: rgba(120, 121, 122, 0.2);
-  color: var(--text-gray-main);
+  background: color-mix(in srgb, var(--color-gray-500) 20%, transparent);
+  color: var(--color-gray-500);
 }
 
 .priority-low {
-  background: rgba(120, 121, 122, 0.15);
-  color: #868D97;
+  background: color-mix(in srgb, var(--color-gray-500) 15%, transparent);
+  color: var(--color-blue-gray-600);
 }
 
 .kanban-card-comment {
