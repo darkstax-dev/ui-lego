@@ -110,7 +110,7 @@ const TaskDrawer: React.FC<TaskDrawerProps> = ({ card, isOpen, onClose, schema, 
   const customer = layout?.customerField ? (flat as any)[layout.customerField] : undefined
 
   return (
-    <Drawer isOpen={isOpen} onClose={onClose} title={title} size={DrawerSize.LARGE}>
+    <Drawer isOpen={isOpen} onClose={onClose} title={"Task details"} size={DrawerSize.LARGE} appearance="light">
       <div className="taskdrawer">
         <div className="taskdrawer-tabs">
           <button className={`taskdrawer-tab ${activeTab === Tab.Details ? 'is-active' : ''}`} onClick={() => setActiveTab(Tab.Details)}>Details</button>
