@@ -13,6 +13,13 @@ export interface KanbanBoardProps {
   onFilterClick?: () => void
   showHeader?: boolean
   headerTitle?: string
+  onRenameColumn?: (columnId: string) => void
+  onArchiveColumn?: (columnId: string) => void
+  onDeleteColumn?: (columnId: string) => void
+  onOpenTask?: (card: KanbanCard) => void
+  onEditCardName?: (card: KanbanCard) => void
+  onMoveCard?: (card: KanbanCard) => void
+  onDeleteCard?: (card: KanbanCard) => void
 }
 
 const KanbanBoard: React.FC<KanbanBoardProps> = ({
@@ -23,7 +30,14 @@ const KanbanBoard: React.FC<KanbanBoardProps> = ({
   onSettingsClick,
   onFilterClick,
   showHeader = true,
-  headerTitle = '[Kanban board]'
+  headerTitle = '[Kanban board]',
+  onRenameColumn,
+  onArchiveColumn,
+  onDeleteColumn,
+  onOpenTask,
+  onEditCardName,
+  onMoveCard,
+  onDeleteCard
 }) => {
   const [boardData, setBoardData] = useState<KanbanBoardData>(data)
   const [draggedCard, setDraggedCard] = useState<{ card: KanbanCard; columnId: string } | null>(null)
@@ -129,6 +143,13 @@ const KanbanBoard: React.FC<KanbanBoardProps> = ({
               onDrop={handleDrop}
               isDragging={draggedCard !== null}
               isDropTarget={draggedCard !== null && draggedCard.columnId !== column.id}
+              onRenameColumn={onRenameColumn}
+              onArchiveColumn={onArchiveColumn}
+              onDeleteColumn={onDeleteColumn}
+              onOpenTask={onOpenTask}
+              onEditCardName={onEditCardName}
+              onMoveCard={onMoveCard}
+              onDeleteCard={onDeleteCard}
             />
           ))}
         </div>
