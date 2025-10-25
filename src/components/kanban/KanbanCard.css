@@ -1,18 +1,20 @@
+@import url('../../tokens.css');
+
 .kanban-card {
   display: flex;
   padding: 16px;
   flex-direction: column;
   align-items: flex-start;
   gap: 16px;
-  background: #DFDFDF;
+  background: var(--surface-card);
   cursor: grab;
   transition: box-shadow 0.2s ease, opacity 0.2s ease, transform 0.2s ease;
   margin-bottom: 16px;
-  box-shadow: 0 16px 32px -8px rgba(12, 12, 13, 0.4);
+  box-shadow: 0 16px 32px -8px var(--sds-color-black-400);
 }
 
 .kanban-card:hover {
-  box-shadow: 0 18px 36px -8px rgba(12, 12, 13, 0.5);
+  box-shadow: 0 18px 36px -8px var(--sds-color-black-400);
   transform: translateY(-2px);
 }
 
@@ -44,8 +46,8 @@
 
 .kanban-card-title {
   align-self: stretch;
-  color: #00112B;
-  font-family: 'Macan', -apple-system, Roboto, Helvetica, sans-serif;
+  color: var(--text-blue-main);
+  font-family: var(--font-family-macan);
   font-size: 18px;
   font-weight: 700;
   line-height: 120%;
@@ -69,7 +71,7 @@
   padding: 4px 6px 4px 1px;
   align-items: center;
   gap: 5px;
-  font-family: 'Macan Mono Trial', -apple-system, Roboto, Helvetica, sans-serif;
+  font-family: var(--font-family-macan-mono);
   font-size: 12px;
   font-weight: 500;
   line-height: 100%;
@@ -147,8 +149,8 @@
 }
 
 .meta-label {
-  color: #78797A;
-  font-family: 'Macan Mono Trial', -apple-system, Roboto, Helvetica, sans-serif;
+  color: var(--text-gray-main);
+  font-family: var(--font-family-macan-mono);
   font-size: 12px;
   font-weight: 450;
   line-height: 120%;
@@ -156,8 +158,8 @@
 }
 
 .meta-value {
-  color: #00112B;
-  font-family: 'Macan Mono Trial', -apple-system, Roboto, Helvetica, sans-serif;
+  color: var(--text-blue-main);
+  font-family: var(--font-family-macan-mono);
   font-size: 14px;
   font-weight: 450;
   line-height: 120%;
@@ -168,7 +170,7 @@
   padding: 4px 6px;
   align-items: center;
   gap: 5px;
-  font-family: 'Macan Mono Trial', -apple-system, Roboto, Helvetica, sans-serif;
+  font-family: var(--font-family-macan-mono);
   font-size: 12px;
   font-weight: 500;
   line-height: 100%;
@@ -187,7 +189,7 @@
 
 .priority-normal {
   background: rgba(120, 121, 122, 0.2);
-  color: #78797A;
+  color: var(--text-gray-main);
 }
 
 .priority-low {
@@ -205,8 +207,8 @@
 
 .comment-text {
   align-self: stretch;
-  color: #00112B;
-  font-family: 'Macan', -apple-system, Roboto, Helvetica, sans-serif;
+  color: var(--text-blue-main);
+  font-family: var(--font-family-macan);
   font-size: 16px;
   font-weight: 450;
   line-height: 120%;
@@ -221,8 +223,8 @@
 }
 
 .customer-value {
-  color: #00112B;
-  font-family: 'Macan', -apple-system, Roboto, Helvetica, sans-serif;
+  color: var(--text-blue-main);
+  font-family: var(--font-family-macan);
   font-size: 16px;
   font-weight: 450;
   line-height: 120%;
@@ -250,8 +252,8 @@
 }
 
 .assignee-name {
-  color: #00112B;
-  font-family: 'Macan Mono Trial', -apple-system, Roboto, Helvetica, sans-serif;
+  color: var(--text-blue-main);
+  font-family: var(--font-family-macan-mono);
   font-size: 15px;
   font-weight: 450;
   line-height: 120%;
@@ -278,7 +280,7 @@
   align-items: center;
   gap: 8px;
   align-self: stretch;
-  background: #CECECE;
+  background: var(--surface-default);
   justify-content: space-between;
 }
 
@@ -293,12 +295,12 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: 'Macan Mono Trial', -apple-system, Roboto, Helvetica, sans-serif;
+  font-family: var(--font-family-macan-mono);
   font-size: 10px;
   font-weight: 600;
-  color: #00112B;
-  background: #DFDFDF;
-  border: 1px solid #C8C8C8;
+  color: var(--text-blue-main);
+  background: var(--surface-card);
+  border: 1px solid var(--divider-light);
 }
 
 .attachment-info {
@@ -311,16 +313,16 @@
 }
 
 .attachment-name {
-  color: #00112B;
-  font-family: 'Macan', -apple-system, Roboto, Helvetica, sans-serif;
+  color: var(--text-blue-main);
+  font-family: var(--font-family-macan);
   font-size: 14px;
   font-weight: 450;
   line-height: 120%;
 }
 
 .attachment-time {
-  color: #78797A;
-  font-family: 'Macan Mono Trial', -apple-system, Roboto, Helvetica, sans-serif;
+  color: var(--text-gray-main);
+  font-family: var(--font-family-macan-mono);
   font-size: 12px;
   font-weight: 450;
   line-height: 120%;
