@@ -44,6 +44,6 @@
 .file-name { color: var(--text-white-main); }
 
 .taskdrawer-actions { display: flex; gap: 8px; justify-content: flex-end; padding-top: 8px; }
-.td-btn { background: var(--color-blue-800); color: #FFFFFF; border: 1px solid var(--divider-dark); border-radius: 6px; padding: 8px 12px; cursor: pointer; }
+.td-btn { background: var(--color-blue-800); color: var(--color-white); border: 1px solid var(--divider-dark); border-radius: 6px; padding: 8px 12px; cursor: pointer; }
 .td-btn.td-secondary { background: var(--color-blue-medium-950); }
 .taskdrawer-log { color: var(--text-white-main); opacity: .85; }
