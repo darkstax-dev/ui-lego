@@ -51,7 +51,7 @@ const tagOptions = [
 
 export const Default: Story = {
   render: () => {
-    const [values, setValues] = React.useState<FilterValues>({
+    const [values, setValues] = useState<FilterValues>({
       shipment: '',
       renewal: '',
       name: '',
