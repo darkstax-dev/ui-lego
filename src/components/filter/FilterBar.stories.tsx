@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
+import React, { useState } from 'react'
 import './FilterBar.css'
 import '../../tokens.css'
 import FilterBar, { FilterControl, FilterValues } from './FilterBar'
