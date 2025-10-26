@@ -9,6 +9,10 @@
   padding: var(--sds-size-space-400);
 }
 
+.drawer-overlay.drawer-overlay--no-backdrop {
+  background: transparent;
+}
+
 /* Panel base */
 .drawer-panel {
   background: var(--color-blue-dark-950);
@@ -18,6 +22,12 @@
   box-shadow: 0 4px 24px rgba(0,0,0,0.2);
   overflow: hidden;
   outline: none;
+}
+
+/* Light appearance variant */
+.drawer-panel--light {
+  background: var(--sds-color-background-default-default);
+  color: var(--Text-Blue-text-Main-text);
 }
 
 /* Positions */
@@ -53,6 +63,11 @@
   border-bottom: 1px dashed var(--color-blue-950);
 }
 
+.drawer-panel--light .drawer-header {
+  background: var(--sds-color-background-default-default);
+  border-bottom: 1px solid var(--Divider-Light);
+}
+
 .drawer-title-container {
   display: flex;
   align-items: center;
@@ -71,6 +86,10 @@
   white-space: nowrap;
 }
 
+.drawer-panel--light .drawer-title {
+  color: var(--Text-Blue-text-Main-text);
+}
+
 .drawer-close-button {
   display: flex;
   width: 32px;
@@ -83,6 +102,10 @@
   cursor: pointer;
   padding: 0;
   flex-shrink: 0;
+}
+
+.drawer-panel--light .drawer-close-button {
+  color: var(--Blue-Dark-blue-950);
 }
 
 .drawer-close-button:hover {
@@ -101,6 +124,10 @@
   gap: var(--sds-size-space-400);
   overflow: auto;
   flex: 1;
+}
+
+.drawer-panel--light .drawer-content {
+  background: var(--sds-color-background-default-default);
 }
 
 /* Responsive adjustments */

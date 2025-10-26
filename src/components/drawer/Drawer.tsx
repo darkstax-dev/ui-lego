@@ -21,6 +21,7 @@ export interface DrawerProps {
   enforceFocus?: boolean
   hasBackdrop?: boolean
   usePortal?: boolean
+  appearance?: 'dark' | 'light'
 }
 
 const Drawer: React.FC<DrawerProps> = ({
@@ -34,6 +35,7 @@ const Drawer: React.FC<DrawerProps> = ({
   enforceFocus = true,
   hasBackdrop = true,
   usePortal = true,
+  appearance = 'dark',
 }) => {
   const containerRef = useRef<HTMLDivElement | null>(null)
   const previouslyFocused = useRef<Element | null>(null)
@@ -118,9 +120,9 @@ const Drawer: React.FC<DrawerProps> = ({
   }
 
   const panel = (
-    <div className="drawer-overlay" onClick={handleOverlayClick}>
+    <div className={`drawer-overlay${hasBackdrop ? '' : ' drawer-overlay--no-backdrop'}`} onClick={handleOverlayClick}>
       <div
-        className={`drawer-panel drawer-panel--${position}`}
+        className={`drawer-panel drawer-panel--${position} ${appearance === 'light' ? 'drawer-panel--light' : ''}`}
         ref={containerRef}
         role="dialog"
         aria-modal="true"

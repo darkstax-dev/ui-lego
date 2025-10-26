@@ -1,0 +1,45 @@
+@import url('../../tokens.css');
+
+.kanban-board-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-height: 100vh;
+  background: var(--surface-default);
+}
+
+.kanban-board {
+  display: flex;
+  width: 100%;
+  background: var(--surface-default);
+  padding: 20px;
+  flex: 1;
+  box-sizing: border-box;
+}
+
+.kanban-board-columns {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  width: 100%;
+  overflow-x: auto;
+  padding-bottom: 20px;
+}
+
+.kanban-board-columns::-webkit-scrollbar {
+  height: 8px;
+}
+
+.kanban-board-columns::-webkit-scrollbar-track {
+  background: var(--surface-card);
+  border-radius: 4px;
+}
+
+.kanban-board-columns::-webkit-scrollbar-thumb {
+  background: var(--divider-light);
+  border-radius: 4px;
+}
+
+.kanban-board-columns::-webkit-scrollbar-thumb:hover {
+  background: var(--text-gray-secondary);
+}
