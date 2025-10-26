@@ -14,6 +14,7 @@ interface TaskDrawerProps {
   schema: JSONSchemaRoot
   descriptionRule?: DescriptionRule
   onSave?: (updated: any) => void
+  mode?: 'view' | 'edit' | 'create'
 }
 
 const Tab = {
@@ -59,12 +60,15 @@ const priorityClass = (v?: string) => {
   }
 }
 
-const TaskDrawer: React.FC<TaskDrawerProps> = ({ card, isOpen, onClose, schema, descriptionRule, onSave }) => {
+const TaskDrawer: React.FC<TaskDrawerProps> = ({ card, isOpen, onClose, schema, descriptionRule, onSave, mode = 'view' }) => {
   const [activeTab, setActiveTab] = useState<typeof Tab[keyof typeof Tab]>(Tab.Details)
-  const [editing, setEditing] = useState(false)
+  const [editing, setEditing] = useState(mode === 'create' || mode === 'edit')
   const [formValue, setFormValue] = useState<Record<string, any>>({})
+  const [checklistItems, setChecklistItems] = useState<string[]>([''])
   const [currentPage, setCurrentPage] = useState(1)
   const [rowsPerPage, setRowsPerPage] = useState(20)
+
+  const isCreateMode = mode === 'create'
 
   const flat = useMemo(() => {
     if (!card) return {}
@@ -95,7 +99,22 @@ const TaskDrawer: React.FC<TaskDrawerProps> = ({ card, isOpen, onClose, schema, 
 
   const save = () => {
     setEditing(false)
-    onSave?.(formValue)
+    onSave?.({ ...formValue, checklist: checklistItems.filter(item => item.trim() !== '') })
+  }
+
+  const addChecklistItem = () => {
+    setChecklistItems([...checklistItems, ''])
+  }
+
+  const updateChecklistItem = (index: number, value: string) => {
+    const updated = [...checklistItems]
+    updated[index] = value
+    setChecklistItems(updated)
+  }
+
+  const removeChecklistItem = (index: number) => {
+    const updated = checklistItems.filter((_, i) => i !== index)
+    setChecklistItems(updated)
   }
 
   const layout = schema.layout
@@ -109,96 +128,340 @@ const TaskDrawer: React.FC<TaskDrawerProps> = ({ card, isOpen, onClose, schema, 
   const product = layout?.productField ? (flat as any)[layout.productField] : undefined
   const customer = layout?.customerField ? (flat as any)[layout.customerField] : undefined
 
+  const drawerTitle = isCreateMode ? 'New task' : 'Task details'
+
   return (
-    <Drawer isOpen={isOpen} onClose={onClose} title={"Task details"} size={DrawerSize.LARGE} appearance="light">
+    <Drawer 
+      isOpen={isOpen} 
+      onClose={onClose} 
+      title={drawerTitle} 
+      size={DrawerSize.LARGE} 
+      appearance="light"
+    >
       <div className="taskdrawer">
-        <div className="taskdrawer-tabs">
-          <button className={`taskdrawer-tab ${activeTab === Tab.Details ? 'is-active' : ''}`} onClick={() => setActiveTab(Tab.Details)}>Details</button>
-          <button className={`taskdrawer-tab ${activeTab === Tab.Log ? 'is-active' : ''}`} onClick={() => setActiveTab(Tab.Log)}>Task log</button>
-        </div>
+        {!isCreateMode && (
+          <div className="taskdrawer-tabs">
+            <button className={`taskdrawer-tab ${activeTab === Tab.Details ? 'is-active' : ''}`} onClick={() => setActiveTab(Tab.Details)}>Details</button>
+            <button className={`taskdrawer-tab ${activeTab === Tab.Log ? 'is-active' : ''}`} onClick={() => setActiveTab(Tab.Log)}>Task log</button>
+          </div>
+        )}
 
-        {activeTab === Tab.Details && (
+        {(activeTab === Tab.Details || isCreateMode) && (
           <>
-            <div className="taskdrawer-section">
-              <div className="section-title">Main Info</div>
-              <div className="info-card">
-                <div className="info-title">{title}</div>
-                <div className="info-grid">
-                  <div className="info-item"><div className="info-label">Created</div><div className="info-value">{created}</div></div>
-                  <div className="info-item"><div className="info-label">Due date</div><div className="info-value">{dueDate}</div></div>
-                  <div className="info-item"><div className="info-label">Status</div><div className={statusClass(status)}>{status}</div></div>
-                  <div className="info-item"><div className="info-label">Priority</div><div className={priorityClass(priority)}>{priority}</div></div>
-                </div>
-                <div className="info-assignee">
-                  <div className="info-label">Assignee</div>
-                  <div className="assignee-chip">
-                    {assigneeAvatar && <img className="assignee-avatar" src={assigneeAvatar} alt={assignee ?? ''} />}
-                    <span>{assignee}</span>
-                  </div>
-                </div>
-                <div className="info-two-col">
-                  <div>
-                    <div className="info-label">Product</div>
-                    <div className="info-value">{product}</div>
-                  </div>
-                  <div>
-                    <div className="info-label">Customer</div>
-                    <div className="info-value">{customer}</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {layout?.sections?.map((sec) => {
-              const val = (flat as any)[sec.field]
-              if (sec.type === 'textarea' && !editing) {
-                if (!val) return null
-                return (
-                  <div key={sec.title} className="taskdrawer-section">
-                    <div className="section-title">{sec.title}</div>
-                    <div className="text-panel">{val}</div>
-                  </div>
-                )
-              }
-              if (sec.type === 'checklist' && Array.isArray(val) && val.length > 0) {
-                return (
-                  <div key={sec.title} className="taskdrawer-section">
-                    <div className="section-title">{sec.title}</div>
-                    <ul className="checklist">
-                      {val.map((t: string, i: number) => (
-                        <li key={i} className="checklist-item"><input type="checkbox" /> <span>{t}</span></li>
-                      ))}
-                    </ul>
-                  </div>
-                )
-              }
-              if (sec.type === 'attachments' && Array.isArray(val) && val.length > 0) {
-                return (
-                  <div key={sec.title} className="taskdrawer-section">
-                    <div className="section-title with-count">{sec.title}<span className="count-dot">{val.length}</span></div>
-                    <div className="attachments">
-                      {val.map((name: string, i: number) => (
-                        <div key={i} className="attachment-row">
-                          <div className="file-icon">{name.split('.').pop()?.toUpperCase()}</div>
-                          <div className="file-name">{name}</div>
-                        </div>
-                      ))}
+            {!editing && !isCreateMode && (
+              <>
+                <div className="taskdrawer-section">
+                  <div className="section-title">Main Info</div>
+                  <div className="info-card">
+                    <div className="info-title">{title}</div>
+                    <div className="info-grid">
+                      <div className="info-item"><div className="info-label">Created</div><div className="info-value">{created}</div></div>
+                      <div className="info-item"><div className="info-label">Due date</div><div className="info-value">{dueDate}</div></div>
+                      <div className="info-item"><div className="info-label">Status</div><div className={statusClass(status)}>{status}</div></div>
+                      <div className="info-item"><div className="info-label">Priority</div><div className={priorityClass(priority)}>{priority}</div></div>
+                    </div>
+                    <div className="info-assignee">
+                      <div className="info-label">Assignee</div>
+                      <div className="assignee-chip">
+                        {assigneeAvatar && <img className="assignee-avatar" src={assigneeAvatar} alt={assignee ?? ''} />}
+                        <span>{assignee}</span>
+                      </div>
+                    </div>
+                    <div className="info-two-col">
+                      <div>
+                        <div className="info-label">Product</div>
+                        <div className="info-value">{product}</div>
+                      </div>
+                      <div>
+                        <div className="info-label">Customer</div>
+                        <div className="info-value">{customer}</div>
+                      </div>
                     </div>
                   </div>
-                )
-              }
-              return null
-            })}
+                </div>
 
-            {editing && (
-              <div className="taskdrawer-section">
-                <SchemaForm schema={schema} value={formValue} onChange={setFormValue} />
+                {layout?.sections?.map((sec) => {
+                  const val = (flat as any)[sec.field]
+                  if (sec.type === 'textarea' && !editing) {
+                    if (!val) return null
+                    return (
+                      <div key={sec.title} className="taskdrawer-section">
+                        <div className="section-title">{sec.title}</div>
+                        <div className="text-panel">{val}</div>
+                      </div>
+                    )
+                  }
+                  if (sec.type === 'checklist' && Array.isArray(val) && val.length > 0) {
+                    return (
+                      <div key={sec.title} className="taskdrawer-section">
+                        <div className="section-title">{sec.title}</div>
+                        <ul className="checklist">
+                          {val.map((t: string, i: number) => (
+                            <li key={i} className="checklist-item"><input type="checkbox" /> <span>{t}</span></li>
+                          ))}
+                        </ul>
+                      </div>
+                    )
+                  }
+                  if (sec.type === 'attachments' && Array.isArray(val) && val.length > 0) {
+                    return (
+                      <div key={sec.title} className="taskdrawer-section">
+                        <div className="section-title with-count">{sec.title}<span className="count-dot">{val.length}</span></div>
+                        <div className="attachments">
+                          {val.map((name: string, i: number) => (
+                            <div key={i} className="attachment-row">
+                              <div className="file-icon">{name.split('.').pop()?.toUpperCase()}</div>
+                              <div className="file-name">{name}</div>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    )
+                  }
+                  return null
+                })}
+              </>
+            )}
+
+            {(editing || isCreateMode) && (
+              <div className="taskdrawer-form">
+                <div className="taskdrawer-section">
+                  <div className="section-title-emphasis">Main Info</div>
+                  
+                  <div className="form-field">
+                    <label className="form-label">Title</label>
+                    <input
+                      type="text"
+                      className="form-input"
+                      placeholder='e.g., "Design Login Screen", "Optimize SQL Queries"'
+                      value={formValue.title || ''}
+                      onChange={(e) => setFormValue({ ...formValue, title: e.target.value })}
+                    />
+                  </div>
+
+                  <div className="form-field">
+                    <label className="form-label">Description</label>
+                    <textarea
+                      className="form-textarea"
+                      placeholder="Write a description of the task..."
+                      rows={7}
+                      value={formValue.description || ''}
+                      onChange={(e) => setFormValue({ ...formValue, description: e.target.value })}
+                    />
+                  </div>
+
+                  <div className="form-field">
+                    <label className="form-label">Assignee</label>
+                    <div className="form-select">
+                      <select
+                        value={formValue.assignee || ''}
+                        onChange={(e) => setFormValue({ ...formValue, assignee: e.target.value })}
+                      >
+                        <option value="">Select responsible team member</option>
+                        <option value="John Doe">John Doe</option>
+                        <option value="Jane Smith">Jane Smith</option>
+                        <option value="Bob Johnson">Bob Johnson</option>
+                      </select>
+                      <svg className="form-select-icon" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <g clipPath="url(#clip0_select_icon)">
+                          <path d="M10.0001 10.9766L14.1251 6.85156L15.3034 8.0299L10.0001 13.3332L4.69678 8.0299L5.87511 6.85156L10.0001 10.9766Z" fill="#00112B"/>
+                        </g>
+                        <defs>
+                          <clipPath id="clip0_select_icon">
+                            <rect width="20" height="20" fill="white"/>
+                          </clipPath>
+                        </defs>
+                      </svg>
+                    </div>
+                  </div>
+
+                  <div className="form-field">
+                    <label className="form-label">Product</label>
+                    <div className="form-select">
+                      <select
+                        value={formValue.product || ''}
+                        onChange={(e) => setFormValue({ ...formValue, product: e.target.value })}
+                      >
+                        <option value="">Choose related product/module</option>
+                        <option value="Product A">Product A</option>
+                        <option value="Product B">Product B</option>
+                        <option value="Product C">Product C</option>
+                      </select>
+                      <svg className="form-select-icon" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <g clipPath="url(#clip1_select_icon)">
+                          <path d="M10.0001 10.9766L14.1251 6.85156L15.3034 8.0299L10.0001 13.3332L4.69678 8.0299L5.87511 6.85156L10.0001 10.9766Z" fill="#00112B"/>
+                        </g>
+                        <defs>
+                          <clipPath id="clip1_select_icon">
+                            <rect width="20" height="20" fill="white"/>
+                          </clipPath>
+                        </defs>
+                      </svg>
+                    </div>
+                  </div>
+
+                  <div className="form-field">
+                    <label className="form-label">Customer</label>
+                    <div className="form-select">
+                      <select
+                        value={formValue.customer || ''}
+                        onChange={(e) => setFormValue({ ...formValue, customer: e.target.value })}
+                      >
+                        <option value="">Assign client or internal stakeholder</option>
+                        <option value="Customer 1">Customer 1</option>
+                        <option value="Customer 2">Customer 2</option>
+                        <option value="Internal Team">Internal Team</option>
+                      </select>
+                      <svg className="form-select-icon" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <g clipPath="url(#clip2_select_icon)">
+                          <path d="M10.0001 10.9766L14.1251 6.85156L15.3034 8.0299L10.0001 13.3332L4.69678 8.0299L5.87511 6.85156L10.0001 10.9766Z" fill="#00112B"/>
+                        </g>
+                        <defs>
+                          <clipPath id="clip2_select_icon">
+                            <rect width="20" height="20" fill="white"/>
+                          </clipPath>
+                        </defs>
+                      </svg>
+                    </div>
+                  </div>
+
+                  <div className="form-field">
+                    <label className="form-label">Created</label>
+                    <input
+                      type="text"
+                      className="form-input"
+                      placeholder="Auto-generated"
+                      value={formValue.created || 'Auto-generated'}
+                      disabled
+                    />
+                  </div>
+
+                  <div className="form-field">
+                    <label className="form-label">Due date</label>
+                    <div className="form-select">
+                      <input
+                        type="date"
+                        className="form-date-input"
+                        placeholder="Select deadline date"
+                        value={formValue.dueDate || ''}
+                        onChange={(e) => setFormValue({ ...formValue, dueDate: e.target.value })}
+                      />
+                      <svg className="form-select-icon" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <g clipPath="url(#clip0_calendar_icon)">
+                          <path d="M14.1667 2.50065H17.5001C17.7211 2.50065 17.9331 2.58845 18.0893 2.74473C18.2456 2.90101 18.3334 3.11297 18.3334 3.33398V16.6673C18.3334 16.8883 18.2456 17.1003 18.0893 17.2566C17.9331 17.4129 17.7211 17.5007 17.5001 17.5007H2.50008C2.27907 17.5007 2.06711 17.4129 1.91083 17.2566C1.75455 17.1003 1.66675 16.8883 1.66675 16.6673V3.33398C1.66675 3.11297 1.75455 2.90101 1.91083 2.74473C2.06711 2.58845 2.27907 2.50065 2.50008 2.50065H5.83342V0.833984H7.50008V2.50065H12.5001V0.833984H14.1667V2.50065ZM16.6667 7.50065V4.16732H14.1667V5.83398H12.5001V4.16732H7.50008V5.83398H5.83342V4.16732H3.33341V7.50065H16.6667ZM16.6667 9.16732H3.33341V15.834H16.6667V9.16732ZM5.00008 10.834H9.16675V14.1673H5.00008V10.834Z" fill="#00112B"/>
+                        </g>
+                        <defs>
+                          <clipPath id="clip0_calendar_icon">
+                            <rect width="20" height="20" fill="white"/>
+                          </clipPath>
+                        </defs>
+                      </svg>
+                    </div>
+                  </div>
+
+                  <div className="form-field">
+                    <label className="form-label">Status</label>
+                    <div className="form-select">
+                      <select
+                        value={formValue.status || ''}
+                        onChange={(e) => setFormValue({ ...formValue, status: e.target.value })}
+                      >
+                        <option value="">Choose current workflow stage</option>
+                        <option value="User Action Required">User Action Required</option>
+                        <option value="Customer Action Required">Customer Action Required</option>
+                        <option value="Agents Active">Agents Active</option>
+                        <option value="Blocked">Blocked</option>
+                        <option value="Waiting">Waiting</option>
+                        <option value="Review">Review</option>
+                        <option value="Done">Done</option>
+                        <option value="Archived">Archived</option>
+                      </select>
+                      <svg className="form-select-icon" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <g clipPath="url(#clip3_select_icon)">
+                          <path d="M10.0001 10.9766L14.1251 6.85156L15.3034 8.0299L10.0001 13.3332L4.69678 8.0299L5.87511 6.85156L10.0001 10.9766Z" fill="#00112B"/>
+                        </g>
+                        <defs>
+                          <clipPath id="clip3_select_icon">
+                            <rect width="20" height="20" fill="white"/>
+                          </clipPath>
+                        </defs>
+                      </svg>
+                    </div>
+                  </div>
+
+                  <div className="form-field">
+                    <label className="form-label">Priority</label>
+                    <div className="form-select">
+                      <select
+                        value={formValue.priority || ''}
+                        onChange={(e) => setFormValue({ ...formValue, priority: e.target.value })}
+                      >
+                        <option value="">Set task importance (Critical / High / Medium / Low / Normal)</option>
+                        <option value="Critical">Critical</option>
+                        <option value="High">High</option>
+                        <option value="Medium">Medium</option>
+                        <option value="Low">Low</option>
+                        <option value="Normal">Normal</option>
+                      </select>
+                      <svg className="form-select-icon" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <g clipPath="url(#clip4_select_icon)">
+                          <path d="M10.0001 10.9766L14.1251 6.85156L15.3034 8.0299L10.0001 13.3332L4.69678 8.0299L5.87511 6.85156L10.0001 10.9766Z" fill="#00112B"/>
+                        </g>
+                        <defs>
+                          <clipPath id="clip4_select_icon">
+                            <rect width="20" height="20" fill="white"/>
+                          </clipPath>
+                        </defs>
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="form-divider"></div>
+
+                <div className="taskdrawer-section">
+                  <div className="section-title-emphasis">Checklist</div>
+                  
+                  {checklistItems.map((item, index) => (
+                    <div key={index} className="form-field">
+                      <label className="form-label">Item {index + 1}</label>
+                      <input
+                        type="text"
+                        className="form-input"
+                        placeholder="Write first checklist item…"
+                        value={item}
+                        onChange={(e) => updateChecklistItem(index, e.target.value)}
+                      />
+                    </div>
+                  ))}
+
+                  <button className="form-add-item" onClick={addChecklistItem}>
+                    <svg width="18" height="24" viewBox="0 0 18 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path fillRule="evenodd" clipRule="evenodd" d="M8 11V6H10V11H15V13H10V18H8V13H3V11H8Z" fill="black"/>
+                    </svg>
+                    <span>Add checklist item</span>
+                  </button>
+                </div>
+
+                <div className="form-divider"></div>
+
+                <div className="taskdrawer-section">
+                  <div className="form-file-upload">
+                    <div className="file-upload-content">
+                      <div className="file-upload-text-bold">Upload supporting files (designs, docs, reports)</div>
+                      <div className="file-upload-action">
+                        <button type="button" className="file-upload-link">Click to upload</button>
+                        <span className="file-upload-text">or drag and drop</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             )}
           </>
         )}
 
-        {activeTab === Tab.Log && (
+        {activeTab === Tab.Log && !isCreateMode && (
           <div className="taskdrawer-log-container">
             <div className="task-log-table">
               <div className="task-log-header">
@@ -285,17 +548,28 @@ const TaskDrawer: React.FC<TaskDrawerProps> = ({ card, isOpen, onClose, schema, 
         )}
 
         <div className="taskdrawer-actions">
-          {!editing ? (
+          {!editing && !isCreateMode ? (
             <>
               <button className="td-btn td-secondary">Archive</button>
               <button className="td-btn" onClick={beginEdit}>Edit</button>
               <button className="td-btn td-secondary">Share</button>
             </>
           ) : (
-            <>
-              <button className="td-btn" onClick={save}>Save</button>
-              <button className="td-btn td-secondary" onClick={() => setEditing(false)}>Cancel</button>
-            </>
+            <div className="save-task-button-wrapper">
+              <button className="save-task-button" onClick={save}>
+                <span className="save-task-text">Save Task</span>
+                <svg className="save-task-icon" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <g clipPath="url(#clip0_save_icon)">
+                    <path d="M5.83333 15.8333V10.8333H14.1667V15.8333H15.8333V6.52333L13.4767 4.16667H4.16667V15.8333H5.83333ZM3.33333 2.5H14.1667L17.5 5.83333V16.6667C17.5 16.8877 17.4122 17.0996 17.2559 17.2559C17.0996 17.4122 16.8877 17.5 16.6667 17.5H3.33333C3.11232 17.5 2.90036 17.4122 2.74408 17.2559C2.5878 17.0996 2.5 16.8877 2.5 16.6667V3.33333C2.5 3.11232 2.5878 2.90036 2.74408 2.74408C2.90036 2.5878 3.11232 2.5 3.33333 2.5ZM7.5 12.5V15.8333H12.5V12.5H7.5Z" fill="white"/>
+                  </g>
+                  <defs>
+                    <clipPath id="clip0_save_icon">
+                      <rect width="20" height="20" fill="white"/>
+                    </clipPath>
+                  </defs>
+                </svg>
+              </button>
+            </div>
           )}
         </div>
       </div>
