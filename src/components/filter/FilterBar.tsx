@@ -1,5 +1,5 @@
 import React from 'react'
-import '../..//tokens.css'
+import '../../tokens.css'
 import './FilterBar.css'
 import SearchField from '../inputs/SearchField'
 import SelectField from '../inputs/SelectField'
