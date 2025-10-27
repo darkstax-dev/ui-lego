@@ -79,6 +79,9 @@ export * from './charts'
 // Drawer exports
 export * from './components/drawer'
 
+// Divider exports
+export * from './components/divider'
+
 // Scenario Listing exports
 export * from './components/scenario-listing'
 

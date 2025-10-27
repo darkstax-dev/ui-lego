@@ -8,6 +8,7 @@ export * from './system'
 export * from './users'
 export * from './logo'
 
+export { default as AccordionPointer } from './AccordionPointer'
 export { default as AdvertisementLine } from './AdvertisementLine'
 export { default as AncientGateFill } from './AncientGateFill'
 export { default as AncientPavilionFill } from './AncientPavilionFill'
