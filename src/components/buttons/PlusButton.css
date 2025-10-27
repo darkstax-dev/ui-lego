@@ -1,0 +1,37 @@
+/* PlusButton styles matching Figma design */
+.plus-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  background: var(--Background-Card, #DFDFDF);
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  outline: none;
+  color: var(--Primary-button-red-Fill, #D9322A);
+}
+
+.plus-button:focus-visible {
+  outline: 2px solid #00112b33;
+  outline-offset: 2px;
+}
+
+.plus-button--default {
+  background: var(--Background-Card, #DFDFDF);
+  color: var(--Primary-button-red-Fill, #D9322A);
+}
+
+.plus-button--hover:not(:disabled),
+.plus-button:hover:not(:disabled) {
+  background: #D0D0D0;
+  color: #C02A23;
+}
+
+.plus-button--disabled,
+.plus-button:disabled {
+  background: #E8E8E8;
+  color: #ADADAD;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
