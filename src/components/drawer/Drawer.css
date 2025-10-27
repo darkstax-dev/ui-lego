@@ -35,12 +35,14 @@
   margin-left: auto;
   transform: translateX(0);
   height: 100%;
+  animation: slideInFromRight 0.3s ease-out;
 }
 
 .drawer-panel--left {
   margin-right: auto;
   transform: translateX(0);
   height: 100%;
+  animation: slideInFromLeft 0.3s ease-out;
 }
 
 .drawer-panel--top {
@@ -128,6 +130,25 @@
 
 .drawer-panel--light .drawer-content {
   background: var(--sds-color-background-default-default);
+}
+
+/* Animations */
+@keyframes slideInFromLeft {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInFromRight {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
 }
 
 /* Responsive adjustments */

@@ -24,6 +24,7 @@
   width: 100%;
   overflow-x: auto;
   padding-bottom: 20px;
+  min-height: calc(100vh - 120px); /* Ensure minimum height for proper column display */
 }
 
 .kanban-board-columns::-webkit-scrollbar {

@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react'
+import type { Meta, StoryObj } from '@storybook/react-vite'
 import DeleteNamespacePopup from './DeleteNamespacePopup'
 
 const meta: Meta<typeof DeleteNamespacePopup> = {

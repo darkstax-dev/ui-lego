@@ -67,24 +67,7 @@
   flex-direction: column;
   align-items: flex-start;
   align-self: stretch;
-  max-height: calc(100vh - 250px);
-  overflow-y: auto;
+  gap: 12px;
   padding-right: 4px;
-}
-
-.kanban-column-cards::-webkit-scrollbar {
-  width: 6px;
-}
-
-.kanban-column-cards::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-.kanban-column-cards::-webkit-scrollbar-thumb {
-  background: var(--divider-light);
-  border-radius: 3px;
-}
-
-.kanban-column-cards::-webkit-scrollbar-thumb:hover {
-  background: var(--text-gray-secondary);
+  /* Allow natural height for page scroll - no max-height constraint */
 }

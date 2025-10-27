@@ -4,6 +4,7 @@ import type { KanbanCard } from './types'
 import type { JSONSchemaRoot, DescriptionRule } from '../schema/SchemaTypes'
 import { SchemaDisplay, SchemaForm } from '../schema/SchemaRenderer'
 import { applyTemplate } from '../schema/SchemaTypes'
+import { ArrowUpSLine, ArrowDownSLine } from '../icons/system'
 import '../schema/SchemaRenderer.css'
 import './TaskDrawer.css'
 
@@ -135,7 +136,8 @@ const TaskDrawer: React.FC<TaskDrawerProps> = ({ card, isOpen, onClose, schema, 
       isOpen={isOpen} 
       onClose={onClose} 
       title={drawerTitle} 
-      size={DrawerSize.LARGE} 
+      size="600px"
+      position="right"
       appearance="light"
     >
       <div className="taskdrawer">
@@ -150,31 +152,109 @@ const TaskDrawer: React.FC<TaskDrawerProps> = ({ card, isOpen, onClose, schema, 
           <>
             {!editing && !isCreateMode && (
               <>
-                <div className="taskdrawer-section">
-                  <div className="section-title">Main Info</div>
-                  <div className="info-card">
-                    <div className="info-title">{title}</div>
-                    <div className="info-grid">
-                      <div className="info-item"><div className="info-label">Created</div><div className="info-value">{created}</div></div>
-                      <div className="info-item"><div className="info-label">Due date</div><div className="info-value">{dueDate}</div></div>
-                      <div className="info-item"><div className="info-label">Status</div><div className={statusClass(status)}>{status}</div></div>
-                      <div className="info-item"><div className="info-label">Priority</div><div className={priorityClass(priority)}>{priority}</div></div>
+                {/* MAIN INFO Section */}
+                <div className="main-info-section">
+                  <div className="section-header-collapsible">
+                    <div className="section-title-main">MAIN INFO</div>
+                    <div className="collapse-icon">
+                      <ArrowUpSLine width={20} height={20} fill="#78797A" />
                     </div>
-                    <div className="info-assignee">
-                      <div className="info-label">Assignee</div>
-                      <div className="assignee-chip">
-                        {assigneeAvatar && <img className="assignee-avatar" src={assigneeAvatar} alt={assignee ?? ''} />}
-                        <span>{assignee}</span>
+                  </div>
+                  
+                  {/* Task Title and Info Content Card */}
+                  <div className="main-info-content">
+                    <div className="task-title-main">{title}</div>
+                    
+                    {/* Info Grid - 4 columns */}
+                    <div className="info-grid-four-col">
+                      <div className="info-item">
+                        <div className="info-label">Created</div>
+                        <div className="info-value">{created}</div>
+                      </div>
+                      <div className="info-item">
+                        <div className="info-label">Due date</div>
+                        <div className="info-value">{dueDate}</div>
+                      </div>
+                      <div className="info-item">
+                        <div className="info-label">Status</div>
+                        <div className={statusClass(status)}>{status}</div>
+                      </div>
+                      <div className="info-item">
+                        <div className="info-label">Priority</div>
+                        <div className={priorityClass(priority)}>{priority}</div>
                       </div>
                     </div>
-                    <div className="info-two-col">
-                      <div>
+
+                    {/* Assignee */}
+                    <div className="assignee-section">
+                      <div className="info-label">Assignee</div>
+                      <div className="assignee-display">
+                        {assigneeAvatar && <img className="assignee-avatar" src={assigneeAvatar} alt={assignee ?? ''} />}
+                        <span className="assignee-name">{assignee}</span>
+                      </div>
+                    </div>
+
+                    {/* Product and Customer */}
+                    <div className="product-customer-grid">
+                      <div className="product-section">
                         <div className="info-label">Product</div>
                         <div className="info-value">{product}</div>
                       </div>
-                      <div>
+                      <div className="customer-section">
                         <div className="info-label">Customer</div>
                         <div className="info-value">{customer}</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* AGENT COMMENT Section */}
+                <div className="collapsible-section">
+                  <div className="section-header-collapsible">
+                    <div className="section-title-main">AGENT COMMENT</div>
+                    <div className="collapse-icon">
+                      <ArrowUpSLine width={20} height={20} fill="#78797A" />
+                    </div>
+                  </div>
+                  <div className="section-content-gray">
+                    <div className="agent-comment-text">
+                      The inventory reallocation process identified shortage of 10cc syringes. 
+                      Approval required for substitution with 20cc syringes.
+                      <br /><br />
+                      Note: Confirm compliance with client requirements before dispatch.
+                    </div>
+                  </div>
+                </div>
+
+                {/* CHECKLIST Section */}
+                <div className="collapsible-section">
+                  <div className="section-header-collapsible">
+                    <div className="section-title-main">CHECKLIST</div>
+                    <div className="collapse-icon">
+                      <ArrowUpSLine width={20} height={20} fill="#78797A" />
+                    </div>
+                  </div>
+                  <div className="section-content-gray">
+                    <div className="checklist-items">
+                      <div className="checklist-item">
+                        <input type="checkbox" className="checklist-checkbox" />
+                        <span className="checklist-text">Validate stock levels at local warehouse</span>
+                      </div>
+                      <div className="checklist-item">
+                        <input type="checkbox" className="checklist-checkbox" />
+                        <span className="checklist-text">Confirm substitution option with QA</span>
+                      </div>
+                      <div className="checklist-item">
+                        <input type="checkbox" className="checklist-checkbox" />
+                        <span className="checklist-text">Send client approval request</span>
+                      </div>
+                      <div className="checklist-item">
+                        <input type="checkbox" className="checklist-checkbox" />
+                        <span className="checklist-text">Update logistics with new shipment data</span>
+                      </div>
+                      <div className="checklist-item">
+                        <input type="checkbox" className="checklist-checkbox" />
+                        <span className="checklist-text">Mark card as "Ready for Delivery"</span>
                       </div>
                     </div>
                   </div>
@@ -186,8 +266,13 @@ const TaskDrawer: React.FC<TaskDrawerProps> = ({ card, isOpen, onClose, schema, 
                     if (!val) return null
                     return (
                       <div key={sec.title} className="taskdrawer-section">
-                        <div className="section-title">{sec.title}</div>
-                        <div className="text-panel">{val}</div>
+                        <div className="section-header">
+                          <div className="section-title-collapsible">{sec.title.toUpperCase()}</div>
+                          <div className="section-collapse-icon">^</div>
+                        </div>
+                        <div className="section-content">
+                          <div className="text-content">{val}</div>
+                        </div>
                       </div>
                     )
                   }
@@ -505,7 +590,7 @@ const TaskDrawer: React.FC<TaskDrawerProps> = ({ card, isOpen, onClose, schema, 
                     </svg>
                   </button>
                   <div className="pagination-pages">
-                    {[...Array(Math.min(3, Math.ceil(card.taskLog.length / rowsPerPage)))].map((_, i) => (
+                    {[...Array(Math.min(3, Math.ceil((card.taskLog?.length || 0) / rowsPerPage)))].map((_, i) => (
                       <button
                         key={i + 1}
                         className={`pagination-page ${currentPage === i + 1 ? 'is-active' : ''}`}
@@ -514,11 +599,11 @@ const TaskDrawer: React.FC<TaskDrawerProps> = ({ card, isOpen, onClose, schema, 
                         {i + 1}
                       </button>
                     ))}
-                    {Math.ceil(card.taskLog.length / rowsPerPage) > 5 && (
+                    {Math.ceil((card.taskLog?.length || 0) / rowsPerPage) > 5 && (
                       <>
                         <span className="pagination-gap">...</span>
                         {[...Array(2)].map((_, i) => {
-                          const page = Math.ceil(card.taskLog.length / rowsPerPage) - 1 + i
+                          const page = Math.ceil((card.taskLog?.length || 0) / rowsPerPage) - 1 + i
                           return (
                             <button
                               key={page}
@@ -534,8 +619,8 @@ const TaskDrawer: React.FC<TaskDrawerProps> = ({ card, isOpen, onClose, schema, 
                   </div>
                   <button
                     className="pagination-nav pagination-next"
-                    disabled={currentPage >= Math.ceil(card.taskLog.length / rowsPerPage)}
-                    onClick={() => setCurrentPage(p => Math.min(Math.ceil(card.taskLog.length / rowsPerPage), p + 1))}
+                    disabled={currentPage >= Math.ceil((card.taskLog?.length || 0) / rowsPerPage)}
+                    onClick={() => setCurrentPage(p => Math.min(Math.ceil((card.taskLog?.length || 0) / rowsPerPage), p + 1))}
                   >
                     <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path d="M8.78145 8.00048L5.48145 4.70048L6.42411 3.75781L10.6668 8.00048L6.42411 12.2431L5.48145 11.3005L8.78145 8.00048Z" fill="currentColor"/>

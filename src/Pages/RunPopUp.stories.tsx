@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react'
+import type { Meta, StoryObj } from '@storybook/react-vite'
 import React, { useState } from 'react'
 import RunPopUp from './RunPopUp'
 import Button from '../components/buttons/Button'
