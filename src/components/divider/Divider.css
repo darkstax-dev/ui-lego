@@ -1,0 +1,13 @@
+@import '../../tokens.css';
+
+.divider {
+  flex-shrink: 0;
+}
+
+.divider--horizontal {
+  min-height: 1px;
+}
+
+.divider--vertical {
+  min-width: 1px;
+}
