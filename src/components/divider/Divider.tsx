@@ -10,7 +10,7 @@ interface DividerProps {
 
 const Divider: React.FC<DividerProps> = ({
   className = '',
-  color = 'var(--Gray-400, #ADADAD)',
+  color = 'var(--color-gray-400)',
   thickness = 1,
   orientation = 'horizontal'
 }) => {
