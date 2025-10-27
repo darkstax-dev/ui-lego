@@ -81,6 +81,7 @@ const iconCategories = {
     { name: 'Image Icon', component: Icons.ImageIcon, category: 'Media' }
   ],
   'Navigation': [
+    { name: 'Accordion Pointer', component: Icons.AccordionPointer, category: 'Navigation' },
     { name: 'Chevron Up', component: Icons.ChevronUp, category: 'Navigation' },
     { name: 'Chevron Down', component: Icons.ChevronDown, category: 'Navigation' }
   ],
