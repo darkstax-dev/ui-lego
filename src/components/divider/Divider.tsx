@@ -6,22 +6,32 @@ interface DividerProps {
   color?: string
   thickness?: number
   orientation?: 'horizontal' | 'vertical'
+  style?: 'solid' | 'dashed' | 'dotted'
 }
 
 const Divider: React.FC<DividerProps> = ({
   className = '',
   color = 'var(--color-gray-400)',
   thickness = 1,
-  orientation = 'horizontal'
+  orientation = 'horizontal',
+  style = 'dotted'
 }) => {
-  const style = orientation === 'horizontal' 
-    ? { width: '100%', height: `${thickness}px`, backgroundColor: color }
-    : { height: '100%', width: `${thickness}px`, backgroundColor: color }
+  const inlineStyle = orientation === 'horizontal'
+    ? {
+        width: '100%',
+        borderBottom: `${thickness}px ${style} ${color}`,
+        height: 0
+      }
+    : {
+        height: '100%',
+        borderRight: `${thickness}px ${style} ${color}`,
+        width: 0
+      }
 
   return (
-    <div 
+    <div
       className={`divider divider--${orientation} ${className}`}
-      style={style}
+      style={inlineStyle}
       role="separator"
       aria-orientation={orientation}
     />

@@ -61,10 +61,41 @@ export const ThickDivider: Story = {
   )
 }
 
+export const Dotted: Story = {
+  render: () => (
+    <div style={{ width: '575px', padding: '24px' }}>
+      <div style={{ marginBottom: '16px' }}>Content above dotted divider</div>
+      <Divider style="dotted" />
+      <div style={{ marginTop: '16px' }}>Content below dotted divider</div>
+    </div>
+  )
+}
+
+export const Dashed: Story = {
+  render: () => (
+    <div style={{ width: '575px', padding: '24px' }}>
+      <div style={{ marginBottom: '16px' }}>Content above dashed divider</div>
+      <Divider style="dashed" />
+      <div style={{ marginTop: '16px' }}>Content below dashed divider</div>
+    </div>
+  )
+}
+
+export const Solid: Story = {
+  render: () => (
+    <div style={{ width: '575px', padding: '24px' }}>
+      <div style={{ marginBottom: '16px' }}>Content above solid divider</div>
+      <Divider style="solid" />
+      <div style={{ marginTop: '16px' }}>Content below solid divider</div>
+    </div>
+  )
+}
+
 export const Default: Story = {
   args: {
     orientation: 'horizontal',
-    thickness: 1
+    thickness: 1,
+    style: 'dotted'
   },
   render: (args) => (
     <div style={{ width: '575px', padding: '24px' }}>
