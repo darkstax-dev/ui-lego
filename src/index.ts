@@ -56,6 +56,9 @@ export * from './components/monaco-editor'
 // Accordion exports
 export * from './components/accordion'
 
+//Filter exports
+export * from './components/filter'
+
 // TopBar components
 export * from './components/bar'
 
@@ -84,9 +87,6 @@ export * from './components/divider'
 
 // Scenario Listing exports
 export * from './components/scenario-listing'
-
-// GanttChart exports
-export * from './components/gantt-chart'
 
 // Scenario exports
 export * from './components/scenario'
