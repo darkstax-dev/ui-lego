@@ -1,4 +1,4 @@
-.execution-node {
+.oscommand-node {
   position: relative;
   background: transparent;
   border: none;
@@ -6,23 +6,7 @@
   cursor: pointer;
 }
 
-.execution-node__polygon {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  pointer-events: none;
-  z-index: -1;
-}
-
-.execution-node__polygon-svg {
-  width: 330px;
-  height: 460px;
-}
-
-.execution-node__content {
-  position: relative;
-  z-index: 1;
+.oscommand-node__content {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -30,7 +14,7 @@
   min-width: 120px;
 }
 
-.execution-node__icon-container {
+.oscommand-node__icon-container {
   width: 52px;
   height: 52px;
   position: relative;
@@ -39,7 +23,7 @@
   align-items: center;
 }
 
-.execution-node__icon-background {
+.oscommand-node__icon-background {
   position: absolute;
   width: 52px;
   height: 52px;
@@ -49,7 +33,7 @@
   -webkit-backdrop-filter: blur(4px);
 }
 
-.execution-node__icon {
+.oscommand-node__icon {
   position: relative;
   z-index: 1;
   display: flex;
@@ -57,7 +41,7 @@
   align-items: center;
 }
 
-.execution-node__label {
+.oscommand-node__label {
   color: var(--Dark-blue, #00112b);
   text-align: center;
   font-family: var(--font-family-macan-mono, 'Macan Mono Trial', -apple-system, Roboto, Helvetica, sans-serif);
@@ -68,7 +52,7 @@
   word-wrap: break-word;
 }
 
-.execution-node__handle {
+.oscommand-node__handle {
   width: 10px;
   height: 10px;
   background: var(--color-blue-700, #0072ff);
@@ -76,45 +60,40 @@
   border-radius: 50%;
 }
 
-.execution-node__handle:hover {
+.oscommand-node__handle:hover {
   background: var(--color-blue-800, #0451a4);
 }
 
-.execution-node:hover .execution-node__icon-background {
+.oscommand-node:hover .oscommand-node__icon-background {
   background: rgba(255, 255, 255, 0.6);
 }
 
-.react-flow__node.selected .execution-node .execution-node__icon-background {
+.react-flow__node.selected .oscommand-node .oscommand-node__icon-background {
   background: rgba(255, 255, 255, 0.6);
   box-shadow: 0 0 0 2px var(--color-blue-700, #0072ff);
 }
 
 @media (max-width: 768px) {
-  .execution-node__polygon-svg {
-    width: 250px;
-    height: 350px;
-  }
-
-  .execution-node__content {
+  .oscommand-node__content {
     min-width: 100px;
   }
 
-  .execution-node__icon-container {
+  .oscommand-node__icon-container {
     width: 44px;
     height: 44px;
   }
 
-  .execution-node__icon-background {
+  .oscommand-node__icon-background {
     width: 44px;
     height: 44px;
   }
 
-  .execution-node__icon {
+  .oscommand-node__icon {
     width: 26px;
     height: 26px;
   }
 
-  .execution-node__label {
+  .oscommand-node__label {
     font-size: var(--font-size-xs, 12px);
     max-width: 100px;
   }

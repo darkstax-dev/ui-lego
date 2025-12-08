@@ -23,6 +23,18 @@
   animation: dashdraw 0.5s linear infinite;
 }
 
+.react-flow__edge.curved-edge .react-flow__edge-path {
+  stroke: #D9322A;
+  stroke-width: 3;
+  stroke-dasharray: none;
+}
+
+.react-flow__edge.polygon-edge .react-flow__edge-path {
+  stroke: var(--Dark-blue, #00112b);
+  stroke-width: 2;
+  stroke-dasharray: 8 4;
+}
+
 @keyframes dashdraw {
   to {
     stroke-dashoffset: -12;
