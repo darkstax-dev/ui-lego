@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import ActivityInputOutput from './ActivityInputOutput'
+import './ActivityInputOutput.stories.css'
 
 const meta: Meta<typeof ActivityInputOutput> = {
   title: 'Components/ActivityInputOutput',
