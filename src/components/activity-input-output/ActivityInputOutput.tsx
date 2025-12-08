@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react'
+import React, { useCallback, useState } from 'react'
 import {
   ReactFlow,
   Node,
@@ -15,31 +15,48 @@ import {
 import '@xyflow/react/dist/style.css'
 import './ActivityInputOutput.css'
 import CustomNode from './CustomNode'
+import ExecutionNode from './ExecutionNode'
+import OutputNode from './OutputNode'
 
 const nodeTypes: NodeTypes = {
   custom: CustomNode,
+  execution: ExecutionNode,
+  output: OutputNode,
 }
 
 const initialNodes: Node[] = [
   {
-    id: '1',
+    id: 'input-1',
     type: 'custom',
     position: { x: 100, y: 100 },
-    data: { label: 'config loading' },
+    data: { label: 'input node' },
   },
   {
-    id: '2',
+    id: 'input-2',
     type: 'custom',
-    position: { x: 400, y: 100 },
-    data: { label: 'process data' },
+    position: { x: 300, y: 100 },
+    data: { label: 'input node' },
+  },
+  {
+    id: 'execution-main',
+    type: 'execution',
+    position: { x: 200, y: 250 },
+    data: { label: 'config loading', showPolygon: false },
   },
 ]
 
 const initialEdges: Edge[] = [
   {
-    id: 'e1-2',
-    source: '1',
-    target: '2',
+    id: 'e-input1-execution',
+    source: 'input-1',
+    target: 'execution-main',
+    type: 'default',
+    className: 'custom-edge',
+  },
+  {
+    id: 'e-input2-execution',
+    source: 'input-2',
+    target: 'execution-main',
     type: 'default',
     className: 'custom-edge',
   },
@@ -52,10 +69,71 @@ export interface ActivityInputOutputProps {
 const ActivityInputOutput: React.FC<ActivityInputOutputProps> = ({ className = '' }) => {
   const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes)
   const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges)
+  const [isExpanded, setIsExpanded] = useState(false)
 
   const onConnect = useCallback(
     (params: Connection) => setEdges((eds) => addEdge({ ...params, className: 'custom-edge' }, eds)),
     [setEdges]
+  )
+
+  const handleNodeDoubleClick = useCallback(
+    (_event: React.MouseEvent, node: Node) => {
+      if (node.id === 'execution-main' && !isExpanded) {
+        setIsExpanded(true)
+        
+        const outputNodes: Node[] = [
+          {
+            id: 'output-1',
+            type: 'output',
+            position: { x: 100, y: 450 },
+            data: { label: 'output node' },
+          },
+          {
+            id: 'output-2',
+            type: 'output',
+            position: { x: 300, y: 450 },
+            data: { label: 'output node' },
+          },
+        ]
+
+        const outputEdges: Edge[] = [
+          {
+            id: 'e-execution-output1',
+            source: 'execution-main',
+            target: 'output-1',
+            type: 'default',
+            className: 'custom-edge',
+            animated: true,
+          },
+          {
+            id: 'e-execution-output2',
+            source: 'execution-main',
+            target: 'output-2',
+            type: 'default',
+            className: 'custom-edge',
+            animated: true,
+          },
+        ]
+
+        setNodes((nds) => {
+          return nds.map((n) => {
+            if (n.id === 'execution-main') {
+              return {
+                ...n,
+                data: {
+                  ...n.data,
+                  showPolygon: true,
+                },
+              }
+            }
+            return n
+          }).concat(outputNodes)
+        })
+
+        setEdges((eds) => eds.concat(outputEdges))
+      }
+    },
+    [isExpanded, setNodes, setEdges]
   )
 
   return (
@@ -66,6 +144,7 @@ const ActivityInputOutput: React.FC<ActivityInputOutputProps> = ({ className = '
         onNodesChange={onNodesChange}
         onEdgesChange={onEdgesChange}
         onConnect={onConnect}
+        onNodeDoubleClick={handleNodeDoubleClick}
         nodeTypes={nodeTypes}
         fitView
         minZoom={0.5}
