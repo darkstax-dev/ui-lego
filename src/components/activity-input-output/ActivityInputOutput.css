@@ -1,0 +1,55 @@
+.activity-input-output {
+  width: 100%;
+  height: 600px;
+  background: var(--color-gray-200, #dfdfdf);
+}
+
+/* Custom edge styles - dashed line with arrow */
+.react-flow__edge.custom-edge .react-flow__edge-path {
+  stroke: var(--Dark-blue, #00112b);
+  stroke-width: 2;
+  stroke-dasharray: 8 4;
+}
+
+.react-flow__edge.custom-edge .react-flow__edge-path:hover {
+  stroke: var(--color-blue-700, #0072ff);
+}
+
+/* Arrow marker */
+.react-flow__edge.custom-edge marker {
+  fill: var(--Dark-blue, #00112b);
+}
+
+/* Controls styling */
+.activity-input-output .react-flow__controls {
+  button {
+    background: var(--color-white, #ffffff);
+    border: 1px solid var(--color-gray-300, #cecece);
+    color: var(--Dark-blue, #00112b);
+  }
+
+  button:hover {
+    background: var(--color-gray-100, #ececec);
+  }
+}
+
+/* Background dots */
+.activity-input-output .react-flow__background {
+  background: var(--color-gray-200, #dfdfdf);
+}
+
+.activity-input-output .react-flow__background circle {
+  fill: var(--color-gray-300, #cecece);
+}
+
+/* Minimap */
+.activity-input-output .react-flow__minimap {
+  background: var(--color-gray-100, #ececec);
+  border: 1px solid var(--color-gray-300, #cecece);
+}
+
+/* Selection */
+.activity-input-output .react-flow__selection {
+  background: rgba(0, 114, 255, 0.08);
+  border: 1px solid var(--color-blue-700, #0072ff);
+}
