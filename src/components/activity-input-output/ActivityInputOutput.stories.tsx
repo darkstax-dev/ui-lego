@@ -24,7 +24,7 @@ export const CustomHeight: Story = {
   },
   decorators: [
     (Story) => (
-      <div style={{ height: '800px' }}>
+      <div className="activity-input-output-story-fullscreen">
         <Story />
       </div>
     ),
