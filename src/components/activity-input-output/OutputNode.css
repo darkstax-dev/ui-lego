@@ -1,0 +1,99 @@
+.output-node {
+  position: relative;
+  background: transparent;
+  border: none;
+  padding: 0;
+}
+
+.output-node__content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--sds-size-space-200, 8px);
+  min-width: 120px;
+}
+
+.output-node__icon-container {
+  width: 52px;
+  height: 52px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.output-node__icon-background {
+  position: absolute;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+.output-node__icon {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.output-node__label {
+  color: var(--Dark-blue, #00112b);
+  text-align: center;
+  font-family: var(--font-family-macan-mono, 'Macan Mono Trial', -apple-system, Roboto, Helvetica, sans-serif);
+  font-size: var(--font-size-sm, 14px);
+  font-weight: var(--font-weight-medium, 500);
+  line-height: 120%;
+  max-width: 120px;
+  word-wrap: break-word;
+}
+
+.output-node__handle {
+  width: 10px;
+  height: 10px;
+  background: var(--color-blue-700, #0072ff);
+  border: 2px solid var(--color-white, #ffffff);
+  border-radius: 50%;
+}
+
+.output-node__handle:hover {
+  background: var(--color-blue-800, #0451a4);
+}
+
+.output-node:hover .output-node__icon-background {
+  background: rgba(255, 255, 255, 0.6);
+}
+
+.react-flow__node.selected .output-node .output-node__icon-background {
+  background: rgba(255, 255, 255, 0.6);
+  box-shadow: 0 0 0 2px var(--color-blue-700, #0072ff);
+}
+
+@media (max-width: 768px) {
+  .output-node__content {
+    min-width: 100px;
+  }
+
+  .output-node__icon-container {
+    width: 44px;
+    height: 44px;
+  }
+
+  .output-node__icon-background {
+    width: 44px;
+    height: 44px;
+  }
+
+  .output-node__icon {
+    width: 26px;
+    height: 26px;
+  }
+
+  .output-node__label {
+    font-size: var(--font-size-xs, 12px);
+    max-width: 100px;
+  }
+}

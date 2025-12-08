@@ -96,3 +96,6 @@ export * from './components/checkbox'
 
 // Kanban exports
 export * from './components/kanban'
+
+// Activity Input Output exports
+export * from './components/activity-input-output'

@@ -1,0 +1,98 @@
+@import '../tokens.css';
+
+.resource-page {
+  background: var(--surface-default);
+  color: var(--text-blue-main);
+  min-height: 100vh;
+  font-family: var(--font-family-macan);
+}
+
+.resource-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: var(--sds-size-space-800) var(--sds-size-space-800);
+}
+
+.resource-header {
+  margin-bottom: var(--sds-size-space-600);
+}
+
+.resource-title {
+  margin: 0 0 var(--sds-size-space-200);
+  font-family: var(--font-family-macan-mono-stencil);
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-medium);
+  letter-spacing: var(--letter-spacing-wide);
+  line-height: var(--line-height-normal);
+  text-transform: uppercase;
+}
+
+.resource-subtitle {
+  margin: 0;
+  font-size: var(--font-size-sm);
+  color: var(--text-gray-main);
+}
+
+.resource-body {
+  border-radius: 0;
+  border: 1px solid var(--divider-light);
+  background: var(--surface-card);
+  padding: var(--sds-size-padding-xl);
+}
+
+.resource-empty-state {
+  display: flex;
+  align-items: center;
+  gap: var(--sds-size-space-400);
+}
+
+.resource-empty-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: var(--Modeling-Items-Modeling-item);
+  backdrop-filter: blur(var(--sds-size-blur-100));
+  -webkit-backdrop-filter: blur(var(--sds-size-blur-100));
+}
+
+.resource-empty-text {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sds-size-space-100);
+}
+
+.resource-empty-title {
+  margin: 0;
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-semibold);
+}
+
+.resource-empty-description {
+  margin: 0;
+  font-size: var(--font-size-sm);
+  color: var(--text-gray-secondary);
+}
+
+@media (max-width: 768px) {
+  .resource-content {
+    padding: var(--sds-size-space-600);
+  }
+
+  .resource-body {
+    padding: var(--sds-size-space-600);
+  }
+
+  .resource-empty-state {
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 480px) {
+  .resource-content {
+    padding: var(--sds-size-space-400);
+  }
+
+  .resource-body {
+    padding: var(--sds-size-space-400);
+  }
+}

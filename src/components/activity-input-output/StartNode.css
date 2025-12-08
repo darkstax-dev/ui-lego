@@ -1,0 +1,78 @@
+.start-node {
+  position: relative;
+  background: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+.start-node__content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--sds-size-space-200, 8px);
+  min-width: 120px;
+}
+
+.start-node__icon-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 32px;
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  position: relative;
+}
+
+.start-node__icon {
+  position: relative;
+  z-index: 1;
+}
+
+.start-node__label {
+  color: var(--Dark-blue, #00112b);
+  text-align: center;
+  font-family: var(--font-family-macan-mono, 'Macan Mono Trial', -apple-system, Roboto, Helvetica, sans-serif);
+  font-size: var(--font-size-sm, 14px);
+  font-weight: var(--font-weight-medium, 500);
+  line-height: 120%;
+  max-width: 120px;
+  word-wrap: break-word;
+}
+
+.start-node__handle {
+  width: 10px;
+  height: 10px;
+  background: var(--color-blue-700, #0072ff);
+  border: 2px solid var(--color-white, #ffffff);
+  border-radius: 50%;
+}
+
+.start-node__handle:hover {
+  background: var(--color-blue-800, #0451a4);
+}
+
+.start-node:hover .start-node__icon-container {
+  opacity: 0.9;
+}
+
+.react-flow__node.selected .start-node .start-node__icon-container {
+  box-shadow: 0 0 0 2px var(--color-blue-700, #0072ff);
+  border-radius: 32px;
+}
+
+@media (max-width: 768px) {
+  .start-node__content {
+    min-width: 100px;
+  }
+
+  .start-node__icon {
+    width: 20px;
+    height: 20px;
+  }
+
+  .start-node__label {
+    font-size: var(--font-size-xs, 12px);
+    max-width: 100px;
+  }
+}
