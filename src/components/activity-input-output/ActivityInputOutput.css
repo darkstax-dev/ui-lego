@@ -1,7 +1,36 @@
 .activity-input-output {
   width: 100%;
-  height: 600px;
+  height: 100vh;
   background: var(--color-gray-200, #dfdfdf);
+  position: relative;
+}
+
+.add-node-button {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  z-index: 10;
+  padding: 10px 20px;
+  background: #D9322A;
+  color: var(--color-white, #ffffff);
+  border: none;
+  border-radius: 8px;
+  font-family: var(--font-family-macan, 'Macan Trial', -apple-system, Roboto, Helvetica, sans-serif);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(217, 50, 42, 0.3);
+  transition: all 0.2s ease;
+}
+
+.add-node-button:hover {
+  background: #c22a22;
+  box-shadow: 0 4px 12px rgba(217, 50, 42, 0.4);
+  transform: translateY(-1px);
+}
+
+.add-node-button:active {
+  transform: translateY(0);
 }
 
 .react-flow__edge.custom-edge .react-flow__edge-path {
@@ -24,9 +53,9 @@
 }
 
 .react-flow__edge.curved-edge .react-flow__edge-path {
-  stroke: #D9322A;
-  stroke-width: 3;
-  stroke-dasharray: none;
+  stroke: var(--Dark-blue, #00112b);
+  stroke-width: 2;
+  stroke-dasharray: 8 4;
 }
 
 .react-flow__edge.polygon-edge .react-flow__edge-path {
@@ -71,14 +100,33 @@
   border: 1px solid var(--color-blue-700, #0072ff);
 }
 
+/* Hide default ReactFlow node backgrounds for input and output nodes */
+.react-flow__node-input,
+.react-flow__node-output {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+}
+
+/* Ensure group background nodes have the correct styling */
+.react-flow__node-groupBackground {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  pointer-events: none !important;
+  z-index: -1 !important;
+}
+
 @media (max-width: 768px) {
   .activity-input-output {
-    height: 500px;
+    height: 100vh;
   }
 }
 
 @media (max-width: 480px) {
   .activity-input-output {
-    height: 400px;
+    height: 100vh;
   }
 }

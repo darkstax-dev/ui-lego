@@ -16,6 +16,13 @@ type Story = StoryObj<typeof ActivityInputOutput>
 
 export const Default: Story = {
   args: {},
+  decorators: [
+    (Story) => (
+      <div className="activity-input-output-story-fullscreen">
+        <Story />
+      </div>
+    ),
+  ],
 }
 
 export const CustomHeight: Story = {

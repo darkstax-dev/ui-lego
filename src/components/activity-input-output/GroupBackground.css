@@ -1,0 +1,36 @@
+.group-background {
+  position: relative;
+  height: 160px;
+  pointer-events: none;
+}
+
+.group-background__shape {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: 32px;
+  border: 1px solid rgba(0, 17, 43, 0.08);
+  box-shadow: 
+    0 2px 4px rgba(0, 0, 0, 0.04),
+    0 4px 12px rgba(0, 0, 0, 0.06);
+}
+
+.group-background--input .group-background__shape {
+  background: linear-gradient(135deg, rgba(245, 248, 252, 0.7) 0%, rgba(235, 242, 250, 0.6) 100%);
+}
+
+.group-background--output .group-background__shape {
+  background: linear-gradient(135deg, rgba(252, 245, 248, 0.7) 0%, rgba(250, 240, 245, 0.6) 100%);
+}
+
+/* Make backgrounds transparent to React Flow interactions */
+.react-flow__node-groupBackground {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  pointer-events: none !important;
+}

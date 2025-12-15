@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react'
+import React, { useCallback, useRef, useEffect, useState } from 'react'
 import {
   ReactFlow,
   Node,
@@ -15,238 +15,427 @@ import {
 import '@xyflow/react/dist/style.css'
 import './ActivityInputOutput.css'
 import StartNode from './StartNode'
-import ConfigNode from './ConfigNode'
 import ExecutionNode from './ExecutionNode'
 import InputNode from './InputNode'
 import OutputNode from './OutputNode'
-import OsCommandNode from './OsCommandNode'
 import StopNode from './StopNode'
+import GroupBackground from './GroupBackground'
 
 const nodeTypes: NodeTypes = {
   start: StartNode,
-  config: ConfigNode,
   execution: ExecutionNode,
   input: InputNode,
   output: OutputNode,
-  oscommand: OsCommandNode,
   stop: StopNode,
+  groupBackground: GroupBackground,
 }
-
-const initialNodes: Node[] = [
-  {
-    id: 'start',
-    type: 'start',
-    position: { x: 50, y: 250 },
-    data: { label: 'Start' },
-  },
-  {
-    id: 'config',
-    type: 'config',
-    position: { x: 250, y: 250 },
-    data: { label: 'config' },
-  },
-  {
-    id: 'config-loading',
-    type: 'execution',
-    position: { x: 450, y: 250 },
-    data: { label: 'config loading', showPolygon: false },
-  },
-  {
-    id: 'oscommand',
-    type: 'oscommand',
-    position: { x: 750, y: 100 },
-    data: { label: 'oscommand' },
-  },
-  {
-    id: 'stop',
-    type: 'stop',
-    position: { x: 950, y: 250 },
-    data: { label: 'stop' },
-  },
-]
-
-const initialEdges: Edge[] = [
-  {
-    id: 'e-start-config',
-    source: 'start',
-    target: 'config',
-    type: 'default',
-    className: 'custom-edge',
-  },
-  {
-    id: 'e-config-configloading',
-    source: 'config',
-    target: 'config-loading',
-    type: 'default',
-    className: 'custom-edge',
-  },
-  {
-    id: 'e-configloading-oscommand',
-    source: 'config-loading',
-    target: 'oscommand',
-    type: 'default',
-    className: 'custom-edge curved-edge',
-    animated: false,
-  },
-  {
-    id: 'e-oscommand-stop',
-    source: 'oscommand',
-    target: 'stop',
-    type: 'default',
-    className: 'custom-edge',
-  },
-]
 
 export interface ActivityInputOutputProps {
   className?: string
 }
 
 const ActivityInputOutput: React.FC<ActivityInputOutputProps> = ({ className = '' }) => {
-  const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes)
-  const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges)
-  const [isExpanded, setIsExpanded] = useState(false)
+  const nodeIdCounter = useRef(1)
+  const inputIdCounter = useRef(0)
+  const outputIdCounter = useRef(0)
+
+  const [nodes, setNodes, onNodesChange] = useNodesState<Node>([])
+  const [edges, setEdges, onEdgesChange] = useEdgesState<Edge>([])
+  const [expandedNodes, setExpandedNodes] = useState<Set<string>>(new Set())
 
   const onConnect = useCallback(
     (params: Connection) => setEdges((eds) => addEdge({ ...params, className: 'custom-edge' }, eds)),
     [setEdges]
   )
 
-  const handleNodeDoubleClick = useCallback(
-    (_event: React.MouseEvent, node: Node) => {
-      if (node.id === 'config-loading') {
-        if (!isExpanded) {
-          setIsExpanded(true)
+  function handleDeleteNode(nodeId: string) {
+    setNodes((nds) => nds.filter((n) => 
+      n.id !== nodeId && 
+      !n.id.startsWith(`${nodeId}-input-`) && 
+      !n.id.startsWith(`${nodeId}-output-`)
+    ))
+    setEdges((eds) => eds.filter((e) => 
+      e.source !== nodeId && 
+      e.target !== nodeId && 
+      !e.source.startsWith(`${nodeId}-`) && 
+      !e.target.startsWith(`${nodeId}-`)
+    ))
+    setExpandedNodes((prev) => {
+      const newSet = new Set(prev)
+      newSet.delete(nodeId)
+      return newSet
+    })
+  }
 
-          const inputNodes: Node[] = [
-            {
-              id: 'polygon-input-1',
-              type: 'input',
-              position: { x: 350, y: 80 },
-              data: { label: 'input node' },
-            },
-            {
-              id: 'polygon-input-2',
-              type: 'input',
-              position: { x: 550, y: 80 },
-              data: { label: 'input node' },
-            },
-          ]
-
-          const outputNodes: Node[] = [
-            {
-              id: 'polygon-output-1',
-              type: 'output',
-              position: { x: 350, y: 420 },
-              data: { label: 'output node' },
-            },
-            {
-              id: 'polygon-output-2',
-              type: 'output',
-              position: { x: 550, y: 420 },
-              data: { label: 'output node' },
-            },
-          ]
-
-          const polygonEdges: Edge[] = [
-            {
-              id: 'e-polygon-input1-configloading',
-              source: 'polygon-input-1',
-              target: 'config-loading',
-              type: 'default',
-              className: 'custom-edge polygon-edge',
-              animated: false,
-            },
-            {
-              id: 'e-polygon-input2-configloading',
-              source: 'polygon-input-2',
-              target: 'config-loading',
-              type: 'default',
-              className: 'custom-edge polygon-edge',
-              animated: false,
-            },
-            {
-              id: 'e-configloading-output1',
-              source: 'config-loading',
-              target: 'polygon-output-1',
-              type: 'default',
-              className: 'custom-edge polygon-edge',
-              animated: false,
-            },
-            {
-              id: 'e-configloading-output2',
-              source: 'config-loading',
-              target: 'polygon-output-2',
-              type: 'default',
-              className: 'custom-edge polygon-edge',
-              animated: false,
-            },
-          ]
-
-          setNodes((nds) => {
-            return nds
-              .map((n) => {
-                if (n.id === 'config-loading') {
-                  return {
-                    ...n,
-                    data: {
-                      ...n.data,
-                      showPolygon: true,
-                    },
-                  }
-                }
-                return n
-              })
-              .concat(inputNodes)
-              .concat(outputNodes)
-          })
-
-          setEdges((eds) => eds.concat(polygonEdges))
-        } else {
-          setIsExpanded(false)
-
-          setNodes((nds) => {
-            return nds
-              .filter(
-                (n) =>
-                  !n.id.startsWith('polygon-input-') &&
-                  !n.id.startsWith('polygon-output-')
-              )
-              .map((n) => {
-                if (n.id === 'config-loading') {
-                  return {
-                    ...n,
-                    data: {
-                      ...n.data,
-                      showPolygon: false,
-                    },
-                  }
-                }
-                return n
-              })
-          })
-
-          setEdges((eds) =>
-            eds.filter(
-              (e) =>
-                !e.id.startsWith('e-polygon-') &&
-                !e.id.startsWith('e-configloading-output')
-            )
-          )
-        }
+  function handleToggleNode(nodeId: string) {
+    setExpandedNodes((prev) => {
+      const newSet = new Set(prev)
+      if (newSet.has(nodeId)) {
+        newSet.delete(nodeId)
+        // Hide input/output nodes and backgrounds
+        setNodes((nds) => nds.map((n) => {
+          if (n.id.startsWith(`${nodeId}-input-`) || 
+              n.id.startsWith(`${nodeId}-output-`) ||
+              n.id === `${nodeId}-input-background` ||
+              n.id === `${nodeId}-output-background`) {
+            return { ...n, hidden: true }
+          }
+          return n
+        }))
+        setEdges((eds) => eds.map((e) => {
+          if (e.source.startsWith(`${nodeId}-`) || e.target.startsWith(`${nodeId}-`)) {
+            return { ...e, hidden: true }
+          }
+          return e
+        }))
+      } else {
+        newSet.add(nodeId)
+        // Show input/output nodes and backgrounds
+        setNodes((nds) => nds.map((n) => {
+          if (n.id.startsWith(`${nodeId}-input-`) || 
+              n.id.startsWith(`${nodeId}-output-`) ||
+              n.id === `${nodeId}-input-background` ||
+              n.id === `${nodeId}-output-background`) {
+            return { ...n, hidden: false }
+          }
+          return n
+        }))
+        setEdges((eds) => eds.map((e) => {
+          if (e.source.startsWith(`${nodeId}-`) || e.target.startsWith(`${nodeId}-`)) {
+            return { ...e, hidden: false }
+          }
+          return e
+        }))
       }
-    },
-    [isExpanded, setNodes, setEdges]
-  )
+      return newSet
+    })
+  }
+
+  function handleAddInput(nodeId: string, inputType: string) {
+    const parentNode = nodes.find((n) => n.id === nodeId)
+    if (!parentNode) return
+
+    inputIdCounter.current += 1
+    const newInputId = `${nodeId}-input-${inputIdCounter.current}`
+
+    // Count existing inputs for this node to calculate position
+    const existingInputs = nodes.filter((n) => n.id.startsWith(`${nodeId}-input-`) && !n.id.includes('background'))
+    const inputCount = existingInputs.length + 1
+    const offsetX = existingInputs.length * 120
+
+    const newInputNode: Node = {
+      id: newInputId,
+      type: 'input',
+      position: {
+        x: parentNode.position.x - 100 + offsetX,
+        y: parentNode.position.y - 150,
+      },
+      data: { label: inputType },
+      hidden: false,
+    }
+
+    const newEdge: Edge = {
+      id: `e-${newInputId}-${nodeId}`,
+      source: newInputId,
+      target: nodeId,
+      targetHandle: 'top',
+      type: 'default',
+      className: 'custom-edge',
+      hidden: false,
+    }
+
+    // Mark the node as expanded
+    setExpandedNodes((prev) => {
+      const newSet = new Set(prev)
+      newSet.add(nodeId)
+      return newSet
+    })
+
+    setNodes((nds) => {
+      // Update parent node data to include the callbacks
+      let updatedNodes = nds.map((n) => {
+        if (n.id === nodeId) {
+          return {
+            ...n,
+            data: {
+              ...n.data,
+              onDelete: handleDeleteNode,
+              onAddInput: handleAddInput,
+              onAddOutput: handleAddOutput,
+              onToggle: handleToggleNode,
+            },
+          }
+        }
+        return n
+      })
+
+      // Check if input background exists
+      const inputBgId = `${nodeId}-input-background`
+      const existingBg = updatedNodes.find((n) => n.id === inputBgId)
+
+      if (existingBg) {
+        // Update existing background
+        updatedNodes = updatedNodes.map((n) => {
+          if (n.id === inputBgId) {
+            return {
+              ...n,
+              data: { type: 'input', count: inputCount },
+            }
+          }
+          return n
+        })
+      } else {
+        // Create new background
+        const backgroundNode: Node = {
+          id: inputBgId,
+          type: 'groupBackground',
+          position: {
+            x: parentNode.position.x - 160,
+            y: parentNode.position.y - 200,
+          },
+          data: { type: 'input', count: inputCount },
+          draggable: false,
+          selectable: false,
+          zIndex: -1,
+          hidden: false,
+        }
+        updatedNodes = [...updatedNodes, backgroundNode]
+      }
+
+      return [...updatedNodes, newInputNode]
+    })
+    setEdges((eds) => [...eds, newEdge])
+  }
+
+  function handleAddOutput(nodeId: string, outputType: string) {
+    const parentNode = nodes.find((n) => n.id === nodeId)
+    if (!parentNode) return
+
+    outputIdCounter.current += 1
+    const newOutputId = `${nodeId}-output-${outputIdCounter.current}`
+
+    // Count existing outputs for this node to calculate position
+    const existingOutputs = nodes.filter((n) => n.id.startsWith(`${nodeId}-output-`) && !n.id.includes('background'))
+    const outputCount = existingOutputs.length + 1
+    const offsetX = existingOutputs.length * 120
+
+    const newOutputNode: Node = {
+      id: newOutputId,
+      type: 'output',
+      position: {
+        x: parentNode.position.x - 100 + offsetX,
+        y: parentNode.position.y + 150,
+      },
+      data: { label: outputType },
+      hidden: false,
+    }
+
+    const newEdge: Edge = {
+      id: `e-${nodeId}-${newOutputId}`,
+      source: nodeId,
+      sourceHandle: 'bottom',
+      target: newOutputId,
+      type: 'default',
+      className: 'custom-edge',
+      hidden: false,
+    }
+
+    // Mark the node as expanded
+    setExpandedNodes((prev) => {
+      const newSet = new Set(prev)
+      newSet.add(nodeId)
+      return newSet
+    })
+
+    setNodes((nds) => {
+      // Update parent node data to include the callbacks
+      let updatedNodes = nds.map((n) => {
+        if (n.id === nodeId) {
+          return {
+            ...n,
+            data: {
+              ...n.data,
+              onDelete: handleDeleteNode,
+              onAddInput: handleAddInput,
+              onAddOutput: handleAddOutput,
+              onToggle: handleToggleNode,
+            },
+          }
+        }
+        return n
+      })
+
+      // Check if output background exists
+      const outputBgId = `${nodeId}-output-background`
+      const existingBg = updatedNodes.find((n) => n.id === outputBgId)
+
+      if (existingBg) {
+        // Update existing background
+        updatedNodes = updatedNodes.map((n) => {
+          if (n.id === outputBgId) {
+            return {
+              ...n,
+              data: { type: 'output', count: outputCount },
+            }
+          }
+          return n
+        })
+      } else {
+        // Create new background
+        const backgroundNode: Node = {
+          id: outputBgId,
+          type: 'groupBackground',
+          position: {
+            x: parentNode.position.x - 160,
+            y: parentNode.position.y + 100,
+          },
+          data: { type: 'output', count: outputCount },
+          draggable: false,
+          selectable: false,
+          zIndex: -1,
+          hidden: false,
+        }
+        updatedNodes = [...updatedNodes, backgroundNode]
+      }
+
+      return [...updatedNodes, newOutputNode]
+    })
+    setEdges((eds) => [...eds, newEdge])
+  }
+
+  const handleAddNode = useCallback(() => {
+    nodeIdCounter.current += 1
+    const newNodeId = `execution-${nodeIdCounter.current}`
+
+    // Find the rightmost execution node to place the new one next to it
+    const executionNodes = nodes.filter((n) => n.type === 'execution')
+    const rightmostNode = executionNodes.reduce((max, node) => 
+      node.position.x > max.position.x ? node : max
+    , executionNodes[0])
+
+    const newNode: Node = {
+      id: newNodeId,
+      type: 'execution',
+      position: {
+        x: rightmostNode.position.x + 250,
+        y: 250,
+      },
+      data: {
+        label: `execution-${nodeIdCounter.current}`,
+        id: newNodeId,
+        onDelete: handleDeleteNode,
+        onAddInput: handleAddInput,
+        onAddOutput: handleAddOutput,
+        onToggle: handleToggleNode,
+      },
+    }
+
+    // Remove edge from last execution node to stop
+    const lastExecutionNode = rightmostNode
+    const stopNode = nodes.find((n) => n.type === 'stop')
+
+    if (stopNode) {
+      // Update stop node position
+      setNodes((nds) => {
+        const updatedNodes = nds.map((n) => {
+          if (n.id === stopNode.id) {
+            return {
+              ...n,
+              position: {
+                x: newNode.position.x + 250,
+                y: n.position.y,
+              },
+            }
+          }
+          return n
+        })
+        return [...updatedNodes, newNode]
+      })
+
+      // Update edges
+      setEdges((eds) => {
+        const filteredEdges = eds.filter((e) => !(e.source === lastExecutionNode.id && e.target === stopNode.id))
+        return [
+          ...filteredEdges,
+          {
+            id: `e-${lastExecutionNode.id}-${newNodeId}`,
+            source: lastExecutionNode.id,
+            target: newNodeId,
+            type: 'default',
+            className: 'custom-edge',
+          },
+          {
+            id: `e-${newNodeId}-${stopNode.id}`,
+            source: newNodeId,
+            target: stopNode.id,
+            type: 'default',
+            className: 'custom-edge',
+          },
+        ]
+      })
+    }
+  }, [nodes, setNodes, setEdges])
+
+  // Initialize nodes on mount
+  useEffect(() => {
+    setNodes([
+      {
+        id: 'start',
+        type: 'start',
+        position: { x: 50, y: 250 },
+        data: { label: 'Start' },
+      },
+      {
+        id: 'execution-1',
+        type: 'execution',
+        position: { x: 300, y: 250 },
+        data: {
+          label: 'trigger-ci/cd',
+          id: 'execution-1',
+          onDelete: handleDeleteNode,
+          onAddInput: handleAddInput,
+          onAddOutput: handleAddOutput,
+          onToggle: handleToggleNode,
+        },
+      },
+      {
+        id: 'stop',
+        type: 'stop',
+        position: { x: 550, y: 250 },
+        data: { label: 'Stop' },
+      },
+    ])
+
+    setEdges([
+      {
+        id: 'e-start-execution-1',
+        source: 'start',
+        target: 'execution-1',
+        type: 'default',
+        className: 'custom-edge',
+      },
+      {
+        id: 'e-execution-1-stop',
+        source: 'execution-1',
+        target: 'stop',
+        type: 'default',
+        className: 'custom-edge',
+      },
+    ])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   return (
     <div className={`activity-input-output ${className}`}>
+      <button className="add-node-button" onClick={handleAddNode}>
+        + Add Node
+      </button>
       <ReactFlow
         nodes={nodes}
         edges={edges}
         onNodesChange={onNodesChange}
         onEdgesChange={onEdgesChange}
         onConnect={onConnect}
-        onNodeDoubleClick={handleNodeDoubleClick}
         nodeTypes={nodeTypes}
         fitView
         minZoom={0.5}

@@ -28,6 +28,9 @@ export default defineConfig({
       },
     },
   },
+  optimizeDeps: {
+    include: ['@xyflow/react'],
+  },
   server: {
     port: 3000,
   },
