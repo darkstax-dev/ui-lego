@@ -81,7 +81,7 @@ export const WithWarning: Story = {
         status: 'danger',
         hasAlert: true
       },
-      ...Default.args.rows!.slice(1)
+      ...(Default.args?.rows || []).slice(1)
     ],
   },
 }
