@@ -470,7 +470,7 @@ const TaskDrawer: React.FC<TaskDrawerProps> = ({ card, isOpen, onClose, schema, 
                 <div className="task-log-header-cell">Event Datetime</div>
               </div>
               <div className="task-log-body">
-                {card?.taskLog && card.taskLog.length > 0 ? (
+                {card?.taskLog && (card.taskLog?.length ?? 0) > 0 ? (
                   card.taskLog.slice((currentPage - 1) * rowsPerPage, currentPage * rowsPerPage).map((event) => (
                     <div key={event.id} className="task-log-row">
                       <div className="task-log-cell">{event.eventType}</div>
@@ -483,7 +483,7 @@ const TaskDrawer: React.FC<TaskDrawerProps> = ({ card, isOpen, onClose, schema, 
                 )}
               </div>
             </div>
-            {card?.taskLog && card.taskLog.length > 0 && (
+            {card?.taskLog && (card.taskLog?.length ?? 0) > 0 && (
               <div className="task-log-pagination">
                 <div className="pagination-left">
                   <span className="pagination-label">Rows per page</span>
@@ -505,7 +505,7 @@ const TaskDrawer: React.FC<TaskDrawerProps> = ({ card, isOpen, onClose, schema, 
                     </svg>
                   </button>
                   <div className="pagination-pages">
-                    {[...Array(Math.min(3, Math.ceil(card.taskLog.length / rowsPerPage)))].map((_, i) => (
+                    {[...Array(Math.min(3, Math.ceil((card.taskLog?.length ?? 0) / rowsPerPage)))].map((_, i) => (
                       <button
                         key={i + 1}
                         className={`pagination-page ${currentPage === i + 1 ? 'is-active' : ''}`}
@@ -514,11 +514,11 @@ const TaskDrawer: React.FC<TaskDrawerProps> = ({ card, isOpen, onClose, schema, 
                         {i + 1}
                       </button>
                     ))}
-                    {Math.ceil(card.taskLog.length / rowsPerPage) > 5 && (
+                    {Math.ceil((card.taskLog?.length ?? 0) / rowsPerPage) > 5 && (
                       <>
                         <span className="pagination-gap">...</span>
                         {[...Array(2)].map((_, i) => {
-                          const page = Math.ceil(card.taskLog.length / rowsPerPage) - 1 + i
+                          const page = Math.ceil((card.taskLog?.length ?? 0) / rowsPerPage) - 1 + i
                           return (
                             <button
                               key={page}
@@ -534,8 +534,8 @@ const TaskDrawer: React.FC<TaskDrawerProps> = ({ card, isOpen, onClose, schema, 
                   </div>
                   <button
                     className="pagination-nav pagination-next"
-                    disabled={currentPage >= Math.ceil(card.taskLog.length / rowsPerPage)}
-                    onClick={() => setCurrentPage(p => Math.min(Math.ceil(card.taskLog.length / rowsPerPage), p + 1))}
+                    disabled={currentPage >= Math.ceil((card.taskLog?.length ?? 0) / rowsPerPage)}
+                    onClick={() => setCurrentPage(p => Math.min(Math.ceil((card.taskLog?.length ?? 0) / rowsPerPage), p + 1))}
                   >
                     <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path d="M8.78145 8.00048L5.48145 4.70048L6.42411 3.75781L10.6668 8.00048L6.42411 12.2431L5.48145 11.3005L8.78145 8.00048Z" fill="currentColor"/>

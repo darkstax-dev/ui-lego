@@ -9,7 +9,6 @@ export type {
   SortDirection,
   SortableColumn,
   ScenarioTableProps,
-  ScenarioTableWithOptionsProps,
   ScenarioTableRowProps,
   ScenarioTableHeaderProps
 } from './types'

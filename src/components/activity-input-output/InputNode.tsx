@@ -1,8 +1,15 @@
 import React from 'react'
-import { Handle, Position, NodeProps } from '@xyflow/react'
+import { Handle, Position, NodeProps, Node } from '@xyflow/react'
 import './InputNode.css'
 
-const InputNode: React.FC<NodeProps> = ({ data, isConnectable }) => {
+
+export type InputNodeData = {
+  label?: string;
+};
+
+export type InputNode = Node<InputNodeData>;
+
+const InputNode: React.FC<NodeProps<InputNode>> = ({ data, isConnectable }) => {
   return (
     <div className="input-node">
       <div className="input-node__content">

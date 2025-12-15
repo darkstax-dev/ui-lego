@@ -1,8 +1,15 @@
 import React from 'react'
-import { Handle, Position, NodeProps } from '@xyflow/react'
+import { Handle, Position, NodeProps, Node } from '@xyflow/react'
 import './StartNode.css'
 
-const StartNode: React.FC<NodeProps> = ({ data, isConnectable }) => {
+
+export type StartNodeData = {
+  label?: string;
+};
+
+export type StartNode = Node<StartNodeData>;
+
+const StartNode: React.FC<NodeProps<StartNode>> = ({ data, isConnectable }) => {
   return (
     <div className="start-node">
       <div className="start-node__content">

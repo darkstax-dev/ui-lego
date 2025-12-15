@@ -134,7 +134,7 @@ export const Default: Story = {
     sortColumn: undefined,
     sortDirection: null
   },
-  render: (args) => (
+  render: (args: any) => (
     <div style={{ padding: '24px', background: 'var(--surface-default)' }}>
       <ScenarioTable {...args} />
     </div>
@@ -150,7 +150,7 @@ export const WithSelection: Story = {
     sortColumn: undefined,
     sortDirection: null
   },
-  render: (args) => (
+  render: (args: any) => (
     <div style={{ padding: '24px', background: 'var(--surface-default)' }}>
       <ScenarioTable {...args} />
     </div>
@@ -163,7 +163,7 @@ export const WithSorting: Story = {
     sortColumn: 'lastModified',
     sortDirection: 'desc'
   },
-  render: (args) => (
+  render: (args: any) => (
     <div style={{ padding: '24px', background: 'var(--surface-default)' }}>
       <ScenarioTable {...args} />
     </div>
@@ -242,7 +242,7 @@ export const Interactive: Story = {
             onScenarioNodes={(scenarioId) => console.log('Scenario nodes:', scenarioId)}
             onDeploy={(scenarioId) => console.log('Deploy scenario:', scenarioId)}
             onRun={(scenarioId) => console.log('Run scenario:', scenarioId)}
-            onDeleteNamespace={(scenarioId, namespaces) => console.log('Delete namespace:', scenarioId, namespaces)}
+            onDeleteNamespace={(scenarioId: string, namespaces: string[]) => console.log('Delete namespace:', scenarioId, namespaces)}
             onDelete={(scenarioId) => console.log('Delete scenario:', scenarioId)}
           />
         </div>
@@ -259,7 +259,7 @@ export const EmptyState: Story = {
     sortColumn: undefined,
     sortDirection: null
   },
-  render: (args) => (
+  render: (args: any) => (
     <div style={{ padding: '24px', background: 'var(--surface-default)' }}>
       <ScenarioTable {...args} />
       <div style={{

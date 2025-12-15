@@ -1,8 +1,15 @@
 import React from 'react'
-import { Handle, Position, NodeProps } from '@xyflow/react'
+import { Handle, Position, NodeProps, Node } from '@xyflow/react'
 import './OutputNode.css'
 
-const OutputNode: React.FC<NodeProps> = ({ data, isConnectable }) => {
+
+export type OutputNodeData = {
+  label?: string;
+};
+
+export type OutputNode = Node<OutputNodeData>;
+
+const OutputNode: React.FC<NodeProps<OutputNode>> = ({ data, isConnectable }) => {
   return (
     <div className="output-node">
       <Handle

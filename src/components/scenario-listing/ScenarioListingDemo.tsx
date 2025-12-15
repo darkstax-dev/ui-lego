@@ -179,10 +179,6 @@ const ScenarioListingDemo: React.FC = () => {
     })
   }
 
-  const handleOptionsClick = (scenarioId: string) => {
-    console.log('Options clicked for scenario:', scenarioId)
-    // Handle options menu logic here
-  }
 
   return (
     <div style={{ padding: '24px', background: 'var(--surface-default)' }}>
@@ -205,7 +201,15 @@ const ScenarioListingDemo: React.FC = () => {
         onSort={handleSort}
         sortColumn={sortColumn}
         sortDirection={sortDirection}
-        onOptionsClick={handleOptionsClick}
+        onOpen={(scenarioId) => console.log('Open', scenarioId)}
+        onVersionHistory={(scenarioId) => console.log('Version History', scenarioId)}
+        onEdit={(scenarioId) => console.log('Edit', scenarioId)}
+        onScenarioAccessibility={(scenarioId) => console.log('Scenario Accessibility', scenarioId)}
+        onScenarioNodes={(scenarioId) => console.log('Scenario Nodes', scenarioId)}
+        onDeploy={(scenarioId) => console.log('Deploy', scenarioId)}
+        onRun={(scenarioId) => console.log('Run', scenarioId)}
+        onDeleteNamespace={(scenarioId) => console.log('Delete Namespace', scenarioId)}
+        onDelete={(scenarioId) => console.log('Delete', scenarioId)}
       />
     </div>
   )

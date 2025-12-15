@@ -3,11 +3,11 @@ import ScenarioTableHeader from './ScenarioTableHeader'
 import ScenarioTableRow from './ScenarioTableRow'
 import OptionBar from './option-bar/OptionBar'
 import DeleteNamespacePopup from './option-bar/DeleteNamespacePopup'
-import { ScenarioTableWithOptionsProps } from './types'
+import { ScenarioTableProps, ScenarioItem } from './types'
 import './ScenarioTable.css'
 
 
-const ScenarioTable: React.FC<ScenarioTableWithOptionsProps> = ({
+const ScenarioTable: React.FC<ScenarioTableProps> = ({
   scenarios,
   onScenarioSelect,
   onSelectAll,
@@ -29,7 +29,7 @@ const ScenarioTable: React.FC<ScenarioTableWithOptionsProps> = ({
   const [optionBarPosition, setOptionBarPosition] = useState<{ top: number; left: number } | null>(null)
   const [showDeleteNamespacePopup, setShowDeleteNamespacePopup] = useState(false)
 
-  const selectedScenarios = scenarios.filter(scenario => scenario.isSelected)
+  const selectedScenarios = scenarios.filter((scenario: ScenarioItem) => scenario.isSelected)
   const allSelected = scenarios.length > 0 && selectedScenarios.length === scenarios.length
   const someSelected = selectedScenarios.length > 0 && selectedScenarios.length < scenarios.length
 
@@ -110,7 +110,7 @@ const ScenarioTable: React.FC<ScenarioTableWithOptionsProps> = ({
       />
 
       <div className="scenario-table__body">
-        {scenarios.map((scenario) => (
+        {scenarios.map((scenario: ScenarioItem) => (
           <ScenarioTableRow
             key={scenario.id}
             scenario={scenario}

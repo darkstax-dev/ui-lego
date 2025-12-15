@@ -1,8 +1,15 @@
 import React from 'react'
-import { Handle, Position, NodeProps } from '@xyflow/react'
+import { Handle, Position, NodeProps, Node } from '@xyflow/react'
 import './StopNode.css'
 
-const StopNode: React.FC<NodeProps> = ({ data, isConnectable }) => {
+
+export type StopNodeData = {
+  label?: string;
+};
+
+export type StopNode = Node<StopNodeData>;
+
+const StopNode: React.FC<NodeProps<StopNode>> = ({ data, isConnectable }) => {
   return (
     <div className="stop-node">
       <Handle

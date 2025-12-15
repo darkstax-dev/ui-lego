@@ -1,6 +1,24 @@
 import React from 'react';
 import { ResponsiveRadar } from '@nivo/radar';
 import { ChartColorPalette, getPalette, resolvePalette } from '../palette';
+
+export type CssMixBlendMode =
+  | 'normal'
+  | 'multiply'
+  | 'screen'
+  | 'overlay'
+  | 'darken'
+  | 'lighten'
+  | 'color-dodge'
+  | 'color-burn'
+  | 'hard-light'
+  | 'soft-light'
+  | 'difference'
+  | 'exclusion'
+  | 'hue'
+  | 'saturation'
+  | 'color'
+  | 'luminosity';
 import './RadarChart.css';
 
 export interface RadarDataPoint {
@@ -29,7 +47,7 @@ export interface RadarChartProps {
   dotBorderColor?: string;
   enableDotLabel?: boolean;
   fillOpacity?: number;
-  blendMode?: string;
+  blendMode?: CssMixBlendMode;
   isInteractive?: boolean;
   animate?: boolean;
   onDotClick?: (dot: any) => void;
