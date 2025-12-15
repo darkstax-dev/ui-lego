@@ -23,11 +23,11 @@
   gap: 6px;
 }
 
-.alert-snackbar__row {
+.alert-snackbar__info-row {
   align-self: stretch;
   color: var(--Text-White-text-Main-text, #FFF);
   font-feature-settings: 'liga' off, 'clig' off;
-  font-family: var(--font-family-macan);
+  font-family: Macan, -apple-system, Roboto, Helvetica, sans-serif;
   font-size: 16px;
   font-style: normal;
   line-height: 120%;
