@@ -98,11 +98,15 @@ const FeedManager: React.FC<FeedManagerProps> = ({
   return (
     <div className={`feed-manager ${className}`}>
       <div className="feed-manager__tabs">
-        <Tabs
-          items={tabs}
-          activeTab={activeTab}
-          onChange={handleTabChange}
-        />
+        {tabs.map((tab) => (
+          <button
+            key={tab.value}
+            className={`feed-manager__tab ${activeTab === tab.value ? 'feed-manager__tab--active' : ''}`}
+            onClick={() => handleTabChange(tab.value)}
+          >
+            {tab.label}
+          </button>
+        ))}
       </div>
 
       <div className="feed-manager__content">
