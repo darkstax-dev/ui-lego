@@ -1,0 +1,36 @@
+.kubernetes-icon {
+  display: flex;
+  padding: 14px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 2px;
+  border-radius: 32px;
+  backdrop-filter: blur(4px);
+  position: relative;
+}
+
+.kubernetes-icon__hexagon {
+  position: absolute;
+  left: 1px;
+  top: -2px;
+  fill: rgba(255, 255, 255, 0.4);
+  stroke-width: 2px;
+  backdrop-filter: blur(4px);
+}
+
+.kubernetes-icon__server {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+}
+
+.kubernetes-icon--green .kubernetes-icon__hexagon {
+  stroke: var(--color-green-600, #23A45A);
+}
+
+.kubernetes-icon--red .kubernetes-icon__hexagon {
+  stroke: var(--color-red-500, #FF3B31);
+}

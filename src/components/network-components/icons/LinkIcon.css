@@ -1,0 +1,16 @@
+.link-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 18px;
+  border: 1px solid var(--color-yellow-600, #DD6A19);
+}
+
+.link-icon svg {
+  display: flex;
+  width: 16px;
+  height: 16px;
+  justify-content: center;
+  align-items: center;
+  aspect-ratio: 1/1;
+}
