@@ -1,5 +1,13 @@
 @import '../../tokens.css';
 
+:root {
+  --Tabs-Tabs-Default-state: #78797A;
+  --Tabs-Tabs-Active-state: #00112B;
+  --Text-Gray-text-Secondary-text: #ADADAD;
+  --Text-Gray-text-Main-text: #78797A;
+  --Checkbox-Stroke-default: #00112B;
+}
+
 .feed-manager {
   display: flex;
   flex-direction: column;
