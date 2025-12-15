@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react'
+import type { Meta, StoryObj } from '@storybook/react-vite'
 import { ShieldAlertIcon } from './ShieldAlertIcon'
 import { KubernetesIcon } from './KubernetesIcon'
 import { LinkIcon } from './LinkIcon'
