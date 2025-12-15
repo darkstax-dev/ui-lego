@@ -374,7 +374,7 @@ const ActivityInputOutput: React.FC<ActivityInputOutputProps> = ({ className = '
         ]
       })
     }
-  }, [nodes, setNodes, setEdges])
+  }, [nodes, setNodes, setEdges, handleDeleteNode, handleAddInput, handleAddOutput, handleToggleNode])
 
   // Initialize nodes on mount
   useEffect(() => {

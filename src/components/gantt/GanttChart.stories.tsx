@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react'
+import type { Meta, StoryObj } from '@storybook/react-vite'
 import GanttChart from './GanttChart'
 import { GanttTask, GanttColumn } from './types'
 

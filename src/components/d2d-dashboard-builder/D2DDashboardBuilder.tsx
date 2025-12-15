@@ -61,7 +61,7 @@ const D2DDashboardBuilder: React.FC<D2DDashboardBuilderProps> = ({
 
   // Find a non-overlapping position for a card
   const findNonOverlappingPosition = (card: DashboardCard, existingCards: DashboardCard[]) => {
-    let position = { ...card.position }
+    const position = { ...card.position }
     let attempts = 0
     const maxAttempts = 100
     
@@ -97,7 +97,7 @@ const D2DDashboardBuilder: React.FC<D2DDashboardBuilderProps> = ({
     let currentX = cardSpacing
     let currentY = cardSpacing
     let rowHeight = 0
-    let maxRowWidth = containerRef.current ? containerRef.current.clientWidth : window.innerWidth
+    const maxRowWidth = containerRef.current ? containerRef.current.clientWidth : window.innerWidth
     
     arrangedCards.forEach((card) => {
       const dimensions = getCardDimensions(card)

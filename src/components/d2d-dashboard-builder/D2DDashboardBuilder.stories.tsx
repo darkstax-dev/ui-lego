@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react'
+import type { Meta, StoryObj } from '@storybook/react-vite'
 import D2DDashboardBuilder from './D2DDashboardBuilder'
 import type { DashboardBuilderData } from './types'
 

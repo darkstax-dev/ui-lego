@@ -36,7 +36,7 @@ export const SchemaDisplay: React.FC<SchemaDisplayProps> = ({ schema, data }) =>
       case 'number':
         text = value
         break
-      case 'array':
+      case 'array': {
         const arr = value as any[] | undefined
         text = (
           <ul className="schema-list">
@@ -46,6 +46,7 @@ export const SchemaDisplay: React.FC<SchemaDisplayProps> = ({ schema, data }) =>
           </ul>
         )
         break
+      }
       case 'string':
       default:
         text = String(value ?? '')

@@ -87,9 +87,9 @@ export const WithDragAndDrop: Story = {
     fireEvent.drop(targetColumn, { dataTransfer })
     fireEvent.dragEnd(sourceCard)
 
-    await waitFor(() => {
+    await waitFor(async () => {
       const inTarget = targetColumn.querySelector('.kanban-column-cards') as HTMLElement
-      expect(within(inTarget).getByText(sourceCardTitle)).toBeInTheDocument()
+      await expect(within(inTarget).getByText(sourceCardTitle)).toBeInTheDocument()
     })
   }
 }
@@ -124,14 +124,14 @@ export const WithHeaderAndSearch: Story = {
 
     await userEvent.type(input, 'API')
 
-    await waitFor(() => {
-      expect(canvas.queryByText('Design Login Screen')).not.toBeInTheDocument()
-      expect(canvas.getByText('API Endpoint Spec — Orders')).toBeInTheDocument()
+    await waitFor(async () => {
+      await expect(canvas.queryByText('Design Login Screen')).not.toBeInTheDocument()
+      await expect(canvas.getByText('API Endpoint Spec — Orders')).toBeInTheDocument()
     })
 
     await userEvent.clear(input)
-    await waitFor(() => {
-      expect(canvas.getByText('Design Login Screen')).toBeInTheDocument()
+    await waitFor(async () => {
+      await expect(canvas.getByText('Design Login Screen')).toBeInTheDocument()
     })
   }
 }
