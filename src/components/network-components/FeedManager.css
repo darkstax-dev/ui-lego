@@ -1,0 +1,427 @@
+@import '../../tokens.css';
+
+:root {
+  --Tabs-Tabs-Default-state: #78797A;
+  --Tabs-Tabs-Active-state: #00112B;
+  --Text-Gray-text-Secondary-text: #ADADAD;
+  --Text-Gray-text-Main-text: #78797A;
+  --Checkbox-Stroke-default: #00112B;
+}
+
+.feed-manager {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+  max-width: 800px;
+}
+
+.feed-manager__tabs {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.feed-manager__tab {
+  display: flex;
+  padding: 4px 12px;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+  flex: 1 0 0;
+  border-radius: 4px 4px 0 0;
+  border: none;
+  border-bottom: 1px solid var(--Tabs-Tabs-Default-state, #78797A);
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  color: var(--Tabs-Tabs-Default-state, #78797A);
+  font-family: 'Macan Mono Trial', -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 110%;
+}
+
+.feed-manager__tab--active {
+  border-bottom-color: var(--Tabs-Tabs-Active-state, #00112B);
+  color: var(--Tabs-Tabs-Active-state, #00112B);
+}
+
+.feed-manager__tab:hover:not(.feed-manager__tab--active) {
+  color: var(--Blue-Dark-blue-950, #00112B);
+}
+
+.feed-manager__content {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+}
+
+.feed-manager__location-section {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  width: 100%;
+  border-bottom: 1px dashed var(--Divider-Light, #C8C8C8);
+  padding-bottom: 8px;
+}
+
+.feed-manager__location-control {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+}
+
+.feed-manager__map-icon {
+  display: flex;
+  width: 24px;
+  height: 24px;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.feed-manager__slider-container {
+  flex: 1 0 0;
+  height: 16px;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.feed-manager__slider-track {
+  width: 100%;
+  height: 4px;
+  background: var(--Text-Gray-text-Secondary-text, #ADADAD);
+  position: relative;
+}
+
+.feed-manager__slider-fill {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  background: var(--Blue-Dark-blue-950, #00112B);
+  transition: width 0.2s ease;
+}
+
+.feed-manager__slider-handle {
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 16px;
+  height: 16px;
+  background: var(--Blue-Dark-blue-950, #00112B);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: left 0.2s ease;
+}
+
+.feed-manager__distance-display {
+  display: flex;
+  width: 120px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.feed-manager__distance-value {
+  color: var(--Text-Gray-text-Main-text, #78797A);
+  font-family: 'Macan', -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 450;
+  line-height: 120%;
+  letter-spacing: -0.32px;
+}
+
+.feed-manager__section {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+  width: 100%;
+}
+
+.feed-manager__section--feeds {
+  gap: 16px;
+}
+
+.feed-manager__section-title {
+  color: #000;
+  font-family: 'Macan', -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 120%;
+  letter-spacing: -0.32px;
+  margin: 0;
+}
+
+.feed-manager__checkbox-grid {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+}
+
+.feed-manager__checkbox-row {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.feed-manager__checkbox-item {
+  display: flex;
+  align-items: flex-start;
+  flex: 1 0 0;
+  gap: 8px;
+}
+
+.feed-manager__checkbox-wrapper {
+  display: flex;
+  width: 18px;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+}
+
+.feed-manager__checkbox-label {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  flex: 1 0 0;
+  overflow: hidden;
+  color: var(--Text-Blue-text-Main-text, #00112B);
+  text-overflow: ellipsis;
+  font-family: 'Macan Mono Trial', -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 450;
+  line-height: 120%;
+}
+
+.feed-manager__section--info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
+  width: 100%;
+}
+
+.feed-manager__info-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.feed-manager__info-label {
+  color: var(--Text-Gray-text-Main-text, #78797A);
+  font-family: 'Macan Mono Trial', -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 450;
+  line-height: 120%;
+  letter-spacing: 1.2px;
+}
+
+.feed-manager__info-value {
+  color: var(--Blue-Dark-blue-950, #00112B);
+  font-family: 'Macan Mono Trial', -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 450;
+  line-height: 120%;
+}
+
+.feed-manager__info-value--warning {
+  color: var(--Yellow-600, #DD6A19);
+}
+
+.feed-manager__info-value--danger {
+  color: var(--red-600-cta, #D9322A);
+}
+
+.feed-manager__details-button {
+  display: flex;
+  height: 32px;
+  padding: 8px 16px;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  border: 1px solid var(--red-600-cta, #D9322A);
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  color: var(--red-600-cta, #D9322A);
+  text-align: center;
+  font-family: 'Macan Mono Trial', -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 110%;
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+}
+
+.feed-manager__details-button:hover {
+  background: var(--red-600-cta, #D9322A);
+  color: #FFF;
+}
+
+.feed-manager__details-button:focus-visible {
+  outline: 2px solid var(--red-600-cta, #D9322A);
+  outline-offset: 2px;
+}
+
+.feed-manager__section--sources {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.feed-manager__sources-label-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  flex: 1 0 0;
+}
+
+.feed-manager__sources-label {
+  color: var(--Blue-Dark-blue-950, #00112B);
+  font-family: 'Macan', -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 450;
+  line-height: 120%;
+  margin: 0;
+}
+
+.feed-manager__sources-tags {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.feed-manager__source-tag {
+  display: flex;
+  padding: 4px 8px;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  background: var(--Gray-100, #ECECEC);
+}
+
+.feed-manager__source-tag-label {
+  color: var(--Blue-Dark-blue-950, #00112B);
+  font-family: 'Macan Mono Trial', -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 450;
+  line-height: 120%;
+}
+
+.feed-manager__source-icon {
+  display: flex;
+  width: 16px;
+  height: 16px;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+@media (max-width: 768px) {
+  .feed-manager {
+    gap: 12px;
+  }
+
+  .feed-manager__tab {
+    font-size: 14px;
+    padding: 4px 8px;
+  }
+
+  .feed-manager__checkbox-row {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .feed-manager__checkbox-item {
+    width: 100%;
+  }
+
+  .feed-manager__distance-display {
+    width: 100px;
+  }
+
+  .feed-manager__distance-value {
+    font-size: 14px;
+  }
+
+  .feed-manager__info-label {
+    font-size: 11px;
+  }
+
+  .feed-manager__info-value {
+    font-size: 13px;
+  }
+
+  .feed-manager__section--sources {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .feed-manager__sources-label-wrapper {
+    width: 100%;
+  }
+
+  .feed-manager__sources-tags {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .feed-manager {
+    gap: 8px;
+  }
+
+  .feed-manager__location-control {
+    flex-wrap: wrap;
+  }
+
+  .feed-manager__slider-container {
+    width: 100%;
+    order: 2;
+  }
+
+  .feed-manager__distance-display {
+    width: auto;
+  }
+
+  .feed-manager__tab {
+    font-size: 13px;
+    padding: 4px 6px;
+  }
+
+  .feed-manager__section-title {
+    font-size: 15px;
+  }
+
+  .feed-manager__checkbox-label {
+    font-size: 14px;
+  }
+
+  .feed-manager__sources-tags {
+    gap: 4px;
+  }
+}

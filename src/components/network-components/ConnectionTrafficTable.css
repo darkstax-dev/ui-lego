@@ -1,0 +1,185 @@
+.connection-traffic-table {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+  max-width: 649px;
+}
+
+.connection-traffic-table__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  align-self: stretch;
+}
+
+.connection-traffic-table__title {
+  color: var(--Blue-Dark-blue-950, #00112B);
+  font-family: var(--font-family-macan-mono);
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 110%;
+}
+
+.connection-traffic-table__actions {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.connection-traffic-table__action-btn {
+  display: flex;
+  width: 24px;
+  height: 24px;
+  justify-content: center;
+  align-items: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.connection-traffic-table__action-btn:hover {
+  opacity: 0.7;
+}
+
+.connection-traffic-table__content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  align-self: stretch;
+}
+
+.connection-traffic-table__thead {
+  display: flex;
+  height: 52px;
+  align-items: flex-start;
+  align-self: stretch;
+}
+
+.connection-traffic-table__th {
+  display: flex;
+  align-items: center;
+  color: var(--Text-Blue-text-Main-text, #00112B);
+  font-family: var(--font-family-macan-mono);
+  font-size: 15px;
+  font-weight: 450;
+  line-height: 120%;
+}
+
+.connection-traffic-table__th--icon {
+  width: 48px;
+  justify-content: center;
+  gap: 8px;
+}
+
+.connection-traffic-table__th--event {
+  width: 170px;
+  gap: 8px;
+}
+
+.connection-traffic-table__th--level {
+  gap: 8px;
+}
+
+.connection-traffic-table__th--supervisor {
+  width: 188px;
+  justify-content: center;
+  gap: 8px;
+  flex: 1;
+}
+
+.connection-traffic-table__th--email {
+  gap: 8px;
+}
+
+.connection-traffic-table__row {
+  display: flex;
+  min-height: 52px;
+  align-items: flex-start;
+  align-self: stretch;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.connection-traffic-table__row--bordered {
+  border-bottom: 1px dashed var(--Gray-400, #ADADAD);
+}
+
+.connection-traffic-table__row--default {
+  background: transparent;
+}
+
+.connection-traffic-table__row--warning {
+  background: var(--Yellow-300, #F5C37C);
+}
+
+.connection-traffic-table__row--danger {
+  background: var(--Red-300, #FFA29D);
+}
+
+.connection-traffic-table__row--hover:hover,
+.connection-traffic-table__row--default:hover {
+  background: var(--Yellow-300, #F5C37C);
+}
+
+.connection-traffic-table__cell {
+  display: flex;
+  align-items: center;
+  color: var(--Text-Blue-text-Main-text, #00112B);
+  font-family: var(--font-family-macan-mono);
+  font-size: 14px;
+  font-weight: 450;
+  line-height: 120%;
+}
+
+.connection-traffic-table__cell--icon {
+  width: 48px;
+  justify-content: center;
+  gap: 8px;
+  align-self: stretch;
+}
+
+.connection-traffic-table__cell--event {
+  width: 170px;
+  gap: 8px;
+  align-self: stretch;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.connection-traffic-table__cell--level {
+  width: 60px;
+  gap: 8px;
+  align-self: stretch;
+}
+
+.connection-traffic-table__cell--supervisor {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  flex: 1;
+  align-self: stretch;
+}
+
+.connection-traffic-table__cell--email {
+  gap: 8px;
+  align-self: stretch;
+}
+
+@media (max-width: 768px) {
+  .connection-traffic-table {
+    max-width: 100%;
+  }
+  
+  .connection-traffic-table__content {
+    overflow-x: auto;
+  }
+  
+  .connection-traffic-table__thead,
+  .connection-traffic-table__row {
+    min-width: 600px;
+  }
+}
