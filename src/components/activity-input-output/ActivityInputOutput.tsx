@@ -48,7 +48,7 @@ const ActivityInputOutput: React.FC<ActivityInputOutputProps> = ({ className = '
     [setEdges]
   )
 
-  function handleDeleteNode(nodeId: string) {
+  const handleDeleteNode = useCallback((nodeId: string) => {
     setNodes((nds) => nds.filter((n) => 
       n.id !== nodeId && 
       !n.id.startsWith(`${nodeId}-input-`) && 
@@ -65,9 +65,9 @@ const ActivityInputOutput: React.FC<ActivityInputOutputProps> = ({ className = '
       newSet.delete(nodeId)
       return newSet
     })
-  }
+  }, [setNodes, setEdges, setExpandedNodes])
 
-  function handleToggleNode(nodeId: string) {
+  const handleToggleNode = useCallback((nodeId: string) => {
     setExpandedNodes((prev) => {
       const newSet = new Set(prev)
       if (newSet.has(nodeId)) {
@@ -109,9 +109,9 @@ const ActivityInputOutput: React.FC<ActivityInputOutputProps> = ({ className = '
       }
       return newSet
     })
-  }
+  }, [setExpandedNodes, setNodes, setEdges])
 
-  function handleAddInput(nodeId: string, inputType: string) {
+  const handleAddInput = useCallback((nodeId: string, inputType: string) => {
     const parentNode = nodes.find((n) => n.id === nodeId)
     if (!parentNode) return
 
@@ -205,9 +205,9 @@ const ActivityInputOutput: React.FC<ActivityInputOutputProps> = ({ className = '
       return [...updatedNodes, newInputNode]
     })
     setEdges((eds) => [...eds, newEdge])
-  }
+  }, [nodes, setExpandedNodes, setNodes, setEdges]) // eslint-disable-line react-hooks/exhaustive-deps
 
-  function handleAddOutput(nodeId: string, outputType: string) {
+  const handleAddOutput = useCallback((nodeId: string, outputType: string) => {
     const parentNode = nodes.find((n) => n.id === nodeId)
     if (!parentNode) return
 
@@ -301,7 +301,7 @@ const ActivityInputOutput: React.FC<ActivityInputOutputProps> = ({ className = '
       return [...updatedNodes, newOutputNode]
     })
     setEdges((eds) => [...eds, newEdge])
-  }
+  }, [nodes, setExpandedNodes, setNodes, setEdges]) // eslint-disable-line react-hooks/exhaustive-deps
 
   const handleAddNode = useCallback(() => {
     nodeIdCounter.current += 1
@@ -374,7 +374,7 @@ const ActivityInputOutput: React.FC<ActivityInputOutputProps> = ({ className = '
         ]
       })
     }
-  }, [nodes, setNodes, setEdges, handleDeleteNode, handleAddInput, handleAddOutput, handleToggleNode])
+  }, [nodes, setNodes, setEdges]) // eslint-disable-line react-hooks/exhaustive-deps
 
   // Initialize nodes on mount
   useEffect(() => {
