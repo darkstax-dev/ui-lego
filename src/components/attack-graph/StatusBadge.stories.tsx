@@ -57,3 +57,17 @@ export const AllVariants: Story = {
     </div>
   ),
 };
+
+export const Editable: Story = {
+  render: () => (
+    <div style={{ display: 'flex', gap: '12px', flexDirection: 'column', alignItems: 'flex-start' }}>
+      <p style={{ fontFamily: 'Macan Mono Trial, monospace', fontSize: '14px', color: '#00112B', marginBottom: '8px' }}>
+        Click on the labels to edit the text
+      </p>
+      <StatusBadge label="status" variant="normal" editable />
+      <StatusBadge label="datacenter" variant="medium" editable />
+      <StatusBadge label="warning" variant="high" editable />
+      <StatusBadge label="critical" variant="critical" editable />
+    </div>
+  ),
+};
