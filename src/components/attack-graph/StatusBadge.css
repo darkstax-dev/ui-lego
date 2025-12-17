@@ -12,6 +12,17 @@
   font-weight: 500;
   line-height: 100%;
   text-transform: uppercase;
+  outline: none;
+}
+
+.status-badge-label[contenteditable="true"] {
+  cursor: text;
+}
+
+.status-badge-label[contenteditable="true"]:focus {
+  outline: 2px solid #0451A4;
+  outline-offset: 2px;
+  border-radius: 2px;
 }
 
 .status-badge-normal {

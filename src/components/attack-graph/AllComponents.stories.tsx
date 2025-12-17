@@ -1,15 +1,11 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
-import { InfoButton } from './InfoButton';
-import { AttackGraphLegend } from './AttackGraphLegend';
 import { ShowAllButton } from './ShowAllButton';
 import { OptimalButton } from './OptimalButton';
 import { GraphStats } from './GraphStats';
 import './AttackGraphDemo.css';
 
 const ComponentShowcase = () => {
-  const [showLegend, setShowLegend] = React.useState(false);
-
   return (
     <div style={{ padding: '40px', maxWidth: '1200px', margin: '0 auto' }}>
       <h2 style={{ 
@@ -22,40 +18,11 @@ const ComponentShowcase = () => {
         Attack Graph Components Showcase
       </h2>
 
-      <div style={{ 
-        display: 'flex', 
-        flexDirection: 'column', 
-        gap: '48px' 
+      <div style={{
+        display: 'flex',
+        flexDirection: 'column',
+        gap: '48px'
       }}>
-        <section>
-          <h3 style={{ 
-            fontFamily: 'Macan Mono Trial, monospace', 
-            fontSize: '18px', 
-            color: '#00112B',
-            marginBottom: '16px'
-          }}>
-            Info Button
-          </h3>
-          <div style={{ display: 'flex', gap: '12px' }}>
-            <InfoButton size="big" onClick={() => setShowLegend(!showLegend)} />
-            <InfoButton size="small" />
-          </div>
-        </section>
-
-        {showLegend && (
-          <section>
-            <h3 style={{ 
-              fontFamily: 'Macan Mono Trial, monospace', 
-              fontSize: '18px', 
-              color: '#00112B',
-              marginBottom: '16px'
-            }}>
-              Legend
-            </h3>
-            <AttackGraphLegend />
-          </section>
-        )}
-
         <section>
           <h3 style={{ 
             fontFamily: 'Macan Mono Trial, monospace', 
@@ -84,24 +51,23 @@ const ComponentShowcase = () => {
         </section>
 
         <section>
-          <h3 style={{ 
-            fontFamily: 'Macan Mono Trial, monospace', 
-            fontSize: '18px', 
+          <h3 style={{
+            fontFamily: 'Macan Mono Trial, monospace',
+            fontSize: '18px',
             color: '#00112B',
             marginBottom: '16px'
           }}>
             Complete Toolbar Layout
           </h3>
-          <div style={{ 
-            display: 'flex', 
-            alignItems: 'center', 
-            gap: '16px', 
+          <div style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: '16px',
             flexWrap: 'wrap',
             padding: '20px',
             background: '#f5f5f5',
             borderRadius: '4px'
           }}>
-            <InfoButton onClick={() => setShowLegend(!showLegend)} />
             <div style={{ display: 'flex', gap: '12px' }}>
               <ShowAllButton />
               <OptimalButton />

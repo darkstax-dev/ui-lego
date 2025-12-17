@@ -6,13 +6,32 @@ export type NodeBoxVariant = 'blue' | 'green' | 'orange';
 export interface NodeBoxProps {
   variant?: NodeBoxVariant;
   className?: string;
+  editable?: boolean;
+  defaultText?: string;
+  onTextChange?: (text: string) => void;
 }
 
-export const NodeBox: React.FC<NodeBoxProps> = ({ 
+export const NodeBox: React.FC<NodeBoxProps> = ({
   variant = 'blue',
-  className = ''
+  className = '',
+  editable = false,
+  defaultText = '',
+  onTextChange
 }) => {
+  const handleInput = (e: React.FormEvent<HTMLDivElement>) => {
+    if (onTextChange) {
+      onTextChange(e.currentTarget.textContent || '');
+    }
+  };
+
   return (
-    <div className={`node-box node-box-${variant} ${className}`} />
+    <div
+      className={`node-box node-box-${variant} ${className}`}
+      contentEditable={editable}
+      suppressContentEditableWarning
+      onInput={handleInput}
+    >
+      {defaultText}
+    </div>
   );
 };

@@ -4,6 +4,23 @@
   border-radius: 1px;
   border-width: 1.5px;
   border-style: solid;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Macan Mono Trial', monospace;
+  font-size: 14px;
+  font-weight: 500;
+  color: #00112B;
+  outline: none;
+}
+
+.node-box[contenteditable="true"] {
+  cursor: text;
+}
+
+.node-box[contenteditable="true"]:focus {
+  outline: 2px solid #0451A4;
+  outline-offset: 2px;
 }
 
 .node-box-blue {

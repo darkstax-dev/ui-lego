@@ -10,6 +10,9 @@
   gap: 32px;
   min-width: 148px;
   height: 40px;
+  padding: 8px 12px;
+  background: #DFDFDF;
+  border-radius: 2px;
 }
 
 .stat-label {
