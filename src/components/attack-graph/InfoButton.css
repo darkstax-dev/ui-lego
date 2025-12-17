@@ -1,0 +1,31 @@
+.info-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  background: #DFDFDF;
+  border: none;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+.info-button:hover {
+  opacity: 0.8;
+}
+
+.info-button:active {
+  opacity: 0.6;
+}
+
+.info-button-big {
+  padding: 10px;
+}
+
+.info-button-small {
+  padding: 8px;
+}
+
+.info-icon {
+  width: 20px;
+  height: 20px;
+}
