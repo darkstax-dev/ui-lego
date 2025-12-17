@@ -67,41 +67,37 @@ const ActivityInputOutput: React.FC<ActivityInputOutputProps> = ({ className = '
     })
   }, [setNodes, setEdges, setExpandedNodes])
 
-  const handleToggleNode = useCallback((nodeId: string) => {
+  const handleToggleInputGroup = useCallback((nodeId: string) => {
     setExpandedNodes((prev) => {
       const newSet = new Set(prev)
-      if (newSet.has(nodeId)) {
-        newSet.delete(nodeId)
-        // Hide input/output nodes and backgrounds
+      const key = `${nodeId}-inputs`
+
+      if (newSet.has(key)) {
+        newSet.delete(key)
+        // Hide inputs
         setNodes((nds) => nds.map((n) => {
-          if (n.id.startsWith(`${nodeId}-input-`) || 
-              n.id.startsWith(`${nodeId}-output-`) ||
-              n.id === `${nodeId}-input-background` ||
-              n.id === `${nodeId}-output-background`) {
+          if (n.id.startsWith(`${nodeId}-input-`) || n.id === `${nodeId}-input-background`) {
             return { ...n, hidden: true }
           }
           return n
         }))
         setEdges((eds) => eds.map((e) => {
-          if (e.source.startsWith(`${nodeId}-`) || e.target.startsWith(`${nodeId}-`)) {
+          if (e.source.startsWith(`${nodeId}-input-`) && e.target === nodeId) {
             return { ...e, hidden: true }
           }
           return e
         }))
       } else {
-        newSet.add(nodeId)
-        // Show input/output nodes and backgrounds
+        newSet.add(key)
+        // Show inputs
         setNodes((nds) => nds.map((n) => {
-          if (n.id.startsWith(`${nodeId}-input-`) || 
-              n.id.startsWith(`${nodeId}-output-`) ||
-              n.id === `${nodeId}-input-background` ||
-              n.id === `${nodeId}-output-background`) {
+          if (n.id.startsWith(`${nodeId}-input-`) || n.id === `${nodeId}-input-background`) {
             return { ...n, hidden: false }
           }
           return n
         }))
         setEdges((eds) => eds.map((e) => {
-          if (e.source.startsWith(`${nodeId}-`) || e.target.startsWith(`${nodeId}-`)) {
+          if (e.source.startsWith(`${nodeId}-input-`) && e.target === nodeId) {
             return { ...e, hidden: false }
           }
           return e
@@ -109,7 +105,74 @@ const ActivityInputOutput: React.FC<ActivityInputOutputProps> = ({ className = '
       }
       return newSet
     })
-  }, [setExpandedNodes, setNodes, setEdges])
+  }, [setNodes, setEdges])
+
+  const handleToggleOutputGroup = useCallback((nodeId: string) => {
+    setExpandedNodes((prev) => {
+      const newSet = new Set(prev)
+      const key = `${nodeId}-outputs`
+
+      if (newSet.has(key)) {
+        newSet.delete(key)
+        // Hide outputs
+        setNodes((nds) => nds.map((n) => {
+          if (n.id.startsWith(`${nodeId}-output-`) || n.id === `${nodeId}-output-background`) {
+            return { ...n, hidden: true }
+          }
+          return n
+        }))
+        setEdges((eds) => eds.map((e) => {
+          if (e.target.startsWith(`${nodeId}-output-`) && e.source === nodeId) {
+            return { ...e, hidden: true }
+          }
+          return e
+        }))
+      } else {
+        newSet.add(key)
+        // Show outputs
+        setNodes((nds) => nds.map((n) => {
+          if (n.id.startsWith(`${nodeId}-output-`) || n.id === `${nodeId}-output-background`) {
+            return { ...n, hidden: false }
+          }
+          return n
+        }))
+        setEdges((eds) => eds.map((e) => {
+          if (e.target.startsWith(`${nodeId}-output-`) && e.source === nodeId) {
+            return { ...e, hidden: false }
+          }
+          return e
+        }))
+      }
+      return newSet
+    })
+  }, [setNodes, setEdges])
+
+  const handleCollapseNode = useCallback((nodeId: string) => {
+    setExpandedNodes((prev) => {
+      const newSet = new Set(prev)
+      newSet.delete(`${nodeId}-inputs`)
+      newSet.delete(`${nodeId}-outputs`)
+
+      // Hide all inputs and outputs
+      setNodes((nds) => nds.map((n) => {
+        if (n.id.startsWith(`${nodeId}-input-`) ||
+            n.id.startsWith(`${nodeId}-output-`) ||
+            n.id === `${nodeId}-input-background` ||
+            n.id === `${nodeId}-output-background`) {
+          return { ...n, hidden: true }
+        }
+        return n
+      }))
+      setEdges((eds) => eds.map((e) => {
+        if (e.source.startsWith(`${nodeId}-`) || e.target.startsWith(`${nodeId}-`)) {
+          return { ...e, hidden: true }
+        }
+        return e
+      }))
+
+      return newSet
+    })
+  }, [setNodes, setEdges])
 
   const handleAddInput = useCallback((nodeId: string, inputType: string) => {
     const parentNode = nodes.find((n) => n.id === nodeId)
@@ -147,7 +210,7 @@ const ActivityInputOutput: React.FC<ActivityInputOutputProps> = ({ className = '
     // Mark the node as expanded
     setExpandedNodes((prev) => {
       const newSet = new Set(prev)
-      newSet.add(nodeId)
+      newSet.add(`${nodeId}-inputs`)
       return newSet
     })
 
@@ -162,7 +225,9 @@ const ActivityInputOutput: React.FC<ActivityInputOutputProps> = ({ className = '
               onDelete: handleDeleteNode,
               onAddInput: handleAddInput,
               onAddOutput: handleAddOutput,
-              onToggle: handleToggleNode,
+              onToggleInputGroup: handleToggleInputGroup,
+              onToggleOutputGroup: handleToggleOutputGroup,
+              onCollapse: handleCollapseNode,
             },
           }
         }
@@ -243,7 +308,7 @@ const ActivityInputOutput: React.FC<ActivityInputOutputProps> = ({ className = '
     // Mark the node as expanded
     setExpandedNodes((prev) => {
       const newSet = new Set(prev)
-      newSet.add(nodeId)
+      newSet.add(`${nodeId}-outputs`)
       return newSet
     })
 
@@ -258,7 +323,9 @@ const ActivityInputOutput: React.FC<ActivityInputOutputProps> = ({ className = '
               onDelete: handleDeleteNode,
               onAddInput: handleAddInput,
               onAddOutput: handleAddOutput,
-              onToggle: handleToggleNode,
+              onToggleInputGroup: handleToggleInputGroup,
+              onToggleOutputGroup: handleToggleOutputGroup,
+              onCollapse: handleCollapseNode,
             },
           }
         }
@@ -326,7 +393,9 @@ const ActivityInputOutput: React.FC<ActivityInputOutputProps> = ({ className = '
         onDelete: handleDeleteNode,
         onAddInput: handleAddInput,
         onAddOutput: handleAddOutput,
-        onToggle: handleToggleNode,
+        onToggleInputGroup: handleToggleInputGroup,
+        onToggleOutputGroup: handleToggleOutputGroup,
+        onCollapse: handleCollapseNode,
       },
     }
 
@@ -395,7 +464,9 @@ const ActivityInputOutput: React.FC<ActivityInputOutputProps> = ({ className = '
           onDelete: handleDeleteNode,
           onAddInput: handleAddInput,
           onAddOutput: handleAddOutput,
-          onToggle: handleToggleNode,
+          onToggleInputGroup: handleToggleInputGroup,
+          onToggleOutputGroup: handleToggleOutputGroup,
+          onCollapse: handleCollapseNode,
         },
       },
       {
