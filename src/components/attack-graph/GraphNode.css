@@ -1,0 +1,41 @@
+.graph-node-wrapper {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.graph-node {
+  display: inline-flex;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.graph-node:hover {
+  transform: scale(1.05);
+}
+
+.graph-node-svg {
+  display: block;
+}
+
+.graph-node-text {
+  font-family: 'Macan Mono Trial', monospace;
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  fill: #00112B;
+  white-space: pre;
+}
+
+.graph-node-outer {
+  stroke: #FF6C64;
+  stroke-opacity: 0.2;
+  stroke-width: 4;
+}
+
+.graph-node-inner {
+  fill: white;
+  fill-opacity: 0.4;
+  stroke: #FF6C64;
+  stroke-width: 1.5;
+}

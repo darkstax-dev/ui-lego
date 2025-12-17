@@ -1,0 +1,66 @@
+.attack-graph-demo {
+  padding: 40px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.attack-graph-demo-title {
+  margin-bottom: 32px;
+  text-align: center;
+}
+
+.attack-graph-demo-title h2 {
+  font-family: 'Macan Mono Trial', monospace;
+  font-size: 24px;
+  color: #00112B;
+  margin: 0 0 8px 0;
+}
+
+.attack-graph-demo-title p {
+  font-family: 'Macan Mono Trial', monospace;
+  font-size: 14px;
+  color: #78797A;
+  margin: 0;
+}
+
+.attack-graph-demo-content {
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+}
+
+.attack-graph-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.attack-graph-row h3 {
+  font-family: 'Macan Mono Trial', monospace;
+  font-size: 18px;
+  color: #00112B;
+  width: 100%;
+  text-align: center;
+  margin: 0 0 16px 0;
+}
+
+.node-box-grid {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 768px) {
+  .attack-graph-demo {
+    padding: 20px;
+  }
+
+  .attack-graph-row {
+    flex-direction: column;
+    gap: 16px;
+  }
+}
