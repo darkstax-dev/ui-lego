@@ -4,9 +4,34 @@
   margin: 0 auto;
 }
 
-.attack-graph-demo-title {
+.attack-graph-demo-header {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
   margin-bottom: 32px;
+}
+
+.attack-graph-demo-title {
   text-align: center;
+}
+
+.attack-graph-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.control-buttons {
+  display: flex;
+  gap: 12px;
+}
+
+.legend-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 24px;
 }
 
 .attack-graph-demo-title h2 {
@@ -57,6 +82,20 @@
 @media (max-width: 768px) {
   .attack-graph-demo {
     padding: 20px;
+  }
+
+  .attack-graph-demo-header {
+    gap: 16px;
+  }
+
+  .attack-graph-controls {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .control-buttons {
+    width: 100%;
+    justify-content: center;
   }
 
   .attack-graph-row {
