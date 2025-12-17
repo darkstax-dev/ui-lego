@@ -1,0 +1,10 @@
+.connector-line {
+  display: block;
+}
+
+@media (max-width: 768px) {
+  .connector-line {
+    max-width: 100%;
+    height: auto;
+  }
+}

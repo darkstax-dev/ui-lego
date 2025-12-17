@@ -10,7 +10,9 @@ interface ExecutionNodeData {
   onAddInput?: (nodeId: string, inputType: string) => void
   onAddOutput?: (nodeId: string, outputType: string) => void
   onOpen?: (nodeId: string) => void
-  onToggle?: (nodeId: string) => void
+  onToggleInputGroup?: (nodeId: string) => void
+  onToggleOutputGroup?: (nodeId: string) => void
+  onCollapse?: (nodeId: string) => void
 }
 
 const ExecutionNode: React.FC<NodeProps> = ({ data, isConnectable }) => {
@@ -40,8 +42,22 @@ const ExecutionNode: React.FC<NodeProps> = ({ data, isConnectable }) => {
   }
 
   const handleNodeClick = () => {
-    if (nodeData?.id && nodeData?.onToggle) {
-      nodeData.onToggle(nodeData.id)
+    if (nodeData?.id && nodeData?.onCollapse) {
+      nodeData.onCollapse(nodeData.id)
+    }
+  }
+
+  const handleInputGroupClick = (e: React.MouseEvent) => {
+    e.stopPropagation()
+    if (nodeData?.id && nodeData?.onToggleInputGroup) {
+      nodeData.onToggleInputGroup(nodeData.id)
+    }
+  }
+
+  const handleOutputGroupClick = (e: React.MouseEvent) => {
+    e.stopPropagation()
+    if (nodeData?.id && nodeData?.onToggleOutputGroup) {
+      nodeData.onToggleOutputGroup(nodeData.id)
     }
   }
 
@@ -62,7 +78,18 @@ const ExecutionNode: React.FC<NodeProps> = ({ data, isConnectable }) => {
         className="execution-node__handle"
         id="top"
       />
-      
+
+      {/* Input Group Trigger */}
+      <div
+        className="execution-node__group-trigger execution-node__group-trigger--input"
+        onClick={handleInputGroupClick}
+        title="Toggle Inputs"
+      >
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="6" cy="6" r="4" fill="#0072ff"/>
+        </svg>
+      </div>
+
       <div className="execution-node__content" onClick={handleNodeClick}>
         <div className="execution-node__icon-container">
           <div className="execution-node__icon-background" />
@@ -117,6 +144,17 @@ const ExecutionNode: React.FC<NodeProps> = ({ data, isConnectable }) => {
         className="execution-node__handle"
         id="bottom"
       />
+
+      {/* Output Group Trigger */}
+      <div
+        className="execution-node__group-trigger execution-node__group-trigger--output"
+        onClick={handleOutputGroupClick}
+        title="Toggle Outputs"
+      >
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="6" cy="6" r="4" fill="#0072ff"/>
+        </svg>
+      </div>
     </div>
   )
 }

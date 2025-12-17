@@ -1,0 +1,67 @@
+.action-button {
+  display: flex;
+  align-items: center;
+  background: #DFDFDF;
+  border: none;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+.action-button:hover {
+  opacity: 0.9;
+}
+
+.action-button:active {
+  opacity: 0.8;
+}
+
+.action-button-label {
+  display: flex;
+  height: 40px;
+  padding: 10px 20px;
+  justify-content: center;
+  align-items: center;
+  border-right: 1px solid #FFF;
+  background: #D9322A;
+  color: #FFF;
+  font-family: 'Macan Mono Trial', monospace;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 110%;
+  letter-spacing: 1.6px;
+  text-transform: uppercase;
+}
+
+.action-button-icon {
+  display: flex;
+  padding: 10px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  background: #D9322A;
+}
+
+.show-all-button {
+  min-width: 157px;
+}
+
+.optimal-button {
+  min-width: auto;
+}
+
+@media (max-width: 768px) {
+  .action-button-label {
+    font-size: 14px;
+    padding: 8px 16px;
+    height: 36px;
+  }
+  
+  .action-button-icon {
+    padding: 8px;
+  }
+  
+  .action-button-icon svg {
+    width: 18px;
+    height: 18px;
+  }
+}

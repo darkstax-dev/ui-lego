@@ -1,0 +1,58 @@
+.status-badge {
+  display: inline-flex;
+  padding: 4px 6px;
+  align-items: center;
+  gap: 5px;
+  border-radius: 2px;
+}
+
+.status-badge-label {
+  font-family: 'Macan Mono Trial', monospace;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 100%;
+  text-transform: uppercase;
+  outline: none;
+}
+
+.status-badge-label[contenteditable="true"] {
+  cursor: text;
+}
+
+.status-badge-label[contenteditable="true"]:focus {
+  outline: 2px solid #0451A4;
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+.status-badge-normal {
+  background: linear-gradient(0deg, rgba(120, 121, 122, 0.2) 0%, rgba(120, 121, 122, 0.2) 100%), #FFF;
+}
+
+.status-badge-normal .status-badge-label {
+  color: #78797A;
+}
+
+.status-badge-medium {
+  background: rgba(4, 81, 164, 0.2);
+}
+
+.status-badge-medium .status-badge-label {
+  color: #0451A4;
+}
+
+.status-badge-high {
+  background: rgba(237, 139, 48, 0.2);
+}
+
+.status-badge-high .status-badge-label {
+  color: #ED8B30;
+}
+
+.status-badge-critical {
+  background: rgba(255, 108, 100, 0.2);
+}
+
+.status-badge-critical .status-badge-label {
+  color: #FF6C64;
+}

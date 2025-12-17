@@ -102,3 +102,6 @@ export * from './components/activity-input-output'
 
 // Network Components exports
 export * from './components/network-components'
+
+// Attack Graph exports
+export * from './components/attack-graph'
