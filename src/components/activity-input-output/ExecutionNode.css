@@ -101,6 +101,41 @@
   box-shadow: 0 0 0 2px var(--color-blue-700, #0072ff);
 }
 
+.execution-node__group-trigger {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 5;
+  background: white;
+  border-radius: 50%;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  transition: transform 0.2s ease;
+}
+
+.execution-node__group-trigger--input {
+  top: -25px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.execution-node__group-trigger--output {
+  bottom: -25px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.execution-node__group-trigger--input:hover {
+  transform: translateX(-50%) scale(1.2);
+}
+
+.execution-node__group-trigger--output:hover {
+  transform: translateX(-50%) scale(1.2);
+}
+
 @media (max-width: 768px) {
   .execution-node__content {
     min-width: 100px;
