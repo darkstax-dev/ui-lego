@@ -136,6 +136,40 @@
   transform: translateX(-50%) scale(1.2);
 }
 
+.execution-node--collapsed .execution-node__content {
+  opacity: 0.7;
+}
+
+.execution-node--collapsed .execution-node__icon-background {
+  background: rgba(217, 50, 42, 0.2);
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.execution-node__group-trigger--input svg circle {
+  transition: fill 0.2s ease;
+}
+
+.execution-node__group-trigger--output svg circle {
+  transition: fill 0.2s ease;
+}
+
+.execution-node__group-trigger--input:hover svg circle {
+  fill: #0451a4;
+}
+
+.execution-node__group-trigger--output:hover svg circle {
+  fill: #b61f18;
+}
+
 @media (max-width: 768px) {
   .execution-node__content {
     min-width: 100px;
