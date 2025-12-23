@@ -15,8 +15,9 @@ interface ExecutionNodeData {
   onCollapse?: (nodeId: string) => void
 }
 
-const ExecutionNode: React.FC<NodeProps> = ({ data, isConnectable }) => {
+const ExecutionNode: React.FC<NodeProps> = ({ data, isConnectable, id }) => {
   const [showMenu, setShowMenu] = useState(false)
+  const [isCollapsed, setIsCollapsed] = useState(false)
   const nodeData = data as ExecutionNodeData
   const menuRef = useRef<HTMLDivElement>(null)
 
@@ -43,6 +44,7 @@ const ExecutionNode: React.FC<NodeProps> = ({ data, isConnectable }) => {
 
   const handleNodeClick = () => {
     if (nodeData?.id && nodeData?.onCollapse) {
+      setIsCollapsed(!isCollapsed)
       nodeData.onCollapse(nodeData.id)
     }
   }
@@ -62,7 +64,7 @@ const ExecutionNode: React.FC<NodeProps> = ({ data, isConnectable }) => {
   }
 
   return (
-    <div className="execution-node" ref={menuRef}>
+    <div className={`execution-node ${isCollapsed ? 'execution-node--collapsed' : ''}`} ref={menuRef}>
       <Handle
         type="target"
         position={Position.Left}
@@ -83,10 +85,11 @@ const ExecutionNode: React.FC<NodeProps> = ({ data, isConnectable }) => {
       <div
         className="execution-node__group-trigger execution-node__group-trigger--input"
         onClick={handleInputGroupClick}
-        title="Toggle Inputs"
+        title="Click to add/toggle inputs"
       >
         <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
           <circle cx="6" cy="6" r="4" fill="#0072ff"/>
+          <text x="6" y="7.5" fontSize="8" fontWeight="bold" fill="white" textAnchor="middle">I</text>
         </svg>
       </div>
 
@@ -149,10 +152,11 @@ const ExecutionNode: React.FC<NodeProps> = ({ data, isConnectable }) => {
       <div
         className="execution-node__group-trigger execution-node__group-trigger--output"
         onClick={handleOutputGroupClick}
-        title="Toggle Outputs"
+        title="Click to add/toggle outputs"
       >
         <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="6" cy="6" r="4" fill="#0072ff"/>
+          <circle cx="6" cy="6" r="4" fill="#D9322A"/>
+          <text x="6" y="7.5" fontSize="8" fontWeight="bold" fill="white" textAnchor="middle">O</text>
         </svg>
       </div>
     </div>
