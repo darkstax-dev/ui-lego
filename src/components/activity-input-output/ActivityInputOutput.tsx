@@ -184,14 +184,21 @@ const ActivityInputOutput: React.FC<ActivityInputOutputProps> = ({ className = '
     // Count existing inputs for this node to calculate position
     const existingInputs = nodes.filter((n) => n.id.startsWith(`${nodeId}-input-`) && !n.id.includes('background'))
     const inputCount = existingInputs.length + 1
-    const offsetX = existingInputs.length * 120
+
+    // Calculate geometric positioning (arc pattern)
+    const radius = 150 // Distance from parent node
+    const arcAngle = Math.min(120, inputCount * 30) // Max 120 degrees arc
+    const startAngle = 90 - arcAngle / 2 // Center the arc above the node
+    const angleStep = inputCount > 1 ? arcAngle / (inputCount - 1) : 0
+    const currentAngle = startAngle + angleStep * existingInputs.length
+    const angleRad = (currentAngle * Math.PI) / 180
 
     const newInputNode: Node = {
       id: newInputId,
       type: 'input',
       position: {
-        x: parentNode.position.x - 100 + offsetX,
-        y: parentNode.position.y - 150,
+        x: parentNode.position.x + Math.cos(angleRad) * radius - 26,
+        y: parentNode.position.y - Math.sin(angleRad) * radius - 26,
       },
       data: { label: inputType },
       hidden: false,
@@ -282,14 +289,21 @@ const ActivityInputOutput: React.FC<ActivityInputOutputProps> = ({ className = '
     // Count existing outputs for this node to calculate position
     const existingOutputs = nodes.filter((n) => n.id.startsWith(`${nodeId}-output-`) && !n.id.includes('background'))
     const outputCount = existingOutputs.length + 1
-    const offsetX = existingOutputs.length * 120
+
+    // Calculate geometric positioning (arc pattern below the node)
+    const radius = 150 // Distance from parent node
+    const arcAngle = Math.min(120, outputCount * 30) // Max 120 degrees arc
+    const startAngle = 270 - arcAngle / 2 // Center the arc below the node
+    const angleStep = outputCount > 1 ? arcAngle / (outputCount - 1) : 0
+    const currentAngle = startAngle + angleStep * existingOutputs.length
+    const angleRad = (currentAngle * Math.PI) / 180
 
     const newOutputNode: Node = {
       id: newOutputId,
       type: 'output',
       position: {
-        x: parentNode.position.x - 100 + offsetX,
-        y: parentNode.position.y + 150,
+        x: parentNode.position.x + Math.cos(angleRad) * radius - 26,
+        y: parentNode.position.y - Math.sin(angleRad) * radius - 26,
       },
       data: { label: outputType },
       hidden: false,
