@@ -181,25 +181,29 @@ const ActivityInputOutput: React.FC<ActivityInputOutputProps> = ({ className = '
     inputIdCounter.current += 1
     const newInputId = `${nodeId}-input-${inputIdCounter.current}`
 
-    // Count existing inputs for this node to calculate position
+    // Count existing inputs for this node
     const existingInputs = nodes.filter((n) => n.id.startsWith(`${nodeId}-input-`) && !n.id.includes('background'))
     const inputCount = existingInputs.length + 1
 
-    // Calculate geometric positioning (arc pattern)
-    const radius = 150 // Distance from parent node
-    const arcAngle = Math.min(120, inputCount * 30) // Max 120 degrees arc
-    const startAngle = 90 - arcAngle / 2 // Center the arc above the node
-    const angleStep = inputCount > 1 ? arcAngle / (inputCount - 1) : 0
-    const currentAngle = startAngle + angleStep * existingInputs.length
-    const angleRad = (currentAngle * Math.PI) / 180
+    // Helper function to calculate position in arc
+    const calculateArcPosition = (index: number, total: number, isInput: boolean) => {
+      const radius = 150
+      const arcAngle = Math.min(120, total * 30)
+      const startAngle = isInput ? 90 - arcAngle / 2 : 270 - arcAngle / 2
+      const angleStep = total > 1 ? arcAngle / (total - 1) : 0
+      const currentAngle = startAngle + angleStep * index
+      const angleRad = (currentAngle * Math.PI) / 180
+
+      return {
+        x: parentNode.position.x + Math.cos(angleRad) * radius - 26,
+        y: parentNode.position.y - Math.sin(angleRad) * radius - 26,
+      }
+    }
 
     const newInputNode: Node = {
       id: newInputId,
       type: 'input',
-      position: {
-        x: parentNode.position.x + Math.cos(angleRad) * radius - 26,
-        y: parentNode.position.y - Math.sin(angleRad) * radius - 26,
-      },
+      position: calculateArcPosition(existingInputs.length, inputCount, true),
       data: { label: inputType },
       hidden: false,
     }
