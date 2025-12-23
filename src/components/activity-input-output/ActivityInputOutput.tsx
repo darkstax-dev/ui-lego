@@ -48,6 +48,27 @@ const ActivityInputOutput: React.FC<ActivityInputOutputProps> = ({ className = '
     [setEdges]
   )
 
+  // Helper function to calculate arc position for input/output nodes
+  const calculateArcPosition = useCallback((
+    parentX: number,
+    parentY: number,
+    index: number,
+    total: number,
+    isInput: boolean
+  ) => {
+    const radius = 150
+    const arcAngle = Math.min(120, total * 30)
+    const startAngle = isInput ? 90 - arcAngle / 2 : 270 - arcAngle / 2
+    const angleStep = total > 1 ? arcAngle / (total - 1) : 0
+    const currentAngle = startAngle + angleStep * index
+    const angleRad = (currentAngle * Math.PI) / 180
+    
+    return {
+      x: parentX + Math.cos(angleRad) * radius - 26,
+      y: parentY - Math.sin(angleRad) * radius - 26,
+    }
+  }, [])
+
   const handleDeleteNode = useCallback((nodeId: string) => {
     setNodes((nds) => nds.filter((n) => 
       n.id !== nodeId && 
@@ -63,6 +84,8 @@ const ActivityInputOutput: React.FC<ActivityInputOutputProps> = ({ className = '
     setExpandedNodes((prev) => {
       const newSet = new Set(prev)
       newSet.delete(nodeId)
+      newSet.delete(`${nodeId}-inputs`)
+      newSet.delete(`${nodeId}-outputs`)
       return newSet
     })
   }, [setNodes, setEdges, setExpandedNodes])
@@ -164,7 +187,8 @@ const ActivityInputOutput: React.FC<ActivityInputOutputProps> = ({ className = '
         return n
       }))
       setEdges((eds) => eds.map((e) => {
-        if (e.source.startsWith(`${nodeId}-`) || e.target.startsWith(`${nodeId}-`)) {
+        if ((e.source.startsWith(`${nodeId}-input-`) && e.target === nodeId) ||
+            (e.source === nodeId && e.target.startsWith(`${nodeId}-output-`))) {
           return { ...e, hidden: true }
         }
         return e
@@ -181,18 +205,20 @@ const ActivityInputOutput: React.FC<ActivityInputOutputProps> = ({ className = '
     inputIdCounter.current += 1
     const newInputId = `${nodeId}-input-${inputIdCounter.current}`
 
-    // Count existing inputs for this node to calculate position
+    // Count existing inputs for this node
     const existingInputs = nodes.filter((n) => n.id.startsWith(`${nodeId}-input-`) && !n.id.includes('background'))
     const inputCount = existingInputs.length + 1
-    const offsetX = existingInputs.length * 120
 
     const newInputNode: Node = {
       id: newInputId,
       type: 'input',
-      position: {
-        x: parentNode.position.x - 100 + offsetX,
-        y: parentNode.position.y - 150,
-      },
+      position: calculateArcPosition(
+        parentNode.position.x,
+        parentNode.position.y,
+        existingInputs.length,
+        inputCount,
+        true
+      ),
       data: { label: inputType },
       hidden: false,
     }
@@ -215,7 +241,7 @@ const ActivityInputOutput: React.FC<ActivityInputOutputProps> = ({ className = '
     })
 
     setNodes((nds) => {
-      // Update parent node data to include the callbacks
+      // Reposition all existing input nodes in the arc pattern
       let updatedNodes = nds.map((n) => {
         if (n.id === nodeId) {
           return {
@@ -229,6 +255,22 @@ const ActivityInputOutput: React.FC<ActivityInputOutputProps> = ({ className = '
               onToggleOutputGroup: handleToggleOutputGroup,
               onCollapse: handleCollapseNode,
             },
+          }
+        }
+        // Reposition existing input nodes
+        if (n.id.startsWith(`${nodeId}-input-`) && !n.id.includes('background')) {
+          const inputIndex = existingInputs.findIndex(input => input.id === n.id)
+          if (inputIndex !== -1) {
+            return {
+              ...n,
+              position: calculateArcPosition(
+                parentNode.position.x,
+                parentNode.position.y,
+                inputIndex,
+                inputCount,
+                true
+              ),
+            }
           }
         }
         return n
@@ -245,6 +287,7 @@ const ActivityInputOutput: React.FC<ActivityInputOutputProps> = ({ className = '
             return {
               ...n,
               data: { type: 'input', count: inputCount },
+              hidden: false,
             }
           }
           return n
@@ -270,7 +313,7 @@ const ActivityInputOutput: React.FC<ActivityInputOutputProps> = ({ className = '
       return [...updatedNodes, newInputNode]
     })
     setEdges((eds) => [...eds, newEdge])
-  }, [nodes, setExpandedNodes, setNodes, setEdges]) // eslint-disable-line react-hooks/exhaustive-deps
+  }, [nodes, setExpandedNodes, setNodes, setEdges, calculateArcPosition, handleDeleteNode, handleToggleInputGroup, handleToggleOutputGroup, handleCollapseNode]) // eslint-disable-line react-hooks/exhaustive-deps
 
   const handleAddOutput = useCallback((nodeId: string, outputType: string) => {
     const parentNode = nodes.find((n) => n.id === nodeId)
@@ -279,18 +322,20 @@ const ActivityInputOutput: React.FC<ActivityInputOutputProps> = ({ className = '
     outputIdCounter.current += 1
     const newOutputId = `${nodeId}-output-${outputIdCounter.current}`
 
-    // Count existing outputs for this node to calculate position
+    // Count existing outputs for this node
     const existingOutputs = nodes.filter((n) => n.id.startsWith(`${nodeId}-output-`) && !n.id.includes('background'))
     const outputCount = existingOutputs.length + 1
-    const offsetX = existingOutputs.length * 120
 
     const newOutputNode: Node = {
       id: newOutputId,
       type: 'output',
-      position: {
-        x: parentNode.position.x - 100 + offsetX,
-        y: parentNode.position.y + 150,
-      },
+      position: calculateArcPosition(
+        parentNode.position.x,
+        parentNode.position.y,
+        existingOutputs.length,
+        outputCount,
+        false
+      ),
       data: { label: outputType },
       hidden: false,
     }
@@ -313,7 +358,7 @@ const ActivityInputOutput: React.FC<ActivityInputOutputProps> = ({ className = '
     })
 
     setNodes((nds) => {
-      // Update parent node data to include the callbacks
+      // Reposition all existing output nodes in the arc pattern
       let updatedNodes = nds.map((n) => {
         if (n.id === nodeId) {
           return {
@@ -327,6 +372,22 @@ const ActivityInputOutput: React.FC<ActivityInputOutputProps> = ({ className = '
               onToggleOutputGroup: handleToggleOutputGroup,
               onCollapse: handleCollapseNode,
             },
+          }
+        }
+        // Reposition existing output nodes
+        if (n.id.startsWith(`${nodeId}-output-`) && !n.id.includes('background')) {
+          const outputIndex = existingOutputs.findIndex(output => output.id === n.id)
+          if (outputIndex !== -1) {
+            return {
+              ...n,
+              position: calculateArcPosition(
+                parentNode.position.x,
+                parentNode.position.y,
+                outputIndex,
+                outputCount,
+                false
+              ),
+            }
           }
         }
         return n
@@ -343,6 +404,7 @@ const ActivityInputOutput: React.FC<ActivityInputOutputProps> = ({ className = '
             return {
               ...n,
               data: { type: 'output', count: outputCount },
+              hidden: false,
             }
           }
           return n
@@ -368,7 +430,7 @@ const ActivityInputOutput: React.FC<ActivityInputOutputProps> = ({ className = '
       return [...updatedNodes, newOutputNode]
     })
     setEdges((eds) => [...eds, newEdge])
-  }, [nodes, setExpandedNodes, setNodes, setEdges]) // eslint-disable-line react-hooks/exhaustive-deps
+  }, [nodes, setExpandedNodes, setNodes, setEdges, calculateArcPosition, handleDeleteNode, handleToggleInputGroup, handleToggleOutputGroup, handleCollapseNode]) // eslint-disable-line react-hooks/exhaustive-deps
 
   const handleAddNode = useCallback(() => {
     nodeIdCounter.current += 1
@@ -443,7 +505,7 @@ const ActivityInputOutput: React.FC<ActivityInputOutputProps> = ({ className = '
         ]
       })
     }
-  }, [nodes, setNodes, setEdges]) // eslint-disable-line react-hooks/exhaustive-deps
+  }, [nodes, setNodes, setEdges, handleDeleteNode, handleAddInput, handleAddOutput, handleToggleInputGroup, handleToggleOutputGroup, handleCollapseNode])
 
   // Initialize nodes on mount
   useEffect(() => {
