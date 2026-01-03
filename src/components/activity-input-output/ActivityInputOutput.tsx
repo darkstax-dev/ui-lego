@@ -42,30 +42,42 @@ const ActivityInputOutput: React.FC<ActivityInputOutputProps> = ({ className = '
   const [nodes, setNodes, onNodesChange] = useNodesState<Node>([])
   const [edges, setEdges, onEdgesChange] = useEdgesState<Edge>([])
   const [expandedNodes, setExpandedNodes] = useState<Set<string>>(new Set())
+  
+  // Refs to hold the latest callback functions to avoid stale closures
+  const callbacksRef = useRef<{
+    handleDeleteNode: (nodeId: string) => void
+    handleAddInput: (nodeId: string, inputType: string) => void
+    handleAddOutput: (nodeId: string, outputType: string) => void
+    handleToggleInputGroup: (nodeId: string) => void
+    handleToggleOutputGroup: (nodeId: string) => void
+    handleCollapseNode: (nodeId: string) => void
+  } | null>(null)
 
   const onConnect = useCallback(
     (params: Connection) => setEdges((eds) => addEdge({ ...params, className: 'custom-edge' }, eds)),
     [setEdges]
   )
 
-  // Helper function to calculate arc position for input/output nodes
-  const calculateArcPosition = useCallback((
+  // Helper function to calculate grid position for input/output nodes
+  // Positions nodes in a horizontal row above (inputs) or below (outputs) the parent
+  const calculateNodePosition = useCallback((
     parentX: number,
     parentY: number,
     index: number,
     total: number,
     isInput: boolean
   ) => {
-    const radius = 150
-    const arcAngle = Math.min(120, total * 30)
-    const startAngle = isInput ? 90 - arcAngle / 2 : 270 - arcAngle / 2
-    const angleStep = total > 1 ? arcAngle / (total - 1) : 0
-    const currentAngle = startAngle + angleStep * index
-    const angleRad = (currentAngle * Math.PI) / 180
+    const spacing = 80 // Horizontal spacing between nodes
+    const verticalOffset = 150 // Distance above/below parent node
+    
+    // Calculate total width needed for all nodes
+    const totalWidth = (total - 1) * spacing
+    // Start position to center the row around parent
+    const startX = parentX - totalWidth / 2
     
     return {
-      x: parentX + Math.cos(angleRad) * radius - 26,
-      y: parentY - Math.sin(angleRad) * radius - 26,
+      x: startX + index * spacing,
+      y: isInput ? parentY - verticalOffset : parentY + verticalOffset,
     }
   }, [])
 
@@ -199,72 +211,60 @@ const ActivityInputOutput: React.FC<ActivityInputOutputProps> = ({ className = '
   }, [setNodes, setEdges])
 
   const handleAddInput = useCallback((nodeId: string, inputType: string) => {
-    const parentNode = nodes.find((n) => n.id === nodeId)
-    if (!parentNode) return
+    setNodes((currentNodes) => {
+      const parentNode = currentNodes.find((n) => n.id === nodeId)
+      if (!parentNode) return currentNodes
 
-    inputIdCounter.current += 1
-    const newInputId = `${nodeId}-input-${inputIdCounter.current}`
+      inputIdCounter.current += 1
+      const newInputId = `${nodeId}-input-${inputIdCounter.current}`
 
-    // Count existing inputs for this node
-    const existingInputs = nodes.filter((n) => n.id.startsWith(`${nodeId}-input-`) && !n.id.includes('background'))
-    const inputCount = existingInputs.length + 1
+      // Count existing inputs for this node
+      const existingInputs = currentNodes.filter((n) => n.id.startsWith(`${nodeId}-input-`) && !n.id.includes('background'))
+      const inputCount = existingInputs.length + 1
 
-    const newInputNode: Node = {
-      id: newInputId,
-      type: 'input',
-      position: calculateArcPosition(
-        parentNode.position.x,
-        parentNode.position.y,
-        existingInputs.length,
-        inputCount,
-        true
-      ),
-      data: { label: inputType },
-      hidden: false,
-    }
+      const newInputNode: Node = {
+        id: newInputId,
+        type: 'input',
+        position: calculateNodePosition(
+          parentNode.position.x + 26,
+          parentNode.position.y,
+          existingInputs.length,
+          inputCount,
+          true
+        ),
+        data: { label: inputType },
+        hidden: false,
+      }
 
-    const newEdge: Edge = {
-      id: `e-${newInputId}-${nodeId}`,
-      source: newInputId,
-      target: nodeId,
-      targetHandle: 'top',
-      type: 'default',
-      className: 'custom-edge',
-      hidden: false,
-    }
+      const newInputEdge: Edge = {
+        id: `e-${newInputId}-${nodeId}`,
+        source: newInputId,
+        target: nodeId,
+        targetHandle: 'top',
+        type: 'default',
+        className: 'custom-edge',
+        hidden: false,
+      }
 
-    // Mark the node as expanded
-    setExpandedNodes((prev) => {
-      const newSet = new Set(prev)
-      newSet.add(`${nodeId}-inputs`)
-      return newSet
-    })
+      // Mark the node as expanded
+      setExpandedNodes((prev) => {
+        const newSet = new Set(prev)
+        newSet.add(`${nodeId}-inputs`)
+        return newSet
+      })
 
-    setNodes((nds) => {
-      // Reposition all existing input nodes in the arc pattern
-      let updatedNodes = nds.map((n) => {
-        if (n.id === nodeId) {
-          return {
-            ...n,
-            data: {
-              ...n.data,
-              onDelete: handleDeleteNode,
-              onAddInput: handleAddInput,
-              onAddOutput: handleAddOutput,
-              onToggleInputGroup: handleToggleInputGroup,
-              onToggleOutputGroup: handleToggleOutputGroup,
-              onCollapse: handleCollapseNode,
-            },
-          }
-        }
-        // Reposition existing input nodes
+      // Add the edge
+      setEdges((eds) => [...eds, newInputEdge])
+
+      // Reposition all existing input nodes in a row
+      let updatedNodes = currentNodes.map((n) => {
         if (n.id.startsWith(`${nodeId}-input-`) && !n.id.includes('background')) {
           const inputIndex = existingInputs.findIndex(input => input.id === n.id)
           if (inputIndex !== -1) {
             return {
               ...n,
-              position: calculateArcPosition(
-                parentNode.position.x,
+              position: calculateNodePosition(
+                parentNode.position.x + 26,
                 parentNode.position.y,
                 inputIndex,
                 inputCount,
@@ -276,16 +276,27 @@ const ActivityInputOutput: React.FC<ActivityInputOutputProps> = ({ className = '
         return n
       })
 
+      // Calculate background width and position to match node spacing
+      const spacing = 80
+      const nodeWidth = 52 // Approximate width of input/output nodes
+      const bgWidth = (inputCount - 1) * spacing + 160 // Width to encompass nodes
+      // Center the background on the nodes (which are centered on parentNode.position.x + 26)
+      const parentCenterX = parentNode.position.x + 26 + nodeWidth / 2
+      const bgX = parentCenterX - bgWidth / 2
+      // Position so nodes sit in the upper portion of the pentagon
+      const bgY = parentNode.position.y - 150 - 50 // Node is 150px above parent
+
       // Check if input background exists
       const inputBgId = `${nodeId}-input-background`
       const existingBg = updatedNodes.find((n) => n.id === inputBgId)
 
       if (existingBg) {
-        // Update existing background
+        // Update existing background position and count
         updatedNodes = updatedNodes.map((n) => {
           if (n.id === inputBgId) {
             return {
               ...n,
+              position: { x: bgX, y: bgY },
               data: { type: 'input', count: inputCount },
               hidden: false,
             }
@@ -297,10 +308,7 @@ const ActivityInputOutput: React.FC<ActivityInputOutputProps> = ({ className = '
         const backgroundNode: Node = {
           id: inputBgId,
           type: 'groupBackground',
-          position: {
-            x: parentNode.position.x - 160,
-            y: parentNode.position.y - 200,
-          },
+          position: { x: bgX, y: bgY },
           data: { type: 'input', count: inputCount },
           draggable: false,
           selectable: false,
@@ -312,76 +320,63 @@ const ActivityInputOutput: React.FC<ActivityInputOutputProps> = ({ className = '
 
       return [...updatedNodes, newInputNode]
     })
-    setEdges((eds) => [...eds, newEdge])
-  }, [nodes, setExpandedNodes, setNodes, setEdges, calculateArcPosition, handleDeleteNode, handleToggleInputGroup, handleToggleOutputGroup, handleCollapseNode]) // eslint-disable-line react-hooks/exhaustive-deps
+  }, [setExpandedNodes, setNodes, setEdges, calculateNodePosition])
 
   const handleAddOutput = useCallback((nodeId: string, outputType: string) => {
-    const parentNode = nodes.find((n) => n.id === nodeId)
-    if (!parentNode) return
+    setNodes((currentNodes) => {
+      const parentNode = currentNodes.find((n) => n.id === nodeId)
+      if (!parentNode) return currentNodes
 
-    outputIdCounter.current += 1
-    const newOutputId = `${nodeId}-output-${outputIdCounter.current}`
+      outputIdCounter.current += 1
+      const newOutputId = `${nodeId}-output-${outputIdCounter.current}`
 
-    // Count existing outputs for this node
-    const existingOutputs = nodes.filter((n) => n.id.startsWith(`${nodeId}-output-`) && !n.id.includes('background'))
-    const outputCount = existingOutputs.length + 1
+      // Count existing outputs for this node
+      const existingOutputs = currentNodes.filter((n) => n.id.startsWith(`${nodeId}-output-`) && !n.id.includes('background'))
+      const outputCount = existingOutputs.length + 1
 
-    const newOutputNode: Node = {
-      id: newOutputId,
-      type: 'output',
-      position: calculateArcPosition(
-        parentNode.position.x,
-        parentNode.position.y,
-        existingOutputs.length,
-        outputCount,
-        false
-      ),
-      data: { label: outputType },
-      hidden: false,
-    }
+      const newOutputNode: Node = {
+        id: newOutputId,
+        type: 'output',
+        position: calculateNodePosition(
+          parentNode.position.x + 26,
+          parentNode.position.y,
+          existingOutputs.length,
+          outputCount,
+          false
+        ),
+        data: { label: outputType },
+        hidden: false,
+      }
 
-    const newEdge: Edge = {
-      id: `e-${nodeId}-${newOutputId}`,
-      source: nodeId,
-      sourceHandle: 'bottom',
-      target: newOutputId,
-      type: 'default',
-      className: 'custom-edge',
-      hidden: false,
-    }
+      const newOutputEdge: Edge = {
+        id: `e-${nodeId}-${newOutputId}`,
+        source: nodeId,
+        sourceHandle: 'bottom',
+        target: newOutputId,
+        type: 'default',
+        className: 'custom-edge',
+        hidden: false,
+      }
 
-    // Mark the node as expanded
-    setExpandedNodes((prev) => {
-      const newSet = new Set(prev)
-      newSet.add(`${nodeId}-outputs`)
-      return newSet
-    })
+      // Mark the node as expanded
+      setExpandedNodes((prev) => {
+        const newSet = new Set(prev)
+        newSet.add(`${nodeId}-outputs`)
+        return newSet
+      })
 
-    setNodes((nds) => {
-      // Reposition all existing output nodes in the arc pattern
-      let updatedNodes = nds.map((n) => {
-        if (n.id === nodeId) {
-          return {
-            ...n,
-            data: {
-              ...n.data,
-              onDelete: handleDeleteNode,
-              onAddInput: handleAddInput,
-              onAddOutput: handleAddOutput,
-              onToggleInputGroup: handleToggleInputGroup,
-              onToggleOutputGroup: handleToggleOutputGroup,
-              onCollapse: handleCollapseNode,
-            },
-          }
-        }
-        // Reposition existing output nodes
+      // Add the edge
+      setEdges((eds) => [...eds, newOutputEdge])
+
+      // Reposition all existing output nodes in a row
+      let updatedNodes = currentNodes.map((n) => {
         if (n.id.startsWith(`${nodeId}-output-`) && !n.id.includes('background')) {
           const outputIndex = existingOutputs.findIndex(output => output.id === n.id)
           if (outputIndex !== -1) {
             return {
               ...n,
-              position: calculateArcPosition(
-                parentNode.position.x,
+              position: calculateNodePosition(
+                parentNode.position.x + 26,
                 parentNode.position.y,
                 outputIndex,
                 outputCount,
@@ -393,16 +388,27 @@ const ActivityInputOutput: React.FC<ActivityInputOutputProps> = ({ className = '
         return n
       })
 
+      // Calculate background width and position to match node spacing
+      const spacing = 80
+      const nodeWidth = 52 // Approximate width of input/output nodes
+      const bgWidth = (outputCount - 1) * spacing + 160 // Width to encompass nodes
+      // Center the background on the nodes (which are centered on parentNode.position.x + 26)
+      const parentCenterX = parentNode.position.x + 26 + nodeWidth / 2
+      const bgX = parentCenterX - bgWidth / 2
+      // Position so nodes sit in the lower portion of the pentagon - same distance as input
+      const bgY = parentNode.position.y + 50 // Start below execution node with same gap as input has above
+
       // Check if output background exists
       const outputBgId = `${nodeId}-output-background`
       const existingBg = updatedNodes.find((n) => n.id === outputBgId)
 
       if (existingBg) {
-        // Update existing background
+        // Update existing background position and count
         updatedNodes = updatedNodes.map((n) => {
           if (n.id === outputBgId) {
             return {
               ...n,
+              position: { x: bgX, y: bgY },
               data: { type: 'output', count: outputCount },
               hidden: false,
             }
@@ -414,10 +420,7 @@ const ActivityInputOutput: React.FC<ActivityInputOutputProps> = ({ className = '
         const backgroundNode: Node = {
           id: outputBgId,
           type: 'groupBackground',
-          position: {
-            x: parentNode.position.x - 160,
-            y: parentNode.position.y + 100,
-          },
+          position: { x: bgX, y: bgY },
           data: { type: 'output', count: outputCount },
           draggable: false,
           selectable: false,
@@ -429,46 +432,104 @@ const ActivityInputOutput: React.FC<ActivityInputOutputProps> = ({ className = '
 
       return [...updatedNodes, newOutputNode]
     })
-    setEdges((eds) => [...eds, newEdge])
-  }, [nodes, setExpandedNodes, setNodes, setEdges, calculateArcPosition, handleDeleteNode, handleToggleInputGroup, handleToggleOutputGroup, handleCollapseNode]) // eslint-disable-line react-hooks/exhaustive-deps
+  }, [setExpandedNodes, setNodes, setEdges, calculateNodePosition])
+
+  // Update the callbacks ref whenever the callbacks change
+  useEffect(() => {
+    callbacksRef.current = {
+      handleDeleteNode,
+      handleAddInput,
+      handleAddOutput,
+      handleToggleInputGroup,
+      handleToggleOutputGroup,
+      handleCollapseNode,
+    }
+  }, [handleDeleteNode, handleAddInput, handleAddOutput, handleToggleInputGroup, handleToggleOutputGroup, handleCollapseNode])
+
+  // Stable callback wrappers that use refs
+  const stableHandleDeleteNode = useCallback((nodeId: string) => {
+    callbacksRef.current?.handleDeleteNode(nodeId)
+  }, [])
+
+  const stableHandleAddInput = useCallback((nodeId: string, inputType: string) => {
+    callbacksRef.current?.handleAddInput(nodeId, inputType)
+  }, [])
+
+  const stableHandleAddOutput = useCallback((nodeId: string, outputType: string) => {
+    callbacksRef.current?.handleAddOutput(nodeId, outputType)
+  }, [])
+
+  const stableHandleToggleInputGroup = useCallback((nodeId: string) => {
+    callbacksRef.current?.handleToggleInputGroup(nodeId)
+  }, [])
+
+  const stableHandleToggleOutputGroup = useCallback((nodeId: string) => {
+    callbacksRef.current?.handleToggleOutputGroup(nodeId)
+  }, [])
+
+  const stableHandleCollapseNode = useCallback((nodeId: string) => {
+    callbacksRef.current?.handleCollapseNode(nodeId)
+  }, [])
 
   const handleAddNode = useCallback(() => {
     nodeIdCounter.current += 1
     const newNodeId = `execution-${nodeIdCounter.current}`
 
-    // Find the rightmost execution node to place the new one next to it
-    const executionNodes = nodes.filter((n) => n.type === 'execution')
-    const rightmostNode = executionNodes.reduce((max, node) => 
-      node.position.x > max.position.x ? node : max
-    , executionNodes[0])
+    setNodes((currentNodes) => {
+      // Find the rightmost execution node to place the new one next to it
+      const executionNodes = currentNodes.filter((n) => n.type === 'execution')
+      const rightmostNode = executionNodes.reduce((max, node) => 
+        node.position.x > max.position.x ? node : max
+      , executionNodes[0])
 
-    const newNode: Node = {
-      id: newNodeId,
-      type: 'execution',
-      position: {
-        x: rightmostNode.position.x + 250,
-        y: 250,
-      },
-      data: {
-        label: `execution-${nodeIdCounter.current}`,
+      const newNode: Node = {
         id: newNodeId,
-        onDelete: handleDeleteNode,
-        onAddInput: handleAddInput,
-        onAddOutput: handleAddOutput,
-        onToggleInputGroup: handleToggleInputGroup,
-        onToggleOutputGroup: handleToggleOutputGroup,
-        onCollapse: handleCollapseNode,
-      },
-    }
+        type: 'execution',
+        position: {
+          x: rightmostNode.position.x + 250,
+          y: 250,
+        },
+        data: {
+          label: `execution-${nodeIdCounter.current}`,
+          id: newNodeId,
+          onDelete: stableHandleDeleteNode,
+          onAddInput: stableHandleAddInput,
+          onAddOutput: stableHandleAddOutput,
+          onToggleInputGroup: stableHandleToggleInputGroup,
+          onToggleOutputGroup: stableHandleToggleOutputGroup,
+          onCollapse: stableHandleCollapseNode,
+        },
+      }
 
-    // Remove edge from last execution node to stop
-    const lastExecutionNode = rightmostNode
-    const stopNode = nodes.find((n) => n.type === 'stop')
+      // Remove edge from last execution node to stop
+      const lastExecutionNode = rightmostNode
+      const stopNode = currentNodes.find((n) => n.type === 'stop')
 
-    if (stopNode) {
-      // Update stop node position
-      setNodes((nds) => {
-        const updatedNodes = nds.map((n) => {
+      if (stopNode) {
+        // Update edges
+        setEdges((eds) => {
+          const filteredEdges = eds.filter((e) => !(e.source === lastExecutionNode.id && e.target === stopNode.id))
+          return [
+            ...filteredEdges,
+            {
+              id: `e-${lastExecutionNode.id}-${newNodeId}`,
+              source: lastExecutionNode.id,
+              target: newNodeId,
+              type: 'default',
+              className: 'custom-edge',
+            },
+            {
+              id: `e-${newNodeId}-${stopNode.id}`,
+              source: newNodeId,
+              target: stopNode.id,
+              type: 'default',
+              className: 'custom-edge',
+            },
+          ]
+        })
+
+        // Update stop node position and add new node
+        const updatedNodes = currentNodes.map((n) => {
           if (n.id === stopNode.id) {
             return {
               ...n,
@@ -481,31 +542,10 @@ const ActivityInputOutput: React.FC<ActivityInputOutputProps> = ({ className = '
           return n
         })
         return [...updatedNodes, newNode]
-      })
-
-      // Update edges
-      setEdges((eds) => {
-        const filteredEdges = eds.filter((e) => !(e.source === lastExecutionNode.id && e.target === stopNode.id))
-        return [
-          ...filteredEdges,
-          {
-            id: `e-${lastExecutionNode.id}-${newNodeId}`,
-            source: lastExecutionNode.id,
-            target: newNodeId,
-            type: 'default',
-            className: 'custom-edge',
-          },
-          {
-            id: `e-${newNodeId}-${stopNode.id}`,
-            source: newNodeId,
-            target: stopNode.id,
-            type: 'default',
-            className: 'custom-edge',
-          },
-        ]
-      })
-    }
-  }, [nodes, setNodes, setEdges, handleDeleteNode, handleAddInput, handleAddOutput, handleToggleInputGroup, handleToggleOutputGroup, handleCollapseNode])
+      }
+      return currentNodes
+    })
+  }, [setNodes, setEdges, stableHandleDeleteNode, stableHandleAddInput, stableHandleAddOutput, stableHandleToggleInputGroup, stableHandleToggleOutputGroup, stableHandleCollapseNode])
 
   // Initialize nodes on mount
   useEffect(() => {
@@ -523,12 +563,12 @@ const ActivityInputOutput: React.FC<ActivityInputOutputProps> = ({ className = '
         data: {
           label: 'trigger-ci/cd',
           id: 'execution-1',
-          onDelete: handleDeleteNode,
-          onAddInput: handleAddInput,
-          onAddOutput: handleAddOutput,
-          onToggleInputGroup: handleToggleInputGroup,
-          onToggleOutputGroup: handleToggleOutputGroup,
-          onCollapse: handleCollapseNode,
+          onDelete: stableHandleDeleteNode,
+          onAddInput: stableHandleAddInput,
+          onAddOutput: stableHandleAddOutput,
+          onToggleInputGroup: stableHandleToggleInputGroup,
+          onToggleOutputGroup: stableHandleToggleOutputGroup,
+          onCollapse: stableHandleCollapseNode,
         },
       },
       {
@@ -556,7 +596,7 @@ const ActivityInputOutput: React.FC<ActivityInputOutputProps> = ({ className = '
       },
     ])
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, [stableHandleDeleteNode, stableHandleAddInput, stableHandleAddOutput, stableHandleToggleInputGroup, stableHandleToggleOutputGroup, stableHandleCollapseNode])
 
   return (
     <div className={`activity-input-output ${className}`}>
