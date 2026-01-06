@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { GraphNode } from './GraphNode';
 
 const meta: Meta<typeof GraphNode> = {
-  title: 'Attack Graph Components/GraphNode',
+  title: 'Attack Graph/Components/GraphNode',
   component: GraphNode,
   parameters: {
     layout: 'centered',

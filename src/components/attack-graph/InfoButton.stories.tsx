@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { InfoButton } from './InfoButton';
 
 const meta: Meta<typeof InfoButton> = {
-  title: 'Attack Graph/Components/InfoButton',
+  title: 'Attack Graph/InfoButton/Icon',
   component: InfoButton,
   parameters: {
     layout: 'centered',

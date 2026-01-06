@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { NodeTooltip } from './NodeTooltip';
 
 const meta: Meta<typeof NodeTooltip> = {
-  title: 'Attack Graph Components/NodeTooltip',
+  title: 'Attack Graph/Components/NodeTooltip',
   component: NodeTooltip,
   parameters: {
     layout: 'centered',

@@ -17,6 +17,45 @@
   max-width: 800px;
 }
 
+.feed-manager__header {
+  display: flex;
+  padding: 8px 12px;
+  justify-content: space-between;
+  align-items: center;
+  align-self: stretch;
+  background: var(--Gray-400, #ADADAD);
+}
+
+.feed-manager__title {
+  color: var(--Blue-Dark-blue-950, #00112B);
+  font-family: var(--font-family-macan-mono);
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 110%;
+}
+
+.feed-manager__actions {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.feed-manager__action-btn {
+  display: flex;
+  width: 24px;
+  height: 24px;
+  justify-content: center;
+  align-items: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.feed-manager__action-btn:hover {
+  opacity: 0.7;
+}
+
 .feed-manager__tabs {
   display: flex;
   align-items: center;
@@ -99,6 +138,7 @@
   height: 4px;
   background: var(--Text-Gray-text-Secondary-text, #ADADAD);
   position: relative;
+  cursor: pointer;
 }
 
 .feed-manager__slider-fill {

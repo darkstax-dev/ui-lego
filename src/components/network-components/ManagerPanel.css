@@ -145,16 +145,42 @@
   opacity: 0.8;
 }
 
+.manager-panel__tab-content {
+  width: 100%;
+  align-self: stretch;
+}
+
+.manager-panel__accordion-eye {
+  display: flex;
+  width: 24px;
+  height: 24px;
+  justify-content: center;
+  align-items: center;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  flex-shrink: 0;
+}
+
+.manager-panel__accordion-eye:hover {
+  opacity: 0.7;
+}
+
+.manager-panel__accordion-content {
+  padding: 0;
+}
+
 @media (max-width: 768px) {
   .manager-panel {
     max-width: 100%;
   }
-  
+
   .manager-panel__tabs {
     width: 100%;
     overflow-x: auto;
   }
-  
+
   .manager-panel__tab {
     flex-shrink: 0;
   }
