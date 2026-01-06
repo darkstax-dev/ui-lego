@@ -25,15 +25,33 @@
 
 .node-box-blue {
   border-color: #072B56;
+  background: linear-gradient(0deg, rgba(4, 81, 164, 0.20), rgba(4, 81, 164, 0.20)), #DFDFDF;
   box-shadow: 0 0 0 4px rgba(7, 43, 86, 0.2);
 }
 
 .node-box-green {
   border-color: #23A45A;
+  background: linear-gradient(0deg, rgba(35, 164, 90, 0.20), rgba(35, 164, 90, 0.20)), #DFDFDF;
   box-shadow: 0 0 0 4px rgba(35, 164, 90, 0.2);
 }
 
 .node-box-orange {
   border-color: #ED8B30;
+  background: linear-gradient(0deg, rgba(237, 139, 48, 0.20), rgba(237, 139, 48, 0.20)), #DFDFDF;
   box-shadow: 0 0 0 4px rgba(237, 139, 48, 0.2);
+}
+
+.node-box-gray {
+  border-color: #78797A;
+  background: #ADADAD;
+  box-shadow: 0 0 0 4px rgba(120, 121, 122, 0.2);
+}
+
+.node-box-red-hexagon {
+  border: none;
+  background: transparent;
+  box-shadow: none;
+  width: 72px;
+  height: 72px;
+  border-radius: 0;
 }
