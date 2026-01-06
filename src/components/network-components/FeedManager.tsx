@@ -1,7 +1,6 @@
-import React, { useState } from 'react'
+import React, { useState, useRef, useCallback } from 'react'
 import { TabItem } from '../tabs/Tabs'
 import Checkbox from '../checkbox/Checkbox'
-import SliderField from '../inputs/SliderField'
 import './FeedManager.css'
 
 export interface FeedInfo {
@@ -32,6 +31,9 @@ export interface FeedManagerProps {
   onSeeDetails?: () => void
   informationSources?: InformationSource[]
   onRemoveSource?: (id: string) => void
+  onCollapse?: () => void
+  onMore?: () => void
+  onClose?: () => void
   className?: string
 }
 
@@ -64,11 +66,17 @@ const FeedManager: React.FC<FeedManagerProps> = ({
     { id: 'faa', label: 'FAA' }
   ],
   onRemoveSource,
+  onCollapse,
+  onMore,
+  onClose,
   className = ''
 }) => {
   const [internalFeeds, setInternalFeeds] = useState(contributingFeeds)
   const [internalSources, setInternalSources] = useState(informationSources)
   const [currentTab, setCurrentTab] = useState(activeTab)
+  const [currentDistance, setCurrentDistance] = useState(distance)
+  const sliderRef = useRef<HTMLDivElement>(null)
+  const [isDragging, setIsDragging] = useState(false)
 
   const tabs: TabItem[] = [
     { value: 'emergency', label: 'Emergency' },
@@ -95,14 +103,51 @@ const FeedManager: React.FC<FeedManagerProps> = ({
     onRemoveSource?.(id)
   }
 
-  const handleDistanceChange = (value: [number, number]) => {
-    onDistanceChange?.(value[1])
+  const getValueFromPosition = useCallback((clientX: number) => {
+    if (!sliderRef.current) return currentDistance
+
+    const rect = sliderRef.current.getBoundingClientRect()
+    const percentage = Math.max(0, Math.min(100, ((clientX - rect.left) / rect.width) * 100))
+    const rawValue = (percentage / 100) * 500
+    return Math.round(rawValue / 10) * 10
+  }, [currentDistance])
+
+  const handleMouseDown = (event: React.MouseEvent) => {
+    event.preventDefault()
+    setIsDragging(true)
+    const newValue = getValueFromPosition(event.clientX)
+    setCurrentDistance(newValue)
+    onDistanceChange?.(newValue)
   }
 
+  const handleMouseMove = useCallback((event: MouseEvent) => {
+    if (!isDragging) return
+
+    const newValue = getValueFromPosition(event.clientX)
+    setCurrentDistance(newValue)
+    onDistanceChange?.(newValue)
+  }, [isDragging, getValueFromPosition, onDistanceChange])
+
+  const handleMouseUp = useCallback(() => {
+    setIsDragging(false)
+  }, [])
+
+  React.useEffect(() => {
+    if (isDragging) {
+      document.addEventListener('mousemove', handleMouseMove)
+      document.addEventListener('mouseup', handleMouseUp)
+      return () => {
+        document.removeEventListener('mousemove', handleMouseMove)
+        document.removeEventListener('mouseup', handleMouseUp)
+      }
+    }
+  }, [isDragging, handleMouseMove, handleMouseUp])
+
+  const sliderPercentage = (currentDistance / 500) * 100
+
   const renderEmergencyTab = () => (
-    <div className="feed-manager__content">
+    <>
       <div className="feed-manager__section feed-manager__section--info">
-        <h3 className="feed-manager__section-title">Emergency Information</h3>
         {feedInfo.map((info, index) => (
           <div key={index} className="feed-manager__info-row">
             <span className="feed-manager__info-label">{info.name}</span>
@@ -139,39 +184,11 @@ const FeedManager: React.FC<FeedManagerProps> = ({
           ))}
         </div>
       </div>
-    </div>
+    </>
   )
 
   const renderFeedsTab = () => (
-    <div className="feed-manager__content">
-      <div className="feed-manager__location-section">
-        <div className="feed-manager__location-control">
-          <div className="feed-manager__map-icon">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-              <g clipPath="url(#clip0_map_pin)">
-                <path d="M12 23.7279L5.636 17.3639C4.37734 16.1052 3.52019 14.5016 3.17293 12.7558C2.82567 11.0099 3.00391 9.20035 3.6851 7.55582C4.36629 5.91129 5.51984 4.50569 6.99988 3.51677C8.47992 2.52784 10.22 2 12 2C13.78 2 15.5201 2.52784 17.0001 3.51677C18.4802 4.50569 19.6337 5.91129 20.3149 7.55582C20.9961 9.20035 21.1743 11.0099 20.8271 12.7558C20.4798 14.5016 19.6227 16.1052 18.364 17.3639L12 23.7279ZM16.95 15.9499C17.9289 14.9709 18.5955 13.7236 18.8656 12.3658C19.1356 11.0079 18.9969 9.60052 18.4671 8.32148C17.9373 7.04244 17.04 5.94923 15.8889 5.18009C14.7378 4.41095 13.3844 4.00043 12 4.00043C10.6156 4.00043 9.26222 4.41095 8.11109 5.18009C6.95996 5.94923 6.06275 7.04244 5.53292 8.32148C5.00308 9.60052 4.86442 11.0079 5.13445 12.3658C5.40449 13.7236 6.07111 14.9709 7.05 15.9499L12 20.8999L16.95 15.9499ZM12 12.9999C11.4696 12.9999 10.9609 12.7892 10.5858 12.4141C10.2107 12.0391 10 11.5304 10 10.9999C10 10.4695 10.2107 9.96078 10.5858 9.58571C10.9609 9.21064 11.4696 8.99992 12 8.99992C12.5304 8.99992 13.0391 9.21064 13.4142 9.58571C13.7893 9.96078 14 10.4695 14 10.9999C14 11.5304 13.7893 12.0391 13.4142 12.4141C13.0391 12.7892 12.5304 12.9999 12 12.9999Z" fill="#03053D"/>
-              </g>
-              <defs>
-                <clipPath id="clip0_map_pin">
-                  <rect width="24" height="24" fill="white"/>
-                </clipPath>
-              </defs>
-            </svg>
-          </div>
-          <div style={{ flex: 1 }}>
-            <SliderField
-              value={[0, distance]}
-              onChange={handleDistanceChange}
-              min={0}
-              max={500}
-              step={10}
-              suffix=" mi"
-              prefix=""
-            />
-          </div>
-        </div>
-      </div>
-
+    <>
       <div className="feed-manager__section feed-manager__section--feeds">
         <h3 className="feed-manager__section-title">Contributing feeds</h3>
         <div className="feed-manager__checkbox-grid">
@@ -203,14 +220,14 @@ const FeedManager: React.FC<FeedManagerProps> = ({
           </div>
         </div>
       </div>
-    </div>
+    </>
   )
 
   const renderActivityTab = () => (
-    <div className="feed-manager__content">
+    <>
       <div className="feed-manager__section">
         <h3 className="feed-manager__section-title">Recent Activity</h3>
-        <div style={{ padding: '16px', color: '#78797A', fontSize: '14px' }}>
+        <div style={{ padding: '16px 0', color: '#78797A', fontSize: '14px' }}>
           <p style={{ margin: '0 0 12px 0' }}>No recent activity to display</p>
           <div className="feed-manager__checkbox-grid">
             <div className="feed-manager__checkbox-row">
@@ -236,11 +253,44 @@ const FeedManager: React.FC<FeedManagerProps> = ({
           </div>
         </div>
       </div>
-    </div>
+    </>
   )
 
   return (
     <div className={`feed-manager ${className}`}>
+      <div className="feed-manager__header">
+        <div className="feed-manager__title">Feed manager</div>
+        <div className="feed-manager__actions">
+          <button 
+            className="feed-manager__action-btn" 
+            onClick={onCollapse}
+            aria-label="Collapse"
+          >
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M11.9997 10.828L7.04974 15.778L5.63574 14.364L11.9997 8L18.3637 14.364L16.9497 15.778L11.9997 10.828Z" fill="#78797A"/>
+            </svg>
+          </button>
+          <button 
+            className="feed-manager__action-btn" 
+            onClick={onMore}
+            aria-label="More options"
+          >
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 3C10.9 3 10 3.9 10 5C10 6.1 10.9 7 12 7C13.1 7 14 6.1 14 5C14 3.9 13.1 3 12 3ZM12 17C10.9 17 10 17.9 10 19C10 20.1 10.9 21 12 21C13.1 21 14 20.1 14 19C14 17.9 13.1 17 12 17ZM12 10C10.9 10 10 10.9 10 12C10 13.1 10.9 14 12 14C13.1 14 14 13.1 14 12C14 10.9 13.1 10 12 10Z" fill="#78797A"/>
+            </svg>
+          </button>
+          <button 
+            className="feed-manager__action-btn" 
+            onClick={onClose}
+            aria-label="Close"
+          >
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M11.9997 10.5867L16.9497 5.63672L18.3637 7.05072L13.4137 12.0007L18.3637 16.9507L16.9497 18.3647L11.9997 13.4147L7.04974 18.3647L5.63574 16.9507L10.5857 12.0007L5.63574 7.05072L7.04974 5.63672L11.9997 10.5867Z" fill="#78797A"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+
       <div className="feed-manager__tabs">
         {tabs.map((tab) => (
           <button
@@ -253,9 +303,44 @@ const FeedManager: React.FC<FeedManagerProps> = ({
         ))}
       </div>
 
-      {currentTab === 'emergency' && renderEmergencyTab()}
-      {currentTab === 'feeds' && renderFeedsTab()}
-      {currentTab === 'activity' && renderActivityTab()}
+      <div className="feed-manager__content">
+        <div className="feed-manager__location-section">
+          <div className="feed-manager__location-control">
+            <div className="feed-manager__map-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <g clipPath="url(#clip0_map_pin)">
+                  <path d="M12 23.7279L5.636 17.3639C4.37734 16.1052 3.52019 14.5016 3.17293 12.7558C2.82567 11.0099 3.00391 9.20035 3.6851 7.55582C4.36629 5.91129 5.51984 4.50569 6.99988 3.51677C8.47992 2.52784 10.22 2 12 2C13.78 2 15.5201 2.52784 17.0001 3.51677C18.4802 4.50569 19.6337 5.91129 20.3149 7.55582C20.9961 9.20035 21.1743 11.0099 20.8271 12.7558C20.4798 14.5016 19.6227 16.1052 18.364 17.3639L12 23.7279ZM16.95 15.9499C17.9289 14.9709 18.5955 13.7236 18.8656 12.3658C19.1356 11.0079 18.9969 9.60052 18.4671 8.32148C17.9373 7.04244 17.04 5.94923 15.8889 5.18009C14.7378 4.41095 13.3844 4.00043 12 4.00043C10.6156 4.00043 9.26222 4.41095 8.11109 5.18009C6.95996 5.94923 6.06275 7.04244 5.53292 8.32148C5.00308 9.60052 4.86442 11.0079 5.13445 12.3658C5.40449 13.7236 6.07111 14.9709 7.05 15.9499L12 20.8999L16.95 15.9499ZM12 12.9999C11.4696 12.9999 10.9609 12.7892 10.5858 12.4141C10.2107 12.0391 10 11.5304 10 10.9999C10 10.4695 10.2107 9.96078 10.5858 9.58571C10.9609 9.21064 11.4696 8.99992 12 8.99992C12.5304 8.99992 13.0391 9.21064 13.4142 9.58571C13.7893 9.96078 14 10.4695 14 10.9999C14 11.5304 13.7893 12.0391 13.4142 12.4141C13.0391 12.7892 12.5304 12.9999 12 12.9999Z" fill="#03053D"/>
+                </g>
+                <defs>
+                  <clipPath id="clip0_map_pin">
+                    <rect width="24" height="24" fill="white"/>
+                  </clipPath>
+                </defs>
+              </svg>
+            </div>
+            <div className="feed-manager__slider-container" ref={sliderRef}>
+              <div className="feed-manager__slider-track" onMouseDown={handleMouseDown}>
+                <div 
+                  className="feed-manager__slider-fill" 
+                  style={{ width: `${sliderPercentage}%` }}
+                />
+                <div 
+                  className="feed-manager__slider-handle"
+                  style={{ left: `${sliderPercentage}%` }}
+                  onMouseDown={handleMouseDown}
+                />
+              </div>
+            </div>
+            <div className="feed-manager__distance-display">
+              <span className="feed-manager__distance-value">{currentDistance} mi</span>
+            </div>
+          </div>
+        </div>
+
+        {currentTab === 'emergency' && renderEmergencyTab()}
+        {currentTab === 'feeds' && renderFeedsTab()}
+        {currentTab === 'activity' && renderActivityTab()}
+      </div>
     </div>
   )
 }
