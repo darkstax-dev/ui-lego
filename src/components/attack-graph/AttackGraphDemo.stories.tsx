@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { AttackGraphDemo } from './AttackGraphDemo';
 
 const meta: Meta<typeof AttackGraphDemo> = {
-  title: 'Attack Graph Components/Demo',
+  title: 'Attack Graph/Demo',
   component: AttackGraphDemo,
   parameters: {
     layout: 'fullscreen',

@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { NodeBox } from './NodeBox';
 
 const meta: Meta<typeof NodeBox> = {
-  title: 'Attack Graph Components/NodeBox',
+  title: 'Attack Graph/Components/NodeBox',
   component: NodeBox,
   parameters: {
     layout: 'centered',

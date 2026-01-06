@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { ConnectorLine } from './ConnectorLine';
 
 const meta: Meta<typeof ConnectorLine> = {
-  title: 'Attack Graph Components/ConnectorLine',
+  title: 'Attack Graph/Components/ConnectorLine',
   component: ConnectorLine,
   parameters: {
     layout: 'centered',
