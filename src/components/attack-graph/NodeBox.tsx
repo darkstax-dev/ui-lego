@@ -1,7 +1,7 @@
 import React from 'react';
 import './NodeBox.css';
 
-export type NodeBoxVariant = 'blue' | 'green' | 'orange';
+export type NodeBoxVariant = 'blue' | 'green' | 'orange' | 'gray' | 'red-hexagon';
 
 export interface NodeBoxProps {
   variant?: NodeBoxVariant;
