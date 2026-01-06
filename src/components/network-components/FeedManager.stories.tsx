@@ -93,7 +93,46 @@ export const WithInteractions: Story = {
     onDistanceChange: (distance: number) => console.log('Distance changed to:', distance),
     onContributingFeedsChange: (feeds) => console.log('Contributing feeds changed:', feeds),
     onSeeDetails: () => console.log('See details clicked'),
-    onRemoveSource: (id: string) => console.log('Source removed:', id)
+    onRemoveSource: (id: string) => console.log('Source removed:', id),
+    onCollapse: () => console.log('Collapse clicked'),
+    onMore: () => console.log('More options clicked'),
+    onClose: () => console.log('Close clicked')
+  }
+}
+
+export const CompleteDemo: Story = {
+  args: {
+    activeTab: 'feeds',
+    distance: 400,
+    contributingFeeds: [
+      { id: 'nwas', label: 'NWAS', checked: true },
+      { id: 'highway', label: 'Highway Patrol', checked: false },
+      { id: 'emergency', label: 'Emergency', checked: true },
+      { id: 'social', label: 'Social feed', checked: false }
+    ],
+    feedInfo: [
+      { name: 'Danaging Winds', value: '38-49 mhp', valueColor: 'default' },
+      { name: 'Hall possible', value: 'Large', valueColor: 'default' },
+      { name: 'Herricane', value: 'Very Likely', valueColor: 'warning' },
+      { name: 'Flooding', value: 'Confirmed', valueColor: 'danger' },
+      { name: 'Location affected', value: '4', valueColor: 'default' },
+      { name: 'Trail last update', value: '00:00:00 UTC', valueColor: 'default' },
+      { name: 'Est Persons', value: '3,672', valueColor: 'default' },
+      { name: 'State of emergency', value: 'No', valueColor: 'default' }
+    ],
+    informationSources: [
+      { id: 'nwas', label: 'NWAS' },
+      { id: 'neh', label: 'NEH' },
+      { id: 'faa', label: 'FAA' }
+    ],
+    onTabChange: (tab: string) => console.log('Tab changed to:', tab),
+    onDistanceChange: (distance: number) => console.log('Distance changed to:', distance),
+    onContributingFeedsChange: (feeds) => console.log('Contributing feeds changed:', feeds),
+    onSeeDetails: () => console.log('See details clicked'),
+    onRemoveSource: (id: string) => console.log('Source removed:', id),
+    onCollapse: () => console.log('Collapse clicked'),
+    onMore: () => console.log('More options clicked'),
+    onClose: () => console.log('Close clicked')
   }
 }
 

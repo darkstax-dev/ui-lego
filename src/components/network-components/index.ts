@@ -8,9 +8,12 @@ export { ManagerPanel } from './ManagerPanel'
 export type { ManagerPanelProps } from './ManagerPanel'
 
 export { default as FeedManager } from './FeedManager'
-export type { 
-  FeedManagerProps, 
-  FeedInfo, 
-  ContributingFeed, 
-  InformationSource 
+export type {
+  FeedManagerProps,
+  FeedInfo,
+  ContributingFeed,
+  InformationSource
 } from './FeedManager'
+
+export { Toast } from './Toast'
+export type { ToastProps } from './Toast'
