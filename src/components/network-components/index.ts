@@ -17,3 +17,6 @@ export type {
 
 export { Toast } from './Toast'
 export type { ToastProps } from './Toast'
+
+export { Tooltip } from './Tooltip'
+export type { TooltipProps } from './Tooltip'
