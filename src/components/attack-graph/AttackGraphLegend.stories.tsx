@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { AttackGraphLegend } from './AttackGraphLegend';
 
 const meta: Meta<typeof AttackGraphLegend> = {
-  title: 'Attack Graph/Components/AttackGraphLegend',
+  title: 'InfoButton/Legend',
   component: AttackGraphLegend,
   parameters: {
     layout: 'centered',
