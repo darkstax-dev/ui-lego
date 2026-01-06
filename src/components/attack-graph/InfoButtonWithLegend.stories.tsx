@@ -22,7 +22,7 @@ const InfoButtonWithLegendDemo = () => {
 };
 
 const meta: Meta = {
-  title: 'InfoButton/With Legend',
+  title: 'Attack Graph/InfoButton/With Legend',
   parameters: {
     layout: 'centered',
   },
