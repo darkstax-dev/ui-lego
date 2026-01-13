@@ -1,22 +1,27 @@
 .group-background {
   position: relative;
   pointer-events: none;
-  transition: opacity 0.3s ease;
+  transform-origin: center center;
 }
 
 .group-background__shape-svg {
   position: absolute;
   top: 0;
   left: 0;
-  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.08));
+  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.06));
+  overflow: visible;
+}
+
+.group-background__pentagon {
+  transition: d 0.3s ease-out;
 }
 
 .group-background--input .group-background__shape-svg {
-  animation: fadeInScale 0.3s ease-out;
+  transform-origin: center bottom;
 }
 
 .group-background--output .group-background__shape-svg {
-  animation: fadeInScale 0.3s ease-out;
+  transform-origin: center top;
 }
 
 /* Make backgrounds transparent to React Flow interactions */
@@ -26,18 +31,6 @@
   box-shadow: none !important;
   padding: 0 !important;
   pointer-events: none !important;
-}
-
-/* Animation for geometric shapes appearing */
-@keyframes fadeInScale {
-  from {
-    opacity: 0;
-    transform: scale(0.8);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
 }
 
 /* Responsive adjustments */

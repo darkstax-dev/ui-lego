@@ -1,17 +1,28 @@
 import React from 'react'
 import { Handle, Position, NodeProps, Node } from '@xyflow/react'
+import { useSpring, animated } from '@react-spring/web'
 import './OutputNode.css'
 
 
 export type OutputNodeData = {
   label?: string;
+  isCollapsed?: boolean;
 };
 
 export type OutputNode = Node<OutputNodeData>;
 
 const OutputNode: React.FC<NodeProps<OutputNode>> = ({ data, isConnectable }) => {
+  const isCollapsed = data?.isCollapsed ?? false;
+  
+  // Spring animation for smooth slide in/out - outputs slide up when collapsing
+  const springProps = useSpring({
+    opacity: isCollapsed ? 0 : 1,
+    transform: isCollapsed ? 'translateY(-40px) scale(0.8)' : 'translateY(0px) scale(1)',
+    config: { tension: 280, friction: 24 }
+  });
+
   return (
-    <div className="output-node">
+    <animated.div className="output-node" style={springProps}>
       <Handle
         type="target"
         position={Position.Top}
@@ -35,7 +46,7 @@ const OutputNode: React.FC<NodeProps<OutputNode>> = ({ data, isConnectable }) =>
         isConnectable={isConnectable}
         className="output-node__handle"
       />
-    </div>
+    </animated.div>
   )
 }
 

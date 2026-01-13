@@ -1,17 +1,28 @@
 import React from 'react'
 import { Handle, Position, NodeProps, Node } from '@xyflow/react'
+import { useSpring, animated } from '@react-spring/web'
 import './InputNode.css'
 
 
 export type InputNodeData = {
   label?: string;
+  isCollapsed?: boolean;
 };
 
 export type InputNode = Node<InputNodeData>;
 
 const InputNode: React.FC<NodeProps<InputNode>> = ({ data, isConnectable }) => {
+  const isCollapsed = data?.isCollapsed ?? false;
+  
+  // Spring animation for smooth slide in/out
+  const springProps = useSpring({
+    opacity: isCollapsed ? 0 : 1,
+    transform: isCollapsed ? 'translateY(40px) scale(0.8)' : 'translateY(0px) scale(1)',
+    config: { tension: 280, friction: 24 }
+  });
+
   return (
-    <div className="input-node">
+    <animated.div className="input-node" style={springProps}>
       <div className="input-node__content">
         <div className="input-node__icon-container">
           <div className="input-node__icon-background" />
@@ -28,7 +39,7 @@ const InputNode: React.FC<NodeProps<InputNode>> = ({ data, isConnectable }) => {
         isConnectable={isConnectable}
         className="input-node__handle"
       />
-    </div>
+    </animated.div>
   )
 }
 

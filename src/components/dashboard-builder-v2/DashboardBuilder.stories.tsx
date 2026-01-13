@@ -1,5 +1,5 @@
-import type { Meta, StoryObj } from '@storybook/react-vite'
-import D2DDashboardBuilder from './D2DDashboardBuilder'
+import type { Meta, StoryObj } from '@storybook/react'
+import D2DDashboardBuilder from './DashboardBuilder'
 import type { DashboardBuilderData } from './types'
 
 const meta: Meta<typeof D2DDashboardBuilder> = {
@@ -20,7 +20,6 @@ const sampleData: DashboardBuilderData = {
       id: 'card-1',
       title: 'Select Notebook Cell',
       notebookCell: 'cell1',
-      chartHeight: '400',
       tableHeight: '300',
       tableColumnWidth: '150',
       defaultTablePageSize: '10',
@@ -30,7 +29,6 @@ const sampleData: DashboardBuilderData = {
       id: 'card-2',
       title: 'Select Notebook Cell',
       notebookCell: 'cell2',
-      chartHeight: '500',
       tableHeight: '400',
       tableColumnWidth: '200',
       defaultTablePageSize: '20',
@@ -40,7 +38,6 @@ const sampleData: DashboardBuilderData = {
       id: 'card-3',
       title: 'Select Notebook Cell',
       notebookCell: '',
-      chartHeight: '',
       tableHeight: '',
       tableColumnWidth: '',
       defaultTablePageSize: '',
@@ -50,7 +47,6 @@ const sampleData: DashboardBuilderData = {
       id: 'card-4',
       title: 'Select Notebook Cell',
       notebookCell: 'cell3',
-      chartHeight: '600',
       tableHeight: '500',
       tableColumnWidth: '180',
       defaultTablePageSize: '15',
@@ -100,35 +96,32 @@ export const WithCustomSizes: Story = {
           id: 'card-1',
           title: 'Select Notebook Cell',
           notebookCell: 'cell1',
-          chartHeight: '400',
           tableHeight: '300',
           tableColumnWidth: '150',
           defaultTablePageSize: '10',
-          cardWidth: '25',  // 25% of screen width
-          cardHeight: '40', // 40% of screen height
+          cardWidth: 1,  // Grid unit 1 = 25% of screen width
+          cardHeight: 2, // Grid unit 2 = 50% of screen height
           position: { x: 20, y: 20 }
         },
         {
           id: 'card-2',
           title: 'Select Notebook Cell',
           notebookCell: 'cell2',
-          chartHeight: '500',
           tableHeight: '400',
           tableColumnWidth: '200',
           defaultTablePageSize: '20',
-          cardWidth: '35',  // 35% of screen width
-          cardHeight: '50', // 50% of screen height
+          cardWidth: 2,  // Grid unit 2 = 50% of screen width
+          cardHeight: 2, // Grid unit 2 = 50% of screen height
           position: { x: 450, y: 20 }
         },
         {
           id: 'card-3',
           title: 'Select Notebook Cell',
           notebookCell: '',
-          chartHeight: '',
           tableHeight: '',
           tableColumnWidth: '',
           defaultTablePageSize: '',
-          cardWidth: '30',  // 30% of screen width
+          cardWidth: 2,  // Grid unit 2 = 50% of screen width
           position: { x: 20, y: 500 }
         },
       ],
@@ -146,7 +139,6 @@ export const WithAutoLayout: Story = {
           id: 'card-1',
           title: 'Select Notebook Cell',
           notebookCell: 'cell1',
-          chartHeight: '400',
           tableHeight: '300',
           tableColumnWidth: '150',
           defaultTablePageSize: '10',
@@ -156,7 +148,6 @@ export const WithAutoLayout: Story = {
           id: 'card-2',
           title: 'Select Notebook Cell',
           notebookCell: 'cell2',
-          chartHeight: '500',
           tableHeight: '400',
           tableColumnWidth: '200',
           defaultTablePageSize: '20',
@@ -166,7 +157,6 @@ export const WithAutoLayout: Story = {
           id: 'card-3',
           title: 'Select Notebook Cell',
           notebookCell: '',
-          chartHeight: '',
           tableHeight: '',
           tableColumnWidth: '',
           defaultTablePageSize: '',

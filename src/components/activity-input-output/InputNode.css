@@ -1,3 +1,5 @@
+/* Input node styles - animations handled by React Spring */
+
 .input-node {
   position: relative;
   background: transparent;

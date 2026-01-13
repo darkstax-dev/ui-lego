@@ -1,5 +1,7 @@
+import React from 'react'
 import type { Meta, StoryObj } from '@storybook/react-vite'
 import ActivityInputOutput from './ActivityInputOutput'
+import { ParentWithMultipleChildren } from './ParentWithMultipleChildren.story.tsx'
 import './ActivityInputOutput.stories.css'
 
 const meta: Meta<typeof ActivityInputOutput> = {
@@ -37,3 +39,5 @@ export const CustomHeight: Story = {
     ),
   ],
 }
+
+export { ParentWithMultipleChildren }

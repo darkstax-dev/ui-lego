@@ -1,0 +1,19 @@
+.scatterplot-chart {
+  width: 100%;
+  font-family: var(--font-family-macan-mono);
+}
+
+.scatterplot-chart__container {
+  position: relative;
+  width: 100%;
+  min-height: 300px;
+  background: var(--Gray-200);
+  border: 1px solid var(--Divider-Light);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .scatterplot-chart__container {
+    min-height: 250px;
+  }
+}

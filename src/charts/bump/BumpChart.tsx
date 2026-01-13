@@ -32,7 +32,7 @@ export interface BumpChartProps {
   enableGridY?: boolean;
   isInteractive?: boolean;
   animate?: boolean;
-  onSerieClick?: (point: any) => void;
+  onSerieClick?: (serie: BumpSerie) => void;
   className?: string;
   margin?: {
     top: number;
@@ -73,7 +73,6 @@ export const BumpChart: React.FC<BumpChartProps> = ({
     <div className={`bump-chart ${className}`}>
       <div className="bump-chart__container" style={{ height }}>
         <ResponsiveBump
-          useMesh={true}
           data={data as any}
           margin={margin}
           colors={resolvedPalette.colors}
@@ -109,7 +108,7 @@ export const BumpChart: React.FC<BumpChartProps> = ({
           enableGridY={enableGridY}
           motionConfig={animate ? 'gentle' : 'instant'}
           isInteractive={isInteractive}
-          onClick={onSerieClick}
+          {...(onSerieClick && { onClick: onSerieClick })}
           theme={{
             background: 'transparent',
             text: {

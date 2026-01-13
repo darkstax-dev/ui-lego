@@ -1,11 +1,13 @@
 import React, { useState, useRef } from 'react'
 import type { DashboardBuilderData, DashboardCard } from './types'
 import DashboardCardComponent from './DashboardCard'
-import './D2DDashboardBuilder.css'
+import './DashboardBuilder.css'
 
-export interface D2DDashboardBuilderProps {
+export interface DashboardBuilderProps {
   data: DashboardBuilderData
   onCardClick?: (card: DashboardCard) => void
+  onCardDragStart?: (card: DashboardCard, e: React.DragEvent) => void
+  onCardDragEnd?: (card: DashboardCard) => void
   onCardUpdate?: (card: DashboardCard) => void
   onCardDelete?: (card: DashboardCard) => void
   onCardAdd?: () => void
@@ -19,7 +21,7 @@ const DEFAULT_CARD_WIDTH = 340
 const DEFAULT_CARD_HEIGHT = 400
 const DEFAULT_SPACING = 20
 
-const D2DDashboardBuilder: React.FC<D2DDashboardBuilderProps> = ({
+const D2DDashboardBuilder: React.FC<DashboardBuilderProps> = ({
   data,
   onCardClick,
   onCardUpdate,
@@ -35,13 +37,19 @@ const D2DDashboardBuilder: React.FC<D2DDashboardBuilderProps> = ({
   const [dragOffset, setDragOffset] = useState({ x: 0, y: 0 })
   const containerRef = useRef<HTMLDivElement>(null)
 
-  // Calculate actual card dimensions
+  // Calculate actual card dimensions based on grid units (1-4)
+  // 1 = 25%, 2 = 50%, 3 = 75%, 4 = 100% of container
   const getCardDimensions = (card: DashboardCard) => {
+    const containerWidth = containerRef.current ? containerRef.current.clientWidth : window.innerWidth
+    const containerHeight = window.innerHeight
+    
+    // Convert grid units to actual dimensions
+    // Each grid unit = 25% of the container
     const width = card.cardWidth 
-      ? (parseFloat(card.cardWidth) / 100) * window.innerWidth 
+      ? (card.cardWidth / 4) * containerWidth - cardSpacing * 2
       : DEFAULT_CARD_WIDTH
     const height = card.cardHeight 
-      ? (parseFloat(card.cardHeight) / 100) * window.innerHeight 
+      ? (card.cardHeight / 4) * containerHeight - cardSpacing * 2
       : DEFAULT_CARD_HEIGHT
     return { width, height }
   }
@@ -61,7 +69,7 @@ const D2DDashboardBuilder: React.FC<D2DDashboardBuilderProps> = ({
 
   // Find a non-overlapping position for a card
   const findNonOverlappingPosition = (card: DashboardCard, existingCards: DashboardCard[]) => {
-    const position = { ...card.position }
+    let position = { ...card.position }
     let attempts = 0
     const maxAttempts = 100
     
@@ -93,32 +101,70 @@ const D2DDashboardBuilder: React.FC<D2DDashboardBuilderProps> = ({
   const autoArrangeCards = () => {
     const arrangedCards = [...boardData.cards]
     
-    // Track current position
+    if (arrangedCards.length === 0) return
+    
+    // Track rows with their Y position and max height
+    const rows: Array<{ 
+      y: number
+      maxHeight: number
+      cards: Array<{ card: DashboardCard; x: number; width: number; height: number }> 
+    }> = []
+    
     let currentX = cardSpacing
     let currentY = cardSpacing
-    let rowHeight = 0
-    const maxRowWidth = containerRef.current ? containerRef.current.clientWidth : window.innerWidth
+    let currentRowIndex = 0
+    const maxRowWidth = containerRef.current ? containerRef.current.clientWidth : window.innerWidth - cardSpacing
     
+    // First pass: organize cards into rows
     arrangedCards.forEach((card) => {
       const dimensions = getCardDimensions(card)
       
-      // Check if card fits in current row
-      if (currentX + dimensions.width > maxRowWidth - cardSpacing && currentX > cardSpacing) {
-        // Move to next row
+      // Check if card fits in current row (including spacing on both sides)
+      if (currentX + dimensions.width + cardSpacing > maxRowWidth && currentX > cardSpacing) {
+        // Move to next row - calculate Y based on previous row's max height
+        currentRowIndex++
         currentX = cardSpacing
-        currentY += rowHeight + cardSpacing
-        rowHeight = 0
+        if (rows.length > 0) {
+          const prevRow = rows[rows.length - 1]
+          currentY = prevRow.y + prevRow.maxHeight + cardSpacing
+        }
       }
       
-      // Position the card
-      card.position = {
+      // Initialize row if it doesn't exist
+      if (!rows[currentRowIndex]) {
+        rows[currentRowIndex] = {
+          y: currentY,
+          maxHeight: 0,
+          cards: []
+        }
+      }
+      
+      // Add card to current row
+      rows[currentRowIndex].cards.push({
+        card,
         x: currentX,
-        y: currentY
-      }
+        width: dimensions.width,
+        height: dimensions.height
+      })
       
-      // Update position for next card
+      // Update row's max height
+      rows[currentRowIndex].maxHeight = Math.max(rows[currentRowIndex].maxHeight, dimensions.height)
+      
+      // Move X position for next card
       currentX += dimensions.width + cardSpacing
-      rowHeight = Math.max(rowHeight, dimensions.height)
+    })
+    
+    // Second pass: apply positions ensuring each row starts at correct Y
+    let cumulativeY = cardSpacing
+    rows.forEach((row) => {
+      row.cards.forEach(({ card, x }) => {
+        card.position = {
+          x: x,
+          y: cumulativeY
+        }
+      })
+      // Move Y down for next row
+      cumulativeY += row.maxHeight + cardSpacing
     })
     
     setBoardData({ cards: arrangedCards })
@@ -201,54 +247,80 @@ const D2DDashboardBuilder: React.FC<D2DDashboardBuilderProps> = ({
   const handleAddCard = () => {
     onCardAdd?.()
     
-    // Calculate smart position for new card based on existing cards
-    let newPosition = { x: cardSpacing, y: cardSpacing }
-    
-    if (boardData.cards.length > 0) {
-      // Find the bottom-most card to place new card below
-      let maxY = 0
-      let maxYCard = boardData.cards[0]
-      
-      boardData.cards.forEach(card => {
-        const dimensions = getCardDimensions(card)
-        const cardBottom = card.position.y + dimensions.height
-        if (cardBottom > maxY) {
-          maxY = cardBottom
-          maxYCard = card
-        }
-      })
-      
-      const maxYCardDimensions = getCardDimensions(maxYCard)
-      // Try to place next to the bottom-most card first
-      newPosition = {
-        x: maxYCard.position.x + maxYCardDimensions.width + cardSpacing,
-        y: maxYCard.position.y
-      }
-      
-      // If it doesn't fit, place below
-      const maxRowWidth = containerRef.current ? containerRef.current.clientWidth : window.innerWidth
-      if (newPosition.x + DEFAULT_CARD_WIDTH > maxRowWidth - cardSpacing) {
-        newPosition = {
-          x: cardSpacing,
-          y: maxY + cardSpacing
-        }
-      }
-    }
-    
     const newCard: DashboardCard = {
       id: `card-${Date.now()}`,
       title: 'Select Notebook Cell',
+      cardType: 'data',
       notebookCell: '',
-      chartHeight: '',
       tableHeight: '',
       tableColumnWidth: '',
       defaultTablePageSize: '',
-      position: newPosition
+      position: { x: cardSpacing, y: cardSpacing }
     }
-
-    // Ensure no overlap with existing cards
-    if (enableAutoLayout) {
-      newCard.position = findNonOverlappingPosition(newCard, boardData.cards)
+    
+    // Find a non-overlapping position for the new card
+    if (boardData.cards.length > 0) {
+      const maxRowWidth = containerRef.current ? containerRef.current.clientWidth : window.innerWidth - cardSpacing
+      const newCardDimensions = getCardDimensions(newCard)
+      
+      // Build a grid of occupied positions
+      const occupiedPositions = boardData.cards.map(card => {
+        const dims = getCardDimensions(card)
+        return {
+          x1: card.position.x,
+          y1: card.position.y,
+          x2: card.position.x + dims.width,
+          y2: card.position.y + dims.height
+        }
+      })
+      
+      // Try to find a position that doesn't overlap
+      let found = false
+      let testX = cardSpacing
+      let testY = cardSpacing
+      
+      // Scan through possible positions
+      for (let row = 0; row < 100 && !found; row++) {
+        testX = cardSpacing
+        
+        for (let col = 0; col < 10 && !found; col++) {
+          // Check if this position overlaps with any existing card
+          const overlaps = occupiedPositions.some(occupied => {
+            const newX1 = testX
+            const newY1 = testY
+            const newX2 = testX + newCardDimensions.width
+            const newY2 = testY + newCardDimensions.height
+            
+            // Check if rectangles overlap
+            return !(newX2 + cardSpacing <= occupied.x1 || 
+                     newX1 >= occupied.x2 + cardSpacing ||
+                     newY2 + cardSpacing <= occupied.y1 || 
+                     newY1 >= occupied.y2 + cardSpacing)
+          })
+          
+          if (!overlaps && testX + newCardDimensions.width <= maxRowWidth) {
+            newCard.position = { x: testX, y: testY }
+            found = true
+            break
+          }
+          
+          testX += DEFAULT_CARD_WIDTH + cardSpacing
+        }
+        
+        // Move to next row
+        if (!found) {
+          testY += DEFAULT_CARD_HEIGHT + cardSpacing
+        }
+      }
+      
+      // If still not found, place at the bottom
+      if (!found) {
+        const maxBottom = Math.max(...boardData.cards.map(card => {
+          const dims = getCardDimensions(card)
+          return card.position.y + dims.height
+        }))
+        newCard.position = { x: cardSpacing, y: maxBottom + cardSpacing }
+      }
     }
 
     setBoardData({ cards: [...boardData.cards, newCard] })
@@ -277,9 +349,8 @@ const D2DDashboardBuilder: React.FC<D2DDashboardBuilderProps> = ({
         onDrop={handleDrop}
       >
         {boardData.cards.map((card) => {
-          // Use viewport units (vw/vh) for percentage-based sizing relative to screen
-          const cardWidth = card.cardWidth ? `${card.cardWidth}vw` : '340px'
-          const cardHeight = card.cardHeight ? `${card.cardHeight}vh` : 'auto'
+          // Calculate dimensions based on grid units (1-4)
+          const dimensions = getCardDimensions(card)
           
           return (
             <DashboardCardComponent
@@ -294,8 +365,8 @@ const D2DDashboardBuilder: React.FC<D2DDashboardBuilderProps> = ({
                 position: 'absolute',
                 left: `${card.position.x}px`,
                 top: `${card.position.y}px`,
-                width: cardWidth,
-                height: cardHeight
+                width: `${dimensions.width}px`,
+                height: `${dimensions.height}px`
               }}
             />
           )

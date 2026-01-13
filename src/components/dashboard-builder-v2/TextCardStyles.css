@@ -1,0 +1,101 @@
+/* Text Card Styles - Add this to DashboardCard.css */
+
+/* Text Card Styles */
+.dashboard-card--text {
+  border-color: var(--color-blue-300);
+}
+
+.dashboard-card--text .dashboard-card__header {
+  background-color: var(--color-blue-50);
+}
+
+.text-card-editor-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sds-size-space-300);
+}
+
+.text-card-editor {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sds-size-space-300);
+}
+
+.text-card-label {
+  font-family: var(--font-family-macan);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-gray-main);
+  margin-bottom: var(--sds-size-space-200);
+}
+
+.text-card-textarea {
+  width: 100%;
+  min-height: 150px;
+  padding: var(--sds-size-space-400);
+  border: var(--sds-size-stroke-border) solid var(--sds-color-border-default-default);
+  border-radius: var(--sds-size-radius-200);
+  font-family: var(--font-family-macan);
+  font-size: var(--font-size-base);
+  color: var(--text-gray-main);
+  background-color: var(--surface-card);
+  resize: vertical;
+  transition: border-color 0.2s ease;
+}
+
+.text-card-textarea:focus {
+  outline: none;
+  border-color: var(--color-blue-500);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.text-card-textarea::placeholder {
+  color: var(--text-gray-secondary);
+}
+
+.text-card-help {
+  font-size: var(--font-size-sm);
+  color: var(--text-gray-secondary);
+  font-style: italic;
+}
+
+/* Dark mode for text cards */
+@media (prefers-color-scheme: dark) {
+  .dashboard-card--text {
+    border-color: var(--color-blue-600);
+  }
+
+  .dashboard-card--text .dashboard-card__header {
+    background-color: var(--color-blue-800);
+  }
+
+  .text-card-textarea {
+    background-color: var(--color-blue-900);
+    border-color: var(--color-blue-700);
+    color: var(--text-white-main);
+  }
+
+  .text-card-textarea:focus {
+    border-color: var(--color-blue-500);
+  }
+}
+
+[data-theme="dark"] {
+  .dashboard-card--text {
+    border-color: var(--color-blue-600);
+  }
+
+  .dashboard-card--text .dashboard-card__header {
+    background-color: var(--color-blue-800);
+  }
+
+  .text-card-textarea {
+    background-color: var(--color-blue-900);
+    border-color: var(--color-blue-700);
+    color: var(--text-white-main);
+  }
+
+  .text-card-textarea:focus {
+    border-color: var(--color-blue-500);
+  }
+}

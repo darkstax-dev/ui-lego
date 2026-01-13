@@ -13,6 +13,8 @@ interface ExecutionNodeData {
   onToggleInputGroup?: (nodeId: string) => void
   onToggleOutputGroup?: (nodeId: string) => void
   onCollapse?: (nodeId: string) => void
+  hasInputs?: boolean
+  hasOutputs?: boolean
 }
 
 const ExecutionNode: React.FC<NodeProps> = ({ data, isConnectable, id }) => {
@@ -20,6 +22,8 @@ const ExecutionNode: React.FC<NodeProps> = ({ data, isConnectable, id }) => {
   const [isCollapsed, setIsCollapsed] = useState(false)
   const nodeData = data as ExecutionNodeData
   const menuRef = useRef<HTMLDivElement>(null)
+  const clickTimeoutRef = useRef<NodeJS.Timeout | null>(null)
+  const clickCountRef = useRef(0)
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -43,9 +47,29 @@ const ExecutionNode: React.FC<NodeProps> = ({ data, isConnectable, id }) => {
   }
 
   const handleNodeClick = () => {
-    if (nodeData?.id && nodeData?.onCollapse) {
-      setIsCollapsed(!isCollapsed)
-      nodeData.onCollapse(nodeData.id)
+    clickCountRef.current += 1
+
+    if (clickCountRef.current === 1) {
+      // First click - set timeout to wait for potential second click
+      clickTimeoutRef.current = setTimeout(() => {
+        clickCountRef.current = 0
+      }, 300) // 300ms window for double-click
+    } else if (clickCountRef.current === 2) {
+      // Double-click detected
+      if (clickTimeoutRef.current) {
+        clearTimeout(clickTimeoutRef.current)
+      }
+      clickCountRef.current = 0
+
+      // Toggle both input and output groups
+      if (nodeData?.id) {
+        if (nodeData?.onToggleInputGroup) {
+          nodeData.onToggleInputGroup(nodeData.id)
+        }
+        if (nodeData?.onToggleOutputGroup) {
+          nodeData.onToggleOutputGroup(nodeData.id)
+        }
+      }
     }
   }
 
@@ -81,17 +105,19 @@ const ExecutionNode: React.FC<NodeProps> = ({ data, isConnectable, id }) => {
         id="top"
       />
 
-      {/* Input Group Trigger */}
-      <div
-        className="execution-node__group-trigger execution-node__group-trigger--input"
-        onClick={handleInputGroupClick}
-        title="Click to add/toggle inputs"
-      >
-        <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="6" cy="6" r="4" fill="#0072ff"/>
-          <text x="6" y="7.5" fontSize="8" fontWeight="bold" fill="white" textAnchor="middle">I</text>
-        </svg>
-      </div>
+      {/* Input Group Trigger - only show if inputs exist */}
+      {nodeData?.hasInputs && (
+        <div
+          className="execution-node__group-trigger execution-node__group-trigger--input"
+          onClick={handleInputGroupClick}
+          title="Click to toggle inputs"
+        >
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="6" cy="6" r="4" fill="#0072ff"/>
+            <text x="6" y="7.5" fontSize="8" fontWeight="bold" fill="white" textAnchor="middle">I</text>
+          </svg>
+        </div>
+      )}
 
       <div className="execution-node__content" onClick={handleNodeClick}>
         <div className="execution-node__icon-container">
@@ -148,17 +174,19 @@ const ExecutionNode: React.FC<NodeProps> = ({ data, isConnectable, id }) => {
         id="bottom"
       />
 
-      {/* Output Group Trigger */}
-      <div
-        className="execution-node__group-trigger execution-node__group-trigger--output"
-        onClick={handleOutputGroupClick}
-        title="Click to add/toggle outputs"
-      >
-        <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="6" cy="6" r="4" fill="#D9322A"/>
-          <text x="6" y="7.5" fontSize="8" fontWeight="bold" fill="white" textAnchor="middle">O</text>
-        </svg>
-      </div>
+      {/* Output Group Trigger - only show if outputs exist */}
+      {nodeData?.hasOutputs && (
+        <div
+          className="execution-node__group-trigger execution-node__group-trigger--output"
+          onClick={handleOutputGroupClick}
+          title="Click to toggle outputs"
+        >
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="6" cy="6" r="4" fill="#D9322A"/>
+            <text x="6" y="7.5" fontSize="8" fontWeight="bold" fill="white" textAnchor="middle">O</text>
+          </svg>
+        </div>
+      )}
     </div>
   )
 }

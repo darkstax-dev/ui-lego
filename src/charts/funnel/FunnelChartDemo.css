@@ -1,0 +1,149 @@
+/* FunnelChartDemo Component Styles */
+
+.funnel-chart-demo {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 32px;
+  background: var(--Background-Card);
+  border-radius: 8px;
+  font-family: var(--font-family-macan-mono);
+}
+
+.funnel-chart-demo__header {
+  margin-bottom: 32px;
+  text-align: center;
+}
+
+.funnel-chart-demo__title {
+  font-family: var(--font-family-macan-mono);
+  font-size: 24px;
+  font-weight: 600;
+  margin: 0 0 8px 0;
+  color: var(--Text-Blue-text-Main-text);
+}
+
+.funnel-chart-demo__description {
+  font-family: var(--font-family-macan-mono);
+  font-size: 14px;
+  color: var(--Text-Gray-text-Main-text);
+  margin: 0;
+}
+
+.funnel-chart-demo__controls {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-bottom: 32px;
+  padding: 20px;
+  background: var(--Background-Main);
+  border-radius: 8px;
+  border: 1px solid var(--Divider-Light);
+}
+
+.funnel-chart-demo__control-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.funnel-chart-demo__label {
+  font-family: var(--font-family-macan-mono);
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--Text-Gray-text-Main-text);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.funnel-chart-demo__buttons {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.funnel-chart-demo__button {
+  font-family: var(--font-family-macan-mono);
+  font-size: 13px;
+  padding: 8px 16px;
+  background: var(--Background-Card);
+  color: var(--Text-Blue-text-Main-text);
+  border: 1px solid var(--Divider-Light);
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.funnel-chart-demo__button:hover {
+  background: var(--Background-Main);
+  border-color: var(--color-blue-dark-950);
+}
+
+.funnel-chart-demo__button--active {
+  background: var(--color-blue-dark-950);
+  color: #ffffff;
+  border-color: var(--color-blue-dark-950);
+}
+
+.funnel-chart-demo__checkboxes {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.funnel-chart-demo__checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-family-macan-mono);
+  font-size: 13px;
+  color: var(--Text-Blue-text-Main-text);
+  cursor: pointer;
+  user-select: none;
+}
+
+.funnel-chart-demo__checkbox-label input[type="checkbox"] {
+  cursor: pointer;
+  width: 16px;
+  height: 16px;
+}
+
+.funnel-chart-demo__chart {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 400px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .funnel-chart-demo {
+    padding: 20px;
+  }
+
+  .funnel-chart-demo__controls {
+    padding: 16px;
+  }
+
+  .funnel-chart-demo__buttons {
+    flex-direction: column;
+  }
+
+  .funnel-chart-demo__button {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .funnel-chart-demo {
+    padding: 16px;
+  }
+
+  .funnel-chart-demo__title {
+    font-size: 20px;
+  }
+
+  .funnel-chart-demo__description {
+    font-size: 12px;
+  }
+}

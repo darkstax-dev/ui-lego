@@ -1,0 +1,150 @@
+/* FunnelChart Component Styles */
+
+.funnel-chart {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  background: var(--Background-Card);
+  border-radius: 8px;
+  padding: 24px;
+  box-sizing: border-box;
+}
+
+.funnel-chart__container {
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 200px;
+}
+
+/* Custom Legend Styles */
+.funnel-chart__legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-top: 24px;
+  justify-content: center;
+  width: 100%;
+  max-width: 800px;
+}
+
+.funnel-chart__legend-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+
+.funnel-chart__legend-color {
+  width: 12px;
+  height: 12px;
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+.funnel-chart__legend-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.funnel-chart__legend-label {
+  font-family: var(--font-family-macan-mono);
+  font-size: 12px;
+  font-weight: 450;
+  line-height: 1.2;
+  letter-spacing: 1.2px;
+  color: var(--Text-Blue-text-Main-text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.funnel-chart__legend-value {
+  font-family: var(--font-family-macan-mono);
+  font-size: 11px;
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--Text-Gray-text-Main-text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .funnel-chart {
+    padding: 16px;
+  }
+  
+  .funnel-chart__container {
+    overflow-x: auto;
+  }
+  
+  .funnel-chart__legend {
+    gap: 12px;
+    margin-top: 16px;
+  }
+  
+  .funnel-chart__legend-item {
+    gap: 6px;
+  }
+  
+  .funnel-chart__legend-label,
+  .funnel-chart__legend-value {
+    font-size: 11px;
+  }
+}
+
+@media (max-width: 480px) {
+  .funnel-chart {
+    padding: 12px;
+  }
+  
+  .funnel-chart__legend {
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  .funnel-chart__legend-item {
+    justify-content: center;
+  }
+}
+
+/* Dark theme support */
+@media (prefers-color-scheme: dark) {
+  .funnel-chart {
+    background: var(--Background-Card, #2a2a2a);
+  }
+  
+  .funnel-chart__legend-label {
+    color: var(--Text-Blue-text-Main-text, #ffffff);
+  }
+  
+  .funnel-chart__legend-value {
+    color: var(--Text-Gray-text-Main-text, #cccccc);
+  }
+}
+
+/* Animation styles */
+.funnel-chart svg {
+  overflow: visible;
+}
+
+.funnel-chart path {
+  transition: opacity 0.2s ease;
+}
+
+.funnel-chart:hover path {
+  opacity: 0.9;
+}
+
+.funnel-chart path:hover {
+  opacity: 1 !important;
+  filter: brightness(1.1);
+}

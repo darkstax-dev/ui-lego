@@ -11,6 +11,7 @@ import {
   useNodesState,
   useEdgesState,
   NodeTypes,
+  useReactFlow,
 } from '@xyflow/react'
 import '@xyflow/react/dist/style.css'
 import './ActivityInputOutput.css'
@@ -32,9 +33,11 @@ const nodeTypes: NodeTypes = {
 
 export interface ActivityInputOutputProps {
   className?: string
+  initialNodes?: Node[]
+  initialEdges?: Edge[]
 }
 
-const ActivityInputOutput: React.FC<ActivityInputOutputProps> = ({ className = '' }) => {
+const ActivityInputOutput: React.FC<ActivityInputOutputProps> = ({ className = '', initialNodes = [], initialEdges = [] }) => {
   const nodeIdCounter = useRef(1)
   const inputIdCounter = useRef(0)
   const outputIdCounter = useRef(0)
@@ -58,6 +61,95 @@ const ActivityInputOutput: React.FC<ActivityInputOutputProps> = ({ className = '
     [setEdges]
   )
 
+  // Custom onNodesChange handler to update input/output positions when execution node moves
+  const handleNodesChange = useCallback((changes: any) => {
+    onNodesChange(changes)
+    
+    // Check for position changes on execution nodes
+    const positionChanges = changes.filter((change: any) => 
+      change.type === 'position' && change.position && change.id?.startsWith('execution-')
+    )
+    
+    if (positionChanges.length > 0) {
+      setNodes((currentNodes) => {
+        let updatedNodes = [...currentNodes]
+        
+        positionChanges.forEach((change: any) => {
+          const nodeId = change.id
+          const newPosition = change.position
+          
+          const inputNodes = updatedNodes.filter(n => n.id.startsWith(`${nodeId}-input-`) && !n.id.includes('background'))
+          const outputNodes = updatedNodes.filter(n => n.id.startsWith(`${nodeId}-output-`) && !n.id.includes('background'))
+          
+          const spacing = 120
+          const nodeWidth = 52
+          const bgPadding = 60
+          const verticalOffset = 140
+          
+          // Update input nodes positions
+          if (inputNodes.length > 0) {
+            const inputCount = inputNodes.length
+            const totalWidth = (inputCount - 1) * spacing
+            const parentCenterX = newPosition.x + 26
+            const startX = parentCenterX - totalWidth / 2
+            
+            updatedNodes = updatedNodes.map(n => {
+              if (n.id.startsWith(`${nodeId}-input-`) && !n.id.includes('background')) {
+                const inputIndex = inputNodes.findIndex(input => input.id === n.id)
+                return {
+                  ...n,
+                  position: {
+                    x: startX + inputIndex * spacing - 26,
+                    y: newPosition.y - verticalOffset
+                  }
+                }
+              }
+              if (n.id === `${nodeId}-input-background`) {
+                const bgWidth = (inputCount - 1) * spacing + nodeWidth + bgPadding * 2
+                const parentCenterXBg = newPosition.x + 26 + nodeWidth / 2
+                const bgX = parentCenterXBg - bgWidth / 2
+                const bgY = newPosition.y - verticalOffset - 60
+                return { ...n, position: { x: bgX, y: bgY } }
+              }
+              return n
+            })
+          }
+          
+          // Update output nodes positions
+          if (outputNodes.length > 0) {
+            const outputCount = outputNodes.length
+            const totalWidth = (outputCount - 1) * spacing
+            const parentCenterX = newPosition.x + 26
+            const startX = parentCenterX - totalWidth / 2
+            
+            updatedNodes = updatedNodes.map(n => {
+              if (n.id.startsWith(`${nodeId}-output-`) && !n.id.includes('background')) {
+                const outputIndex = outputNodes.findIndex(output => output.id === n.id)
+                return {
+                  ...n,
+                  position: {
+                    x: startX + outputIndex * spacing - 26,
+                    y: newPosition.y + verticalOffset + 50
+                  }
+                }
+              }
+              if (n.id === `${nodeId}-output-background`) {
+                const bgWidth = (outputCount - 1) * spacing + nodeWidth + bgPadding * 2
+                const parentCenterXBg = newPosition.x + 26 + nodeWidth / 2
+                const bgX = parentCenterXBg - bgWidth / 2
+                const bgY = newPosition.y + 50 + 20
+                return { ...n, position: { x: bgX, y: bgY } }
+              }
+              return n
+            })
+          }
+        })
+        
+        return updatedNodes
+      })
+    }
+  }, [onNodesChange, setNodes])
+
   // Helper function to calculate grid position for input/output nodes
   // Positions nodes in a horizontal row above (inputs) or below (outputs) the parent
   const calculateNodePosition = useCallback((
@@ -67,17 +159,18 @@ const ActivityInputOutput: React.FC<ActivityInputOutputProps> = ({ className = '
     total: number,
     isInput: boolean
   ) => {
-    const spacing = 80 // Horizontal spacing between nodes
-    const verticalOffset = 150 // Distance above/below parent node
-    
+    const spacing = 120 // Increased horizontal spacing between nodes
+    const verticalOffset = 140 // Distance above/below parent node
+
     // Calculate total width needed for all nodes
     const totalWidth = (total - 1) * spacing
-    // Start position to center the row around parent
-    const startX = parentX - totalWidth / 2
-    
+    // Start position to center the row around parent (parent center is at parentX + 26)
+    const parentCenterX = parentX + 26
+    const startX = parentCenterX - totalWidth / 2
+
     return {
-      x: startX + index * spacing,
-      y: isInput ? parentY - verticalOffset : parentY + verticalOffset,
+      x: startX + index * spacing - 26, // Subtract 26 to account for node width offset
+      y: isInput ? parentY - verticalOffset : parentY + verticalOffset + 50,
     }
   }, [])
 
@@ -109,13 +202,21 @@ const ActivityInputOutput: React.FC<ActivityInputOutputProps> = ({ className = '
 
       if (newSet.has(key)) {
         newSet.delete(key)
-        // Hide inputs
+        // Collapse inputs with animation - nodes first, then background
         setNodes((nds) => nds.map((n) => {
-          if (n.id.startsWith(`${nodeId}-input-`) || n.id === `${nodeId}-input-background`) {
-            return { ...n, hidden: true }
+          if (n.id.startsWith(`${nodeId}-input-`) && !n.id.includes('background')) {
+            return { ...n, data: { ...n.data, isCollapsed: true } }
           }
           return n
         }))
+        setTimeout(() => {
+          setNodes((nds) => nds.map((n) => {
+            if (n.id === `${nodeId}-input-background`) {
+              return { ...n, data: { ...n.data, isCollapsed: true } }
+            }
+            return n
+          }))
+        }, 100)
         setEdges((eds) => eds.map((e) => {
           if (e.source.startsWith(`${nodeId}-input-`) && e.target === nodeId) {
             return { ...e, hidden: true }
@@ -124,19 +225,27 @@ const ActivityInputOutput: React.FC<ActivityInputOutputProps> = ({ className = '
         }))
       } else {
         newSet.add(key)
-        // Show inputs
+        // Expand inputs with animation - background first, then nodes
         setNodes((nds) => nds.map((n) => {
-          if (n.id.startsWith(`${nodeId}-input-`) || n.id === `${nodeId}-input-background`) {
-            return { ...n, hidden: false }
+          if (n.id === `${nodeId}-input-background`) {
+            return { ...n, data: { ...n.data, isCollapsed: false } }
           }
           return n
         }))
-        setEdges((eds) => eds.map((e) => {
-          if (e.source.startsWith(`${nodeId}-input-`) && e.target === nodeId) {
-            return { ...e, hidden: false }
-          }
-          return e
-        }))
+        setTimeout(() => {
+          setNodes((nds) => nds.map((n) => {
+            if (n.id.startsWith(`${nodeId}-input-`) && !n.id.includes('background')) {
+              return { ...n, data: { ...n.data, isCollapsed: false } }
+            }
+            return n
+          }))
+          setEdges((eds) => eds.map((e) => {
+            if (e.source.startsWith(`${nodeId}-input-`) && e.target === nodeId) {
+              return { ...e, hidden: false }
+            }
+            return e
+          }))
+        }, 150)
       }
       return newSet
     })
@@ -149,13 +258,21 @@ const ActivityInputOutput: React.FC<ActivityInputOutputProps> = ({ className = '
 
       if (newSet.has(key)) {
         newSet.delete(key)
-        // Hide outputs
+        // Collapse outputs with animation - nodes first, then background
         setNodes((nds) => nds.map((n) => {
-          if (n.id.startsWith(`${nodeId}-output-`) || n.id === `${nodeId}-output-background`) {
-            return { ...n, hidden: true }
+          if (n.id.startsWith(`${nodeId}-output-`) && !n.id.includes('background')) {
+            return { ...n, data: { ...n.data, isCollapsed: true } }
           }
           return n
         }))
+        setTimeout(() => {
+          setNodes((nds) => nds.map((n) => {
+            if (n.id === `${nodeId}-output-background`) {
+              return { ...n, data: { ...n.data, isCollapsed: true } }
+            }
+            return n
+          }))
+        }, 100)
         setEdges((eds) => eds.map((e) => {
           if (e.target.startsWith(`${nodeId}-output-`) && e.source === nodeId) {
             return { ...e, hidden: true }
@@ -164,19 +281,27 @@ const ActivityInputOutput: React.FC<ActivityInputOutputProps> = ({ className = '
         }))
       } else {
         newSet.add(key)
-        // Show outputs
+        // Expand outputs with animation - background first, then nodes
         setNodes((nds) => nds.map((n) => {
-          if (n.id.startsWith(`${nodeId}-output-`) || n.id === `${nodeId}-output-background`) {
-            return { ...n, hidden: false }
+          if (n.id === `${nodeId}-output-background`) {
+            return { ...n, data: { ...n.data, isCollapsed: false } }
           }
           return n
         }))
-        setEdges((eds) => eds.map((e) => {
-          if (e.target.startsWith(`${nodeId}-output-`) && e.source === nodeId) {
-            return { ...e, hidden: false }
-          }
-          return e
-        }))
+        setTimeout(() => {
+          setNodes((nds) => nds.map((n) => {
+            if (n.id.startsWith(`${nodeId}-output-`) && !n.id.includes('background')) {
+              return { ...n, data: { ...n.data, isCollapsed: false } }
+            }
+            return n
+          }))
+          setEdges((eds) => eds.map((e) => {
+            if (e.target.startsWith(`${nodeId}-output-`) && e.source === nodeId) {
+              return { ...e, hidden: false }
+            }
+            return e
+          }))
+        }, 150)
       }
       return newSet
     })
@@ -188,16 +313,24 @@ const ActivityInputOutput: React.FC<ActivityInputOutputProps> = ({ className = '
       newSet.delete(`${nodeId}-inputs`)
       newSet.delete(`${nodeId}-outputs`)
 
-      // Hide all inputs and outputs
+      // Collapse all inputs and outputs with smooth animation - nodes first, then backgrounds
       setNodes((nds) => nds.map((n) => {
-        if (n.id.startsWith(`${nodeId}-input-`) ||
-            n.id.startsWith(`${nodeId}-output-`) ||
-            n.id === `${nodeId}-input-background` ||
-            n.id === `${nodeId}-output-background`) {
-          return { ...n, hidden: true }
+        if (n.id.startsWith(`${nodeId}-input-`) && !n.id.includes('background')) {
+          return { ...n, data: { ...n.data, isCollapsed: true } }
+        }
+        if (n.id.startsWith(`${nodeId}-output-`) && !n.id.includes('background')) {
+          return { ...n, data: { ...n.data, isCollapsed: true } }
         }
         return n
       }))
+      setTimeout(() => {
+        setNodes((nds) => nds.map((n) => {
+          if (n.id === `${nodeId}-input-background` || n.id === `${nodeId}-output-background`) {
+            return { ...n, data: { ...n.data, isCollapsed: true } }
+          }
+          return n
+        }))
+      }, 100)
       setEdges((eds) => eds.map((e) => {
         if ((e.source.startsWith(`${nodeId}-input-`) && e.target === nodeId) ||
             (e.source === nodeId && e.target.startsWith(`${nodeId}-output-`))) {
@@ -256,8 +389,11 @@ const ActivityInputOutput: React.FC<ActivityInputOutputProps> = ({ className = '
       // Add the edge
       setEdges((eds) => [...eds, newInputEdge])
 
-      // Reposition all existing input nodes in a row
+      // Update parent node to show hasInputs indicator and reposition existing inputs
       let updatedNodes = currentNodes.map((n) => {
+        if (n.id === nodeId) {
+          return { ...n, data: { ...n.data, hasInputs: true } }
+        }
         if (n.id.startsWith(`${nodeId}-input-`) && !n.id.includes('background')) {
           const inputIndex = existingInputs.findIndex(input => input.id === n.id)
           if (inputIndex !== -1) {
@@ -277,14 +413,13 @@ const ActivityInputOutput: React.FC<ActivityInputOutputProps> = ({ className = '
       })
 
       // Calculate background width and position to match node spacing
-      const spacing = 80
-      const nodeWidth = 52 // Approximate width of input/output nodes
-      const bgWidth = (inputCount - 1) * spacing + 160 // Width to encompass nodes
-      // Center the background on the nodes (which are centered on parentNode.position.x + 26)
+      const spacing = 120
+      const nodeWidth = 52
+      const bgPadding = 60
+      const bgWidth = (inputCount - 1) * spacing + nodeWidth + bgPadding * 2
       const parentCenterX = parentNode.position.x + 26 + nodeWidth / 2
       const bgX = parentCenterX - bgWidth / 2
-      // Position so nodes sit in the upper portion of the pentagon
-      const bgY = parentNode.position.y - 150 - 50 // Node is 150px above parent
+      const bgY = parentNode.position.y - 140 - 60
 
       // Check if input background exists
       const inputBgId = `${nodeId}-input-background`
@@ -368,8 +503,11 @@ const ActivityInputOutput: React.FC<ActivityInputOutputProps> = ({ className = '
       // Add the edge
       setEdges((eds) => [...eds, newOutputEdge])
 
-      // Reposition all existing output nodes in a row
+      // Update parent node to show hasOutputs indicator and reposition existing outputs
       let updatedNodes = currentNodes.map((n) => {
+        if (n.id === nodeId) {
+          return { ...n, data: { ...n.data, hasOutputs: true } }
+        }
         if (n.id.startsWith(`${nodeId}-output-`) && !n.id.includes('background')) {
           const outputIndex = existingOutputs.findIndex(output => output.id === n.id)
           if (outputIndex !== -1) {
@@ -389,14 +527,13 @@ const ActivityInputOutput: React.FC<ActivityInputOutputProps> = ({ className = '
       })
 
       // Calculate background width and position to match node spacing
-      const spacing = 80
-      const nodeWidth = 52 // Approximate width of input/output nodes
-      const bgWidth = (outputCount - 1) * spacing + 160 // Width to encompass nodes
-      // Center the background on the nodes (which are centered on parentNode.position.x + 26)
+      const spacing = 120
+      const nodeWidth = 52
+      const bgPadding = 60
+      const bgWidth = (outputCount - 1) * spacing + nodeWidth + bgPadding * 2
       const parentCenterX = parentNode.position.x + 26 + nodeWidth / 2
       const bgX = parentCenterX - bgWidth / 2
-      // Position so nodes sit in the lower portion of the pentagon - same distance as input
-      const bgY = parentNode.position.y + 50 // Start below execution node with same gap as input has above
+      const bgY = parentNode.position.y + 50 + 20
 
       // Check if output background exists
       const outputBgId = `${nodeId}-output-background`
@@ -549,52 +686,79 @@ const ActivityInputOutput: React.FC<ActivityInputOutputProps> = ({ className = '
 
   // Initialize nodes on mount
   useEffect(() => {
-    setNodes([
-      {
-        id: 'start',
-        type: 'start',
-        position: { x: 50, y: 250 },
-        data: { label: 'Start' },
-      },
-      {
-        id: 'execution-1',
-        type: 'execution',
-        position: { x: 300, y: 250 },
-        data: {
-          label: 'trigger-ci/cd',
-          id: 'execution-1',
-          onDelete: stableHandleDeleteNode,
-          onAddInput: stableHandleAddInput,
-          onAddOutput: stableHandleAddOutput,
-          onToggleInputGroup: stableHandleToggleInputGroup,
-          onToggleOutputGroup: stableHandleToggleOutputGroup,
-          onCollapse: stableHandleCollapseNode,
+    if (initialNodes.length > 0) {
+      // Use provided initial nodes, but add callbacks to execution nodes
+      const nodesWithCallbacks = initialNodes.map((node) => {
+        if (node.type === 'execution') {
+          return {
+            ...node,
+            data: {
+              ...node.data,
+              onDelete: stableHandleDeleteNode,
+              onAddInput: stableHandleAddInput,
+              onAddOutput: stableHandleAddOutput,
+              onToggleInputGroup: stableHandleToggleInputGroup,
+              onToggleOutputGroup: stableHandleToggleOutputGroup,
+              onCollapse: stableHandleCollapseNode,
+            },
+          }
+        }
+        return node
+      })
+      setNodes(nodesWithCallbacks)
+    } else {
+      // Use default nodes
+      setNodes([
+        {
+          id: 'start',
+          type: 'start',
+          position: { x: 50, y: 250 },
+          data: { label: 'Start' },
         },
-      },
-      {
-        id: 'stop',
-        type: 'stop',
-        position: { x: 550, y: 250 },
-        data: { label: 'Stop' },
-      },
-    ])
+        {
+          id: 'execution-1',
+          type: 'execution',
+          position: { x: 300, y: 250 },
+          data: {
+            label: 'trigger-ci/cd',
+            id: 'execution-1',
+            onDelete: stableHandleDeleteNode,
+            onAddInput: stableHandleAddInput,
+            onAddOutput: stableHandleAddOutput,
+            onToggleInputGroup: stableHandleToggleInputGroup,
+            onToggleOutputGroup: stableHandleToggleOutputGroup,
+            onCollapse: stableHandleCollapseNode,
+          },
+        },
+        {
+          id: 'stop',
+          type: 'stop',
+          position: { x: 550, y: 250 },
+          data: { label: 'Stop' },
+        },
+      ])
+    }
 
-    setEdges([
-      {
-        id: 'e-start-execution-1',
-        source: 'start',
-        target: 'execution-1',
-        type: 'default',
-        className: 'custom-edge',
-      },
-      {
-        id: 'e-execution-1-stop',
-        source: 'execution-1',
-        target: 'stop',
-        type: 'default',
-        className: 'custom-edge',
-      },
-    ])
+    if (initialEdges.length > 0) {
+      setEdges(initialEdges)
+    } else {
+      setEdges([
+        {
+          id: 'e-start-execution-1',
+          source: 'start',
+          target: 'execution-1',
+          type: 'default',
+          className: 'custom-edge',
+        },
+        {
+          id: 'e-execution-1-stop',
+          source: 'execution-1',
+          target: 'stop',
+          type: 'default',
+          className: 'custom-edge',
+        },
+      ])
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [stableHandleDeleteNode, stableHandleAddInput, stableHandleAddOutput, stableHandleToggleInputGroup, stableHandleToggleOutputGroup, stableHandleCollapseNode])
 
@@ -606,7 +770,7 @@ const ActivityInputOutput: React.FC<ActivityInputOutputProps> = ({ className = '
       <ReactFlow
         nodes={nodes}
         edges={edges}
-        onNodesChange={onNodesChange}
+        onNodesChange={handleNodesChange}
         onEdgesChange={onEdgesChange}
         onConnect={onConnect}
         nodeTypes={nodeTypes}

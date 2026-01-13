@@ -1,0 +1,19 @@
+.chord-chart {
+  width: 100%;
+  font-family: var(--font-family-macan-mono);
+}
+
+.chord-chart__container {
+  position: relative;
+  width: 100%;
+  min-height: 400px;
+  background: var(--Gray-200);
+  border: 1px solid var(--Divider-Light);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .chord-chart__container {
+    min-height: 300px;
+  }
+}
