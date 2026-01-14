@@ -218,6 +218,34 @@
   line-height: 120%;
 }
 
+.drawer-tag-toggles-section {
+  display: flex;
+  padding: var(--sds-size-space-400);
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--sds-size-space-300);
+  align-self: stretch;
+  background: var(--Background-Card);
+}
+
+.drawer-section-label {
+  font-family: var(--font-family-macan-mono);
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 120%;
+  color: var(--Text-Blue-text-Main-text);
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+.drawer-tag-toggles-group {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: var(--sds-size-space-200);
+  align-self: stretch;
+}
+
 .drawer-upload-section {
   display: flex;
   padding: var(--sds-size-space-400);
