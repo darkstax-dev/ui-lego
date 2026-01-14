@@ -1,0 +1,225 @@
+/* Menu Item 2.0 - Based on Figma design */
+.menu-item-2 {
+  display: flex;
+  align-items: center;
+  align-self: stretch;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  font-family: var(--font-family-macan);
+  outline: none;
+  user-select: none;
+  box-sizing: border-box;
+}
+
+.menu-item-2:focus-visible {
+  outline: 2px solid var(--color-blue-700);
+  outline-offset: -2px;
+}
+
+.menu-item-2__label {
+  flex: 1;
+  font-family: var(--font-family-macan);
+  font-style: normal;
+  line-height: 120%;
+}
+
+.menu-item-2__icon-leading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.menu-item-2__icon-trailing {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.menu-item-2__arrow {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Size variants */
+.menu-item-2--small {
+  padding: 8px;
+  gap: 8px;
+}
+
+.menu-item-2--small .menu-item-2__label {
+  font-size: 14px;
+  font-weight: 450;
+}
+
+.menu-item-2--small .menu-item-2__icon-leading,
+.menu-item-2--small .menu-item-2__icon-trailing {
+  width: 16px;
+  height: 16px;
+}
+
+.menu-item-2--medium {
+  padding: 12px;
+  gap: 12px;
+}
+
+.menu-item-2--medium .menu-item-2__label {
+  font-size: 16px;
+  font-weight: 450;
+}
+
+.menu-item-2--medium .menu-item-2__icon-leading,
+.menu-item-2--medium .menu-item-2__icon-trailing {
+  width: 20px;
+  height: 20px;
+}
+
+.menu-item-2--large {
+  padding: 16px;
+  gap: 16px;
+}
+
+.menu-item-2--large .menu-item-2__label {
+  font-size: 18px;
+  font-weight: 450;
+}
+
+.menu-item-2--large .menu-item-2__icon-leading,
+.menu-item-2--large .menu-item-2__icon-trailing {
+  width: 24px;
+  height: 24px;
+}
+
+/* Default variant */
+.menu-item-2--default {
+  background: var(--Drop-down-light-Background-default, var(--color-gray-100));
+}
+
+.menu-item-2--default .menu-item-2__label {
+  color: var(--Text-Blue-text-Main-text, var(--color-blue-dark-950));
+}
+
+.menu-item-2--default .menu-item-2__icon-leading,
+.menu-item-2--default .menu-item-2__icon-trailing,
+.menu-item-2--default .menu-item-2__arrow {
+  color: var(--Text-Blue-text-Main-text, var(--color-blue-dark-950));
+}
+
+/* Hover state for default variant */
+.menu-item-2--default:hover,
+.menu-item-2--default:focus-visible {
+  background: var(--Gray-300, var(--color-gray-300));
+}
+
+/* Hover variant (static state) */
+.menu-item-2--hover {
+  background: var(--Gray-300, var(--color-gray-300));
+}
+
+.menu-item-2--hover .menu-item-2__label {
+  color: var(--Text-Blue-text-Main-text, var(--color-blue-dark-950));
+}
+
+.menu-item-2--hover .menu-item-2__icon-leading,
+.menu-item-2--hover .menu-item-2__icon-trailing,
+.menu-item-2--hover .menu-item-2__arrow {
+  color: var(--Text-Blue-text-Main-text, var(--color-blue-dark-950));
+}
+
+/* Danger variant */
+.menu-item-2--danger {
+  background: var(--Drop-down-light-Background-default, var(--color-gray-100));
+}
+
+.menu-item-2--danger .menu-item-2__label {
+  color: var(--Red-500, var(--color-red-500));
+}
+
+.menu-item-2--danger .menu-item-2__icon-leading,
+.menu-item-2--danger .menu-item-2__icon-trailing,
+.menu-item-2--danger .menu-item-2__arrow {
+  color: var(--Red-500, var(--color-red-500));
+}
+
+.menu-item-2--danger:hover,
+.menu-item-2--danger:focus-visible {
+  background: var(--Gray-300, var(--color-gray-300));
+}
+
+/* Disabled state */
+.menu-item-2--disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.menu-item-2--disabled:hover {
+  background: var(--Drop-down-light-Background-default, var(--color-gray-100));
+}
+
+/* When the item has justify-content: space-between for trailing arrow */
+.menu-item-2--default.menu-item-2--has-trailing,
+.menu-item-2--hover.menu-item-2--has-trailing,
+.menu-item-2--danger.menu-item-2--has-trailing {
+  justify-content: space-between;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .menu-item-2--small {
+    padding: 12px;
+    gap: 12px;
+  }
+
+  .menu-item-2--small .menu-item-2__label {
+    font-size: 16px;
+  }
+
+  .menu-item-2--medium {
+    padding: 16px;
+    gap: 16px;
+  }
+
+  .menu-item-2--medium .menu-item-2__label {
+    font-size: 18px;
+  }
+
+  .menu-item-2--large {
+    padding: 20px;
+    gap: 20px;
+  }
+
+  .menu-item-2--large .menu-item-2__label {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .menu-item-2--small {
+    padding: 10px;
+    gap: 10px;
+  }
+
+  .menu-item-2--small .menu-item-2__label {
+    font-size: 14px;
+  }
+
+  .menu-item-2--medium {
+    padding: 14px;
+    gap: 14px;
+  }
+
+  .menu-item-2--medium .menu-item-2__label {
+    font-size: 16px;
+  }
+
+  .menu-item-2--large {
+    padding: 18px;
+    gap: 18px;
+  }
+
+  .menu-item-2--large .menu-item-2__label {
+    font-size: 18px;
+  }
+}
