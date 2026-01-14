@@ -74,7 +74,10 @@
     width: 160px;
   }
 
-  .node-tooltip-section,
+  .node-tooltip-section {
+    width: 136px;
+  }
+
   .node-tooltip-divider {
     width: 136px;
   }
