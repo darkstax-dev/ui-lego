@@ -1,159 +1,134 @@
 import React, { useState } from 'react'
+import InputField from '../inputs/InputField'
+import SwitchField from '../inputs/SwitchField'
+import FileUpload from '../inputs/FileUpload'
 import './Drawer.css'
 
 const DrawerExampleContent: React.FC = () => {
-  const [activeToggles, setActiveToggles] = useState({
+  const [formData, setFormData] = useState({
+    activityName: 'Command',
+    nodeTypeName: 'Command',
+    groupName: 'Command',
+    nodeInternalName: 'Command',
+    displayOrder: '0',
+  })
+
+  const [toggles, setToggles] = useState({
     isActive: false,
     isSystemActivity: false,
     supportMultiRule: false,
   })
 
-  const handleToggle = (key: keyof typeof activeToggles) => {
-    setActiveToggles(prev => ({
-      ...prev,
-      [key]: !prev[key],
-    }))
+  const handleInputChange = (field: keyof typeof formData) => (value: string) => {
+    setFormData(prev => ({ ...prev, [field]: value }))
+  }
+
+  const handleToggleChange = (field: keyof typeof toggles) => (checked: boolean) => {
+    setToggles(prev => ({ ...prev, [field]: checked }))
+  }
+
+  const handleFileSelect = (sectionName: string) => (files: FileList | null) => {
+    if (files) {
+      console.log(`${sectionName} files selected:`, Array.from(files))
+    }
   }
 
   return (
     <div className="drawer-form-section">
       <div className="drawer-form-fields">
-        <div className="drawer-select-field">
-          <label className="drawer-select-label">Activity name</label>
-          <input
-            type="text"
-            className="drawer-select-input"
-            placeholder="Command"
-          />
-        </div>
+        <InputField
+          label="Activity name"
+          value={formData.activityName}
+          onChange={handleInputChange('activityName')}
+          placeholder="Command"
+          leadingIcon={null}
+        />
 
-        <div className="drawer-select-field">
-          <label className="drawer-select-label">Node type name</label>
-          <input
-            type="text"
-            className="drawer-select-input"
-            placeholder="Command"
-          />
-        </div>
+        <InputField
+          label="Node type name"
+          value={formData.nodeTypeName}
+          onChange={handleInputChange('nodeTypeName')}
+          placeholder="Command"
+          leadingIcon={null}
+        />
 
-        <div className="drawer-select-field">
-          <label className="drawer-select-label">Group name</label>
-          <input
-            type="text"
-            className="drawer-select-input"
-            placeholder="Command"
-          />
-        </div>
+        <InputField
+          label="Group name"
+          value={formData.groupName}
+          onChange={handleInputChange('groupName')}
+          placeholder="Command"
+          leadingIcon={null}
+        />
 
-        <div className="drawer-select-field">
-          <label className="drawer-select-label">Node internal name</label>
-          <input
-            type="text"
-            className="drawer-select-input"
-            placeholder="Command"
-          />
-        </div>
+        <InputField
+          label="Node internal name"
+          value={formData.nodeInternalName}
+          onChange={handleInputChange('nodeInternalName')}
+          placeholder="Command"
+          leadingIcon={null}
+        />
 
-        <div className="drawer-select-field">
-          <label className="drawer-select-label">Display order</label>
-          <input
-            type="text"
-            className="drawer-select-input"
-            placeholder="0"
-          />
-        </div>
+        <InputField
+          label="Display order"
+          value={formData.displayOrder}
+          onChange={handleInputChange('displayOrder')}
+          placeholder="0"
+          type="number"
+          leadingIcon={null}
+        />
       </div>
 
       <div className="drawer-toggles-section">
         <div className="drawer-toggles-container">
           <div className="drawer-toggles-row">
-            <div className="drawer-toggle-item">
-              <button
-                type="button"
-                className={`drawer-toggle-switch ${activeToggles.isActive ? 'active' : ''}`}
-                onClick={() => handleToggle('isActive')}
-                aria-label="Toggle is active"
-              >
-                <div className="drawer-toggle-knob" />
-              </button>
-              <span className="drawer-toggle-label">Is Active?</span>
-            </div>
+            <SwitchField
+              label="Is Active?"
+              checked={toggles.isActive}
+              onChange={handleToggleChange('isActive')}
+              labelPosition="right"
+            />
 
-            <div className="drawer-toggle-item">
-              <button
-                type="button"
-                className={`drawer-toggle-switch ${activeToggles.isSystemActivity ? 'active' : ''}`}
-                onClick={() => handleToggle('isSystemActivity')}
-                aria-label="Toggle is system activity"
-              >
-                <div className="drawer-toggle-knob" />
-              </button>
-              <span className="drawer-toggle-label">Is System Activity</span>
-            </div>
+            <SwitchField
+              label="Is System Activity"
+              checked={toggles.isSystemActivity}
+              onChange={handleToggleChange('isSystemActivity')}
+              labelPosition="right"
+            />
 
-            <div className="drawer-toggle-item">
-              <button
-                type="button"
-                className={`drawer-toggle-switch ${activeToggles.supportMultiRule ? 'active' : ''}`}
-                onClick={() => handleToggle('supportMultiRule')}
-                aria-label="Toggle support multi rule"
-              >
-                <div className="drawer-toggle-knob" />
-              </button>
-              <span className="drawer-toggle-label">Support multi rule</span>
-            </div>
+            <SwitchField
+              label="Support multi rule"
+              checked={toggles.supportMultiRule}
+              onChange={handleToggleChange('supportMultiRule')}
+              labelPosition="right"
+            />
           </div>
         </div>
 
         <div className="drawer-upload-section">
-          <div className="drawer-file-upload">
-            <div className="drawer-upload-content">
-              <div className="drawer-upload-text-section">
-                <div className="drawer-upload-title">Activity Icon</div>
-                <div className="drawer-upload-action">
-                  <button type="button" className="drawer-upload-link-button">
-                    <div className="drawer-upload-link-text">Click to upload</div>
-                    <div className="drawer-upload-link-underline" />
-                  </button>
-                  <span className="drawer-upload-drag-text">or drag and drop</span>
-                </div>
-              </div>
-            </div>
-          </div>
+          <FileUpload
+            title="Activity Icon"
+            description="Click to upload or drag and drop"
+            onFileSelect={handleFileSelect('Activity Icon')}
+            accept="image/*"
+          />
         </div>
 
         <div className="drawer-upload-section">
-          <div className="drawer-file-upload">
-            <div className="drawer-upload-content">
-              <div className="drawer-upload-text-section">
-                <div className="drawer-upload-title">Form Schema</div>
-                <div className="drawer-upload-action">
-                  <button type="button" className="drawer-upload-link-button">
-                    <div className="drawer-upload-link-text">Click to upload</div>
-                    <div className="drawer-upload-link-underline" />
-                  </button>
-                  <span className="drawer-upload-drag-text">or drag and drop</span>
-                </div>
-              </div>
-            </div>
-          </div>
+          <FileUpload
+            title="Form Schema"
+            description="Click to upload or drag and drop"
+            onFileSelect={handleFileSelect('Form Schema')}
+            accept=".json,.yaml,.yml"
+          />
         </div>
 
         <div className="drawer-upload-section">
-          <div className="drawer-file-upload">
-            <div className="drawer-upload-content">
-              <div className="drawer-upload-text-section">
-                <div className="drawer-upload-title">Plugin File</div>
-                <div className="drawer-upload-action">
-                  <button type="button" className="drawer-upload-link-button">
-                    <div className="drawer-upload-link-text">Click to upload</div>
-                    <div className="drawer-upload-link-underline" />
-                  </button>
-                  <span className="drawer-upload-drag-text">or drag and drop</span>
-                </div>
-              </div>
-            </div>
-          </div>
+          <FileUpload
+            title="Plugin File"
+            description="Click to upload or drag and drop"
+            onFileSelect={handleFileSelect('Plugin File')}
+            accept=".js,.ts,.jsx,.tsx"
+          />
         </div>
       </div>
     </div>
