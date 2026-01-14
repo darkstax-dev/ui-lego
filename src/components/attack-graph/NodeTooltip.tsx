@@ -1,6 +1,6 @@
 import React from 'react';
 import './NodeTooltip.css';
-import { StatusBadge } from './StatusBadge';
+import { NodeTypeBadge } from './NodeTypeBadge';
 
 export interface NodeTooltipProps {
   type: string;
@@ -8,6 +8,8 @@ export interface NodeTooltipProps {
   criticality: string;
   status: string;
   onClose?: () => void;
+  typeBackgroundColor?: string;
+  typeTextColor?: string;
 }
 
 export const NodeTooltip: React.FC<NodeTooltipProps> = ({
@@ -15,7 +17,9 @@ export const NodeTooltip: React.FC<NodeTooltipProps> = ({
   priority,
   criticality,
   status,
-  onClose
+  onClose,
+  typeBackgroundColor,
+  typeTextColor
 }) => {
   return (
     <div className="node-tooltip">
@@ -36,7 +40,11 @@ export const NodeTooltip: React.FC<NodeTooltipProps> = ({
       <div className="node-tooltip-content">
         <div className="node-tooltip-section">
           <div className="node-tooltip-label">Type:</div>
-          <StatusBadge label={type} variant="medium" />
+          <NodeTypeBadge
+            label={type}
+            backgroundColor={typeBackgroundColor}
+            textColor={typeTextColor}
+          />
         </div>
         
         <div className="node-tooltip-divider" />

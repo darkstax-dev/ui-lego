@@ -1,0 +1,26 @@
+.node-type-badge {
+  display: flex;
+  padding: 4px 6px;
+  align-items: center;
+  gap: 5px;
+  width: fit-content;
+}
+
+.node-type-badge-text {
+  font-family: 'Macan Mono Trial', -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 100%;
+  text-transform: uppercase;
+}
+
+@media (max-width: 768px) {
+  .node-type-badge {
+    padding: 3px 5px;
+  }
+  
+  .node-type-badge-text {
+    font-size: 11px;
+  }
+}
