@@ -10,6 +10,9 @@ export type { NodeTooltipProps } from './NodeTooltip';
 export { NodeTypeBadge } from './NodeTypeBadge';
 export type { NodeTypeBadgeProps } from './NodeTypeBadge';
 
+export { getTypeColor, typeColorMap } from './typeColors';
+export type { TypeColor } from './typeColors';
+
 export { ConnectorLine } from './ConnectorLine';
 export type { ConnectorLineProps } from './ConnectorLine';
 

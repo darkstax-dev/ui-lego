@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './GraphNode.css';
 import { NodeTooltip } from './NodeTooltip';
+import { getTypeColor } from './typeColors';
 
 export interface GraphNodeProps {
   label: string;
@@ -10,6 +11,8 @@ export interface GraphNodeProps {
     priority: string;
     criticality: string;
     status: string;
+    typeBackgroundColor?: string;
+    typeTextColor?: string;
   };
 }
 
@@ -75,6 +78,8 @@ export const GraphNode: React.FC<GraphNodeProps> = ({
           priority={tooltipData.priority}
           criticality={tooltipData.criticality}
           status={tooltipData.status}
+          typeBackgroundColor={tooltipData.typeBackgroundColor || getTypeColor(tooltipData.type).backgroundColor}
+          typeTextColor={tooltipData.typeTextColor || getTypeColor(tooltipData.type).textColor}
           onClose={() => setShowTooltip(false)}
         />
       )}
