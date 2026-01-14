@@ -55,6 +55,7 @@
   transform: translateY(0);
 }
 
+/* Header */
 .drawer-header {
   display: flex;
   padding: var(--sds-size-space-400);
@@ -64,6 +65,7 @@
   align-self: stretch;
   border-bottom: 1px dashed var(--Gray-400);
   background: var(--sds-color-background-default-default);
+  flex-shrink: 0;
 }
 
 .drawer-panel--light .drawer-header {
@@ -130,6 +132,7 @@
   outline-offset: 2px;
 }
 
+/* Content */
 .drawer-content {
   display: flex;
   padding: 24px 16px;
@@ -145,7 +148,7 @@
   background: var(--sds-color-background-default-default);
 }
 
-/* Form elements within drawer */
+/* Layout sections for drawer example content */
 .drawer-form-section {
   display: flex;
   flex-direction: column;
@@ -162,45 +165,6 @@
   align-self: stretch;
 }
 
-.drawer-select-field {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: var(--sds-size-space-200);
-  align-self: stretch;
-}
-
-.drawer-select-label {
-  align-self: stretch;
-  color: var(--Text-Blue-text-Main-text);
-  font-family: var(--font-family-macan);
-  font-size: 14px;
-  font-weight: 450;
-  line-height: 120%;
-}
-
-.drawer-select-input {
-  display: flex;
-  height: 40px;
-  padding: 12px 16px;
-  align-items: center;
-  gap: var(--sds-size-space-200);
-  align-self: stretch;
-  background: var(--Inputs-Input-Background);
-  border: none;
-  color: var(--Inputs-Placeholder-text);
-  font-family: var(--font-family-macan);
-  font-size: 16px;
-  font-weight: 450;
-  line-height: 120%;
-  letter-spacing: -0.32px;
-}
-
-.drawer-select-input:focus {
-  outline: 2px solid var(--color-blue-700);
-  outline-offset: 1px;
-}
-
 .drawer-toggles-section {
   display: flex;
   flex-direction: column;
@@ -211,7 +175,6 @@
 
 .drawer-toggles-container {
   display: flex;
-  height: 52px;
   padding: var(--sds-size-space-400);
   flex-direction: column;
   justify-content: center;
@@ -227,56 +190,7 @@
   align-items: flex-start;
   flex: 1;
   align-self: stretch;
-}
-
-.drawer-toggle-item {
-  display: flex;
-  align-items: center;
-  gap: var(--sds-size-space-200);
-}
-
-.drawer-toggle-switch {
-  display: flex;
-  padding: 2px;
-  align-items: center;
-  width: 34px;
-  height: 20px;
-  border-radius: 12px;
-  background: var(--Gray-300);
-  border: none;
-  cursor: pointer;
-  position: relative;
-  transition: background 0.2s ease;
-}
-
-.drawer-toggle-switch:focus {
-  outline: 2px solid var(--color-blue-700);
-  outline-offset: 2px;
-}
-
-.drawer-toggle-knob {
-  width: 16px;
-  height: 16px;
-  border-radius: 50%;
-  background: var(--color-white);
-  box-shadow: 0 1px 2px rgba(10, 13, 18, 0.06), 0 1px 3px rgba(10, 13, 18, 0.1);
-  transition: transform 0.2s ease;
-}
-
-.drawer-toggle-switch.active {
-  background: var(--color-blue-700);
-}
-
-.drawer-toggle-switch.active .drawer-toggle-knob {
-  transform: translateX(14px);
-}
-
-.drawer-toggle-label {
-  color: var(--Text-Blue-text-Main-text);
-  font-family: var(--font-family-macan);
-  font-size: 14px;
-  font-weight: 450;
-  line-height: 120%;
+  gap: var(--sds-size-space-400);
 }
 
 .drawer-upload-section {
@@ -284,86 +198,8 @@
   padding: var(--sds-size-space-400);
   flex-direction: column;
   align-items: flex-start;
-  gap: var(--sds-size-space-400);
   align-self: stretch;
   background: var(--Background-Card);
-}
-
-.drawer-file-upload {
-  display: flex;
-  padding: var(--sds-size-space-400) 24px;
-  flex-direction: column;
-  align-items: center;
-  gap: 4px;
-  align-self: stretch;
-  border: 1px dashed var(--Divider-Light);
-}
-
-.drawer-upload-content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: var(--sds-size-space-300);
-  align-self: stretch;
-}
-
-.drawer-upload-text-section {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 4px;
-  align-self: stretch;
-}
-
-.drawer-upload-title {
-  align-self: stretch;
-  color: var(--Text-Blue-text-Main-text);
-  text-align: center;
-  font-family: var(--font-family-macan);
-  font-size: 16px;
-  font-weight: 600;
-  line-height: 120%;
-  letter-spacing: -0.32px;
-}
-
-.drawer-upload-action {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 4px;
-  align-self: stretch;
-}
-
-.drawer-upload-link-button {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  background: none;
-  border: none;
-  padding: 0;
-  cursor: pointer;
-}
-
-.drawer-upload-link-text {
-  color: var(--red-600-cta);
-  font-family: var(--font-family-macan);
-  font-size: 14px;
-  font-weight: 450;
-  line-height: 120%;
-}
-
-.drawer-upload-link-underline {
-  height: 1px;
-  align-self: stretch;
-  background: var(--red-600-cta);
-}
-
-.drawer-upload-drag-text {
-  color: var(--Text-Blue-text-Tetriary-text);
-  font-family: var(--font-family-macan);
-  font-size: 14px;
-  font-weight: 450;
-  line-height: 120%;
 }
 
 /* Responsive adjustments */
@@ -393,13 +229,5 @@
 @media (max-width: 480px) {
   .drawer-content {
     padding: var(--sds-size-space-300);
-  }
-
-  .drawer-select-input {
-    font-size: 14px;
-  }
-
-  .drawer-upload-title {
-    font-size: 14px;
   }
 }
