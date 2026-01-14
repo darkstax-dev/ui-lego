@@ -180,44 +180,57 @@ export const Disabled: Story = {
 export const NestedMenuExample: Story = {
   render: () => {
     const [expandedItem, setExpandedItem] = useState<string | null>(null)
-    
+    const [itemPosition, setItemPosition] = useState<{ top: number } | null>(null)
+
+    const handleMenuItemClick = (item: string, event: React.MouseEvent) => {
+      const rect = event.currentTarget.getBoundingClientRect()
+      setItemPosition({ top: rect.top })
+      setExpandedItem(expandedItem === item ? null : item)
+    }
+
+    const handleMenuItemEnter = (item: string, event: React.MouseEvent) => {
+      const rect = event.currentTarget.getBoundingClientRect()
+      setItemPosition({ top: rect.top })
+      setExpandedItem(item)
+    }
+
     return (
-      <div style={{ width: '300px' }}>
-        <Menu2>
-          <MenuItem2 label="Open" />
-          <MenuItem2 label="Edit" />
-          <MenuItem2 
-            label="Action Output" 
-            hasTrailingArrow 
-            onClick={() => setExpandedItem(expandedItem === 'output' ? null : 'output')}
-          />
-          {expandedItem === 'output' && (
-            <div style={{ paddingLeft: '16px' }}>
-              <Menu2>
-                <MenuItem2 label="Action" />
-                <MenuItem2 label="Action" />
-                <MenuItem2 label="Action" />
-                <MenuItem2 label="Action" />
-              </Menu2>
-            </div>
-          )}
-          <MenuItem2 
-            label="Action Input" 
-            hasTrailingArrow 
-            onClick={() => setExpandedItem(expandedItem === 'input' ? null : 'input')}
-          />
-          {expandedItem === 'input' && (
-            <div style={{ paddingLeft: '16px' }}>
-              <Menu2>
-                <MenuItem2 label="Action" />
-                <MenuItem2 label="Action" />
-                <MenuItem2 label="Action" />
-                <MenuItem2 label="Action" />
-              </Menu2>
-            </div>
-          )}
-          <MenuItem2 label="Delete" variant="danger" />
-        </Menu2>
+      <div style={{ display: 'flex', gap: '16px', alignItems: 'flex-start' }}>
+        <div style={{ width: '300px', position: 'relative' }}>
+          <Menu2>
+            <MenuItem2 label="Open" />
+            <MenuItem2 label="Edit" />
+            <MenuItem2
+              label="Action Output"
+              hasTrailingArrow
+              onClick={(e) => handleMenuItemClick('output', e as any)}
+              onMouseEnter={(e) => handleMenuItemEnter('output', e as any)}
+            />
+            <MenuItem2
+              label="Action Input"
+              hasTrailingArrow
+              onClick={(e) => handleMenuItemClick('input', e as any)}
+              onMouseEnter={(e) => handleMenuItemEnter('input', e as any)}
+            />
+            <MenuItem2 label="Delete" variant="danger" />
+          </Menu2>
+        </div>
+
+        {expandedItem && (
+          <div
+            style={{
+              width: '300px',
+              position: 'relative'
+            }}
+          >
+            <Menu2>
+              <MenuItem2 label="Action" />
+              <MenuItem2 label="Action" />
+              <MenuItem2 label="Action" />
+              <MenuItem2 label="Action" />
+            </Menu2>
+          </div>
+        )}
       </div>
     )
   },
