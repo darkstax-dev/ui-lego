@@ -1,6 +1,7 @@
 import React from 'react'
 import type { Meta, StoryObj } from '@storybook/react-vite'
 import Drawer, { DrawerSize } from './Drawer'
+import DrawerExampleContent from './DrawerExampleContent'
 import Button from '../buttons/Button'
 import './Drawer.stories.css'
 
@@ -31,11 +32,42 @@ export const Default: Story = {
             Open Drawer
           </Button>
 
-          <Drawer isOpen={open} onClose={() => setOpen(false)} title="Default Drawer">
-            <div className="drawer-sample-content">
-              <p>This is the default drawer content. Use the close button or click the backdrop to close.</p>
-              <Button variant="secondary" onClick={() => setOpen(false)} hideIcon size="sm">Close</Button>
-            </div>
+          <Drawer
+            isOpen={open}
+            onClose={() => setOpen(false)}
+            appearance="light"
+            onExpand={() => console.log('Expand clicked')}
+            onFullscreen={() => console.log('Fullscreen clicked')}
+          >
+            {/* Empty drawer with just the header */}
+          </Drawer>
+        </div>
+      )
+    }
+
+    return <Example />
+  },
+}
+
+export const ExampleDrawer: Story = {
+  render: () => {
+    const Example: React.FC = () => {
+      const [open, setOpen] = React.useState(false)
+      return (
+        <div className="drawer-story">
+          <Button onClick={() => setOpen(true)} hideIcon size="sm">
+            Open Drawer
+          </Button>
+
+          <Drawer
+            isOpen={open}
+            onClose={() => setOpen(false)}
+            appearance="light"
+            size={DrawerSize.STANDARD}
+            onExpand={() => console.log('Expand clicked')}
+            onFullscreen={() => console.log('Fullscreen clicked')}
+          >
+            <DrawerExampleContent />
           </Drawer>
         </div>
       )
@@ -62,7 +94,9 @@ export const Positions: Story = {
             isOpen={openPos === 'right'}
             onClose={() => setOpenPos(null)}
             position="right"
-            title="Right"
+            appearance="light"
+            onExpand={() => console.log('Expand clicked')}
+            onFullscreen={() => console.log('Fullscreen clicked')}
           >
             <div className="drawer-sample-content">Right drawer</div>
           </Drawer>
@@ -71,7 +105,9 @@ export const Positions: Story = {
             isOpen={openPos === 'left'}
             onClose={() => setOpenPos(null)}
             position="left"
-            title="Left"
+            appearance="light"
+            onExpand={() => console.log('Expand clicked')}
+            onFullscreen={() => console.log('Fullscreen clicked')}
           >
             <div className="drawer-sample-content">Left drawer</div>
           </Drawer>
@@ -81,7 +117,9 @@ export const Positions: Story = {
             onClose={() => setOpenPos(null)}
             position="top"
             size="30%"
-            title="Top"
+            appearance="light"
+            onExpand={() => console.log('Expand clicked')}
+            onFullscreen={() => console.log('Fullscreen clicked')}
           >
             <div className="drawer-sample-content">Top drawer</div>
           </Drawer>
@@ -91,7 +129,9 @@ export const Positions: Story = {
             onClose={() => setOpenPos(null)}
             position="bottom"
             size="30%"
-            title="Bottom"
+            appearance="light"
+            onExpand={() => console.log('Expand clicked')}
+            onFullscreen={() => console.log('Fullscreen clicked')}
           >
             <div className="drawer-sample-content">Bottom drawer</div>
           </Drawer>
@@ -119,7 +159,9 @@ export const Sizes: Story = {
             isOpen={sizeOpen === 'small'}
             onClose={() => setSizeOpen(null)}
             size={DrawerSize.SMALL}
-            title="Small Drawer"
+            appearance="light"
+            onExpand={() => console.log('Expand clicked')}
+            onFullscreen={() => console.log('Fullscreen clicked')}
           >
             <div className="drawer-sample-content">Small width drawer</div>
           </Drawer>
@@ -128,7 +170,9 @@ export const Sizes: Story = {
             isOpen={sizeOpen === 'standard'}
             onClose={() => setSizeOpen(null)}
             size={DrawerSize.STANDARD}
-            title="Standard Drawer"
+            appearance="light"
+            onExpand={() => console.log('Expand clicked')}
+            onFullscreen={() => console.log('Fullscreen clicked')}
           >
             <div className="drawer-sample-content">Standard size drawer</div>
           </Drawer>
@@ -137,7 +181,9 @@ export const Sizes: Story = {
             isOpen={sizeOpen === 'large'}
             onClose={() => setSizeOpen(null)}
             size={DrawerSize.LARGE}
-            title="Large Drawer"
+            appearance="light"
+            onExpand={() => console.log('Expand clicked')}
+            onFullscreen={() => console.log('Fullscreen clicked')}
           >
             <div className="drawer-sample-content">Large drawer</div>
           </Drawer>
@@ -157,7 +203,14 @@ export const NoBackdrop: Story = {
         <div className="drawer-story">
           <Button onClick={() => setOpen(true)} hideIcon size="sm">Open without Backdrop</Button>
 
-          <Drawer isOpen={open} onClose={() => setOpen(false)} hasBackdrop={false} title="No Backdrop">
+          <Drawer
+            isOpen={open}
+            onClose={() => setOpen(false)}
+            hasBackdrop={false}
+            appearance="light"
+            onExpand={() => console.log('Expand clicked')}
+            onFullscreen={() => console.log('Fullscreen clicked')}
+          >
             <div className="drawer-sample-content">Drawer without a backdrop</div>
           </Drawer>
         </div>

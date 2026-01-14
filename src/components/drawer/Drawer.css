@@ -6,7 +6,7 @@
   justify-content: center;
   background: var(--sds-color-background-utilities-overlay);
   z-index: 1000;
-  padding: var(--sds-size-space-400);
+  padding: 0;
 }
 
 .drawer-overlay.drawer-overlay--no-backdrop {
@@ -55,73 +55,91 @@
   transform: translateY(0);
 }
 
+/* Header */
 .drawer-header {
   display: flex;
+  padding: var(--sds-size-space-400);
+  justify-content: center;
   align-items: center;
-  justify-content: space-between;
-  padding: var(--sds-size-space-400) var(--sds-size-space-400);
-  border-bottom: 1px dashed var(--color-blue-950);
+  gap: var(--sds-size-space-300);
+  align-self: stretch;
+  border-bottom: 1px dashed var(--Gray-400);
+  background: var(--sds-color-background-default-default);
+  flex-shrink: 0;
 }
 
 .drawer-panel--light .drawer-header {
   background: var(--sds-color-background-default-default);
-  border-bottom: 1px solid var(--Divider-Light);
+  border-bottom: 1px dashed var(--Gray-400);
 }
 
-.drawer-title-container {
+.drawer-header-actions {
   display: flex;
   align-items: center;
   gap: var(--sds-size-space-200);
   flex: 1;
 }
 
-.drawer-title {
-  color: var(--text-white-main);
-  font-family: var(--font-family-macan);
-  font-size: var(--font-size-lg);
-  font-weight: var(--font-weight-medium);
-  margin: 0;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+.drawer-icon-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 24px;
+  height: 24px;
+  background: none;
+  border: none;
+  color: var(--color-gray-500);
+  cursor: pointer;
+  padding: 0;
+  flex-shrink: 0;
+  transition: color 0.2s ease;
 }
 
-.drawer-panel--light .drawer-title {
+.drawer-icon-button:hover {
   color: var(--Text-Blue-text-Main-text);
+}
+
+.drawer-icon-button:focus {
+  outline: 2px solid rgba(120, 121, 122, 0.3);
+  outline-offset: 2px;
 }
 
 .drawer-close-button {
   display: flex;
-  width: 32px;
-  height: 32px;
+  width: 24px;
+  height: 24px;
   justify-content: center;
   align-items: center;
   background: none;
   border: none;
-  color: var(--color-blue-950);
+  color: var(--color-gray-500);
   cursor: pointer;
   padding: 0;
   flex-shrink: 0;
+  transition: color 0.2s ease;
 }
 
 .drawer-panel--light .drawer-close-button {
-  color: var(--Blue-Dark-blue-950);
+  color: var(--color-gray-500);
 }
 
 .drawer-close-button:hover {
-  color: var(--text-white-main);
+  color: var(--Text-Blue-text-Main-text);
 }
 
 .drawer-close-button:focus {
-  outline: 2px solid rgba(223, 223, 223, 0.2);
+  outline: 2px solid rgba(120, 121, 122, 0.3);
   outline-offset: 2px;
 }
 
+/* Content */
 .drawer-content {
   display: flex;
-  padding: var(--sds-size-space-400);
+  padding: 24px 16px;
   flex-direction: column;
-  gap: var(--sds-size-space-400);
+  align-items: flex-start;
+  gap: 32px;
+  align-self: stretch;
   overflow: auto;
   flex: 1;
 }
@@ -130,11 +148,132 @@
   background: var(--sds-color-background-default-default);
 }
 
+/* Layout sections for drawer example content */
+.drawer-form-section {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 24px;
+  align-self: stretch;
+}
+
+.drawer-form-fields {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--sds-size-space-400);
+  align-self: stretch;
+}
+
+.drawer-toggles-section {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--sds-size-space-400);
+  align-self: stretch;
+}
+
+.drawer-toggles-container {
+  display: flex;
+  padding: var(--sds-size-space-400);
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  align-self: stretch;
+  background: var(--Background-Card);
+}
+
+.drawer-toggles-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex: 1;
+  align-self: stretch;
+  gap: var(--sds-size-space-400);
+}
+
+/* SwitchField overrides to match Figma design */
+.drawer-toggles-container .switch-field__switch {
+  width: 34px;
+  height: 20px;
+  border-radius: 12px;
+  background: var(--Gray-300);
+}
+
+.drawer-toggles-container .switch-field__switch--checked {
+  background: var(--color-blue-700);
+}
+
+.drawer-toggles-container .switch-field__thumb {
+  width: 16px;
+  height: 16px;
+}
+
+.drawer-toggles-container .switch-field__label {
+  color: var(--Text-Blue-text-Main-text);
+  font-family: var(--font-family-macan);
+  font-size: 14px;
+  font-weight: 450;
+  line-height: 120%;
+}
+
+.drawer-tag-toggles-section {
+  display: flex;
+  padding: var(--sds-size-space-400);
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--sds-size-space-300);
+  align-self: stretch;
+  background: var(--Background-Card);
+}
+
+.drawer-section-label {
+  font-family: var(--font-family-macan-mono);
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 120%;
+  color: var(--Text-Blue-text-Main-text);
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+.drawer-tag-toggles-group {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: var(--sds-size-space-200);
+  align-self: stretch;
+}
+
+.drawer-upload-section {
+  display: flex;
+  padding: var(--sds-size-space-400);
+  flex-direction: column;
+  align-items: flex-start;
+  align-self: stretch;
+  background: var(--Background-Card);
+}
+
 /* Responsive adjustments */
-@media (max-width: 640px) {
-  .drawer-overlay {
-    padding: var(--sds-size-space-200);
+@media (max-width: 768px) {
+  .drawer-toggles-row {
+    flex-direction: column;
+    gap: var(--sds-size-space-400);
+    align-items: flex-start;
   }
+
+  .drawer-toggles-container {
+    height: auto;
+  }
+}
+
+@media (max-width: 640px) {
+  .drawer-content {
+    padding: var(--sds-size-space-400) var(--sds-size-space-300);
+    gap: 24px;
+  }
+  
   .drawer-header {
     padding: var(--sds-size-space-300) var(--sds-size-space-400);
   }

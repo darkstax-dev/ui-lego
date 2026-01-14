@@ -7,6 +7,19 @@ const meta: Meta<typeof GraphNode> = {
   parameters: {
     layout: 'centered',
   },
+  decorators: [
+    (Story) => (
+      <div style={{
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        minHeight: '400px',
+        padding: '40px'
+      }}>
+        <Story />
+      </div>
+    ),
+  ],
   tags: ['autodocs'],
 };
 
@@ -19,9 +32,9 @@ export const Default: Story = {
   },
 };
 
-export const WithTooltip: Story = {
+export const DatacenterWithTooltip: Story = {
   args: {
-    label: 'Node\nName',
+    label: 'Data\nCenter',
     tooltipData: {
       type: 'datacenter',
       priority: '9.5',
@@ -31,7 +44,7 @@ export const WithTooltip: Story = {
   },
 };
 
-export const CustomLabel: Story = {
+export const ServerWithTooltip: Story = {
   args: {
     label: 'Server\n001',
     tooltipData: {
@@ -39,6 +52,18 @@ export const CustomLabel: Story = {
       priority: '7.2',
       criticality: '8.1',
       status: 'active',
+    },
+  },
+};
+
+export const WorkstationWithTooltip: Story = {
+  args: {
+    label: 'Work\nStation',
+    tooltipData: {
+      type: 'workstation',
+      priority: '3.8',
+      criticality: '4.2',
+      status: 'inactive',
     },
   },
 };
