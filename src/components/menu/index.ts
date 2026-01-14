@@ -7,4 +7,9 @@ export { default as MenuSeparator } from './MenuSeparator'
 export { default as MenuShortcut } from './MenuShortcut'
 export { default as MenuDemo } from './MenuDemo'
 
+// Menu 2.0 components
+export { default as Menu2 } from './Menu2'
+export { default as MenuItem2 } from './MenuItem2'
+
 export type { MenuItemState } from './MenuItem'
+export type { MenuItem2Variant, MenuItem2Size } from './MenuItem2'
