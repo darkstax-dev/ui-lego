@@ -59,52 +59,47 @@ const Menu2Demo: React.FC = () => {
 
         <div className="menu-2-demo__section">
           <h3 className="menu-2-demo__section-title">Expandable Menu</h3>
-          <div className="menu-2-demo__menu-container">
-            <Menu2>
-              <MenuItem2 
-                label="Open" 
-                onClick={() => handleItemClick('Open')}
-              />
-              <MenuItem2 
-                label="Edit" 
-                onClick={() => handleItemClick('Edit')}
-              />
-              <MenuItem2 
-                label="Action Output" 
-                hasTrailingArrow 
-                onClick={() => toggleExpand('output')}
-              />
-              {expandedItem === 'output' && (
-                <div className="menu-2-demo__submenu">
-                  <Menu2>
-                    <MenuItem2 label="Action 1" onClick={() => handleItemClick('Action 1')} />
-                    <MenuItem2 label="Action 2" onClick={() => handleItemClick('Action 2')} />
-                    <MenuItem2 label="Action 3" onClick={() => handleItemClick('Action 3')} />
-                    <MenuItem2 label="Action 4" onClick={() => handleItemClick('Action 4')} />
-                  </Menu2>
-                </div>
-              )}
-              <MenuItem2 
-                label="Action Input" 
-                hasTrailingArrow 
-                onClick={() => toggleExpand('input')}
-              />
-              {expandedItem === 'input' && (
-                <div className="menu-2-demo__submenu">
-                  <Menu2>
-                    <MenuItem2 label="Action 1" onClick={() => handleItemClick('Action 1')} />
-                    <MenuItem2 label="Action 2" onClick={() => handleItemClick('Action 2')} />
-                    <MenuItem2 label="Action 3" onClick={() => handleItemClick('Action 3')} />
-                    <MenuItem2 label="Action 4" onClick={() => handleItemClick('Action 4')} />
-                  </Menu2>
-                </div>
-              )}
-              <MenuItem2 
-                label="Delete" 
-                variant="danger" 
-                onClick={() => handleItemClick('Delete')}
-              />
-            </Menu2>
+          <div className="menu-2-demo__expandable-container">
+            <div className="menu-2-demo__menu-main">
+              <Menu2>
+                <MenuItem2
+                  label="Open"
+                  onClick={() => handleItemClick('Open')}
+                />
+                <MenuItem2
+                  label="Edit"
+                  onClick={() => handleItemClick('Edit')}
+                />
+                <MenuItem2
+                  label="Action Output"
+                  hasTrailingArrow
+                  onClick={() => toggleExpand('output')}
+                  onMouseEnter={() => setExpandedItem('output')}
+                />
+                <MenuItem2
+                  label="Action Input"
+                  hasTrailingArrow
+                  onClick={() => toggleExpand('input')}
+                  onMouseEnter={() => setExpandedItem('input')}
+                />
+                <MenuItem2
+                  label="Delete"
+                  variant="danger"
+                  onClick={() => handleItemClick('Delete')}
+                />
+              </Menu2>
+            </div>
+
+            {expandedItem && (
+              <div className="menu-2-demo__menu-submenu">
+                <Menu2>
+                  <MenuItem2 label="Action" onClick={() => handleItemClick('Action 1')} />
+                  <MenuItem2 label="Action" onClick={() => handleItemClick('Action 2')} />
+                  <MenuItem2 label="Action" onClick={() => handleItemClick('Action 3')} />
+                  <MenuItem2 label="Action" onClick={() => handleItemClick('Action 4')} />
+                </Menu2>
+              </div>
+            )}
           </div>
         </div>
 
