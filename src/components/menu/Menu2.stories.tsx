@@ -180,39 +180,67 @@ export const Disabled: Story = {
 export const NestedMenuExample: Story = {
   render: () => {
     const [expandedItem, setExpandedItem] = useState<string | null>(null)
-    const [itemPosition, setItemPosition] = useState<{ top: number } | null>(null)
+    const [isHoveringSubmenu, setIsHoveringSubmenu] = useState(false)
 
-    const handleMenuItemClick = (item: string, event: React.MouseEvent) => {
-      const rect = event.currentTarget.getBoundingClientRect()
-      setItemPosition({ top: rect.top })
+    const handleMenuItemClick = (item: string) => {
       setExpandedItem(expandedItem === item ? null : item)
     }
 
-    const handleMenuItemEnter = (item: string, event: React.MouseEvent) => {
-      const rect = event.currentTarget.getBoundingClientRect()
-      setItemPosition({ top: rect.top })
+    const handleMenuItemEnter = (item: string) => {
       setExpandedItem(item)
     }
 
+    const handleMainMenuLeave = () => {
+      // Small delay to allow moving to submenu
+      setTimeout(() => {
+        if (!isHoveringSubmenu) {
+          setExpandedItem(null)
+        }
+      }, 100)
+    }
+
+    const handleSubmenuEnter = () => {
+      setIsHoveringSubmenu(true)
+    }
+
+    const handleSubmenuLeave = () => {
+      setIsHoveringSubmenu(false)
+      setExpandedItem(null)
+    }
+
     return (
-      <div style={{ display: 'flex', gap: '16px', alignItems: 'flex-start' }}>
-        <div style={{ width: '300px', position: 'relative' }}>
+      <div
+        style={{
+          display: 'flex',
+          gap: '0',
+          alignItems: 'flex-start',
+          position: 'relative'
+        }}
+      >
+        <div
+          style={{ width: '300px' }}
+          onMouseLeave={handleMainMenuLeave}
+        >
           <Menu2>
-            <MenuItem2 label="Open" />
-            <MenuItem2 label="Edit" />
+            <MenuItem2 label="Open" onClick={() => console.log('Open')} />
+            <MenuItem2 label="Edit" onClick={() => console.log('Edit')} />
             <MenuItem2
               label="Action Output"
               hasTrailingArrow
-              onClick={(e) => handleMenuItemClick('output', e as any)}
-              onMouseEnter={(e) => handleMenuItemEnter('output', e as any)}
+              onClick={() => handleMenuItemClick('output')}
+              onMouseEnter={() => handleMenuItemEnter('output')}
             />
             <MenuItem2
               label="Action Input"
               hasTrailingArrow
-              onClick={(e) => handleMenuItemClick('input', e as any)}
-              onMouseEnter={(e) => handleMenuItemEnter('input', e as any)}
+              onClick={() => handleMenuItemClick('input')}
+              onMouseEnter={() => handleMenuItemEnter('input')}
             />
-            <MenuItem2 label="Delete" variant="danger" />
+            <MenuItem2
+              label="Delete"
+              variant="danger"
+              onClick={() => console.log('Delete')}
+            />
           </Menu2>
         </div>
 
@@ -220,14 +248,28 @@ export const NestedMenuExample: Story = {
           <div
             style={{
               width: '300px',
-              position: 'relative'
+              marginLeft: '8px'
             }}
+            onMouseEnter={handleSubmenuEnter}
+            onMouseLeave={handleSubmenuLeave}
           >
             <Menu2>
-              <MenuItem2 label="Action" />
-              <MenuItem2 label="Action" />
-              <MenuItem2 label="Action" />
-              <MenuItem2 label="Action" />
+              <MenuItem2
+                label="Action"
+                onClick={() => console.log('Submenu Action 1')}
+              />
+              <MenuItem2
+                label="Action"
+                onClick={() => console.log('Submenu Action 2')}
+              />
+              <MenuItem2
+                label="Action"
+                onClick={() => console.log('Submenu Action 3')}
+              />
+              <MenuItem2
+                label="Action"
+                onClick={() => console.log('Submenu Action 4')}
+              />
             </Menu2>
           </div>
         )}
