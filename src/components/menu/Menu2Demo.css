@@ -49,8 +49,19 @@
   gap: 16px;
 }
 
-.menu-2-demo__submenu {
-  padding-left: 16px;
+.menu-2-demo__expandable-container {
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+}
+
+.menu-2-demo__menu-main {
+  flex-shrink: 0;
+}
+
+.menu-2-demo__menu-submenu {
+  flex-shrink: 0;
+  min-width: 200px;
 }
 
 .menu-2-demo__size-group,
