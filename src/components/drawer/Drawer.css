@@ -193,6 +193,31 @@
   gap: var(--sds-size-space-400);
 }
 
+/* SwitchField overrides to match Figma design */
+.drawer-toggles-container .switch-field__switch {
+  width: 34px;
+  height: 20px;
+  border-radius: 12px;
+  background: var(--Gray-300);
+}
+
+.drawer-toggles-container .switch-field__switch--checked {
+  background: var(--color-blue-700);
+}
+
+.drawer-toggles-container .switch-field__thumb {
+  width: 16px;
+  height: 16px;
+}
+
+.drawer-toggles-container .switch-field__label {
+  color: var(--Text-Blue-text-Main-text);
+  font-family: var(--font-family-macan);
+  font-size: 14px;
+  font-weight: 450;
+  line-height: 120%;
+}
+
 .drawer-upload-section {
   display: flex;
   padding: var(--sds-size-space-400);
