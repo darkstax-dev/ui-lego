@@ -60,7 +60,7 @@ function MyComponent() {
 }
 ```
 
-### Menu with Expandable Items
+### Menu with Expandable Items (Separate Submenu Box)
 
 ```tsx
 import { Menu2, MenuItem2 } from './components/menu'
@@ -70,23 +70,40 @@ function MyComponent() {
   const [expandedItem, setExpandedItem] = useState<string | null>(null)
 
   return (
-    <Menu2>
-      <MenuItem2 label="Open" onClick={() => console.log('Open')} />
-      <MenuItem2 
-        label="Actions" 
-        hasTrailingArrow 
-        onClick={() => setExpandedItem(expandedItem === 'actions' ? null : 'actions')}
-      />
-      {expandedItem === 'actions' && (
-        <div style={{ paddingLeft: '16px' }}>
+    <div style={{ display: 'flex', gap: '8px', alignItems: 'flex-start' }}>
+      {/* Main Menu */}
+      <div style={{ width: '300px' }}>
+        <Menu2>
+          <MenuItem2 label="Open" onClick={() => console.log('Open')} />
+          <MenuItem2 label="Edit" onClick={() => console.log('Edit')} />
+          <MenuItem2
+            label="Action Output"
+            hasTrailingArrow
+            onClick={() => setExpandedItem(expandedItem === 'output' ? null : 'output')}
+            onMouseEnter={() => setExpandedItem('output')}
+          />
+          <MenuItem2
+            label="Action Input"
+            hasTrailingArrow
+            onClick={() => setExpandedItem(expandedItem === 'input' ? null : 'input')}
+            onMouseEnter={() => setExpandedItem('input')}
+          />
+          <MenuItem2 label="Delete" variant="danger" onClick={() => console.log('Delete')} />
+        </Menu2>
+      </div>
+
+      {/* Submenu - appears in separate box to the right */}
+      {expandedItem && (
+        <div style={{ width: '300px' }}>
           <Menu2>
-            <MenuItem2 label="Action 1" onClick={() => console.log('Action 1')} />
-            <MenuItem2 label="Action 2" onClick={() => console.log('Action 2')} />
+            <MenuItem2 label="Action" onClick={() => console.log('Action 1')} />
+            <MenuItem2 label="Action" onClick={() => console.log('Action 2')} />
+            <MenuItem2 label="Action" onClick={() => console.log('Action 3')} />
+            <MenuItem2 label="Action" onClick={() => console.log('Action 4')} />
           </Menu2>
         </div>
       )}
-      <MenuItem2 label="Delete" variant="danger" onClick={() => console.log('Delete')} />
-    </Menu2>
+    </div>
   )
 }
 ```
