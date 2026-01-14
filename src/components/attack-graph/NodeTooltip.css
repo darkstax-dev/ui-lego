@@ -64,8 +64,9 @@
 
 .node-tooltip-divider {
   width: 164px;
-  height: 1px;
-  background: #ADADAD;
+  height: 0;
+  border: none;
+  border-top: 1px dashed #ADADAD;
 }
 
 @media (max-width: 768px) {
