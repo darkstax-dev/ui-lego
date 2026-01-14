@@ -112,6 +112,36 @@ const DrawerExampleContent: React.FC = () => {
           </div>
         </div>
 
+        <div className="drawer-tag-toggles-section">
+          <label className="drawer-section-label">Environment Filters</label>
+          <div className="drawer-tag-toggles-group">
+            <TagToggle
+              state={tagFilters.production ? 'on' : 'off'}
+              onClick={() => setTagFilters(prev => ({ ...prev, production: !prev.production }))}
+            >
+              Production
+            </TagToggle>
+            <TagToggle
+              state={tagFilters.development ? 'on' : 'off'}
+              onClick={() => setTagFilters(prev => ({ ...prev, development: !prev.development }))}
+            >
+              Development
+            </TagToggle>
+            <TagToggle
+              state={tagFilters.testing ? 'on' : 'off'}
+              onClick={() => setTagFilters(prev => ({ ...prev, testing: !prev.testing }))}
+            >
+              Testing
+            </TagToggle>
+            <TagToggle
+              state={tagFilters.staging ? 'on' : 'off'}
+              onClick={() => setTagFilters(prev => ({ ...prev, staging: !prev.staging }))}
+            >
+              Staging
+            </TagToggle>
+          </div>
+        </div>
+
         <div className="drawer-upload-section">
           <DrawerFileUpload
             title="Activity Icon"
