@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import InputField from '../inputs/InputField'
 import SwitchField from '../inputs/SwitchField'
-import FileUpload from '../inputs/FileUpload'
+import DrawerFileUpload from './DrawerFileUpload'
 import './Drawer.css'
 
 const DrawerExampleContent: React.FC = () => {
@@ -105,27 +105,24 @@ const DrawerExampleContent: React.FC = () => {
         </div>
 
         <div className="drawer-upload-section">
-          <FileUpload
+          <DrawerFileUpload
             title="Activity Icon"
-            description="Click to upload or drag and drop"
             onFileSelect={handleFileSelect('Activity Icon')}
             accept="image/*"
           />
         </div>
 
         <div className="drawer-upload-section">
-          <FileUpload
+          <DrawerFileUpload
             title="Form Schema"
-            description="Click to upload or drag and drop"
             onFileSelect={handleFileSelect('Form Schema')}
             accept=".json,.yaml,.yml"
           />
         </div>
 
         <div className="drawer-upload-section">
-          <FileUpload
+          <DrawerFileUpload
             title="Plugin File"
-            description="Click to upload or drag and drop"
             onFileSelect={handleFileSelect('Plugin File')}
             accept=".js,.ts,.jsx,.tsx"
           />
