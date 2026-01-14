@@ -12,12 +12,11 @@
 }
 
 .node-tooltip-beak {
-  position: absolute;
-  top: -5px;
-  left: 50%;
-  transform: translateX(-50%) rotate(45deg);
-  width: 8px;
-  height: 8px;
+  position: relative;
+  left: 88.343px;
+  top: -5.314px;
+  width: 12px;
+  height: 12px;
 }
 
 .node-tooltip-beak svg {
@@ -30,12 +29,12 @@
   flex-direction: column;
   align-items: flex-start;
   gap: 12px;
-  padding: 12px;
+  padding: 8px 12px;
   background: #DFDFDF;
-  box-shadow: 0 4px 4px -1px rgba(12, 12, 13, 0.1), 
-              0 4px 4px -1px rgba(12, 12, 13, 0.05);
+  box-shadow: 0px 4px 4px -1px rgba(12, 12, 13, 0.1),
+              0px 4px 4px -1px rgba(12, 12, 13, 0.05);
   border-radius: 4px;
-  min-width: 188px;
+  width: 188px;
 }
 
 .node-tooltip-section {
@@ -43,7 +42,7 @@
   flex-direction: column;
   align-items: flex-start;
   gap: 4px;
-  width: 100%;
+  width: 164px;
 }
 
 .node-tooltip-label {
@@ -64,13 +63,22 @@
 }
 
 .node-tooltip-divider {
-  width: 100%;
+  width: 164px;
   height: 1px;
-  background: rgba(120, 121, 122, 0.2);
+  background: #ADADAD;
 }
 
 @media (max-width: 768px) {
   .node-tooltip-content {
-    min-width: 160px;
+    width: 160px;
+  }
+
+  .node-tooltip-section,
+  .node-tooltip-divider {
+    width: 136px;
+  }
+
+  .node-tooltip-beak {
+    left: 74px;
   }
 }

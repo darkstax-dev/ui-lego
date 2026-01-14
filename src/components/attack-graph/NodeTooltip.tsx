@@ -23,20 +23,19 @@ export const NodeTooltip: React.FC<NodeTooltipProps> = ({
 }) => {
   return (
     <div className="node-tooltip">
-      <div className="node-tooltip-beak">
-        <svg
-          width="12"
-          height="12"
-          viewBox="0 0 12 12"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M5.65674 11.3125L11.3136 5.65565L5.65674 -0.00120831L-0.000115871 5.65565L5.65674 11.3125Z"
-            fill="#DFDFDF"
-          />
-        </svg>
-      </div>
+      <svg
+        className="node-tooltip-beak"
+        width="12"
+        height="12"
+        viewBox="0 0 12 12"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M5.65685 11.3137L11.3137 5.65685L5.65685 0L0 5.65685L5.65685 11.3137Z"
+          fill="#DFDFDF"
+        />
+      </svg>
       <div className="node-tooltip-content">
         <div className="node-tooltip-section">
           <div className="node-tooltip-label">Type:</div>
