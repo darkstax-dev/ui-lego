@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import InputField from '../inputs/InputField'
 import SwitchField from '../inputs/SwitchField'
+import TagToggle from '../tag-badges/TagToggle'
 import DrawerFileUpload from './DrawerFileUpload'
 import './Drawer.css'
 
@@ -17,6 +18,13 @@ const DrawerExampleContent: React.FC = () => {
     isActive: false,
     isSystemActivity: false,
     supportMultiRule: false,
+  })
+
+  const [tagFilters, setTagFilters] = useState({
+    production: false,
+    development: false,
+    testing: false,
+    staging: false,
   })
 
   const handleInputChange = (field: keyof typeof formData) => (value: string) => {
