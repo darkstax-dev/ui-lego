@@ -9,6 +9,7 @@ import Checkbox from '../components/checkbox/Checkbox'
 import Button from '../components/buttons/Button'
 import Accordion from '../components/accordion/Accordion'
 import AccordionItem from '../components/accordion/AccordionItem'
+import DeleteBinLine from '../components/icons/system/DeleteBinLine'
 
 // Types
 type Port = {
@@ -132,15 +133,19 @@ const ContainerModalPage: React.FC = () => {
             <h1 className="container-title">Configure Container</h1>
           </div>
 
-          {/* General Information Section */}
-          <section className="form-section">
-            <h3 className="form-section-title">General Information</h3>
+          <div className="form-group-unified">
             <div className="form-grid-2">
                <InputField label="Name" value={name} onChange={setName} placeholder="Container Name" />
                <SelectField label="Image Pull Policy" value={pullPolicy} onChange={setPullPolicy} options={pullPolicyOptions} />
             </div>
+            
             <InputField label="Image" value={image} onChange={setImage} placeholder="Image URL" leadingIcon={null} />
             
+            <InputField label="Command" value={command} onChange={setCommand} placeholder="/bin/sh" />
+            
+            <InputField label="Args" value={args} onChange={setArgs} placeholder="arguments..." />
+            
+            {/* Labels as part of the main flow */}
             <div className="dynamic-list-container">
                <div className="add-button-row" style={{justifyContent: 'space-between', alignItems: 'center'}}>
                  <span className="input-field__label">Labels</span>
@@ -158,26 +163,19 @@ const ContainerModalPage: React.FC = () => {
                      newLabels.find(l => l.id === label.id)!.value = v
                      setLabels(newLabels)
                    }} placeholder="Value" />
-                   <Button variant="white" size="sm" onClick={() => removeLabel(label.id)} icon={null}>🗑️</Button>
+                   <Button variant="white" size="sm" onClick={() => removeLabel(label.id)} icon={<DeleteBinLine width={20} height={20} />} hideIcon={false} className="icon-only-button" >{''}</Button>
                  </div>
                ))}
             </div>
-          </section>
 
-          {/* Runtime Section */}
-          <section className="form-section">
-            <h3 className="form-section-title">Runtime & Execution</h3>
-            <InputField label="Command" value={command} onChange={setCommand} placeholder="/bin/sh" />
-            <InputField label="Args" value={args} onChange={setArgs} placeholder="arguments..." />
-            
-            <div className="checkbox-group">
+            <div className="checkbox-group-spaced">
                <Checkbox label="Privileged" checked={privileged} onChange={setPrivileged} />
                <Checkbox label="Allow Privilege Escalation" checked={allowEscalation} onChange={setAllowEscalation} />
                <Checkbox label="stdin" checked={stdin} onChange={setStdin} />
                <Checkbox label="stdinOnce" checked={stdinOnce} onChange={setStdinOnce} />
                <Checkbox label="TTY" checked={tty} onChange={setTty} />
             </div>
-          </section>
+          </div>
 
           {/* Advanced Settings in Accordion */}
           <Accordion className="container-accordion">
@@ -265,7 +263,7 @@ const ContainerModalPage: React.FC = () => {
                            setEnvVars(newEnv)
                         }} placeholder="Value" />
                      </div>
-                     <Button variant="white" size="sm" onClick={() => removeEnvVar(env.id)} icon={null}>🗑️</Button>
+                     <Button variant="white" size="sm" onClick={() => removeEnvVar(env.id)} icon={<DeleteBinLine width={20} height={20} />} hideIcon={false} className="icon-only-button" >{''}</Button>
                    </div>
                  ))}
               </div>
@@ -293,7 +291,7 @@ const ContainerModalPage: React.FC = () => {
                          setPorts(newPorts)
                        }} placeholder="Protocol" />
                      </div>
-                     <Button variant="white" size="sm" onClick={() => removePort(port.id)} icon={null}>🗑️</Button>
+                     <Button variant="white" size="sm" onClick={() => removePort(port.id)} icon={<DeleteBinLine width={20} height={20} />} hideIcon={false} className="icon-only-button" >{''}</Button>
                    </div>
                  ))}
                  {ports.length === 0 && <div className="text-secondary text-sm">No ports defined.</div>}
