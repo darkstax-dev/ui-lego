@@ -9,3 +9,6 @@ export * from './MetricsQueryPage'
 
 export { default as RunPopUp } from './RunPopUp'
 export * from './RunPopUp'
+
+export { default as ContainerModalPage } from './ContainerModalPage'
+export * from './ContainerModalPage'
