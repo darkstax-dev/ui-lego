@@ -134,18 +134,8 @@ const ContainerModalPage: React.FC = () => {
           </div>
 
           <div className="form-group-unified">
-            <div className="form-grid-2">
-               <InputField label="Name" value={name} onChange={setName} placeholder="Container Name" />
-               <SelectField label="Image Pull Policy" value={pullPolicy} onChange={setPullPolicy} options={pullPolicyOptions} />
-            </div>
             
-            <InputField label="Image" value={image} onChange={setImage} placeholder="Image URL" leadingIcon={null} />
-            
-            <InputField label="Command" value={command} onChange={setCommand} placeholder="/bin/sh" />
-            
-            <InputField label="Args" value={args} onChange={setArgs} placeholder="arguments..." />
-            
-            {/* Labels as part of the main flow */}
+            {/* Labels */}
             <div className="dynamic-list-container">
                <div className="add-button-row" style={{justifyContent: 'space-between', alignItems: 'center'}}>
                  <span className="input-field__label">Labels</span>
@@ -168,6 +158,56 @@ const ContainerModalPage: React.FC = () => {
                ))}
             </div>
 
+            <InputField label="Name" value={name} onChange={setName} placeholder="Container Name" />
+            
+            <InputField label="Image" value={image} onChange={setImage} placeholder="Image URL" leadingIcon={null} />
+            
+            <InputField label="Command" value={command} onChange={setCommand} placeholder="/bin/sh" />
+            
+            <InputField label="Args" value={args} onChange={setArgs} placeholder="arguments..." />
+            
+            {/* Grid 4 Section: Policy, Resources, Security */}
+            <div className="form-grid-4">
+                <SelectField label="Image Pull Policy" value={pullPolicy} onChange={setPullPolicy} options={pullPolicyOptions} />
+                
+                <InputField label="Resource Request Memory" value={reqMem} onChange={setReqMem} placeholder="e.g. 512Mi" />
+                <InputField label="Resource Request CPU" value={reqCpu} onChange={setReqCpu} placeholder="e.g. 500m" />
+                <InputField label="Resource Limit Memory" value={limitMem} onChange={setLimitMem} placeholder="e.g. 1Gi" />
+                
+                <InputField label="Resource Limit CPU" value={limitCpu} onChange={setLimitCpu} placeholder="e.g. 1000m" />
+                <InputField label="Capabilities" value={capabilities} onChange={setCapabilities} placeholder="e.g. NET_ADMIN" />
+                <InputField label="Capabilities Add" value={capAdd} onChange={setCapAdd} placeholder="Enter to add" />
+                <InputField label="Capabilities Drop" value={capDrop} onChange={setCapDrop} placeholder="Enter to drop" />
+
+                <InputField label="App Armor Profile" value={appArmor} onChange={setAppArmor} placeholder="runtime/default" />
+            </div>
+
+            {/* Health Probes in Accordion */}
+            <Accordion className="container-accordion">
+              <AccordionItem title="Health Probes" content={
+                <div className="form-grid-2">
+                  <div>
+                     <h4 className="input-field__label" style={{marginBottom: 8}}>Liveness Probe</h4>
+                     <div className="form-grid-2">
+                        <InputField label="Path" value={livenessPath} onChange={setLivenessPath} placeholder="/healthz" />
+                        <InputField label="Port" value={livenessPort} onChange={setLivenessPort} placeholder="8080" />
+                        <InputField label="Initial Delay (s)" value={livenessDelay} onChange={setLivenessDelay} placeholder="30" />
+                        <InputField label="Period (s)" value={livenessPeriod} onChange={setLivenessPeriod} placeholder="10" />
+                     </div>
+                  </div>
+                  <div>
+                     <h4 className="input-field__label" style={{marginBottom: 8}}>Readiness Probe</h4>
+                     <div className="form-grid-2">
+                        <InputField label="Path" value={readinessPath} onChange={setReadinessPath} placeholder="/ready" />
+                        <InputField label="Port" value={readinessPort} onChange={setReadinessPort} placeholder="8080" />
+                        <InputField label="Initial Delay (s)" value={readinessDelay} onChange={setReadinessDelay} placeholder="30" />
+                        <InputField label="Period (s)" value={readinessPeriod} onChange={setReadinessPeriod} placeholder="10" />
+                     </div>
+                  </div>
+                </div>
+              } />
+            </Accordion>
+
             <div className="checkbox-group-spaced">
                <Checkbox label="Privileged" checked={privileged} onChange={setPrivileged} />
                <Checkbox label="Allow Privilege Escalation" checked={allowEscalation} onChange={setAllowEscalation} />
@@ -175,68 +215,41 @@ const ContainerModalPage: React.FC = () => {
                <Checkbox label="stdinOnce" checked={stdinOnce} onChange={setStdinOnce} />
                <Checkbox label="TTY" checked={tty} onChange={setTty} />
             </div>
-          </div>
 
-          {/* Advanced Settings in Accordion */}
-          <Accordion className="container-accordion">
-            
-            {/* Resources */}
-            <AccordionItem title="Resources" content={
-              <div className="form-grid-2">
-                <div>
-                   <h4 className="input-field__label" style={{marginBottom: 8}}>Requests</h4>
-                   <div className="form-grid-2">
-                      <InputField label="Memory" value={reqMem} onChange={setReqMem} placeholder="e.g. 512Mi" />
-                      <InputField label="CPU" value={reqCpu} onChange={setReqCpu} placeholder="e.g. 500m" />
+            {/* Ports */}
+            <div>
+               <h4 className="input-field__label" style={{marginBottom: 8}}>Ports</h4>
+               <div className="dynamic-list-container">
+                 <div className="add-button-row">
+                   <Button variant="secondary" size="sm" onClick={addPort} icon={null}>+ Add Port</Button>
+                 </div>
+                 {ports.map(port => (
+                   <div key={port.id} className="dynamic-list-row">
+                     <div style={{flex: 2}}>
+                       <InputField value={port.containerPort} onChange={(v) => {
+                         const newPorts = [...ports]
+                         newPorts.find(p => p.id === port.id)!.containerPort = v
+                         setPorts(newPorts)
+                       }} placeholder="Container Port" />
+                     </div>
+                     <div style={{flex: 1}}>
+                       <SelectField options={protocolOptions} value={port.protocol} onChange={(v) => {
+                         const newPorts = [...ports]
+                         newPorts.find(p => p.id === port.id)!.protocol = v
+                         setPorts(newPorts)
+                       }} placeholder="Protocol" />
+                     </div>
+                     <Button variant="white" size="sm" onClick={() => removePort(port.id)} icon={<DeleteBinLine width={20} height={20} />} hideIcon={false} className="icon-only-button" >{''}</Button>
                    </div>
-                </div>
-                <div>
-                   <h4 className="input-field__label" style={{marginBottom: 8}}>Limits</h4>
-                   <div className="form-grid-2">
-                      <InputField label="Memory" value={limitMem} onChange={setLimitMem} placeholder="e.g. 1Gi" />
-                      <InputField label="CPU" value={limitCpu} onChange={setLimitCpu} placeholder="e.g. 1000m" />
-                   </div>
-                </div>
-              </div>
-            } />
+                 ))}
+                 {ports.length === 0 && <div className="text-secondary text-sm">No ports defined.</div>}
+               </div>
+            </div>
 
-            {/* Probes */}
-            <AccordionItem title="Health Probes" content={
-              <div className="form-grid-2">
-                <div>
-                   <h4 className="input-field__label" style={{marginBottom: 8}}>Liveness Probe</h4>
-                   <div className="form-grid-2">
-                      <InputField label="Path" value={livenessPath} onChange={setLivenessPath} placeholder="/healthz" />
-                      <InputField label="Port" value={livenessPort} onChange={setLivenessPort} placeholder="8080" />
-                      <InputField label="Initial Delay (s)" value={livenessDelay} onChange={setLivenessDelay} placeholder="30" />
-                      <InputField label="Period (s)" value={livenessPeriod} onChange={setLivenessPeriod} placeholder="10" />
-                   </div>
-                </div>
-                <div>
-                   <h4 className="input-field__label" style={{marginBottom: 8}}>Readiness Probe</h4>
-                   <div className="form-grid-2">
-                      <InputField label="Path" value={readinessPath} onChange={setReadinessPath} placeholder="/ready" />
-                      <InputField label="Port" value={readinessPort} onChange={setReadinessPort} placeholder="8080" />
-                      <InputField label="Initial Delay (s)" value={readinessDelay} onChange={setReadinessDelay} placeholder="30" />
-                      <InputField label="Period (s)" value={readinessPeriod} onChange={setReadinessPeriod} placeholder="10" />
-                   </div>
-                </div>
-              </div>
-            } />
-
-            {/* Security */}
-            <AccordionItem title="Security Context" content={
-              <div className="form-grid-2">
-                 <InputField label="Capabilities" value={capabilities} onChange={setCapabilities} placeholder="e.g. NET_ADMIN" />
-                 <InputField label="AppArmor Profile" value={appArmor} onChange={setAppArmor} placeholder="runtime/default" />
-                 <InputField label="Capabilities Add" value={capAdd} onChange={setCapAdd} placeholder="Enter to add" />
-                 <InputField label="Capabilities Drop" value={capDrop} onChange={setCapDrop} placeholder="Enter to drop" />
-              </div>
-            } />
-
-            {/* Environment */}
-            <AccordionItem title="Environment Variables" content={
-              <div className="dynamic-list-container">
+            {/* Environment Variables */}
+            <div>
+               <h4 className="input-field__label" style={{marginBottom: 8}}>Environment</h4>
+               <div className="dynamic-list-container">
                  <div className="add-button-row">
                    <Button variant="secondary" size="sm" onClick={addEnvVar} icon={null}>+ Add Variable</Button>
                  </div>
@@ -267,37 +280,9 @@ const ContainerModalPage: React.FC = () => {
                    </div>
                  ))}
               </div>
-            } />
+            </div>
 
-            {/* Ports */}
-            <AccordionItem title="Network Ports" content={
-               <div className="dynamic-list-container">
-                 <div className="add-button-row">
-                   <Button variant="secondary" size="sm" onClick={addPort} icon={null}>+ Add Port</Button>
-                 </div>
-                 {ports.map(port => (
-                   <div key={port.id} className="dynamic-list-row">
-                     <div style={{flex: 2}}>
-                       <InputField value={port.containerPort} onChange={(v) => {
-                         const newPorts = [...ports]
-                         newPorts.find(p => p.id === port.id)!.containerPort = v
-                         setPorts(newPorts)
-                       }} placeholder="Container Port" />
-                     </div>
-                     <div style={{flex: 1}}>
-                       <SelectField options={protocolOptions} value={port.protocol} onChange={(v) => {
-                         const newPorts = [...ports]
-                         newPorts.find(p => p.id === port.id)!.protocol = v
-                         setPorts(newPorts)
-                       }} placeholder="Protocol" />
-                     </div>
-                     <Button variant="white" size="sm" onClick={() => removePort(port.id)} icon={<DeleteBinLine width={20} height={20} />} hideIcon={false} className="icon-only-button" >{''}</Button>
-                   </div>
-                 ))}
-                 {ports.length === 0 && <div className="text-secondary text-sm">No ports defined.</div>}
-               </div>
-            } />
-          </Accordion>
+          </div>
 
         </div>
       </div>
