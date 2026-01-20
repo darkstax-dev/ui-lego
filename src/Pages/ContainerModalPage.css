@@ -131,32 +131,8 @@
 
 /* Accordion Customization for Uniformity */
 .container-accordion {
-  border: 1px solid var(--sds-color-border-default-default);
-  border-radius: var(--sds-size-radius-200);
-  overflow: hidden;
   width: 100% !important; /* Ensure full width overrides default */
   margin-top: var(--sds-size-space-400);
-  gap: 0 !important; /* Remove gap for unified look */
-}
-
-.container-accordion .accordion-item {
-  border: none; /* Remove default border */
-  border-bottom: 1px solid var(--sds-color-border-default-default);
-  width: 100%; /* Ensure item takes full width */
-}
-
-.container-accordion .accordion-item:last-child {
-  border-bottom: none;
-}
-
-.container-accordion .accordion-item__header {
-  background: var(--surface-card);
-  padding: var(--sds-size-padding-lg);
-}
-
-.container-accordion .accordion-item__content {
-  background: var(--sds-color-background-default-default);
-  padding: var(--sds-size-padding-lg);
 }
 
 /* Helper for aligning labels */

@@ -188,23 +188,19 @@ const ContainerModalPage: React.FC = () => {
               {/* Health Probes Accordion */}
               <AccordionItem title="Health Probes" content={
                 <div className="form-grid-2">
-                  <div>
+                  <div className="form-group-unified">
                      <h4 className="input-field__label" style={{marginBottom: 8}}>Liveness Probe</h4>
-                     <div className="form-grid-2">
-                        <InputField label="Path" value={livenessPath} onChange={setLivenessPath} placeholder="/healthz" />
-                        <InputField label="Port" value={livenessPort} onChange={setLivenessPort} placeholder="8080" />
-                        <InputField label="Initial Delay (s)" value={livenessDelay} onChange={setLivenessDelay} placeholder="30" />
-                        <InputField label="Period (s)" value={livenessPeriod} onChange={setLivenessPeriod} placeholder="10" />
-                     </div>
+                     <InputField label="Liveness Probe Path" value={livenessPath} onChange={setLivenessPath} placeholder="/healthz" />
+                     <InputField label="Port" value={livenessPort} onChange={setLivenessPort} placeholder="8080" />
+                     <InputField label="Initial Delay" value={livenessDelay} onChange={setLivenessDelay} placeholder="30" />
+                     <InputField label="Period (s)" value={livenessPeriod} onChange={setLivenessPeriod} placeholder="10" />
                   </div>
-                  <div>
+                  <div className="form-group-unified">
                      <h4 className="input-field__label" style={{marginBottom: 8}}>Readiness Probe</h4>
-                     <div className="form-grid-2">
-                        <InputField label="Path" value={readinessPath} onChange={setReadinessPath} placeholder="/ready" />
-                        <InputField label="Port" value={readinessPort} onChange={setReadinessPort} placeholder="8080" />
-                        <InputField label="Initial Delay (s)" value={readinessDelay} onChange={setReadinessDelay} placeholder="30" />
-                        <InputField label="Period (s)" value={readinessPeriod} onChange={setReadinessPeriod} placeholder="10" />
-                     </div>
+                     <InputField label="Readiness Probe Path" value={readinessPath} onChange={setReadinessPath} placeholder="/ready" />
+                     <InputField label="Port" value={readinessPort} onChange={setReadinessPort} placeholder="8080" />
+                     <InputField label="Initial Delay" value={readinessDelay} onChange={setReadinessDelay} placeholder="30" />
+                     <InputField label="Period (s)" value={readinessPeriod} onChange={setReadinessPeriod} placeholder="10" />
                   </div>
                 </div>
               } />
