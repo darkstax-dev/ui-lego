@@ -166,24 +166,26 @@ const ContainerModalPage: React.FC = () => {
             
             <InputField label="Args" value={args} onChange={setArgs} placeholder="arguments..." />
             
-            {/* Grid 4 Section: Policy, Resources, Security */}
-            <div className="form-grid-4">
-                <SelectField label="Image Pull Policy" value={pullPolicy} onChange={setPullPolicy} options={pullPolicyOptions} />
-                
-                <InputField label="Resource Request Memory" value={reqMem} onChange={setReqMem} placeholder="e.g. 512Mi" />
-                <InputField label="Resource Request CPU" value={reqCpu} onChange={setReqCpu} placeholder="e.g. 500m" />
-                <InputField label="Resource Limit Memory" value={limitMem} onChange={setLimitMem} placeholder="e.g. 1Gi" />
-                
-                <InputField label="Resource Limit CPU" value={limitCpu} onChange={setLimitCpu} placeholder="e.g. 1000m" />
-                <InputField label="Capabilities" value={capabilities} onChange={setCapabilities} placeholder="e.g. NET_ADMIN" />
-                <InputField label="Capabilities Add" value={capAdd} onChange={setCapAdd} placeholder="Enter to add" />
-                <InputField label="Capabilities Drop" value={capDrop} onChange={setCapDrop} placeholder="Enter to drop" />
+            <SelectField label="Image Pull Policy" value={pullPolicy} onChange={setPullPolicy} options={pullPolicyOptions} />
 
-                <InputField label="App Armor Profile" value={appArmor} onChange={setAppArmor} placeholder="runtime/default" />
-            </div>
-
-            {/* Health Probes in Accordion */}
+            {/* Accordion Group */}
             <Accordion className="container-accordion">
+              {/* Resources Accordion */}
+              <AccordionItem title="Resources" content={
+                 <div className="form-grid-4">
+                    <InputField label="Resource Request Memory" value={reqMem} onChange={setReqMem} placeholder="e.g. 512Mi" />
+                    <InputField label="Resource Request CPU" value={reqCpu} onChange={setReqCpu} placeholder="e.g. 500m" />
+                    <InputField label="Resource Limit Memory" value={limitMem} onChange={setLimitMem} placeholder="e.g. 1Gi" />
+                    <InputField label="Resource Limit CPU" value={limitCpu} onChange={setLimitCpu} placeholder="e.g. 1000m" />
+                    
+                    <InputField label="Capabilities" value={capabilities} onChange={setCapabilities} placeholder="e.g. NET_ADMIN" />
+                    <InputField label="Capabilities Add" value={capAdd} onChange={setCapAdd} placeholder="Enter to add" />
+                    <InputField label="Capabilities Drop" value={capDrop} onChange={setCapDrop} placeholder="Enter to drop" />
+                    <InputField label="App Armor Profile" value={appArmor} onChange={setAppArmor} placeholder="runtime/default" />
+                 </div>
+              } />
+
+              {/* Health Probes Accordion */}
               <AccordionItem title="Health Probes" content={
                 <div className="form-grid-2">
                   <div>
