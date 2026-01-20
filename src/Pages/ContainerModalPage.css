@@ -1,0 +1,167 @@
+.container-page {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background-color: var(--sds-color-background-default-default);
+  overflow: hidden;
+}
+
+.container-scroll-area {
+  flex: 1;
+  overflow-y: auto;
+  padding: var(--sds-size-space-600);
+}
+
+.container-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sds-size-space-600);
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+  padding-bottom: 80px; /* Space for footer */
+}
+
+.container-header-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--sds-size-space-200);
+}
+
+.container-title {
+  font-family: var(--font-family-macan-mono-stencil);
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-medium);
+  color: var(--sds-color-text-default-default);
+  text-transform: uppercase;
+  margin: 0;
+}
+
+/* Unified Form Structure */
+.form-group-unified {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sds-size-space-400);
+  width: 100%;
+}
+
+.form-grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--sds-size-space-400);
+  width: 100%;
+}
+
+.form-grid-4 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--sds-size-space-400);
+  width: 100%;
+}
+
+/* Checkbox Spacing */
+.checkbox-group-spaced {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 32px; /* Increased spacing as requested */
+  padding: var(--sds-size-space-200) 0;
+  margin-top: var(--sds-size-space-200);
+}
+
+/* Dynamic List Styling */
+.dynamic-list-container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sds-size-space-200);
+  width: 100%;
+}
+
+.dynamic-list-row {
+  display: flex;
+  gap: var(--sds-size-space-200);
+  align-items: flex-start;
+  width: 100%;
+}
+
+.dynamic-list-row .input-field,
+.dynamic-list-row .select-field {
+  flex: 1;
+}
+
+.dynamic-list-row .button {
+  margin-top: 24px; /* Align with input height approx */
+}
+
+.add-button-row {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: var(--sds-size-space-200);
+}
+
+/* Icon Button Fixes */
+.icon-only-button {
+  min-width: 40px !important;
+  width: 40px !important;
+  padding: 0 !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon-only-button .button__content {
+  display: none;
+}
+
+.page-footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 80px;
+  background: var(--surface-default);
+  border-top: 1px solid var(--sds-color-border-default-default);
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 0 var(--sds-size-space-600);
+  gap: var(--sds-size-space-400);
+  z-index: 100;
+}
+
+/* Accordion Customization for Uniformity */
+.container-accordion {
+  width: 100% !important; /* Ensure full width overrides default */
+  margin-top: var(--sds-size-space-400);
+}
+
+/* Helper for aligning labels */
+.input-field__label {
+  display: block;
+  margin-bottom: var(--sds-size-space-200);
+  font-family: var(--font-family-macan);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--input-label-text);
+}
+
+@media (max-width: 768px) {
+  .form-grid-2,
+  .form-grid-4 {
+    grid-template-columns: 1fr;
+  }
+  
+  .dynamic-list-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .dynamic-list-row .button {
+    margin-top: 0;
+    align-self: flex-end;
+  }
+  
+  .checkbox-group-spaced {
+    gap: var(--sds-size-space-400);
+  }
+}
