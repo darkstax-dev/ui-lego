@@ -7,6 +7,7 @@ import './DarkstaxDashboard.css'
 const DarkstaxDashboard: React.FC = () => {
   const [selectedCluster, setSelectedCluster] = useState('k8s-dev')
   const [selectedScenarioStatus, setSelectedScenarioStatus] = useState('running')
+  const [isDashboardOpen, setIsDashboardOpen] = useState(false)
 
   // Mock data for the chart
   const chartData = [
