@@ -441,7 +441,7 @@
 }
 
 .custom-scrollbar::-webkit-scrollbar-thumb {
-  background: #23A45A;
+  background: #78797A; /* Gray thumb */
   border-radius: 3px;
 }
 
@@ -467,6 +467,18 @@
   line-height: 100%;
 }
 
+.count-badge.status-running {
+  color: #ED8B30;
+}
+
+.count-badge.status-pending {
+  color: #78797A;
+}
+
+.count-badge.status-failed {
+  color: #FF3B31;
+}
+
 .scenario-list-scroll {
   overflow-y: auto;
   flex: 1;
@@ -487,7 +499,7 @@
 }
 
 .scenario-list-scroll::-webkit-scrollbar-thumb {
-  background: #23A45A;
+  background: #78797A; /* Gray thumb */
   border-radius: 3px;
 }
 
@@ -578,7 +590,7 @@
 }
 
 .cluster-metrics-scroll-content::-webkit-scrollbar-thumb {
-  background: #23A45A;
+  background: #78797A; /* Gray thumb */
   border-radius: 3px;
 }
 
