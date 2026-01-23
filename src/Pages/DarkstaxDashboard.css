@@ -302,7 +302,7 @@
   padding: 16px;
   display: flex;
   flex-direction: column;
-  gap: 56px;
+  gap: 24px;
   overflow: hidden;
   justify-content: space-between;
 }
@@ -314,6 +314,29 @@
 .stat-card-activity {
   background: #00112B;
   gap: 24px;
+}
+
+/* Scenarios Card Styles */
+.scenarios-card {
+  grid-column: span 2;
+  gap: 32px;
+}
+
+.scenario-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  flex: 1;
+}
+
+.scenario-item {
+  color: #DFDFDF;
+  font-family: var(--font-family-macan-mono);
+  font-size: 16px;
+  font-weight: 450;
+  line-height: 140%;
+  padding-left: 16px;
+  border-left: 2px solid #23A45A;
 }
 
 .stat-header {
@@ -463,6 +486,10 @@
   .stats-grid {
     grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
   }
+  
+  .scenarios-card {
+    grid-column: auto; /* Reset to auto on smaller screens if needed, but keeping it 2 might work */
+  }
 }
 
 @media (max-width: 768px) {
@@ -512,6 +539,10 @@
 
   .stats-grid {
     grid-template-columns: 1fr;
+  }
+  
+  .scenarios-card {
+    grid-column: auto;
   }
 }
 
