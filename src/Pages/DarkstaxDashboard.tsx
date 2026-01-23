@@ -111,10 +111,16 @@ const DarkstaxDashboard: React.FC = () => {
 
       {/* Stats Cards Grid */}
       <div className="stats-grid">
-        <div className="stat-card stat-card-primary">
-          <div className="stat-header">Server Uptime, days</div>
+        <div className="stat-card stat-card-primary scenarios-card">
+          <div className="stat-header">Scenarios Deployed</div>
+          <div className="scenario-list">
+            <div className="scenario-item">traffic-light-uat</div>
+            <div className="scenario-item">open5gs-test</div>
+            <div className="scenario-item">rtest</div>
+            <div className="scenario-item">all-test-dev</div>
+          </div>
           <div className="stat-footer">
-            <div className="stat-value">5.14</div>
+            <div className="stat-value">4</div>
             <div className="stat-trend stat-trend-up">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
                 <path d="M16 6.00195L18.29 8.29195L13.41 13.172L9.41 9.17195L2 16.592L3.41 18.002L9.41 12.002L13.41 16.002L19.71 9.71195L22 12.002V6.00195H16Z" fill="currentColor"/>
@@ -125,7 +131,7 @@ const DarkstaxDashboard: React.FC = () => {
         </div>
 
         <div className="stat-card stat-card-primary">
-          <div className="stat-header">Number of seed nodes</div>
+          <div className="stat-header">Activity Model Info</div>
           <div className="stat-footer">
             <div className="stat-value">12</div>
             <div className="stat-trend stat-trend-down">
@@ -152,7 +158,7 @@ const DarkstaxDashboard: React.FC = () => {
         </div>
 
         <div className="stat-card stat-card-activity">
-          <div className="stat-header">Active Resources</div>
+          <div className="stat-header">Scenario Info</div>
           <div className="activity-stats">
             <div className="activity-stat">
               <span className="activity-label activity-running">Running</span>
