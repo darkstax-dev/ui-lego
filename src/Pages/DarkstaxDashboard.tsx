@@ -1,9 +1,12 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { ResponsiveLine } from '@nivo/line'
+import SelectField from '../components/inputs/SelectField'
 import '../tokens.css'
 import './DarkstaxDashboard.css'
 
 const DarkstaxDashboard: React.FC = () => {
+  const [selectedCluster, setSelectedCluster] = useState('k8s-dev')
+
   // Mock data for the chart
   const chartData = [
     {
@@ -219,47 +222,93 @@ const DarkstaxDashboard: React.FC = () => {
         <div className="stat-card stat-card-primary cluster-metrics-card">
           <div className="card-top-bar">
             <div className="stat-header">Cluster Metrics</div>
-            <select className="cluster-select">
-              <option>Select Cluster</option>
-              <option>K8s dev Development</option>
-            </select>
+            <div style={{ width: 200 }}>
+              <SelectField
+                options={[
+                  { value: 'k8s-dev', label: 'K8s dev Development' },
+                  { value: 'azure-dev', label: 'Azure Development' }
+                ]}
+                value={selectedCluster}
+                onChange={setSelectedCluster}
+              />
+            </div>
           </div>
-          <div className="chart-container">
-             <ResponsiveLine
-                data={chartData}
-                margin={{ top: 20, right: 20, bottom: 40, left: 40 }}
-                xScale={{ type: 'point' }}
-                yScale={{ type: 'linear', min: 0, max: 'auto', stacked: true, reverse: false }}
-                axisTop={null}
-                axisRight={null}
-                axisBottom={{
-                    tickSize: 5,
-                    tickPadding: 5,
-                    tickRotation: 0,
-                }}
-                axisLeft={{
-                    tickSize: 5,
-                    tickPadding: 5,
-                    tickRotation: 0,
-                }}
-                pointSize={4}
-                pointColor={{ theme: 'background' }}
-                pointBorderWidth={2}
-                pointBorderColor={{ from: 'serieColor' }}
-                pointLabelYOffset={-12}
-                useMesh={true}
-                theme={{
-                  axis: {
-                    ticks: {
-                      text: { fill: '#DFDFDF' }
+          <div className="cluster-metrics-scroll-content">
+            <div className="chart-container">
+              <ResponsiveLine
+                  data={chartData}
+                  margin={{ top: 20, right: 20, bottom: 40, left: 40 }}
+                  xScale={{ type: 'point' }}
+                  yScale={{ type: 'linear', min: 0, max: 'auto', stacked: true, reverse: false }}
+                  axisTop={null}
+                  axisRight={null}
+                  axisBottom={{
+                      tickSize: 5,
+                      tickPadding: 5,
+                      tickRotation: 0,
+                  }}
+                  axisLeft={{
+                      tickSize: 5,
+                      tickPadding: 5,
+                      tickRotation: 0,
+                  }}
+                  pointSize={4}
+                  pointColor={{ theme: 'background' }}
+                  pointBorderWidth={2}
+                  pointBorderColor={{ from: 'serieColor' }}
+                  pointLabelYOffset={-12}
+                  useMesh={true}
+                  theme={{
+                    axis: {
+                      ticks: {
+                        text: { fill: '#DFDFDF' }
+                      }
+                    },
+                    grid: {
+                      line: { stroke: '#444' }
                     }
-                  },
-                  grid: {
-                    line: { stroke: '#444' }
-                  }
-                }}
-                colors={['#ED8B30']}
-            />
+                  }}
+                  colors={['#ED8B30']}
+              />
+            </div>
+            {/* Duplicate chart to demonstrate scrolling */}
+            <div className="chart-container">
+              <ResponsiveLine
+                  data={chartData}
+                  margin={{ top: 20, right: 20, bottom: 40, left: 40 }}
+                  xScale={{ type: 'point' }}
+                  yScale={{ type: 'linear', min: 0, max: 'auto', stacked: true, reverse: false }}
+                  axisTop={null}
+                  axisRight={null}
+                  axisBottom={{
+                      tickSize: 5,
+                      tickPadding: 5,
+                      tickRotation: 0,
+                  }}
+                  axisLeft={{
+                      tickSize: 5,
+                      tickPadding: 5,
+                      tickRotation: 0,
+                  }}
+                  pointSize={4}
+                  pointColor={{ theme: 'background' }}
+                  pointBorderWidth={2}
+                  pointBorderColor={{ from: 'serieColor' }}
+                  pointLabelYOffset={-12}
+                  useMesh={true}
+                  theme={{
+                    axis: {
+                      ticks: {
+                        text: { fill: '#DFDFDF' }
+                      }
+                    },
+                    grid: {
+                      line: { stroke: '#444' }
+                    }
+                  }}
+                  colors={['#23A45A']}
+              />
+            </div>
           </div>
         </div>
 
