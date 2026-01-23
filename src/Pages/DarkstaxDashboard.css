@@ -389,6 +389,36 @@
   grid-column: 3;
 }
 
+/* Deployment Info Card Styles */
+.deployment-info-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-top: auto;
+}
+
+.deployment-value {
+  color: #DFDFDF;
+  font-family: var(--font-family-macan-mono);
+  font-size: 40px;
+  font-weight: 500;
+  line-height: 120%;
+}
+
+.deployment-trend {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.deployment-percentage {
+  color: #DFDFDF;
+  font-family: Lexend, var(--font-family-macan);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 140%;
+}
+
 .activity-stats {
   display: flex;
   justify-content: space-between;
