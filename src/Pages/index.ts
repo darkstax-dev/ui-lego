@@ -12,3 +12,6 @@ export * from './RunPopUp'
 
 export { default as ContainerModalPage } from './ContainerModalPage'
 export * from './ContainerModalPage'
+
+export { default as DarkstaxDashboard } from './DarkstaxDashboard'
+export * from './DarkstaxDashboard'
