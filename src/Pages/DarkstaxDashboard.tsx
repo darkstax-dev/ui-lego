@@ -138,29 +138,22 @@ const DarkstaxDashboard: React.FC = () => {
         </div>
 
         <div className="stat-card stat-card-primary">
-          <div className="stat-header">Cloud cluster Deployed</div>
-          <div className="stat-footer">
-            <div className="stat-value">2</div>
-            <div className="stat-trend stat-trend-down">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                <path d="M16 18.002L18.29 15.712L13.41 10.832L9.41 14.832L2 7.41195L3.41 6.00195L9.41 12.002L13.41 8.00195L19.71 14.292L22 12.002V18.002H16Z" fill="currentColor"/>
-              </svg>
-              <span>-7%</span>
+          <div className="stat-header">Cloud Clusters</div>
+          <div className="cloud-cluster-list">
+            <div className="cluster-item">
+              <span className="status-dot status-dot-success"></span>
+              <span className="cluster-name">Kubernetes</span>
+            </div>
+            <div className="cluster-item">
+              <span className="status-dot status-dot-error"></span>
+              <span className="cluster-name">Azure</span>
             </div>
           </div>
         </div>
 
         <div className="stat-card stat-card-activity">
-          <div className="stat-header">Activity model status</div>
+          <div className="stat-header">Active Resources</div>
           <div className="activity-stats">
-            <div className="activity-stat">
-              <span className="activity-label activity-finished">Finished</span>
-              <span className="activity-value">22</span>
-            </div>
-            <div className="activity-stat">
-              <span className="activity-label activity-error">error</span>
-              <span className="activity-value">8</span>
-            </div>
             <div className="activity-stat">
               <span className="activity-label activity-running">Running</span>
               <span className="activity-value">12</span>
@@ -169,119 +162,11 @@ const DarkstaxDashboard: React.FC = () => {
               <span className="activity-label activity-pending">Pending</span>
               <span className="activity-value">12</span>
             </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Status Indicators */}
-      <div className="status-indicators">
-        <div className="status-card">
-          <div className="status-icon">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-              <path d="M20 18.002V20.002H13.5C9.91 20.002 7 17.092 7 13.502V7.83195L3.91 10.922L2.5 9.50195L8 4.00195L13.5 9.50195L12.09 10.912L9 7.83195V13.502C9 16.002 11 18.002 13.5 18.002H20Z" fill="currentColor"/>
-            </svg>
-            <span>Up</span>
-          </div>
-          <div className="status-value status-value-success">10</div>
-        </div>
-        <div className="status-card">
-          <div className="status-icon">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-              <path d="M4 15H6V20H18V4H6V9H4V3C4 2.73478 4.10536 2.48043 4.29289 2.29289C4.48043 2.10536 4.73478 2 5 2H19C19.2652 2 19.5196 2.10536 19.7071 2.29289C19.8946 2.48043 20 2.73478 20 3V21C20 21.2652 19.8946 21.5196 19.7071 21.7071C19.5196 21.8946 19.2652 22 19 22H5C4.73478 22 4.48043 21.8946 4.29289 21.7071C4.10536 21.5196 4 21.2652 4 21V15ZM10 11V8L15 12L10 16V13H2V11H10Z" fill="currentColor"/>
-            </svg>
-            <span>Joining</span>
-          </div>
-          <div className="status-value status-value-warning">6</div>
-        </div>
-        <div className="status-card">
-          <div className="status-icon">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-              <path d="M4 18H6V20H18V4H6V6H4V3C4 2.73478 4.10536 2.48043 4.29289 2.29289C4.48043 2.10536 4.73478 2 5 2H19C19.2652 2 19.5196 2.10536 19.7071 2.29289C19.8946 2.48043 20 2.73478 20 3V21C20 21.2652 19.8946 21.5196 19.7071 21.7071C19.5196 21.8946 19.2652 22 19 22H5C4.73478 22 4.48043 21.8946 4.29289 21.7071C4.10536 21.5196 4 21.2652 4 21V18ZM6 11H13V13H6V16L1 12L6 8V11Z" fill="currentColor"/>
-            </svg>
-            <span>Leaving</span>
-          </div>
-          <div className="status-value status-value-danger">9</div>
-        </div>
-        <div className="status-card">
-          <div className="status-icon">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-              <path d="M16 18.002L18.29 15.712L13.41 10.832L9.41 14.832L2 7.41195L3.41 6.00195L9.41 12.002L13.41 8.00195L19.71 14.292L22 12.002V18.002H16Z" fill="currentColor"/>
-            </svg>
-            <span>Weakly Joining</span>
-          </div>
-          <div className="status-value">1</div>
-        </div>
-        <div className="status-card">
-          <div className="status-icon">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-              <path d="M16.0005 6.00195L18.2905 8.29195L13.4105 13.172L9.41049 9.17195L2.00049 16.592L3.41049 18.002L9.41049 12.002L13.4105 16.002L19.7105 9.71195L22.0005 12.002V6.00195H16.0005Z" fill="currentColor"/>
-            </svg>
-            <span>Weakly Up</span>
-          </div>
-          <div className="status-value">9</div>
-        </div>
-      </div>
-
-      {/* Data Table */}
-      <div className="data-table">
-        <div className="table-header">
-          <div className="table-cell">Unique id</div>
-          <div className="table-cell">Status</div>
-          <div className="table-cell">Host name</div>
-          <div className="table-cell">Activity roles</div>
-          <div className="table-cell">Port</div>
-          <div className="table-cell table-cell-actions"></div>
-        </div>
-        
-        {[...Array(8)].map((_, index) => (
-          <div key={index} className="table-row">
-            <div className="table-cell">12568834</div>
-            <div className="table-cell">{index === 2 ? 'Up' : 'Joining'}</div>
-            <div className="table-cell">02/12/2025 [13:29PM]</div>
-            <div className="table-cell">
-              <span className="tag">Server role</span>
-            </div>
-            <div className="table-cell">AhraCognitiveCluster</div>
-            <div className="table-cell table-cell-actions">
-              <button className="view-button" aria-label="View details">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                  <path d="M12.0002 3C17.3922 3 21.8782 6.88 22.8192 12C21.8792 17.12 17.3922 21 12.0002 21C6.60815 21 2.12215 17.12 1.18115 12C2.12115 6.88 6.60815 3 12.0002 3ZM12.0002 19C14.0396 18.9996 16.0185 18.3068 17.613 17.0352C19.2075 15.7635 20.3231 13.9883 20.7772 12C20.3214 10.0133 19.2051 8.24 17.6108 6.97003C16.0165 5.70005 14.0385 5.00853 12.0002 5.00853C9.96185 5.00853 7.98384 5.70005 6.38953 6.97003C4.79521 8.24 3.67892 10.0133 3.22315 12C3.67725 13.9883 4.79283 15.7635 6.3873 17.0352C7.98177 18.3068 9.96068 18.9996 12.0002 19ZM12.0002 16.5C10.8067 16.5 9.66209 16.0259 8.81817 15.182C7.97426 14.3381 7.50015 13.1935 7.50015 12C7.50015 10.8065 7.97426 9.66193 8.81817 8.81802C9.66209 7.97411 10.8067 7.5 12.0002 7.5C13.1936 7.5 14.3382 7.97411 15.1821 8.81802C16.026 9.66193 16.5002 10.8065 16.5002 12C16.5002 13.1935 16.026 14.3381 15.1821 15.182C14.3382 16.0259 13.1936 16.5 12.0002 16.5ZM12.0002 14.5C12.6632 14.5 13.2991 14.2366 13.7679 13.7678C14.2368 13.2989 14.5002 12.663 14.5002 12C14.5002 11.337 14.2368 10.7011 13.7679 10.2322C13.2991 9.76339 12.6632 9.5 12.0002 9.5C11.3371 9.5 10.7012 9.76339 10.2324 10.2322C9.76355 10.7011 9.50015 11.337 9.50015 12C9.50015 12.663 9.76355 13.2989 10.2324 13.7678C10.7012 14.2366 11.3371 14.5 12.0002 14.5Z" fill="currentColor"/>
-                </svg>
-              </button>
+            <div className="activity-stat">
+              <span className="activity-label activity-error">Failed</span>
+              <span className="activity-value">8</span>
             </div>
           </div>
-        ))}
-      </div>
-
-      {/* Pagination */}
-      <div className="pagination">
-        <div className="pagination-left">
-          <span className="pagination-label">Rows per page</span>
-          <select className="pagination-select">
-            <option>10</option>
-            <option>25</option>
-            <option>50</option>
-          </select>
-        </div>
-        <div className="pagination-controls">
-          <button className="pagination-button" disabled aria-label="Previous page">
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-              <path d="M7.21883 8.00048L10.5188 11.3005L9.57616 12.2431L5.3335 8.00048L9.57616 3.75781L10.5188 4.70048L7.21883 8.00048Z" fill="currentColor"/>
-            </svg>
-          </button>
-          <div className="pagination-pages">
-            <button className="pagination-page pagination-page-active">1</button>
-            <button className="pagination-page">2</button>
-            <button className="pagination-page">3</button>
-            <span className="pagination-ellipsis">...</span>
-            <button className="pagination-page">67</button>
-            <button className="pagination-page">68</button>
-          </div>
-          <button className="pagination-button" aria-label="Next page">
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-              <path d="M8.78145 8.00048L5.48145 4.70048L6.42411 3.75781L10.6668 8.00048L6.42411 12.2431L5.48145 11.3005L8.78145 8.00048Z" fill="currentColor"/>
-            </svg>
-          </button>
         </div>
       </div>
     </div>
