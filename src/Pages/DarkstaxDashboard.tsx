@@ -183,21 +183,16 @@ const DarkstaxDashboard: React.FC = () => {
           </div>
         </div>
 
-        {/* Row 1, Col 3: Scenario Deployment Info */}
+        {/* Row 1, Col 3: Deployment Info */}
         <div className="stat-card stat-card-primary scenario-deployment-card">
-          <div className="stat-header">Deployment Info</div>
-          <div className="activity-stats center-align">
-             <div className="activity-stat">
-              <span className="activity-label activity-running">Running</span>
-              <span className="activity-value">12</span>
-            </div>
-            <div className="activity-stat">
-              <span className="activity-label activity-pending">Pending</span>
-              <span className="activity-value">12</span>
-            </div>
-            <div className="activity-stat">
-              <span className="activity-label activity-error">Failed</span>
-              <span className="activity-value">8</span>
+          <div className="stat-header">Deployment Info: Deployed</div>
+          <div className="deployment-info-content">
+            <div className="deployment-value">2</div>
+            <div className="deployment-trend">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M16 18.002L18.29 15.712L13.41 10.832L9.41 14.832L2 7.41195L3.41 6.00195L9.41 12.002L13.41 8.00195L19.71 14.292L22 12.002V18.002H16Z" fill="#FF3B31"/>
+              </svg>
+              <span className="deployment-percentage">-7%</span>
             </div>
           </div>
         </div>
