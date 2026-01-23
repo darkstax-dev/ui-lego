@@ -1,8 +1,31 @@
 import React from 'react'
+import { ResponsiveLine } from '@nivo/line'
 import '../tokens.css'
 import './DarkstaxDashboard.css'
 
 const DarkstaxDashboard: React.FC = () => {
+  // Mock data for the chart
+  const chartData = [
+    {
+      id: "usage",
+      color: "hsl(22, 70%, 50%)",
+      data: [
+        { x: "0", y: 45 },
+        { x: "5", y: 78 },
+        { x: "10", y: 56 },
+        { x: "15", y: 89 },
+        { x: "20", y: 65 },
+        { x: "25", y: 72 },
+        { x: "30", y: 50 },
+        { x: "35", y: 85 },
+        { x: "40", y: 60 },
+        { x: "45", y: 75 },
+        { x: "50", y: 55 },
+        { x: "55", y: 20 },
+      ]
+    }
+  ]
+
   return (
     <div className="darkstax-dashboard">
       {/* Main Navigation */}
@@ -86,7 +109,7 @@ const DarkstaxDashboard: React.FC = () => {
 
       {/* Secondary Navigation */}
       <div className="secondary-navigation">
-        <h1 className="page-title">Cognitive Agent wellness tracker</h1>
+        <h1 className="page-title">Darkstax Dashboard</h1>
         <div className="secondary-nav-actions">
           <label className="toggle-field">
             <input type="checkbox" defaultChecked />
@@ -109,58 +132,58 @@ const DarkstaxDashboard: React.FC = () => {
 
       <div className="divider-horizontal" />
 
-      {/* Stats Cards Grid */}
+      {/* Stats Cards Grid - New Layout */}
       <div className="stats-grid">
-        <div className="stat-card stat-card-primary scenarios-card">
-          <div className="stat-header">Scenarios Deployed</div>
-          <div className="scenario-list">
-            <div className="scenario-item">traffic-light-uat</div>
-            <div className="scenario-item">open5gs-test</div>
-            <div className="scenario-item">rtest</div>
-            <div className="scenario-item">all-test-dev</div>
-          </div>
-          <div className="stat-footer">
-            <div className="stat-value">4</div>
-            <div className="stat-trend stat-trend-up">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                <path d="M16 6.00195L18.29 8.29195L13.41 13.172L9.41 9.17195L2 16.592L3.41 18.002L9.41 12.002L13.41 16.002L19.71 9.71195L22 12.002V6.00195H16Z" fill="currentColor"/>
-              </svg>
-              <span>+10%</span>
-            </div>
-          </div>
-        </div>
-
-        <div className="stat-card stat-card-primary">
-          <div className="stat-header">Activity Model Info</div>
-          <div className="stat-footer">
-            <div className="stat-value">12</div>
-            <div className="stat-trend stat-trend-down">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                <path d="M16 18.002L18.29 15.712L13.41 10.832L9.41 14.832L2 7.41195L3.41 6.00195L9.41 12.002L13.41 8.00195L19.71 14.292L22 12.002V18.002H16Z" fill="currentColor"/>
-              </svg>
-              <span>-7%</span>
-            </div>
-          </div>
-        </div>
-
-        <div className="stat-card stat-card-primary">
+        
+        {/* Row 1, Col 1: Cloud Clusters */}
+        <div className="stat-card stat-card-primary cloud-clusters-card">
           <div className="stat-header">Cloud Clusters</div>
-          <div className="cloud-cluster-list">
+          <div className="cloud-cluster-content">
             <div className="cluster-item">
-              <span className="status-dot status-dot-success"></span>
-              <span className="cluster-name">Kubernetes</span>
+              <div className="cluster-label">
+                <span className="status-dot status-dot-success"></span>
+                <span className="cluster-name">Kubernetes</span>
+              </div>
+              <div className="cluster-subtext success">K8s-Development</div>
             </div>
             <div className="cluster-item">
-              <span className="status-dot status-dot-error"></span>
-              <span className="cluster-name">Azure</span>
+              <div className="cluster-label">
+                <span className="status-dot status-dot-error"></span>
+                <span className="cluster-name">Azure</span>
+              </div>
+              <div className="cluster-subtext error">Azure-Development</div>
             </div>
           </div>
         </div>
 
-        <div className="stat-card stat-card-activity">
-          <div className="stat-header">Scenario Info</div>
+        {/* Row 1, Col 2: Activity Models Info */}
+        <div className="stat-card stat-card-primary activity-models-card">
+          <div className="stat-header">Activity Models Info</div>
           <div className="activity-stats">
             <div className="activity-stat">
+              <span className="activity-label activity-finished">Finished</span>
+              <span className="activity-value">22</span>
+            </div>
+            <div className="activity-stat">
+              <span className="activity-label activity-error">Error</span>
+              <span className="activity-value">8</span>
+            </div>
+            <div className="activity-stat">
+              <span className="activity-label activity-running">Running</span>
+              <span className="activity-value">12</span>
+            </div>
+            <div className="activity-stat">
+              <span className="activity-label activity-pending">Pending</span>
+              <span className="activity-value">12</span>
+            </div>
+          </div>
+        </div>
+
+        {/* Row 1, Col 3: Scenario Deployment Info */}
+        <div className="stat-card stat-card-primary scenario-deployment-card">
+          <div className="stat-header">Scenario Deployment Info</div>
+          <div className="activity-stats center-align">
+             <div className="activity-stat">
               <span className="activity-label activity-running">Running</span>
               <span className="activity-value">12</span>
             </div>
@@ -174,6 +197,72 @@ const DarkstaxDashboard: React.FC = () => {
             </div>
           </div>
         </div>
+
+        {/* Row 2, Col 1: Scenarios Deployed */}
+        <div className="stat-card stat-card-primary scenarios-deployed-card">
+          <div className="card-top-bar">
+             <div className="stat-header">Scenarios Deployed</div>
+             <div className="count-badge">7</div>
+          </div>
+          <div className="scenario-list-scroll">
+            <div className="scenario-item">traffic-light-uat</div>
+            <div className="scenario-item">open5gs-test</div>
+            <div className="scenario-item">rtest</div>
+            <div className="scenario-item">all-test-dev</div>
+            <div className="scenario-item">traffic-light-uat</div>
+            <div className="scenario-item">open5gs-test</div>
+            <div className="scenario-item">rtest</div>
+          </div>
+        </div>
+
+        {/* Row 2, Col 2 & 3: Cluster Metrics */}
+        <div className="stat-card stat-card-primary cluster-metrics-card">
+          <div className="card-top-bar">
+            <div className="stat-header">Cluster Metrics</div>
+            <select className="cluster-select">
+              <option>Select Cluster</option>
+              <option>K8s dev Development</option>
+            </select>
+          </div>
+          <div className="chart-container">
+             <ResponsiveLine
+                data={chartData}
+                margin={{ top: 20, right: 20, bottom: 40, left: 40 }}
+                xScale={{ type: 'point' }}
+                yScale={{ type: 'linear', min: 0, max: 'auto', stacked: true, reverse: false }}
+                axisTop={null}
+                axisRight={null}
+                axisBottom={{
+                    tickSize: 5,
+                    tickPadding: 5,
+                    tickRotation: 0,
+                }}
+                axisLeft={{
+                    tickSize: 5,
+                    tickPadding: 5,
+                    tickRotation: 0,
+                }}
+                pointSize={4}
+                pointColor={{ theme: 'background' }}
+                pointBorderWidth={2}
+                pointBorderColor={{ from: 'serieColor' }}
+                pointLabelYOffset={-12}
+                useMesh={true}
+                theme={{
+                  axis: {
+                    ticks: {
+                      text: { fill: '#DFDFDF' }
+                    }
+                  },
+                  grid: {
+                    line: { stroke: '#444' }
+                  }
+                }}
+                colors={['#ED8B30']}
+            />
+          </div>
+        </div>
+
       </div>
     </div>
   )
