@@ -219,7 +219,7 @@ const DarkstaxDashboard: React.FC = () => {
                   />
                </div>
              </div>
-             <div className="count-badge">7</div>
+             <div className={`count-badge status-${selectedScenarioStatus}`}>7</div>
           </div>
           <div className="scenario-list-scroll">
             <div className={`scenario-item status-${selectedScenarioStatus}`}>traffic-light-uat</div>
