@@ -6,6 +6,7 @@ import './DarkstaxDashboard.css'
 
 const DarkstaxDashboard: React.FC = () => {
   const [selectedCluster, setSelectedCluster] = useState('k8s-dev')
+  const [selectedScenarioStatus, setSelectedScenarioStatus] = useState('running')
 
   // Mock data for the chart
   const chartData = [
@@ -184,7 +185,7 @@ const DarkstaxDashboard: React.FC = () => {
 
         {/* Row 1, Col 3: Scenario Deployment Info */}
         <div className="stat-card stat-card-primary scenario-deployment-card">
-          <div className="stat-header">Scenario Deployment Info</div>
+          <div className="stat-header">Deployment Info</div>
           <div className="activity-stats center-align">
              <div className="activity-stat">
               <span className="activity-label activity-running">Running</span>
@@ -204,17 +205,30 @@ const DarkstaxDashboard: React.FC = () => {
         {/* Row 2, Col 1: Scenarios Deployed */}
         <div className="stat-card stat-card-primary scenarios-deployed-card">
           <div className="card-top-bar">
-             <div className="stat-header">Scenarios Deployed</div>
+             <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+               <div className="stat-header">Scenarios Deployed</div>
+               <div style={{ width: 140 }}>
+                  <SelectField
+                    options={[
+                      { value: 'running', label: 'Running' },
+                      { value: 'pending', label: 'Pending' },
+                      { value: 'failed', label: 'Failed' }
+                    ]}
+                    value={selectedScenarioStatus}
+                    onChange={setSelectedScenarioStatus}
+                  />
+               </div>
+             </div>
              <div className="count-badge">7</div>
           </div>
           <div className="scenario-list-scroll">
-            <div className="scenario-item">traffic-light-uat</div>
-            <div className="scenario-item">open5gs-test</div>
-            <div className="scenario-item">rtest</div>
-            <div className="scenario-item">all-test-dev</div>
-            <div className="scenario-item">traffic-light-uat</div>
-            <div className="scenario-item">open5gs-test</div>
-            <div className="scenario-item">rtest</div>
+            <div className={`scenario-item status-${selectedScenarioStatus}`}>traffic-light-uat</div>
+            <div className={`scenario-item status-${selectedScenarioStatus}`}>open5gs-test</div>
+            <div className={`scenario-item status-${selectedScenarioStatus}`}>rtest</div>
+            <div className={`scenario-item status-${selectedScenarioStatus}`}>all-test-dev</div>
+            <div className={`scenario-item status-${selectedScenarioStatus}`}>traffic-light-uat</div>
+            <div className={`scenario-item status-${selectedScenarioStatus}`}>open5gs-test</div>
+            <div className={`scenario-item status-${selectedScenarioStatus}`}>rtest</div>
           </div>
         </div>
 
