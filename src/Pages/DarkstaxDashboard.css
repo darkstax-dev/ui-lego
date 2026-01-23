@@ -491,6 +491,40 @@
   border-radius: 3px;
 }
 
+/* Style override for the SelectField in Scenarios Deployed card */
+.scenarios-deployed-card .select-field {
+  width: 140px;
+}
+
+.scenarios-deployed-card .select-field__select {
+  background: #DFDFDF;
+  height: 32px; /* Slightly smaller */
+  padding: 4px 12px;
+  border-radius: 0;
+  border: none;
+}
+
+.scenarios-deployed-card .select-field__value {
+  color: #00112B;
+  font-family: var(--font-family-macan);
+  font-size: 13px;
+}
+
+.scenarios-deployed-card .select-field__dropdown {
+  background: #DFDFDF;
+  border-radius: 0;
+}
+
+.scenarios-deployed-card .select-field__option {
+  color: #00112B;
+}
+
+.scenarios-deployed-card .select-field__option:hover,
+.scenarios-deployed-card .select-field__option--selected {
+  background: #CECECE;
+  color: #00112B;
+}
+
 .scenario-item {
   color: #DFDFDF;
   font-family: var(--font-family-macan-mono);
@@ -500,6 +534,18 @@
   padding-left: 16px;
   border-left: 2px solid #23A45A;
   flex-shrink: 0;
+}
+
+.scenario-item.status-running {
+  border-left-color: #ED8B30; /* Orange for Running */
+}
+
+.scenario-item.status-pending {
+  border-left-color: #78797A; /* Gray for Pending */
+}
+
+.scenario-item.status-failed {
+  border-left-color: #FF3B31; /* Red for Failed */
 }
 
 /* Cluster Metrics */
