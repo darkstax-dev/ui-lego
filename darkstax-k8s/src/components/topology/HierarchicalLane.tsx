@@ -64,13 +64,38 @@ export function HierarchicalLane({ category, label, nodes, height }: Hierarchica
 
   return (
     <div
-      className="flex flex-col bg-gray-200 mb-2"
-      style={{ minHeight: laneHeight }}
+      className="flex flex-row mb-2.5"
+      style={{
+        minHeight: laneHeight,
+        padding: '4px',
+        gap: '10px',
+        background: '#DFDFDF'
+      }}
       data-testid={`lane-${category}`}
     >
-      {/* Lane Label */}
-      <div className="h-[40px] bg-gray-300 flex items-center px-4 border-b border-gray-400">
-        <div className="text-blue-dark-950 font-macan text-base font-medium leading-tight">
+      {/* Vertical Lane Label */}
+      <div
+        className="flex items-center justify-center"
+        style={{
+          width: '45px',
+          padding: '4px 8px',
+          background: '#CECECE',
+          flexShrink: 0
+        }}
+      >
+        <div
+          style={{
+            transform: 'rotate(-90deg)',
+            color: '#00112B',
+            textAlign: 'center',
+            fontFamily: 'Macan, -apple-system, Roboto, Helvetica, sans-serif',
+            fontSize: '24px',
+            fontWeight: 500,
+            lineHeight: '120%',
+            letterSpacing: '-0.48px',
+            whiteSpace: 'nowrap'
+          }}
+        >
           {label}
         </div>
       </div>
@@ -107,7 +132,7 @@ export function HierarchicalLane({ category, label, nodes, height }: Hierarchica
                 );
               })()
             ))}
-            
+
             {/* Render standalone nodes */}
             {standaloneNodes.map((node) => (
               <div
