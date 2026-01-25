@@ -5,10 +5,9 @@ import { useUIStore } from '../../store/uiStore';
 import { useTopologyStore } from '../../store/topologyStore';
 import { filterNodes } from '../../lib/filterNodes';
 import { kubernetesTopologyScenario } from '../../data/k8sTopologyScenario';
-import { buildGroupsFromRules, hierarchyConfig } from '../../hierarchyConfig';
+import { buildGroupsFromRules, hierarchyConfig, getLaneCategories } from '../../hierarchyConfig';
 import { applyCircularLayout, applyFlextreeLayout, applyOwnershipTreeLayout } from '../../lib/layouts/flextreeLayout';
 import { KubernetesIconWrapper } from '../ui/KubernetesIconWrapper';
-import { hierarchyConfig, getLaneCategories } from '../../hierarchyConfig';
 
 
 export function TopologyCanvas() {
