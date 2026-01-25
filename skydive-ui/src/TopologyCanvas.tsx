@@ -17,17 +17,19 @@ export interface K8sNode {
 }
 
 export interface TopologyCanvasProps {
+  initialNodes?: K8sNode[]
   onNodeClick?: (node: K8sNode) => void
   onNodeDoubleClick?: (node: K8sNode) => void
   onCanvasClick?: () => void
 }
 
 export const TopologyCanvas: React.FC<TopologyCanvasProps> = ({
+  initialNodes,
   onNodeClick,
   onNodeDoubleClick,
   onCanvasClick
 }) => {
-  const [nodes, setNodes] = useState<K8sNode[]>([])
+  const [nodes, setNodes] = useState<K8sNode[]>(() => initialNodes ?? [])
   const [selectedNodeId, setSelectedNodeId] = useState<string | null>(null)
   const [showLegend, setShowLegend] = useState(false)
 
