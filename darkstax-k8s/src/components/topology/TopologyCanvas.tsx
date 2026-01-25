@@ -297,14 +297,6 @@ export function TopologyCanvas() {
           </div>
         )}
 
-        <div className="absolute bottom-6 right-6 flex flex-col gap-2 z-20">
-          <button className="px-4 h-10 rounded-full bg-blue-700 text-white text-sm font-macan shadow hover:bg-blue-600">
-            infrastructure
-          </button>
-          <button className="px-4 h-10 rounded-full bg-blue-700 text-white text-sm font-macan shadow hover:bg-blue-600">
-            kubernetes
-          </button>
-        </div>
 
         {contextMenu && (
           <div
