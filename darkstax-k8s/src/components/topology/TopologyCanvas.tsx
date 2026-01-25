@@ -83,13 +83,9 @@ export function TopologyCanvas() {
     return new Map(filteredNodes.map((n) => [n.id, n] as const));
   }, [filteredNodes]);
 
-  const laneCategories: Array<{ id: string; label: string; height: number | 'auto' }> = [
-    { id: 'aggregate', label: 'Namespaces', height: 'auto' as const },
-    { id: 'load', label: 'Load', height: 200 },
-    { id: 'service', label: 'Service', height: 200 },
-    { id: 'network', label: 'Network', height: 200 },
-    { id: 'config-storage', label: 'Config and Storage', height: 'auto' as const },
-  ];
+  const laneCategories = useMemo(() => {
+    return getLaneCategories(hierarchyConfig);
+  }, []);
 
   const computeConnections = () => {
     const svgEl = svgRef.current;
