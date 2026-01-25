@@ -1,5 +1,4 @@
 import { ReactNode } from 'react';
-import { MetadataPanel } from '../panels/MetadataPanel';
 import { ResourceMenuPanel } from '../panels/ResourceMenuPanel';
 import { StatusLegendTooltip } from '../ui/StatusLegendTooltip';
 
@@ -19,7 +18,6 @@ export function AppLayout({ children }: AppLayoutProps) {
             <ResourceMenuPanel />
             <StatusLegendTooltip />
           </div>
-          <MetadataPanel />
         </div>
       </div>
     </div>
