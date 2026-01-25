@@ -1,6 +1,6 @@
 import { HierarchyConfig, Category, GroupingRule } from '../types/hierarchy';
 import { K8sNodeData, K8sNodeGroup } from '../types';
-import hierarchyConfigJson from '../config/kubernetes-hierarchy.json';
+import hierarchyConfigJson from './config/kubernetes-hierarchy.json';
 
 export const hierarchyConfig: HierarchyConfig = hierarchyConfigJson as HierarchyConfig;
 
