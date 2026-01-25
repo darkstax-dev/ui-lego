@@ -1,0 +1,100 @@
+.topology-topbar {
+  background: var(--color-blue-dark-950, #00112B);
+  color: var(--color-white, #FFFFFF);
+  height: 72px;
+  display: flex;
+  align-items: center;
+  padding: 0 var(--sds-size-space-400);
+  box-shadow: 0px 4px 4px -1px rgba(12, 12, 13, 0.1);
+  z-index: 100;
+}
+
+.topology-topbar__container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 100%;
+}
+
+.topology-topbar__brand {
+  display: flex;
+  align-items: center;
+  gap: var(--sds-size-space-200);
+  color: var(--color-white);
+}
+
+.topology-topbar__brand-text {
+  font-family: var(--font-family-macan);
+  font-weight: var(--font-weight-bold);
+  font-size: var(--font-size-md);
+  letter-spacing: 0.05em;
+}
+
+.topology-topbar__nav {
+  display: flex;
+  align-items: center;
+  gap: var(--sds-size-space-200);
+  flex: 1;
+  margin: 0 var(--sds-size-space-800);
+}
+
+.topology-topbar__nav-item {
+  display: flex;
+  align-items: center;
+  gap: var(--sds-size-space-200);
+  padding: var(--sds-size-space-200) var(--sds-size-space-400);
+  background: transparent;
+  border: none;
+  color: var(--color-gray-400, #ADADAD);
+  cursor: pointer;
+  font-family: var(--font-family-macan);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  letter-spacing: 0.05em;
+  transition: all 0.2s ease;
+  border-radius: 4px;
+}
+
+.topology-topbar__nav-item:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--color-white);
+}
+
+.topology-topbar__nav-item--active {
+  color: var(--color-white);
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.topology-topbar__dropdown-icon {
+  margin-left: auto;
+  opacity: 0.6;
+}
+
+.topology-topbar__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--sds-size-space-200);
+}
+
+.topology-topbar__icon-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background: transparent;
+  border: none;
+  color: var(--color-white);
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background 0.2s ease;
+}
+
+.topology-topbar__icon-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.topology-topbar__icon-btn--avatar {
+  color: var(--color-gray-300);
+}

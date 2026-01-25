@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Figma Design vs Implementation - Visual Comparison</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #1a1a1a;
+            color: #fff;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        h1 {
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            color: #888;
+            font-size: 14px;
+        }
+
+        .comparison-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            max-width: 1800px;
+            margin: 0 auto;
+        }
+
+        .image-panel {
+            background: #2a2a2a;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        }
+
+        .panel-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #444;
+        }
+
+        .panel-title {
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .status-badge {
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        .status-badge.design {
+            background: #4a90e2;
+        }
+
+        .status-badge.implementation {
+            background: #50c878;
+        }
+
+        .image-wrapper {
+            background: #fff;
+            border-radius: 4px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .image-wrapper img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .placeholder {
+            padding: 100px 20px;
+            text-align: center;
+            color: #888;
+            font-size: 14px;
+        }
+
+        .placeholder-icon {
+            font-size: 48px;
+            margin-bottom: 10px;
+            opacity: 0.3;
+        }
+
+        .controls {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .slider-container {
+            max-width: 600px;
+            margin: 20px auto;
+        }
+
+        .slider {
+            width: 100%;
+            margin: 10px 0;
+        }
+
+        .button {
+            background: #4a90e2;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            margin: 0 5px;
+        }
+
+        .button:hover {
+            background: #357abd;
+        }
+
+        .instructions {
+            background: #2a2a2a;
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 30px;
+            max-width: 1800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .instructions h2 {
+            font-size: 20px;
+            margin-bottom: 15px;
+            color: #4a90e2;
+        }
+
+        .instructions ol {
+            margin-left: 20px;
+            line-height: 1.8;
+        }
+
+        .instructions code {
+            background: #1a1a1a;
+            padding: 2px 8px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+            color: #50c878;
+        }
+
+        @media (max-width: 1200px) {
+            .comparison-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Figma Design vs Implementation</h1>
+        <p class="subtitle">Visual Comparison Tool - Kubernetes Scenario Visualization</p>
+    </div>
+
+    <div class="comparison-container">
+        <!-- Figma Design -->
+        <div class="image-panel">
+            <div class="panel-header">
+                <span class="panel-title">Figma Design (Expected)</span>
+                <span class="status-badge design">DESIGN</span>
+            </div>
+            <div class="image-wrapper">
+                <div class="placeholder">
+                    <div class="placeholder-icon">🎨</div>
+                    <p><strong>Place Figma design screenshot here</strong></p>
+                    <p style="margin-top: 10px; font-size: 12px;">
+                        Copy <code>screenshot-of-entire-figma-design.jpeg</code><br>
+                        to <code>darkstax-k8s-scn/tests/screenshots/figma-design.jpg</code>
+                    </p>
+                </div>
+                <!-- Uncomment when image is available -->
+                <!-- <img src="screenshots/figma-design.jpg" alt="Figma Design"> -->
+            </div>
+        </div>
+
+        <!-- Current Implementation -->
+        <div class="image-panel">
+            <div class="panel-header">
+                <span class="panel-title">Current Implementation (Actual)</span>
+                <span class="status-badge implementation">CURRENT</span>
+            </div>
+            <div class="image-wrapper">
+                <div class="placeholder">
+                    <div class="placeholder-icon">💻</div>
+                    <p><strong>Run tests to generate screenshot</strong></p>
+                    <p style="margin-top: 10px; font-size: 12px;">
+                        Run: <code>npm test</code><br>
+                        Screenshot will appear at: <code>tests/screenshots/current-implementation.png</code>
+                    </p>
+                </div>
+                <!-- Uncomment when tests have run -->
+                <!-- <img src="screenshots/current-implementation.png" alt="Current Implementation"> -->
+            </div>
+        </div>
+    </div>
+
+    <div class="instructions">
+        <h2>📋 How to Use This Tool</h2>
+        <ol>
+            <li>
+                <strong>Run the Playwright tests:</strong><br>
+                <code>cd darkstax-k8s-scn && npm test</code>
+            </li>
+            <li>
+                <strong>Copy the Figma design screenshot:</strong><br>
+                <code>cp ../../screenshot-of-entire-figma-design.jpeg tests/screenshots/figma-design.jpg</code>
+            </li>
+            <li>
+                <strong>Open this file in a browser:</strong><br>
+                <code>open tests/visual-comparison.html</code>
+            </li>
+            <li>
+                <strong>Uncomment the image tags</strong> in the HTML (lines marked with comments)
+            </li>
+            <li>
+                <strong>Compare side-by-side</strong> and identify visual differences
+            </li>
+            <li>
+                <strong>Review test output</strong> for specific component gaps
+            </li>
+        </ol>
+
+        <h2 style="margin-top: 30px;">🔍 What to Look For</h2>
+        <ul style="margin-left: 20px; line-height: 1.8;">
+            <li>✅ <strong>Layout alignment:</strong> Header, panels, canvas positioning</li>
+            <li>✅ <strong>Component sizing:</strong> 72px header, 280px menu, 40px buttons</li>
+            <li>✅ <strong>Color accuracy:</strong> Grays (#CECECE, #DFDFDF), blue (#00112B)</li>
+            <li>⚠️ <strong>Canvas background:</strong> Dotted grid pattern presence</li>
+            <li>⚠️ <strong>Hierarchical lanes:</strong> Load, Service, Network, Config labels</li>
+            <li>⚠️ <strong>Connection lines:</strong> Dashed lines between resources</li>
+            <li>⚠️ <strong>Resource badges:</strong> Count indicators on icons</li>
+        </ul>
+
+        <h2 style="margin-top: 30px;">📊 Test Results</h2>
+        <p style="line-height: 1.8; margin-left: 20px;">
+            Automated tests provide detailed output on each design element.<br>
+            View full report: <code>npm run test:report</code><br>
+            Interactive mode: <code>npm run test:ui</code>
+        </p>
+
+        <h2 style="margin-top: 30px;">📄 Documentation</h2>
+        <p style="line-height: 1.8; margin-left: 20px;">
+            • <strong>Full Analysis:</strong> <code>FIGMA_DESIGN_ANALYSIS.md</code><br>
+            • <strong>Quick Summary:</strong> <code>DESIGN_GAPS_SUMMARY.md</code><br>
+            • <strong>Test Guide:</strong> <code>tests/README.md</code>
+        </p>
+    </div>
+
+    <script>
+        // Add zoom functionality
+        document.querySelectorAll('.image-wrapper img').forEach(img => {
+            img.addEventListener('click', function() {
+                if (this.style.transform === 'scale(1.5)') {
+                    this.style.transform = 'scale(1)';
+                    this.style.cursor = 'zoom-in';
+                } else {
+                    this.style.transform = 'scale(1.5)';
+                    this.style.cursor = 'zoom-out';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

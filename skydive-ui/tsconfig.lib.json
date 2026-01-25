@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "forceConsistentCasingInFileNames": true,
+    "target": "es2017",
+    "module": "esnext",
+    "jsx": "react",
+    "declaration": true,
+    "emitDeclarationOnly": true,
+    "outDir": "./dist-lib",
+    "strictNullChecks": true,
+    "moduleResolution": "node",
+    "types": ["node"],
+    "lib": ["es2017", "dom"],
+    "skipLibCheck": true
+  },
+  "include": ["./src/index.ts", "./src/Topology.tsx", "./src/**/*.d.ts"]
+}

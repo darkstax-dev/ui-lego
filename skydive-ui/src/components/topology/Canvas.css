@@ -1,0 +1,129 @@
+.topology-canvas__canvas {
+  flex: 1;
+  position: relative;
+  background: var(--color-gray-300, #CECECE);
+  overflow: hidden;
+}
+
+.topology-canvas__canvas--drag-over {
+  background: var(--color-gray-200, #DFDFDF);
+}
+
+.topology-canvas__grid {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.24;
+  background-image: 
+    radial-gradient(circle, var(--color-blue-dark-950, #00112B) 1px, transparent 1px);
+  background-size: 28.53px 26px;
+  background-position: 0 0, 14.265px 13px;
+  pointer-events: none;
+}
+
+.topology-canvas__toolbar {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  right: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sds-size-space-200);
+  z-index: 10;
+}
+
+.topology-canvas__breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: var(--sds-size-space-200);
+}
+
+.topology-canvas__back-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background: var(--color-gray-200, #DFDFDF);
+  border: none;
+  color: var(--color-gray-500, #78797A);
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.topology-canvas__back-btn:hover {
+  background: var(--color-gray-100);
+}
+
+.topology-canvas__input,
+.topology-canvas__select {
+  height: 40px;
+  padding: 12px var(--sds-size-space-400);
+  background: var(--color-gray-200, #DFDFDF);
+  border: none;
+  color: var(--color-gray-500, #78797A);
+  font-family: var(--font-family-macan);
+  font-size: var(--font-size-md, 16px);
+  font-weight: var(--font-weight-book, 450);
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  outline: none;
+}
+
+.topology-canvas__input {
+  width: 180px;
+}
+
+.topology-canvas__input--filled {
+  color: var(--color-blue-dark-950, #00112B);
+}
+
+.topology-canvas__select {
+  width: 180px;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M10 11L14 7L15 8L10 13L5 8L6 7L10 11Z' fill='%2378797A'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 20px 20px;
+  padding-right: 36px;
+  cursor: pointer;
+}
+
+.topology-canvas__controls {
+  display: flex;
+  align-items: center;
+  gap: var(--sds-size-space-200);
+}
+
+.topology-canvas__icon-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background: var(--color-gray-200, #DFDFDF);
+  border: none;
+  color: var(--color-gray-500, #78797A);
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.topology-canvas__icon-btn:hover {
+  background: var(--color-gray-100);
+}
+
+.topology-canvas__nodes {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.topology-canvas__nodes > * {
+  pointer-events: all;
+}

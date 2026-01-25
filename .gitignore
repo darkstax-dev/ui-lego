@@ -1,5 +1,8 @@
 # dependencies
 darkstax-topology/node_modules
+darkstax-k8s-scn/node_modules
+darkstax-k8s/node_modules
+skydive-ui/node_modules
 /node_modules
 /.pnp
 .pnp.*

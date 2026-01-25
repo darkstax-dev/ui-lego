@@ -1,0 +1,380 @@
+{
+  "$schema": "../schemas/hierarchy-config.schema.json",
+  "metadata": {
+    "name": "Kubernetes Resource Hierarchy",
+    "description": "Hierarchical display configuration for Kubernetes resources on topology canvas",
+    "version": "1.0.0",
+    "author": "DarkStax",
+    "tags": ["kubernetes", "k8s", "hierarchy", "topology"]
+  },
+  "hierarchyLevels": [
+    {
+      "level": 0,
+      "name": "Cluster & Namespace",
+      "description": "Top-level organizational containers",
+      "resourceTypes": ["namespace"],
+      "canContain": ["deployment", "statefulset", "job", "service", "ingress", "multus", "configmap", "secret", "persistentvolumeclaim"],
+      "displayOrder": 1
+    },
+    {
+      "level": 1,
+      "name": "Workload Controllers",
+      "description": "Controllers that manage pod lifecycles",
+      "resourceTypes": ["deployment", "statefulset", "job"],
+      "canContain": ["pod"],
+      "displayOrder": 2
+    },
+    {
+      "level": 2,
+      "name": "Pods",
+      "description": "Smallest deployable compute units",
+      "resourceTypes": ["pod"],
+      "canContain": [],
+      "displayOrder": 3
+    }
+  ],
+  "categories": [
+    {
+      "id": "aggregate",
+      "label": "Aggregate",
+      "description": "Organizational containers and namespaces",
+      "resourceTypes": ["namespace"],
+      "laneConfig": {
+        "display": false,
+        "height": "auto"
+      },
+      "color": "#4ECDC4",
+      "icon": "folder"
+    },
+    {
+      "id": "load",
+      "label": "Load",
+      "description": "Workload resources including controllers and pods",
+      "resourceTypes": ["deployment", "statefulset", "job", "pod"],
+      "laneConfig": {
+        "display": true,
+        "height": 200,
+        "order": 1
+      },
+      "color": "#326CE5",
+      "icon": "cpu"
+    },
+    {
+      "id": "service",
+      "label": "Service",
+      "description": "Service discovery and load balancing",
+      "resourceTypes": ["service", "ingress"],
+      "laneConfig": {
+        "display": true,
+        "height": 200,
+        "order": 2
+      },
+      "color": "#00D1B2",
+      "icon": "network"
+    },
+    {
+      "id": "network",
+      "label": "Network",
+      "description": "Advanced networking resources",
+      "resourceTypes": ["multus"],
+      "laneConfig": {
+        "display": true,
+        "height": 200,
+        "order": 3
+      },
+      "color": "#F38181",
+      "icon": "wifi"
+    },
+    {
+      "id": "config-storage",
+      "label": "Config and Storage",
+      "description": "Configuration and persistent storage resources",
+      "resourceTypes": ["configmap", "secret", "persistentvolume", "persistentvolumeclaim"],
+      "laneConfig": {
+        "display": true,
+        "height": "auto",
+        "order": 4
+      },
+      "color": "#AA96DA",
+      "icon": "database"
+    }
+  ],
+  "groupingRules": [
+    {
+      "id": "group-by-namespace",
+      "name": "Group by Namespace",
+      "description": "Group all resources within their namespace",
+      "enabled": true,
+      "priority": 1,
+      "criteria": {
+        "type": "property-match",
+        "ownerProperty": "Type",
+        "ownerValue": "namespace",
+        "memberProperty": "Namespace",
+        "memberValue": "${ownerId}"
+      },
+      "hierarchyLevel": 0,
+      "collapsible": true,
+      "defaultCollapsed": false,
+      "style": {
+        "fillColor": "rgba(78, 205, 196, 0.05)",
+        "strokeColor": "rgba(78, 205, 196, 0.4)",
+        "strokeWidth": 2,
+        "strokeDashArray": "10, 5",
+        "borderRadius": 30,
+        "padding": 40,
+        "labelPosition": "top-left",
+        "labelStyle": {
+          "fontSize": 14,
+          "fontWeight": 600,
+          "color": "#2C3E50"
+        }
+      }
+    },
+    {
+      "id": "group-by-deployment",
+      "name": "Group Pods by Deployment",
+      "description": "Group pods managed by a deployment",
+      "enabled": true,
+      "priority": 2,
+      "criteria": {
+        "type": "property-match",
+        "ownerProperty": "Type",
+        "ownerValue": "deployment",
+        "memberProperty": "Owner",
+        "memberValue": "${ownerId}"
+      },
+      "hierarchyLevel": 1,
+      "collapsible": true,
+      "defaultCollapsed": false,
+      "style": {
+        "fillColor": "rgba(255, 107, 107, 0.05)",
+        "strokeColor": "rgba(255, 107, 107, 0.3)",
+        "strokeWidth": 2,
+        "strokeDashArray": "8, 4",
+        "borderRadius": 20,
+        "padding": 30,
+        "labelPosition": "top-left",
+        "labelStyle": {
+          "fontSize": 12,
+          "fontWeight": 500,
+          "color": "#2C3E50"
+        }
+      }
+    },
+    {
+      "id": "group-by-statefulset",
+      "name": "Group Pods by StatefulSet",
+      "description": "Group pods managed by a statefulset",
+      "enabled": true,
+      "priority": 2,
+      "criteria": {
+        "type": "property-match",
+        "ownerProperty": "Type",
+        "ownerValue": "statefulset",
+        "memberProperty": "Owner",
+        "memberValue": "${ownerId}"
+      },
+      "hierarchyLevel": 1,
+      "collapsible": true,
+      "defaultCollapsed": false,
+      "style": {
+        "fillColor": "rgba(50, 108, 229, 0.05)",
+        "strokeColor": "rgba(50, 108, 229, 0.3)",
+        "strokeWidth": 2,
+        "strokeDashArray": "8, 4",
+        "borderRadius": 20,
+        "padding": 30,
+        "labelPosition": "top-left",
+        "labelStyle": {
+          "fontSize": 12,
+          "fontWeight": 500,
+          "color": "#2C3E50"
+        }
+      }
+    },
+    {
+      "id": "group-by-job",
+      "name": "Group Pods by Job",
+      "description": "Group pods managed by a job",
+      "enabled": true,
+      "priority": 2,
+      "criteria": {
+        "type": "property-match",
+        "ownerProperty": "Type",
+        "ownerValue": "job",
+        "memberProperty": "Owner",
+        "memberValue": "${ownerId}"
+      },
+      "hierarchyLevel": 1,
+      "collapsible": true,
+      "defaultCollapsed": false,
+      "style": {
+        "fillColor": "rgba(0, 209, 178, 0.05)",
+        "strokeColor": "rgba(0, 209, 178, 0.3)",
+        "strokeWidth": 2,
+        "strokeDashArray": "8, 4",
+        "borderRadius": 20,
+        "padding": 30,
+        "labelPosition": "top-left",
+        "labelStyle": {
+          "fontSize": 12,
+          "fontWeight": 500,
+          "color": "#2C3E50"
+        }
+      }
+    }
+  ],
+  "relationshipRules": [
+    {
+      "id": "namespace-contains-resources",
+      "name": "Namespace Contains Resources",
+      "sourceType": "namespace",
+      "targetTypes": ["deployment", "statefulset", "job", "service", "ingress", "multus", "configmap", "secret", "persistentvolumeclaim"],
+      "relationship": "contains",
+      "matchProperty": "Namespace",
+      "displayConnection": false
+    },
+    {
+      "id": "deployment-manages-pods",
+      "name": "Deployment Manages Pods",
+      "sourceType": "deployment",
+      "targetTypes": ["pod"],
+      "relationship": "manages",
+      "matchProperty": "Owner",
+      "displayConnection": true,
+      "connectionStyle": {
+        "color": "rgba(255, 107, 107, 0.4)",
+        "width": 2,
+        "style": "dashed",
+        "dashArray": "5, 5"
+      }
+    },
+    {
+      "id": "statefulset-manages-pods",
+      "name": "StatefulSet Manages Pods",
+      "sourceType": "statefulset",
+      "targetTypes": ["pod"],
+      "relationship": "manages",
+      "matchProperty": "Owner",
+      "displayConnection": true,
+      "connectionStyle": {
+        "color": "rgba(50, 108, 229, 0.4)",
+        "width": 2,
+        "style": "dashed",
+        "dashArray": "5, 5"
+      }
+    },
+    {
+      "id": "service-routes-to-pods",
+      "name": "Service Routes to Pods",
+      "sourceType": "service",
+      "targetTypes": ["pod"],
+      "relationship": "routes",
+      "matchProperty": "connections",
+      "displayConnection": true,
+      "connectionStyle": {
+        "color": "rgba(0, 209, 178, 0.6)",
+        "width": 2,
+        "style": "solid"
+      }
+    },
+    {
+      "id": "ingress-routes-to-service",
+      "name": "Ingress Routes to Service",
+      "sourceType": "ingress",
+      "targetTypes": ["service"],
+      "relationship": "routes",
+      "matchProperty": "connections",
+      "displayConnection": true,
+      "connectionStyle": {
+        "color": "rgba(243, 129, 129, 0.6)",
+        "width": 2,
+        "style": "solid"
+      }
+    },
+    {
+      "id": "pod-uses-configmap",
+      "name": "Pod Uses ConfigMap",
+      "sourceType": "pod",
+      "targetTypes": ["configmap"],
+      "relationship": "uses",
+      "matchProperty": "connections",
+      "displayConnection": true,
+      "connectionStyle": {
+        "color": "rgba(170, 150, 218, 0.4)",
+        "width": 1.5,
+        "style": "dotted"
+      }
+    },
+    {
+      "id": "pod-uses-secret",
+      "name": "Pod Uses Secret",
+      "sourceType": "pod",
+      "targetTypes": ["secret"],
+      "relationship": "uses",
+      "matchProperty": "connections",
+      "displayConnection": true,
+      "connectionStyle": {
+        "color": "rgba(252, 186, 211, 0.4)",
+        "width": 1.5,
+        "style": "dotted"
+      }
+    },
+    {
+      "id": "pod-mounts-pvc",
+      "name": "Pod Mounts PVC",
+      "sourceType": "pod",
+      "targetTypes": ["persistentvolumeclaim"],
+      "relationship": "mounts",
+      "matchProperty": "connections",
+      "displayConnection": true,
+      "connectionStyle": {
+        "color": "rgba(170, 150, 218, 0.5)",
+        "width": 2,
+        "style": "solid"
+      }
+    },
+    {
+      "id": "pvc-binds-pv",
+      "name": "PVC Binds to PV",
+      "sourceType": "persistentvolumeclaim",
+      "targetTypes": ["persistentvolume"],
+      "relationship": "binds",
+      "matchProperty": "connections",
+      "displayConnection": true,
+      "connectionStyle": {
+        "color": "rgba(170, 150, 218, 0.6)",
+        "width": 2,
+        "style": "solid"
+      }
+    }
+  ],
+  "displayRules": {
+    "showEmptyLanes": true,
+    "autoCollapseDepth": null,
+    "nodeSpacing": {
+      "horizontal": 32,
+      "vertical": 24,
+      "groupPadding": 40
+    },
+    "labelDisplay": {
+      "showLabels": true,
+      "truncateLength": 20,
+      "position": "bottom"
+    },
+    "indicatorDisplay": {
+      "showContainerCount": true,
+      "showStatusIndicator": true,
+      "position": "top-right"
+    }
+  },
+  "interactionRules": {
+    "allowDragDrop": true,
+    "allowCollapse": true,
+    "allowExpand": true,
+    "contextMenuEnabled": true,
+    "doubleClickAction": "expand-collapse",
+    "selectionMode": "single"
+  }
+}

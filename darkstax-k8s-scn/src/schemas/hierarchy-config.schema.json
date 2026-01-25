@@ -1,0 +1,233 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://darkstax.com/schemas/hierarchy-config.schema.json",
+  "title": "Kubernetes Hierarchy Configuration",
+  "description": "Schema for configuring hierarchical display of Kubernetes resources",
+  "type": "object",
+  "required": ["metadata", "hierarchyLevels", "categories", "groupingRules"],
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "description": "JSON Schema reference"
+    },
+    "metadata": {
+      "type": "object",
+      "required": ["name", "version"],
+      "properties": {
+        "name": { "type": "string" },
+        "description": { "type": "string" },
+        "version": { "type": "string" },
+        "author": { "type": "string" },
+        "tags": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
+    },
+    "hierarchyLevels": {
+      "type": "array",
+      "description": "Defines the hierarchical levels of resources",
+      "items": {
+        "type": "object",
+        "required": ["level", "name", "resourceTypes"],
+        "properties": {
+          "level": {
+            "type": "number",
+            "description": "Numeric level (0 = top)"
+          },
+          "name": { "type": "string" },
+          "description": { "type": "string" },
+          "resourceTypes": {
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "canContain": {
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "displayOrder": { "type": "number" }
+        }
+      }
+    },
+    "categories": {
+      "type": "array",
+      "description": "Visual categories for organizing resources into lanes",
+      "items": {
+        "type": "object",
+        "required": ["id", "label", "resourceTypes"],
+        "properties": {
+          "id": { "type": "string" },
+          "label": { "type": "string" },
+          "description": { "type": "string" },
+          "resourceTypes": {
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "laneConfig": {
+            "type": "object",
+            "properties": {
+              "display": { "type": "boolean" },
+              "height": {
+                "oneOf": [
+                  { "type": "number" },
+                  { "type": "string", "enum": ["auto"] }
+                ]
+              },
+              "order": { "type": "number" }
+            }
+          },
+          "color": { "type": "string" },
+          "icon": { "type": "string" }
+        }
+      }
+    },
+    "groupingRules": {
+      "type": "array",
+      "description": "Rules for grouping resources hierarchically",
+      "items": {
+        "type": "object",
+        "required": ["id", "name", "enabled", "criteria"],
+        "properties": {
+          "id": { "type": "string" },
+          "name": { "type": "string" },
+          "description": { "type": "string" },
+          "enabled": { "type": "boolean" },
+          "priority": { "type": "number" },
+          "criteria": {
+            "type": "object",
+            "required": ["type"],
+            "properties": {
+              "type": {
+                "type": "string",
+                "enum": ["property-match", "pattern-match", "manual"]
+              },
+              "ownerProperty": { "type": "string" },
+              "ownerValue": { "type": "string" },
+              "memberProperty": { "type": "string" },
+              "memberValue": { "type": "string" }
+            }
+          },
+          "hierarchyLevel": { "type": "number" },
+          "collapsible": { "type": "boolean" },
+          "defaultCollapsed": { "type": "boolean" },
+          "style": {
+            "type": "object",
+            "properties": {
+              "fillColor": { "type": "string" },
+              "strokeColor": { "type": "string" },
+              "strokeWidth": { "type": "number" },
+              "strokeDashArray": { "type": "string" },
+              "borderRadius": { "type": "number" },
+              "padding": { "type": "number" },
+              "labelPosition": {
+                "type": "string",
+                "enum": ["top-left", "top-right", "bottom-left", "bottom-right", "center"]
+              },
+              "labelStyle": {
+                "type": "object",
+                "properties": {
+                  "fontSize": { "type": "number" },
+                  "fontWeight": { "type": "number" },
+                  "color": { "type": "string" }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "relationshipRules": {
+      "type": "array",
+      "description": "Defines relationships between resource types",
+      "items": {
+        "type": "object",
+        "required": ["id", "name", "sourceType", "targetTypes", "relationship"],
+        "properties": {
+          "id": { "type": "string" },
+          "name": { "type": "string" },
+          "sourceType": { "type": "string" },
+          "targetTypes": {
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "relationship": {
+            "type": "string",
+            "enum": ["contains", "manages", "routes", "uses", "mounts", "binds"]
+          },
+          "matchProperty": { "type": "string" },
+          "displayConnection": { "type": "boolean" },
+          "connectionStyle": {
+            "type": "object",
+            "properties": {
+              "color": { "type": "string" },
+              "width": { "type": "number" },
+              "style": {
+                "type": "string",
+                "enum": ["solid", "dashed", "dotted"]
+              },
+              "dashArray": { "type": "string" }
+            }
+          }
+        }
+      }
+    },
+    "displayRules": {
+      "type": "object",
+      "description": "General display configuration",
+      "properties": {
+        "showEmptyLanes": { "type": "boolean" },
+        "autoCollapseDepth": {
+          "oneOf": [
+            { "type": "number" },
+            { "type": "null" }
+          ]
+        },
+        "nodeSpacing": {
+          "type": "object",
+          "properties": {
+            "horizontal": { "type": "number" },
+            "vertical": { "type": "number" },
+            "groupPadding": { "type": "number" }
+          }
+        },
+        "labelDisplay": {
+          "type": "object",
+          "properties": {
+            "showLabels": { "type": "boolean" },
+            "truncateLength": { "type": "number" },
+            "position": {
+              "type": "string",
+              "enum": ["top", "bottom", "left", "right"]
+            }
+          }
+        },
+        "indicatorDisplay": {
+          "type": "object",
+          "properties": {
+            "showContainerCount": { "type": "boolean" },
+            "showStatusIndicator": { "type": "boolean" },
+            "position": { "type": "string" }
+          }
+        }
+      }
+    },
+    "interactionRules": {
+      "type": "object",
+      "description": "User interaction configuration",
+      "properties": {
+        "allowDragDrop": { "type": "boolean" },
+        "allowCollapse": { "type": "boolean" },
+        "allowExpand": { "type": "boolean" },
+        "contextMenuEnabled": { "type": "boolean" },
+        "doubleClickAction": {
+          "type": "string",
+          "enum": ["expand-collapse", "open-details", "none"]
+        },
+        "selectionMode": {
+          "type": "string",
+          "enum": ["single", "multiple", "none"]
+        }
+      }
+    }
+  }
+}

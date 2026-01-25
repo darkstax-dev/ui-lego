@@ -1,0 +1,113 @@
+import { K8sNodeData, K8sNodeGroup, K8sResourceCategory, K8sResourceType } from '../../types';
+import { SkydiveSyncReplyData } from '../../types/skydive';
+
+const normalizeResourceType = (rawType?: string): K8sResourceType => {
+  const type = (rawType || 'pod').toLowerCase();
+  const mapping: Record<string, K8sResourceType> = {
+    namespace: 'namespace',
+    service: 'service',
+    deployment: 'deployment',
+    pod: 'pod',
+    job: 'job',
+    ingress: 'ingress',
+    secret: 'secret',
+    configmap: 'configmap',
+    persistentvolume: 'persistentvolume',
+    persistentvolumeclaim: 'persistentvolumeclaim',
+    statefulset: 'statefulset',
+    node: 'node',
+    host: 'node',
+    multus: 'multus',
+  };
+
+  return mapping[type] || 'pod';
+};
+
+const categoryByType: Record<K8sResourceType, K8sResourceCategory> = {
+  namespace: 'aggregate',
+  deployment: 'load',
+  pod: 'load',
+  job: 'load',
+  statefulset: 'load',
+  service: 'service',
+  ingress: 'service',
+  multus: 'network',
+  node: 'network',
+  configmap: 'config-storage',
+  secret: 'config-storage',
+  persistentvolume: 'config-storage',
+  persistentvolumeclaim: 'config-storage',
+};
+
+const statusFromMetadata = (metadata: Record<string, any>) => {
+  const raw = String(metadata.Status || metadata.Phase || metadata.State || '').toLowerCase();
+  if (raw.includes('error') || raw.includes('failed')) return 'error' as const;
+  if (raw.includes('deploy') || raw.includes('pending') || raw.includes('creating')) return 'deploying' as const;
+  if (raw.includes('terminated') || raw.includes('deleted') || raw.includes('stopped')) return 'terminated' as const;
+  if (raw.includes('running') || raw.includes('active') || raw.includes('ready')) return 'active' as const;
+  return 'ready' as const;
+};
+
+const indicatorFromMetadata = (metadata: Record<string, any>) => {
+  if (typeof metadata.Replicas === 'number') return metadata.Replicas;
+  if (Array.isArray(metadata.Containers)) return metadata.Containers.length;
+  if (Array.isArray(metadata.Pods)) return metadata.Pods.length;
+  return undefined;
+};
+
+export const parseSkydiveSyncReply = (data: SkydiveSyncReplyData): {
+  nodes: K8sNodeData[];
+  groups: K8sNodeGroup[];
+} => {
+  const edges = Object.values(data.Edges || {});
+  const connections = new Map<string, string[]>();
+  const ownershipEdges = edges.filter((edge) => edge.Metadata?.RelationType === 'ownership');
+
+  edges.forEach((edge) => {
+    const list = connections.get(edge.Parent) || [];
+    list.push(edge.Child);
+    connections.set(edge.Parent, list);
+  });
+
+  const nodes: K8sNodeData[] = Object.values(data.Nodes || {}).map((node) => {
+    const metadata = node.Metadata || {};
+    const type = normalizeResourceType(metadata.Type);
+    const indicatorCount = indicatorFromMetadata(metadata);
+
+    return {
+      id: node.ID,
+      type,
+      label: metadata.Name || metadata.Label || metadata.Type || node.ID,
+      category: categoryByType[type] || 'load',
+      metadata,
+      status: statusFromMetadata(metadata),
+      indicatorCount: indicatorCount && indicatorCount > 0 ? indicatorCount : undefined,
+      connections: connections.get(node.ID),
+    };
+  });
+
+  const nodeById = new Map(nodes.map((node) => [node.id, node] as const));
+  const groupMembers = new Map<string, string[]>();
+
+  ownershipEdges.forEach((edge) => {
+    const parentNode = nodeById.get(edge.Parent);
+    const childNode = nodeById.get(edge.Child);
+    if (!parentNode || !childNode) return;
+    if (parentNode.category !== childNode.category) return;
+
+    const members = groupMembers.get(edge.Parent) || [];
+    members.push(edge.Child);
+    groupMembers.set(edge.Parent, members);
+  });
+
+  const groups: K8sNodeGroup[] = Array.from(groupMembers.entries()).map(([ownerId, memberIds]) => ({
+    id: `group-${ownerId}`,
+    ownerId,
+    memberIds,
+    collapsed: false,
+    level: 1,
+    depth: 0,
+  }));
+
+  return { nodes, groups };
+};

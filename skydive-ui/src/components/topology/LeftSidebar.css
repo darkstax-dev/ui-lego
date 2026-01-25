@@ -1,0 +1,43 @@
+.topology-left-sidebar {
+  display: flex;
+  flex-direction: column;
+  background: var(--color-gray-200, #DFDFDF);
+  min-width: 53px;
+  z-index: 10;
+}
+
+.topology-left-sidebar__section {
+  display: flex;
+  flex: 1;
+  border-bottom: 1px solid var(--color-gray-300, #CECECE);
+}
+
+.topology-left-sidebar__section:last-child {
+  border-bottom: none;
+}
+
+.topology-left-sidebar__label-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-gray-300, #CECECE);
+  width: 45px;
+  padding: var(--sds-size-space-400) var(--sds-size-space-200);
+}
+
+.topology-left-sidebar__label {
+  font-family: var(--font-family-macan);
+  font-size: var(--font-size-xl, 24px);
+  font-weight: var(--font-weight-medium, 500);
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  color: var(--color-blue-dark-950, #00112B);
+  white-space: nowrap;
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+}
+
+.topology-left-sidebar__content {
+  flex: 1;
+  padding: var(--sds-size-space-100);
+}
