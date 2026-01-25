@@ -1,0 +1,180 @@
+{
+  "$schema": "../schemas/topology-config.schema.json",
+  "metadata": {
+    "name": "Kubernetes Cluster Topology",
+    "description": "Kubernetes cluster infrastructure and service mesh topology",
+    "version": "1.0.0",
+    "author": "DarkStax",
+    "tags": ["kubernetes", "k8s", "containers", "microservices"]
+  },
+  "nodeTypes": {
+    "pod": {
+      "label": "Pod",
+      "icon": "settings",
+      "color": "#326CE5",
+      "backgroundColor": "rgba(50, 108, 229, 0.1)",
+      "shape": "circle",
+      "size": 28
+    },
+    "service": {
+      "label": "Service",
+      "icon": "link",
+      "color": "#00D1B2",
+      "backgroundColor": "rgba(0, 209, 178, 0.1)",
+      "shape": "circle",
+      "size": 30
+    },
+    "deployment": {
+      "label": "Deployment",
+      "icon": "settings",
+      "color": "#FF6B6B",
+      "backgroundColor": "rgba(255, 107, 107, 0.1)",
+      "shape": "circle",
+      "size": 32
+    },
+    "namespace": {
+      "label": "Namespace",
+      "icon": "settings",
+      "color": "#4ECDC4",
+      "backgroundColor": "rgba(78, 205, 196, 0.1)",
+      "shape": "circle",
+      "size": 35
+    },
+    "node": {
+      "label": "Node",
+      "icon": "settings",
+      "color": "#95E1D3",
+      "backgroundColor": "rgba(149, 225, 211, 0.1)",
+      "shape": "circle",
+      "size": 38
+    },
+    "ingress": {
+      "label": "Ingress",
+      "icon": "link",
+      "color": "#F38181",
+      "backgroundColor": "rgba(243, 129, 129, 0.1)",
+      "shape": "circle",
+      "size": 30
+    },
+    "configmap": {
+      "label": "ConfigMap",
+      "icon": "settings",
+      "color": "#AA96DA",
+      "backgroundColor": "rgba(170, 150, 218, 0.1)",
+      "shape": "circle",
+      "size": 26
+    },
+    "secret": {
+      "label": "Secret",
+      "icon": "lock",
+      "color": "#FCBAD3",
+      "backgroundColor": "rgba(252, 186, 211, 0.1)",
+      "shape": "circle",
+      "size": 26
+    }
+  },
+  "edgeTypes": {
+    "network": {
+      "label": "Network Connection",
+      "color": "#326CE5",
+      "width": 2,
+      "style": "solid"
+    },
+    "ownership": {
+      "label": "Owns/Manages",
+      "color": "#95E1D3",
+      "width": 2,
+      "style": "dashed",
+      "dashArray": "5,5"
+    },
+    "policy": {
+      "label": "Network Policy",
+      "color": "#FF6B6B",
+      "width": 3,
+      "style": "solid"
+    },
+    "service": {
+      "label": "Service Route",
+      "color": "#00D1B2",
+      "width": 2,
+      "style": "solid"
+    }
+  },
+  "groupingRules": [
+    {
+      "id": "group-by-namespace",
+      "name": "Group by Namespace",
+      "enabled": true,
+      "criteria": {
+        "type": "property-match",
+        "ownerProperty": "Type",
+        "ownerValue": "namespace",
+        "memberProperty": "Namespace",
+        "memberValue": "${ownerId}"
+      },
+      "style": {
+        "fillColor": "rgba(78, 205, 196, 0.05)",
+        "strokeColor": "rgba(78, 205, 196, 0.4)",
+        "strokeWidth": 2,
+        "strokeDashArray": "10, 5",
+        "borderRadius": 30,
+        "padding": 40
+      }
+    },
+    {
+      "id": "group-by-deployment",
+      "name": "Group Pods by Deployment",
+      "enabled": true,
+      "criteria": {
+        "type": "property-match",
+        "ownerProperty": "Type",
+        "ownerValue": "deployment",
+        "memberProperty": "Owner",
+        "memberValue": "${ownerId}"
+      },
+      "style": {
+        "fillColor": "rgba(255, 107, 107, 0.05)",
+        "strokeColor": "rgba(255, 107, 107, 0.3)",
+        "strokeWidth": 2,
+        "strokeDashArray": "8, 4",
+        "borderRadius": 20,
+        "padding": 30
+      }
+    }
+  ],
+  "theme": {
+    "backgroundColor": "#F7F9FC",
+    "gridColor": "#E1E8ED",
+    "gridOpacity": 0.15,
+    "selectionColor": "#326CE5",
+    "selectionStrokeWidth": 3,
+    "hoverColor": "#5B8DEE",
+    "textColor": "#2C3E50",
+    "labelFontFamily": "Inter, sans-serif",
+    "labelFontSize": 13,
+    "labelFontWeight": 500
+  },
+  "layout": {
+    "defaultAlgorithm": "hierarchical",
+    "autoLayout": true,
+    "forceLayout": {
+      "chargeStrength": -1000,
+      "linkDistance": 150,
+      "collideRadius": 70
+    },
+    "hierarchicalLayout": {
+      "direction": "TB",
+      "levelSeparation": 180,
+      "nodeSeparation": 120
+    }
+  },
+  "features": {
+    "enableSearch": true,
+    "enableFiltering": true,
+    "enableExport": true,
+    "enableTimeline": false,
+    "enableMetadataPanel": true,
+    "enableContextMenu": true,
+    "enableKeyboardShortcuts": true
+  }
+}

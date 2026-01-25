@@ -1,0 +1,181 @@
+{
+  "$schema": "../schemas/topology-config.schema.json",
+  "metadata": {
+    "name": "OpenStack Network View",
+    "description": "OpenStack network topology with namespace grouping - matching the reference visualization",
+    "version": "1.0.0",
+    "author": "DarkStax",
+    "tags": ["openstack", "network", "neutron", "ovs"]
+  },
+  "nodeTypes": {
+    "bridge": {
+      "label": "Network Bridge",
+      "icon": "settings",
+      "color": "#00112B",
+      "backgroundColor": "rgba(0, 17, 43, 0.1)",
+      "shape": "circle",
+      "size": 26,
+      "strokeColor": "#00112B",
+      "strokeWidth": 2
+    },
+    "vnet": {
+      "label": "Virtual Network Interface",
+      "icon": "lock",
+      "color": "#072B56",
+      "backgroundColor": "rgba(7, 43, 86, 0.1)",
+      "shape": "circle",
+      "size": 24,
+      "strokeColor": "#072B56",
+      "strokeWidth": 2
+    },
+    "tap": {
+      "label": "TAP Interface",
+      "icon": "link",
+      "color": "#0072ff",
+      "backgroundColor": "rgba(0, 114, 255, 0.1)",
+      "shape": "circle",
+      "size": 22,
+      "strokeColor": "#0072ff",
+      "strokeWidth": 1.5
+    },
+    "patch": {
+      "label": "Patch Port",
+      "icon": "link",
+      "color": "#0072ff",
+      "backgroundColor": "rgba(0, 114, 255, 0.1)",
+      "shape": "circle",
+      "size": 22,
+      "strokeColor": "#0072ff",
+      "strokeWidth": 1.5
+    },
+    "qrouter": {
+      "label": "Quantum Router Port",
+      "icon": "lock",
+      "color": "#072B56",
+      "backgroundColor": "rgba(7, 43, 86, 0.1)",
+      "shape": "circle",
+      "size": 24,
+      "strokeColor": "#072B56",
+      "strokeWidth": 2
+    },
+    "qgateway": {
+      "label": "Quantum Gateway Port",
+      "icon": "alert",
+      "color": "#D9322A",
+      "backgroundColor": "rgba(217, 50, 42, 0.1)",
+      "shape": "circle",
+      "size": 24,
+      "strokeColor": "#D9322A",
+      "strokeWidth": 2
+    },
+    "namespace": {
+      "label": "Network Namespace",
+      "icon": "settings",
+      "color": "#2eb969",
+      "backgroundColor": "rgba(46, 185, 105, 0.1)",
+      "shape": "circle",
+      "size": 28,
+      "strokeColor": "#2eb969",
+      "strokeWidth": 2
+    }
+  },
+  "edgeTypes": {
+    "network": {
+      "label": "Network Connection",
+      "color": "#475569",
+      "width": 1.5,
+      "style": "solid"
+    },
+    "virtual": {
+      "label": "Virtual Link",
+      "color": "#64748b",
+      "width": 1.5,
+      "style": "solid"
+    },
+    "patch": {
+      "label": "Patch Connection",
+      "color": "#94a3b8",
+      "width": 1.5,
+      "style": "solid"
+    }
+  },
+  "groupingRules": [
+    {
+      "id": "group-by-namespace",
+      "name": "Group by Network Namespace",
+      "enabled": true,
+      "criteria": {
+        "type": "property-match",
+        "ownerProperty": "Type",
+        "ownerValue": "namespace",
+        "memberProperty": "Namespace",
+        "memberValue": "${ownerId}"
+      },
+      "style": {
+        "fillColor": "rgba(255, 255, 255, 0.6)",
+        "strokeColor": "rgba(100, 116, 139, 0.25)",
+        "strokeWidth": 2,
+        "strokeDashArray": "0",
+        "opacity": 0.9,
+        "borderRadius": 25,
+        "padding": 40
+      }
+    },
+    {
+      "id": "group-by-bridge",
+      "name": "Group by OVS Bridge",
+      "enabled": true,
+      "criteria": {
+        "type": "property-match",
+        "ownerProperty": "Type",
+        "ownerValue": "bridge",
+        "memberProperty": "Bridge",
+        "memberValue": "${ownerId}"
+      },
+      "style": {
+        "fillColor": "rgba(255, 255, 255, 0.5)",
+        "strokeColor": "rgba(71, 85, 105, 0.2)",
+        "strokeWidth": 2,
+        "strokeDashArray": "0",
+        "opacity": 0.85,
+        "borderRadius": 20,
+        "padding": 35
+      }
+    }
+  ],
+  "theme": {
+    "backgroundColor": "#CECECE",
+    "gridColor": "#00112B",
+    "gridOpacity": 0.08,
+    "selectionColor": "#0072ff",
+    "selectionStrokeWidth": 3,
+    "hoverColor": "#60a5fa",
+    "textColor": "#00112B",
+    "labelFontFamily": "Macan Mono Trial, monospace",
+    "labelFontSize": 13,
+    "labelFontWeight": 500
+  },
+  "layout": {
+    "defaultAlgorithm": "force",
+    "autoLayout": true,
+    "forceLayout": {
+      "chargeStrength": -1200,
+      "linkDistance": 140,
+      "collideRadius": 70
+    },
+    "hierarchicalLayout": {
+      "direction": "TB",
+      "levelSeparation": 150,
+      "nodeSeparation": 100
+    }
+  },
+  "features": {
+    "enableSearch": true,
+    "enableFiltering": true,
+    "enableExport": true,
+    "enableTimeline": true,
+    "enableMetadataPanel": true,
+    "enableContextMenu": true,
+    "enableKeyboardShortcuts": true
+  }
+}

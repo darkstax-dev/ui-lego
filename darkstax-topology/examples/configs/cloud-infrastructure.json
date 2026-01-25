@@ -1,0 +1,189 @@
+{
+  "$schema": "../schemas/topology-config.schema.json",
+  "metadata": {
+    "name": "Cloud Infrastructure Topology",
+    "description": "Multi-cloud infrastructure topology visualization",
+    "version": "1.0.0",
+    "author": "DarkStax",
+    "tags": ["cloud", "aws", "azure", "gcp", "infrastructure"]
+  },
+  "nodeTypes": {
+    "vpc": {
+      "label": "VPC",
+      "icon": "settings",
+      "color": "#FF9900",
+      "backgroundColor": "rgba(255, 153, 0, 0.1)",
+      "shape": "circle",
+      "size": 40
+    },
+    "subnet": {
+      "label": "Subnet",
+      "icon": "settings",
+      "color": "#146EB4",
+      "backgroundColor": "rgba(20, 110, 180, 0.1)",
+      "shape": "circle",
+      "size": 35
+    },
+    "ec2": {
+      "label": "EC2 Instance",
+      "icon": "settings",
+      "color": "#FF9900",
+      "backgroundColor": "rgba(255, 153, 0, 0.1)",
+      "shape": "circle",
+      "size": 30
+    },
+    "rds": {
+      "label": "RDS Database",
+      "icon": "settings",
+      "color": "#527FFF",
+      "backgroundColor": "rgba(82, 127, 255, 0.1)",
+      "shape": "circle",
+      "size": 30
+    },
+    "loadbalancer": {
+      "label": "Load Balancer",
+      "icon": "link",
+      "color": "#8C4FFF",
+      "backgroundColor": "rgba(140, 79, 255, 0.1)",
+      "shape": "circle",
+      "size": 32
+    },
+    "s3": {
+      "label": "S3 Bucket",
+      "icon": "settings",
+      "color": "#569A31",
+      "backgroundColor": "rgba(86, 154, 49, 0.1)",
+      "shape": "circle",
+      "size": 28
+    },
+    "lambda": {
+      "label": "Lambda Function",
+      "icon": "settings",
+      "color": "#FF9900",
+      "backgroundColor": "rgba(255, 153, 0, 0.1)",
+      "shape": "circle",
+      "size": 26
+    },
+    "apigateway": {
+      "label": "API Gateway",
+      "icon": "link",
+      "color": "#FF4F8B",
+      "backgroundColor": "rgba(255, 79, 139, 0.1)",
+      "shape": "circle",
+      "size": 30
+    },
+    "securitygroup": {
+      "label": "Security Group",
+      "icon": "lock",
+      "color": "#DD344C",
+      "backgroundColor": "rgba(221, 52, 76, 0.1)",
+      "shape": "circle",
+      "size": 28
+    }
+  },
+  "edgeTypes": {
+    "network": {
+      "label": "Network Connection",
+      "color": "#146EB4",
+      "width": 2,
+      "style": "solid"
+    },
+    "ownership": {
+      "label": "Contains",
+      "color": "#95A5A6",
+      "width": 2,
+      "style": "dashed",
+      "dashArray": "6,4"
+    },
+    "policy": {
+      "label": "Security Policy",
+      "color": "#DD344C",
+      "width": 2,
+      "style": "solid"
+    },
+    "data": {
+      "label": "Data Flow",
+      "color": "#569A31",
+      "width": 3,
+      "style": "solid",
+      "animated": true
+    }
+  },
+  "groupingRules": [
+    {
+      "id": "group-by-vpc",
+      "name": "Group by VPC",
+      "enabled": true,
+      "criteria": {
+        "type": "property-match",
+        "ownerProperty": "Type",
+        "ownerValue": "vpc",
+        "memberProperty": "VpcId",
+        "memberValue": "${ownerId}"
+      },
+      "style": {
+        "fillColor": "rgba(255, 153, 0, 0.03)",
+        "strokeColor": "rgba(255, 153, 0, 0.4)",
+        "strokeWidth": 3,
+        "strokeDashArray": "12, 6",
+        "borderRadius": 35,
+        "padding": 50
+      }
+    },
+    {
+      "id": "group-by-subnet",
+      "name": "Group by Subnet",
+      "enabled": true,
+      "criteria": {
+        "type": "property-match",
+        "ownerProperty": "Type",
+        "ownerValue": "subnet",
+        "memberProperty": "SubnetId",
+        "memberValue": "${ownerId}"
+      },
+      "style": {
+        "fillColor": "rgba(20, 110, 180, 0.03)",
+        "strokeColor": "rgba(20, 110, 180, 0.3)",
+        "strokeWidth": 2,
+        "strokeDashArray": "8, 4",
+        "borderRadius": 25,
+        "padding": 35
+      }
+    }
+  ],
+  "theme": {
+    "backgroundColor": "#FAFBFC",
+    "gridColor": "#D1D5DB",
+    "gridOpacity": 0.1,
+    "selectionColor": "#FF9900",
+    "selectionStrokeWidth": 3,
+    "hoverColor": "#FFAD33",
+    "textColor": "#232F3E",
+    "labelFontFamily": "Amazon Ember, sans-serif",
+    "labelFontSize": 13,
+    "labelFontWeight": 500
+  },
+  "layout": {
+    "defaultAlgorithm": "hierarchical",
+    "autoLayout": true,
+    "forceLayout": {
+      "chargeStrength": -1200,
+      "linkDistance": 180,
+      "collideRadius": 80
+    },
+    "hierarchicalLayout": {
+      "direction": "TB",
+      "levelSeparation": 200,
+      "nodeSeparation": 150
+    }
+  },
+  "features": {
+    "enableSearch": true,
+    "enableFiltering": true,
+    "enableExport": true,
+    "enableTimeline": true,
+    "enableMetadataPanel": true,
+    "enableContextMenu": true,
+    "enableKeyboardShortcuts": true
+  }
+}

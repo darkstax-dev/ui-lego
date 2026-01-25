@@ -1,0 +1,184 @@
+{
+  "$schema": "../schemas/topology-config.schema.json",
+  "metadata": {
+    "name": "OpenStack Network Topology",
+    "description": "Network infrastructure topology for OpenStack environments",
+    "version": "1.0.0",
+    "author": "DarkStax",
+    "tags": ["network", "openstack", "infrastructure"]
+  },
+  "nodeTypes": {
+    "device": {
+      "label": "Network Device",
+      "icon": "lock",
+      "color": "#072B56",
+      "backgroundColor": "rgba(255, 255, 255, 0.4)",
+      "shape": "circle",
+      "size": 26
+    },
+    "ovsbridge": {
+      "label": "OVS Bridge",
+      "icon": "settings",
+      "color": "#0072ff",
+      "backgroundColor": "rgba(255, 255, 255, 0.4)",
+      "shape": "circle",
+      "size": 26
+    },
+    "veth": {
+      "label": "Virtual Ethernet",
+      "icon": "link",
+      "color": "#072B56",
+      "backgroundColor": "rgba(255, 255, 255, 0.4)",
+      "shape": "circle",
+      "size": 26
+    },
+    "host": {
+      "label": "Host",
+      "icon": "settings",
+      "color": "#0072ff",
+      "backgroundColor": "rgba(255, 255, 255, 0.4)",
+      "shape": "circle",
+      "size": 26
+    },
+    "netns": {
+      "label": "Network Namespace",
+      "icon": "settings",
+      "color": "#2eb969",
+      "backgroundColor": "rgba(255, 255, 255, 0.4)",
+      "shape": "circle",
+      "size": 26
+    },
+    "internal": {
+      "label": "Internal",
+      "icon": "settings",
+      "color": "#ed8b30",
+      "backgroundColor": "rgba(255, 255, 255, 0.4)",
+      "shape": "circle",
+      "size": 26
+    },
+    "container": {
+      "label": "Container",
+      "icon": "settings",
+      "color": "#2eb969",
+      "backgroundColor": "rgba(255, 255, 255, 0.4)",
+      "shape": "circle",
+      "size": 26
+    },
+    "pod": {
+      "label": "Pod",
+      "icon": "settings",
+      "color": "#ed8b30",
+      "backgroundColor": "rgba(255, 255, 255, 0.4)",
+      "shape": "circle",
+      "size": 26
+    },
+    "service": {
+      "label": "Service",
+      "icon": "settings",
+      "color": "#00112b",
+      "backgroundColor": "rgba(255, 255, 255, 0.4)",
+      "shape": "circle",
+      "size": 26
+    },
+    "networkpolicy": {
+      "label": "Network Policy",
+      "icon": "alert",
+      "color": "#D9322A",
+      "backgroundColor": "rgba(255, 255, 255, 0.4)",
+      "shape": "circle",
+      "size": 26
+    },
+    "deployment": {
+      "label": "Deployment",
+      "icon": "settings",
+      "color": "#0072ff",
+      "backgroundColor": "rgba(255, 255, 255, 0.4)",
+      "shape": "circle",
+      "size": 26
+    },
+    "namespace": {
+      "label": "Namespace",
+      "icon": "settings",
+      "color": "#2eb969",
+      "backgroundColor": "rgba(255, 255, 255, 0.4)",
+      "shape": "circle",
+      "size": 26
+    }
+  },
+  "edgeTypes": {
+    "network": {
+      "label": "Network Link",
+      "color": "#cbd5e1",
+      "width": 2,
+      "style": "solid"
+    },
+    "ownership": {
+      "label": "Ownership",
+      "color": "#94a3b8",
+      "width": 2,
+      "style": "dashed",
+      "dashArray": "5,5"
+    },
+    "policy": {
+      "label": "Policy",
+      "color": "#ef4444",
+      "width": 2,
+      "style": "solid"
+    }
+  },
+  "groupingRules": [
+    {
+      "id": "auto-group-ovs-devices",
+      "name": "Group OVS Bridge Connected Devices",
+      "enabled": true,
+      "criteria": {
+        "type": "property-match",
+        "ownerProperty": "Type",
+        "ownerValue": "ovsbridge"
+      },
+      "style": {
+        "fillColor": "rgba(255, 255, 255, 0.08)",
+        "strokeColor": "rgba(100, 150, 255, 0.3)",
+        "strokeWidth": 2,
+        "strokeDashArray": "8, 4",
+        "borderRadius": 25,
+        "padding": 35
+      }
+    }
+  ],
+  "theme": {
+    "backgroundColor": "#CECECE",
+    "gridColor": "#00112B",
+    "gridOpacity": 0.12,
+    "selectionColor": "#3b82f6",
+    "selectionStrokeWidth": 3,
+    "hoverColor": "#60a5fa",
+    "textColor": "#00112B",
+    "labelFontFamily": "Macan Mono Trial, monospace",
+    "labelFontSize": 14,
+    "labelFontWeight": 500
+  },
+  "layout": {
+    "defaultAlgorithm": "force",
+    "autoLayout": true,
+    "forceLayout": {
+      "chargeStrength": -800,
+      "linkDistance": 120,
+      "collideRadius": 60
+    },
+    "hierarchicalLayout": {
+      "direction": "TB",
+      "levelSeparation": 150,
+      "nodeSeparation": 100
+    }
+  },
+  "features": {
+    "enableSearch": true,
+    "enableFiltering": true,
+    "enableExport": true,
+    "enableTimeline": true,
+    "enableMetadataPanel": true,
+    "enableContextMenu": true,
+    "enableKeyboardShortcuts": true
+  }
+}

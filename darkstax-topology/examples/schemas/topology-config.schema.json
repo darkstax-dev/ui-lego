@@ -1,0 +1,191 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://darkstax.com/schemas/topology-config.schema.json",
+  "title": "Topology Configuration",
+  "description": "Configuration schema for DarkStax topology visualization",
+  "type": "object",
+  "required": ["metadata", "nodeTypes", "edgeTypes"],
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "description": "JSON Schema reference"
+    },
+    "metadata": {
+      "type": "object",
+      "required": ["name"],
+      "properties": {
+        "name": { "type": "string" },
+        "description": { "type": "string" },
+        "version": { "type": "string" },
+        "author": { "type": "string" },
+        "tags": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
+    },
+    "nodeTypes": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "required": ["label", "icon", "color"],
+        "properties": {
+          "label": { "type": "string" },
+          "icon": { "type": "string" },
+          "iconPath": { "type": "string" },
+          "color": { "type": "string" },
+          "backgroundColor": { "type": "string" },
+          "shape": {
+            "type": "string",
+            "enum": ["circle", "rect", "hexagon"]
+          },
+          "size": { "type": "number" },
+          "strokeColor": { "type": "string" },
+          "strokeWidth": { "type": "number" }
+        }
+      }
+    },
+    "edgeTypes": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "required": ["label", "color"],
+        "properties": {
+          "label": { "type": "string" },
+          "color": { "type": "string" },
+          "width": { "type": "number" },
+          "style": {
+            "type": "string",
+            "enum": ["solid", "dashed", "dotted"]
+          },
+          "dashArray": { "type": "string" },
+          "animated": { "type": "boolean" }
+        }
+      }
+    },
+    "groupingRules": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "enabled", "criteria"],
+        "properties": {
+          "id": { "type": "string" },
+          "name": { "type": "string" },
+          "enabled": { "type": "boolean" },
+          "criteria": {
+            "type": "object",
+            "required": ["type"],
+            "properties": {
+              "type": {
+                "type": "string",
+                "enum": ["property-match", "pattern-match", "manual"]
+              },
+              "ownerProperty": { "type": "string" },
+              "ownerValue": {
+                "oneOf": [
+                  { "type": "string" },
+                  { "type": "array", "items": { "type": "string" } }
+                ]
+              },
+              "memberProperty": { "type": "string" },
+              "memberValue": {
+                "oneOf": [
+                  { "type": "string" },
+                  { "type": "array", "items": { "type": "string" } }
+                ]
+              },
+              "pattern": { "type": "string" },
+              "manualGroups": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "required": ["ownerId", "memberIds"],
+                  "properties": {
+                    "ownerId": { "type": "string" },
+                    "memberIds": {
+                      "type": "array",
+                      "items": { "type": "string" }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "style": {
+            "type": "object",
+            "properties": {
+              "fillColor": { "type": "string" },
+              "strokeColor": { "type": "string" },
+              "strokeWidth": { "type": "number" },
+              "strokeDashArray": { "type": "string" },
+              "opacity": { "type": "number" },
+              "borderRadius": { "type": "number" },
+              "padding": { "type": "number" }
+            }
+          }
+        }
+      }
+    },
+    "theme": {
+      "type": "object",
+      "properties": {
+        "backgroundColor": { "type": "string" },
+        "gridColor": { "type": "string" },
+        "gridOpacity": { "type": "number" },
+        "selectionColor": { "type": "string" },
+        "selectionStrokeWidth": { "type": "number" },
+        "hoverColor": { "type": "string" },
+        "textColor": { "type": "string" },
+        "labelFontFamily": { "type": "string" },
+        "labelFontSize": { "type": "number" },
+        "labelFontWeight": {
+          "oneOf": [
+            { "type": "string" },
+            { "type": "number" }
+          ]
+        }
+      }
+    },
+    "layout": {
+      "type": "object",
+      "properties": {
+        "defaultAlgorithm": {
+          "type": "string",
+          "enum": ["force", "hierarchical", "manual"]
+        },
+        "autoLayout": { "type": "boolean" },
+        "forceLayout": {
+          "type": "object",
+          "properties": {
+            "chargeStrength": { "type": "number" },
+            "linkDistance": { "type": "number" },
+            "collideRadius": { "type": "number" }
+          }
+        },
+        "hierarchicalLayout": {
+          "type": "object",
+          "properties": {
+            "direction": {
+              "type": "string",
+              "enum": ["TB", "BT", "LR", "RL"]
+            },
+            "levelSeparation": { "type": "number" },
+            "nodeSeparation": { "type": "number" }
+          }
+        }
+      }
+    },
+    "features": {
+      "type": "object",
+      "properties": {
+        "enableSearch": { "type": "boolean" },
+        "enableFiltering": { "type": "boolean" },
+        "enableExport": { "type": "boolean" },
+        "enableTimeline": { "type": "boolean" },
+        "enableMetadataPanel": { "type": "boolean" },
+        "enableContextMenu": { "type": "boolean" },
+        "enableKeyboardShortcuts": { "type": "boolean" }
+      }
+    }
+  }
+}

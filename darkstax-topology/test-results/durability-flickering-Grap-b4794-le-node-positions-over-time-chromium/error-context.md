@@ -1,0 +1,76 @@
+# Page snapshot
+
+```yaml
+- generic [ref=e3]:
+  - generic [ref=e4]:
+    - heading "TOPOLOGY" [level=1] [ref=e5]
+    - generic [ref=e6]:
+      - checkbox "Use Mock Data" [checked] [ref=e7]
+      - generic [ref=e8]: Use Mock Data
+    - generic [ref=e9]:
+      - checkbox "Show Metadata Panel" [checked] [ref=e10]
+      - generic [ref=e11]: Show Metadata Panel
+    - combobox "Layout algorithm selector" [ref=e12]:
+      - option "Force Layout" [selected]
+      - option "Hierarchical Layout"
+      - option "Manual Layout"
+  - generic [ref=e14]:
+    - generic [ref=e15]:
+      - img [ref=e16]:
+        - generic [ref=e1507]:
+          - generic [ref=e1512] [cursor=pointer]: qr-7a85e4-1c
+          - generic [ref=e1517] [cursor=pointer]: qr-aaa7e7ec
+          - generic [ref=e1522] [cursor=pointer]: tap-b42d3ddb
+          - generic [ref=e1527] [cursor=pointer]: vnet_br0_eth1
+          - generic [ref=e1532] [cursor=pointer]: qr-dc2e-4bc
+          - generic [ref=e1537] [cursor=pointer]: ns-aa2e-br
+          - generic [ref=e1542] [cursor=pointer]: vnet_ovs_br0
+          - generic [ref=e1547] [cursor=pointer]: tap-c9f7
+          - generic [ref=e1552] [cursor=pointer]: patch-tun
+          - generic [ref=e1557] [cursor=pointer]: qg-ed8ccd45
+          - generic [ref=e1562] [cursor=pointer]: vnet_br0_eth1
+          - generic [ref=e1567] [cursor=pointer]: qr-d41033a9
+          - generic [ref=e1572] [cursor=pointer]: tap-U42d3dda
+          - generic [ref=e1577] [cursor=pointer]: patch-int
+          - generic [ref=e1582] [cursor=pointer]: patch-int-br
+          - generic [ref=e1587] [cursor=pointer]: tap-b42d3ddb
+          - generic [ref=e1592] [cursor=pointer]: tap-b42d3ddb
+      - button "Press ? for shortcuts" [ref=e1593]
+      - button "Toggle filter panel" [ref=e1595]:
+        - img [ref=e1596]
+      - generic [ref=e1600]:
+        - img [ref=e1601]
+        - textbox "Search nodes..." [ref=e1604]
+      - button "Live" [ref=e1606]:
+        - img [ref=e1607]
+        - generic [ref=e1610]: Live
+      - generic [ref=e1611]:
+        - generic [ref=e1612]:
+          - button "Zoom In" [ref=e1613]:
+            - img [ref=e1614]
+          - button "Zoom Out" [ref=e1617]:
+            - img [ref=e1618]
+          - button "Fit View" [ref=e1621]:
+            - img [ref=e1622]
+        - generic [ref=e1627]:
+          - button "Force Layout" [ref=e1628]:
+            - img [ref=e1629]
+          - button "Hierarchical Layout" [ref=e1634]:
+            - img [ref=e1635]
+          - button "Disable Auto-Layout" [ref=e1644]:
+            - img [ref=e1645]
+          - button "Re-apply Layout" [ref=e1647]:
+            - img [ref=e1648]
+      - button "Export Topology" [ref=e1654]:
+        - img [ref=e1655]
+      - button [ref=e1659]:
+        - img [ref=e1660]
+        - img [ref=e1662]
+      - button "Unlocked" [ref=e1665]:
+        - generic [ref=e1666]:
+          - img [ref=e1667]
+          - generic [ref=e1670]: Unlocked
+    - generic [ref=e1672]:
+      - img [ref=e1673]
+      - paragraph [ref=e1675]: Select a node or edge to view details
+```
