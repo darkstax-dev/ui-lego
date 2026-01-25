@@ -1,4 +1,5 @@
 import React, { useState, useCallback } from 'react'
+import React, { useState, useCallback } from 'react'
 import './TopologyCanvas.css'
 import { LeftSidebar } from './components/topology/LeftSidebar'
 import { RightSidebar } from './components/topology/RightSidebar'
