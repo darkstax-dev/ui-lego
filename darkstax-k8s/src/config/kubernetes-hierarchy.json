@@ -48,7 +48,7 @@
     },
     {
       "id": "load",
-      "label": "Load",
+      "label": "Workload",
       "description": "Workload resources including controllers and pods",
       "resourceTypes": ["deployment", "statefulset", "job", "pod"],
       "laneConfig": {

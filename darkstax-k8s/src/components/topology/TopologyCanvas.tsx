@@ -4,8 +4,8 @@ import { GroupController } from '../controls/GroupController';
 import { useUIStore } from '../../store/uiStore';
 import { useTopologyStore } from '../../store/topologyStore';
 import { filterNodes } from '../../lib/filterNodes';
-import { skydiveTopology } from '../../data/skydiveTopology';
-import { parseSkydiveSyncReply } from '../../lib/skydive/graphParser';
+import { kubernetesTopologyScenario } from '../../data/k8sTopologyScenario';
+import { buildGroupsFromRules, hierarchyConfig } from '../../hierarchyConfig';
 import { applyCircularLayout, applyFlextreeLayout, applyOwnershipTreeLayout } from '../../lib/layouts/flextreeLayout';
 import { KubernetesIconWrapper } from '../ui/KubernetesIconWrapper';
 import { hierarchyConfig, getLaneCategories } from '../../hierarchyConfig';
@@ -21,9 +21,12 @@ export function TopologyCanvas() {
   const [contextMenu, setContextMenu] = useState<null | { x: number; y: number; nodeId: string }>(null);
 
   useEffect(() => {
-    const { nodes: parsedNodes, groups: parsedGroups } = parseSkydiveSyncReply(skydiveTopology);
-    setNodes(parsedNodes);
-    setGroups(parsedGroups);
+    const scenarioGroups =
+      kubernetesTopologyScenario.groups ??
+      buildGroupsFromRules(kubernetesTopologyScenario.nodes, hierarchyConfig.groupingRules);
+
+    setNodes(kubernetesTopologyScenario.nodes);
+    setGroups(scenarioGroups);
   }, [setNodes, setGroups]);
 
   const isHiddenByCollapsedGroup = useMemo(() => {

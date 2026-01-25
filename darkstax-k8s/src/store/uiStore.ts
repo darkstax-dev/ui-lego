@@ -34,11 +34,8 @@ interface UIStore {
 }
 
 const getInitialLayoutMode = (): LayoutMode => {
-  if (typeof window === 'undefined') return 'hierarchy';
-  const stored = window.localStorage.getItem('layoutMode');
-  if (stored === 'hierarchy' || stored === 'force' || stored === 'tree') {
-    return stored;
-  }
+  // Always default to hierarchy so lanes render immediately in demos.
+  // Users can still switch via the LayoutSelector.
   return 'hierarchy';
 };
 
