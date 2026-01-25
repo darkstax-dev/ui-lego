@@ -8,6 +8,7 @@ import { skydiveTopology } from '../../data/skydiveTopology';
 import { parseSkydiveSyncReply } from '../../lib/skydive/graphParser';
 import { applyCircularLayout, applyFlextreeLayout, applyOwnershipTreeLayout } from '../../lib/layouts/flextreeLayout';
 import { KubernetesIconWrapper } from '../ui/KubernetesIconWrapper';
+import { hierarchyConfig, getLaneCategories } from '../../hierarchyConfig';
 
 
 export function TopologyCanvas() {
