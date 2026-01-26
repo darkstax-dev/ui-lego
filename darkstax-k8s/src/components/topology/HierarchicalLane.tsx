@@ -1,3 +1,4 @@
+import { useRef } from 'react';
 import { useDroppable } from '@dnd-kit/core';
 import { K8sNodeData, K8sResourceCategory } from '../../types';
 import { KubernetesIconWrapper } from '../ui/KubernetesIconWrapper';
@@ -13,7 +14,7 @@ interface HierarchicalLaneProps {
 }
 
 export function HierarchicalLane({ category, label, nodes, height }: HierarchicalLaneProps) {
-  const { setSelectedNode, openMetadataPanel } = useUIStore();
+  const { setSelectedNode, openMetadataPanel, expandDetailLanes, collapseDetailLanes } = useUIStore();
   const { groups, toggleGroupCollapse } = useTopologyStore();
   const { setNodeRef, isOver } = useDroppable({
     id: `lane-${category}`,
@@ -21,6 +22,31 @@ export function HierarchicalLane({ category, label, nodes, height }: Hierarchica
   });
 
   const laneHeight = typeof height === 'number' ? `${height}px` : height;
+
+  const isAggregateLane = category === 'aggregate';
+  const clickTimeoutRef = useRef<number | null>(null);
+
+  const clearAggregateClickTimeout = () => {
+    if (clickTimeoutRef.current == null) return;
+    window.clearTimeout(clickTimeoutRef.current);
+    clickTimeoutRef.current = null;
+  };
+
+  const handleAggregateNodeClick = (node: K8sNodeData) => {
+    // Delay the single-click handler so a double-click can cancel it.
+    clearAggregateClickTimeout();
+    clickTimeoutRef.current = window.setTimeout(() => {
+      setSelectedNode(node);
+      openMetadataPanel(node);
+      expandDetailLanes();
+      clickTimeoutRef.current = null;
+    }, 200);
+  };
+
+  const handleAggregateNodeDoubleClick = () => {
+    clearAggregateClickTimeout();
+    collapseDetailLanes();
+  };
 
   // Organize nodes into parent-child hierarchy
   const organizeHierarchy = () => {
@@ -128,6 +154,8 @@ export function HierarchicalLane({ category, label, nodes, height }: Hierarchica
                     onToggleCollapse={
                       group ? () => toggleGroupCollapse(group.id) : undefined
                     }
+                    onParentClick={isAggregateLane ? handleAggregateNodeClick : undefined}
+                    onParentDoubleClick={isAggregateLane ? handleAggregateNodeDoubleClick : undefined}
                   />
                 );
               })()
@@ -140,8 +168,18 @@ export function HierarchicalLane({ category, label, nodes, height }: Hierarchica
                 data-node-id={node.id}
                 className="cursor-pointer transition-transform hover:scale-105"
                 onClick={() => {
+                  if (isAggregateLane) {
+                    handleAggregateNodeClick(node);
+                    return;
+                  }
+
                   setSelectedNode(node);
                   openMetadataPanel(node);
+                }}
+                onDoubleClick={(e) => {
+                  if (!isAggregateLane) return;
+                  e.stopPropagation();
+                  handleAggregateNodeDoubleClick();
                 }}
               >
                 <KubernetesIconWrapper
