@@ -669,7 +669,10 @@ export function TopologyCanvas() {
           style={{ overflow: 'visible' }}
           data-testid="connection-layer"
         >
-          {connectionPaths.map((p) => (
+          {(selectedNode
+            ? connectionPaths.filter((p) => p.fromId === selectedNode.id || p.toId === selectedNode.id)
+            : []
+          ).map((p) => (
             <path
               key={p.id}
               d={p.d}
