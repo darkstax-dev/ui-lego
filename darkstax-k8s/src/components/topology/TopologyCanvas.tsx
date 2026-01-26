@@ -560,6 +560,18 @@ export function TopologyCanvas() {
     const el = scrollRef.current;
     if (!el) return;
 
+    // Lane paging swaps out node elements without changing TopologyCanvas props/state.
+    // Observe DOM changes so connection paths are recalculated when the visible node set changes.
+    const mutationObserver = new MutationObserver(() => {
+      if (rafRef.current) return;
+      rafRef.current = requestAnimationFrame(() => {
+        rafRef.current = null;
+        computeConnections();
+      });
+    });
+
+    mutationObserver.observe(el, { childList: true, subtree: true });
+
     const onContextMenu = (e: MouseEvent) => {
       const target = e.target as HTMLElement | null;
       if (!target) return;
