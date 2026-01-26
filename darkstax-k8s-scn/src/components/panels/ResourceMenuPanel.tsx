@@ -84,8 +84,8 @@ export function ResourceMenuPanel() {
 
   return (
     <div
-      className="absolute top-4 right-4 z-30 h-[calc(100%-2rem)] bg-gray-200 shadow-[0px_16px_16px_-8px_rgba(12,12,13,0.1)] rounded-lg flex flex-col p-4 gap-4 overflow-hidden"
-      style={{ width: '280px', minWidth: '280px', maxWidth: '280px', boxSizing: 'border-box' }}
+      className="absolute top-4 right-4 z-30 bg-gray-200 shadow-[0px_16px_16px_-8px_rgba(12,12,13,0.1)] rounded-lg flex flex-col p-4 gap-4 overflow-hidden"
+      style={{ width: '280px', minWidth: '280px', maxWidth: '280px', height: 'calc(100% - 2rem)', boxSizing: 'border-box' }}
       data-testid="resource-menu-panel"
     >
       {/* Search Input */}
