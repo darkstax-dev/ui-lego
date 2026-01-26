@@ -535,6 +535,15 @@ export function TopologyCanvas() {
   }, []);
 
   const onNodeClick = (node: K8sNodeData) => {
+    if (node.id === 'dc-01') {
+      const productionNode = nodes.find((n) => n.id === 'ns-production');
+      if (productionNode) {
+        setSelectedNode(productionNode);
+        openMetadataPanel(productionNode);
+        return;
+      }
+    }
+
     setSelectedNode(node);
     openMetadataPanel(node);
   };
