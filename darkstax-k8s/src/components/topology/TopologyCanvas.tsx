@@ -320,11 +320,6 @@ export function TopologyCanvas() {
       return containerEl.querySelector(`[data-node-id="${CSS.escape(id)}"]`) as HTMLElement | null;
     };
 
-    const getRect = (id: string) => {
-      const el = getNodeEl(id);
-      if (!el) return null;
-      return el.getBoundingClientRect();
-    };
 
     const getAnchor = (id: string, anchor: 'center' | 'top' | 'bottom') => {
       const el = getNodeEl(id);
