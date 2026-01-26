@@ -224,6 +224,63 @@ export function HierarchicalLane({ category, label, nodes, height }: Hierarchica
     setPageIndex(0);
   }, [category, nodes.length, pageSize, aggregateFilterTokens.length]);
 
+  const lastAutoPagedSelectionRef = useRef<string | null>(null);
+
+  useEffect(() => {
+    // When a node is selected, automatically page each lane to the first connected node in that lane.
+    // This ensures cross-lane relationships (e.g. pod -> multus / configmap) are visible even with paging.
+    if (!selectedNode) {
+      lastAutoPagedSelectionRef.current = null;
+      return;
+    }
+
+    if (pageSize <= 0) return;
+
+    // Only auto-page once per selection so users can still manually page afterward.
+    if (lastAutoPagedSelectionRef.current === selectedNode.id) return;
+
+    const nodeIdsInLane = new Set(nodes.map((n) => n.id));
+
+    let targetId: string | null = null;
+    if (nodeIdsInLane.has(selectedNode.id)) {
+      targetId = selectedNode.id;
+    } else if (Array.isArray(selectedNode.connections)) {
+      targetId = selectedNode.connections.find((id) => nodeIdsInLane.has(id)) ?? null;
+    }
+
+    if (!targetId) return;
+
+    const items = isAggregateLane ? filteredTopLevelItems : topLevelItems;
+
+    const targetIndex = items.findIndex((item) => {
+      if (item.node.id === targetId) return true;
+      if (item.kind !== 'group') return false;
+      const children = childNodesByParent.get(item.node.id) || [];
+      return children.some((child) => child.id === targetId);
+    });
+
+    if (targetIndex < 0) return;
+
+    const start = pageIndex * pageSize;
+    const end = start + pageSize;
+    if (targetIndex >= start && targetIndex < end) {
+      lastAutoPagedSelectionRef.current = selectedNode.id;
+      return;
+    }
+
+    lastAutoPagedSelectionRef.current = selectedNode.id;
+    setPageIndex(Math.floor(targetIndex / pageSize));
+  }, [
+    childNodesByParent,
+    filteredTopLevelItems,
+    isAggregateLane,
+    nodes,
+    pageIndex,
+    pageSize,
+    selectedNode,
+    topLevelItems,
+  ]);
+
   const totalPages = useMemo(() => {
     const itemCount = isAggregateLane ? filteredTopLevelItems.length : topLevelItems.length;
     if (pageSize <= 0) return 1;
