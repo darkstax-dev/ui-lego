@@ -1,5 +1,6 @@
 import { K8sResourceType } from '../../types';
 import { statusColors } from '../../data/k8sTemplates';
+import type { K8sResourceType } from '../../types';
 
 // Import K8s icons from ui-lego source via Vite alias
 import KubernetesNamespace from '@icons/kubernetes/KubernetesNamespace';
