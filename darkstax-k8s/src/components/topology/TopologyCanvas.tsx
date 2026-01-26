@@ -389,6 +389,8 @@ export function TopologyCanvas() {
 
           paths.push({
             id: key,
+            fromId: group.ownerId,
+            toId: memberId,
             d: `M ${from.x} ${from.y} C ${cx1} ${cy1}, ${cx2} ${cy2}, ${to.x} ${to.y}`,
           });
         });
