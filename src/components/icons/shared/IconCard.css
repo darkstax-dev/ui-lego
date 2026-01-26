@@ -1,0 +1,94 @@
+/* IconCard - Themed component for icon catalog */
+
+.icon-card {
+  background: var(--surface-card);
+  border: var(--sds-size-stroke-border) solid var(--sds-color-border-default-default);
+  padding: var(--sds-size-space-400);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--sds-size-space-300);
+  transition: all 0.2s ease;
+}
+
+.icon-card:hover {
+  border-color: var(--text-blue-main);
+  transform: translateY(-2px);
+}
+
+.icon-card__preview {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  background: var(--surface-default);
+  border: var(--sds-size-stroke-border) solid var(--sds-color-border-default-default);
+}
+
+.icon-card__info {
+  text-align: center;
+  flex: 1;
+  width: 100%;
+}
+
+.icon-card__name {
+  font-family: var(--font-family-macan-mono);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-tight);
+  letter-spacing: var(--letter-spacing-wider);
+  text-transform: uppercase;
+  color: var(--text-blue-main);
+  margin: 0 0 var(--sds-size-space-100) 0;
+}
+
+.icon-card__category {
+  font-family: var(--font-family-macan-mono);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-book);
+  letter-spacing: var(--letter-spacing-wider);
+  color: var(--text-blue-secondary);
+  text-transform: uppercase;
+}
+
+.icon-card__actions {
+  display: flex;
+  gap: var(--sds-size-space-200);
+  width: 100%;
+}
+
+.icon-card__button {
+  flex: 1;
+  padding: var(--sds-size-padding-sm);
+  border: var(--sds-size-stroke-border) solid var(--sds-color-border-default-default);
+  background: var(--btn-icon-gray-fill);
+  color: var(--text-blue-main);
+  font-family: var(--font-family-macan-mono);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-tight);
+  letter-spacing: var(--letter-spacing-wider);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.icon-card__button:hover {
+  background: var(--text-blue-main);
+  color: var(--text-white-main);
+  border-color: var(--text-blue-main);
+}
+
+.icon-card__button:active {
+  opacity: 0.8;
+}
+
+.icon-card__button--copy:hover {
+  background: var(--color-blue-700);
+  border-color: var(--color-blue-700);
+}
+
+.icon-card__button--download:hover {
+  background: var(--color-green-600);
+  border-color: var(--color-green-600);
+}

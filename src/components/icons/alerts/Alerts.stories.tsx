@@ -1,7 +1,10 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { useState, useMemo } from 'react';
 import * as AlertIcons from './index';
+import { copySVGToClipboard, downloadSVG } from '../utils/svgExtractor';
+import { IconCard, CatalogLayout, CatalogControls, CatalogControlGroup, CatalogGrid, CatalogEmptyState } from '../shared';
 import './Alerts.stories.css';
+import '../../../tokens.css';
 
 const meta: Meta = {
   title: 'Icons/Alerts',
@@ -107,6 +110,7 @@ const AlertIconsCatalog = () => {
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [selectedSemantic, setSelectedSemantic] = useState('All');
   const [iconSize, setIconSize] = useState(32);
+  const [copyStatus, setCopyStatus] = useState<string>('');
 
   const filteredIcons = useMemo(() => {
     let filtered = allAlertIcons;
@@ -133,6 +137,16 @@ const AlertIconsCatalog = () => {
   const categories = ['All', ...Object.keys(alertIconCategories)];
   const semantics = ['All', 'Neutral', 'Add/Create', 'Block/Disable', 'Close/Remove', 'Help/Unknown', 'Information', 'Warning/Important', 'Success/Complete', 'Multiple Success'];
 
+  const handleCopySuccess = (message: string) => {
+    setCopyStatus(message);
+    setTimeout(() => setCopyStatus(''), 2000);
+  };
+
+  const handleCopyError = (error: string) => {
+    setCopyStatus(error);
+    setTimeout(() => setCopyStatus(''), 2000);
+  };
+
   const getSemanticColor = (semantic: string) => {
     switch (semantic) {
       case 'Success/Complete':
@@ -155,113 +169,85 @@ const AlertIconsCatalog = () => {
   };
 
   return (
-    <div className="alert-icons-catalog">
-      <div className="alert-icons-header">
-        <h1>Alert Icons Catalog</h1>
-        <p className="alert-icons-description">
-          Comprehensive collection of alert, warning, and notification icons for user interfaces.
-          These icons are designed to communicate different states and actions clearly using consistent visual language.
-        </p>
+    <CatalogLayout
+      title="Alert Icons"
+      description="Comprehensive collection of alert, warning, and notification icons. Designed to communicate different states and actions clearly."
+      copyStatus={copyStatus}
+    >
+      <CatalogControls>
+        <CatalogControlGroup label="Search">
+          <input
+            type="text"
+            placeholder="Search alert icons..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
+        </CatalogControlGroup>
         
-        <div className="alert-icons-controls">
-          <div className="alert-icons-control-group">
-            <label>Search:</label>
-            <input
-              type="text"
-              placeholder="Search icons..."
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              className="alert-icons-search"
-            />
-          </div>
-          
-          <div className="alert-icons-control-group">
-            <label>Category:</label>
-            <select
-              value={selectedCategory}
-              onChange={(e) => setSelectedCategory(e.target.value)}
-              className="alert-icons-select"
-            >
-              {categories.map(category => (
-                <option key={category} value={category}>{category}</option>
-              ))}
-            </select>
-          </div>
-          
-          <div className="alert-icons-control-group">
-            <label>Semantic:</label>
-            <select
-              value={selectedSemantic}
-              onChange={(e) => setSelectedSemantic(e.target.value)}
-              className="alert-icons-select"
-            >
-              {semantics.map(semantic => (
-                <option key={semantic} value={semantic}>{semantic}</option>
-              ))}
-            </select>
-          </div>
-          
-          <div className="alert-icons-control-group">
-            <label>Size:</label>
+        <CatalogControlGroup label="Category">
+          <select
+            value={selectedCategory}
+            onChange={(e) => setSelectedCategory(e.target.value)}
+          >
+            {categories.map(category => (
+              <option key={category} value={category}>{category}</option>
+            ))}
+          </select>
+        </CatalogControlGroup>
+        
+        <CatalogControlGroup label="Semantic">
+          <select
+            value={selectedSemantic}
+            onChange={(e) => setSelectedSemantic(e.target.value)}
+          >
+            {semantics.map(semantic => (
+              <option key={semantic} value={semantic}>{semantic}</option>
+            ))}
+          </select>
+        </CatalogControlGroup>
+        
+        <CatalogControlGroup label="Size">
+          <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--sds-size-space-200)' }}>
             <input
               type="range"
               min="16"
               max="64"
               value={iconSize}
               onChange={(e) => setIconSize(Number(e.target.value))}
-              className="alert-icons-size-slider"
             />
-            <span className="alert-icons-size-value">{iconSize}px</span>
+            <span className="catalog-control-group__size-value">{iconSize}px</span>
           </div>
-        </div>
-      </div>
+        </CatalogControlGroup>
+      </CatalogControls>
 
-      <div className="alert-icons-results">
-        <p className="alert-icons-count">
-          {filteredIcons.length} icon{filteredIcons.length !== 1 ? 's' : ''} found
-        </p>
-      </div>
-
-      <div className="alert-icons-grid">
-        {filteredIcons.map((icon, index) => {
-          const IconComponent = icon.component;
-          const semanticColor = getSemanticColor(icon.semantic);
-          
-          return (
-            <div key={index} className="alert-icon-item">
-              <div className="alert-icon-preview">
-                <IconComponent 
-                  width={iconSize} 
-                  height={iconSize} 
-                  fill={semanticColor}
-                />
-              </div>
-              <div className="alert-icon-info">
-                <h3 className="alert-icon-name">{icon.name}</h3>
-                <span className="alert-icon-semantic" style={{ color: semanticColor }}>
-                  {icon.semantic}
-                </span>
-              </div>
-              <button
-                className="alert-icon-copy"
-                onClick={() => navigator.clipboard.writeText(icon.name.replace(/\s+/g, ''))}
-                title="Copy icon name"
-              >
-                Copy
-              </button>
-            </div>
-          );
-        })}
-      </div>
-
-      {filteredIcons.length === 0 && (
-        <div className="alert-icons-empty">
-          <AlertIcons.QuestionCircle width={48} height={48} fill="var(--color-gray-400)" />
-          <p>No alert icons found matching your search criteria.</p>
-          <p>Try adjusting your filters or search terms.</p>
-        </div>
-      )}
-    </div>
+      <CatalogGrid resultCount={filteredIcons.length}>
+        {filteredIcons.length > 0 ? (
+          filteredIcons.map((icon, index) => {
+            const semanticColor = getSemanticColor(icon.semantic);
+            
+            return (
+              <IconCard
+                key={index}
+                icon={icon.component}
+                iconSize={iconSize}
+                iconColor={semanticColor}
+                name={icon.name}
+                category={icon.semantic}
+                categoryColor={semanticColor}
+                onCopySuccess={handleCopySuccess}
+                onCopyError={handleCopyError}
+              />
+            );
+          })
+        ) : (
+          <CatalogEmptyState
+            icon={<AlertIcons.QuestionCircle width={48} height={48} fill="var(--text-gray-disabled)" />}
+            message="No alert icons found matching your search criteria."
+            suggestion="Try adjusting your filters or search terms."
+          />
+        )}
+      </CatalogGrid>
+    </CatalogLayout>
   );
 };
 

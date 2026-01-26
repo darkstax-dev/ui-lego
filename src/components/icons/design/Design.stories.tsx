@@ -1,6 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
-import React from 'react'
+import React, { useState, useMemo } from 'react'
 import './Design.stories.css'
+import { copySVGToClipboard, downloadSVG } from '../utils/svgExtractor'
+import { IconCard, CatalogLayout, CatalogControls, CatalogControlGroup, CatalogGrid, CatalogEmptyState } from '../shared'
+import '../../../tokens.css'
 
 // Import all design icons
 import {
@@ -39,6 +42,42 @@ const meta: Meta = {
 
 export default meta
 type Story = StoryObj
+
+// Icon categories organized by design function
+const designIconCategories = {
+  'Layout & Structure': [
+    { name: 'Layout 3 Fill', component: Layout3Fill, category: 'Layout' },
+    { name: 'Layout 2 Fill', component: Layout2Fill, category: 'Layout' },
+    { name: 'Layout Top 2 Fill', component: LayoutTop2Fill, category: 'Layout' },
+    { name: 'Layout Grid Fill', component: LayoutGridFill, category: 'Grid' },
+    { name: 'Grid Fill', component: GridFill, category: 'Grid' },
+    { name: 'Drag Drop Line', component: DragDropLine, category: 'Interaction' }
+  ],
+  'Drawing & Creation': [
+    { name: 'Pencil Fill', component: PencilFill, category: 'Drawing' },
+    { name: 'Paint Brush Fill', component: PaintBrushFill, category: 'Painting' },
+    { name: 'Edit Fill', component: EditFill, category: 'Editing' },
+    { name: 'Magic Fill', component: MagicFill, category: 'Effects' },
+    { name: 'Palette Fill', component: PaletteFill, category: 'Color' }
+  ],
+  'Measurement & Precision': [
+    { name: 'Ruler Fill', component: RulerFill, category: 'Measurement' },
+    { name: 'Pencil Ruler Fill', component: PencilRulerFill, category: 'Measurement' },
+    { name: 'Compasses Fill', component: CompassesFill, category: 'Geometry' }
+  ],
+  'Image & Content Editing': [
+    { name: 'Crop Fill', component: CropFill, category: 'Image Editing' },
+    { name: 'Slice Fill', component: SliceFill, category: 'Cutting' },
+    { name: 'Scissors Fill', component: ScissorsFill, category: 'Cutting' }
+  ],
+  'Visual Effects': [
+    { name: 'Contrast 2 Fill', component: Contrast2Fill, category: 'Adjustment' },
+    { name: 'Focus Fill', component: FocusFill, category: 'Focus' }
+  ]
+};
+
+// Flatten all icons for search
+const allDesignIcons = Object.values(designIconCategories).flat();
 
 // Individual icon stories
 export const Layout3FillIcon: Story = {
@@ -136,91 +175,156 @@ export const PencilFillIcon: Story = {
   name: 'Pencil Fill'
 }
 
+const DesignIconsCatalog = () => {
+  const [searchTerm, setSearchTerm] = useState('');
+  const [selectedCategory, setSelectedCategory] = useState('All');
+  const [selectedFunction, setSelectedFunction] = useState('All');
+  const [iconSize, setIconSize] = useState(32);
+  const [copyStatus, setCopyStatus] = useState<string>('');
+
+  const filteredIcons = useMemo(() => {
+    let filtered = allDesignIcons;
+
+    if (selectedCategory !== 'All') {
+      const categoryIcons = designIconCategories[selectedCategory as keyof typeof designIconCategories];
+      filtered = categoryIcons || [];
+    }
+
+    if (selectedFunction !== 'All') {
+      filtered = filtered.filter(icon => icon.category === selectedFunction);
+    }
+
+    if (searchTerm) {
+      filtered = filtered.filter(icon =>
+        icon.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        icon.category.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+    }
+
+    return filtered;
+  }, [searchTerm, selectedCategory, selectedFunction]);
+
+  const categories = ['All', ...Object.keys(designIconCategories)];
+  const functions = ['All', 'Layout', 'Grid', 'Interaction', 'Drawing', 'Painting', 'Editing', 'Effects', 'Color', 'Measurement', 'Geometry', 'Image Editing', 'Cutting', 'Adjustment', 'Focus'];
+
+  const handleCopySuccess = (message: string) => {
+    setCopyStatus(message);
+    setTimeout(() => setCopyStatus(''), 2000);
+  };
+
+  const handleCopyError = (error: string) => {
+    setCopyStatus(error);
+    setTimeout(() => setCopyStatus(''), 2000);
+  };
+
+  const getCategoryColor = (category: string) => {
+    switch (category) {
+      case 'Layout':
+      case 'Grid':
+        return 'var(--color-blue-600)';
+      case 'Drawing':
+      case 'Painting':
+        return 'var(--color-green-600)';
+      case 'Editing':
+      case 'Effects':
+        return 'var(--color-purple-600)';
+      case 'Measurement':
+      case 'Geometry':
+        return 'var(--color-orange-600)';
+      case 'Image Editing':
+      case 'Cutting':
+        return 'var(--color-red-600)';
+      default:
+        return 'var(--text-blue-main)';
+    }
+  };
+
+  return (
+    <CatalogLayout
+      title="Design Icons"
+      description="Professional design tools and layout icons for creative applications. Organized by function and purpose for easy discovery."
+      copyStatus={copyStatus}
+    >
+      <CatalogControls>
+        <CatalogControlGroup label="Search">
+          <input
+            type="text"
+            placeholder="Search design icons..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
+        </CatalogControlGroup>
+        
+        <CatalogControlGroup label="Category">
+          <select
+            value={selectedCategory}
+            onChange={(e) => setSelectedCategory(e.target.value)}
+          >
+            {categories.map(category => (
+              <option key={category} value={category}>{category}</option>
+            ))}
+          </select>
+        </CatalogControlGroup>
+        
+        <CatalogControlGroup label="Function">
+          <select
+            value={selectedFunction}
+            onChange={(e) => setSelectedFunction(e.target.value)}
+          >
+            {functions.map(func => (
+              <option key={func} value={func}>{func}</option>
+            ))}
+          </select>
+        </CatalogControlGroup>
+        
+        <CatalogControlGroup label="Size">
+          <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--sds-size-space-200)' }}>
+            <input
+              type="range"
+              min="16"
+              max="64"
+              value={iconSize}
+              onChange={(e) => setIconSize(Number(e.target.value))}
+            />
+            <span className="catalog-control-group__size-value">{iconSize}px</span>
+          </div>
+        </CatalogControlGroup>
+      </CatalogControls>
+
+      <CatalogGrid resultCount={filteredIcons.length}>
+        {filteredIcons.length > 0 ? (
+          filteredIcons.map((icon, index) => {
+            const categoryColor = getCategoryColor(icon.category);
+            
+            return (
+              <IconCard
+                key={index}
+                icon={icon.component}
+                iconSize={iconSize}
+                iconColor={categoryColor}
+                name={icon.name}
+                category={icon.category}
+                categoryColor={categoryColor}
+                onCopySuccess={handleCopySuccess}
+                onCopyError={handleCopyError}
+              />
+            );
+          })
+        ) : (
+          <CatalogEmptyState
+            icon={<EditFill width={48} height={48} fill="var(--text-gray-disabled)" />}
+            message="No design icons found matching your search criteria."
+            suggestion="Try adjusting your filters or search terms."
+          />
+        )}
+      </CatalogGrid>
+    </CatalogLayout>
+  );
+};
+
 // All icons showcase
-export const AllDesignIcons: Story = {
-  render: () => (
-    <div className="design-icons-showcase">
-      <h2 className="showcase-title">Design Icons Collection</h2>
-      <div className="icons-grid">
-        <div className="icon-item">
-          <Layout3Fill />
-          <span className="icon-name">Layout3Fill</span>
-        </div>
-        <div className="icon-item">
-          <Layout2Fill />
-          <span className="icon-name">Layout2Fill</span>
-        </div>
-        <div className="icon-item">
-          <LayoutTop2Fill />
-          <span className="icon-name">LayoutTop2Fill</span>
-        </div>
-        <div className="icon-item">
-          <Contrast2Fill />
-          <span className="icon-name">Contrast2Fill</span>
-        </div>
-        <div className="icon-item">
-          <FocusFill />
-          <span className="icon-name">FocusFill</span>
-        </div>
-        <div className="icon-item">
-          <DragDropLine />
-          <span className="icon-name">DragDropLine</span>
-        </div>
-        <div className="icon-item">
-          <EditFill />
-          <span className="icon-name">EditFill</span>
-        </div>
-        <div className="icon-item">
-          <PencilRulerFill />
-          <span className="icon-name">PencilRulerFill</span>
-        </div>
-        <div className="icon-item">
-          <PaintBrushFill />
-          <span className="icon-name">PaintBrushFill</span>
-        </div>
-        <div className="icon-item">
-          <LayoutGridFill />
-          <span className="icon-name">LayoutGridFill</span>
-        </div>
-        <div className="icon-item">
-          <MagicFill />
-          <span className="icon-name">MagicFill</span>
-        </div>
-        <div className="icon-item">
-          <CropFill />
-          <span className="icon-name">CropFill</span>
-        </div>
-        <div className="icon-item">
-          <GridFill />
-          <span className="icon-name">GridFill</span>
-        </div>
-        <div className="icon-item">
-          <SliceFill />
-          <span className="icon-name">SliceFill</span>
-        </div>
-        <div className="icon-item">
-          <ScissorsFill />
-          <span className="icon-name">ScissorsFill</span>
-        </div>
-        <div className="icon-item">
-          <PaletteFill />
-          <span className="icon-name">PaletteFill</span>
-        </div>
-        <div className="icon-item">
-          <RulerFill />
-          <span className="icon-name">RulerFill</span>
-        </div>
-        <div className="icon-item">
-          <CompassesFill />
-          <span className="icon-name">CompassesFill</span>
-        </div>
-        <div className="icon-item">
-          <PencilFill />
-          <span className="icon-name">PencilFill</span>
-        </div>
-      </div>
-    </div>
-  )
+export const Catalog: Story = {
+  render: () => <DesignIconsCatalog />,
 }
 
 // Customization examples

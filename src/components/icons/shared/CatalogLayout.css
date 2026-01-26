@@ -1,0 +1,169 @@
+/* Catalog Layout - Themed components for icon catalogs */
+
+.catalog-layout {
+  font-family: var(--font-family-macan);
+}
+
+.catalog-layout__header {
+  margin-bottom: var(--sds-size-space-600);
+}
+
+.catalog-layout__title {
+  font-family: var(--font-family-macan-mono-stencil);
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-normal);
+  letter-spacing: var(--letter-spacing-wide);
+  text-transform: uppercase;
+  color: var(--text-blue-main);
+  margin: 0 0 var(--sds-size-space-200) 0;
+}
+
+.catalog-layout__description {
+  font-family: var(--font-family-macan);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-book);
+  line-height: var(--line-height-normal);
+  color: var(--text-blue-secondary);
+  margin: 0 0 var(--sds-size-space-400) 0;
+}
+
+.catalog-layout__status {
+  background: var(--color-green-100);
+  color: var(--color-green-800);
+  padding: var(--sds-size-padding-sm) var(--sds-size-padding-lg);
+  border: var(--sds-size-stroke-border) solid var(--color-green-600);
+  font-family: var(--font-family-macan-mono);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  letter-spacing: var(--letter-spacing-normal);
+  margin-bottom: var(--sds-size-space-400);
+}
+
+/* Controls */
+.catalog-controls {
+  display: flex;
+  gap: var(--sds-size-space-400);
+  flex-wrap: wrap;
+  align-items: flex-end;
+  margin-bottom: var(--sds-size-space-600);
+  padding-bottom: var(--sds-size-space-400);
+  border-bottom: var(--sds-size-stroke-border) solid var(--divider-light);
+}
+
+.catalog-control-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sds-size-space-200);
+}
+
+.catalog-control-group__label {
+  font-family: var(--font-family-macan-mono);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-blue-secondary);
+  text-transform: uppercase;
+  letter-spacing: var(--letter-spacing-wider);
+}
+
+.catalog-control-group input[type="text"],
+.catalog-control-group select {
+  padding: var(--sds-size-padding-sm) var(--sds-size-padding-lg);
+  border: var(--sds-size-stroke-border) solid var(--sds-color-border-default-default);
+  background: var(--Inputs-Input-Background);
+  font-family: var(--font-family-macan-mono);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-book);
+  color: var(--text-blue-main);
+  min-width: 200px;
+  transition: border-color 0.15s ease;
+}
+
+.catalog-control-group input[type="text"]:focus,
+.catalog-control-group select:focus {
+  outline: none;
+  border-color: var(--text-blue-main);
+}
+
+.catalog-control-group input[type="text"]::placeholder {
+  color: var(--Inputs-Placeholder-text);
+}
+
+.catalog-control-group input[type="range"] {
+  width: 100px;
+}
+
+.catalog-control-group__size-value {
+  font-family: var(--font-family-macan-mono);
+  font-size: var(--font-size-xs);
+  color: var(--text-blue-secondary);
+  font-weight: var(--font-weight-medium);
+  margin-left: var(--sds-size-space-200);
+}
+
+/* Grid */
+.catalog-grid__results {
+  margin-bottom: var(--sds-size-space-400);
+}
+
+.catalog-grid__count {
+  font-family: var(--font-family-macan-mono);
+  font-size: var(--font-size-sm);
+  color: var(--text-blue-secondary);
+  margin: 0;
+  letter-spacing: var(--letter-spacing-normal);
+}
+
+.catalog-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: var(--sds-size-space-400);
+}
+
+/* Empty State */
+.catalog-empty-state {
+  text-align: center;
+  padding: var(--sds-size-space-2400) var(--sds-size-space-600);
+}
+
+.catalog-empty-state__icon {
+  margin-bottom: var(--sds-size-space-400);
+}
+
+.catalog-empty-state__message {
+  font-family: var(--font-family-macan);
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-blue-main);
+  margin: 0 0 var(--sds-size-space-200) 0;
+}
+
+.catalog-empty-state__suggestion {
+  font-family: var(--font-family-macan);
+  font-size: var(--font-size-sm);
+  color: var(--text-blue-secondary);
+  margin: 0;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .catalog-controls {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .catalog-control-group {
+    width: 100%;
+  }
+  
+  .catalog-control-group input[type="text"],
+  .catalog-control-group select {
+    min-width: auto;
+    width: 100%;
+  }
+  
+  .catalog-grid {
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: var(--sds-size-space-300);
+  }
+}

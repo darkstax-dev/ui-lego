@@ -2,7 +2,10 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { useState, useMemo } from 'react';
 import * as Icons from './index';
 import { AlignCenterGraphic } from './graphics';
+import { copySVGToClipboard, downloadSVG } from './utils/svgExtractor';
+import { IconCard, CatalogLayout, CatalogControls, CatalogControlGroup, CatalogGrid, CatalogEmptyState } from './shared';
 import './Icons.stories.css';
+import '../../tokens.css';
 
 const meta: Meta = {
   title: 'Icons',
@@ -206,6 +209,8 @@ const allIcons = Object.values(iconCategories).flat();
 const IconsCatalog = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('All');
+  const [iconSize, setIconSize] = useState(32);
+  const [copyStatus, setCopyStatus] = useState<string>('');
 
   const filteredIcons = useMemo(() => {
     let filtered = allIcons;
@@ -229,67 +234,82 @@ const IconsCatalog = () => {
 
   const categories = ['All', ...Object.keys(iconCategories)];
 
+  const handleCopySuccess = (message: string) => {
+    setCopyStatus(message);
+    setTimeout(() => setCopyStatus(''), 2000);
+  };
+
+  const handleCopyError = (error: string) => {
+    setCopyStatus(error);
+    setTimeout(() => setCopyStatus(''), 2000);
+  };
+
   return (
-    <div className="icons-catalog">
-      <div className="icons-header">
-        <h1>Icons Catalog</h1>
-        <div className="icons-controls">
+    <CatalogLayout
+      title="All Icons"
+      description="Comprehensive collection of all icons in the UI Lego library. Search, filter, and copy SVG content for easy implementation."
+      copyStatus={copyStatus}
+    >
+      <CatalogControls>
+        <CatalogControlGroup label="Search">
           <input
             type="text"
             placeholder="Search icons..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="icons-search"
           />
+        </CatalogControlGroup>
+        
+        <CatalogControlGroup label="Category">
           <select
             value={selectedCategory}
             onChange={(e) => setSelectedCategory(e.target.value)}
-            className="icons-category-select"
             aria-label="Select icon category"
           >
             {categories.map(category => (
               <option key={category} value={category}>{category}</option>
             ))}
           </select>
-        </div>
-      </div>
+        </CatalogControlGroup>
+        
+        <CatalogControlGroup label="Size">
+          <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--sds-size-space-200)' }}>
+            <input
+              type="range"
+              min="16"
+              max="64"
+              value={iconSize}
+              onChange={(e) => setIconSize(Number(e.target.value))}
+            />
+            <span className="catalog-control-group__size-value">{iconSize}px</span>
+          </div>
+        </CatalogControlGroup>
+      </CatalogControls>
 
-      <div className="icons-results">
-        <p className="icons-count">
-          {filteredIcons.length} icon{filteredIcons.length !== 1 ? 's' : ''} found
-        </p>
-      </div>
-
-      <div className="icons-grid">
-        {filteredIcons.map((icon, index) => {
-          const IconComponent = icon.component;
-          return (
-            <div key={index} className="icon-item">
-              <div className="icon-preview">
-                <IconComponent width={32} height={32} />
-              </div>
-              <div className="icon-info">
-                <h3 className="icon-name">{icon.name}</h3>
-                <span className="icon-category">{icon.category}</span>
-              </div>
-              <button
-                className="icon-copy"
-                onClick={() => navigator.clipboard.writeText(icon.name)}
-                title="Copy icon name"
-              >
-                Copy
-              </button>
-            </div>
-          );
-        })}
-      </div>
-
-      {filteredIcons.length === 0 && (
-        <div className="icons-empty">
-          <p>No icons found matching your search.</p>
-        </div>
-      )}
-    </div>
+      <CatalogGrid resultCount={filteredIcons.length}>
+        {filteredIcons.length > 0 ? (
+          filteredIcons.map((icon, index) => {
+            return (
+              <IconCard
+                key={index}
+                icon={icon.component}
+                iconSize={iconSize}
+                name={icon.name}
+                category={icon.category}
+                onCopySuccess={handleCopySuccess}
+                onCopyError={handleCopyError}
+              />
+            );
+          })
+        ) : (
+          <CatalogEmptyState
+            icon={<Icons.QuestionCircle width={48} height={48} fill="var(--text-gray-disabled)" />}
+            message="No icons found matching your search criteria."
+            suggestion="Try adjusting your filters or search terms."
+          />
+        )}
+      </CatalogGrid>
+    </CatalogLayout>
   );
 };
 
