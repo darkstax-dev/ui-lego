@@ -578,9 +578,9 @@ export function TopologyCanvas() {
               d={p.d}
               fill="none"
               stroke="#00112B"
-              strokeWidth="1.5"
-              strokeDasharray="6 6"
-              opacity="0.6"
+              strokeWidth="2"
+              strokeDasharray="8 4"
+              opacity="0.8"
             />
           ))}
         </svg>
