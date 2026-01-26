@@ -1,5 +1,6 @@
-import { K8sNodeData, K8sNodeGroup, K8sResourceCategory, K8sResourceType } from '../../types';
 import { SkydiveSyncReplyData } from '../../types/skydive';
+import type { K8sNodeData, K8sNodeGroup, K8sResourceCategory, K8sResourceType } from '../../types';
+import { getHierarchyLevelForResource, hierarchyConfig } from '../../hierarchyConfig';
 
 const normalizeResourceType = (rawType?: string): K8sResourceType => {
   const type = (rawType || 'pod').toLowerCase();
@@ -93,21 +94,26 @@ export const parseSkydiveSyncReply = (data: SkydiveSyncReplyData): {
     const parentNode = nodeById.get(edge.Parent);
     const childNode = nodeById.get(edge.Child);
     if (!parentNode || !childNode) return;
-    if (parentNode.category !== childNode.category) return;
 
+    // Unlike the old logic, allow cross-category ownership (namespace contains deployments, services, etc.)
     const members = groupMembers.get(edge.Parent) || [];
     members.push(edge.Child);
     groupMembers.set(edge.Parent, members);
   });
 
-  const groups: K8sNodeGroup[] = Array.from(groupMembers.entries()).map(([ownerId, memberIds]) => ({
-    id: `group-${ownerId}`,
-    ownerId,
-    memberIds,
-    collapsed: false,
-    level: 1,
-    depth: 0,
-  }));
+  const groups: K8sNodeGroup[] = Array.from(groupMembers.entries()).map(([ownerId, memberIds]) => {
+    const owner = nodeById.get(ownerId);
+    const level = owner ? getHierarchyLevelForResource(owner.type, hierarchyConfig) : 0;
+
+    return {
+      id: `group-${ownerId}`,
+      ownerId,
+      memberIds,
+      collapsed: false,
+      level,
+      depth: level + 1,
+    };
+  });
 
   return { nodes, groups };
 };
