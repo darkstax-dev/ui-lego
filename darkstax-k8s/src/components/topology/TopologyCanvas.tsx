@@ -586,23 +586,25 @@ export function TopologyCanvas() {
         </svg>
 
         {layoutMode === 'hierarchy' ? (
-          <div className="relative z-10 flex flex-col gap-8">
-            <div className="flex flex-wrap gap-8">
-              {hierarchyRoots.map((group) => renderGroup(group, 0))}
-            </div>
+          <div className="relative z-10 flex flex-col">
+            {laneCategories.map((lane) => {
+              const nodesInLane = nodesByCategory[lane.id] || [];
 
-            {ungroupedNodes.length > 0 && (
-              <div className="rounded-lg border border-gray-400/40 bg-white/60 p-4">
-                <div className="text-xs font-macan font-semibold text-blue-dark-950 mb-3">Ungrouped</div>
-                <div className="flex flex-wrap gap-6">
-                  {ungroupedNodes
-                    .filter((n) => !isHiddenByCollapsedGroup(n.id))
-                    .map((node) => (
-                      <NodeTile key={node.id} node={node} onClick={onNodeClick} />
-                    ))}
-                </div>
-              </div>
-            )}
+              // Skip lanes with no nodes unless configured to show empty lanes
+              if (nodesInLane.length === 0 && !hierarchyConfig.displayRules?.showEmptyLanes) {
+                return null;
+              }
+
+              return (
+                <HierarchicalLane
+                  key={lane.id}
+                  category={lane.id as any}
+                  label={lane.label}
+                  nodes={nodesInLane}
+                  height={lane.height}
+                />
+              );
+            })}
           </div>
         ) : (
           <div
