@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { useDroppable } from '@dnd-kit/core';
 import { Minus, Plus } from 'lucide-react';
+import { MultiSelect, type MultiSelectOption } from 'ui-lego';
 import { K8sNodeData, K8sResourceCategory } from '../../types';
 import { KubernetesIconWrapper } from '../ui/KubernetesIconWrapper';
 import { HierarchicalNodeGroup } from './HierarchicalNodeGroup';
@@ -34,6 +35,7 @@ export function HierarchicalLane({ category, label, nodes, height }: Hierarchica
 
   const laneContentRef = useRef<HTMLDivElement | null>(null);
   const [laneContentWidth, setLaneContentWidth] = useState(0);
+  const [aggregateFilterValues, setAggregateFilterValues] = useState<MultiSelectOption[]>([]);
 
   const setLaneContentNodeRef = useCallback(
     (node: HTMLDivElement | null) => {
@@ -131,6 +133,64 @@ export function HierarchicalLane({ category, label, nodes, height }: Hierarchica
     [parentNodes, standaloneNodes]
   );
 
+  const aggregateFilterOptions: MultiSelectOption[] = useMemo(() => {
+    if (!isAggregateLane) return [];
+
+    const byKey = new Map<string, MultiSelectOption>();
+    const addValue = (value: unknown) => {
+      if (typeof value !== 'string' && typeof value !== 'number') return;
+      const trimmed = String(value).trim();
+      if (!trimmed) return;
+      const key = trimmed.toLowerCase();
+      if (byKey.has(key)) return;
+      byKey.set(key, { id: key, label: trimmed, value: trimmed });
+    };
+
+    for (const node of nodes) {
+      addValue(node.label);
+      Object.values(node.metadata || {}).forEach(addValue);
+    }
+
+    return Array.from(byKey.values()).sort((a, b) => a.label.localeCompare(b.label));
+  }, [isAggregateLane, nodes]);
+
+  const aggregateFilterTokens = useMemo(() => {
+    if (!isAggregateLane) return [];
+    return aggregateFilterValues
+      .map((v) => String(v.value ?? v.label).trim())
+      .filter(Boolean);
+  }, [aggregateFilterValues, isAggregateLane]);
+
+  const nodeMatchesAggregateFilters = useCallback(
+    (node: K8sNodeData) => {
+      if (!isAggregateLane) return true;
+      if (aggregateFilterTokens.length === 0) return true;
+
+      const haystack =
+        `${node.label ?? ''} ` +
+        Object.values(node.metadata || {})
+          .filter((v) => typeof v === 'string' || typeof v === 'number')
+          .join(' ');
+
+      const lower = haystack.toLowerCase();
+      return aggregateFilterTokens.some((token) => lower.includes(token.toLowerCase()));
+    },
+    [aggregateFilterTokens, isAggregateLane]
+  );
+
+  const filteredTopLevelItems = useMemo(() => {
+    if (!isAggregateLane) return topLevelItems;
+    if (aggregateFilterTokens.length === 0) return topLevelItems;
+
+    return topLevelItems.filter((item) => {
+      if (nodeMatchesAggregateFilters(item.node)) return true;
+      if (item.kind !== 'group') return false;
+
+      const children = childNodesByParent.get(item.node.id) || [];
+      return children.some((child) => nodeMatchesAggregateFilters(child));
+    });
+  }, [aggregateFilterTokens.length, childNodesByParent, isAggregateLane, nodeMatchesAggregateFilters, topLevelItems]);
+
   const itemsPerRow = useMemo(() => {
     if (!isAggregateLane) return 0;
     if (laneContentWidth <= 0) return 0;
@@ -160,20 +220,20 @@ export function HierarchicalLane({ category, label, nodes, height }: Hierarchica
   const totalPages = useMemo(() => {
     if (!isAggregateLane) return 1;
     if (pageSize <= 0) return 1;
-    return Math.max(1, Math.ceil(topLevelItems.length / pageSize));
-  }, [isAggregateLane, pageSize, topLevelItems.length]);
+    return Math.max(1, Math.ceil(filteredTopLevelItems.length / pageSize));
+  }, [filteredTopLevelItems.length, isAggregateLane, pageSize]);
 
   const canPageBack = isAggregateLane && totalPages > 1 && pageIndex > 0;
   const canPageForward = isAggregateLane && totalPages > 1 && pageIndex + 1 < totalPages;
 
   const visibleItems = useMemo(() => {
     if (!isAggregateLane) return topLevelItems;
-    if (pageSize <= 0) return topLevelItems;
+    if (pageSize <= 0) return filteredTopLevelItems;
 
     const start = pageIndex * pageSize;
     const end = start + pageSize;
-    return topLevelItems.slice(start, end);
-  }, [isAggregateLane, pageIndex, pageSize, topLevelItems]);
+    return filteredTopLevelItems.slice(start, end);
+  }, [filteredTopLevelItems, isAggregateLane, pageIndex, pageSize, topLevelItems]);
 
   const laneHasPaging = isAggregateLane && totalPages > 1;
 
@@ -223,31 +283,50 @@ export function HierarchicalLane({ category, label, nodes, height }: Hierarchica
           isOver ? 'bg-blue-100 border-2 border-blue-500 border-dashed' : ''
         }`}
       >
-        {laneHasPaging && (
-          <div className="absolute left-3 top-3 z-20 flex items-center gap-1 rounded bg-white/80 border border-gray-400/40 px-1 py-1">
-            <button
-              className="w-7 h-7 flex items-center justify-center rounded disabled:opacity-40"
-              onClick={() => setPageIndex((v) => Math.max(0, v - 1))}
-              disabled={!canPageBack}
-              type="button"
-              aria-label="Previous page"
-              title="Previous"
-            >
-              <Minus className="w-4 h-4 text-blue-dark-950" />
-            </button>
-            <div className="px-1 text-[10px] text-gray-700 font-macan-mono whitespace-nowrap">
-              {pageIndex + 1}/{totalPages}
+        {isAggregateLane && (
+          <div className="absolute left-3 top-3 z-20 flex items-start gap-2">
+            <div className="min-w-[260px] max-w-[460px]" onMouseDown={(e) => e.stopPropagation()}>
+              <MultiSelect
+                options={aggregateFilterOptions}
+                value={aggregateFilterValues}
+                onChange={(val) => setAggregateFilterValues(val)}
+                placeholder="Filter aggregate…"
+                maxHeight={220}
+                createNewItemFromQuery={(query) => ({
+                  id: `aggregate-filter-${query}`,
+                  label: query,
+                  value: query,
+                })}
+              />
             </div>
-            <button
-              className="w-7 h-7 flex items-center justify-center rounded disabled:opacity-40"
-              onClick={() => setPageIndex((v) => Math.min(totalPages - 1, v + 1))}
-              disabled={!canPageForward}
-              type="button"
-              aria-label="Next page"
-              title="Next"
-            >
-              <Plus className="w-4 h-4 text-blue-dark-950" />
-            </button>
+
+            {laneHasPaging && (
+              <div className="flex items-center gap-1 rounded bg-white/80 border border-gray-400/40 px-1 py-1">
+                <button
+                  className="w-7 h-7 flex items-center justify-center rounded disabled:opacity-40"
+                  onClick={() => setPageIndex((v) => Math.max(0, v - 1))}
+                  disabled={!canPageBack}
+                  type="button"
+                  aria-label="Previous page"
+                  title="Previous"
+                >
+                  <Minus className="w-4 h-4 text-blue-dark-950" />
+                </button>
+                <div className="px-1 text-[10px] text-gray-700 font-macan-mono whitespace-nowrap">
+                  {pageIndex + 1}/{totalPages}
+                </div>
+                <button
+                  className="w-7 h-7 flex items-center justify-center rounded disabled:opacity-40"
+                  onClick={() => setPageIndex((v) => Math.min(totalPages - 1, v + 1))}
+                  disabled={!canPageForward}
+                  type="button"
+                  aria-label="Next page"
+                  title="Next"
+                >
+                  <Plus className="w-4 h-4 text-blue-dark-950" />
+                </button>
+              </div>
+            )}
           </div>
         )}
 
