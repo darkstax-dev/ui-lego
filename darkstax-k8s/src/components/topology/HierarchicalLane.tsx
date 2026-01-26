@@ -1,5 +1,6 @@
-import { useRef } from 'react';
+import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { useDroppable } from '@dnd-kit/core';
+import { Minus, Plus } from 'lucide-react';
 import { K8sNodeData, K8sResourceCategory } from '../../types';
 import { KubernetesIconWrapper } from '../ui/KubernetesIconWrapper';
 import { HierarchicalNodeGroup } from './HierarchicalNodeGroup';
@@ -13,18 +14,48 @@ interface HierarchicalLaneProps {
   height: number | 'auto';
 }
 
+const AGGREGATE_MAX_ROWS = 3;
+// Approximate visual width of a node tile (icon + label) used to estimate how many fit per row.
+const AGGREGATE_TILE_EST_WIDTH_PX = 96;
+const AGGREGATE_TILE_GAP_PX = 32; // gap-8
+
 export function HierarchicalLane({ category, label, nodes, height }: HierarchicalLaneProps) {
   const { setSelectedNode, openMetadataPanel, expandDetailLanes, collapseDetailLanes } = useUIStore();
   const { groups, toggleGroupCollapse } = useTopologyStore();
   const { setNodeRef, isOver } = useDroppable({
     id: `lane-${category}`,
-    data: { category }
+    data: { category },
   });
 
   const laneHeight = typeof height === 'number' ? `${height}px` : height;
 
   const isAggregateLane = category === 'aggregate';
   const clickTimeoutRef = useRef<number | null>(null);
+
+  const laneContentRef = useRef<HTMLDivElement | null>(null);
+  const [laneContentWidth, setLaneContentWidth] = useState(0);
+
+  const setLaneContentNodeRef = useCallback(
+    (node: HTMLDivElement | null) => {
+      setNodeRef(node);
+      laneContentRef.current = node;
+    },
+    [setNodeRef]
+  );
+
+  useLayoutEffect(() => {
+    if (!isAggregateLane) return;
+    const el = laneContentRef.current;
+    if (!el) return;
+
+    const observer = new ResizeObserver((entries) => {
+      const next = entries[0]?.contentRect?.width;
+      if (typeof next === 'number') setLaneContentWidth(next);
+    });
+
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [isAggregateLane]);
 
   const clearAggregateClickTimeout = () => {
     if (clickTimeoutRef.current == null) return;
@@ -55,29 +86,29 @@ export function HierarchicalLane({ category, label, nodes, height }: Hierarchica
     const standaloneNodes: K8sNodeData[] = [];
 
     // Find groups for this category's nodes
-    const relevantGroups = groups.filter(group => {
-      const ownerNode = nodes.find(n => n.id === group.ownerId);
+    const relevantGroups = groups.filter((group) => {
+      const ownerNode = nodes.find((n) => n.id === group.ownerId);
       return ownerNode !== undefined;
     });
 
     // Build parent-child map from groups
-    relevantGroups.forEach(group => {
-      const parentNode = nodes.find(n => n.id === group.ownerId);
+    relevantGroups.forEach((group) => {
+      const parentNode = nodes.find((n) => n.id === group.ownerId);
       if (parentNode) {
         parentNodes.push(parentNode);
-        const children = nodes.filter(n => group.memberIds.includes(n.id));
+        const children = nodes.filter((n) => group.memberIds.includes(n.id));
         childNodesByParent.set(group.ownerId, children);
       }
     });
 
     // Find standalone nodes (not parents, not children)
     const allChildIds = new Set<string>();
-    childNodesByParent.forEach(children => {
-      children.forEach(child => allChildIds.add(child.id));
+    childNodesByParent.forEach((children) => {
+      children.forEach((child) => allChildIds.add(child.id));
     });
-    const parentIds = new Set(parentNodes.map(n => n.id));
+    const parentIds = new Set(parentNodes.map((n) => n.id));
 
-    nodes.forEach(node => {
+    nodes.forEach((node) => {
       if (!parentIds.has(node.id) && !allChildIds.has(node.id)) {
         standaloneNodes.push(node);
       }
@@ -88,6 +119,64 @@ export function HierarchicalLane({ category, label, nodes, height }: Hierarchica
 
   const { parentNodes, childNodesByParent, standaloneNodes } = organizeHierarchy();
 
+  type TopLevelItem =
+    | { kind: 'group'; node: K8sNodeData }
+    | { kind: 'node'; node: K8sNodeData };
+
+  const topLevelItems: TopLevelItem[] = useMemo(
+    () => [
+      ...parentNodes.map((node) => ({ kind: 'group' as const, node })),
+      ...standaloneNodes.map((node) => ({ kind: 'node' as const, node })),
+    ],
+    [parentNodes, standaloneNodes]
+  );
+
+  const itemsPerRow = useMemo(() => {
+    if (!isAggregateLane) return 0;
+    if (laneContentWidth <= 0) return 0;
+
+    return Math.max(
+      1,
+      Math.floor(
+        (laneContentWidth + AGGREGATE_TILE_GAP_PX) /
+          (AGGREGATE_TILE_EST_WIDTH_PX + AGGREGATE_TILE_GAP_PX)
+      )
+    );
+  }, [isAggregateLane, laneContentWidth]);
+
+  const pageSize = useMemo(() => {
+    if (!isAggregateLane) return 0;
+    if (itemsPerRow <= 0) return 0;
+    return itemsPerRow * AGGREGATE_MAX_ROWS;
+  }, [isAggregateLane, itemsPerRow]);
+
+  const [pageIndex, setPageIndex] = useState(0);
+
+  useEffect(() => {
+    if (!isAggregateLane) return;
+    setPageIndex(0);
+  }, [isAggregateLane, nodes.length, pageSize]);
+
+  const totalPages = useMemo(() => {
+    if (!isAggregateLane) return 1;
+    if (pageSize <= 0) return 1;
+    return Math.max(1, Math.ceil(topLevelItems.length / pageSize));
+  }, [isAggregateLane, pageSize, topLevelItems.length]);
+
+  const canPageBack = isAggregateLane && totalPages > 1 && pageIndex > 0;
+  const canPageForward = isAggregateLane && totalPages > 1 && pageIndex + 1 < totalPages;
+
+  const visibleItems = useMemo(() => {
+    if (!isAggregateLane) return topLevelItems;
+    if (pageSize <= 0) return topLevelItems;
+
+    const start = pageIndex * pageSize;
+    const end = start + pageSize;
+    return topLevelItems.slice(start, end);
+  }, [isAggregateLane, pageIndex, pageSize, topLevelItems]);
+
+  const laneHasPaging = isAggregateLane && totalPages > 1;
+
   return (
     <div
       className="flex flex-row mb-2.5"
@@ -95,7 +184,7 @@ export function HierarchicalLane({ category, label, nodes, height }: Hierarchica
         minHeight: laneHeight,
         padding: '4px',
         gap: '10px',
-        background: '#DFDFDF'
+        background: '#DFDFDF',
       }}
       data-testid={`lane-${category}`}
     >
@@ -106,7 +195,7 @@ export function HierarchicalLane({ category, label, nodes, height }: Hierarchica
           width: '45px',
           padding: '4px 8px',
           background: '#CECECE',
-          flexShrink: 0
+          flexShrink: 0,
         }}
       >
         <div
@@ -119,7 +208,7 @@ export function HierarchicalLane({ category, label, nodes, height }: Hierarchica
             fontWeight: 500,
             lineHeight: '120%',
             letterSpacing: '-0.48px',
-            whiteSpace: 'nowrap'
+            whiteSpace: 'nowrap',
           }}
         >
           {label}
@@ -128,21 +217,49 @@ export function HierarchicalLane({ category, label, nodes, height }: Hierarchica
 
       {/* Lane Content */}
       <div
-        ref={setNodeRef}
+        ref={setLaneContentNodeRef}
         data-testid={`lane-drop-${category}`}
         className={`flex-1 p-4 relative transition-colors ${
           isOver ? 'bg-blue-100 border-2 border-blue-500 border-dashed' : ''
         }`}
       >
+        {laneHasPaging && (
+          <div className="absolute left-3 top-3 z-20 flex items-center gap-1 rounded bg-white/80 border border-gray-400/40 px-1 py-1">
+            <button
+              className="w-7 h-7 flex items-center justify-center rounded disabled:opacity-40"
+              onClick={() => setPageIndex((v) => Math.max(0, v - 1))}
+              disabled={!canPageBack}
+              type="button"
+              aria-label="Previous page"
+              title="Previous"
+            >
+              <Minus className="w-4 h-4 text-blue-dark-950" />
+            </button>
+            <div className="px-1 text-[10px] text-gray-700 font-macan-mono whitespace-nowrap">
+              {pageIndex + 1}/{totalPages}
+            </div>
+            <button
+              className="w-7 h-7 flex items-center justify-center rounded disabled:opacity-40"
+              onClick={() => setPageIndex((v) => Math.min(totalPages - 1, v + 1))}
+              disabled={!canPageForward}
+              type="button"
+              aria-label="Next page"
+              title="Next"
+            >
+              <Plus className="w-4 h-4 text-blue-dark-950" />
+            </button>
+          </div>
+        )}
+
         {nodes.length === 0 ? (
           <div className="h-full flex items-center justify-center text-gray-500 font-macan text-sm">
             Drop {category} resources here
           </div>
         ) : (
           <div className="flex flex-wrap gap-8">
-            {/* Render parent nodes with their children */}
-            {parentNodes.map((parentNode) => (
-              (() => {
+            {visibleItems.map((item) => {
+              if (item.kind === 'group') {
+                const parentNode = item.node;
                 const group = groups.find((g) => g.ownerId === parentNode.id);
 
                 return (
@@ -151,45 +268,43 @@ export function HierarchicalLane({ category, label, nodes, height }: Hierarchica
                     parentNode={parentNode}
                     childNodes={childNodesByParent.get(parentNode.id) || []}
                     collapsed={!!group?.collapsed}
-                    onToggleCollapse={
-                      group ? () => toggleGroupCollapse(group.id) : undefined
-                    }
+                    onToggleCollapse={group ? () => toggleGroupCollapse(group.id) : undefined}
                     onParentClick={isAggregateLane ? handleAggregateNodeClick : undefined}
                     onParentDoubleClick={isAggregateLane ? handleAggregateNodeDoubleClick : undefined}
                   />
                 );
-              })()
-            ))}
+              }
 
-            {/* Render standalone nodes */}
-            {standaloneNodes.map((node) => (
-              <div
-                key={node.id}
-                data-node-id={node.id}
-                className="cursor-pointer transition-transform hover:scale-105"
-                onClick={() => {
-                  if (isAggregateLane) {
-                    handleAggregateNodeClick(node);
-                    return;
-                  }
+              const node = item.node;
+              return (
+                <div
+                  key={node.id}
+                  data-node-id={node.id}
+                  className="cursor-pointer transition-transform hover:scale-105"
+                  onClick={() => {
+                    if (isAggregateLane) {
+                      handleAggregateNodeClick(node);
+                      return;
+                    }
 
-                  setSelectedNode(node);
-                  openMetadataPanel(node);
-                }}
-                onDoubleClick={(e) => {
-                  if (!isAggregateLane) return;
-                  e.stopPropagation();
-                  handleAggregateNodeDoubleClick();
-                }}
-              >
-                <KubernetesIconWrapper
-                  type={node.type}
-                  status={node.status}
-                  label={node.label}
-                  showIndicator={false}
-                />
-              </div>
-            ))}
+                    setSelectedNode(node);
+                    openMetadataPanel(node);
+                  }}
+                  onDoubleClick={(e) => {
+                    if (!isAggregateLane) return;
+                    e.stopPropagation();
+                    handleAggregateNodeDoubleClick();
+                  }}
+                >
+                  <KubernetesIconWrapper
+                    type={node.type}
+                    status={node.status}
+                    label={node.label}
+                    showIndicator={false}
+                  />
+                </div>
+              );
+            })}
           </div>
         )}
       </div>
