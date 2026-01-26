@@ -148,8 +148,7 @@ export function HierarchicalLane({ category, label, nodes, height }: Hierarchica
                   type={node.type}
                   status={node.status}
                   label={node.label}
-                  showIndicator={!!node.indicatorCount}
-                  indicatorCount={node.indicatorCount}
+                  showIndicator={false}
                 />
               </div>
             ))}
