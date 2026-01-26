@@ -5,361 +5,1704 @@
   - main [ref=e7]:
     - generic [ref=e9]:
       - img
-      - generic [ref=e11]:
-        - generic [ref=e13]: Aggregate
-        - generic [ref=e14]:
-          - generic [ref=e18]:
-            - combobox "Filter aggregate…" [ref=e19]
-            - generic [ref=e20]:
-              - generic [ref=e21]: "0"
-              - button "Toggle dropdown" [ref=e22] [cursor=pointer]:
-                - img [ref=e23]
-          - generic [ref=e26]:
-            - button "Previous page" [disabled] [ref=e27]:
-              - img [ref=e28]
-            - generic [ref=e29]: 1/2
-            - button "Next page" [ref=e30]:
-              - img [ref=e31]
-          - generic [ref=e32]:
-            - generic [ref=e35] [cursor=pointer]:
-              - generic [ref=e36]:
-                - img [ref=e37]
-                - img [ref=e39]
-                - img [ref=e42]
-                - generic [ref=e46]: "60"
-              - generic [ref=e47]: DC01
-            - generic [ref=e50] [cursor=pointer]:
-              - generic [ref=e51]:
-                - img [ref=e52]
-                - img [ref=e54]
-                - img [ref=e57]
-                - generic [ref=e61]: "50"
-              - generic [ref=e62]: DC02
-            - generic [ref=e65] [cursor=pointer]:
-              - generic [ref=e66]:
-                - img [ref=e67]
-                - img [ref=e69]
-                - img [ref=e72]
-                - generic [ref=e76]: "8"
-              - generic [ref=e77]: DC03
-            - generic [ref=e80] [cursor=pointer]:
-              - generic [ref=e81]:
-                - img [ref=e82]
-                - img [ref=e84]
-                - img [ref=e87]
-                - generic [ref=e91]: "10"
-              - generic [ref=e92]: DC04
-            - generic [ref=e95] [cursor=pointer]:
-              - generic [ref=e96]:
-                - img [ref=e97]
-                - img [ref=e99]
-                - img [ref=e102]
-                - generic [ref=e106]: "10"
-              - generic [ref=e107]: DC05
-            - generic [ref=e110] [cursor=pointer]:
-              - generic [ref=e111]:
-                - img [ref=e112]
-                - img [ref=e114]
-                - img [ref=e117]
-                - generic [ref=e121]: "8"
-              - generic [ref=e122]: DC06
-            - generic [ref=e125] [cursor=pointer]:
-              - generic [ref=e126]:
-                - img [ref=e127]
-                - img [ref=e129]
-                - img [ref=e132]
-                - generic [ref=e136]: "10"
-              - generic [ref=e137]: DC07
-            - generic [ref=e140] [cursor=pointer]:
-              - generic [ref=e141]:
-                - img [ref=e142]
-                - img [ref=e144]
-                - img [ref=e147]
-                - generic [ref=e151]: "10"
-              - generic [ref=e152]: DC08
-            - generic [ref=e155] [cursor=pointer]:
-              - generic [ref=e156]:
-                - img [ref=e157]
-                - img [ref=e159]
-                - img [ref=e162]
-                - generic [ref=e166]: "8"
-              - generic [ref=e167]: DC09
-            - generic [ref=e170] [cursor=pointer]:
-              - generic [ref=e171]:
-                - img [ref=e172]
-                - img [ref=e174]
-                - img [ref=e177]
-                - generic [ref=e181]: "10"
-              - generic [ref=e182]: DC10
-            - generic [ref=e185] [cursor=pointer]:
-              - generic [ref=e186]:
-                - img [ref=e187]
-                - img [ref=e189]
-                - img [ref=e192]
-                - generic [ref=e196]: "10"
-              - generic [ref=e197]: DC11
-            - generic [ref=e200] [cursor=pointer]:
-              - generic [ref=e201]:
-                - img [ref=e202]
-                - img [ref=e204]
-                - img [ref=e207]
-                - generic [ref=e211]: "8"
-              - generic [ref=e212]: DC12
-            - generic [ref=e215] [cursor=pointer]:
-              - generic [ref=e216]:
-                - img [ref=e217]
-                - img [ref=e219]
-                - img [ref=e222]
-                - generic [ref=e226]: "10"
-              - generic [ref=e227]: DC13
-            - generic [ref=e230] [cursor=pointer]:
-              - generic [ref=e231]:
-                - img [ref=e232]
-                - img [ref=e234]
-                - img [ref=e237]
-                - generic [ref=e241]: "10"
-              - generic [ref=e242]: DC14
-            - generic [ref=e245] [cursor=pointer]:
-              - generic [ref=e246]:
-                - img [ref=e247]
-                - img [ref=e249]
-                - img [ref=e252]
-                - generic [ref=e256]: "8"
-              - generic [ref=e257]: DC15
-            - generic [ref=e260] [cursor=pointer]:
-              - generic [ref=e261]:
-                - img [ref=e262]
-                - img [ref=e264]
-                - img [ref=e267]
-                - generic [ref=e271]: "10"
-              - generic [ref=e272]: DC16
-            - generic [ref=e275] [cursor=pointer]:
-              - generic [ref=e276]:
-                - img [ref=e277]
-                - img [ref=e279]
-                - img [ref=e282]
-                - generic [ref=e286]: "10"
-              - generic [ref=e287]: DC17
-            - generic [ref=e290] [cursor=pointer]:
-              - generic [ref=e291]:
-                - img [ref=e292]
-                - img [ref=e294]
-                - img [ref=e297]
-                - generic [ref=e301]: "8"
-              - generic [ref=e302]: DC18
-            - generic [ref=e305] [cursor=pointer]:
-              - generic [ref=e306]:
-                - img [ref=e307]
-                - img [ref=e309]
-                - img [ref=e312]
-                - generic [ref=e316]: "10"
-              - generic [ref=e317]: DC19
-            - generic [ref=e320] [cursor=pointer]:
-              - generic [ref=e321]:
-                - img [ref=e322]
-                - img [ref=e324]
-                - img [ref=e327]
-                - generic [ref=e331]: "10"
-              - generic [ref=e332]: DC20
-            - generic [ref=e335] [cursor=pointer]:
-              - generic [ref=e336]:
-                - img [ref=e337]
-                - img [ref=e339]
-                - img [ref=e342]
-                - generic [ref=e346]: "8"
-              - generic [ref=e347]: DC21
-            - generic [ref=e350] [cursor=pointer]:
-              - generic [ref=e351]:
-                - img [ref=e352]
-                - img [ref=e354]
-                - img [ref=e357]
-                - generic [ref=e361]: "10"
-              - generic [ref=e362]: DC22
-            - generic [ref=e365] [cursor=pointer]:
-              - generic [ref=e366]:
-                - img [ref=e367]
-                - img [ref=e369]
-                - img [ref=e372]
-                - generic [ref=e376]: "10"
-              - generic [ref=e377]: DC23
-            - generic [ref=e380] [cursor=pointer]:
-              - generic [ref=e381]:
-                - img [ref=e382]
-                - img [ref=e384]
-                - img [ref=e387]
-                - generic [ref=e391]: "8"
-              - generic [ref=e392]: DC24
-            - generic [ref=e395] [cursor=pointer]:
-              - generic [ref=e396]:
-                - img [ref=e397]
-                - img [ref=e399]
-                - img [ref=e402]
-                - generic [ref=e406]: "10"
-              - generic [ref=e407]: DC25
-            - generic [ref=e410] [cursor=pointer]:
-              - generic [ref=e411]:
-                - img [ref=e412]
-                - img [ref=e414]
-                - img [ref=e417]
-                - generic [ref=e421]: "10"
-              - generic [ref=e422]: DC26
-            - generic [ref=e425] [cursor=pointer]:
-              - generic [ref=e426]:
-                - img [ref=e427]
-                - img [ref=e429]
-                - img [ref=e432]
-                - generic [ref=e436]: "8"
-              - generic [ref=e437]: DC27
-            - generic [ref=e440] [cursor=pointer]:
-              - generic [ref=e441]:
-                - img [ref=e442]
-                - img [ref=e444]
-                - img [ref=e447]
-                - generic [ref=e451]: "10"
-              - generic [ref=e452]: DC28
-            - generic [ref=e455] [cursor=pointer]:
-              - generic [ref=e456]:
-                - img [ref=e457]
-                - img [ref=e459]
-                - img [ref=e462]
-                - generic [ref=e466]: "10"
-              - generic [ref=e467]: DC29
-            - generic [ref=e470] [cursor=pointer]:
-              - generic [ref=e471]:
-                - img [ref=e472]
-                - img [ref=e474]
-                - img [ref=e477]
-                - generic [ref=e481]: "8"
-              - generic [ref=e482]: DC30
-            - generic [ref=e485] [cursor=pointer]:
-              - generic [ref=e486]:
-                - img [ref=e487]
-                - img [ref=e489]
-                - img [ref=e492]
-                - generic [ref=e496]: "10"
-              - generic [ref=e497]: DC31
-            - generic [ref=e500] [cursor=pointer]:
-              - generic [ref=e501]:
-                - img [ref=e502]
-                - img [ref=e504]
-                - img [ref=e507]
-                - generic [ref=e511]: "10"
-              - generic [ref=e512]: DC32
-            - generic [ref=e515] [cursor=pointer]:
-              - generic [ref=e516]:
-                - img [ref=e517]
-                - img [ref=e519]
-                - img [ref=e522]
-                - generic [ref=e526]: "8"
-              - generic [ref=e527]: DC33
-            - generic [ref=e530] [cursor=pointer]:
-              - generic [ref=e531]:
-                - img [ref=e532]
-                - img [ref=e534]
-                - img [ref=e537]
-                - generic [ref=e541]: "10"
-              - generic [ref=e542]: DC34
-            - generic [ref=e545] [cursor=pointer]:
-              - generic [ref=e546]:
-                - img [ref=e547]
-                - img [ref=e549]
-                - img [ref=e552]
-                - generic [ref=e556]: "10"
-              - generic [ref=e557]: DC35
-            - generic [ref=e560] [cursor=pointer]:
-              - generic [ref=e561]:
-                - img [ref=e562]
-                - img [ref=e564]
-                - img [ref=e567]
-                - generic [ref=e571]: "8"
-              - generic [ref=e572]: DC36
-            - generic [ref=e575] [cursor=pointer]:
-              - generic [ref=e576]:
-                - img [ref=e577]
-                - img [ref=e579]
-                - img [ref=e582]
-                - generic [ref=e586]: "10"
-              - generic [ref=e587]: DC37
-            - generic [ref=e590] [cursor=pointer]:
-              - generic [ref=e591]:
-                - img [ref=e592]
-                - img [ref=e594]
-                - img [ref=e597]
-                - generic [ref=e601]: "10"
-              - generic [ref=e602]: DC38
-            - generic [ref=e605] [cursor=pointer]:
-              - generic [ref=e606]:
-                - img [ref=e607]
-                - img [ref=e609]
-                - img [ref=e612]
-                - generic [ref=e616]: "8"
-              - generic [ref=e617]: DC39
-            - generic [ref=e620] [cursor=pointer]:
-              - generic [ref=e621]:
-                - img [ref=e622]
-                - img [ref=e624]
-                - img [ref=e627]
-                - generic [ref=e631]: "10"
-              - generic [ref=e632]: DC40
-    - generic [ref=e633]:
-      - generic [ref=e634]:
-        - img [ref=e635]
-        - textbox "Search actions..." [ref=e638]
-      - generic [ref=e639]:
-        - button "Aggregate" [ref=e641]:
-          - generic [ref=e642]: Aggregate
-          - img [ref=e643]
-        - generic [ref=e646]:
-          - button "Kubernetes" [ref=e647]:
-            - generic [ref=e648]: Kubernetes
-            - img [ref=e649]
-          - generic [ref=e651]:
-            - button [ref=e652]:
-              - generic [ref=e654]:
-                - img [ref=e655]
-                - img [ref=e658]
-            - button [ref=e661]:
-              - generic [ref=e663]:
-                - img [ref=e664]
-                - img [ref=e667]
-            - button [ref=e669]:
-              - generic [ref=e671]:
-                - img [ref=e672]
-                - img [ref=e675]
-            - button [ref=e677]:
-              - generic [ref=e679]:
-                - img [ref=e680]
-                - img [ref=e683]
-            - button [ref=e690]:
-              - generic [ref=e692]:
-                - img [ref=e693]
-                - img [ref=e696]
-            - button [ref=e698]:
-              - generic [ref=e700]:
-                - img [ref=e701]
-                - img [ref=e704]
-            - button [ref=e707]:
-              - generic [ref=e709]:
-                - img [ref=e710]
-                - img [ref=e713]
-            - button [ref=e723]:
-              - generic [ref=e725]:
-                - img [ref=e726]
-                - img [ref=e729]
-            - button [ref=e731]:
-              - generic [ref=e733]:
-                - img [ref=e734]
-                - img [ref=e737]
-            - button [ref=e739]:
-              - generic [ref=e741]:
-                - img [ref=e742]
-                - img [ref=e745]
-            - button [ref=e749]:
-              - generic [ref=e751]:
-                - img [ref=e752]
-                - img [ref=e755]
-        - button "Templates" [ref=e759]:
-          - generic [ref=e760]: Templates
-          - img [ref=e761]
-  - status [ref=e763]
+      - generic [ref=e10]:
+        - generic [ref=e11]:
+          - generic [ref=e13]: Aggregate
+          - generic [ref=e14]:
+            - generic [ref=e18]:
+              - combobox "Filter aggregate…" [ref=e19]
+              - generic [ref=e20]:
+                - generic [ref=e21]: "0"
+                - button "Toggle dropdown" [ref=e22] [cursor=pointer]:
+                  - img [ref=e23]
+            - generic [ref=e26]:
+              - button "Previous page" [disabled] [ref=e27]:
+                - img [ref=e28]
+              - generic [ref=e29]: 1/2
+              - button "Next page" [ref=e30]:
+                - img [ref=e31]
+            - generic [ref=e32]:
+              - generic [ref=e33]:
+                - generic [ref=e35] [cursor=pointer]:
+                  - generic [ref=e36]:
+                    - img [ref=e37]
+                    - img [ref=e39]
+                    - img [ref=e42]
+                    - generic [ref=e46]: "60"
+                  - generic [ref=e47]: DC01
+                - generic [ref=e48]:
+                  - generic [ref=e50] [cursor=pointer]:
+                    - generic [ref=e51]:
+                      - img [ref=e52]
+                      - img [ref=e54]
+                      - img [ref=e57]
+                    - generic [ref=e60]: DC11
+                  - generic [ref=e62] [cursor=pointer]:
+                    - generic [ref=e63]:
+                      - img [ref=e64]
+                      - img [ref=e66]
+                      - img [ref=e69]
+                    - generic [ref=e72]: DC12
+                  - generic [ref=e74] [cursor=pointer]:
+                    - generic [ref=e75]:
+                      - img [ref=e76]
+                      - img [ref=e78]
+                      - img [ref=e81]
+                    - generic [ref=e84]: DC13
+                  - generic [ref=e86] [cursor=pointer]:
+                    - generic [ref=e87]:
+                      - img [ref=e88]
+                      - img [ref=e90]
+                      - img [ref=e93]
+                    - generic [ref=e96]: DC14
+                  - generic [ref=e98] [cursor=pointer]:
+                    - generic [ref=e99]:
+                      - img [ref=e100]
+                      - img [ref=e102]
+                      - img [ref=e105]
+                    - generic [ref=e108]: DC15
+                  - generic [ref=e110] [cursor=pointer]:
+                    - generic [ref=e111]:
+                      - img [ref=e112]
+                      - img [ref=e114]
+                      - img [ref=e117]
+                    - generic [ref=e120]: DC16
+                  - generic [ref=e122] [cursor=pointer]:
+                    - generic [ref=e123]:
+                      - img [ref=e124]
+                      - img [ref=e126]
+                      - img [ref=e129]
+                    - generic [ref=e132]: DC17
+                  - generic [ref=e134] [cursor=pointer]:
+                    - generic [ref=e135]:
+                      - img [ref=e136]
+                      - img [ref=e138]
+                      - img [ref=e141]
+                    - generic [ref=e144]: DC18
+                  - generic [ref=e146] [cursor=pointer]:
+                    - generic [ref=e147]:
+                      - img [ref=e148]
+                      - img [ref=e150]
+                      - img [ref=e153]
+                    - generic [ref=e156]: DC19
+                  - generic [ref=e158] [cursor=pointer]:
+                    - generic [ref=e159]:
+                      - img [ref=e160]
+                      - img [ref=e162]
+                      - img [ref=e165]
+                    - generic [ref=e168]: DC20
+                  - generic [ref=e170] [cursor=pointer]:
+                    - generic [ref=e171]:
+                      - img [ref=e172]
+                      - img [ref=e174]
+                      - img [ref=e177]
+                    - generic [ref=e180]: DC21
+                  - generic [ref=e182] [cursor=pointer]:
+                    - generic [ref=e183]:
+                      - img [ref=e184]
+                      - img [ref=e186]
+                      - img [ref=e189]
+                    - generic [ref=e192]: DC22
+                  - generic [ref=e194] [cursor=pointer]:
+                    - generic [ref=e195]:
+                      - img [ref=e196]
+                      - img [ref=e198]
+                      - img [ref=e201]
+                    - generic [ref=e204]: DC23
+                  - generic [ref=e206] [cursor=pointer]:
+                    - generic [ref=e207]:
+                      - img [ref=e208]
+                      - img [ref=e210]
+                      - img [ref=e213]
+                    - generic [ref=e216]: DC24
+                  - generic [ref=e218] [cursor=pointer]:
+                    - generic [ref=e219]:
+                      - img [ref=e220]
+                      - img [ref=e222]
+                      - img [ref=e225]
+                    - generic [ref=e228]: DC25
+                  - generic [ref=e230] [cursor=pointer]:
+                    - generic [ref=e231]:
+                      - img [ref=e232]
+                      - img [ref=e234]
+                      - img [ref=e237]
+                    - generic [ref=e240]: DC26
+                  - generic [ref=e242] [cursor=pointer]:
+                    - generic [ref=e243]:
+                      - img [ref=e244]
+                      - img [ref=e246]
+                      - img [ref=e249]
+                    - generic [ref=e252]: DC27
+                  - generic [ref=e254] [cursor=pointer]:
+                    - generic [ref=e255]:
+                      - img [ref=e256]
+                      - img [ref=e258]
+                      - img [ref=e261]
+                    - generic [ref=e264]: DC28
+                  - generic [ref=e266] [cursor=pointer]:
+                    - generic [ref=e267]:
+                      - img [ref=e268]
+                      - img [ref=e270]
+                      - img [ref=e273]
+                    - generic [ref=e276]: DC29
+                  - generic [ref=e278] [cursor=pointer]:
+                    - generic [ref=e279]:
+                      - img [ref=e280]
+                      - img [ref=e282]
+                      - img [ref=e285]
+                    - generic [ref=e288]: DC30
+                  - generic [ref=e290] [cursor=pointer]:
+                    - generic [ref=e291]:
+                      - img [ref=e292]
+                      - img [ref=e294]
+                      - img [ref=e297]
+                    - generic [ref=e299]: Tower01
+                  - generic [ref=e301] [cursor=pointer]:
+                    - generic [ref=e302]:
+                      - img [ref=e303]
+                      - img [ref=e305]
+                      - img [ref=e308]
+                    - generic [ref=e310]: Tower02
+                  - generic [ref=e312] [cursor=pointer]:
+                    - generic [ref=e313]:
+                      - img [ref=e314]
+                      - img [ref=e316]
+                      - img [ref=e319]
+                    - generic [ref=e321]: Tower03
+                  - generic [ref=e323] [cursor=pointer]:
+                    - generic [ref=e324]:
+                      - img [ref=e325]
+                      - img [ref=e327]
+                      - img [ref=e330]
+                    - generic [ref=e332]: Tower04
+                  - generic [ref=e334] [cursor=pointer]:
+                    - generic [ref=e335]:
+                      - img [ref=e336]
+                      - img [ref=e338]
+                      - img [ref=e341]
+                    - generic [ref=e343]: Tower05
+                  - generic [ref=e345] [cursor=pointer]:
+                    - generic [ref=e346]:
+                      - img [ref=e347]
+                      - img [ref=e349]
+                      - img [ref=e352]
+                    - generic [ref=e354]: Tower06
+                  - generic [ref=e356] [cursor=pointer]:
+                    - generic [ref=e357]:
+                      - img [ref=e358]
+                      - img [ref=e360]
+                      - img [ref=e363]
+                    - generic [ref=e365]: Tower07
+                  - generic [ref=e367] [cursor=pointer]:
+                    - generic [ref=e368]:
+                      - img [ref=e369]
+                      - img [ref=e371]
+                      - img [ref=e374]
+                    - generic [ref=e376]: Tower08
+                  - generic [ref=e378] [cursor=pointer]:
+                    - generic [ref=e379]:
+                      - img [ref=e380]
+                      - img [ref=e382]
+                      - img [ref=e385]
+                    - generic [ref=e387]: Tower09
+                  - generic [ref=e389] [cursor=pointer]:
+                    - generic [ref=e390]:
+                      - img [ref=e391]
+                      - img [ref=e393]
+                      - img [ref=e396]
+                    - generic [ref=e398]: Tower10
+                  - generic [ref=e400] [cursor=pointer]:
+                    - generic [ref=e401]:
+                      - img [ref=e402]
+                      - img [ref=e404]
+                      - img [ref=e407]
+                    - generic [ref=e409]: Tower11
+                  - generic [ref=e411] [cursor=pointer]:
+                    - generic [ref=e412]:
+                      - img [ref=e413]
+                      - img [ref=e415]
+                      - img [ref=e418]
+                    - generic [ref=e420]: Tower12
+                  - generic [ref=e422] [cursor=pointer]:
+                    - generic [ref=e423]:
+                      - img [ref=e424]
+                      - img [ref=e426]
+                      - img [ref=e429]
+                    - generic [ref=e431]: Tower13
+                  - generic [ref=e433] [cursor=pointer]:
+                    - generic [ref=e434]:
+                      - img [ref=e435]
+                      - img [ref=e437]
+                      - img [ref=e440]
+                    - generic [ref=e442]: Tower14
+                  - generic [ref=e444] [cursor=pointer]:
+                    - generic [ref=e445]:
+                      - img [ref=e446]
+                      - img [ref=e448]
+                      - img [ref=e451]
+                    - generic [ref=e453]: Tower15
+                  - generic [ref=e455] [cursor=pointer]:
+                    - generic [ref=e456]:
+                      - img [ref=e457]
+                      - img [ref=e459]
+                      - img [ref=e462]
+                    - generic [ref=e464]: Tower16
+                  - generic [ref=e466] [cursor=pointer]:
+                    - generic [ref=e467]:
+                      - img [ref=e468]
+                      - img [ref=e470]
+                      - img [ref=e473]
+                    - generic [ref=e475]: Tower17
+                  - generic [ref=e477] [cursor=pointer]:
+                    - generic [ref=e478]:
+                      - img [ref=e479]
+                      - img [ref=e481]
+                      - img [ref=e484]
+                    - generic [ref=e486]: Tower18
+                  - generic [ref=e488] [cursor=pointer]:
+                    - generic [ref=e489]:
+                      - img [ref=e490]
+                      - img [ref=e492]
+                      - img [ref=e495]
+                    - generic [ref=e497]: Tower19
+                  - generic [ref=e499] [cursor=pointer]:
+                    - generic [ref=e500]:
+                      - img [ref=e501]
+                      - img [ref=e503]
+                      - img [ref=e506]
+                    - generic [ref=e508]: Tower20
+                  - generic [ref=e510] [cursor=pointer]:
+                    - generic [ref=e511]:
+                      - img [ref=e512]
+                      - img [ref=e514]
+                      - img [ref=e517]
+                    - generic [ref=e519]: Tower21
+                  - generic [ref=e521] [cursor=pointer]:
+                    - generic [ref=e522]:
+                      - img [ref=e523]
+                      - img [ref=e525]
+                      - img [ref=e528]
+                    - generic [ref=e530]: Tower22
+                  - generic [ref=e532] [cursor=pointer]:
+                    - generic [ref=e533]:
+                      - img [ref=e534]
+                      - img [ref=e536]
+                      - img [ref=e539]
+                    - generic [ref=e541]: Tower23
+                  - generic [ref=e543] [cursor=pointer]:
+                    - generic [ref=e544]:
+                      - img [ref=e545]
+                      - img [ref=e547]
+                      - img [ref=e550]
+                    - generic [ref=e552]: Tower24
+                  - generic [ref=e554] [cursor=pointer]:
+                    - generic [ref=e555]:
+                      - img [ref=e556]
+                      - img [ref=e558]
+                      - img [ref=e561]
+                    - generic [ref=e563]: Tower25
+                  - generic [ref=e565] [cursor=pointer]:
+                    - generic [ref=e566]:
+                      - img [ref=e567]
+                      - img [ref=e569]
+                      - img [ref=e572]
+                    - generic [ref=e574]: Tower26
+                  - generic [ref=e576] [cursor=pointer]:
+                    - generic [ref=e577]:
+                      - img [ref=e578]
+                      - img [ref=e580]
+                      - img [ref=e583]
+                    - generic [ref=e585]: Tower27
+                  - generic [ref=e587] [cursor=pointer]:
+                    - generic [ref=e588]:
+                      - img [ref=e589]
+                      - img [ref=e591]
+                      - img [ref=e594]
+                    - generic [ref=e596]: Tower28
+                  - generic [ref=e598] [cursor=pointer]:
+                    - generic [ref=e599]:
+                      - img [ref=e600]
+                      - img [ref=e602]
+                      - img [ref=e605]
+                    - generic [ref=e607]: Tower29
+                  - generic [ref=e609] [cursor=pointer]:
+                    - generic [ref=e610]:
+                      - img [ref=e611]
+                      - img [ref=e613]
+                      - img [ref=e616]
+                    - generic [ref=e618]: Tower30
+              - generic [ref=e621] [cursor=pointer]:
+                - generic [ref=e622]:
+                  - img [ref=e623]
+                  - img [ref=e625]
+                  - img [ref=e628]
+                  - generic [ref=e632]: "50"
+                - generic [ref=e633]: DC02
+              - generic [ref=e636] [cursor=pointer]:
+                - generic [ref=e637]:
+                  - img [ref=e638]
+                  - img [ref=e640]
+                  - img [ref=e643]
+                  - generic [ref=e647]: "8"
+                - generic [ref=e648]: DC03
+              - generic [ref=e651] [cursor=pointer]:
+                - generic [ref=e652]:
+                  - img [ref=e653]
+                  - img [ref=e655]
+                  - img [ref=e658]
+                  - generic [ref=e662]: "10"
+                - generic [ref=e663]: DC04
+              - generic [ref=e666] [cursor=pointer]:
+                - generic [ref=e667]:
+                  - img [ref=e668]
+                  - img [ref=e670]
+                  - img [ref=e673]
+                  - generic [ref=e677]: "10"
+                - generic [ref=e678]: DC05
+              - generic [ref=e681] [cursor=pointer]:
+                - generic [ref=e682]:
+                  - img [ref=e683]
+                  - img [ref=e685]
+                  - img [ref=e688]
+                  - generic [ref=e692]: "8"
+                - generic [ref=e693]: DC06
+              - generic [ref=e696] [cursor=pointer]:
+                - generic [ref=e697]:
+                  - img [ref=e698]
+                  - img [ref=e700]
+                  - img [ref=e703]
+                  - generic [ref=e707]: "10"
+                - generic [ref=e708]: DC07
+              - generic [ref=e711] [cursor=pointer]:
+                - generic [ref=e712]:
+                  - img [ref=e713]
+                  - img [ref=e715]
+                  - img [ref=e718]
+                  - generic [ref=e722]: "10"
+                - generic [ref=e723]: DC08
+              - generic [ref=e726] [cursor=pointer]:
+                - generic [ref=e727]:
+                  - img [ref=e728]
+                  - img [ref=e730]
+                  - img [ref=e733]
+                  - generic [ref=e737]: "8"
+                - generic [ref=e738]: DC09
+              - generic [ref=e741] [cursor=pointer]:
+                - generic [ref=e742]:
+                  - img [ref=e743]
+                  - img [ref=e745]
+                  - img [ref=e748]
+                  - generic [ref=e752]: "10"
+                - generic [ref=e753]: DC10
+              - generic [ref=e756] [cursor=pointer]:
+                - generic [ref=e757]:
+                  - img [ref=e758]
+                  - img [ref=e760]
+                  - img [ref=e763]
+                  - generic [ref=e767]: "10"
+                - generic [ref=e768]: DC11
+              - generic [ref=e771] [cursor=pointer]:
+                - generic [ref=e772]:
+                  - img [ref=e773]
+                  - img [ref=e775]
+                  - img [ref=e778]
+                  - generic [ref=e782]: "8"
+                - generic [ref=e783]: DC12
+              - generic [ref=e786] [cursor=pointer]:
+                - generic [ref=e787]:
+                  - img [ref=e788]
+                  - img [ref=e790]
+                  - img [ref=e793]
+                  - generic [ref=e797]: "10"
+                - generic [ref=e798]: DC13
+              - generic [ref=e801] [cursor=pointer]:
+                - generic [ref=e802]:
+                  - img [ref=e803]
+                  - img [ref=e805]
+                  - img [ref=e808]
+                  - generic [ref=e812]: "10"
+                - generic [ref=e813]: DC14
+              - generic [ref=e816] [cursor=pointer]:
+                - generic [ref=e817]:
+                  - img [ref=e818]
+                  - img [ref=e820]
+                  - img [ref=e823]
+                  - generic [ref=e827]: "8"
+                - generic [ref=e828]: DC15
+              - generic [ref=e831] [cursor=pointer]:
+                - generic [ref=e832]:
+                  - img [ref=e833]
+                  - img [ref=e835]
+                  - img [ref=e838]
+                  - generic [ref=e842]: "10"
+                - generic [ref=e843]: DC16
+              - generic [ref=e846] [cursor=pointer]:
+                - generic [ref=e847]:
+                  - img [ref=e848]
+                  - img [ref=e850]
+                  - img [ref=e853]
+                  - generic [ref=e857]: "10"
+                - generic [ref=e858]: DC17
+              - generic [ref=e861] [cursor=pointer]:
+                - generic [ref=e862]:
+                  - img [ref=e863]
+                  - img [ref=e865]
+                  - img [ref=e868]
+                  - generic [ref=e872]: "8"
+                - generic [ref=e873]: DC18
+              - generic [ref=e876] [cursor=pointer]:
+                - generic [ref=e877]:
+                  - img [ref=e878]
+                  - img [ref=e880]
+                  - img [ref=e883]
+                  - generic [ref=e887]: "10"
+                - generic [ref=e888]: DC19
+              - generic [ref=e891] [cursor=pointer]:
+                - generic [ref=e892]:
+                  - img [ref=e893]
+                  - img [ref=e895]
+                  - img [ref=e898]
+                  - generic [ref=e902]: "10"
+                - generic [ref=e903]: DC20
+              - generic [ref=e906] [cursor=pointer]:
+                - generic [ref=e907]:
+                  - img [ref=e908]
+                  - img [ref=e910]
+                  - img [ref=e913]
+                  - generic [ref=e917]: "8"
+                - generic [ref=e918]: DC21
+              - generic [ref=e921] [cursor=pointer]:
+                - generic [ref=e922]:
+                  - img [ref=e923]
+                  - img [ref=e925]
+                  - img [ref=e928]
+                  - generic [ref=e932]: "10"
+                - generic [ref=e933]: DC22
+              - generic [ref=e936] [cursor=pointer]:
+                - generic [ref=e937]:
+                  - img [ref=e938]
+                  - img [ref=e940]
+                  - img [ref=e943]
+                  - generic [ref=e947]: "10"
+                - generic [ref=e948]: DC23
+              - generic [ref=e951] [cursor=pointer]:
+                - generic [ref=e952]:
+                  - img [ref=e953]
+                  - img [ref=e955]
+                  - img [ref=e958]
+                  - generic [ref=e962]: "8"
+                - generic [ref=e963]: DC24
+              - generic [ref=e966] [cursor=pointer]:
+                - generic [ref=e967]:
+                  - img [ref=e968]
+                  - img [ref=e970]
+                  - img [ref=e973]
+                  - generic [ref=e977]: "10"
+                - generic [ref=e978]: DC25
+              - generic [ref=e981] [cursor=pointer]:
+                - generic [ref=e982]:
+                  - img [ref=e983]
+                  - img [ref=e985]
+                  - img [ref=e988]
+                  - generic [ref=e992]: "10"
+                - generic [ref=e993]: DC26
+              - generic [ref=e996] [cursor=pointer]:
+                - generic [ref=e997]:
+                  - img [ref=e998]
+                  - img [ref=e1000]
+                  - img [ref=e1003]
+                  - generic [ref=e1007]: "8"
+                - generic [ref=e1008]: DC27
+              - generic [ref=e1011] [cursor=pointer]:
+                - generic [ref=e1012]:
+                  - img [ref=e1013]
+                  - img [ref=e1015]
+                  - img [ref=e1018]
+                  - generic [ref=e1022]: "10"
+                - generic [ref=e1023]: DC28
+              - generic [ref=e1026] [cursor=pointer]:
+                - generic [ref=e1027]:
+                  - img [ref=e1028]
+                  - img [ref=e1030]
+                  - img [ref=e1033]
+                  - generic [ref=e1037]: "10"
+                - generic [ref=e1038]: DC29
+              - generic [ref=e1041] [cursor=pointer]:
+                - generic [ref=e1042]:
+                  - img [ref=e1043]
+                  - img [ref=e1045]
+                  - img [ref=e1048]
+                  - generic [ref=e1052]: "8"
+                - generic [ref=e1053]: DC30
+              - generic [ref=e1056] [cursor=pointer]:
+                - generic [ref=e1057]:
+                  - img [ref=e1058]
+                  - img [ref=e1060]
+                  - img [ref=e1063]
+                  - generic [ref=e1067]: "10"
+                - generic [ref=e1068]: DC31
+              - generic [ref=e1071] [cursor=pointer]:
+                - generic [ref=e1072]:
+                  - img [ref=e1073]
+                  - img [ref=e1075]
+                  - img [ref=e1078]
+                  - generic [ref=e1082]: "10"
+                - generic [ref=e1083]: DC32
+              - generic [ref=e1086] [cursor=pointer]:
+                - generic [ref=e1087]:
+                  - img [ref=e1088]
+                  - img [ref=e1090]
+                  - img [ref=e1093]
+                  - generic [ref=e1097]: "8"
+                - generic [ref=e1098]: DC33
+              - generic [ref=e1101] [cursor=pointer]:
+                - generic [ref=e1102]:
+                  - img [ref=e1103]
+                  - img [ref=e1105]
+                  - img [ref=e1108]
+                  - generic [ref=e1112]: "10"
+                - generic [ref=e1113]: DC34
+              - generic [ref=e1116] [cursor=pointer]:
+                - generic [ref=e1117]:
+                  - img [ref=e1118]
+                  - img [ref=e1120]
+                  - img [ref=e1123]
+                  - generic [ref=e1127]: "10"
+                - generic [ref=e1128]: DC35
+              - generic [ref=e1131] [cursor=pointer]:
+                - generic [ref=e1132]:
+                  - img [ref=e1133]
+                  - img [ref=e1135]
+                  - img [ref=e1138]
+                  - generic [ref=e1142]: "8"
+                - generic [ref=e1143]: DC36
+              - generic [ref=e1146] [cursor=pointer]:
+                - generic [ref=e1147]:
+                  - img [ref=e1148]
+                  - img [ref=e1150]
+                  - img [ref=e1153]
+                  - generic [ref=e1157]: "10"
+                - generic [ref=e1158]: DC37
+              - generic [ref=e1161] [cursor=pointer]:
+                - generic [ref=e1162]:
+                  - img [ref=e1163]
+                  - img [ref=e1165]
+                  - img [ref=e1168]
+                  - generic [ref=e1172]: "10"
+                - generic [ref=e1173]: DC38
+              - generic [ref=e1176] [cursor=pointer]:
+                - generic [ref=e1177]:
+                  - img [ref=e1178]
+                  - img [ref=e1180]
+                  - img [ref=e1183]
+                  - generic [ref=e1187]: "8"
+                - generic [ref=e1188]: DC39
+              - generic [ref=e1191] [cursor=pointer]:
+                - generic [ref=e1192]:
+                  - img [ref=e1193]
+                  - img [ref=e1195]
+                  - img [ref=e1198]
+                  - generic [ref=e1202]: "10"
+                - generic [ref=e1203]: DC40
+        - generic [ref=e1204]:
+          - generic [ref=e1206]: Workload
+          - generic [ref=e1207]:
+            - generic [ref=e1208]:
+              - button "Previous page" [disabled] [ref=e1209]:
+                - img [ref=e1210]
+              - generic [ref=e1211]: 1/3
+              - button "Next page" [ref=e1212]:
+                - img [ref=e1213]
+            - generic [ref=e1214]:
+              - generic [ref=e1217] [cursor=pointer]:
+                - generic [ref=e1218]:
+                  - img [ref=e1219]
+                  - img [ref=e1221]
+                  - img [ref=e1224]
+                  - generic [ref=e1228]: "2"
+                - generic [ref=e1229]: deploy-dc-01
+              - generic [ref=e1232] [cursor=pointer]:
+                - generic [ref=e1233]:
+                  - img [ref=e1234]
+                  - img [ref=e1236]
+                  - img [ref=e1239]
+                  - generic [ref=e1243]: "2"
+                - generic [ref=e1244]: deploy-dc-04
+              - generic [ref=e1247] [cursor=pointer]:
+                - generic [ref=e1248]:
+                  - img [ref=e1249]
+                  - img [ref=e1251]
+                  - img [ref=e1254]
+                  - generic [ref=e1258]: "2"
+                - generic [ref=e1259]: deploy-dc-07
+              - generic [ref=e1262] [cursor=pointer]:
+                - generic [ref=e1263]:
+                  - img [ref=e1264]
+                  - img [ref=e1266]
+                  - img [ref=e1269]
+                  - generic [ref=e1273]: "2"
+                - generic [ref=e1274]: deploy-dc-10
+              - generic [ref=e1277] [cursor=pointer]:
+                - generic [ref=e1278]:
+                  - img [ref=e1279]
+                  - img [ref=e1281]
+                  - img [ref=e1284]
+                  - generic [ref=e1288]: "2"
+                - generic [ref=e1289]: deploy-dc-13
+              - generic [ref=e1292] [cursor=pointer]:
+                - generic [ref=e1293]:
+                  - img [ref=e1294]
+                  - img [ref=e1296]
+                  - img [ref=e1299]
+                  - generic [ref=e1303]: "2"
+                - generic [ref=e1304]: deploy-dc-16
+              - generic [ref=e1307] [cursor=pointer]:
+                - generic [ref=e1308]:
+                  - img [ref=e1309]
+                  - img [ref=e1311]
+                  - img [ref=e1314]
+                  - generic [ref=e1318]: "2"
+                - generic [ref=e1319]: deploy-dc-19
+              - generic [ref=e1322] [cursor=pointer]:
+                - generic [ref=e1323]:
+                  - img [ref=e1324]
+                  - img [ref=e1326]
+                  - img [ref=e1329]
+                  - generic [ref=e1333]: "2"
+                - generic [ref=e1334]: deploy-dc-22
+              - generic [ref=e1337] [cursor=pointer]:
+                - generic [ref=e1338]:
+                  - img [ref=e1339]
+                  - img [ref=e1341]
+                  - img [ref=e1344]
+                  - generic [ref=e1348]: "2"
+                - generic [ref=e1349]: deploy-dc-25
+              - generic [ref=e1352] [cursor=pointer]:
+                - generic [ref=e1353]:
+                  - img [ref=e1354]
+                  - img [ref=e1356]
+                  - img [ref=e1359]
+                  - generic [ref=e1363]: "2"
+                - generic [ref=e1364]: deploy-dc-28
+              - generic [ref=e1367] [cursor=pointer]:
+                - generic [ref=e1368]:
+                  - img [ref=e1369]
+                  - img [ref=e1371]
+                  - img [ref=e1374]
+                  - generic [ref=e1378]: "2"
+                - generic [ref=e1379]: deploy-dc-31
+              - generic [ref=e1382] [cursor=pointer]:
+                - generic [ref=e1383]:
+                  - img [ref=e1384]
+                  - img [ref=e1386]
+                  - img [ref=e1389]
+                  - generic [ref=e1393]: "2"
+                - generic [ref=e1394]: deploy-dc-34
+              - generic [ref=e1397] [cursor=pointer]:
+                - generic [ref=e1398]:
+                  - img [ref=e1399]
+                  - img [ref=e1401]
+                  - img [ref=e1404]
+                  - generic [ref=e1408]: "2"
+                - generic [ref=e1409]: deploy-dc-37
+              - generic [ref=e1412] [cursor=pointer]:
+                - generic [ref=e1413]:
+                  - img [ref=e1414]
+                  - img [ref=e1416]
+                  - img [ref=e1419]
+                  - generic [ref=e1423]: "2"
+                - generic [ref=e1424]: deploy-dc-40
+              - generic [ref=e1427] [cursor=pointer]:
+                - generic [ref=e1428]:
+                  - img [ref=e1429]
+                  - img [ref=e1431]
+                  - img [ref=e1434]
+                  - generic [ref=e1438]: "2"
+                - generic [ref=e1439]: deploy-dc-43
+              - generic [ref=e1442] [cursor=pointer]:
+                - generic [ref=e1443]:
+                  - img [ref=e1444]
+                  - img [ref=e1446]
+                  - img [ref=e1449]
+                  - generic [ref=e1453]: "2"
+                - generic [ref=e1454]: deploy-dc-46
+              - generic [ref=e1457] [cursor=pointer]:
+                - generic [ref=e1458]:
+                  - img [ref=e1459]
+                  - img [ref=e1461]
+                  - img [ref=e1464]
+                  - generic [ref=e1468]: "2"
+                - generic [ref=e1469]: deploy-dc-49
+              - generic [ref=e1472] [cursor=pointer]:
+                - generic [ref=e1473]:
+                  - img [ref=e1474]
+                  - img [ref=e1476]
+                  - img [ref=e1479]
+                  - generic [ref=e1483]: "2"
+                - generic [ref=e1484]: deploy-tower-02
+              - generic [ref=e1487] [cursor=pointer]:
+                - generic [ref=e1488]:
+                  - img [ref=e1489]
+                  - img [ref=e1491]
+                  - img [ref=e1494]
+                  - generic [ref=e1498]: "2"
+                - generic [ref=e1499]: deploy-tower-05
+              - generic [ref=e1502] [cursor=pointer]:
+                - generic [ref=e1503]:
+                  - img [ref=e1504]
+                  - img [ref=e1506]
+                  - img [ref=e1509]
+                  - generic [ref=e1513]: "2"
+                - generic [ref=e1514]: deploy-tower-08
+              - generic [ref=e1517] [cursor=pointer]:
+                - generic [ref=e1518]:
+                  - img [ref=e1519]
+                  - img [ref=e1521]
+                  - img [ref=e1524]
+                  - generic [ref=e1528]: "2"
+                - generic [ref=e1529]: deploy-tower-11
+              - generic [ref=e1532] [cursor=pointer]:
+                - generic [ref=e1533]:
+                  - img [ref=e1534]
+                  - img [ref=e1536]
+                  - img [ref=e1539]
+                  - generic [ref=e1543]: "2"
+                - generic [ref=e1544]: deploy-tower-14
+              - generic [ref=e1547] [cursor=pointer]:
+                - generic [ref=e1548]:
+                  - img [ref=e1549]
+                  - img [ref=e1551]
+                  - img [ref=e1554]
+                  - generic [ref=e1558]: "2"
+                - generic [ref=e1559]: deploy-tower-17
+              - generic [ref=e1562] [cursor=pointer]:
+                - generic [ref=e1563]:
+                  - img [ref=e1564]
+                  - img [ref=e1566]
+                  - img [ref=e1569]
+                  - generic [ref=e1573]: "2"
+                - generic [ref=e1574]: deploy-tower-20
+              - generic [ref=e1577] [cursor=pointer]:
+                - generic [ref=e1578]:
+                  - img [ref=e1579]
+                  - img [ref=e1581]
+                  - img [ref=e1584]
+                  - generic [ref=e1588]: "2"
+                - generic [ref=e1589]: deploy-tower-23
+              - generic [ref=e1592] [cursor=pointer]:
+                - generic [ref=e1593]:
+                  - img [ref=e1594]
+                  - img [ref=e1596]
+                  - img [ref=e1599]
+                  - generic [ref=e1603]: "2"
+                - generic [ref=e1604]: deploy-tower-26
+              - generic [ref=e1607] [cursor=pointer]:
+                - generic [ref=e1608]:
+                  - img [ref=e1609]
+                  - img [ref=e1611]
+                  - img [ref=e1614]
+                  - generic [ref=e1618]: "2"
+                - generic [ref=e1619]: deploy-tower-29
+              - generic [ref=e1622] [cursor=pointer]:
+                - generic [ref=e1623]:
+                  - img [ref=e1624]
+                  - img [ref=e1626]
+                  - img [ref=e1629]
+                  - generic [ref=e1633]: "2"
+                - generic [ref=e1634]: deploy-tower-32
+              - generic [ref=e1637] [cursor=pointer]:
+                - generic [ref=e1638]:
+                  - img [ref=e1639]
+                  - img [ref=e1641]
+                  - img [ref=e1644]
+                  - generic [ref=e1648]: "2"
+                - generic [ref=e1649]: deploy-tower-35
+              - generic [ref=e1652] [cursor=pointer]:
+                - generic [ref=e1653]:
+                  - img [ref=e1654]
+                  - img [ref=e1656]
+                  - img [ref=e1659]
+                  - generic [ref=e1663]: "2"
+                - generic [ref=e1664]: deploy-tower-38
+              - generic [ref=e1667] [cursor=pointer]:
+                - generic [ref=e1668]:
+                  - img [ref=e1669]
+                  - img [ref=e1671]
+                  - img [ref=e1674]
+                  - generic [ref=e1678]: "2"
+                - generic [ref=e1679]: deploy-tower-41
+              - generic [ref=e1682] [cursor=pointer]:
+                - generic [ref=e1683]:
+                  - img [ref=e1684]
+                  - img [ref=e1686]
+                  - img [ref=e1689]
+                  - generic [ref=e1693]: "2"
+                - generic [ref=e1694]: deploy-tower-44
+              - generic [ref=e1697] [cursor=pointer]:
+                - generic [ref=e1698]:
+                  - img [ref=e1699]
+                  - img [ref=e1701]
+                  - img [ref=e1704]
+                  - generic [ref=e1708]: "2"
+                - generic [ref=e1709]: deploy-tower-47
+              - generic [ref=e1712] [cursor=pointer]:
+                - generic [ref=e1713]:
+                  - img [ref=e1714]
+                  - img [ref=e1716]
+                  - img [ref=e1719]
+                  - generic [ref=e1723]: "2"
+                - generic [ref=e1724]: deploy-tower-50
+              - generic [ref=e1727] [cursor=pointer]:
+                - generic [ref=e1728]:
+                  - img [ref=e1729]
+                  - img [ref=e1731]
+                  - img [ref=e1734]
+                  - generic [ref=e1742]: "2"
+                - generic [ref=e1743]: sts-dc-02
+              - generic [ref=e1746] [cursor=pointer]:
+                - generic [ref=e1747]:
+                  - img [ref=e1748]
+                  - img [ref=e1750]
+                  - img [ref=e1753]
+                  - generic [ref=e1761]: "2"
+                - generic [ref=e1762]: sts-dc-05
+              - generic [ref=e1765] [cursor=pointer]:
+                - generic [ref=e1766]:
+                  - img [ref=e1767]
+                  - img [ref=e1769]
+                  - img [ref=e1772]
+                  - generic [ref=e1780]: "2"
+                - generic [ref=e1781]: sts-dc-08
+              - generic [ref=e1784] [cursor=pointer]:
+                - generic [ref=e1785]:
+                  - img [ref=e1786]
+                  - img [ref=e1788]
+                  - img [ref=e1791]
+                  - generic [ref=e1799]: "2"
+                - generic [ref=e1800]: sts-dc-11
+              - generic [ref=e1803] [cursor=pointer]:
+                - generic [ref=e1804]:
+                  - img [ref=e1805]
+                  - img [ref=e1807]
+                  - img [ref=e1810]
+                  - generic [ref=e1818]: "2"
+                - generic [ref=e1819]: sts-dc-14
+              - generic [ref=e1822] [cursor=pointer]:
+                - generic [ref=e1823]:
+                  - img [ref=e1824]
+                  - img [ref=e1826]
+                  - img [ref=e1829]
+                  - generic [ref=e1837]: "2"
+                - generic [ref=e1838]: sts-dc-17
+        - generic [ref=e1839]:
+          - generic [ref=e1841]: Service
+          - generic [ref=e1842]:
+            - generic [ref=e1843]:
+              - button "Previous page" [disabled] [ref=e1844]:
+                - img [ref=e1845]
+              - generic [ref=e1846]: 1/3
+              - button "Next page" [ref=e1847]:
+                - img [ref=e1848]
+            - generic [ref=e1849]:
+              - generic [ref=e1851] [cursor=pointer]:
+                - generic [ref=e1852]:
+                  - img [ref=e1853]
+                  - img [ref=e1855]
+                  - img [ref=e1858]
+                - generic [ref=e1860]: svc-dc-01
+              - generic [ref=e1862] [cursor=pointer]:
+                - generic [ref=e1863]:
+                  - img [ref=e1864]
+                  - img [ref=e1866]
+                  - img [ref=e1869]
+                - generic [ref=e1871]: svc-dc-02
+              - generic [ref=e1873] [cursor=pointer]:
+                - generic [ref=e1874]:
+                  - img [ref=e1875]
+                  - img [ref=e1877]
+                  - img [ref=e1880]
+                - generic [ref=e1882]: svc-dc-03
+              - generic [ref=e1884] [cursor=pointer]:
+                - generic [ref=e1885]:
+                  - img [ref=e1886]
+                  - img [ref=e1888]
+                  - img [ref=e1891]
+                - generic [ref=e1893]: svc-dc-04
+              - generic [ref=e1895] [cursor=pointer]:
+                - generic [ref=e1896]:
+                  - img [ref=e1897]
+                  - img [ref=e1899]
+                  - img [ref=e1902]
+                - generic [ref=e1904]: svc-dc-05
+              - generic [ref=e1906] [cursor=pointer]:
+                - generic [ref=e1907]:
+                  - img [ref=e1908]
+                  - img [ref=e1910]
+                  - img [ref=e1913]
+                - generic [ref=e1915]: svc-dc-06
+              - generic [ref=e1917] [cursor=pointer]:
+                - generic [ref=e1918]:
+                  - img [ref=e1919]
+                  - img [ref=e1921]
+                  - img [ref=e1924]
+                - generic [ref=e1926]: svc-dc-07
+              - generic [ref=e1928] [cursor=pointer]:
+                - generic [ref=e1929]:
+                  - img [ref=e1930]
+                  - img [ref=e1932]
+                  - img [ref=e1935]
+                - generic [ref=e1937]: svc-dc-08
+              - generic [ref=e1939] [cursor=pointer]:
+                - generic [ref=e1940]:
+                  - img [ref=e1941]
+                  - img [ref=e1943]
+                  - img [ref=e1946]
+                - generic [ref=e1948]: svc-dc-09
+              - generic [ref=e1950] [cursor=pointer]:
+                - generic [ref=e1951]:
+                  - img [ref=e1952]
+                  - img [ref=e1954]
+                  - img [ref=e1957]
+                - generic [ref=e1959]: svc-dc-10
+              - generic [ref=e1961] [cursor=pointer]:
+                - generic [ref=e1962]:
+                  - img [ref=e1963]
+                  - img [ref=e1965]
+                  - img [ref=e1968]
+                - generic [ref=e1970]: svc-dc-11
+              - generic [ref=e1972] [cursor=pointer]:
+                - generic [ref=e1973]:
+                  - img [ref=e1974]
+                  - img [ref=e1976]
+                  - img [ref=e1979]
+                - generic [ref=e1981]: svc-dc-12
+              - generic [ref=e1983] [cursor=pointer]:
+                - generic [ref=e1984]:
+                  - img [ref=e1985]
+                  - img [ref=e1987]
+                  - img [ref=e1990]
+                - generic [ref=e1992]: svc-dc-13
+              - generic [ref=e1994] [cursor=pointer]:
+                - generic [ref=e1995]:
+                  - img [ref=e1996]
+                  - img [ref=e1998]
+                  - img [ref=e2001]
+                - generic [ref=e2003]: svc-dc-14
+              - generic [ref=e2005] [cursor=pointer]:
+                - generic [ref=e2006]:
+                  - img [ref=e2007]
+                  - img [ref=e2009]
+                  - img [ref=e2012]
+                - generic [ref=e2014]: svc-dc-15
+              - generic [ref=e2016] [cursor=pointer]:
+                - generic [ref=e2017]:
+                  - img [ref=e2018]
+                  - img [ref=e2020]
+                  - img [ref=e2023]
+                - generic [ref=e2025]: svc-dc-16
+              - generic [ref=e2027] [cursor=pointer]:
+                - generic [ref=e2028]:
+                  - img [ref=e2029]
+                  - img [ref=e2031]
+                  - img [ref=e2034]
+                - generic [ref=e2036]: svc-dc-17
+              - generic [ref=e2038] [cursor=pointer]:
+                - generic [ref=e2039]:
+                  - img [ref=e2040]
+                  - img [ref=e2042]
+                  - img [ref=e2045]
+                - generic [ref=e2047]: svc-dc-18
+              - generic [ref=e2049] [cursor=pointer]:
+                - generic [ref=e2050]:
+                  - img [ref=e2051]
+                  - img [ref=e2053]
+                  - img [ref=e2056]
+                - generic [ref=e2058]: svc-dc-19
+              - generic [ref=e2060] [cursor=pointer]:
+                - generic [ref=e2061]:
+                  - img [ref=e2062]
+                  - img [ref=e2064]
+                  - img [ref=e2067]
+                - generic [ref=e2069]: svc-dc-20
+              - generic [ref=e2071] [cursor=pointer]:
+                - generic [ref=e2072]:
+                  - img [ref=e2073]
+                  - img [ref=e2075]
+                  - img [ref=e2078]
+                - generic [ref=e2080]: svc-dc-21
+              - generic [ref=e2082] [cursor=pointer]:
+                - generic [ref=e2083]:
+                  - img [ref=e2084]
+                  - img [ref=e2086]
+                  - img [ref=e2089]
+                - generic [ref=e2091]: svc-dc-22
+              - generic [ref=e2093] [cursor=pointer]:
+                - generic [ref=e2094]:
+                  - img [ref=e2095]
+                  - img [ref=e2097]
+                  - img [ref=e2100]
+                - generic [ref=e2102]: svc-dc-23
+              - generic [ref=e2104] [cursor=pointer]:
+                - generic [ref=e2105]:
+                  - img [ref=e2106]
+                  - img [ref=e2108]
+                  - img [ref=e2111]
+                - generic [ref=e2113]: svc-dc-24
+              - generic [ref=e2115] [cursor=pointer]:
+                - generic [ref=e2116]:
+                  - img [ref=e2117]
+                  - img [ref=e2119]
+                  - img [ref=e2122]
+                - generic [ref=e2124]: svc-dc-25
+              - generic [ref=e2126] [cursor=pointer]:
+                - generic [ref=e2127]:
+                  - img [ref=e2128]
+                  - img [ref=e2130]
+                  - img [ref=e2133]
+                - generic [ref=e2135]: svc-dc-26
+              - generic [ref=e2137] [cursor=pointer]:
+                - generic [ref=e2138]:
+                  - img [ref=e2139]
+                  - img [ref=e2141]
+                  - img [ref=e2144]
+                - generic [ref=e2146]: svc-dc-27
+              - generic [ref=e2148] [cursor=pointer]:
+                - generic [ref=e2149]:
+                  - img [ref=e2150]
+                  - img [ref=e2152]
+                  - img [ref=e2155]
+                - generic [ref=e2157]: svc-dc-28
+              - generic [ref=e2159] [cursor=pointer]:
+                - generic [ref=e2160]:
+                  - img [ref=e2161]
+                  - img [ref=e2163]
+                  - img [ref=e2166]
+                - generic [ref=e2168]: svc-dc-29
+              - generic [ref=e2170] [cursor=pointer]:
+                - generic [ref=e2171]:
+                  - img [ref=e2172]
+                  - img [ref=e2174]
+                  - img [ref=e2177]
+                - generic [ref=e2179]: svc-dc-30
+              - generic [ref=e2181] [cursor=pointer]:
+                - generic [ref=e2182]:
+                  - img [ref=e2183]
+                  - img [ref=e2185]
+                  - img [ref=e2188]
+                - generic [ref=e2190]: svc-dc-31
+              - generic [ref=e2192] [cursor=pointer]:
+                - generic [ref=e2193]:
+                  - img [ref=e2194]
+                  - img [ref=e2196]
+                  - img [ref=e2199]
+                - generic [ref=e2201]: svc-dc-32
+              - generic [ref=e2203] [cursor=pointer]:
+                - generic [ref=e2204]:
+                  - img [ref=e2205]
+                  - img [ref=e2207]
+                  - img [ref=e2210]
+                - generic [ref=e2212]: svc-dc-33
+              - generic [ref=e2214] [cursor=pointer]:
+                - generic [ref=e2215]:
+                  - img [ref=e2216]
+                  - img [ref=e2218]
+                  - img [ref=e2221]
+                - generic [ref=e2223]: svc-dc-34
+              - generic [ref=e2225] [cursor=pointer]:
+                - generic [ref=e2226]:
+                  - img [ref=e2227]
+                  - img [ref=e2229]
+                  - img [ref=e2232]
+                - generic [ref=e2234]: svc-dc-35
+              - generic [ref=e2236] [cursor=pointer]:
+                - generic [ref=e2237]:
+                  - img [ref=e2238]
+                  - img [ref=e2240]
+                  - img [ref=e2243]
+                - generic [ref=e2245]: svc-dc-36
+              - generic [ref=e2247] [cursor=pointer]:
+                - generic [ref=e2248]:
+                  - img [ref=e2249]
+                  - img [ref=e2251]
+                  - img [ref=e2254]
+                - generic [ref=e2256]: svc-dc-37
+              - generic [ref=e2258] [cursor=pointer]:
+                - generic [ref=e2259]:
+                  - img [ref=e2260]
+                  - img [ref=e2262]
+                  - img [ref=e2265]
+                - generic [ref=e2267]: svc-dc-38
+              - generic [ref=e2269] [cursor=pointer]:
+                - generic [ref=e2270]:
+                  - img [ref=e2271]
+                  - img [ref=e2273]
+                  - img [ref=e2276]
+                - generic [ref=e2278]: svc-dc-39
+              - generic [ref=e2280] [cursor=pointer]:
+                - generic [ref=e2281]:
+                  - img [ref=e2282]
+                  - img [ref=e2284]
+                  - img [ref=e2287]
+                - generic [ref=e2289]: svc-dc-40
+        - generic [ref=e2290]:
+          - generic [ref=e2292]: Network
+          - generic [ref=e2293]:
+            - generic [ref=e2294]:
+              - button "Previous page" [disabled] [ref=e2295]:
+                - img [ref=e2296]
+              - generic [ref=e2297]: 1/5
+              - button "Next page" [ref=e2298]:
+                - img [ref=e2299]
+            - generic [ref=e2300]:
+              - generic [ref=e2302] [cursor=pointer]:
+                - generic [ref=e2303]:
+                  - img [ref=e2304]
+                  - img [ref=e2306]
+                  - img [ref=e2309]
+                - generic [ref=e2319]: net-a-dc-01
+              - generic [ref=e2321] [cursor=pointer]:
+                - generic [ref=e2322]:
+                  - img [ref=e2323]
+                  - img [ref=e2325]
+                  - img [ref=e2328]
+                - generic [ref=e2338]: net-b-dc-01
+              - generic [ref=e2340] [cursor=pointer]:
+                - generic [ref=e2341]:
+                  - img [ref=e2342]
+                  - img [ref=e2344]
+                  - img [ref=e2347]
+                - generic [ref=e2357]: net-a-dc-02
+              - generic [ref=e2359] [cursor=pointer]:
+                - generic [ref=e2360]:
+                  - img [ref=e2361]
+                  - img [ref=e2363]
+                  - img [ref=e2366]
+                - generic [ref=e2376]: net-b-dc-02
+              - generic [ref=e2378] [cursor=pointer]:
+                - generic [ref=e2379]:
+                  - img [ref=e2380]
+                  - img [ref=e2382]
+                  - img [ref=e2385]
+                - generic [ref=e2395]: net-a-dc-03
+              - generic [ref=e2397] [cursor=pointer]:
+                - generic [ref=e2398]:
+                  - img [ref=e2399]
+                  - img [ref=e2401]
+                  - img [ref=e2404]
+                - generic [ref=e2414]: net-b-dc-03
+              - generic [ref=e2416] [cursor=pointer]:
+                - generic [ref=e2417]:
+                  - img [ref=e2418]
+                  - img [ref=e2420]
+                  - img [ref=e2423]
+                - generic [ref=e2433]: net-a-dc-04
+              - generic [ref=e2435] [cursor=pointer]:
+                - generic [ref=e2436]:
+                  - img [ref=e2437]
+                  - img [ref=e2439]
+                  - img [ref=e2442]
+                - generic [ref=e2452]: net-b-dc-04
+              - generic [ref=e2454] [cursor=pointer]:
+                - generic [ref=e2455]:
+                  - img [ref=e2456]
+                  - img [ref=e2458]
+                  - img [ref=e2461]
+                - generic [ref=e2471]: net-a-dc-05
+              - generic [ref=e2473] [cursor=pointer]:
+                - generic [ref=e2474]:
+                  - img [ref=e2475]
+                  - img [ref=e2477]
+                  - img [ref=e2480]
+                - generic [ref=e2490]: net-b-dc-05
+              - generic [ref=e2492] [cursor=pointer]:
+                - generic [ref=e2493]:
+                  - img [ref=e2494]
+                  - img [ref=e2496]
+                  - img [ref=e2499]
+                - generic [ref=e2509]: net-a-dc-06
+              - generic [ref=e2511] [cursor=pointer]:
+                - generic [ref=e2512]:
+                  - img [ref=e2513]
+                  - img [ref=e2515]
+                  - img [ref=e2518]
+                - generic [ref=e2528]: net-b-dc-06
+              - generic [ref=e2530] [cursor=pointer]:
+                - generic [ref=e2531]:
+                  - img [ref=e2532]
+                  - img [ref=e2534]
+                  - img [ref=e2537]
+                - generic [ref=e2547]: net-a-dc-07
+              - generic [ref=e2549] [cursor=pointer]:
+                - generic [ref=e2550]:
+                  - img [ref=e2551]
+                  - img [ref=e2553]
+                  - img [ref=e2556]
+                - generic [ref=e2566]: net-b-dc-07
+              - generic [ref=e2568] [cursor=pointer]:
+                - generic [ref=e2569]:
+                  - img [ref=e2570]
+                  - img [ref=e2572]
+                  - img [ref=e2575]
+                - generic [ref=e2585]: net-a-dc-08
+              - generic [ref=e2587] [cursor=pointer]:
+                - generic [ref=e2588]:
+                  - img [ref=e2589]
+                  - img [ref=e2591]
+                  - img [ref=e2594]
+                - generic [ref=e2604]: net-b-dc-08
+              - generic [ref=e2606] [cursor=pointer]:
+                - generic [ref=e2607]:
+                  - img [ref=e2608]
+                  - img [ref=e2610]
+                  - img [ref=e2613]
+                - generic [ref=e2623]: net-a-dc-09
+              - generic [ref=e2625] [cursor=pointer]:
+                - generic [ref=e2626]:
+                  - img [ref=e2627]
+                  - img [ref=e2629]
+                  - img [ref=e2632]
+                - generic [ref=e2642]: net-b-dc-09
+              - generic [ref=e2644] [cursor=pointer]:
+                - generic [ref=e2645]:
+                  - img [ref=e2646]
+                  - img [ref=e2648]
+                  - img [ref=e2651]
+                - generic [ref=e2661]: net-a-dc-10
+              - generic [ref=e2663] [cursor=pointer]:
+                - generic [ref=e2664]:
+                  - img [ref=e2665]
+                  - img [ref=e2667]
+                  - img [ref=e2670]
+                - generic [ref=e2680]: net-b-dc-10
+              - generic [ref=e2682] [cursor=pointer]:
+                - generic [ref=e2683]:
+                  - img [ref=e2684]
+                  - img [ref=e2686]
+                  - img [ref=e2689]
+                - generic [ref=e2699]: net-a-dc-11
+              - generic [ref=e2701] [cursor=pointer]:
+                - generic [ref=e2702]:
+                  - img [ref=e2703]
+                  - img [ref=e2705]
+                  - img [ref=e2708]
+                - generic [ref=e2718]: net-b-dc-11
+              - generic [ref=e2720] [cursor=pointer]:
+                - generic [ref=e2721]:
+                  - img [ref=e2722]
+                  - img [ref=e2724]
+                  - img [ref=e2727]
+                - generic [ref=e2737]: net-a-dc-12
+              - generic [ref=e2739] [cursor=pointer]:
+                - generic [ref=e2740]:
+                  - img [ref=e2741]
+                  - img [ref=e2743]
+                  - img [ref=e2746]
+                - generic [ref=e2756]: net-b-dc-12
+              - generic [ref=e2758] [cursor=pointer]:
+                - generic [ref=e2759]:
+                  - img [ref=e2760]
+                  - img [ref=e2762]
+                  - img [ref=e2765]
+                - generic [ref=e2775]: net-a-dc-13
+              - generic [ref=e2777] [cursor=pointer]:
+                - generic [ref=e2778]:
+                  - img [ref=e2779]
+                  - img [ref=e2781]
+                  - img [ref=e2784]
+                - generic [ref=e2794]: net-b-dc-13
+              - generic [ref=e2796] [cursor=pointer]:
+                - generic [ref=e2797]:
+                  - img [ref=e2798]
+                  - img [ref=e2800]
+                  - img [ref=e2803]
+                - generic [ref=e2813]: net-a-dc-14
+              - generic [ref=e2815] [cursor=pointer]:
+                - generic [ref=e2816]:
+                  - img [ref=e2817]
+                  - img [ref=e2819]
+                  - img [ref=e2822]
+                - generic [ref=e2832]: net-b-dc-14
+              - generic [ref=e2834] [cursor=pointer]:
+                - generic [ref=e2835]:
+                  - img [ref=e2836]
+                  - img [ref=e2838]
+                  - img [ref=e2841]
+                - generic [ref=e2851]: net-a-dc-15
+              - generic [ref=e2853] [cursor=pointer]:
+                - generic [ref=e2854]:
+                  - img [ref=e2855]
+                  - img [ref=e2857]
+                  - img [ref=e2860]
+                - generic [ref=e2870]: net-b-dc-15
+              - generic [ref=e2872] [cursor=pointer]:
+                - generic [ref=e2873]:
+                  - img [ref=e2874]
+                  - img [ref=e2876]
+                  - img [ref=e2879]
+                - generic [ref=e2889]: net-a-dc-16
+              - generic [ref=e2891] [cursor=pointer]:
+                - generic [ref=e2892]:
+                  - img [ref=e2893]
+                  - img [ref=e2895]
+                  - img [ref=e2898]
+                - generic [ref=e2908]: net-b-dc-16
+              - generic [ref=e2910] [cursor=pointer]:
+                - generic [ref=e2911]:
+                  - img [ref=e2912]
+                  - img [ref=e2914]
+                  - img [ref=e2917]
+                - generic [ref=e2927]: net-a-dc-17
+              - generic [ref=e2929] [cursor=pointer]:
+                - generic [ref=e2930]:
+                  - img [ref=e2931]
+                  - img [ref=e2933]
+                  - img [ref=e2936]
+                - generic [ref=e2946]: net-b-dc-17
+              - generic [ref=e2948] [cursor=pointer]:
+                - generic [ref=e2949]:
+                  - img [ref=e2950]
+                  - img [ref=e2952]
+                  - img [ref=e2955]
+                - generic [ref=e2965]: net-a-dc-18
+              - generic [ref=e2967] [cursor=pointer]:
+                - generic [ref=e2968]:
+                  - img [ref=e2969]
+                  - img [ref=e2971]
+                  - img [ref=e2974]
+                - generic [ref=e2984]: net-b-dc-18
+              - generic [ref=e2986] [cursor=pointer]:
+                - generic [ref=e2987]:
+                  - img [ref=e2988]
+                  - img [ref=e2990]
+                  - img [ref=e2993]
+                - generic [ref=e3003]: net-a-dc-19
+              - generic [ref=e3005] [cursor=pointer]:
+                - generic [ref=e3006]:
+                  - img [ref=e3007]
+                  - img [ref=e3009]
+                  - img [ref=e3012]
+                - generic [ref=e3022]: net-b-dc-19
+              - generic [ref=e3024] [cursor=pointer]:
+                - generic [ref=e3025]:
+                  - img [ref=e3026]
+                  - img [ref=e3028]
+                  - img [ref=e3031]
+                - generic [ref=e3041]: net-a-dc-20
+              - generic [ref=e3043] [cursor=pointer]:
+                - generic [ref=e3044]:
+                  - img [ref=e3045]
+                  - img [ref=e3047]
+                  - img [ref=e3050]
+                - generic [ref=e3060]: net-b-dc-20
+        - generic [ref=e3061]:
+          - generic [ref=e3063]: Config and Storage
+          - generic [ref=e3064]:
+            - generic [ref=e3065]:
+              - button "Previous page" [disabled] [ref=e3066]:
+                - img [ref=e3067]
+              - generic [ref=e3068]: 1/10
+              - button "Next page" [ref=e3069]:
+                - img [ref=e3070]
+            - generic [ref=e3071]:
+              - generic [ref=e3073] [cursor=pointer]:
+                - generic [ref=e3074]:
+                  - img [ref=e3075]
+                  - img [ref=e3077]
+                  - img [ref=e3080]
+                - generic [ref=e3082]: cm-dc-01
+              - generic [ref=e3084] [cursor=pointer]:
+                - generic [ref=e3085]:
+                  - img [ref=e3086]
+                  - img [ref=e3088]
+                  - img [ref=e3091]
+                - generic [ref=e3093]: secret-dc-01
+              - generic [ref=e3095] [cursor=pointer]:
+                - generic [ref=e3096]:
+                  - img [ref=e3097]
+                  - img [ref=e3099]
+                  - img [ref=e3102]
+                - generic [ref=e3104]: pvc-dc-01
+              - generic [ref=e3106] [cursor=pointer]:
+                - generic [ref=e3107]:
+                  - img [ref=e3108]
+                  - img [ref=e3110]
+                  - img [ref=e3113]
+                - generic [ref=e3117]: pv-dc-01
+              - generic [ref=e3119] [cursor=pointer]:
+                - generic [ref=e3120]:
+                  - img [ref=e3121]
+                  - img [ref=e3123]
+                  - img [ref=e3126]
+                - generic [ref=e3128]: cm-dc-02
+              - generic [ref=e3130] [cursor=pointer]:
+                - generic [ref=e3131]:
+                  - img [ref=e3132]
+                  - img [ref=e3134]
+                  - img [ref=e3137]
+                - generic [ref=e3139]: secret-dc-02
+              - generic [ref=e3141] [cursor=pointer]:
+                - generic [ref=e3142]:
+                  - img [ref=e3143]
+                  - img [ref=e3145]
+                  - img [ref=e3148]
+                - generic [ref=e3150]: pvc-dc-02
+              - generic [ref=e3152] [cursor=pointer]:
+                - generic [ref=e3153]:
+                  - img [ref=e3154]
+                  - img [ref=e3156]
+                  - img [ref=e3159]
+                - generic [ref=e3163]: pv-dc-02
+              - generic [ref=e3165] [cursor=pointer]:
+                - generic [ref=e3166]:
+                  - img [ref=e3167]
+                  - img [ref=e3169]
+                  - img [ref=e3172]
+                - generic [ref=e3174]: cm-dc-03
+              - generic [ref=e3176] [cursor=pointer]:
+                - generic [ref=e3177]:
+                  - img [ref=e3178]
+                  - img [ref=e3180]
+                  - img [ref=e3183]
+                - generic [ref=e3185]: secret-dc-03
+              - generic [ref=e3187] [cursor=pointer]:
+                - generic [ref=e3188]:
+                  - img [ref=e3189]
+                  - img [ref=e3191]
+                  - img [ref=e3194]
+                - generic [ref=e3196]: pvc-dc-03
+              - generic [ref=e3198] [cursor=pointer]:
+                - generic [ref=e3199]:
+                  - img [ref=e3200]
+                  - img [ref=e3202]
+                  - img [ref=e3205]
+                - generic [ref=e3209]: pv-dc-03
+              - generic [ref=e3211] [cursor=pointer]:
+                - generic [ref=e3212]:
+                  - img [ref=e3213]
+                  - img [ref=e3215]
+                  - img [ref=e3218]
+                - generic [ref=e3220]: cm-dc-04
+              - generic [ref=e3222] [cursor=pointer]:
+                - generic [ref=e3223]:
+                  - img [ref=e3224]
+                  - img [ref=e3226]
+                  - img [ref=e3229]
+                - generic [ref=e3231]: secret-dc-04
+              - generic [ref=e3233] [cursor=pointer]:
+                - generic [ref=e3234]:
+                  - img [ref=e3235]
+                  - img [ref=e3237]
+                  - img [ref=e3240]
+                - generic [ref=e3242]: pvc-dc-04
+              - generic [ref=e3244] [cursor=pointer]:
+                - generic [ref=e3245]:
+                  - img [ref=e3246]
+                  - img [ref=e3248]
+                  - img [ref=e3251]
+                - generic [ref=e3255]: pv-dc-04
+              - generic [ref=e3257] [cursor=pointer]:
+                - generic [ref=e3258]:
+                  - img [ref=e3259]
+                  - img [ref=e3261]
+                  - img [ref=e3264]
+                - generic [ref=e3266]: cm-dc-05
+              - generic [ref=e3268] [cursor=pointer]:
+                - generic [ref=e3269]:
+                  - img [ref=e3270]
+                  - img [ref=e3272]
+                  - img [ref=e3275]
+                - generic [ref=e3277]: secret-dc-05
+              - generic [ref=e3279] [cursor=pointer]:
+                - generic [ref=e3280]:
+                  - img [ref=e3281]
+                  - img [ref=e3283]
+                  - img [ref=e3286]
+                - generic [ref=e3288]: pvc-dc-05
+              - generic [ref=e3290] [cursor=pointer]:
+                - generic [ref=e3291]:
+                  - img [ref=e3292]
+                  - img [ref=e3294]
+                  - img [ref=e3297]
+                - generic [ref=e3301]: pv-dc-05
+              - generic [ref=e3303] [cursor=pointer]:
+                - generic [ref=e3304]:
+                  - img [ref=e3305]
+                  - img [ref=e3307]
+                  - img [ref=e3310]
+                - generic [ref=e3312]: cm-dc-06
+              - generic [ref=e3314] [cursor=pointer]:
+                - generic [ref=e3315]:
+                  - img [ref=e3316]
+                  - img [ref=e3318]
+                  - img [ref=e3321]
+                - generic [ref=e3323]: secret-dc-06
+              - generic [ref=e3325] [cursor=pointer]:
+                - generic [ref=e3326]:
+                  - img [ref=e3327]
+                  - img [ref=e3329]
+                  - img [ref=e3332]
+                - generic [ref=e3334]: pvc-dc-06
+              - generic [ref=e3336] [cursor=pointer]:
+                - generic [ref=e3337]:
+                  - img [ref=e3338]
+                  - img [ref=e3340]
+                  - img [ref=e3343]
+                - generic [ref=e3347]: pv-dc-06
+              - generic [ref=e3349] [cursor=pointer]:
+                - generic [ref=e3350]:
+                  - img [ref=e3351]
+                  - img [ref=e3353]
+                  - img [ref=e3356]
+                - generic [ref=e3358]: cm-dc-07
+              - generic [ref=e3360] [cursor=pointer]:
+                - generic [ref=e3361]:
+                  - img [ref=e3362]
+                  - img [ref=e3364]
+                  - img [ref=e3367]
+                - generic [ref=e3369]: secret-dc-07
+              - generic [ref=e3371] [cursor=pointer]:
+                - generic [ref=e3372]:
+                  - img [ref=e3373]
+                  - img [ref=e3375]
+                  - img [ref=e3378]
+                - generic [ref=e3380]: pvc-dc-07
+              - generic [ref=e3382] [cursor=pointer]:
+                - generic [ref=e3383]:
+                  - img [ref=e3384]
+                  - img [ref=e3386]
+                  - img [ref=e3389]
+                - generic [ref=e3393]: pv-dc-07
+              - generic [ref=e3395] [cursor=pointer]:
+                - generic [ref=e3396]:
+                  - img [ref=e3397]
+                  - img [ref=e3399]
+                  - img [ref=e3402]
+                - generic [ref=e3404]: cm-dc-08
+              - generic [ref=e3406] [cursor=pointer]:
+                - generic [ref=e3407]:
+                  - img [ref=e3408]
+                  - img [ref=e3410]
+                  - img [ref=e3413]
+                - generic [ref=e3415]: secret-dc-08
+              - generic [ref=e3417] [cursor=pointer]:
+                - generic [ref=e3418]:
+                  - img [ref=e3419]
+                  - img [ref=e3421]
+                  - img [ref=e3424]
+                - generic [ref=e3426]: pvc-dc-08
+              - generic [ref=e3428] [cursor=pointer]:
+                - generic [ref=e3429]:
+                  - img [ref=e3430]
+                  - img [ref=e3432]
+                  - img [ref=e3435]
+                - generic [ref=e3439]: pv-dc-08
+              - generic [ref=e3441] [cursor=pointer]:
+                - generic [ref=e3442]:
+                  - img [ref=e3443]
+                  - img [ref=e3445]
+                  - img [ref=e3448]
+                - generic [ref=e3450]: cm-dc-09
+              - generic [ref=e3452] [cursor=pointer]:
+                - generic [ref=e3453]:
+                  - img [ref=e3454]
+                  - img [ref=e3456]
+                  - img [ref=e3459]
+                - generic [ref=e3461]: secret-dc-09
+              - generic [ref=e3463] [cursor=pointer]:
+                - generic [ref=e3464]:
+                  - img [ref=e3465]
+                  - img [ref=e3467]
+                  - img [ref=e3470]
+                - generic [ref=e3472]: pvc-dc-09
+              - generic [ref=e3474] [cursor=pointer]:
+                - generic [ref=e3475]:
+                  - img [ref=e3476]
+                  - img [ref=e3478]
+                  - img [ref=e3481]
+                - generic [ref=e3485]: pv-dc-09
+              - generic [ref=e3487] [cursor=pointer]:
+                - generic [ref=e3488]:
+                  - img [ref=e3489]
+                  - img [ref=e3491]
+                  - img [ref=e3494]
+                - generic [ref=e3496]: cm-dc-10
+              - generic [ref=e3498] [cursor=pointer]:
+                - generic [ref=e3499]:
+                  - img [ref=e3500]
+                  - img [ref=e3502]
+                  - img [ref=e3505]
+                - generic [ref=e3507]: secret-dc-10
+              - generic [ref=e3509] [cursor=pointer]:
+                - generic [ref=e3510]:
+                  - img [ref=e3511]
+                  - img [ref=e3513]
+                  - img [ref=e3516]
+                - generic [ref=e3518]: pvc-dc-10
+              - generic [ref=e3520] [cursor=pointer]:
+                - generic [ref=e3521]:
+                  - img [ref=e3522]
+                  - img [ref=e3524]
+                  - img [ref=e3527]
+                - generic [ref=e3531]: pv-dc-10
+    - generic [ref=e3532]:
+      - generic [ref=e3533]:
+        - img [ref=e3534]
+        - textbox "Search actions..." [ref=e3537]
+      - generic [ref=e3538]:
+        - button "Aggregate" [ref=e3540]:
+          - generic [ref=e3541]: Aggregate
+          - img [ref=e3542]
+        - generic [ref=e3545]:
+          - button "Kubernetes" [ref=e3546]:
+            - generic [ref=e3547]: Kubernetes
+            - img [ref=e3548]
+          - generic [ref=e3550]:
+            - button [ref=e3551]:
+              - generic [ref=e3553]:
+                - img [ref=e3554]
+                - img [ref=e3557]
+            - button [ref=e3560]:
+              - generic [ref=e3562]:
+                - img [ref=e3563]
+                - img [ref=e3566]
+            - button [ref=e3568]:
+              - generic [ref=e3570]:
+                - img [ref=e3571]
+                - img [ref=e3574]
+            - button [ref=e3576]:
+              - generic [ref=e3578]:
+                - img [ref=e3579]
+                - img [ref=e3582]
+            - button [ref=e3589]:
+              - generic [ref=e3591]:
+                - img [ref=e3592]
+                - img [ref=e3595]
+            - button [ref=e3597]:
+              - generic [ref=e3599]:
+                - img [ref=e3600]
+                - img [ref=e3603]
+            - button [ref=e3606]:
+              - generic [ref=e3608]:
+                - img [ref=e3609]
+                - img [ref=e3612]
+            - button [ref=e3622]:
+              - generic [ref=e3624]:
+                - img [ref=e3625]
+                - img [ref=e3628]
+            - button [ref=e3630]:
+              - generic [ref=e3632]:
+                - img [ref=e3633]
+                - img [ref=e3636]
+            - button [ref=e3638]:
+              - generic [ref=e3640]:
+                - img [ref=e3641]
+                - img [ref=e3644]
+            - button [ref=e3648]:
+              - generic [ref=e3650]:
+                - img [ref=e3651]
+                - img [ref=e3654]
+        - button "Templates" [ref=e3658]:
+          - generic [ref=e3659]: Templates
+          - img [ref=e3660]
+  - status [ref=e3662]
 ```
