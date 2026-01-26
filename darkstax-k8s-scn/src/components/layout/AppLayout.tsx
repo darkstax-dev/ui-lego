@@ -20,16 +20,12 @@ export function AppLayout({ children }: AppLayoutProps) {
         {/* Topology Canvas */}
         <main className="flex-1 relative">
           {children}
+          <ResourceMenuPanel />
+          <StatusLegendTooltip />
         </main>
-        
+
         {/* Metadata Panel (slides in when node selected) */}
         <MetadataPanel />
-        
-        {/* Resource Menu Panel (Right Side) */}
-        <ResourceMenuPanel />
-        
-        {/* Status Legend Tooltip */}
-        <StatusLegendTooltip />
       </div>
       
       {/* Bottom Panel */}
