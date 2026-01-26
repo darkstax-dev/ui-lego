@@ -40,8 +40,9 @@
       "description": "Organizational containers and namespaces",
       "resourceTypes": ["namespace"],
       "laneConfig": {
-        "display": false,
-        "height": "auto"
+        "display": true,
+        "height": 360,
+        "order": 0
       },
       "color": "#4ECDC4",
       "icon": "folder"
