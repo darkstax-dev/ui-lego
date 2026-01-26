@@ -423,6 +423,8 @@ export function TopologyCanvas() {
 
           paths.push({
             id: key,
+            fromId: node.id,
+            toId: targetId,
             d: `M ${from.x} ${from.y} C ${cx1} ${cy1}, ${cx2} ${cy2}, ${to.x} ${to.y}`,
           });
         });
