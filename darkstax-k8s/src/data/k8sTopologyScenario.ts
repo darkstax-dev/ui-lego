@@ -36,7 +36,12 @@ export const kubernetesTopologyScenario: K8sTopologyScenario = {
           ...(n > 10 ? { ParentAggregate: n <= 30 ? 'dc-01' : 'dc-02' } : {}),
         },
         status: 'active' as const,
-        connections: n <= 5 ? [`tower-${String(n).padStart(2, '0')}`] : [],
+        connections:
+          n === 1
+            ? [`tower-${String(n).padStart(2, '0')}`, 'ns-production']
+            : n <= 5
+              ? [`tower-${String(n).padStart(2, '0')}`]
+              : [],
       };
     }),
     ...Array.from({ length: 50 }, (_, index) => {
