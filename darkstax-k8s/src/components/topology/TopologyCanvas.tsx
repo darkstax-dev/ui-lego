@@ -358,7 +358,7 @@ export function TopologyCanvas() {
     };
 
     const renderedIds = new Set(layoutNodes.map((n) => n.id));
-    const paths: Array<{ id: string; d: string }> = [];
+    const paths: Array<{ id: string; d: string; fromId: string; toId: string }> = [];
 
     // In lane-based hierarchy mode, draw ownership (parent -> child) connections.
     // Additionally, allow peer connections between aggregate nodes so aggregate hierarchies can
