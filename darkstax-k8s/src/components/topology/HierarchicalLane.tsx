@@ -305,12 +305,11 @@ export function HierarchicalLane({ category, label, nodes, height }: Hierarchica
 
         {laneHasPaging && (
           <div
-            className="absolute bottom-3 right-3 z-40 flex items-center gap-1 rounded bg-white/80 border border-gray-400/40 px-1 py-1"
-            style={resourceMenuOpen ? { right: 300 } : undefined}
+            className="absolute bottom-3 left-3 z-40 flex items-center gap-1 bg-gray-300 border border-gray-400/40 px-1 py-1"
             onMouseDown={(e) => e.stopPropagation()}
           >
             <button
-              className="w-7 h-7 flex items-center justify-center rounded disabled:opacity-40"
+              className="w-7 h-7 flex items-center justify-center disabled:opacity-40"
               onClick={() => setPageIndex((v) => Math.max(0, v - 1))}
               disabled={!canPageBack}
               type="button"
@@ -323,7 +322,7 @@ export function HierarchicalLane({ category, label, nodes, height }: Hierarchica
               {pageIndex + 1}/{totalPages}
             </div>
             <button
-              className="w-7 h-7 flex items-center justify-center rounded disabled:opacity-40"
+              className="w-7 h-7 flex items-center justify-center disabled:opacity-40"
               onClick={() => setPageIndex((v) => Math.min(totalPages - 1, v + 1))}
               disabled={!canPageForward}
               type="button"
