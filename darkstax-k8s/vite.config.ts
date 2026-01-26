@@ -9,8 +9,8 @@ export default defineConfig({
       '@': path.resolve(__dirname, './src'),
       '@icons': path.resolve(__dirname, '../src/components/icons'),
       '@icons/kubernetes': path.resolve(__dirname, '../src/components/icons/kubernetes'),
-      // Use ui-lego source directly (no need to build dist in this workspace)
-      'ui-lego': path.resolve(__dirname, '../src/index.ts'),
+      // Use ui-lego MultiSelect source directly (no need to build full dist in this workspace)
+      'ui-lego': path.resolve(__dirname, '../src/components/multiselect'),
     },
   },
   server: {

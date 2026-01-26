@@ -25,8 +25,7 @@
     "paths": {
       "@/*": ["./src/*"],
       "@icons/*": ["../src/components/icons/*"],
-      "@icons/kubernetes/*": ["../src/components/icons/kubernetes/*"],
-      "ui-lego": ["../src/index.ts"]
+      "@icons/kubernetes/*": ["../src/components/icons/kubernetes/*"]
     }
   },
   "include": ["src"],
