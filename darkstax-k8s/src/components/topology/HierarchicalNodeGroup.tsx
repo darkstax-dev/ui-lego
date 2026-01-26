@@ -9,9 +9,18 @@ interface HierarchicalNodeGroupProps {
   childNodes: K8sNodeData[];
   collapsed?: boolean;
   onToggleCollapse?: () => void;
+  onParentClick?: (node: K8sNodeData) => void;
+  onParentDoubleClick?: (node: K8sNodeData) => void;
 }
 
-export function HierarchicalNodeGroup({ parentNode, childNodes, collapsed = false, onToggleCollapse }: HierarchicalNodeGroupProps) {
+export function HierarchicalNodeGroup({
+  parentNode,
+  childNodes,
+  collapsed = false,
+  onToggleCollapse,
+  onParentClick,
+  onParentDoubleClick,
+}: HierarchicalNodeGroupProps) {
   const { setSelectedNode, openMetadataPanel } = useUIStore();
 
   const aggregatedChildCount = childNodes.length;
@@ -22,6 +31,11 @@ export function HierarchicalNodeGroup({ parentNode, childNodes, collapsed = fals
   };
 
   const handleParentClick = () => {
+    if (onParentClick) {
+      onParentClick(parentNode);
+      return;
+    }
+
     setSelectedNode(parentNode);
     openMetadataPanel(parentNode);
   };
@@ -58,6 +72,10 @@ export function HierarchicalNodeGroup({ parentNode, childNodes, collapsed = fals
           onClick={handleParentClick}
           onDoubleClick={(e) => {
             e.stopPropagation();
+            if (onParentDoubleClick) {
+              onParentDoubleClick(parentNode);
+              return;
+            }
             onToggleCollapse?.();
           }}
         >
