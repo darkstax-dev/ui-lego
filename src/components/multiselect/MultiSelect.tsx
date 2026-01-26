@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react'
+import React, { useEffect, useId, useMemo, useRef, useState } from 'react'
 import Tag from '../tag-badges/Tag'
 import './MultiSelect.css'
 
@@ -28,7 +28,7 @@ const MultiSelect: React.FC<MultiSelectProps> = ({
   onChange,
   onItemAdd,
   onItemRemove,
-  placeholder = "Press enter to add",
+  placeholder = 'Press enter to add',
   disabled = false,
   allowCreate = true,
   className = '',
@@ -38,16 +38,86 @@ const MultiSelect: React.FC<MultiSelectProps> = ({
   const [query, setQuery] = useState('')
   const [isOpen, setIsOpen] = useState(false)
   const [activeIndex, setActiveIndex] = useState(-1)
+
+  const rootRef = useRef<HTMLDivElement>(null)
   const inputRef = useRef<HTMLInputElement>(null)
 
-  const selectedIds = new Set(value.map(item => item.id))
-  const filteredOptions = options.filter(option =>
-    !selectedIds.has(option.id) &&
-    option.label.toLowerCase().includes(query.toLowerCase())
-  )
-  const exactMatch = query.trim().length > 0 && filteredOptions.some(opt => opt.label.toLowerCase() === query.trim().toLowerCase())
-  const showCreate = allowCreate && query.trim().length > 0 && !exactMatch
+  const listboxBaseId = useId()
+  const listboxId = `${listboxBaseId}-listbox`
+
+  const selectedIds = useMemo(() => new Set(value.map((item) => item.id)), [value])
+
+  const filteredOptions = useMemo(() => {
+    const q = query.trim().toLowerCase()
+
+    return options.filter((option) => {
+      if (selectedIds.has(option.id)) return false
+      if (!q) return true
+      return option.label.toLowerCase().includes(q)
+    })
+  }, [options, query, selectedIds])
+
+  const queryTrimmed = query.trim()
+  const queryLower = queryTrimmed.toLowerCase()
+
+  const exactMatch = useMemo(() => {
+    if (!queryTrimmed) return false
+    return options.some((opt) => opt.label.toLowerCase() === queryLower)
+  }, [options, queryLower, queryTrimmed])
+
+  const showCreate = allowCreate && queryTrimmed.length > 0 && !exactMatch
   const optionsCount = filteredOptions.length + (showCreate ? 1 : 0)
+
+  // Click-away handling (more reliable than relying on blur + timeouts)
+  useEffect(() => {
+    if (!isOpen) return
+
+    const onMouseDown = (event: MouseEvent) => {
+      const target = event.target as Node | null
+      if (!target) return
+      if (!rootRef.current?.contains(target)) {
+        setIsOpen(false)
+        setActiveIndex(-1)
+      }
+    }
+
+    document.addEventListener('mousedown', onMouseDown)
+    return () => document.removeEventListener('mousedown', onMouseDown)
+  }, [isOpen])
+
+  // Keep activeIndex in bounds when results change
+  useEffect(() => {
+    if (activeIndex >= optionsCount) setActiveIndex(-1)
+  }, [activeIndex, optionsCount])
+
+  const addItem = (item: MultiSelectOption) => {
+    const newValue = [...value, item]
+    onChange?.(newValue)
+
+    // Allow quick multi-add by keeping the dropdown open.
+    setQuery('')
+    setActiveIndex(-1)
+    setIsOpen(true)
+
+    inputRef.current?.focus()
+  }
+
+  const removeItem = (item: MultiSelectOption, index: number) => {
+    const newValue = value.filter((_, i) => i !== index)
+    onChange?.(newValue)
+    onItemRemove?.(item, index)
+    inputRef.current?.focus()
+  }
+
+  const createNewItem = (q: string): MultiSelectOption => {
+    if (createNewItemFromQuery) return createNewItemFromQuery(q)
+
+    return {
+      id: `new-${Date.now()}`,
+      label: q,
+      value: q,
+    }
+  }
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newQuery = e.target.value
@@ -60,89 +130,84 @@ const MultiSelect: React.FC<MultiSelectProps> = ({
     if (e.key === 'ArrowDown') {
       e.preventDefault()
       setIsOpen(true)
-      setActiveIndex(prev => {
+      setActiveIndex((prev) => {
+        if (optionsCount <= 0) return -1
         const next = prev + 1
         return Math.min(next, optionsCount - 1)
       })
-    } else if (e.key === 'ArrowUp') {
+      return
+    }
+
+    if (e.key === 'ArrowUp') {
       e.preventDefault()
-      setActiveIndex(prev => Math.max(prev - 1, -1))
-    } else if (e.key === 'Enter') {
+      setActiveIndex((prev) => Math.max(prev - 1, -1))
+      return
+    }
+
+    if (e.key === 'Enter') {
       e.preventDefault()
-      
-      if (activeIndex >= 0 && activeIndex < filteredOptions.length) {
-        const selectedOption = filteredOptions[activeIndex]
+
+      if (optionsCount <= 0) return
+
+      // If nothing is actively highlighted, Enter should select the first match.
+      const resolvedIndex = activeIndex >= 0 ? activeIndex : 0
+
+      if (resolvedIndex < filteredOptions.length) {
+        const selectedOption = filteredOptions[resolvedIndex]
         addItem(selectedOption)
-      } else if (showCreate || (allowCreate && query.trim())) {
-        // Create new item
-        let newItem: MultiSelectOption
-        if (createNewItemFromQuery) {
-          newItem = createNewItemFromQuery(query.trim())
-        } else {
-          newItem = {
-            id: `new-${Date.now()}`,
-            label: query.trim(),
-            value: query.trim()
-          }
-        }
+        return
+      }
+
+      if (showCreate && resolvedIndex === filteredOptions.length) {
+        const newItem = createNewItem(queryTrimmed)
         addItem(newItem)
         onItemAdd?.(newItem)
       }
-    } else if (e.key === 'Escape') {
+
+      return
+    }
+
+    if (e.key === 'Escape') {
       setIsOpen(false)
       setActiveIndex(-1)
-    } else if (e.key === 'Backspace' && !query && value.length > 0) {
-      // Remove last item when backspace is pressed on empty input
+      return
+    }
+
+    if (e.key === 'Backspace' && !query && value.length > 0) {
       const lastItem = value[value.length - 1]
       removeItem(lastItem, value.length - 1)
     }
-  }
-
-  const addItem = (item: MultiSelectOption) => {
-    const newValue = [...value, item]
-    onChange?.(newValue)
-    setQuery('')
-    setIsOpen(false)
-    setActiveIndex(-1)
-    inputRef.current?.focus()
-  }
-
-  const removeItem = (item: MultiSelectOption, index: number) => {
-    const newValue = value.filter((_, i) => i !== index)
-    onChange?.(newValue)
-    onItemRemove?.(item, index)
-    inputRef.current?.focus()
-  }
-
-  const handleOptionClick = (option: MultiSelectOption) => {
-    addItem(option)
   }
 
   const handleInputFocus = () => {
     setIsOpen(true)
   }
 
-  const handleInputBlur = () => {
-    // Delay closing to allow option clicks
-    setTimeout(() => setIsOpen(false), 150)
-  }
-
   const toggleDropdown = () => {
-    setIsOpen(!isOpen)
-    if (!isOpen) {
-      inputRef.current?.focus()
-    }
+    if (disabled) return
+
+    setIsOpen((open) => {
+      const next = !open
+      if (next) inputRef.current?.focus()
+      if (!next) setActiveIndex(-1)
+      return next
+    })
   }
 
   const multiSelectClass = [
     'multiselect',
     disabled && 'multiselect--disabled',
     value.length > 0 && 'multiselect--has-tags',
-    className
-  ].filter(Boolean).join(' ')
+    className,
+  ]
+    .filter(Boolean)
+    .join(' ')
+
+  const activeDescendantId =
+    activeIndex >= 0 ? `${listboxId}-option-${activeIndex}` : undefined
 
   return (
-    <div className={multiSelectClass}>
+    <div className={multiSelectClass} ref={rootRef}>
       {value.length > 0 && (
         <div className="multiselect__field-body">
           {value.map((item, index) => (
@@ -158,7 +223,20 @@ const MultiSelect: React.FC<MultiSelectProps> = ({
         </div>
       )}
 
-      <div className="multiselect__input-container">
+      <div
+        className="multiselect__input-container"
+        onMouseDown={(e) => {
+          if (disabled) return
+          const target = e.target as HTMLElement
+          if (target === inputRef.current) return
+          if (target.closest('button')) return
+
+          // Prevent focusing something else (and blurring the input), then focus the input ourselves.
+          e.preventDefault()
+          inputRef.current?.focus()
+          setIsOpen(true)
+        }}
+      >
         <input
           ref={inputRef}
           type="text"
@@ -166,10 +244,14 @@ const MultiSelect: React.FC<MultiSelectProps> = ({
           onChange={handleInputChange}
           onKeyDown={handleKeyDown}
           onFocus={handleInputFocus}
-          onBlur={handleInputBlur}
           placeholder={placeholder}
           disabled={disabled}
           className="multiselect__input"
+          role="combobox"
+          aria-autocomplete="list"
+          aria-expanded={isOpen}
+          aria-controls={listboxId}
+          aria-activedescendant={activeDescendantId}
         />
         <div className="multiselect__controls">
           <span className="multiselect__count">{value.length}</span>
@@ -180,13 +262,19 @@ const MultiSelect: React.FC<MultiSelectProps> = ({
             onClick={toggleDropdown}
             disabled={disabled}
             aria-label="Toggle dropdown"
+            aria-expanded={isOpen}
+            aria-controls={listboxId}
           >
             <svg
               width="20"
               height="20"
               viewBox="0 0 20 20"
               fill="none"
-              className={isOpen ? 'multiselect__toggle-icon--up' : 'multiselect__toggle-icon--down'}
+              className={
+                isOpen
+                  ? 'multiselect__toggle-icon--up'
+                  : 'multiselect__toggle-icon--down'
+              }
             >
               <g clipPath="url(#clip0_2036_43391)">
                 <path
@@ -204,40 +292,59 @@ const MultiSelect: React.FC<MultiSelectProps> = ({
         </div>
       </div>
 
-      {isOpen && (filteredOptions.length > 0 || showCreate) && (
-        <div className="multiselect__dropdown" style={{ maxHeight }} role="listbox" aria-label="Options">
+      {isOpen && (
+        <div
+          className="multiselect__dropdown"
+          style={{ maxHeight }}
+          role="listbox"
+          id={listboxId}
+          aria-label="Options"
+          onMouseDown={(e) => {
+            // Keep input focused while clicking options.
+            e.preventDefault()
+          }}
+        >
           <ul className="multiselect__options">
             {filteredOptions.map((option, index) => (
               <li
                 key={option.id}
-                className={`multiselect__option ${index === activeIndex ? 'multiselect__option--active' : ''}`}
-                onClick={() => handleOptionClick(option)}
+                id={`${listboxId}-option-${index}`}
+                role="option"
+                aria-selected={false}
+                className={`multiselect__option ${
+                  index === activeIndex ? 'multiselect__option--active' : ''
+                }`}
+                onClick={() => addItem(option)}
                 onMouseEnter={() => setActiveIndex(index)}
               >
                 {option.label}
               </li>
             ))}
+
             {showCreate && (
               <li
-                className={`multiselect__option multiselect__option--create ${activeIndex === filteredOptions.length ? 'multiselect__option--active' : ''}`}
+                id={`${listboxId}-option-${filteredOptions.length}`}
+                role="option"
+                aria-selected={false}
+                className={`multiselect__option multiselect__option--create ${
+                  activeIndex === filteredOptions.length
+                    ? 'multiselect__option--active'
+                    : ''
+                }`}
                 onClick={() => {
-                  if (createNewItemFromQuery) {
-                    const newItem = createNewItemFromQuery(query.trim())
-                    addItem(newItem)
-                    onItemAdd?.(newItem)
-                  } else {
-                    const newItem: MultiSelectOption = {
-                      id: `new-${Date.now()}`,
-                      label: query.trim(),
-                      value: query.trim()
-                    }
-                    addItem(newItem)
-                    onItemAdd?.(newItem)
-                  }
+                  const newItem = createNewItem(queryTrimmed)
+                  addItem(newItem)
+                  onItemAdd?.(newItem)
                 }}
                 onMouseEnter={() => setActiveIndex(filteredOptions.length)}
               >
-                Create "{query}"
+                Create "{queryTrimmed}"
+              </li>
+            )}
+
+            {!showCreate && filteredOptions.length === 0 && queryTrimmed.length > 0 && (
+              <li className="multiselect__empty" aria-disabled="true">
+                No matches
               </li>
             )}
           </ul>
