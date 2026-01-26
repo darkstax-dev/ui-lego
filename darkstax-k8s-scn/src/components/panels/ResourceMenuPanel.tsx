@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Search, ChevronDown, ChevronUp } from 'lucide-react';
+import { Search, ChevronDown, ChevronUp, Layers } from 'lucide-react';
 import { useDraggable } from '@dnd-kit/core';
 import { k8sResourceTemplates } from '../../data/k8sTemplates';
 import { KubernetesIconWrapper } from '../ui/KubernetesIconWrapper';
@@ -61,10 +61,35 @@ export function ResourceMenuPanel() {
     }));
   };
 
+  const isCompact = !expandedSections.aggregate && !expandedSections.kubernetes && !expandedSections.templates;
+
+  if (isCompact) {
+    return (
+      <div
+        className="absolute top-4 right-4 z-30 bg-gray-200 shadow-[0px_16px_16px_-8px_rgba(12,12,13,0.1)] rounded-lg"
+        style={{ width: '56px', height: '56px', boxSizing: 'border-box' }}
+        data-testid="resource-menu-panel"
+      >
+        <button
+          type="button"
+          className="w-full h-full flex items-center justify-center rounded-lg hover:bg-gray-100"
+          onClick={() => setExpandedSections((prev) => ({ ...prev, kubernetes: true }))}
+          aria-label="Open resource menu"
+        >
+          <Layers className="w-5 h-5 text-blue-dark-950" />
+        </button>
+      </div>
+    );
+  }
+
   return (
-    <div className="h-full bg-gray-200 shadow-[0px_16px_16px_-8px_rgba(12,12,13,0.1)] flex flex-col p-4 gap-4" style={{ width: '280px', minWidth: '280px', maxWidth: '280px', boxSizing: 'border-box' }} data-testid="resource-menu-panel">
+    <div
+      className="absolute top-4 right-4 z-30 bg-gray-200 shadow-[0px_16px_16px_-8px_rgba(12,12,13,0.1)] rounded-lg flex flex-col p-4 gap-4 overflow-hidden"
+      style={{ width: '280px', minWidth: '280px', maxWidth: '280px', height: 'calc(100% - 2rem)', boxSizing: 'border-box' }}
+      data-testid="resource-menu-panel"
+    >
       {/* Search Input */}
-      <div className="h-10 px-4 bg-gray-100 flex items-center gap-2">
+      <div className="h-10 px-4 bg-gray-100 flex items-center gap-2 rounded">
         <Search className="w-4 h-4 text-gray-500 flex-shrink-0" />
         <input
           type="text"
@@ -79,55 +104,70 @@ export function ResourceMenuPanel() {
       <div className="flex-1 flex flex-col gap-4 overflow-y-auto">
         {/* Aggregate Section */}
         <div className="flex flex-col gap-3">
-          <button 
+          <button
             className="flex items-center justify-between"
             onClick={() => toggleSection('aggregate')}
           >
             <span className="text-blue-dark-950 font-macan text-base font-semibold">Aggregate</span>
-            {expandedSections.aggregate ? 
-              <ChevronUp className="w-5 h-5 text-gray-500" /> : 
+            {expandedSections.aggregate ? (
+              <ChevronUp className="w-5 h-5 text-gray-500" />
+            ) : (
               <ChevronDown className="w-5 h-5 text-gray-500" />
-            }
+            )}
           </button>
         </div>
 
-        <div className="h-px bg-gray-400" style={{ backgroundImage: 'repeating-linear-gradient(to right, #C8C8C8 0, #C8C8C8 6px, transparent 6px, transparent 12px)' }} />
+        <div
+          className="h-px bg-gray-400"
+          style={{
+            backgroundImage:
+              'repeating-linear-gradient(to right, #C8C8C8 0, #C8C8C8 6px, transparent 6px, transparent 12px)',
+          }}
+        />
 
         {/* Kubernetes Section */}
         <div className="flex flex-col gap-3">
-          <button 
+          <button
             className="flex items-center justify-between"
             onClick={() => toggleSection('kubernetes')}
           >
             <span className="text-blue-dark-950 font-macan text-base font-semibold">Kubernetes</span>
-            {expandedSections.kubernetes ? 
-              <ChevronUp className="w-5 h-5 text-gray-500" /> : 
+            {expandedSections.kubernetes ? (
+              <ChevronUp className="w-5 h-5 text-gray-500" />
+            ) : (
               <ChevronDown className="w-5 h-5 text-gray-500" />
-            }
+            )}
           </button>
 
           {expandedSections.kubernetes && (
             <div className="flex flex-wrap gap-x-3 gap-y-2">
-              {groupedByCategory.Kubernetes.map(template => (
+              {groupedByCategory.Kubernetes.map((template) => (
                 <DraggableResourceItem key={template.id} template={template} />
               ))}
             </div>
           )}
         </div>
 
-        <div className="h-px bg-gray-400" style={{ backgroundImage: 'repeating-linear-gradient(to right, #C8C8C8 0, #C8C8C8 6px, transparent 6px, transparent 12px)' }} />
+        <div
+          className="h-px bg-gray-400"
+          style={{
+            backgroundImage:
+              'repeating-linear-gradient(to right, #C8C8C8 0, #C8C8C8 6px, transparent 6px, transparent 12px)',
+          }}
+        />
 
         {/* Templates Section */}
         <div className="flex flex-col gap-3">
-          <button 
+          <button
             className="flex items-center justify-between"
             onClick={() => toggleSection('templates')}
           >
             <span className="text-blue-dark-950 font-macan text-base font-semibold">Templates</span>
-            {expandedSections.templates ? 
-              <ChevronUp className="w-5 h-5 text-gray-500" /> : 
+            {expandedSections.templates ? (
+              <ChevronUp className="w-5 h-5 text-gray-500" />
+            ) : (
               <ChevronDown className="w-5 h-5 text-gray-500" />
-            }
+            )}
           </button>
         </div>
       </div>

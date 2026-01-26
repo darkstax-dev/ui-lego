@@ -1,4 +1,3 @@
-import { ChevronDown } from 'lucide-react';
 import { Menu, UserCircle } from 'lucide-react';
 import { SearchFilter } from '../controls/SearchFilter';
 import { LayoutSelector } from '../controls/LayoutSelector';

@@ -23,7 +23,9 @@
     
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
+      "@icons/*": ["../src/components/icons/*"],
+      "@icons/kubernetes/*": ["../src/components/icons/kubernetes/*"]
     }
   },
   "include": ["src"],

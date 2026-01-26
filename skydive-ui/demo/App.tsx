@@ -1,11 +1,16 @@
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 import { TopologyCanvas } from '../src/TopologyCanvas'
 import type { K8sNode } from '../src/TopologyCanvas'
+import { sampleNodes } from './sampleNodes'
 import '../tokens.css'
 import './styles.css'
 
 function App() {
   const [selectedNode, setSelectedNode] = useState<K8sNode | null>(null)
+  const [canvasKey, setCanvasKey] = useState(1)
+  const [useSample, setUseSample] = useState(true)
+
+  const initialNodes = useMemo(() => (useSample ? sampleNodes : []), [useSample])
 
   const handleNodeClick = (node: K8sNode) => {
     console.log('Node clicked:', node)
@@ -23,14 +28,76 @@ function App() {
 
   return (
     <div style={{ width: '100vw', height: '100vh', margin: 0, padding: 0 }}>
+      {/* Demo controls */}
+      <div
+        style={{
+          position: 'fixed',
+          top: 16,
+          left: 16,
+          zIndex: 1100,
+          display: 'flex',
+          gap: 8,
+          padding: 8,
+          borderRadius: 8,
+          background: 'rgba(255,255,255,0.9)',
+          border: '1px solid rgba(0,0,0,0.08)',
+          boxShadow: '0 4px 12px rgba(0,0,0,0.08)',
+          backdropFilter: 'blur(6px)'
+        }}
+      >
+        <button
+          onClick={() => {
+            setUseSample(true)
+            setCanvasKey((k) => k + 1)
+            setSelectedNode(null)
+          }}
+          style={{
+            height: 32,
+            padding: '0 12px',
+            borderRadius: 999,
+            border: '1px solid rgba(0,0,0,0.12)',
+            background: useSample ? 'var(--color-blue-700)' : 'white',
+            color: useSample ? 'white' : 'var(--color-blue-dark-950)',
+            fontFamily: 'var(--font-family-macan)',
+            fontSize: 13,
+            cursor: 'pointer'
+          }}
+        >
+          Load sample data
+        </button>
+
+        <button
+          onClick={() => {
+            setUseSample(false)
+            setCanvasKey((k) => k + 1)
+            setSelectedNode(null)
+          }}
+          style={{
+            height: 32,
+            padding: '0 12px',
+            borderRadius: 999,
+            border: '1px solid rgba(0,0,0,0.12)',
+            background: !useSample ? 'var(--color-blue-700)' : 'white',
+            color: !useSample ? 'white' : 'var(--color-blue-dark-950)',
+            fontFamily: 'var(--font-family-macan)',
+            fontSize: 13,
+            cursor: 'pointer'
+          }}
+        >
+          Clear
+        </button>
+      </div>
+
       <TopologyCanvas
+        key={canvasKey}
+        initialNodes={initialNodes}
         onNodeClick={handleNodeClick}
         onNodeDoubleClick={handleNodeDoubleClick}
         onCanvasClick={handleCanvasClick}
       />
-      
+
       {selectedNode && (
-        <div 
+        <div
           style={{
             position: 'fixed',
             top: 20,

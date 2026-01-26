@@ -10,9 +10,9 @@
   "hierarchyLevels": [
     {
       "level": 0,
-      "name": "Cluster & Namespace",
+      "name": "Cluster",
       "description": "Top-level organizational containers",
-      "resourceTypes": ["namespace"],
+      "resourceTypes": ["datacenter", "mobiletower"],
       "canContain": ["deployment", "statefulset", "job", "service", "ingress", "multus", "configmap", "secret", "persistentvolumeclaim"],
       "displayOrder": 1
     },
@@ -37,20 +37,21 @@
     {
       "id": "aggregate",
       "label": "Aggregate",
-      "description": "Organizational containers and namespaces",
-      "resourceTypes": ["namespace"],
+      "description": "Organizational containers",
+      "resourceTypes": ["datacenter", "mobiletower"],
       "laneConfig": {
-        "display": false,
-        "height": "auto"
+        "display": true,
+        "height": 360,
+        "order": 0
       },
       "color": "#4ECDC4",
       "icon": "folder"
     },
     {
       "id": "load",
-      "label": "Load",
+      "label": "Workload",
       "description": "Workload resources including controllers and pods",
-      "resourceTypes": ["deployment", "statefulset", "job", "pod"],
+      "resourceTypes": ["namespace", "deployment", "statefulset", "job", "pod"],
       "laneConfig": {
         "display": true,
         "height": 200,
@@ -101,10 +102,41 @@
   ],
   "groupingRules": [
     {
+      "id": "group-by-datacenter",
+      "name": "Group Aggregates by Datacenter",
+      "description": "Group aggregate resources under their parent datacenter",
+      "enabled": true,
+      "priority": 0,
+      "criteria": {
+        "type": "property-match",
+        "ownerProperty": "Type",
+        "ownerValue": "datacenter",
+        "memberProperty": "ParentAggregate",
+        "memberValue": "${ownerId}"
+      },
+      "hierarchyLevel": 0,
+      "collapsible": true,
+      "defaultCollapsed": true,
+      "style": {
+        "fillColor": "rgba(78, 205, 196, 0.04)",
+        "strokeColor": "rgba(78, 205, 196, 0.25)",
+        "strokeWidth": 2,
+        "strokeDashArray": "10, 5",
+        "borderRadius": 26,
+        "padding": 30,
+        "labelPosition": "top-left",
+        "labelStyle": {
+          "fontSize": 13,
+          "fontWeight": 600,
+          "color": "#2C3E50"
+        }
+      }
+    },
+    {
       "id": "group-by-namespace",
       "name": "Group by Namespace",
       "description": "Group all resources within their namespace",
-      "enabled": true,
+      "enabled": false,
       "priority": 1,
       "criteria": {
         "type": "property-match",
@@ -115,7 +147,7 @@
       },
       "hierarchyLevel": 0,
       "collapsible": true,
-      "defaultCollapsed": false,
+      "defaultCollapsed": true,
       "style": {
         "fillColor": "rgba(78, 205, 196, 0.05)",
         "strokeColor": "rgba(78, 205, 196, 0.4)",
@@ -146,7 +178,7 @@
       },
       "hierarchyLevel": 1,
       "collapsible": true,
-      "defaultCollapsed": false,
+      "defaultCollapsed": true,
       "style": {
         "fillColor": "rgba(255, 107, 107, 0.05)",
         "strokeColor": "rgba(255, 107, 107, 0.3)",
@@ -177,7 +209,7 @@
       },
       "hierarchyLevel": 1,
       "collapsible": true,
-      "defaultCollapsed": false,
+      "defaultCollapsed": true,
       "style": {
         "fillColor": "rgba(50, 108, 229, 0.05)",
         "strokeColor": "rgba(50, 108, 229, 0.3)",
@@ -208,7 +240,7 @@
       },
       "hierarchyLevel": 1,
       "collapsible": true,
-      "defaultCollapsed": false,
+      "defaultCollapsed": true,
       "style": {
         "fillColor": "rgba(0, 209, 178, 0.05)",
         "strokeColor": "rgba(0, 209, 178, 0.3)",
@@ -226,15 +258,6 @@
     }
   ],
   "relationshipRules": [
-    {
-      "id": "namespace-contains-resources",
-      "name": "Namespace Contains Resources",
-      "sourceType": "namespace",
-      "targetTypes": ["deployment", "statefulset", "job", "service", "ingress", "multus", "configmap", "secret", "persistentvolumeclaim"],
-      "relationship": "contains",
-      "matchProperty": "Namespace",
-      "displayConnection": false
-    },
     {
       "id": "deployment-manages-pods",
       "name": "Deployment Manages Pods",

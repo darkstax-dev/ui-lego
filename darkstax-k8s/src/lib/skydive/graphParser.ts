@@ -1,10 +1,13 @@
-import { K8sNodeData, K8sNodeGroup, K8sResourceCategory, K8sResourceType } from '../../types';
 import { SkydiveSyncReplyData } from '../../types/skydive';
+import type { K8sNodeData, K8sNodeGroup, K8sResourceCategory, K8sResourceType } from '../../types';
+import { getHierarchyLevelForResource, hierarchyConfig } from '../../hierarchyConfig';
 
 const normalizeResourceType = (rawType?: string): K8sResourceType => {
   const type = (rawType || 'pod').toLowerCase();
   const mapping: Record<string, K8sResourceType> = {
     namespace: 'namespace',
+    datacenter: 'datacenter',
+    mobiletower: 'mobiletower',
     service: 'service',
     deployment: 'deployment',
     pod: 'pod',
@@ -24,7 +27,9 @@ const normalizeResourceType = (rawType?: string): K8sResourceType => {
 };
 
 const categoryByType: Record<K8sResourceType, K8sResourceCategory> = {
-  namespace: 'aggregate',
+  namespace: 'load',
+  datacenter: 'aggregate',
+  mobiletower: 'aggregate',
   deployment: 'load',
   pod: 'load',
   job: 'load',
@@ -82,32 +87,52 @@ export const parseSkydiveSyncReply = (data: SkydiveSyncReplyData): {
       metadata,
       status: statusFromMetadata(metadata),
       indicatorCount: indicatorCount && indicatorCount > 0 ? indicatorCount : undefined,
-      connections: connections.get(node.ID),
+      // Namespaces are shown as peers/orphans (no edges in either layout mode).
+      connections: type === 'namespace' ? undefined : connections.get(node.ID),
     };
   });
 
   const nodeById = new Map(nodes.map((node) => [node.id, node] as const));
+
+  // Remove any links that point at namespaces, so other nodes don't draw edges to them.
+  const namespaceIds = new Set(nodes.filter((n) => n.type === 'namespace').map((n) => n.id));
+  if (namespaceIds.size > 0) {
+    nodes.forEach((node) => {
+      if (!node.connections) return;
+      node.connections = node.connections.filter((id) => !namespaceIds.has(id));
+      if (node.connections.length === 0) node.connections = undefined;
+    });
+  }
+
   const groupMembers = new Map<string, string[]>();
 
   ownershipEdges.forEach((edge) => {
     const parentNode = nodeById.get(edge.Parent);
     const childNode = nodeById.get(edge.Child);
     if (!parentNode || !childNode) return;
-    if (parentNode.category !== childNode.category) return;
 
+    // Namespaces are shown as peers/orphans (no ownership grouping).
+    if (parentNode.type === 'namespace') return;
+
+    // Unlike the old logic, allow cross-category ownership (e.g. deployments manage pods).
     const members = groupMembers.get(edge.Parent) || [];
     members.push(edge.Child);
     groupMembers.set(edge.Parent, members);
   });
 
-  const groups: K8sNodeGroup[] = Array.from(groupMembers.entries()).map(([ownerId, memberIds]) => ({
-    id: `group-${ownerId}`,
-    ownerId,
-    memberIds,
-    collapsed: false,
-    level: 1,
-    depth: 0,
-  }));
+  const groups: K8sNodeGroup[] = Array.from(groupMembers.entries()).map(([ownerId, memberIds]) => {
+    const owner = nodeById.get(ownerId);
+    const level = owner ? getHierarchyLevelForResource(owner.type, hierarchyConfig) : 0;
+
+    return {
+      id: `group-${ownerId}`,
+      ownerId,
+      memberIds,
+      collapsed: false,
+      level,
+      depth: level + 1,
+    };
+  });
 
   return { nodes, groups };
 };

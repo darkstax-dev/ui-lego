@@ -1,5 +1,7 @@
 export type K8sResourceType =
   | 'namespace'
+  | 'datacenter'
+  | 'mobiletower'
   | 'service'
   | 'deployment'
   | 'pod'

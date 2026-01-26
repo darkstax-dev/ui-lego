@@ -1,28 +1,251 @@
-import { useMemo, useEffect, useLayoutEffect, useRef, useState } from 'react';
-import { HierarchicalLane } from './HierarchicalLane';
-import { GroupController } from '../controls/GroupController';
+import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
+import {
+  ChevronDown,
+  ChevronLeft,
+  ChevronRight,
+  ChevronsLeft,
+  ChevronsRight,
+  Maximize2,
+  Minimize2,
+} from 'lucide-react';
+import type { K8sNodeData, K8sNodeGroup } from '../../types';
 import { useUIStore } from '../../store/uiStore';
 import { useTopologyStore } from '../../store/topologyStore';
 import { filterNodes } from '../../lib/filterNodes';
-import { skydiveTopology } from '../../data/skydiveTopology';
-import { parseSkydiveSyncReply } from '../../lib/skydive/graphParser';
-import { applyCircularLayout, applyFlextreeLayout, applyOwnershipTreeLayout } from '../../lib/layouts/flextreeLayout';
+import { kubernetesAggregateWorkloadsScenario } from '../../data/k8sTopologyScenario';
+import { buildGroupsFromRules, hierarchyConfig, getLaneCategories } from '../../hierarchyConfig';
+import { applyCircularLayout, applyOwnershipTreeLayout } from '../../lib/layouts/flextreeLayout';
 import { KubernetesIconWrapper } from '../ui/KubernetesIconWrapper';
+import { HierarchicalLane } from './HierarchicalLane';
 
+const DEFAULT_GROUP_SIZE = 4;
+const DEFAULT_MAX_EXPAND_SIZE = 8;
+
+function NodeTile({ node, onClick }: { node: K8sNodeData; onClick: (node: K8sNodeData) => void }) {
+  return (
+    <div
+      data-node-id={node.id}
+      className="cursor-pointer transition-transform hover:scale-105"
+      onClick={() => onClick(node)}
+    >
+      <KubernetesIconWrapper
+        type={node.type}
+        status={node.status}
+        label={node.label}
+        showIndicator={!!node.indicatorCount}
+        indicatorCount={node.indicatorCount}
+      />
+    </div>
+  );
+}
+
+function TypeCluster({
+  clusterKey,
+  nodeType,
+  nodes,
+  onNodeClick,
+  groupSize = DEFAULT_GROUP_SIZE,
+  maxExpandSize = DEFAULT_MAX_EXPAND_SIZE,
+}: {
+  clusterKey: string;
+  nodeType: string;
+  nodes: K8sNodeData[];
+  onNodeClick: (node: K8sNodeData) => void;
+  groupSize?: number;
+  maxExpandSize?: number;
+}) {
+  const [expanded, setExpanded] = useState(false);
+  const [offset, setOffset] = useState(0);
+  const [fullSize, setFullSize] = useState(false);
+
+  const hasPaging = nodes.length > groupSize;
+  const canShowFullToggle = nodes.length > maxExpandSize;
+
+  const visibleNodes = useMemo(() => {
+    if (!expanded) return [];
+    if (!hasPaging) return nodes;
+    if (fullSize) return nodes;
+    return nodes.slice(offset, offset + groupSize);
+  }, [expanded, fullSize, hasPaging, nodes, offset, groupSize]);
+
+  const canPageLeft = offset > 0;
+  const canPageRight = offset + groupSize < nodes.length;
+
+  return (
+    <div className="inline-flex flex-col gap-2" data-testid={`type-cluster-${clusterKey}`}
+    >
+      <button
+        className="inline-flex items-center gap-2 rounded bg-white/70 border border-gray-400/40 px-2 py-1 hover:bg-white transition-colors"
+        onClick={() => {
+          setExpanded((v) => !v);
+          setOffset(0);
+          setFullSize(false);
+        }}
+        type="button"
+      >
+        {expanded ? (
+          <ChevronDown className="w-4 h-4 text-blue-dark-950" />
+        ) : (
+          <ChevronRight className="w-4 h-4 text-blue-dark-950" />
+        )}
+        <span className="text-xs font-macan text-blue-dark-950 truncate max-w-[180px]">
+          {nodeType}(s)
+        </span>
+        <span className="text-[10px] text-gray-600">{nodes.length}</span>
+      </button>
+
+      {expanded && (
+        <div className="flex flex-col gap-2">
+          {hasPaging && !fullSize && (
+            <div className="flex items-center gap-1">
+              <button
+                className="w-6 h-6 flex items-center justify-center rounded bg-white/70 border border-gray-400/40 disabled:opacity-40"
+                onClick={() => setOffset(0)}
+                disabled={!canPageLeft}
+                type="button"
+                aria-label="First"
+              >
+                <ChevronsLeft className="w-4 h-4 text-blue-dark-950" />
+              </button>
+              <button
+                className="w-6 h-6 flex items-center justify-center rounded bg-white/70 border border-gray-400/40 disabled:opacity-40"
+                onClick={() => setOffset((v) => Math.max(0, v - groupSize))}
+                disabled={!canPageLeft}
+                type="button"
+                aria-label="Previous"
+              >
+                <ChevronLeft className="w-4 h-4 text-blue-dark-950" />
+              </button>
+              <button
+                className="w-6 h-6 flex items-center justify-center rounded bg-white/70 border border-gray-400/40 disabled:opacity-40"
+                onClick={() => setOffset((v) => Math.min(nodes.length - groupSize, v + groupSize))}
+                disabled={!canPageRight}
+                type="button"
+                aria-label="Next"
+              >
+                <ChevronRight className="w-4 h-4 text-blue-dark-950" />
+              </button>
+              <button
+                className="w-6 h-6 flex items-center justify-center rounded bg-white/70 border border-gray-400/40 disabled:opacity-40"
+                onClick={() => setOffset(Math.max(0, nodes.length - groupSize))}
+                disabled={!canPageRight}
+                type="button"
+                aria-label="Last"
+              >
+                <ChevronsRight className="w-4 h-4 text-blue-dark-950" />
+              </button>
+
+              {canShowFullToggle && (
+                <button
+                  className="ml-2 w-6 h-6 flex items-center justify-center rounded bg-white/70 border border-gray-400/40"
+                  onClick={() => setFullSize(true)}
+                  type="button"
+                  aria-label="Show all"
+                >
+                  <Maximize2 className="w-4 h-4 text-blue-dark-950" />
+                </button>
+              )}
+            </div>
+          )}
+
+          {fullSize && canShowFullToggle && (
+            <div className="flex items-center gap-2">
+              <button
+                className="w-6 h-6 flex items-center justify-center rounded bg-white/70 border border-gray-400/40"
+                onClick={() => {
+                  setFullSize(false);
+                  setOffset(0);
+                }}
+                type="button"
+                aria-label="Show paged"
+              >
+                <Minimize2 className="w-4 h-4 text-blue-dark-950" />
+              </button>
+              <div className="text-[10px] text-gray-600 font-macan">Showing all</div>
+            </div>
+          )}
+
+          <div className="flex flex-wrap gap-4">
+            {visibleNodes.map((node) => (
+              <NodeTile key={node.id} node={node} onClick={onNodeClick} />
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
+function buildGroupTree(groups: K8sNodeGroup[]) {
+  const byId = new Map<string, K8sNodeGroup>();
+  const byOwnerId = new Map<string, K8sNodeGroup>();
+  const memberToGroups = new Map<string, K8sNodeGroup[]>();
+
+  for (const group of groups) {
+    byId.set(group.id, group);
+    byOwnerId.set(group.ownerId, group);
+    for (const memberId of group.memberIds) {
+      const list = memberToGroups.get(memberId) || [];
+      list.push(group);
+      memberToGroups.set(memberId, list);
+    }
+  }
+
+  const parentByGroupId = new Map<string, string>();
+
+  for (const group of groups) {
+    const candidates = (memberToGroups.get(group.ownerId) || []).filter((g) => g.level < group.level);
+    if (candidates.length === 0) continue;
+    candidates.sort((a, b) => b.level - a.level);
+    parentByGroupId.set(group.id, candidates[0].id);
+  }
+
+  const childrenByGroupId = new Map<string, K8sNodeGroup[]>();
+  for (const group of groups) {
+    const parentId = parentByGroupId.get(group.id);
+    if (!parentId) continue;
+    const list = childrenByGroupId.get(parentId) || [];
+    list.push(group);
+    childrenByGroupId.set(parentId, list);
+  }
+
+  childrenByGroupId.forEach((list) => {
+    list.sort((a, b) => a.level - b.level || a.ownerId.localeCompare(b.ownerId));
+  });
+
+  const rootGroups = groups
+    .filter((g) => !parentByGroupId.has(g.id))
+    .slice()
+    .sort((a, b) => a.level - b.level || a.ownerId.localeCompare(b.ownerId));
+
+  return { byId, byOwnerId, parentByGroupId, childrenByGroupId, rootGroups };
+}
 
 export function TopologyCanvas() {
-  const { filters, openMetadataPanel, setSelectedNode, layoutMode } = useUIStore();
-  const { nodes, groups, setNodes, setGroups } = useTopologyStore();
+  const {
+    filters,
+    openMetadataPanel,
+    setSelectedNode,
+    selectedNode,
+    layoutMode,
+    detailLanesExpanded,
+  } = useUIStore();
+  const { nodes, groups, setNodes, setGroups, toggleGroupCollapse } = useTopologyStore();
   const scrollRef = useRef<HTMLDivElement | null>(null);
   const svgRef = useRef<SVGSVGElement | null>(null);
   const rafRef = useRef<number | null>(null);
-  const [connectionPaths, setConnectionPaths] = useState<Array<{ id: string; d: string }>>([]);
+  const [connectionPaths, setConnectionPaths] = useState<
+    Array<{ id: string; d: string; fromId: string; toId: string }>
+  >([]);
   const [contextMenu, setContextMenu] = useState<null | { x: number; y: number; nodeId: string }>(null);
 
   useEffect(() => {
-    const { nodes: parsedNodes, groups: parsedGroups } = parseSkydiveSyncReply(skydiveTopology);
-    setNodes(parsedNodes);
-    setGroups(parsedGroups);
+    const scenarioGroups =
+      kubernetesAggregateWorkloadsScenario.groups ??
+      buildGroupsFromRules(kubernetesAggregateWorkloadsScenario.nodes, hierarchyConfig.groupingRules);
+
+    setNodes(kubernetesAggregateWorkloadsScenario.nodes);
+    setGroups(scenarioGroups);
   }, [setNodes, setGroups]);
 
   const isHiddenByCollapsedGroup = useMemo(() => {
@@ -32,10 +255,10 @@ export function TopologyCanvas() {
 
   const filteredNodes = useMemo(() => {
     if (filters.length === 0) return nodes;
-    
-    const activeQueries = filters.filter(f => f.active).map(f => f.query);
+
+    const activeQueries = filters.filter((f) => f.active).map((f) => f.query);
     if (activeQueries.length === 0) return nodes;
-    
+
     return activeQueries.reduce((acc, query) => {
       return filterNodes(acc, query);
     }, nodes);
@@ -52,8 +275,15 @@ export function TopologyCanvas() {
     if (layoutMode === 'force') {
       return applyCircularLayout(renderedNodes);
     }
+
+    // In lane-based hierarchy mode, the DOM visibility is controlled by lane paging + group expansion.
+    // Do not hide nodes via collapsed groups here, otherwise links won't render for visible nodes.
+    if (layoutMode === 'hierarchy') {
+      return filteredNodes;
+    }
+
     return renderedNodes;
-  }, [layoutMode, renderedNodes]);
+  }, [filteredNodes, layoutMode, renderedNodes, groups]);
 
   const layoutBounds = useMemo(() => {
     if (layoutMode === 'hierarchy') return null;
@@ -82,13 +312,9 @@ export function TopologyCanvas() {
     return new Map(filteredNodes.map((n) => [n.id, n] as const));
   }, [filteredNodes]);
 
-  const laneCategories: Array<{ id: string; label: string; height: number | 'auto' }> = [
-    { id: 'aggregate', label: 'Namespaces', height: 'auto' as const },
-    { id: 'load', label: 'Load', height: 200 },
-    { id: 'service', label: 'Service', height: 200 },
-    { id: 'network', label: 'Network', height: 200 },
-    { id: 'config-storage', label: 'Config and Storage', height: 'auto' as const },
-  ];
+  const groupTree = useMemo(() => buildGroupTree(groups), [groups]);
+
+
 
   const computeConnections = () => {
     const svgEl = svgRef.current;
@@ -97,27 +323,210 @@ export function TopologyCanvas() {
 
     const svgRect = svgEl.getBoundingClientRect();
 
-    const getCenter = (id: string) => {
-      const el = containerEl.querySelector(`[data-node-id="${CSS.escape(id)}"]`) as HTMLElement | null;
-      if (!el) return null;
-      const r = el.getBoundingClientRect();
-      return {
-        x: r.left - svgRect.left + r.width / 2,
-        y: r.top - svgRect.top + r.height / 2,
-      };
+    const getNodeEl = (id: string) => {
+      return containerEl.querySelector(`[data-node-id="${CSS.escape(id)}"]`) as HTMLElement | null;
+    };
+
+
+    const getAnchor = (id: string, anchor: 'center' | 'top' | 'bottom') => {
+      const el = getNodeEl(id);
+      const r = el?.getBoundingClientRect();
+      if (!el || !r) return null;
+
+      // Default to the whole node tile.
+      let anchorRect = r;
+
+      // For "bottom" anchor, prefer the label itself so the line originates
+      // from the label's bottom-center (when present).
+      if (anchor === 'bottom') {
+        const labelEl = el.querySelector('[data-anchor="node-label"]') as HTMLElement | null;
+        if (labelEl) {
+          anchorRect = labelEl.getBoundingClientRect();
+        }
+      }
+
+      const x = anchorRect.left - svgRect.left + anchorRect.width / 2;
+      const yBase = anchorRect.top - svgRect.top;
+
+      if (anchor === 'top') {
+        return { x, y: yBase };
+      }
+
+      if (anchor === 'bottom') {
+        return { x, y: yBase + anchorRect.height };
+      }
+
+      return { x, y: yBase + anchorRect.height / 2 };
     };
 
     const renderedIds = new Set(layoutNodes.map((n) => n.id));
-    const paths: Array<{ id: string; d: string }> = [];
+    const paths: Array<{ id: string; d: string; fromId: string; toId: string }> = [];
 
+    // In lane-based hierarchy mode, draw:
+    // 1) ownership (group parent -> child) connections
+    // 2) lane-adjacent connections (load -> service -> network -> config/storage)
+    // 3) aggregate peer connections (aggregate <-> aggregate)
+    if (layoutMode === 'hierarchy') {
+      const seen = new Set<string>();
+
+      const categoryOrder = new Map(
+        hierarchyConfig.categories.map((cat) => [cat.id, cat.laneConfig.order ?? 0] as const)
+      );
+      const getCategoryOrder = (category: K8sNodeData['category']) => categoryOrder.get(category) ?? 0;
+
+      const workloadControllerTypes = new Set(['deployment', 'statefulset', 'job']);
+      const isWorkloadController = (node: K8sNodeData) => workloadControllerTypes.has(node.type);
+
+      const pushVerticalCurve = (fromId: string, toId: string, key: string) => {
+        const from = getAnchor(fromId, 'bottom');
+        const to = getAnchor(toId, 'top');
+        if (!from || !to) return;
+
+        const dy = to.y - from.y;
+        const curvature = 0.5;
+        const cx1 = from.x;
+        const cy1 = from.y + dy * curvature;
+        const cx2 = to.x;
+        const cy2 = to.y - dy * curvature;
+
+        paths.push({
+          id: key,
+          fromId,
+          toId,
+          d: `M ${from.x} ${from.y} C ${cx1} ${cy1}, ${cx2} ${cy2}, ${to.x} ${to.y}`,
+        });
+      };
+
+      groups.forEach((group) => {
+        if (!renderedIds.has(group.ownerId)) return;
+
+        const owner = nodeById.get(group.ownerId);
+        if (!owner) return;
+
+        // Aggregate groups should connect to workload controllers first (not directly to every child)
+        // so the flow goes: aggregate -> workload -> pods -> service -> network -> config/storage.
+        const hasWorkloadControllers =
+          owner.category === 'aggregate'
+            ? group.memberIds.some((memberId) => {
+                const member = nodeById.get(memberId);
+                return member ? isWorkloadController(member) : false;
+              })
+            : false;
+
+        group.memberIds.forEach((memberId) => {
+          if (!renderedIds.has(memberId)) return;
+          const member = nodeById.get(memberId);
+          if (!member) return;
+
+          if (owner.category === 'aggregate') {
+            if (hasWorkloadControllers) {
+              if (!isWorkloadController(member)) return;
+            } else {
+              if (member.category !== 'load') return;
+            }
+          }
+
+          const key = `${group.ownerId}->${memberId}`;
+          if (seen.has(key)) return;
+          seen.add(key);
+
+          pushVerticalCurve(group.ownerId, memberId, key);
+        });
+      });
+
+      // Lane-adjacent connections for non-aggregate nodes.
+      layoutNodes.forEach((node) => {
+        if (node.category === 'aggregate') return;
+        if (!node.connections) return;
+        if (!renderedIds.has(node.id)) return;
+
+        node.connections.forEach((targetId) => {
+          if (!renderedIds.has(targetId)) return;
+          const target = nodeById.get(targetId);
+          if (!target) return;
+          if (target.category === 'aggregate') return;
+          if (node.category === target.category) return;
+
+          const orderA = getCategoryOrder(node.category);
+          const orderB = getCategoryOrder(target.category);
+
+          // Allow connections to span multiple lanes (e.g. pod -> multus, pod -> configmap).
+          // We still draw as a simple vertical curve between the two lane positions.
+          if (orderA === orderB) return;
+
+          const fromId = orderA < orderB ? node.id : targetId;
+          const toId = orderA < orderB ? targetId : node.id;
+
+          const key = `lane:${fromId}->${toId}`;
+          if (seen.has(key)) return;
+          seen.add(key);
+
+          pushVerticalCurve(fromId, toId, key);
+        });
+      });
+
+      // Aggregate peer connections (and optional aggregate -> workload controller links from raw graph connections).
+      layoutNodes.forEach((node) => {
+        if (node.category !== 'aggregate') return;
+        if (!node.connections) return;
+        if (!renderedIds.has(node.id)) return;
+
+        node.connections.forEach((targetId) => {
+          if (!renderedIds.has(targetId)) return;
+          const target = nodeById.get(targetId);
+          if (!target) return;
+
+          if (target.category === 'aggregate') {
+            const key = `peer:${[node.id, targetId].sort().join('<->')}`;
+            if (seen.has(key)) return;
+            seen.add(key);
+
+            const from = getAnchor(node.id, 'center');
+            const to = getAnchor(targetId, 'center');
+            if (!from || !to) return;
+
+            const dx = to.x - from.x;
+            const curvature = 0.35;
+            const cx1 = from.x + dx * curvature;
+            const cy1 = from.y;
+            const cx2 = to.x - dx * curvature;
+            const cy2 = to.y;
+
+            paths.push({
+              id: key,
+              fromId: node.id,
+              toId: targetId,
+              d: `M ${from.x} ${from.y} C ${cx1} ${cy1}, ${cx2} ${cy2}, ${to.x} ${to.y}`,
+            });
+
+            return;
+          }
+
+          // Keep aggregate->workload controller as a fallback (in case ownership grouping isn't present)
+          // but avoid connecting aggregates directly to services/network/config-storage.
+          if (!isWorkloadController(target)) return;
+
+          const key = `${node.id}->${targetId}`;
+          if (seen.has(key)) return;
+          seen.add(key);
+
+          pushVerticalCurve(node.id, targetId, key);
+        });
+      });
+
+      setConnectionPaths(paths);
+      return;
+    }
+
+    // In other layout modes, draw the graph connections from node.connections
     layoutNodes.forEach((node) => {
       if (!node.connections) return;
-      const from = getCenter(node.id);
+      const from = getAnchor(node.id, 'center');
       if (!from) return;
 
       node.connections.forEach((targetId) => {
         if (!renderedIds.has(targetId)) return;
-        const to = getCenter(targetId);
+        const to = getAnchor(targetId, 'center');
         if (!to) return;
 
         const dx = to.x - from.x;
@@ -129,7 +538,9 @@ export function TopologyCanvas() {
 
         paths.push({
           id: `${node.id}-${targetId}`,
-          d: `M ${from.x} ${from.y} C ${cx1} ${cy1}, ${cx2} ${cy2}, ${to.x} ${to.y}`
+          fromId: node.id,
+          toId: targetId,
+          d: `M ${from.x} ${from.y} C ${cx1} ${cy1}, ${cx2} ${cy2}, ${to.x} ${to.y}`,
         });
       });
     });
@@ -137,12 +548,17 @@ export function TopologyCanvas() {
     setConnectionPaths(paths);
   };
 
+  const computeConnectionsRef = useRef(computeConnections);
+  useEffect(() => {
+    computeConnectionsRef.current = computeConnections;
+  });
+
   useLayoutEffect(() => {
     if (rafRef.current) {
       cancelAnimationFrame(rafRef.current);
     }
     rafRef.current = requestAnimationFrame(() => {
-      computeConnections();
+      computeConnectionsRef.current();
     });
 
     return () => {
@@ -150,11 +566,23 @@ export function TopologyCanvas() {
         cancelAnimationFrame(rafRef.current);
       }
     };
-  }, [layoutNodes, groups, filters]);
+  }, [layoutNodes, groups, filters, layoutMode, detailLanesExpanded]);
 
   useEffect(() => {
     const el = scrollRef.current;
     if (!el) return;
+
+    // Lane paging swaps out node elements without changing TopologyCanvas props/state.
+    // Observe DOM changes so connection paths are recalculated when the visible node set changes.
+    const mutationObserver = new MutationObserver(() => {
+      if (rafRef.current) return;
+      rafRef.current = requestAnimationFrame(() => {
+        rafRef.current = null;
+        computeConnectionsRef.current();
+      });
+    });
+
+    mutationObserver.observe(el, { childList: true, subtree: true });
 
     const onContextMenu = (e: MouseEvent) => {
       const target = e.target as HTMLElement | null;
@@ -189,12 +617,12 @@ export function TopologyCanvas() {
       if (rafRef.current) return;
       rafRef.current = requestAnimationFrame(() => {
         rafRef.current = null;
-        computeConnections();
+        computeConnectionsRef.current();
       });
     };
 
     const onResize = () => {
-      computeConnections();
+      computeConnectionsRef.current();
     };
 
     el.addEventListener('scroll', onScroll, { passive: true });
@@ -204,6 +632,7 @@ export function TopologyCanvas() {
     window.addEventListener('resize', onResize);
 
     return () => {
+      mutationObserver.disconnect();
       el.removeEventListener('scroll', onScroll);
       el.removeEventListener('contextmenu', onContextMenu);
       window.removeEventListener('pointerdown', onGlobalPointerDown);
@@ -212,14 +641,128 @@ export function TopologyCanvas() {
     };
   }, []);
 
+  const onNodeClick = (node: K8sNodeData) => {
+    if (node.id === 'dc-01') {
+      const productionNode = nodes.find((n) => n.id === 'ns-production');
+      if (productionNode) {
+        setSelectedNode(productionNode);
+        openMetadataPanel(productionNode);
+        return;
+      }
+    }
+
+    setSelectedNode(node);
+    openMetadataPanel(node);
+  };
+
+  const renderGroup = (group: K8sNodeGroup, depth: number) => {
+    const ownerNode = nodeById.get(group.ownerId);
+    if (!ownerNode) return null;
+
+    const childGroups = groupTree.childrenByGroupId.get(group.id) || [];
+
+    const leafNodes = group.memberIds
+      .filter((id) => !groupTree.byOwnerId.has(id))
+      .filter((id) => !isHiddenByCollapsedGroup(id))
+      .map((id) => nodeById.get(id))
+      .filter((node): node is K8sNodeData => !!node);
+
+    const leafNodesByType = leafNodes.reduce((acc, node) => {
+      const list = acc.get(node.type) || [];
+      list.push(node);
+      acc.set(node.type, list);
+      return acc;
+    }, new Map<string, K8sNodeData[]>());
+
+    return (
+      <div
+        key={group.id}
+        className="rounded-lg border border-gray-400/40 bg-white/70"
+        style={{
+          padding: '12px',
+          marginLeft: depth === 0 ? 0 : 18,
+        }}
+        data-testid={`hierarchy-group-${group.id}`}
+      >
+        <div className="flex items-center gap-2">
+          {group.memberIds.length > 0 && (
+            <button
+              className="flex-shrink-0 w-6 h-6 flex items-center justify-center bg-gray-200 hover:bg-gray-300 transition-colors rounded"
+              onClick={(e) => {
+                e.stopPropagation();
+                toggleGroupCollapse(group.id);
+              }}
+              aria-label={group.collapsed ? 'Expand' : 'Collapse'}
+              type="button"
+            >
+              {group.collapsed ? (
+                <ChevronRight className="w-4 h-4 text-blue-dark-950" />
+              ) : (
+                <ChevronDown className="w-4 h-4 text-blue-dark-950" />
+              )}
+            </button>
+          )}
+
+          <NodeTile node={ownerNode} onClick={onNodeClick} />
+
+          <div className="text-[10px] text-gray-600 font-macan">
+            {group.memberIds.length}m{group.collapsed && ' ✓'}
+          </div>
+        </div>
+
+        {!group.collapsed && (childGroups.length > 0 || leafNodes.length > 0) && (
+          <div className="mt-4 flex flex-col gap-4">
+            {childGroups.length > 0 && (
+              <div className="flex flex-wrap gap-6">
+                {childGroups.map((child) => renderGroup(child, depth + 1))}
+              </div>
+            )}
+
+            {leafNodes.length > 0 && (
+              <div className="flex flex-wrap gap-6">
+                {Array.from(leafNodesByType.entries()).flatMap(([type, nodesForType]) => {
+                  if (nodesForType.length > DEFAULT_GROUP_SIZE) {
+                    return [
+                      <TypeCluster
+                        key={`${group.id}:${type}`}
+                        clusterKey={`${group.id}:${type}`}
+                        nodeType={type}
+                        nodes={nodesForType}
+                        onNodeClick={onNodeClick}
+                      />,
+                    ];
+                  }
+
+                  return nodesForType.map((node) => <NodeTile key={node.id} node={node} onClick={onNodeClick} />);
+                })}
+              </div>
+            )}
+          </div>
+        )}
+      </div>
+    );
+  };
+
+
+  const laneCategories = useMemo(() => {
+    return getLaneCategories(hierarchyConfig);
+  }, []);
+
+  const nodesByCategory = useMemo(() => {
+    const grouped: Record<string, K8sNodeData[]> = {};
+
+    laneCategories.forEach(lane => {
+      grouped[lane.id] = filteredNodes.filter(
+        node => node.category === lane.id
+      );
+    });
+
+    return grouped;
+  }, [laneCategories, filteredNodes]);
+
   return (
     <div ref={scrollRef} className="w-full h-full relative overflow-auto">
-      {/* Group Controller */}
-      <GroupController />
-      
-      {/* Canvas with dotted grid background */}
       <div className="w-full min-h-full bg-gray-300 relative p-5 pt-5">
-        {/* Dotted Grid Background */}
         <div
           className="absolute inset-0 pointer-events-none opacity-25"
           style={{
@@ -229,40 +772,54 @@ export function TopologyCanvas() {
           }}
         />
 
-        {/* Connection Lines Overlay */}
         <svg
           ref={svgRef}
-          className="absolute inset-0 pointer-events-none"
+          className="absolute inset-0 pointer-events-none z-20"
           width="100%"
           height="100%"
           style={{ overflow: 'visible' }}
           data-testid="connection-layer"
         >
-          {connectionPaths.map((p) => (
+          {(selectedNode
+            ? connectionPaths.filter((p) => p.fromId === selectedNode.id || p.toId === selectedNode.id)
+            : []
+          ).map((p) => (
             <path
               key={p.id}
               d={p.d}
               fill="none"
               stroke="#00112B"
-              strokeWidth="1"
-              strokeDasharray="6 6"
-              opacity="0.4"
+              strokeWidth="2"
+              strokeDasharray="8 4"
+              opacity="0.8"
             />
           ))}
         </svg>
 
-        {/* Hierarchical Lanes */}
         {layoutMode === 'hierarchy' ? (
           <div className="relative z-10 flex flex-col">
-            {laneCategories.map((lane) => (
-              <HierarchicalLane
-                key={lane.id}
-                category={lane.id as any}
-                label={lane.label}
-                nodes={filteredNodes.filter(n => n.category === lane.id)}
-                height={lane.height}
-              />
-            ))}
+            {laneCategories.map((lane) => {
+              if (lane.id !== 'aggregate' && !detailLanesExpanded) {
+                return null;
+              }
+
+              const nodesInLane = nodesByCategory[lane.id] || [];
+
+              // Skip lanes with no nodes unless configured to show empty lanes
+              if (nodesInLane.length === 0 && !hierarchyConfig.displayRules?.showEmptyLanes) {
+                return null;
+              }
+
+              return (
+                <HierarchicalLane
+                  key={lane.id}
+                  category={lane.id as any}
+                  label={lane.label}
+                  nodes={nodesInLane}
+                  height={lane.height}
+                />
+              );
+            })}
           </div>
         ) : (
           <div
@@ -281,10 +838,7 @@ export function TopologyCanvas() {
                   left: (node.position?.x ?? 0) - (layoutBounds?.offsetX ?? 0),
                   top: (node.position?.y ?? 0) - (layoutBounds?.offsetY ?? 0),
                 }}
-                onClick={() => {
-                  setSelectedNode(node);
-                  openMetadataPanel(node);
-                }}
+                onClick={() => onNodeClick(node)}
               >
                 <KubernetesIconWrapper
                   type={node.type}
@@ -298,15 +852,6 @@ export function TopologyCanvas() {
           </div>
         )}
 
-        <div className="absolute bottom-6 right-6 flex flex-col gap-2 z-20">
-          <button className="px-4 h-10 rounded-full bg-blue-700 text-white text-sm font-macan shadow hover:bg-blue-600">
-            infrastructure
-          </button>
-          <button className="px-4 h-10 rounded-full bg-blue-700 text-white text-sm font-macan shadow hover:bg-blue-600">
-            kubernetes
-          </button>
-        </div>
-
         {contextMenu && (
           <div
             className="absolute z-30 bg-white border border-gray-300 rounded shadow-lg py-1 min-w-[180px]"
@@ -318,8 +863,7 @@ export function TopologyCanvas() {
               onClick={() => {
                 const node = nodeById.get(contextMenu.nodeId);
                 if (node) {
-                  setSelectedNode(node);
-                  openMetadataPanel(node);
+                  onNodeClick(node);
                 }
                 setContextMenu(null);
               }}

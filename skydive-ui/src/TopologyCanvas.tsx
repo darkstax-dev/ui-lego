@@ -1,6 +1,5 @@
 import React, { useState, useCallback } from 'react'
 import './TopologyCanvas.css'
-import { TopBar } from './components/topology/TopBar'
 import { LeftSidebar } from './components/topology/LeftSidebar'
 import { RightSidebar } from './components/topology/RightSidebar'
 import { Canvas } from './components/topology/Canvas'
@@ -18,20 +17,21 @@ export interface K8sNode {
 }
 
 export interface TopologyCanvasProps {
+  initialNodes?: K8sNode[]
   onNodeClick?: (node: K8sNode) => void
   onNodeDoubleClick?: (node: K8sNode) => void
   onCanvasClick?: () => void
 }
 
 export const TopologyCanvas: React.FC<TopologyCanvasProps> = ({
+  initialNodes,
   onNodeClick,
   onNodeDoubleClick,
   onCanvasClick
 }) => {
-  const [nodes, setNodes] = useState<K8sNode[]>([])
+  const [nodes, setNodes] = useState<K8sNode[]>(() => initialNodes ?? [])
   const [selectedNodeId, setSelectedNodeId] = useState<string | null>(null)
   const [showLegend, setShowLegend] = useState(false)
-  const [searchQuery, setSearchQuery] = useState('')
 
   const handleDrop = useCallback((type: string, position: { x: number; y: number }) => {
     const newNode: K8sNode = {
@@ -68,11 +68,6 @@ export const TopologyCanvas: React.FC<TopologyCanvasProps> = ({
 
   return (
     <div className="topology-canvas">
-      <TopBar 
-        searchQuery={searchQuery}
-        onSearchChange={setSearchQuery}
-      />
-      
       <div className="topology-canvas__main">
         <LeftSidebar />
         
@@ -86,7 +81,7 @@ export const TopologyCanvas: React.FC<TopologyCanvasProps> = ({
           onCanvasClick={handleCanvasClick}
         />
         
-        <RightSidebar searchQuery={searchQuery} />
+        <RightSidebar />
       </div>
       
       <BottomToolbar 

@@ -27,18 +27,21 @@ interface UIStore {
   // Layout
   layoutMode: LayoutMode;
   setLayoutMode: (mode: LayoutMode) => void;
-  
+
+  // Swim lanes
+  detailLanesExpanded: boolean;
+  setDetailLanesExpanded: (expanded: boolean) => void;
+  expandDetailLanes: () => void;
+  collapseDetailLanes: () => void;
+
   // Status legend tooltip
   showStatusLegend: boolean;
   toggleStatusLegend: () => void;
 }
 
 const getInitialLayoutMode = (): LayoutMode => {
-  if (typeof window === 'undefined') return 'hierarchy';
-  const stored = window.localStorage.getItem('layoutMode');
-  if (stored === 'hierarchy' || stored === 'force' || stored === 'tree') {
-    return stored;
-  }
+  // Always default to hierarchy so lanes render immediately in demos.
+  // Users can still switch via the LayoutSelector.
   return 'hierarchy';
 };
 
@@ -127,7 +130,13 @@ export const useUIStore = create<UIStore>((set) => ({
     }
     set({ layoutMode: mode });
   },
-  
+
+  // Swim lanes
+  detailLanesExpanded: false,
+  setDetailLanesExpanded: (expanded) => set({ detailLanesExpanded: expanded }),
+  expandDetailLanes: () => set({ detailLanesExpanded: true }),
+  collapseDetailLanes: () => set({ detailLanesExpanded: false }),
+
   // Status legend
   showStatusLegend: false,
   toggleStatusLegend: () => set((state) => ({ 

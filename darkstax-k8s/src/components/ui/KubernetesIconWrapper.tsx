@@ -1,5 +1,5 @@
-import { K8sResourceType } from '../../types';
 import { statusColors } from '../../data/k8sTemplates';
+import type { K8sResourceType } from '../../types';
 
 // Import K8s icons from ui-lego source via Vite alias
 import KubernetesNamespace from '@icons/kubernetes/KubernetesNamespace';
@@ -16,6 +16,9 @@ import KubernetesStatefulSet from '@icons/kubernetes/KubernetesStatefulSet';
 import KubernetesNode from '@icons/kubernetes/KubernetesNode';
 import KubernetesMultus from '@icons/kubernetes/KubernetesMultus';
 
+import BuildingFill from '@icons/BuildingFill';
+import MobileTowerFill from '@icons/MobileTowerFill';
+
 interface KubernetesIconWrapperProps {
   type: K8sResourceType;
   status?: 'ready' | 'deploying' | 'active' | 'error' | 'terminated';
@@ -26,6 +29,8 @@ interface KubernetesIconWrapperProps {
 
 const iconMap: Record<K8sResourceType, React.ComponentType<any>> = {
   namespace: KubernetesNamespace,
+  datacenter: BuildingFill,
+  mobiletower: MobileTowerFill,
   service: KubernetesService,
   deployment: KubernetesDeployment,
   job: KubernetesJob,
@@ -64,6 +69,8 @@ export function KubernetesIconWrapper({
 
   const borderColor = statusBorderColors[status] || 'transparent';
   const fillColor = statusColors[status]?.hex || statusColors.ready.hex;
+  const indicatorBg = fillColor;
+  const indicatorTextClass = status === 'ready' ? 'text-blue-dark-950' : 'text-white';
 
   return (
     <div className="KubernetesIconWrapper flex flex-col items-center gap-2 relative">
@@ -110,9 +117,12 @@ export function KubernetesIconWrapper({
         </div>
 
         {/* Indicator Badge */}
-        {showIndicator && indicatorCount && (
-          <div className="absolute -top-1 -right-1 min-w-[18px] h-[18px] px-1 bg-blue-gray-600 rounded-full flex items-center justify-center">
-            <span className="text-white font-macan-mono-stencil text-xs font-medium leading-tight">
+        {showIndicator && indicatorCount != null && (
+          <div
+            className="absolute -bottom-1 -right-1 min-w-[18px] h-[18px] px-1 rounded-full flex items-center justify-center border border-blue-dark-950/30"
+            style={{ backgroundColor: indicatorBg }}
+          >
+            <span className={`${indicatorTextClass} font-macan-mono-stencil text-xs font-medium leading-tight`}>
               {indicatorCount}
             </span>
           </div>
@@ -121,7 +131,10 @@ export function KubernetesIconWrapper({
 
       {/* Label */}
       {label && (
-        <div className="text-blue-dark-950 font-macan-mono text-sm font-book leading-tight text-center">
+        <div
+          data-anchor="node-label"
+          className="text-blue-dark-950 font-macan-mono text-sm font-book leading-tight text-center"
+        >
           {label}
         </div>
       )}

@@ -1,27 +1,51 @@
-import type React from 'react';
-import { ChevronDown, ChevronRight } from 'lucide-react';
+import type { MouseEvent } from 'react';
 import { K8sNodeData } from '../../types';
 import { KubernetesIconWrapper } from '../ui/KubernetesIconWrapper';
 import { useUIStore } from '../../store/uiStore';
+import { useTopologyStore } from '../../store/topologyStore';
 
 interface HierarchicalNodeGroupProps {
   parentNode: K8sNodeData;
   childNodes: K8sNodeData[];
+  /** Total members in the underlying group (may span lanes). */
+  memberCount?: number;
   collapsed?: boolean;
   onToggleCollapse?: () => void;
+  onParentClick?: (node: K8sNodeData) => void;
+  onParentDoubleClick?: (node: K8sNodeData) => void;
 }
 
-export function HierarchicalNodeGroup({ parentNode, childNodes, collapsed = false, onToggleCollapse }: HierarchicalNodeGroupProps) {
+export function HierarchicalNodeGroup({
+  parentNode,
+  childNodes,
+  memberCount,
+  collapsed = true,
+  onToggleCollapse,
+  onParentClick,
+  onParentDoubleClick,
+}: HierarchicalNodeGroupProps) {
   const { setSelectedNode, openMetadataPanel } = useUIStore();
+  const { nodes } = useTopologyStore();
 
-  const handleToggle = (e: React.MouseEvent) => {
+  const aggregatedChildCount = memberCount ?? childNodes.length;
+
+  const handleParentClick = (e: MouseEvent) => {
     e.stopPropagation();
-    onToggleCollapse?.();
-  };
 
-  const handleParentClick = () => {
-    setSelectedNode(parentNode);
-    openMetadataPanel(parentNode);
+    if (onParentClick) {
+      onParentClick(parentNode);
+    } else {
+
+      const nextNode =
+        parentNode.id === 'dc-01' ? nodes.find((n) => n.id === 'ns-production') ?? parentNode : parentNode;
+
+      setSelectedNode(nextNode);
+      openMetadataPanel(nextNode);
+    }
+
+    if (onToggleCollapse && aggregatedChildCount > 0) {
+      onToggleCollapse();
+    }
   };
 
   const handleChildClick = (node: K8sNodeData) => {
@@ -30,44 +54,29 @@ export function HierarchicalNodeGroup({ parentNode, childNodes, collapsed = fals
   };
 
   return (
-    <div className="inline-flex flex-col gap-2">
-      {/* Parent Node with Collapse/Expand Button */}
-      <div className="relative inline-flex items-center gap-2">
-        {childNodes.length > 0 && (
-          <button
-            onClick={handleToggle}
-            className="flex-shrink-0 w-6 h-6 flex items-center justify-center bg-gray-200 hover:bg-gray-300 transition-colors rounded"
-            aria-label={collapsed ? 'Expand' : 'Collapse'}
-          >
-            {collapsed ? (
-              <ChevronRight className="w-4 h-4 text-blue-dark-950" />
-            ) : (
-              <ChevronDown className="w-4 h-4 text-blue-dark-950" />
-            )}
-          </button>
-        )}
-        <div
-          data-node-id={parentNode.id}
-          className="cursor-pointer transition-transform hover:scale-105"
-          onClick={handleParentClick}
-          onDoubleClick={(e) => {
-            e.stopPropagation();
-            onToggleCollapse?.();
-          }}
-        >
-          <KubernetesIconWrapper
-            type={parentNode.type}
-            status={parentNode.status}
-            label={parentNode.label}
-            showIndicator={!!parentNode.indicatorCount}
-            indicatorCount={parentNode.indicatorCount}
-          />
-        </div>
+    <div className="inline-grid grid-cols-1 gap-y-6 justify-items-center">
+      {/* Parent Node */}
+      <div
+        data-node-id={parentNode.id}
+        className="cursor-pointer transition-transform hover:scale-105"
+        onClick={handleParentClick}
+        onDoubleClick={(e) => {
+          e.stopPropagation();
+          onParentDoubleClick?.(parentNode);
+        }}
+      >
+        <KubernetesIconWrapper
+          type={parentNode.type}
+          status={parentNode.status}
+          label={parentNode.label}
+          showIndicator={aggregatedChildCount > 0}
+          indicatorCount={aggregatedChildCount}
+        />
       </div>
 
       {/* Child Nodes */}
       {!collapsed && childNodes.length > 0 && (
-        <div className="flex flex-wrap gap-4 ml-8">
+        <div className="flex flex-wrap justify-center gap-4">
           {childNodes.map((childNode) => (
             <div
               key={childNode.id}
@@ -79,8 +88,7 @@ export function HierarchicalNodeGroup({ parentNode, childNodes, collapsed = fals
                 type={childNode.type}
                 status={childNode.status}
                 label={childNode.label}
-                showIndicator={!!childNode.indicatorCount}
-                indicatorCount={childNode.indicatorCount}
+                showIndicator={false}
               />
             </div>
           ))}

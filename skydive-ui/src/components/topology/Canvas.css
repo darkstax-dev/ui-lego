@@ -41,27 +41,11 @@
   gap: var(--sds-size-space-200);
 }
 
-.topology-canvas__back-btn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 40px;
-  height: 40px;
-  background: var(--color-gray-200, #DFDFDF);
-  border: none;
-  color: var(--color-gray-500, #78797A);
-  cursor: pointer;
-  transition: background 0.2s ease;
-}
-
-.topology-canvas__back-btn:hover {
-  background: var(--color-gray-100);
-}
-
-.topology-canvas__input,
 .topology-canvas__select {
   height: 40px;
+  width: 180px;
   padding: 12px var(--sds-size-space-400);
+  padding-right: 36px;
   background: var(--color-gray-200, #DFDFDF);
   border: none;
   color: var(--color-gray-500, #78797A);
@@ -71,24 +55,11 @@
   line-height: 1.2;
   letter-spacing: -0.02em;
   outline: none;
-}
-
-.topology-canvas__input {
-  width: 180px;
-}
-
-.topology-canvas__input--filled {
-  color: var(--color-blue-dark-950, #00112B);
-}
-
-.topology-canvas__select {
-  width: 180px;
   appearance: none;
   background-image: url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M10 11L14 7L15 8L10 13L5 8L6 7L10 11Z' fill='%2378797A'/%3E%3C/svg%3E");
   background-repeat: no-repeat;
   background-position: right 12px center;
   background-size: 20px 20px;
-  padding-right: 36px;
   cursor: pointer;
 }
 

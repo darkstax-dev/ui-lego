@@ -70,21 +70,6 @@ export const Canvas: React.FC<CanvasProps> = ({
       {/* Toolbar */}
       <div className="topology-canvas__toolbar">
         <div className="topology-canvas__breadcrumb">
-          <button className="topology-canvas__back-btn">
-            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-              <path d="M6.5 10H16.5M6.5 10L10.5 6M6.5 10L10.5 14" stroke="currentColor" strokeWidth="1.5"/>
-            </svg>
-          </button>
-          <input
-            type="text"
-            placeholder="Fotder path"
-            className="topology-canvas__input"
-          />
-          <input
-            type="text"
-            defaultValue="Untitled 1"
-            className="topology-canvas__input topology-canvas__input--filled"
-          />
           <select className="topology-canvas__select">
             <option>Select node</option>
           </select>

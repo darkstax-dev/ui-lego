@@ -23,6 +23,7 @@ const iconCategories = {
     { name: 'Bank Fill', component: Icons.BankFill, category: 'Finance' },
     { name: 'Building Fill', component: Icons.BuildingFill, category: 'Commercial' },
     { name: 'Building 4 Fill', component: Icons.Building4Fill, category: 'Commercial' },
+    { name: 'Mobile Tower Fill', component: Icons.MobileTowerFill, category: 'Telecom' },
     { name: 'Store Fill', component: Icons.StoreFill, category: 'Retail' },
     { name: 'Hotel Fill', component: Icons.HotelFill, category: 'Hospitality' },
     { name: 'Community Fill', component: Icons.CommunityFill, category: 'Community' },
