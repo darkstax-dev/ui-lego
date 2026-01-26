@@ -78,7 +78,7 @@ export const kubernetesTopologyScenario: K8sTopologyScenario = {
       id: 'ns-staging',
       type: 'namespace',
       label: 'staging',
-      category: 'aggregate',
+      category: 'load',
       metadata: {
         Type: 'namespace',
         Name: 'staging',
