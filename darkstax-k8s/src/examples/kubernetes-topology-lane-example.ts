@@ -63,7 +63,7 @@ export const k8sLaneExampleTopology: K8sNodeData[] = [
     id: 'ns-workload-example',
     type: 'namespace',
     label: 'ns',
-    category: 'aggregate',
+    category: 'load',
     metadata: {
       Type: 'namespace',
       Name: 'workload-example',
