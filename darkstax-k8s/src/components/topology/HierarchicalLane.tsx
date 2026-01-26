@@ -353,7 +353,7 @@ export function HierarchicalLane({ category, label, nodes, height }: Hierarchica
                     childNodes={childNodesByParent.get(parentNode.id) || []}
                     memberCount={memberCount}
                     collapsed={!!group?.collapsed}
-                    onToggleCollapse={memberCount > 0 ? () => toggleGroupCollapse(group.id) : undefined}
+                    onToggleCollapse={memberCount > 0 && group ? () => toggleGroupCollapse(group.id) : undefined}
                     onParentClick={isAggregateLane ? handleAggregateNodeClick : undefined}
                     onParentDoubleClick={isAggregateLane ? handleAggregateNodeDoubleClick : undefined}
                   />
