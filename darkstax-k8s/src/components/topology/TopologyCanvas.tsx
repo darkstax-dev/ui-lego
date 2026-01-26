@@ -566,7 +566,7 @@ export function TopologyCanvas() {
 
         <svg
           ref={svgRef}
-          className="absolute inset-0 pointer-events-none"
+          className="absolute inset-0 pointer-events-none z-20"
           width="100%"
           height="100%"
           style={{ overflow: 'visible' }}
