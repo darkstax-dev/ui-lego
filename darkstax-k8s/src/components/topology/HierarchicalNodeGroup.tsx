@@ -14,6 +14,8 @@ interface HierarchicalNodeGroupProps {
 export function HierarchicalNodeGroup({ parentNode, childNodes, collapsed = false, onToggleCollapse }: HierarchicalNodeGroupProps) {
   const { setSelectedNode, openMetadataPanel } = useUIStore();
 
+  const aggregatedChildCount = childNodes.length;
+
   const handleToggle = (e: React.MouseEvent) => {
     e.stopPropagation();
     onToggleCollapse?.();
