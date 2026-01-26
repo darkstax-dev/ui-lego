@@ -40,8 +40,7 @@ test.describe('Aggregate → Kubernetes hierarchy relationship', () => {
       .poll(async () => page.getByTestId('lane-load').locator('[data-node-id]').count())
       .toBeGreaterThan(0);
 
-    // Aggregate → Kubernetes relationship should be represented by at least one connection path
-    // (dc-01 connects to ns-production in the demo scenario, and dc-01 click maps to selecting ns-production).
+    // Aggregate → Kubernetes relationship should be represented by at least one connection path.
     await expect
       .poll(async () => page.getByTestId('connection-layer').locator('path').count())
       .toBeGreaterThan(0);
