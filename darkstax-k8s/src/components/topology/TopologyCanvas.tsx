@@ -477,7 +477,7 @@ export function TopologyCanvas() {
         cancelAnimationFrame(rafRef.current);
       }
     };
-  }, [layoutNodes, groups, filters]);
+  }, [layoutNodes, groups, filters, layoutMode, detailLanesExpanded]);
 
   useEffect(() => {
     const el = scrollRef.current;
