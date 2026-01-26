@@ -44,9 +44,9 @@ export const kubernetesTopologyScenario: K8sTopologyScenario = {
       const id = `tower-${String(n).padStart(2, '0')}`;
       return {
         id,
-        type: 'mobiletower',
+        type: 'mobiletower' as const,
         label: `Tower${String(n).padStart(2, '0')}`,
-        category: 'aggregate',
+        category: 'aggregate' as const,
         metadata: {
           Type: 'mobiletower',
           Name: id,
