@@ -3,6 +3,7 @@ import { ChevronDown, ChevronRight } from 'lucide-react';
 import { K8sNodeData } from '../../types';
 import { KubernetesIconWrapper } from '../ui/KubernetesIconWrapper';
 import { useUIStore } from '../../store/uiStore';
+import { useTopologyStore } from '../../store/topologyStore';
 
 interface HierarchicalNodeGroupProps {
   parentNode: K8sNodeData;
@@ -22,6 +23,7 @@ export function HierarchicalNodeGroup({
   onParentDoubleClick,
 }: HierarchicalNodeGroupProps) {
   const { setSelectedNode, openMetadataPanel } = useUIStore();
+  const { nodes } = useTopologyStore();
 
   const aggregatedChildCount = childNodes.length;
 
@@ -34,6 +36,15 @@ export function HierarchicalNodeGroup({
     if (onParentClick) {
       onParentClick(parentNode);
       return;
+    }
+
+    if (parentNode.id === 'dc-01') {
+      const productionNode = nodes.find((n) => n.id === 'ns-production');
+      if (productionNode) {
+        setSelectedNode(productionNode);
+        openMetadataPanel(productionNode);
+        return;
+      }
     }
 
     setSelectedNode(parentNode);
