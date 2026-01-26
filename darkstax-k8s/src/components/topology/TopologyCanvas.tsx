@@ -541,12 +541,17 @@ export function TopologyCanvas() {
     setConnectionPaths(paths);
   };
 
+  const computeConnectionsRef = useRef(computeConnections);
+  useEffect(() => {
+    computeConnectionsRef.current = computeConnections;
+  });
+
   useLayoutEffect(() => {
     if (rafRef.current) {
       cancelAnimationFrame(rafRef.current);
     }
     rafRef.current = requestAnimationFrame(() => {
-      computeConnections();
+      computeConnectionsRef.current();
     });
 
     return () => {
@@ -566,7 +571,7 @@ export function TopologyCanvas() {
       if (rafRef.current) return;
       rafRef.current = requestAnimationFrame(() => {
         rafRef.current = null;
-        computeConnections();
+        computeConnectionsRef.current();
       });
     });
 
@@ -605,12 +610,12 @@ export function TopologyCanvas() {
       if (rafRef.current) return;
       rafRef.current = requestAnimationFrame(() => {
         rafRef.current = null;
-        computeConnections();
+        computeConnectionsRef.current();
       });
     };
 
     const onResize = () => {
-      computeConnections();
+      computeConnectionsRef.current();
     };
 
     el.addEventListener('scroll', onScroll, { passive: true });
