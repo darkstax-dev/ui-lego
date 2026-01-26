@@ -14,9 +14,10 @@ import { useUIStore } from '../../store/uiStore';
 import { useTopologyStore } from '../../store/topologyStore';
 import { filterNodes } from '../../lib/filterNodes';
 import { kubernetesTopologyScenario } from '../../data/k8sTopologyScenario';
-import { buildGroupsFromRules, hierarchyConfig } from '../../hierarchyConfig';
+import { buildGroupsFromRules, hierarchyConfig, getLaneCategories } from '../../hierarchyConfig';
 import { applyCircularLayout, applyOwnershipTreeLayout } from '../../lib/layouts/flextreeLayout';
 import { KubernetesIconWrapper } from '../ui/KubernetesIconWrapper';
+import { HierarchicalLane } from './HierarchicalLane';
 
 const DEFAULT_GROUP_SIZE = 4;
 const DEFAULT_MAX_EXPAND_SIZE = 8;
