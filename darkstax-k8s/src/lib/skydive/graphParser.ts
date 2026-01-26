@@ -27,7 +27,7 @@ const normalizeResourceType = (rawType?: string): K8sResourceType => {
 };
 
 const categoryByType: Record<K8sResourceType, K8sResourceCategory> = {
-  namespace: 'aggregate',
+  namespace: 'load',
   datacenter: 'aggregate',
   mobiletower: 'aggregate',
   deployment: 'load',
