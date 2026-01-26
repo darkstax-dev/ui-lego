@@ -311,7 +311,8 @@ export function getStatusColor(status?: string): { stroke: string; fill: string 
     'default': { stroke: '#00112B', fill: 'rgba(0, 17, 43, 0.2)' }        // Dark blue
   };
 
-  return statusColors[status || 'default'] || statusColors.default;
+  const key = (status ?? 'default') as keyof typeof statusColors;
+  return statusColors[key] || statusColors.default;
 }
 
 /**
