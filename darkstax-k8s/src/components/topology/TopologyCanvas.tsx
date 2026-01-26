@@ -316,28 +316,45 @@ export function TopologyCanvas() {
 
     const svgRect = svgEl.getBoundingClientRect();
 
+    const getNodeEl = (id: string) => {
+      return containerEl.querySelector(`[data-node-id="${CSS.escape(id)}"]`) as HTMLElement | null;
+    };
+
     const getRect = (id: string) => {
-      const el = containerEl.querySelector(`[data-node-id="${CSS.escape(id)}"]`) as HTMLElement | null;
+      const el = getNodeEl(id);
       if (!el) return null;
       return el.getBoundingClientRect();
     };
 
     const getAnchor = (id: string, anchor: 'center' | 'top' | 'bottom') => {
-      const r = getRect(id);
-      if (!r) return null;
+      const el = getNodeEl(id);
+      const r = el?.getBoundingClientRect();
+      if (!el || !r) return null;
 
-      const x = r.left - svgRect.left + r.width / 2;
-      const yBase = r.top - svgRect.top;
+      // Default to the whole node tile.
+      let anchorRect = r;
+
+      // For "bottom" anchor, prefer the label itself so the line originates
+      // from the label's bottom-center (when present).
+      if (anchor === 'bottom') {
+        const labelEl = el.querySelector('[data-anchor="node-label"]') as HTMLElement | null;
+        if (labelEl) {
+          anchorRect = labelEl.getBoundingClientRect();
+        }
+      }
+
+      const x = anchorRect.left - svgRect.left + anchorRect.width / 2;
+      const yBase = anchorRect.top - svgRect.top;
 
       if (anchor === 'top') {
         return { x, y: yBase };
       }
 
       if (anchor === 'bottom') {
-        return { x, y: yBase + r.height };
+        return { x, y: yBase + anchorRect.height };
       }
 
-      return { x, y: yBase + r.height / 2 };
+      return { x, y: yBase + anchorRect.height / 2 };
     };
 
     const renderedIds = new Set(layoutNodes.map((n) => n.id));
