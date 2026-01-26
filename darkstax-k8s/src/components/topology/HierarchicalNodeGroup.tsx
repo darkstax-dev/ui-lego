@@ -56,52 +56,29 @@ export function HierarchicalNodeGroup({
   };
 
   return (
-    <div className="inline-grid grid-cols-[24px_auto] gap-x-2 gap-y-6">
-      {/* Collapse/Expand Button */}
-      <div className="row-start-1 col-start-1 flex items-center justify-center">
-        {childNodes.length > 0 && (
-          <button
-            onClick={handleToggle}
-            className="flex-shrink-0 w-6 h-6 flex items-center justify-center bg-gray-200 hover:bg-gray-300 transition-colors rounded"
-            aria-label={collapsed ? 'Expand' : 'Collapse'}
-          >
-            {collapsed ? (
-              <ChevronRight className="w-4 h-4 text-blue-dark-950" />
-            ) : (
-              <ChevronDown className="w-4 h-4 text-blue-dark-950" />
-            )}
-          </button>
-        )}
-      </div>
-
+    <div className="inline-grid grid-cols-1 gap-y-6 justify-items-center">
       {/* Parent Node */}
-      <div className="row-start-1 col-start-2 flex justify-center">
-        <div
-          data-node-id={parentNode.id}
-          className="cursor-pointer transition-transform hover:scale-105"
-          onClick={handleParentClick}
-          onDoubleClick={(e) => {
-            e.stopPropagation();
-            if (onParentDoubleClick) {
-              onParentDoubleClick(parentNode);
-              return;
-            }
-            onToggleCollapse?.();
-          }}
-        >
-          <KubernetesIconWrapper
-            type={parentNode.type}
-            status={parentNode.status}
-            label={parentNode.label}
-            showIndicator={aggregatedChildCount > 0}
-            indicatorCount={aggregatedChildCount}
-          />
-        </div>
+      <div
+        data-node-id={parentNode.id}
+        className="cursor-pointer transition-transform hover:scale-105"
+        onClick={handleParentClick}
+        onDoubleClick={(e) => {
+          e.stopPropagation();
+          onParentDoubleClick?.(parentNode);
+        }}
+      >
+        <KubernetesIconWrapper
+          type={parentNode.type}
+          status={parentNode.status}
+          label={parentNode.label}
+          showIndicator={aggregatedChildCount > 0}
+          indicatorCount={aggregatedChildCount}
+        />
       </div>
 
       {/* Child Nodes */}
       {!collapsed && childNodes.length > 0 && (
-        <div className="row-start-2 col-start-2 flex flex-wrap justify-center gap-4">
+        <div className="flex flex-wrap justify-center gap-4">
           {childNodes.map((childNode) => (
             <div
               key={childNode.id}
