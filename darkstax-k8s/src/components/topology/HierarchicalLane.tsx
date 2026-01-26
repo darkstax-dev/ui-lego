@@ -21,7 +21,13 @@ const TILE_EST_WIDTH_PX = 96;
 const TILE_GAP_PX = 32; // gap-8
 
 export function HierarchicalLane({ category, label, nodes, height }: HierarchicalLaneProps) {
-  const { setSelectedNode, openMetadataPanel, expandDetailLanes, collapseDetailLanes } = useUIStore();
+  const {
+    selectedNode,
+    setSelectedNode,
+    openMetadataPanel,
+    expandDetailLanes,
+    collapseDetailLanes,
+  } = useUIStore();
   const { nodes: topologyNodes, groups, toggleGroupCollapse } = useTopologyStore();
   const { setNodeRef, isOver } = useDroppable({
     id: `lane-${category}`,

@@ -442,7 +442,10 @@ export function TopologyCanvas() {
 
           const orderA = getCategoryOrder(node.category);
           const orderB = getCategoryOrder(target.category);
-          if (Math.abs(orderA - orderB) !== 1) return;
+
+          // Allow connections to span multiple lanes (e.g. pod -> multus, pod -> configmap).
+          // We still draw as a simple vertical curve between the two lane positions.
+          if (orderA === orderB) return;
 
           const fromId = orderA < orderB ? node.id : targetId;
           const toId = orderA < orderB ? targetId : node.id;
