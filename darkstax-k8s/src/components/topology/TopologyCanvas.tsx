@@ -534,6 +534,22 @@ export function TopologyCanvas() {
     return level0.length > 0 ? level0 : rootsWithOwner;
   }, [groupTree.rootGroups, nodeById]);
 
+  const laneCategories = useMemo(() => {
+    return getLaneCategories(hierarchyConfig);
+  }, []);
+
+  const nodesByCategory = useMemo(() => {
+    const grouped: Record<string, K8sNodeData[]> = {};
+
+    laneCategories.forEach(lane => {
+      grouped[lane.id] = filteredNodes.filter(
+        node => node.category === lane.id
+      );
+    });
+
+    return grouped;
+  }, [laneCategories, filteredNodes]);
+
   return (
     <div ref={scrollRef} className="w-full h-full relative overflow-auto">
       <GroupController />
