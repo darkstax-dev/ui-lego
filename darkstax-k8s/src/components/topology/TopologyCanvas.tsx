@@ -222,12 +222,21 @@ function buildGroupTree(groups: K8sNodeGroup[]) {
 }
 
 export function TopologyCanvas() {
-  const { filters, openMetadataPanel, setSelectedNode, layoutMode, detailLanesExpanded } = useUIStore();
+  const {
+    filters,
+    openMetadataPanel,
+    setSelectedNode,
+    selectedNode,
+    layoutMode,
+    detailLanesExpanded,
+  } = useUIStore();
   const { nodes, groups, setNodes, setGroups, toggleGroupCollapse } = useTopologyStore();
   const scrollRef = useRef<HTMLDivElement | null>(null);
   const svgRef = useRef<SVGSVGElement | null>(null);
   const rafRef = useRef<number | null>(null);
-  const [connectionPaths, setConnectionPaths] = useState<Array<{ id: string; d: string }>>([]);
+  const [connectionPaths, setConnectionPaths] = useState<
+    Array<{ id: string; d: string; fromId: string; toId: string }>
+  >([]);
   const [contextMenu, setContextMenu] = useState<null | { x: number; y: number; nodeId: string }>(null);
 
   useEffect(() => {
