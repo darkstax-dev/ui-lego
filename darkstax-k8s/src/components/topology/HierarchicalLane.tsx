@@ -305,7 +305,7 @@ export function HierarchicalLane({ category, label, nodes, height }: Hierarchica
 
         {laneHasPaging && (
           <div
-            className="absolute bottom-3 left-3 z-40 flex items-center gap-1 bg-gray-300 border border-gray-400/40 px-1 py-1"
+            className="absolute bottom-1 left-1 z-40 flex items-center gap-1 bg-gray-300 border border-gray-400/40"
             onMouseDown={(e) => e.stopPropagation()}
           >
             <button
@@ -318,7 +318,7 @@ export function HierarchicalLane({ category, label, nodes, height }: Hierarchica
             >
               <Minus className="w-4 h-4 text-blue-dark-950" />
             </button>
-            <div className="px-1 text-[10px] text-gray-700 font-macan-mono whitespace-nowrap">
+            <div className="text-[10px] text-gray-700 font-macan-mono whitespace-nowrap">
               {pageIndex + 1}/{totalPages}
             </div>
             <button
