@@ -1,4 +1,5 @@
 import type React from 'react';
+import type { MouseEvent } from 'react';
 import { K8sNodeData } from '../../types';
 import { KubernetesIconWrapper } from '../ui/KubernetesIconWrapper';
 import { useUIStore } from '../../store/uiStore';
@@ -26,7 +27,7 @@ export function HierarchicalNodeGroup({
 
   const aggregatedChildCount = childNodes.length;
 
-  const handleParentClick = (e: React.MouseEvent) => {
+  const handleParentClick = (e: MouseEvent) => {
     e.stopPropagation();
 
     if (onParentClick) {
