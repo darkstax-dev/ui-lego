@@ -63,23 +63,59 @@ export function HierarchicalLane({ category, label, nodes, height }: Hierarchica
   const { parentNodes, childNodesByParent, standaloneNodes } = organizeHierarchy();
 
   return (
-    <div 
-      className="flex flex-col bg-gray-200 mb-2"
-      style={{ minHeight: laneHeight }}
+    <div
+      className="flex flex-row"
+      style={{
+        minHeight: laneHeight,
+        padding: '4px',
+        gap: '10px',
+        alignSelf: 'stretch',
+        background: '#DFDFDF',
+        marginBottom: '4px'
+      }}
+      data-testid={`lane-${category}`}
     >
-      {/* Lane Label */}
-      <div className="h-[40px] bg-gray-300 flex items-center px-4 border-b border-gray-400">
-        <div className="text-blue-dark-950 font-macan text-base font-medium leading-tight">
+      {/* Vertical Rotated Lane Label */}
+      <div
+        style={{
+          display: 'flex',
+          width: '45px',
+          padding: '4px 8px',
+          justifyContent: 'center',
+          alignItems: 'center',
+          gap: '10px',
+          flex: '1 0 0',
+          background: '#CECECE'
+        }}
+      >
+        <div
+          style={{
+            transform: 'rotate(-90deg)',
+            color: '#00112B',
+            textAlign: 'center',
+            fontFamily: 'Macan, -apple-system, Roboto, Helvetica, sans-serif',
+            fontSize: '24px',
+            fontWeight: 500,
+            lineHeight: '120%',
+            letterSpacing: '-0.48px',
+            whiteSpace: 'nowrap'
+          }}
+        >
           {label}
         </div>
       </div>
 
       {/* Lane Content */}
-      <div 
+      <div
         ref={setNodeRef}
-        className={`flex-1 p-4 relative transition-colors ${
+        data-testid={`lane-drop-${category}`}
+        className={`relative transition-colors ${
           isOver ? 'bg-blue-100 border-2 border-blue-500 border-dashed' : ''
         }`}
+        style={{
+          flex: 1,
+          padding: '16px'
+        }}
       >
         {nodes.length === 0 ? (
           <div className="h-full flex items-center justify-center text-gray-500 font-macan text-sm">
@@ -105,7 +141,7 @@ export function HierarchicalLane({ category, label, nodes, height }: Hierarchica
                 );
               })()
             ))}
-            
+
             {/* Render standalone nodes */}
             {standaloneNodes.map((node) => (
               <div
