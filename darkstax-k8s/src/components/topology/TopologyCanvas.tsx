@@ -609,12 +609,6 @@ export function TopologyCanvas() {
     );
   };
 
-  const hierarchyRoots = useMemo(() => {
-    // Prefer level 0 roots (e.g. namespaces). If none exist, fall back to whatever roots we have.
-    const rootsWithOwner = groupTree.rootGroups.filter((g) => nodeById.has(g.ownerId));
-    const level0 = rootsWithOwner.filter((g) => g.level === 0);
-    return level0.length > 0 ? level0 : rootsWithOwner;
-  }, [groupTree.rootGroups, nodeById]);
 
   const laneCategories = useMemo(() => {
     return getLaneCategories(hierarchyConfig);
