@@ -67,13 +67,12 @@ export function ResourceMenuPanel() {
   if (isCompact) {
     return (
       <div
-        className="absolute top-4 right-4 z-30 bg-gray-200 shadow-[0px_16px_16px_-8px_rgba(12,12,13,0.1)] rounded-lg"
-        style={{ width: '56px', height: '56px', boxSizing: 'border-box' }}
+        className="absolute top-4 right-4 z-30 bg-gray-200 shadow-[0px_16px_16px_-8px_rgba(12,12,13,0.1)] rounded-lg w-14 h-14 box-border"
         data-testid="resource-menu-panel"
       >
         <button
           type="button"
-          className="w-full h-full flex items-center justify-center rounded-lg hover:bg-gray-100"
+          className="w-full h-full flex items-center justify-center bg-[rgb(206,206,206)] hover:bg-[rgb(206,206,206)]"
           onClick={() => setExpandedSections((prev) => ({ ...prev, kubernetes: true }))}
           aria-label="Open resource menu"
         >
@@ -85,8 +84,7 @@ export function ResourceMenuPanel() {
 
   return (
     <div
-      className="absolute top-4 right-4 z-30 bg-gray-200 shadow-[0px_16px_16px_-8px_rgba(12,12,13,0.1)] rounded-lg flex flex-col p-4 gap-4 overflow-hidden"
-      style={{ width: '280px', minWidth: '280px', maxWidth: '280px', height: 'calc(100% - 2rem)', boxSizing: 'border-box' }}
+      className="absolute top-4 right-4 z-30 bg-gray-200 shadow-[0px_16px_16px_-8px_rgba(12,12,13,0.1)] rounded-lg flex flex-col p-4 gap-4 overflow-hidden w-[280px] min-w-[280px] max-w-[280px] h-[calc(100%-2rem)] box-border"
       data-testid="resource-menu-panel"
     >
       {/* Search Input */}
@@ -119,11 +117,7 @@ export function ResourceMenuPanel() {
         </div>
 
         <div
-          className="h-px bg-gray-400"
-          style={{
-            backgroundImage:
-              'repeating-linear-gradient(to right, #C8C8C8 0, #C8C8C8 6px, transparent 6px, transparent 12px)',
-          }}
+          className="h-px bg-gray-400 bg-[repeating-linear-gradient(to_right,_#C8C8C8_0,_#C8C8C8_6px,_transparent_6px,_transparent_12px)]"
         />
 
         {/* Kubernetes Section */}
@@ -150,11 +144,7 @@ export function ResourceMenuPanel() {
         </div>
 
         <div
-          className="h-px bg-gray-400"
-          style={{
-            backgroundImage:
-              'repeating-linear-gradient(to right, #C8C8C8 0, #C8C8C8 6px, transparent 6px, transparent 12px)',
-          }}
+          className="h-px bg-gray-400 bg-[repeating-linear-gradient(to_right,_#C8C8C8_0,_#C8C8C8_6px,_transparent_6px,_transparent_12px)]"
         />
 
         {/* Templates Section */}
