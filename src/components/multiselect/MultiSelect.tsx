@@ -292,7 +292,7 @@ const MultiSelect: React.FC<MultiSelectProps> = ({
         </div>
       </div>
 
-      {isOpen && (
+      {isOpen && (optionsCount > 0 || queryTrimmed.length > 0) && (
         <div
           className="multiselect__dropdown"
           style={{ maxHeight }}
