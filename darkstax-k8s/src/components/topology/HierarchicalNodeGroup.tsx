@@ -34,16 +34,11 @@ export function HierarchicalNodeGroup({
       onParentClick(parentNode);
     } else {
 
-    if (parentNode.id === 'dc-01') {
-      const productionNode = nodes.find((n) => n.id === 'ns-production');
-      if (productionNode) {
-        setSelectedNode(productionNode);
-        openMetadataPanel(productionNode);
-      }
-    }
+      const nextNode =
+        parentNode.id === 'dc-01' ? nodes.find((n) => n.id === 'ns-production') ?? parentNode : parentNode;
 
-      setSelectedNode(parentNode);
-      openMetadataPanel(parentNode);
+      setSelectedNode(nextNode);
+      openMetadataPanel(nextNode);
     }
 
     if (childNodes.length > 0) {
