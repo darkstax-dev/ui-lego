@@ -16,7 +16,7 @@ interface HierarchicalNodeGroupProps {
 export function HierarchicalNodeGroup({
   parentNode,
   childNodes,
-  collapsed = false,
+  collapsed = true,
   onToggleCollapse,
   onParentClick,
   onParentDoubleClick,
@@ -26,16 +26,12 @@ export function HierarchicalNodeGroup({
 
   const aggregatedChildCount = childNodes.length;
 
-  const handleToggle = (e: React.MouseEvent) => {
+  const handleParentClick = (e: React.MouseEvent) => {
     e.stopPropagation();
-    onToggleCollapse?.();
-  };
 
-  const handleParentClick = () => {
     if (onParentClick) {
       onParentClick(parentNode);
-      return;
-    }
+    } else {
 
     if (parentNode.id === 'dc-01') {
       const productionNode = nodes.find((n) => n.id === 'ns-production');
@@ -46,8 +42,13 @@ export function HierarchicalNodeGroup({
       }
     }
 
-    setSelectedNode(parentNode);
-    openMetadataPanel(parentNode);
+      setSelectedNode(parentNode);
+      openMetadataPanel(parentNode);
+    }
+
+    if (childNodes.length > 0) {
+      onToggleCollapse?.();
+    }
   };
 
   const handleChildClick = (node: K8sNodeData) => {
