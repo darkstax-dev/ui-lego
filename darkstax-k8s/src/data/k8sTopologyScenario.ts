@@ -21,6 +21,42 @@ export const kubernetesTopologyScenario: K8sTopologyScenario = {
   name: 'Kubernetes Microservices Cluster',
   description: 'A complete Kubernetes cluster with namespaces, deployments, pods, services, and networking',
   nodes: [
+    ...Array.from({ length: 50 }, (_, index) => {
+      const n = index + 1;
+      const id = `dc-${String(n).padStart(2, '0')}`;
+      return {
+        id,
+        type: 'datacenter',
+        label: `DC${String(n).padStart(2, '0')}`,
+        category: 'aggregate',
+        metadata: {
+          Type: 'datacenter',
+          Name: id,
+          Description: 'Aggregate datacenter',
+          ...(n > 10 ? { ParentAggregate: n <= 30 ? 'dc-01' : 'dc-02' } : {}),
+        },
+        status: 'active',
+        connections: n <= 5 ? [`tower-${String(n).padStart(2, '0')}`] : [],
+      };
+    }),
+    ...Array.from({ length: 50 }, (_, index) => {
+      const n = index + 1;
+      const id = `tower-${String(n).padStart(2, '0')}`;
+      return {
+        id,
+        type: 'mobiletower',
+        label: `Tower${String(n).padStart(2, '0')}`,
+        category: 'aggregate',
+        metadata: {
+          Type: 'mobiletower',
+          Name: id,
+          Description: 'Aggregate mobile tower',
+          ...(n <= 30 ? { ParentAggregate: 'dc-01' } : { ParentAggregate: 'dc-02' }),
+        },
+        status: 'active',
+        connections: n <= 5 ? [`dc-${String(n).padStart(2, '0')}`] : [],
+      };
+    }),
     {
       id: 'ns-production',
       type: 'namespace',
