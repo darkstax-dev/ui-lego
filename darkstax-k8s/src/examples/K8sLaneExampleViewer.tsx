@@ -23,7 +23,7 @@ import {
 } from './kubernetes-topology-lane-example';
 
 export function K8sLaneExampleViewer() {
-  const { setSelectedNode, openMetadataPanel } = useUIStore();
+  const { detailLanesExpanded } = useUIStore();
   const { setNodes, setGroups } = useTopologyStore();
 
   // Initialize example data
@@ -106,8 +106,12 @@ export function K8sLaneExampleViewer() {
         >
           <div className="relative z-10">
             {laneCategories.map((lane) => {
+              if (lane.id !== 'aggregate' && !detailLanesExpanded) {
+                return null;
+              }
+
               const nodesInLane = nodesByCategory[lane.id] || [];
-              
+
               // Skip lanes with no nodes for cleaner display
               if (nodesInLane.length === 0) {
                 return null;
