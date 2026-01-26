@@ -33,8 +33,8 @@ test.describe('Aggregate → Kubernetes hierarchy relationship', () => {
     // Detail lanes should become visible.
     await expect(page.getByTestId('lane-load')).toBeVisible();
 
-    // A known Kubernetes workload node should be visible once lanes are expanded.
-    await expect(page.locator('[data-node-id="deploy-frontend"]').first()).toBeVisible();
+    // For the aggregate workloads scenario, DC01 should own a workload deployment `deploy-dc-01`.
+    await expect(page.locator('[data-node-id="deploy-dc-01"]').first()).toBeVisible();
 
     // Aggregate → Kubernetes relationship should be represented by at least one connection path
     // (dc-01 connects to ns-production in the demo scenario, and dc-01 click maps to selecting ns-production).
