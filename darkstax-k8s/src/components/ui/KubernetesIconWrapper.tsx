@@ -64,6 +64,8 @@ export function KubernetesIconWrapper({
 
   const borderColor = statusBorderColors[status] || 'transparent';
   const fillColor = statusColors[status]?.hex || statusColors.ready.hex;
+  const indicatorBg = fillColor;
+  const indicatorTextClass = status === 'ready' ? 'text-blue-dark-950' : 'text-white';
 
   return (
     <div className="KubernetesIconWrapper flex flex-col items-center gap-2 relative">
@@ -110,9 +112,12 @@ export function KubernetesIconWrapper({
         </div>
 
         {/* Indicator Badge */}
-        {showIndicator && indicatorCount && (
-          <div className="absolute -top-1 -right-1 min-w-[18px] h-[18px] px-1 bg-blue-gray-600 rounded-full flex items-center justify-center">
-            <span className="text-white font-macan-mono-stencil text-xs font-medium leading-tight">
+        {showIndicator && indicatorCount != null && (
+          <div
+            className="absolute -bottom-1 -right-1 min-w-[18px] h-[18px] px-1 rounded-full flex items-center justify-center border border-blue-dark-950/30"
+            style={{ backgroundColor: indicatorBg }}
+          >
+            <span className={`${indicatorTextClass} font-macan-mono-stencil text-xs font-medium leading-tight`}>
               {indicatorCount}
             </span>
           </div>
