@@ -7,6 +7,8 @@ import { useTopologyStore } from '../../store/topologyStore';
 interface HierarchicalNodeGroupProps {
   parentNode: K8sNodeData;
   childNodes: K8sNodeData[];
+  /** Total members in the underlying group (may span lanes). */
+  memberCount?: number;
   collapsed?: boolean;
   onToggleCollapse?: () => void;
   onParentClick?: (node: K8sNodeData) => void;
@@ -16,6 +18,7 @@ interface HierarchicalNodeGroupProps {
 export function HierarchicalNodeGroup({
   parentNode,
   childNodes,
+  memberCount,
   collapsed = true,
   onToggleCollapse,
   onParentClick,
@@ -24,7 +27,7 @@ export function HierarchicalNodeGroup({
   const { setSelectedNode, openMetadataPanel } = useUIStore();
   const { nodes } = useTopologyStore();
 
-  const aggregatedChildCount = childNodes.length;
+  const aggregatedChildCount = memberCount ?? childNodes.length;
 
   const handleParentClick = (e: MouseEvent) => {
     e.stopPropagation();
@@ -40,8 +43,8 @@ export function HierarchicalNodeGroup({
       openMetadataPanel(nextNode);
     }
 
-    if (childNodes.length > 0) {
-      onToggleCollapse?.();
+    if (onToggleCollapse && aggregatedChildCount > 0) {
+      onToggleCollapse();
     }
   };
 
