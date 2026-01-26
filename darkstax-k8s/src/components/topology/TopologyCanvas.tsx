@@ -275,8 +275,15 @@ export function TopologyCanvas() {
     if (layoutMode === 'force') {
       return applyCircularLayout(renderedNodes);
     }
+
+    // In lane-based hierarchy mode, the DOM visibility is controlled by lane paging + group expansion.
+    // Do not hide nodes via collapsed groups here, otherwise links won't render for visible nodes.
+    if (layoutMode === 'hierarchy') {
+      return filteredNodes;
+    }
+
     return renderedNodes;
-  }, [layoutMode, renderedNodes, groups]);
+  }, [filteredNodes, layoutMode, renderedNodes, groups]);
 
   const layoutBounds = useMemo(() => {
     if (layoutMode === 'hierarchy') return null;
