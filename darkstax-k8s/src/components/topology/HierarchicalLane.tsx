@@ -300,7 +300,8 @@ export function HierarchicalLane({ category, label, nodes, height }: Hierarchica
 
         {laneHasPaging && (
           <div
-            className="absolute bottom-3 right-3 z-20 flex items-center gap-1 rounded bg-white/80 border border-gray-400/40 px-1 py-1"
+            className="absolute bottom-3 right-3 z-40 flex items-center gap-1 rounded bg-white/80 border border-gray-400/40 px-1 py-1"
+            style={resourceMenuOpen ? { right: 300 } : undefined}
             onMouseDown={(e) => e.stopPropagation()}
           >
             <button
