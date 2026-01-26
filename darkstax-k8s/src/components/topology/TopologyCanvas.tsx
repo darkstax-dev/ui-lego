@@ -299,14 +299,6 @@ export function TopologyCanvas() {
 
   const groupTree = useMemo(() => buildGroupTree(groups), [groups]);
 
-  const groupedNodeIds = useMemo(() => {
-    const ids = new Set<string>();
-    groups.forEach((g) => {
-      ids.add(g.ownerId);
-      g.memberIds.forEach((id) => ids.add(id));
-    });
-    return ids;
-  }, [groups]);
 
 
   const computeConnections = () => {
