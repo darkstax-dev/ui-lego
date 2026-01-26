@@ -1,4 +1,5 @@
 import type React from 'react';
+import type React from 'react';
 import { K8sNodeData } from '../../types';
 import { KubernetesIconWrapper } from '../ui/KubernetesIconWrapper';
 import { useUIStore } from '../../store/uiStore';
