@@ -35,7 +35,7 @@ export const kubernetesTopologyScenario: K8sTopologyScenario = {
           Description: 'Aggregate datacenter',
           ...(n > 10 ? { ParentAggregate: n <= 30 ? 'dc-01' : 'dc-02' } : {}),
         },
-        status: 'active',
+        status: 'active' as const,
         connections: n <= 5 ? [`tower-${String(n).padStart(2, '0')}`] : [],
       };
     }),
