@@ -1,6 +1,5 @@
 import { useMemo, useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { HierarchicalLane } from './HierarchicalLane';
-import { GroupController } from '../controls/GroupController';
 import { useUIStore } from '../../store/uiStore';
 import { useTopologyStore } from '../../store/topologyStore';
 import { filterNodes } from '../../lib/filterNodes';
@@ -187,9 +186,6 @@ export function TopologyCanvas() {
 
   return (
     <div ref={scrollRef} className="w-full h-full relative overflow-auto">
-      {/* Group Controller */}
-      <GroupController />
-      
       {/* Canvas with dotted grid background */}
       <div className="w-full min-h-full bg-gray-300 relative p-5 pt-5">
         {/* Dotted Grid Background */}

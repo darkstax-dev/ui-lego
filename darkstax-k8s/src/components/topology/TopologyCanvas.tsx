@@ -9,7 +9,6 @@ import {
   Minimize2,
 } from 'lucide-react';
 import type { K8sNodeData, K8sNodeGroup } from '../../types';
-import { GroupController } from '../controls/GroupController';
 import { useUIStore } from '../../store/uiStore';
 import { useTopologyStore } from '../../store/topologyStore';
 import { filterNodes } from '../../lib/filterNodes';
@@ -620,8 +619,6 @@ export function TopologyCanvas() {
 
   return (
     <div ref={scrollRef} className="w-full h-full relative overflow-auto">
-      <GroupController />
-
       <div className="w-full min-h-full bg-gray-300 relative p-5 pt-5">
         <div
           className="absolute inset-0 pointer-events-none opacity-25"
