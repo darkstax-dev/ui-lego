@@ -38,7 +38,7 @@
       "id": "aggregate",
       "label": "Aggregate",
       "description": "Organizational containers and namespaces",
-      "resourceTypes": ["namespace"],
+      "resourceTypes": ["namespace", "datacenter", "mobiletower"],
       "laneConfig": {
         "display": true,
         "height": 360,
