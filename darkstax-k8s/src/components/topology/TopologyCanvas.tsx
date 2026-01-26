@@ -319,27 +319,79 @@ export function TopologyCanvas() {
 
     const svgRect = svgEl.getBoundingClientRect();
 
-    const getCenter = (id: string) => {
+    const getRect = (id: string) => {
       const el = containerEl.querySelector(`[data-node-id="${CSS.escape(id)}"]`) as HTMLElement | null;
       if (!el) return null;
-      const r = el.getBoundingClientRect();
-      return {
-        x: r.left - svgRect.left + r.width / 2,
-        y: r.top - svgRect.top + r.height / 2,
-      };
+      return el.getBoundingClientRect();
+    };
+
+    const getAnchor = (id: string, anchor: 'center' | 'top' | 'bottom') => {
+      const r = getRect(id);
+      if (!r) return null;
+
+      const x = r.left - svgRect.left + r.width / 2;
+      const yBase = r.top - svgRect.top;
+
+      if (anchor === 'top') {
+        return { x, y: yBase };
+      }
+
+      if (anchor === 'bottom') {
+        return { x, y: yBase + r.height };
+      }
+
+      return { x, y: yBase + r.height / 2 };
     };
 
     const renderedIds = new Set(layoutNodes.map((n) => n.id));
     const paths: Array<{ id: string; d: string }> = [];
 
+    // In lane-based hierarchy mode, only draw ownership (parent -> child) connections.
+    // This avoids the "mesh" that happens when we draw all arbitrary connections (service routes, uses, etc.)
+    if (layoutMode === 'hierarchy') {
+      const seen = new Set<string>();
+
+      groups.forEach((group) => {
+        if (!renderedIds.has(group.ownerId)) return;
+
+        group.memberIds.forEach((memberId) => {
+          if (!renderedIds.has(memberId)) return;
+
+          const key = `${group.ownerId}->${memberId}`;
+          if (seen.has(key)) return;
+          seen.add(key);
+
+          const from = getAnchor(group.ownerId, 'bottom');
+          const to = getAnchor(memberId, 'top');
+          if (!from || !to) return;
+
+          const dy = to.y - from.y;
+          const curvature = 0.5;
+          const cx1 = from.x;
+          const cy1 = from.y + dy * curvature;
+          const cx2 = to.x;
+          const cy2 = to.y - dy * curvature;
+
+          paths.push({
+            id: key,
+            d: `M ${from.x} ${from.y} C ${cx1} ${cy1}, ${cx2} ${cy2}, ${to.x} ${to.y}`,
+          });
+        });
+      });
+
+      setConnectionPaths(paths);
+      return;
+    }
+
+    // In other layout modes, draw the graph connections from node.connections
     layoutNodes.forEach((node) => {
       if (!node.connections) return;
-      const from = getCenter(node.id);
+      const from = getAnchor(node.id, 'center');
       if (!from) return;
 
       node.connections.forEach((targetId) => {
         if (!renderedIds.has(targetId)) return;
-        const to = getCenter(targetId);
+        const to = getAnchor(targetId, 'center');
         if (!to) return;
 
         const dx = to.x - from.x;
