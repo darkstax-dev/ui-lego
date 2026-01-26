@@ -22,7 +22,7 @@ const TILE_GAP_PX = 32; // gap-8
 
 export function HierarchicalLane({ category, label, nodes, height }: HierarchicalLaneProps) {
   const { setSelectedNode, openMetadataPanel, expandDetailLanes, collapseDetailLanes, resourceMenuOpen } = useUIStore();
-  const { groups, toggleGroupCollapse } = useTopologyStore();
+  const { nodes: topologyNodes, groups, toggleGroupCollapse } = useTopologyStore();
   const { setNodeRef, isOver } = useDroppable({
     id: `lane-${category}`,
     data: { category },
@@ -71,8 +71,13 @@ export function HierarchicalLane({ category, label, nodes, height }: Hierarchica
     // Delay the single-click handler so a double-click can cancel it.
     clearAggregateClickTimeout();
     clickTimeoutRef.current = window.setTimeout(() => {
-      setSelectedNode(node);
-      openMetadataPanel(node);
+      const nextNode =
+        node.id === 'dc-01'
+          ? topologyNodes.find((n) => n.id === 'ns-production') ?? node
+          : node;
+
+      setSelectedNode(nextNode);
+      openMetadataPanel(nextNode);
       expandDetailLanes();
       clickTimeoutRef.current = null;
     }, 200);
