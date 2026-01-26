@@ -46,4 +46,47 @@ test.describe('Aggregate → Kubernetes hierarchy relationship', () => {
     await expect(page.getByTestId('lane-load')).toHaveCount(0);
     await expect(page.getByTestId('lane-service')).toHaveCount(0);
   });
+
+  test('shows pod links to Network + Config/Storage lanes when selecting a pod', async ({ page }) => {
+    const aggregateLane = page.getByTestId('lane-aggregate');
+    const dc03Tile = aggregateLane.locator('[data-node-id="dc-03"]');
+    await dc03Tile.click();
+
+    const loadLane = page.getByTestId('lane-load');
+    await expect(loadLane).toBeVisible();
+
+    // Expand the first workload controller group (deployment/statefulset/job) and then click one of its pods.
+    const controller = loadLane
+      .locator('[data-node-id^="deploy-"], [data-node-id^="statefulset-"], [data-node-id^="job-"]')
+      .first();
+    await expect(controller).toBeVisible();
+
+    const controllerId = await controller.getAttribute('data-node-id');
+    expect(controllerId).toBeTruthy();
+
+    const match = controllerId!.match(/^(deploy|statefulset|job)-(.+)$/);
+    expect(match).not.toBeNull();
+
+    const suffix = match![2];
+
+    await controller.click();
+
+    const pod = loadLane.locator(`[data-node-id^="pod-${suffix}"]`).first();
+    await expect(pod).toBeVisible();
+    await pod.click();
+
+    // Auto-paging should bring linked nodes into view.
+    const networkLane = page.getByTestId('lane-network');
+    const configLane = page.getByTestId('lane-config-storage');
+    await expect(networkLane).toBeVisible();
+    await expect(configLane).toBeVisible();
+
+    await expect(networkLane.locator(`[data-node-id="multus-${suffix}-a"]`)).toBeVisible();
+    await expect(configLane.locator(`[data-node-id="configmap-${suffix}"]`)).toBeVisible();
+
+    // Connection paths should be computed for the now-visible linked nodes.
+    await expect
+      .poll(async () => page.getByTestId('connection-layer').locator('path').count())
+      .toBeGreaterThan(0);
+  });
 });
