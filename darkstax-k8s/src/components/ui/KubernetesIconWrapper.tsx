@@ -1,4 +1,3 @@
-import { K8sResourceType } from '../../types';
 import { statusColors } from '../../data/k8sTemplates';
 import type { K8sResourceType } from '../../types';
 
