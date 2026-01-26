@@ -61,7 +61,7 @@ export const kubernetesTopologyScenario: K8sTopologyScenario = {
       id: 'ns-production',
       type: 'namespace',
       label: 'production',
-      category: 'aggregate',
+      category: 'load',
       metadata: {
         Type: 'namespace',
         Name: 'production',
