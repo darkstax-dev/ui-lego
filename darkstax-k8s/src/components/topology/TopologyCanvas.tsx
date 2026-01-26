@@ -223,7 +223,7 @@ function buildGroupTree(groups: K8sNodeGroup[]) {
 }
 
 export function TopologyCanvas() {
-  const { filters, openMetadataPanel, setSelectedNode, layoutMode } = useUIStore();
+  const { filters, openMetadataPanel, setSelectedNode, layoutMode, detailLanesExpanded } = useUIStore();
   const { nodes, groups, setNodes, setGroups, toggleGroupCollapse } = useTopologyStore();
   const scrollRef = useRef<HTMLDivElement | null>(null);
   const svgRef = useRef<SVGSVGElement | null>(null);
@@ -346,8 +346,9 @@ export function TopologyCanvas() {
     const renderedIds = new Set(layoutNodes.map((n) => n.id));
     const paths: Array<{ id: string; d: string }> = [];
 
-    // In lane-based hierarchy mode, only draw ownership (parent -> child) connections.
-    // This avoids the "mesh" that happens when we draw all arbitrary connections (service routes, uses, etc.)
+    // In lane-based hierarchy mode, draw ownership (parent -> child) connections.
+    // Additionally, allow peer connections between aggregate nodes so aggregate hierarchies can
+    // show both parent/child and peer relationships without creating a full mesh.
     if (layoutMode === 'hierarchy') {
       const seen = new Set<string>();
 
@@ -371,6 +372,38 @@ export function TopologyCanvas() {
           const cy1 = from.y + dy * curvature;
           const cx2 = to.x;
           const cy2 = to.y - dy * curvature;
+
+          paths.push({
+            id: key,
+            d: `M ${from.x} ${from.y} C ${cx1} ${cy1}, ${cx2} ${cy2}, ${to.x} ${to.y}`,
+          });
+        });
+      });
+
+      layoutNodes.forEach((node) => {
+        if (node.category !== 'aggregate') return;
+        if (!node.connections) return;
+        if (!renderedIds.has(node.id)) return;
+
+        node.connections.forEach((targetId) => {
+          if (!renderedIds.has(targetId)) return;
+          const target = nodeById.get(targetId);
+          if (!target || target.category !== 'aggregate') return;
+
+          const key = `peer:${[node.id, targetId].sort().join('<->')}`;
+          if (seen.has(key)) return;
+          seen.add(key);
+
+          const from = getAnchor(node.id, 'center');
+          const to = getAnchor(targetId, 'center');
+          if (!from || !to) return;
+
+          const dx = to.x - from.x;
+          const curvature = 0.35;
+          const cx1 = from.x + dx * curvature;
+          const cy1 = from.y;
+          const cx2 = to.x - dx * curvature;
+          const cy2 = to.y;
 
           paths.push({
             id: key,
@@ -640,6 +673,10 @@ export function TopologyCanvas() {
         {layoutMode === 'hierarchy' ? (
           <div className="relative z-10 flex flex-col">
             {laneCategories.map((lane) => {
+              if (lane.id !== 'aggregate' && !detailLanesExpanded) {
+                return null;
+              }
+
               const nodesInLane = nodesByCategory[lane.id] || [];
 
               // Skip lanes with no nodes unless configured to show empty lanes
