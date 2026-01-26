@@ -194,50 +194,44 @@ export function HierarchicalLane({ category, label, nodes, height }: Hierarchica
   }, [aggregateFilterTokens.length, childNodesByParent, isAggregateLane, nodeMatchesAggregateFilters, topLevelItems]);
 
   const itemsPerRow = useMemo(() => {
-    if (!isAggregateLane) return 0;
     if (laneContentWidth <= 0) return 0;
 
     return Math.max(
       1,
-      Math.floor(
-        (laneContentWidth + AGGREGATE_TILE_GAP_PX) /
-          (AGGREGATE_TILE_EST_WIDTH_PX + AGGREGATE_TILE_GAP_PX)
-      )
+      Math.floor((laneContentWidth + TILE_GAP_PX) / (TILE_EST_WIDTH_PX + TILE_GAP_PX))
     );
-  }, [isAggregateLane, laneContentWidth]);
+  }, [laneContentWidth]);
 
   const pageSize = useMemo(() => {
-    if (!isAggregateLane) return 0;
     if (itemsPerRow <= 0) return 0;
-    return itemsPerRow * AGGREGATE_MAX_ROWS;
-  }, [isAggregateLane, itemsPerRow]);
+    return itemsPerRow * LANE_MAX_ROWS;
+  }, [itemsPerRow]);
 
   const [pageIndex, setPageIndex] = useState(0);
 
   useEffect(() => {
-    if (!isAggregateLane) return;
     setPageIndex(0);
-  }, [isAggregateLane, nodes.length, pageSize]);
+  }, [category, nodes.length, pageSize, aggregateFilterTokens.length]);
 
   const totalPages = useMemo(() => {
-    if (!isAggregateLane) return 1;
+    const itemCount = isAggregateLane ? filteredTopLevelItems.length : topLevelItems.length;
     if (pageSize <= 0) return 1;
-    return Math.max(1, Math.ceil(filteredTopLevelItems.length / pageSize));
-  }, [filteredTopLevelItems.length, isAggregateLane, pageSize]);
+    return Math.max(1, Math.ceil(itemCount / pageSize));
+  }, [filteredTopLevelItems.length, isAggregateLane, pageSize, topLevelItems.length]);
 
-  const canPageBack = isAggregateLane && totalPages > 1 && pageIndex > 0;
-  const canPageForward = isAggregateLane && totalPages > 1 && pageIndex + 1 < totalPages;
+  const canPageBack = totalPages > 1 && pageIndex > 0;
+  const canPageForward = totalPages > 1 && pageIndex + 1 < totalPages;
 
   const visibleItems = useMemo(() => {
-    if (!isAggregateLane) return topLevelItems;
-    if (pageSize <= 0) return filteredTopLevelItems;
+    const items = isAggregateLane ? filteredTopLevelItems : topLevelItems;
+    if (pageSize <= 0) return items;
 
     const start = pageIndex * pageSize;
     const end = start + pageSize;
-    return filteredTopLevelItems.slice(start, end);
+    return items.slice(start, end);
   }, [filteredTopLevelItems, isAggregateLane, pageIndex, pageSize, topLevelItems]);
 
-  const laneHasPaging = isAggregateLane && totalPages > 1;
+  const laneHasPaging = totalPages > 1;
 
   return (
     <div
