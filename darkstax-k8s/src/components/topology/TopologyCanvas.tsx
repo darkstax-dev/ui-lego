@@ -308,9 +308,6 @@ export function TopologyCanvas() {
     return ids;
   }, [groups]);
 
-  const ungroupedNodes = useMemo(() => {
-    return filteredNodes.filter((node) => !groupedNodeIds.has(node.id));
-  }, [filteredNodes, groupedNodeIds]);
 
   const computeConnections = () => {
     const svgEl = svgRef.current;
