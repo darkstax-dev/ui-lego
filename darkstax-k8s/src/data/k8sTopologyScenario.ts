@@ -565,8 +565,7 @@ export const kubernetesTopologyScenario: K8sTopologyScenario = {
       memberIds: ['pod-frontend-1', 'pod-frontend-2', 'pod-frontend-3'],
       collapsed: false,
       level: 1,
-      depth: 2,
-
+      depth: 2
     },
     {
       id: 'group-deploy-backend',
@@ -574,8 +573,7 @@ export const kubernetesTopologyScenario: K8sTopologyScenario = {
       memberIds: ['pod-backend-1', 'pod-backend-2', 'pod-backend-3', 'pod-backend-4'],
       collapsed: false,
       level: 1,
-      depth: 2,
-
+      depth: 2
     },
     {
       id: 'group-statefulset-db',
