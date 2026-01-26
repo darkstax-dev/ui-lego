@@ -102,6 +102,37 @@
   ],
   "groupingRules": [
     {
+      "id": "group-by-datacenter",
+      "name": "Group Aggregates by Datacenter",
+      "description": "Group aggregate resources under their parent datacenter",
+      "enabled": true,
+      "priority": 0,
+      "criteria": {
+        "type": "property-match",
+        "ownerProperty": "Type",
+        "ownerValue": "datacenter",
+        "memberProperty": "ParentAggregate",
+        "memberValue": "${ownerId}"
+      },
+      "hierarchyLevel": 0,
+      "collapsible": true,
+      "defaultCollapsed": false,
+      "style": {
+        "fillColor": "rgba(78, 205, 196, 0.04)",
+        "strokeColor": "rgba(78, 205, 196, 0.25)",
+        "strokeWidth": 2,
+        "strokeDashArray": "10, 5",
+        "borderRadius": 26,
+        "padding": 30,
+        "labelPosition": "top-left",
+        "labelStyle": {
+          "fontSize": 13,
+          "fontWeight": 600,
+          "color": "#2C3E50"
+        }
+      }
+    },
+    {
       "id": "group-by-namespace",
       "name": "Group by Namespace",
       "description": "Group all resources within their namespace",
