@@ -285,7 +285,7 @@ export function HierarchicalLane({ category, label, nodes, height }: Hierarchica
         } ${laneHasPaging ? 'pb-14' : ''}`}
       >
         {isAggregateLane && (
-          <div className="absolute left-3 top-3 z-20 flex items-start gap-2">
+          <div className="mb-3 flex items-start gap-2">
             <div className="min-w-[260px] max-w-[460px]" onMouseDown={(e) => e.stopPropagation()}>
               <MultiSelect
                 options={aggregateFilterOptions}
