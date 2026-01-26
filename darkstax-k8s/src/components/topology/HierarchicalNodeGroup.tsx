@@ -1,4 +1,3 @@
-import type React from 'react';
 import type { MouseEvent } from 'react';
 import { K8sNodeData } from '../../types';
 import { KubernetesIconWrapper } from '../ui/KubernetesIconWrapper';
