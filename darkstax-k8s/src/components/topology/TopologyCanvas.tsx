@@ -12,7 +12,7 @@ import type { K8sNodeData, K8sNodeGroup } from '../../types';
 import { useUIStore } from '../../store/uiStore';
 import { useTopologyStore } from '../../store/topologyStore';
 import { filterNodes } from '../../lib/filterNodes';
-import { kubernetesTopologyScenario } from '../../data/k8sTopologyScenario';
+import { kubernetesAggregateWorkloadsScenario } from '../../data/k8sTopologyScenario';
 import { buildGroupsFromRules, hierarchyConfig, getLaneCategories } from '../../hierarchyConfig';
 import { applyCircularLayout, applyOwnershipTreeLayout } from '../../lib/layouts/flextreeLayout';
 import { KubernetesIconWrapper } from '../ui/KubernetesIconWrapper';
@@ -241,10 +241,10 @@ export function TopologyCanvas() {
 
   useEffect(() => {
     const scenarioGroups =
-      kubernetesTopologyScenario.groups ??
-      buildGroupsFromRules(kubernetesTopologyScenario.nodes, hierarchyConfig.groupingRules);
+      kubernetesAggregateWorkloadsScenario.groups ??
+      buildGroupsFromRules(kubernetesAggregateWorkloadsScenario.nodes, hierarchyConfig.groupingRules);
 
-    setNodes(kubernetesTopologyScenario.nodes);
+    setNodes(kubernetesAggregateWorkloadsScenario.nodes);
     setGroups(scenarioGroups);
   }, [setNodes, setGroups]);
 

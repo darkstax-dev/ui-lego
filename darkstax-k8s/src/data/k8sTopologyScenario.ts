@@ -590,3 +590,336 @@ export const kubernetesTopologyScenario: K8sTopologyScenario = {
     }
   ]
 };
+
+function buildAggregateNodes(): K8sNodeData[] {
+  const datacenters: K8sNodeData[] = Array.from({ length: 50 }, (_, index) => {
+    const n = index + 1;
+    const id = `dc-${String(n).padStart(2, '0')}`;
+    return {
+      id,
+      type: 'datacenter',
+      label: `DC${String(n).padStart(2, '0')}`,
+      category: 'aggregate',
+      metadata: {
+        Type: 'datacenter',
+        Name: id,
+        Description: 'Aggregate datacenter',
+        ...(n > 10 ? { ParentAggregate: n <= 30 ? 'dc-01' : 'dc-02' } : {}),
+      },
+      status: 'active',
+      connections: n <= 5 ? [`tower-${String(n).padStart(2, '0')}`] : [],
+    };
+  });
+
+  const towers: K8sNodeData[] = Array.from({ length: 50 }, (_, index) => {
+    const n = index + 1;
+    const id = `tower-${String(n).padStart(2, '0')}`;
+    return {
+      id,
+      type: 'mobiletower',
+      label: `Tower${String(n).padStart(2, '0')}`,
+      category: 'aggregate',
+      metadata: {
+        Type: 'mobiletower',
+        Name: id,
+        Description: 'Aggregate mobile tower',
+        ...(n <= 30 ? { ParentAggregate: 'dc-01' } : { ParentAggregate: 'dc-02' }),
+      },
+      status: 'active',
+      connections: n <= 5 ? [`dc-${String(n).padStart(2, '0')}`] : [],
+    };
+  });
+
+  return [...datacenters, ...towers];
+}
+
+function buildAggregateWorkloadNodes(aggregateNodes: K8sNodeData[]): K8sNodeData[] {
+  const nodes: K8sNodeData[] = [...aggregateNodes];
+
+  aggregateNodes.forEach((aggregateNode, index) => {
+    const suffix = aggregateNode.id;
+    const namespace = 'ns-agg-workloads';
+
+    const serviceId = `svc-${suffix}`;
+    const multusAId = `multus-${suffix}-a`;
+    const multusBId = `multus-${suffix}-b`;
+    const configMapId = `configmap-${suffix}`;
+    const secretId = `secret-${suffix}`;
+    const pvcId = `pvc-${suffix}`;
+    const pvId = `pv-${suffix}`;
+
+    nodes.push(
+      {
+        id: serviceId,
+        type: 'service',
+        label: `svc-${suffix}`,
+        category: 'service',
+        metadata: {
+          Type: 'service',
+          Name: `svc-${suffix}`,
+          Namespace: namespace,
+          ParentAggregate: aggregateNode.id,
+          Ports: [{ name: 'http', port: 80, targetPort: 8080 }],
+        },
+        status: 'active',
+      },
+      {
+        id: multusAId,
+        type: 'multus',
+        label: `net-a-${suffix}`,
+        category: 'network',
+        metadata: {
+          Type: 'multus',
+          Name: `net-a-${suffix}`,
+          Namespace: namespace,
+          ParentAggregate: aggregateNode.id,
+          CNI: 'macvlan',
+        },
+        status: 'active',
+      },
+      {
+        id: multusBId,
+        type: 'multus',
+        label: `net-b-${suffix}`,
+        category: 'network',
+        metadata: {
+          Type: 'multus',
+          Name: `net-b-${suffix}`,
+          Namespace: namespace,
+          ParentAggregate: aggregateNode.id,
+          CNI: 'bridge',
+        },
+        status: 'active',
+      },
+      {
+        id: configMapId,
+        type: 'configmap',
+        label: `cm-${suffix}`,
+        category: 'config-storage',
+        metadata: {
+          Type: 'configmap',
+          Name: `cm-${suffix}`,
+          Namespace: namespace,
+          ParentAggregate: aggregateNode.id,
+          Keys: ['APP_MODE', 'LOG_LEVEL'],
+        },
+        status: 'active',
+      },
+      {
+        id: secretId,
+        type: 'secret',
+        label: `secret-${suffix}`,
+        category: 'config-storage',
+        metadata: {
+          Type: 'secret',
+          Name: `secret-${suffix}`,
+          Namespace: namespace,
+          ParentAggregate: aggregateNode.id,
+          Keys: ['DB_PASSWORD', 'API_TOKEN'],
+        },
+        status: 'active',
+      },
+      {
+        id: pvcId,
+        type: 'persistentvolumeclaim',
+        label: `pvc-${suffix}`,
+        category: 'config-storage',
+        metadata: {
+          Type: 'persistentvolumeclaim',
+          Name: `pvc-${suffix}`,
+          Namespace: namespace,
+          ParentAggregate: aggregateNode.id,
+          StorageClass: 'fast-ssd',
+          Capacity: '10Gi',
+          AccessMode: 'ReadWriteOnce',
+        },
+        status: 'active',
+        connections: [pvId],
+      },
+      {
+        id: pvId,
+        type: 'persistentvolume',
+        label: `pv-${suffix}`,
+        category: 'config-storage',
+        metadata: {
+          Type: 'persistentvolume',
+          Name: `pv-${suffix}`,
+          ParentAggregate: aggregateNode.id,
+          StorageClass: 'fast-ssd',
+          Capacity: '10Gi',
+          AccessMode: 'ReadWriteOnce',
+          ReclaimPolicy: 'Retain',
+        },
+        status: 'active',
+        connections: [pvcId],
+      }
+    );
+
+    const workloadKind = index % 3;
+    const baseConnections = [serviceId, multusAId, multusBId, configMapId, secretId, pvcId];
+
+    if (workloadKind === 0) {
+      const controllerId = `deploy-${suffix}`;
+      const podAId = `pod-${suffix}-a`;
+      const podBId = `pod-${suffix}-b`;
+
+      nodes.push(
+        {
+          id: controllerId,
+          type: 'deployment',
+          label: `deploy-${suffix}`,
+          category: 'load',
+          metadata: {
+            Type: 'deployment',
+            Name: `deploy-${suffix}`,
+            Namespace: namespace,
+            ParentAggregate: aggregateNode.id,
+            Replicas: 2,
+          },
+          status: 'active',
+          indicatorCount: 2,
+          connections: [serviceId],
+        },
+        {
+          id: podAId,
+          type: 'pod',
+          label: `pod-${suffix}-a`,
+          category: 'load',
+          metadata: {
+            Type: 'pod',
+            Name: `pod-${suffix}-a`,
+            Namespace: namespace,
+            ParentAggregate: aggregateNode.id,
+            Owner: controllerId,
+            Status: 'Running',
+            IP: `10.244.${(index % 220) + 1}.10`,
+            Containers: ['app', 'sidecar-proxy'],
+          },
+          status: 'active',
+          indicatorCount: 6,
+          connections: baseConnections,
+        },
+        {
+          id: podBId,
+          type: 'pod',
+          label: `pod-${suffix}-b`,
+          category: 'load',
+          metadata: {
+            Type: 'pod',
+            Name: `pod-${suffix}-b`,
+            Namespace: namespace,
+            ParentAggregate: aggregateNode.id,
+            Owner: controllerId,
+            Status: index % 7 === 0 ? 'Pending' : 'Running',
+            IP: `10.244.${(index % 220) + 1}.11`,
+            Containers: ['app', 'sidecar-proxy'],
+          },
+          status: index % 7 === 0 ? 'deploying' : 'active',
+          indicatorCount: 6,
+          connections: baseConnections,
+        }
+      );
+
+      aggregateNode.connections = Array.from(new Set([...(aggregateNode.connections || []), controllerId]));
+      return;
+    }
+
+    if (workloadKind === 1) {
+      const controllerId = `statefulset-${suffix}`;
+      const podAId = `pod-${suffix}-0`;
+      const podBId = `pod-${suffix}-1`;
+
+      nodes.push(
+        {
+          id: controllerId,
+          type: 'statefulset',
+          label: `sts-${suffix}`,
+          category: 'load',
+          metadata: {
+            Type: 'statefulset',
+            Name: `sts-${suffix}`,
+            Namespace: namespace,
+            ParentAggregate: aggregateNode.id,
+            Replicas: 2,
+            ServiceName: serviceId,
+          },
+          status: 'active',
+          indicatorCount: 2,
+          connections: [serviceId, pvcId],
+        },
+        {
+          id: podAId,
+          type: 'pod',
+          label: `pod-${suffix}-0`,
+          category: 'load',
+          metadata: {
+            Type: 'pod',
+            Name: `pod-${suffix}-0`,
+            Namespace: namespace,
+            ParentAggregate: aggregateNode.id,
+            Owner: controllerId,
+            Status: 'Running',
+            IP: `10.245.${(index % 220) + 1}.20`,
+            Containers: ['db'],
+          },
+          status: 'active',
+          indicatorCount: 6,
+          connections: baseConnections,
+        },
+        {
+          id: podBId,
+          type: 'pod',
+          label: `pod-${suffix}-1`,
+          category: 'load',
+          metadata: {
+            Type: 'pod',
+            Name: `pod-${suffix}-1`,
+            Namespace: namespace,
+            ParentAggregate: aggregateNode.id,
+            Owner: controllerId,
+            Status: index % 11 === 0 ? 'Error' : 'Running',
+            IP: `10.245.${(index % 220) + 1}.21`,
+            Containers: ['db'],
+          },
+          status: index % 11 === 0 ? 'error' : 'active',
+          indicatorCount: 6,
+          connections: baseConnections,
+        }
+      );
+
+      aggregateNode.connections = Array.from(new Set([...(aggregateNode.connections || []), controllerId]));
+      return;
+    }
+
+    const podId = `pod-${suffix}-diag`;
+    nodes.push({
+      id: podId,
+      type: 'pod',
+      label: `diag-${suffix}`,
+      category: 'load',
+      metadata: {
+        Type: 'pod',
+        Name: `diag-${suffix}`,
+        Namespace: namespace,
+        ParentAggregate: aggregateNode.id,
+        Status: 'Running',
+        IP: `10.246.${(index % 220) + 1}.30`,
+        Containers: ['netshoot'],
+      },
+      status: 'active',
+      indicatorCount: 6,
+      connections: baseConnections,
+    });
+
+    aggregateNode.connections = Array.from(new Set([...(aggregateNode.connections || []), podId]));
+  });
+
+  return nodes;
+}
+
+export const kubernetesAggregateWorkloadsScenario: K8sTopologyScenario = {
+  name: 'Aggregate Workloads Cluster',
+  description:
+    'Same aggregate nodes, but each aggregate owns a workload (pod/deployment/statefulset) with services, multus networks, PV/PVC, configmaps, and secrets.',
+  nodes: buildAggregateWorkloadNodes(buildAggregateNodes()),
+};
