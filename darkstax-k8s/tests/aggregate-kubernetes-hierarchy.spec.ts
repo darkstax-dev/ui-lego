@@ -13,10 +13,8 @@ import { test, expect } from '@playwright/test';
 test.describe('Aggregate → Kubernetes hierarchy relationship', () => {
   test.beforeEach(async ({ page }) => {
     await page.goto('/');
-    await page.waitForLoadState('networkidle');
-
-    // Make the test resilient if other tests (or localStorage) change the layout mode.
-    await page.getByLabel('Select layout mode').selectOption('hierarchy');
+    // This view is already in hierarchy lane mode; wait for the Aggregate lane to render.
+    await expect(page.getByTestId('lane-aggregate')).toBeVisible();
   });
 
   test('expands detail lanes when an aggregate node is selected and collapses on double-click', async ({ page }) => {
