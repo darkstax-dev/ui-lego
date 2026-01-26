@@ -355,42 +355,107 @@ export function TopologyCanvas() {
     const renderedIds = new Set(layoutNodes.map((n) => n.id));
     const paths: Array<{ id: string; d: string; fromId: string; toId: string }> = [];
 
-    // In lane-based hierarchy mode, draw ownership (parent -> child) connections.
-    // Additionally, allow peer connections between aggregate nodes so aggregate hierarchies can
-    // show both parent/child and peer relationships without creating a full mesh.
+    // In lane-based hierarchy mode, draw:
+    // 1) ownership (group parent -> child) connections
+    // 2) lane-adjacent connections (load -> service -> network -> config/storage)
+    // 3) aggregate peer connections (aggregate <-> aggregate)
     if (layoutMode === 'hierarchy') {
       const seen = new Set<string>();
+
+      const categoryOrder = new Map(
+        hierarchyConfig.categories.map((cat) => [cat.id, cat.laneConfig.order ?? 0] as const)
+      );
+      const getCategoryOrder = (category: K8sNodeData['category']) => categoryOrder.get(category) ?? 0;
+
+      const workloadControllerTypes = new Set(['deployment', 'statefulset', 'job']);
+      const isWorkloadController = (node: K8sNodeData) => workloadControllerTypes.has(node.type);
+
+      const pushVerticalCurve = (fromId: string, toId: string, key: string) => {
+        const from = getAnchor(fromId, 'bottom');
+        const to = getAnchor(toId, 'top');
+        if (!from || !to) return;
+
+        const dy = to.y - from.y;
+        const curvature = 0.5;
+        const cx1 = from.x;
+        const cy1 = from.y + dy * curvature;
+        const cx2 = to.x;
+        const cy2 = to.y - dy * curvature;
+
+        paths.push({
+          id: key,
+          fromId,
+          toId,
+          d: `M ${from.x} ${from.y} C ${cx1} ${cy1}, ${cx2} ${cy2}, ${to.x} ${to.y}`,
+        });
+      };
 
       groups.forEach((group) => {
         if (!renderedIds.has(group.ownerId)) return;
 
+        const owner = nodeById.get(group.ownerId);
+        if (!owner) return;
+
+        // Aggregate groups should connect to workload controllers first (not directly to every child)
+        // so the flow goes: aggregate -> workload -> pods -> service -> network -> config/storage.
+        const hasWorkloadControllers =
+          owner.category === 'aggregate'
+            ? group.memberIds.some((memberId) => {
+                const member = nodeById.get(memberId);
+                return member ? isWorkloadController(member) : false;
+              })
+            : false;
+
         group.memberIds.forEach((memberId) => {
           if (!renderedIds.has(memberId)) return;
+          const member = nodeById.get(memberId);
+          if (!member) return;
+
+          if (owner.category === 'aggregate') {
+            if (hasWorkloadControllers) {
+              if (!isWorkloadController(member)) return;
+            } else {
+              if (member.category !== 'load') return;
+            }
+          }
 
           const key = `${group.ownerId}->${memberId}`;
           if (seen.has(key)) return;
           seen.add(key);
 
-          const from = getAnchor(group.ownerId, 'bottom');
-          const to = getAnchor(memberId, 'top');
-          if (!from || !to) return;
-
-          const dy = to.y - from.y;
-          const curvature = 0.5;
-          const cx1 = from.x;
-          const cy1 = from.y + dy * curvature;
-          const cx2 = to.x;
-          const cy2 = to.y - dy * curvature;
-
-          paths.push({
-            id: key,
-            fromId: group.ownerId,
-            toId: memberId,
-            d: `M ${from.x} ${from.y} C ${cx1} ${cy1}, ${cx2} ${cy2}, ${to.x} ${to.y}`,
-          });
+          pushVerticalCurve(group.ownerId, memberId, key);
         });
       });
 
+      // Lane-adjacent connections for non-aggregate nodes.
+      layoutNodes.forEach((node) => {
+        if (node.category === 'aggregate') return;
+        if (!node.connections) return;
+        if (!renderedIds.has(node.id)) return;
+
+        node.connections.forEach((targetId) => {
+          if (!renderedIds.has(targetId)) return;
+          const target = nodeById.get(targetId);
+          if (!target) return;
+          if (target.category === 'aggregate') return;
+          if (node.category === target.category) return;
+
+          const orderA = getCategoryOrder(node.category);
+          const orderB = getCategoryOrder(target.category);
+          if (Math.abs(orderA - orderB) !== 1) return;
+
+          const fromId = orderA < orderB ? node.id : targetId;
+          const toId = orderA < orderB ? targetId : node.id;
+
+          const key = `lane:${fromId}->${toId}`;
+          if (seen.has(key)) return;
+          seen.add(key);
+
+          pushVerticalCurve(fromId, toId, key);
+        });
+      });
+
+      // Aggregate peer connections (and optional aggregate -> workload controller links from raw graph connections).
       layoutNodes.forEach((node) => {
         if (node.category !== 'aggregate') return;
         if (!node.connections) return;
@@ -401,30 +466,41 @@ export function TopologyCanvas() {
           const target = nodeById.get(targetId);
           if (!target) return;
 
-          const key =
-            target.category === 'aggregate'
-              ? `peer:${[node.id, targetId].sort().join('<->')}`
-              : `conn:${node.id}->${targetId}`;
+          if (target.category === 'aggregate') {
+            const key = `peer:${[node.id, targetId].sort().join('<->')}`;
+            if (seen.has(key)) return;
+            seen.add(key);
+
+            const from = getAnchor(node.id, 'center');
+            const to = getAnchor(targetId, 'center');
+            if (!from || !to) return;
+
+            const dx = to.x - from.x;
+            const curvature = 0.35;
+            const cx1 = from.x + dx * curvature;
+            const cy1 = from.y;
+            const cx2 = to.x - dx * curvature;
+            const cy2 = to.y;
+
+            paths.push({
+              id: key,
+              fromId: node.id,
+              toId: targetId,
+              d: `M ${from.x} ${from.y} C ${cx1} ${cy1}, ${cx2} ${cy2}, ${to.x} ${to.y}`,
+            });
+
+            return;
+          }
+
+          // Keep aggregate->workload controller as a fallback (in case ownership grouping isn't present)
+          // but avoid connecting aggregates directly to services/network/config-storage.
+          if (!isWorkloadController(target)) return;
+
+          const key = `${node.id}->${targetId}`;
           if (seen.has(key)) return;
           seen.add(key);
 
-          const from = getAnchor(node.id, 'center');
-          const to = getAnchor(targetId, 'center');
-          if (!from || !to) return;
-
-          const dx = to.x - from.x;
-          const curvature = 0.35;
-          const cx1 = from.x + dx * curvature;
-          const cy1 = from.y;
-          const cx2 = to.x - dx * curvature;
-          const cy2 = to.y;
-
-          paths.push({
-            id: key,
-            fromId: node.id,
-            toId: targetId,
-            d: `M ${from.x} ${from.y} C ${cx1} ${cy1}, ${cx2} ${cy2}, ${to.x} ${to.y}`,
-          });
+          pushVerticalCurve(node.id, targetId, key);
         });
       });
 
