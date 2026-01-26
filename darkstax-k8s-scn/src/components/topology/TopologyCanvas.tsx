@@ -238,7 +238,17 @@ export function TopologyCanvas() {
         </svg>
 
         {/* Hierarchical Lanes */}
-        <div className="relative z-10 flex flex-col">
+        <div
+          className="relative z-10"
+          style={{
+            display: 'flex',
+            width: '100%',
+            flexDirection: 'column',
+            justifyContent: 'center',
+            alignItems: 'flex-start',
+            gap: '4px'
+          }}
+        >
           {laneCategories.map((lane) => (
             <HierarchicalLane
               key={lane.id}
