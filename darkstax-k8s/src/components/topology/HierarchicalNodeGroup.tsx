@@ -65,8 +65,8 @@ export function HierarchicalNodeGroup({ parentNode, childNodes, collapsed = fals
             type={parentNode.type}
             status={parentNode.status}
             label={parentNode.label}
-            showIndicator={!!parentNode.indicatorCount}
-            indicatorCount={parentNode.indicatorCount}
+            showIndicator={aggregatedChildCount > 0}
+            indicatorCount={aggregatedChildCount}
           />
         </div>
       </div>
@@ -85,8 +85,7 @@ export function HierarchicalNodeGroup({ parentNode, childNodes, collapsed = fals
                 type={childNode.type}
                 status={childNode.status}
                 label={childNode.label}
-                showIndicator={!!childNode.indicatorCount}
-                indicatorCount={childNode.indicatorCount}
+                showIndicator={false}
               />
             </div>
           ))}
