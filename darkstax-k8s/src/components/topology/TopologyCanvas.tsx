@@ -399,9 +399,12 @@ export function TopologyCanvas() {
         node.connections.forEach((targetId) => {
           if (!renderedIds.has(targetId)) return;
           const target = nodeById.get(targetId);
-          if (!target || target.category !== 'aggregate') return;
+          if (!target) return;
 
-          const key = `peer:${[node.id, targetId].sort().join('<->')}`;
+          const key =
+            target.category === 'aggregate'
+              ? `peer:${[node.id, targetId].sort().join('<->')}`
+              : `conn:${node.id}->${targetId}`;
           if (seen.has(key)) return;
           seen.add(key);
 
