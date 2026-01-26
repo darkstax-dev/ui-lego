@@ -12,7 +12,7 @@
       "level": 0,
       "name": "Cluster & Namespace",
       "description": "Top-level organizational containers",
-      "resourceTypes": ["namespace"],
+      "resourceTypes": ["datacenter", "mobiletower", "namespace"],
       "canContain": ["deployment", "statefulset", "job", "service", "ingress", "multus", "configmap", "secret", "persistentvolumeclaim"],
       "displayOrder": 1
     },
