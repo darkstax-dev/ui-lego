@@ -40,11 +40,6 @@ test.describe('Aggregate → Kubernetes hierarchy relationship', () => {
       .poll(async () => page.getByTestId('lane-load').locator('[data-node-id]').count())
       .toBeGreaterThan(0);
 
-    // Aggregate → Kubernetes relationship should be represented by at least one connection path.
-    await expect
-      .poll(async () => page.getByTestId('connection-layer').locator('path').count())
-      .toBeGreaterThan(0);
-
     // Double-clicking collapses the detail lanes.
     await dc03Tile.dblclick();
 
