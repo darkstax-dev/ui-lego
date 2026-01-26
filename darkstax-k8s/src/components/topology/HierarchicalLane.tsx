@@ -15,10 +15,10 @@ interface HierarchicalLaneProps {
   height: number | 'auto';
 }
 
-const AGGREGATE_MAX_ROWS = 3;
+const LANE_MAX_ROWS = 4;
 // Approximate visual width of a node tile (icon + label) used to estimate how many fit per row.
-const AGGREGATE_TILE_EST_WIDTH_PX = 96;
-const AGGREGATE_TILE_GAP_PX = 32; // gap-8
+const TILE_EST_WIDTH_PX = 96;
+const TILE_GAP_PX = 32; // gap-8
 
 export function HierarchicalLane({ category, label, nodes, height }: HierarchicalLaneProps) {
   const { setSelectedNode, openMetadataPanel, expandDetailLanes, collapseDetailLanes } = useUIStore();
