@@ -39,7 +39,6 @@ export function HierarchicalNodeGroup({
       if (productionNode) {
         setSelectedNode(productionNode);
         openMetadataPanel(productionNode);
-        return;
       }
     }
 
