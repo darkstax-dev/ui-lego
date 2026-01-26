@@ -560,30 +560,13 @@ export const kubernetesTopologyScenario: K8sTopologyScenario = {
   ],
   groups: [
     {
-      id: 'group-ns-production',
-      ownerId: 'ns-production',
-      memberIds: [
-        'deploy-frontend', 'pod-frontend-1', 'pod-frontend-2', 'pod-frontend-3',
-        'deploy-backend', 'pod-backend-1', 'pod-backend-2', 'pod-backend-3', 'pod-backend-4',
-        'statefulset-db', 'pod-db-1', 'pod-db-2',
-        'svc-frontend', 'svc-backend', 'svc-database',
-        'ingress-main', 'multus-sriov',
-        'configmap-frontend', 'configmap-backend', 'secret-frontend', 'secret-db',
-        'pvc-db-1', 'pvc-db-2', 'pv-1', 'pv-2',
-        'job-migration'
-      ],
-      collapsed: false,
-      level: 0,
-      depth: 1
-    },
-    {
       id: 'group-deploy-frontend',
       ownerId: 'deploy-frontend',
       memberIds: ['pod-frontend-1', 'pod-frontend-2', 'pod-frontend-3'],
       collapsed: false,
       level: 1,
       depth: 2,
-      parentGroupId: 'group-ns-production'
+
     },
     {
       id: 'group-deploy-backend',
@@ -592,7 +575,7 @@ export const kubernetesTopologyScenario: K8sTopologyScenario = {
       collapsed: false,
       level: 1,
       depth: 2,
-      parentGroupId: 'group-ns-production'
+
     },
     {
       id: 'group-statefulset-db',
@@ -601,7 +584,7 @@ export const kubernetesTopologyScenario: K8sTopologyScenario = {
       collapsed: false,
       level: 1,
       depth: 2,
-      parentGroupId: 'group-ns-production'
+
     }
   ]
 };
