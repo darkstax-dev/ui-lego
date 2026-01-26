@@ -116,7 +116,7 @@
       },
       "hierarchyLevel": 0,
       "collapsible": true,
-      "defaultCollapsed": false,
+      "defaultCollapsed": true,
       "style": {
         "fillColor": "rgba(78, 205, 196, 0.04)",
         "strokeColor": "rgba(78, 205, 196, 0.25)",
@@ -147,7 +147,7 @@
       },
       "hierarchyLevel": 0,
       "collapsible": true,
-      "defaultCollapsed": false,
+      "defaultCollapsed": true,
       "style": {
         "fillColor": "rgba(78, 205, 196, 0.05)",
         "strokeColor": "rgba(78, 205, 196, 0.4)",
@@ -178,7 +178,7 @@
       },
       "hierarchyLevel": 1,
       "collapsible": true,
-      "defaultCollapsed": false,
+      "defaultCollapsed": true,
       "style": {
         "fillColor": "rgba(255, 107, 107, 0.05)",
         "strokeColor": "rgba(255, 107, 107, 0.3)",
@@ -209,7 +209,7 @@
       },
       "hierarchyLevel": 1,
       "collapsible": true,
-      "defaultCollapsed": false,
+      "defaultCollapsed": true,
       "style": {
         "fillColor": "rgba(50, 108, 229, 0.05)",
         "strokeColor": "rgba(50, 108, 229, 0.3)",
@@ -240,7 +240,7 @@
       },
       "hierarchyLevel": 1,
       "collapsible": true,
-      "defaultCollapsed": false,
+      "defaultCollapsed": true,
       "style": {
         "fillColor": "rgba(0, 209, 178, 0.05)",
         "strokeColor": "rgba(0, 209, 178, 0.3)",
