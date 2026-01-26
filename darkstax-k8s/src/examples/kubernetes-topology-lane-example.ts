@@ -26,16 +26,16 @@ export const k8sLaneExampleTopology: K8sNodeData[] = [
     const id = `dc-${String(n).padStart(2, '0')}`;
     return {
       id,
-      type: 'datacenter',
+      type: 'datacenter' as const,
       label: `DC${String(n).padStart(2, '0')}`,
-      category: 'aggregate',
+      category: 'aggregate' as const,
       metadata: {
         Type: 'datacenter',
         Name: id,
         Description: 'Aggregate datacenter',
         ...(n > 10 ? { ParentAggregate: n <= 30 ? 'dc-01' : 'dc-02' } : {}),
       },
-      status: 'active',
+      status: 'active' as const,
       connections: n <= 5 ? [`tower-${String(n).padStart(2, '0')}`] : [],
     };
   }),
@@ -44,16 +44,16 @@ export const k8sLaneExampleTopology: K8sNodeData[] = [
     const id = `tower-${String(n).padStart(2, '0')}`;
     return {
       id,
-      type: 'mobiletower',
+      type: 'mobiletower' as const,
       label: `Tower${String(n).padStart(2, '0')}`,
-      category: 'aggregate',
+      category: 'aggregate' as const,
       metadata: {
         Type: 'mobiletower',
         Name: id,
         Description: 'Aggregate mobile tower',
         ...(n <= 30 ? { ParentAggregate: 'dc-01' } : { ParentAggregate: 'dc-02' }),
       },
-      status: 'active',
+      status: 'active' as const,
       connections: n <= 5 ? [`dc-${String(n).padStart(2, '0')}`] : [],
     };
   }),
