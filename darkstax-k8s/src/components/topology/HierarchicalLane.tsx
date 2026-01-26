@@ -344,14 +344,16 @@ export function HierarchicalLane({ category, label, nodes, height }: Hierarchica
               if (item.kind === 'group') {
                 const parentNode = item.node;
                 const group = groups.find((g) => g.ownerId === parentNode.id);
+                const memberCount = group?.memberIds.length ?? 0;
 
                 return (
                   <HierarchicalNodeGroup
                     key={parentNode.id}
                     parentNode={parentNode}
                     childNodes={childNodesByParent.get(parentNode.id) || []}
+                    memberCount={memberCount}
                     collapsed={!!group?.collapsed}
-                    onToggleCollapse={group ? () => toggleGroupCollapse(group.id) : undefined}
+                    onToggleCollapse={memberCount > 0 ? () => toggleGroupCollapse(group.id) : undefined}
                     onParentClick={isAggregateLane ? handleAggregateNodeClick : undefined}
                     onParentDoubleClick={isAggregateLane ? handleAggregateNodeDoubleClick : undefined}
                   />
