@@ -581,8 +581,7 @@ export const kubernetesTopologyScenario: K8sTopologyScenario = {
       memberIds: ['pod-db-1', 'pod-db-2'],
       collapsed: false,
       level: 1,
-      depth: 2,
-
+      depth: 2
     }
   ]
 };
