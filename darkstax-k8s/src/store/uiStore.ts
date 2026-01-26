@@ -27,7 +27,13 @@ interface UIStore {
   // Layout
   layoutMode: LayoutMode;
   setLayoutMode: (mode: LayoutMode) => void;
-  
+
+  // Swim lanes
+  detailLanesExpanded: boolean;
+  setDetailLanesExpanded: (expanded: boolean) => void;
+  expandDetailLanes: () => void;
+  collapseDetailLanes: () => void;
+
   // Status legend tooltip
   showStatusLegend: boolean;
   toggleStatusLegend: () => void;
@@ -124,7 +130,13 @@ export const useUIStore = create<UIStore>((set) => ({
     }
     set({ layoutMode: mode });
   },
-  
+
+  // Swim lanes
+  detailLanesExpanded: false,
+  setDetailLanesExpanded: (expanded) => set({ detailLanesExpanded: expanded }),
+  expandDetailLanes: () => set({ detailLanesExpanded: true }),
+  collapseDetailLanes: () => set({ detailLanesExpanded: false }),
+
   // Status legend
   showStatusLegend: false,
   toggleStatusLegend: () => set((state) => ({ 
