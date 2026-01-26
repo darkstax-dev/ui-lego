@@ -46,9 +46,11 @@ export function HierarchicalLane({ category, label, nodes, height }: Hierarchica
   );
 
   useLayoutEffect(() => {
-    if (!isAggregateLane) return;
     const el = laneContentRef.current;
     if (!el) return;
+
+    // Set immediately, then keep it up-to-date.
+    setLaneContentWidth(el.getBoundingClientRect().width);
 
     const observer = new ResizeObserver((entries) => {
       const next = entries[0]?.contentRect?.width;
@@ -57,7 +59,7 @@ export function HierarchicalLane({ category, label, nodes, height }: Hierarchica
 
     observer.observe(el);
     return () => observer.disconnect();
-  }, [isAggregateLane]);
+  }, [category]);
 
   const clearAggregateClickTimeout = () => {
     if (clickTimeoutRef.current == null) return;
