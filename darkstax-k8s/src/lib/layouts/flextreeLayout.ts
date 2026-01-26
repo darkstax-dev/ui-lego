@@ -28,7 +28,7 @@ export function applyFlextreeLayout(
   });
 
   const tree = layout.hierarchy(hierarchy);
-  const positioned = layout(tree);
+  const positioned: any = layout(tree);
 
   const nodeMap = new Map<string, { x: number; y: number }>();
   positioned.each((d: any) => {
@@ -56,7 +56,7 @@ export function applyOwnershipTreeLayout(
   });
 
   const tree = layout.hierarchy(hierarchy);
-  const positioned = layout(tree);
+  const positioned: any = layout(tree);
 
   const nodeMap = new Map<string, { x: number; y: number }>();
   positioned.each((d: any) => {
