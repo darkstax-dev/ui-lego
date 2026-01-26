@@ -26,8 +26,10 @@ test.describe('Aggregate → Kubernetes hierarchy relationship', () => {
     await expect(page.getByTestId('lane-service')).toHaveCount(0);
 
     // Select an aggregate node.
-    const dc01Tile = aggregateLane.getByText('DC01', { exact: true });
+    // Use data-node-id for stability (avoids clicking only the text label).
+    const dc01Tile = aggregateLane.locator('[data-node-id="dc-01"]');
     await expect(dc01Tile).toBeVisible();
+    await expect(dc01Tile).toContainText('DC01');
     await dc01Tile.click();
 
     // Detail lanes should become visible.
