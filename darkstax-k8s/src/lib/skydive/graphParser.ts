@@ -6,6 +6,8 @@ const normalizeResourceType = (rawType?: string): K8sResourceType => {
   const type = (rawType || 'pod').toLowerCase();
   const mapping: Record<string, K8sResourceType> = {
     namespace: 'namespace',
+    datacenter: 'datacenter',
+    mobiletower: 'mobiletower',
     service: 'service',
     deployment: 'deployment',
     pod: 'pod',
@@ -26,6 +28,8 @@ const normalizeResourceType = (rawType?: string): K8sResourceType => {
 
 const categoryByType: Record<K8sResourceType, K8sResourceCategory> = {
   namespace: 'aggregate',
+  datacenter: 'aggregate',
+  mobiletower: 'aggregate',
   deployment: 'load',
   pod: 'load',
   job: 'load',
