@@ -7,6 +7,7 @@ export default defineConfig({
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),
+      '@icons': path.resolve(__dirname, '../src/components/icons'),
       '@icons/kubernetes': path.resolve(__dirname, '../src/components/icons/kubernetes'),
     },
   },
