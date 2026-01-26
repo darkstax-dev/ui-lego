@@ -30,9 +30,9 @@ export function HierarchicalNodeGroup({ parentNode, childNodes, collapsed = fals
   };
 
   return (
-    <div className="inline-flex flex-col gap-2">
-      {/* Parent Node with Collapse/Expand Button */}
-      <div className="relative inline-flex items-center gap-2">
+    <div className="inline-grid grid-cols-[24px_auto] gap-x-2 gap-y-6">
+      {/* Collapse/Expand Button */}
+      <div className="row-start-1 col-start-1 flex items-center justify-center">
         {childNodes.length > 0 && (
           <button
             onClick={handleToggle}
@@ -46,6 +46,10 @@ export function HierarchicalNodeGroup({ parentNode, childNodes, collapsed = fals
             )}
           </button>
         )}
+      </div>
+
+      {/* Parent Node */}
+      <div className="row-start-1 col-start-2 flex justify-center">
         <div
           data-node-id={parentNode.id}
           className="cursor-pointer transition-transform hover:scale-105"
@@ -67,7 +71,7 @@ export function HierarchicalNodeGroup({ parentNode, childNodes, collapsed = fals
 
       {/* Child Nodes */}
       {!collapsed && childNodes.length > 0 && (
-        <div className="flex flex-wrap gap-4 ml-8">
+        <div className="row-start-2 col-start-2 flex flex-wrap justify-center gap-4">
           {childNodes.map((childNode) => (
             <div
               key={childNode.id}
