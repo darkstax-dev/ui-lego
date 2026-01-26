@@ -16,6 +16,9 @@ import KubernetesStatefulSet from '@icons/kubernetes/KubernetesStatefulSet';
 import KubernetesNode from '@icons/kubernetes/KubernetesNode';
 import KubernetesMultus from '@icons/kubernetes/KubernetesMultus';
 
+import BuildingFill from '@icons/BuildingFill';
+import MobileTowerFill from '@icons/MobileTowerFill';
+
 interface KubernetesIconWrapperProps {
   type: K8sResourceType;
   status?: 'ready' | 'deploying' | 'active' | 'error' | 'terminated';
@@ -26,6 +29,8 @@ interface KubernetesIconWrapperProps {
 
 const iconMap: Record<K8sResourceType, React.ComponentType<any>> = {
   namespace: KubernetesNamespace,
+  datacenter: BuildingFill,
+  mobiletower: MobileTowerFill,
   service: KubernetesService,
   deployment: KubernetesDeployment,
   job: KubernetesJob,
