@@ -131,7 +131,10 @@ export function KubernetesIconWrapper({
 
       {/* Label */}
       {label && (
-        <div className="text-blue-dark-950 font-macan-mono text-sm font-book leading-tight text-center">
+        <div
+          data-anchor="node-label"
+          className="text-blue-dark-950 font-macan-mono text-sm font-book leading-tight text-center"
+        >
           {label}
         </div>
       )}
