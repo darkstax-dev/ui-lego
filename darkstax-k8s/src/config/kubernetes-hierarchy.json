@@ -38,7 +38,7 @@
       "id": "aggregate",
       "label": "Aggregate",
       "description": "Organizational containers and namespaces",
-      "resourceTypes": ["namespace", "datacenter", "mobiletower"],
+      "resourceTypes": ["datacenter", "mobiletower"],
       "laneConfig": {
         "display": true,
         "height": 360,
@@ -51,7 +51,7 @@
       "id": "load",
       "label": "Workload",
       "description": "Workload resources including controllers and pods",
-      "resourceTypes": ["deployment", "statefulset", "job", "pod"],
+      "resourceTypes": ["namespace", "deployment", "statefulset", "job", "pod"],
       "laneConfig": {
         "display": true,
         "height": 200,
@@ -136,7 +136,7 @@
       "id": "group-by-namespace",
       "name": "Group by Namespace",
       "description": "Group all resources within their namespace",
-      "enabled": true,
+      "enabled": false,
       "priority": 1,
       "criteria": {
         "type": "property-match",
@@ -258,15 +258,6 @@
     }
   ],
   "relationshipRules": [
-    {
-      "id": "namespace-contains-resources",
-      "name": "Namespace Contains Resources",
-      "sourceType": "namespace",
-      "targetTypes": ["deployment", "statefulset", "job", "service", "ingress", "multus", "configmap", "secret", "persistentvolumeclaim"],
-      "relationship": "contains",
-      "matchProperty": "Namespace",
-      "displayConnection": false
-    },
     {
       "id": "deployment-manages-pods",
       "name": "Deployment Manages Pods",
