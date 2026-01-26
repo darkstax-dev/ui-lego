@@ -71,15 +71,18 @@ test.describe('Darkstax K8s - Basic UI', () => {
     await expect(page.getByRole('button', { name: /toggle filter: frontend/i })).toBeVisible();
   });
 
-  test('group controller toggles collapse state', async ({ page }) => {
-    const controller = page.getByTestId('group-controller');
-    await expect(controller).toBeVisible();
+  test('group collapse toggles collapse state', async ({ page }) => {
+    const layoutSelect = page.getByLabel('Select layout mode');
+    await layoutSelect.selectOption('hierarchy');
 
-    const groupItem = page.getByTestId('group-item-group-deploy-frontend');
-    await expect(groupItem).toBeVisible();
-    await groupItem.click();
+    const group = page.getByTestId('hierarchy-group-group-deploy-frontend');
+    await expect(group).toBeVisible();
 
-    await expect(groupItem.getByText('✓')).toBeVisible();
+    const toggle = group.getByRole('button', { name: 'Collapse' });
+    await expect(toggle).toBeVisible();
+    await toggle.click();
+
+    await expect(group.getByText('✓')).toBeVisible();
   });
 
   test('dragging a resource highlights lane', async ({ page }) => {
