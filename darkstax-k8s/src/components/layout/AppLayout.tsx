@@ -14,9 +14,9 @@ export function AppLayout({ children }: AppLayoutProps) {
           <div className="flex-1 flex overflow-hidden">
             <main className="flex-1 relative bg-gray-300">
               {children}
+              <ResourceMenuPanel />
+              <StatusLegendTooltip />
             </main>
-            <ResourceMenuPanel />
-            <StatusLegendTooltip />
           </div>
         </div>
       </div>
