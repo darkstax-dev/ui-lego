@@ -277,7 +277,7 @@ export function HierarchicalLane({ category, label, nodes, height }: Hierarchica
         data-testid={`lane-drop-${category}`}
         className={`flex-1 p-4 relative transition-colors ${
           isOver ? 'bg-blue-100 border-2 border-blue-500 border-dashed' : ''
-        }`}
+        } ${laneHasPaging ? 'pb-14' : ''}`}
       >
         {isAggregateLane && (
           <div className="absolute left-3 top-3 z-20 flex items-start gap-2">
@@ -295,34 +295,37 @@ export function HierarchicalLane({ category, label, nodes, height }: Hierarchica
                 })}
               />
             </div>
+          </div>
+        )}
 
-            {laneHasPaging && (
-              <div className="flex items-center gap-1 rounded bg-white/80 border border-gray-400/40 px-1 py-1">
-                <button
-                  className="w-7 h-7 flex items-center justify-center rounded disabled:opacity-40"
-                  onClick={() => setPageIndex((v) => Math.max(0, v - 1))}
-                  disabled={!canPageBack}
-                  type="button"
-                  aria-label="Previous page"
-                  title="Previous"
-                >
-                  <Minus className="w-4 h-4 text-blue-dark-950" />
-                </button>
-                <div className="px-1 text-[10px] text-gray-700 font-macan-mono whitespace-nowrap">
-                  {pageIndex + 1}/{totalPages}
-                </div>
-                <button
-                  className="w-7 h-7 flex items-center justify-center rounded disabled:opacity-40"
-                  onClick={() => setPageIndex((v) => Math.min(totalPages - 1, v + 1))}
-                  disabled={!canPageForward}
-                  type="button"
-                  aria-label="Next page"
-                  title="Next"
-                >
-                  <Plus className="w-4 h-4 text-blue-dark-950" />
-                </button>
-              </div>
-            )}
+        {laneHasPaging && (
+          <div
+            className="absolute bottom-3 right-3 z-20 flex items-center gap-1 rounded bg-white/80 border border-gray-400/40 px-1 py-1"
+            onMouseDown={(e) => e.stopPropagation()}
+          >
+            <button
+              className="w-7 h-7 flex items-center justify-center rounded disabled:opacity-40"
+              onClick={() => setPageIndex((v) => Math.max(0, v - 1))}
+              disabled={!canPageBack}
+              type="button"
+              aria-label="Previous page"
+              title="Previous"
+            >
+              <Minus className="w-4 h-4 text-blue-dark-950" />
+            </button>
+            <div className="px-1 text-[10px] text-gray-700 font-macan-mono whitespace-nowrap">
+              {pageIndex + 1}/{totalPages}
+            </div>
+            <button
+              className="w-7 h-7 flex items-center justify-center rounded disabled:opacity-40"
+              onClick={() => setPageIndex((v) => Math.min(totalPages - 1, v + 1))}
+              disabled={!canPageForward}
+              type="button"
+              aria-label="Next page"
+              title="Next"
+            >
+              <Plus className="w-4 h-4 text-blue-dark-950" />
+            </button>
           </div>
         )}
 
