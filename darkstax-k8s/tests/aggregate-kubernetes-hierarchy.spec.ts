@@ -27,16 +27,16 @@ test.describe('Aggregate → Kubernetes hierarchy relationship', () => {
 
     // Select an aggregate node.
     // Use data-node-id for stability (avoids clicking only the text label).
-    const dc01Tile = aggregateLane.locator('[data-node-id="dc-01"]');
-    await expect(dc01Tile).toBeVisible();
-    await expect(dc01Tile).toContainText('DC01');
-    await dc01Tile.click();
+    const dc03Tile = aggregateLane.locator('[data-node-id="dc-03"]');
+    await expect(dc03Tile).toBeVisible();
+    await expect(dc03Tile).toContainText('DC03');
+    await dc03Tile.click();
 
     // Detail lanes should become visible.
     await expect(page.getByTestId('lane-load')).toBeVisible();
 
-    // For the aggregate workloads scenario, DC01 should own a workload deployment `deploy-dc-01`.
-    await expect(page.locator('[data-node-id="deploy-dc-01"]').first()).toBeVisible();
+    // For the aggregate workloads scenario, DC03 should own a diagnostic pod `pod-dc-03-diag`.
+    await expect(page.locator('[data-node-id="pod-dc-03-diag"]').first()).toBeVisible();
 
     // Aggregate → Kubernetes relationship should be represented by at least one connection path
     // (dc-01 connects to ns-production in the demo scenario, and dc-01 click maps to selecting ns-production).
@@ -45,7 +45,7 @@ test.describe('Aggregate → Kubernetes hierarchy relationship', () => {
       .toBeGreaterThan(0);
 
     // Double-clicking collapses the detail lanes.
-    await dc01Tile.dblclick();
+    await dc03Tile.dblclick();
 
     await expect(page.getByTestId('lane-load')).toHaveCount(0);
     await expect(page.getByTestId('lane-service')).toHaveCount(0);
