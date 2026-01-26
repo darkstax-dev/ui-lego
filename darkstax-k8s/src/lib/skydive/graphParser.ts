@@ -87,11 +87,23 @@ export const parseSkydiveSyncReply = (data: SkydiveSyncReplyData): {
       metadata,
       status: statusFromMetadata(metadata),
       indicatorCount: indicatorCount && indicatorCount > 0 ? indicatorCount : undefined,
-      connections: connections.get(node.ID),
+      // Namespaces are shown as peers/orphans (no edges in either layout mode).
+      connections: type === 'namespace' ? undefined : connections.get(node.ID),
     };
   });
 
   const nodeById = new Map(nodes.map((node) => [node.id, node] as const));
+
+  // Remove any links that point at namespaces, so other nodes don't draw edges to them.
+  const namespaceIds = new Set(nodes.filter((n) => n.type === 'namespace').map((n) => n.id));
+  if (namespaceIds.size > 0) {
+    nodes.forEach((node) => {
+      if (!node.connections) return;
+      node.connections = node.connections.filter((id) => !namespaceIds.has(id));
+      if (node.connections.length === 0) node.connections = undefined;
+    });
+  }
+
   const groupMembers = new Map<string, string[]>();
 
   ownershipEdges.forEach((edge) => {
@@ -99,7 +111,10 @@ export const parseSkydiveSyncReply = (data: SkydiveSyncReplyData): {
     const childNode = nodeById.get(edge.Child);
     if (!parentNode || !childNode) return;
 
-    // Unlike the old logic, allow cross-category ownership (namespace contains deployments, services, etc.)
+    // Namespaces are shown as peers/orphans (no ownership grouping).
+    if (parentNode.type === 'namespace') return;
+
+    // Unlike the old logic, allow cross-category ownership (e.g. deployments manage pods).
     const members = groupMembers.get(edge.Parent) || [];
     members.push(edge.Child);
     groupMembers.set(edge.Parent, members);
