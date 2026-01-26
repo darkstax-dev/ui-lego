@@ -620,6 +620,7 @@ export function TopologyCanvas() {
     window.addEventListener('resize', onResize);
 
     return () => {
+      mutationObserver.disconnect();
       el.removeEventListener('scroll', onScroll);
       el.removeEventListener('contextmenu', onContextMenu);
       window.removeEventListener('pointerdown', onGlobalPointerDown);
