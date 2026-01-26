@@ -26,9 +26,9 @@ export const kubernetesTopologyScenario: K8sTopologyScenario = {
       const id = `dc-${String(n).padStart(2, '0')}`;
       return {
         id,
-        type: 'datacenter',
+        type: 'datacenter' as const,
         label: `DC${String(n).padStart(2, '0')}`,
-        category: 'aggregate',
+        category: 'aggregate' as const,
         metadata: {
           Type: 'datacenter',
           Name: id,
