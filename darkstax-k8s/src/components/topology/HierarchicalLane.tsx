@@ -333,29 +333,27 @@ export function HierarchicalLane({ category, label, nodes, height }: Hierarchica
 
   return (
     <div
-      className="flex flex-row mb-2.5"
+      className="flex flex-row mb-2.5 bg-surface-card"
       style={{
         minHeight: laneHeight,
         padding: '4px',
         gap: '10px',
-        background: '#DFDFDF',
       }}
       data-testid={`lane-${category}`}
     >
       {/* Vertical Lane Label */}
       <div
-        className="flex items-center justify-center"
+        className="flex items-center justify-center bg-nav-secondary"
         style={{
           width: '45px',
           padding: '4px 8px',
-          background: '#CECECE',
           flexShrink: 0,
         }}
       >
         <div
           style={{
             transform: 'rotate(-90deg)',
-            color: '#00112B',
+            color: 'var(--text-blue-main)',
             textAlign: 'center',
             fontFamily: 'Macan, -apple-system, Roboto, Helvetica, sans-serif',
             fontSize: '24px',
@@ -374,7 +372,7 @@ export function HierarchicalLane({ category, label, nodes, height }: Hierarchica
         ref={setLaneContentNodeRef}
         data-testid={`lane-drop-${category}`}
         className={`flex-1 p-4 relative transition-colors flex flex-col ${
-          isOver ? 'bg-blue-100 border-2 border-blue-500 border-dashed' : ''
+          isOver ? 'bg-surface-subtle border-2 border-blue-700 border-dashed' : ''
         } ${laneHasPaging ? 'pb-14' : ''}`}
       >
         {isAggregateLane && (
@@ -398,7 +396,7 @@ export function HierarchicalLane({ category, label, nodes, height }: Hierarchica
 
         {laneHasPaging && (
           <div
-            className="absolute bottom-1 left-1 z-40 flex items-center gap-1 bg-gray-300 border border-gray-400/40"
+            className="absolute bottom-1 left-1 z-40 flex items-center gap-1 bg-surface-card border border-divider"
             onMouseDown={(e) => e.stopPropagation()}
           >
             <button
@@ -409,9 +407,9 @@ export function HierarchicalLane({ category, label, nodes, height }: Hierarchica
               aria-label="Previous page"
               title="Previous"
             >
-              <Minus className="w-4 h-4 text-blue-dark-950" />
+              <Minus className="w-4 h-4 text-primary" />
             </button>
-            <div className="text-[10px] text-gray-700 font-macan-mono whitespace-nowrap">
+            <div className="text-[10px] text-secondary font-macan-mono whitespace-nowrap">
               {pageIndex + 1}/{totalPages}
             </div>
             <button
@@ -422,14 +420,14 @@ export function HierarchicalLane({ category, label, nodes, height }: Hierarchica
               aria-label="Next page"
               title="Next"
             >
-              <Plus className="w-4 h-4 text-blue-dark-950" />
+              <Plus className="w-4 h-4 text-primary" />
             </button>
           </div>
         )}
 
         <div className="flex-1 flex items-center justify-center">
           {nodes.length === 0 ? (
-            <div className="flex items-center justify-center text-gray-500 font-macan text-sm">
+            <div className="flex items-center justify-center text-secondary font-macan text-sm">
               Drop {category} resources here
             </div>
           ) : (

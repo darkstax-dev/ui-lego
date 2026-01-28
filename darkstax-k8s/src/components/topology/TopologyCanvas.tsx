@@ -877,13 +877,13 @@ export function TopologyCanvas() {
   return (
     <div ref={scrollRef} className="w-full h-full relative overflow-auto">
       <div
-        className="w-full min-h-full bg-gray-300 relative p-5 pt-5"
+        className="w-full min-h-full bg-surface-default relative p-5 pt-5"
         style={{ transform: `scale(${zoom})`, transformOrigin: '0 0' }}
       >
         <div
           className="absolute inset-0 pointer-events-none opacity-25"
           style={{
-            backgroundImage: `radial-gradient(circle, #00112B 1px, transparent 1px)`,
+            backgroundImage: `radial-gradient(circle, var(--text-blue-main) 1px, transparent 1px)`,
             backgroundSize: '28.53px 26px',
             backgroundPosition: '0 0',
           }}
@@ -905,7 +905,7 @@ export function TopologyCanvas() {
               key={p.id}
               d={p.d}
               fill="none"
-              stroke="#00112B"
+              stroke="var(--text-blue-main)"
               strokeWidth="2"
               strokeDasharray="8 4"
               opacity="0.8"

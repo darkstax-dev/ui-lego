@@ -37,7 +37,7 @@ export function ThemeToggle() {
   return (
     <button
       onClick={toggleTheme}
-      className="w-9 h-9 flex items-center justify-center rounded hover:bg-blue-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60 transition-colors"
+      className="w-9 h-9 flex items-center justify-center rounded hover:bg-blue-950 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60 transition-colors"
       aria-label={getLabel()}
       title={getLabel()}
     >
