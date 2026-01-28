@@ -361,6 +361,13 @@
     /* Dividers */
     --divider-light: var(--color-blue-950);
     --divider-dark: #c8c8c8;
+
+    /* Status Colors - dark mode */
+    --status-ready: rgba(255, 255, 255, 0.20);
+    --status-deploying: #faa536;
+    --status-active: #2b9952;
+    --status-error: #aa1a00;
+    --status-terminated: rgba(255, 255, 255, 0.20);
   }
 }
 
