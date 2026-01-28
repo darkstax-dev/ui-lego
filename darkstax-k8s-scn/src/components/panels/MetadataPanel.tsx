@@ -27,41 +27,41 @@ export function MetadataPanel() {
       <div className="flex-1 overflow-auto" style={{ padding: '24px 16px' }}>
         {/* ID */}
         <div className="mb-4">
-          <h3 className="text-sm font-medium text-gray-500 mb-2 font-macan">ID</h3>
-          <p className="text-sm font-macan-mono text-blue-dark-950">{selectedNode.id}</p>
+          <h3 className="text-sm font-medium mb-2 font-macan-mono uppercase" style={{ color: '#78797A', fontSize: '12px', fontWeight: 600, letterSpacing: '0.1em' }}>ID</h3>
+          <p className="text-sm font-macan-mono" style={{ color: '#00112B' }}>{selectedNode.id}</p>
         </div>
-        
+
         {/* Type */}
         <div className="mb-4">
-          <h3 className="text-sm font-medium text-gray-500 mb-2 font-macan">Type</h3>
-          <p className="text-sm font-macan text-blue-dark-950 capitalize">{selectedNode.type}</p>
+          <h3 className="text-sm font-medium mb-2 font-macan-mono uppercase" style={{ color: '#78797A', fontSize: '12px', fontWeight: 600, letterSpacing: '0.1em' }}>Type</h3>
+          <p className="text-sm font-macan capitalize" style={{ color: '#00112B' }}>{selectedNode.type}</p>
         </div>
-        
+
         {/* Label */}
         <div className="mb-4">
-          <h3 className="text-sm font-medium text-gray-500 mb-2 font-macan">Label</h3>
-          <p className="text-sm font-macan text-blue-dark-950">{selectedNode.label}</p>
+          <h3 className="text-sm font-medium mb-2 font-macan-mono uppercase" style={{ color: '#78797A', fontSize: '12px', fontWeight: 600, letterSpacing: '0.1em' }}>Label</h3>
+          <p className="text-sm font-macan" style={{ color: '#00112B' }}>{selectedNode.label}</p>
         </div>
-        
+
         {/* Category */}
         <div className="mb-4">
-          <h3 className="text-sm font-medium text-gray-500 mb-2 font-macan">Category</h3>
-          <p className="text-sm font-macan text-blue-dark-950 capitalize">{selectedNode.category}</p>
+          <h3 className="text-sm font-medium mb-2 font-macan-mono uppercase" style={{ color: '#78797A', fontSize: '12px', fontWeight: 600, letterSpacing: '0.1em' }}>Category</h3>
+          <p className="text-sm font-macan capitalize" style={{ color: '#00112B' }}>{selectedNode.category}</p>
         </div>
-        
+
         {/* Status */}
         {selectedNode.status && (
           <div className="mb-4">
-            <h3 className="text-sm font-medium text-gray-500 mb-2 font-macan">Status</h3>
-            <p className="text-sm font-macan text-blue-dark-950 capitalize">{selectedNode.status}</p>
+            <h3 className="text-sm font-medium mb-2 font-macan-mono uppercase" style={{ color: '#78797A', fontSize: '12px', fontWeight: 600, letterSpacing: '0.1em' }}>Status</h3>
+            <p className="text-sm font-macan capitalize" style={{ color: '#00112B' }}>{selectedNode.status}</p>
           </div>
         )}
         
         {/* Metadata */}
         <div className="mb-4">
-          <h3 className="text-sm font-medium text-gray-500 mb-2 font-macan">Metadata</h3>
-          <div className="bg-gray-100 p-3 rounded">
-            <pre className="m-0 whitespace-pre-wrap break-words text-[13px] font-mono text-blue-dark-950">
+          <h3 className="text-sm font-medium mb-2 font-macan-mono uppercase" style={{ color: '#78797A', fontSize: '12px', fontWeight: 600, letterSpacing: '0.1em' }}>Metadata</h3>
+          <div className="p-3" style={{ backgroundColor: '#DFDFDF', border: '1px solid #C8C8C8' }}>
+            <pre className="m-0 whitespace-pre-wrap break-words text-[13px] font-mono" style={{ color: '#00112B' }}>
               {JSON.stringify(selectedNode.metadata || {}, null, 2)}
             </pre>
           </div>
@@ -70,8 +70,8 @@ export function MetadataPanel() {
         {/* Position (if available) */}
         {selectedNode.position && (
           <div className="mb-4">
-            <h3 className="text-sm font-medium text-gray-500 mb-2 font-macan">Position</h3>
-            <p className="text-sm font-macan-mono text-blue-dark-950">
+            <h3 className="text-sm font-medium mb-2 font-macan-mono uppercase" style={{ color: '#78797A', fontSize: '12px', fontWeight: 600, letterSpacing: '0.1em' }}>Position</h3>
+            <p className="text-sm font-macan-mono" style={{ color: '#00112B' }}>
               x: {selectedNode.position.x}, y: {selectedNode.position.y}
             </p>
           </div>
