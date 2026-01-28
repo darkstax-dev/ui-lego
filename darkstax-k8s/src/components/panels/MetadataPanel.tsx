@@ -13,27 +13,43 @@ export function MetadataPanel() {
   if (!metadataPanelOpen) return null;
 
   return (
-    <aside className="absolute top-0 right-0 bottom-0 z-30 w-[420px] max-w-[90vw] bg-white border-l border-gray-200 shadow-[-4px_0px_20px_-10px_rgba(12,12,13,0.2)] flex flex-col">
-      <div className="flex items-center justify-between px-4 h-12 border-b border-gray-200">
-        <div className="flex items-center gap-4 text-sm font-macan text-blue-dark-950">
+    <aside className="absolute top-0 right-0 bottom-0 z-30 w-[420px] max-w-[90vw] border-l shadow-[-4px_0px_20px_-10px_rgba(12,12,13,0.2)] flex flex-col" style={{ backgroundColor: '#CECECE', borderLeftColor: '#C8C8C8' }}>
+      <div className="flex items-center justify-between" style={{ padding: '24px 16px 0 16px' }}>
+        <div className="flex items-center gap-0">
           <button
             type="button"
-            className={`pb-2 border-b-2 transition-colors ${
-              metadataPanelTab === 'metadata'
-                ? 'border-blue-700 text-blue-700'
-                : 'border-transparent text-gray-500 hover:text-gray-700'
-            }`}
+            className="font-macan-mono transition-colors"
+            style={{
+              padding: '4px 12px',
+              borderRadius: '4px 4px 0 0',
+              borderBottom: metadataPanelTab === 'metadata' ? '1px solid #00112B' : '1px solid #78797A',
+              color: metadataPanelTab === 'metadata' ? '#00112B' : '#78797A',
+              fontSize: '16px',
+              fontWeight: 500,
+              lineHeight: '110%',
+              background: 'transparent',
+              border: 'none',
+              borderBottom: metadataPanelTab === 'metadata' ? '1px solid #00112B' : '1px solid #78797A',
+            }}
             onClick={() => setMetadataPanelTab('metadata')}
           >
             Metadata
           </button>
           <button
             type="button"
-            className={`pb-2 border-b-2 transition-colors ${
-              metadataPanelTab === 'raw'
-                ? 'border-blue-700 text-blue-700'
-                : 'border-transparent text-gray-500 hover:text-gray-700'
-            }`}
+            className="font-macan-mono transition-colors"
+            style={{
+              padding: '4px 12px',
+              borderRadius: '4px 4px 0 0',
+              borderBottom: metadataPanelTab === 'raw' ? '1px solid #00112B' : '1px solid #78797A',
+              color: metadataPanelTab === 'raw' ? '#00112B' : '#78797A',
+              fontSize: '16px',
+              fontWeight: 500,
+              lineHeight: '110%',
+              background: 'transparent',
+              border: 'none',
+              borderBottom: metadataPanelTab === 'raw' ? '1px solid #00112B' : '1px solid #78797A',
+            }}
             onClick={() => setMetadataPanelTab('raw')}
           >
             Raw
@@ -41,19 +57,19 @@ export function MetadataPanel() {
         </div>
 
         <div className="flex items-center gap-3">
-          <span className="text-xs text-gray-500 font-macan">Details</span>
           <button
             type="button"
-            className="w-8 h-8 inline-flex items-center justify-center rounded hover:bg-gray-100"
+            className="w-8 h-8 inline-flex items-center justify-center hover:opacity-80"
+            style={{ background: 'transparent' }}
             onClick={closeMetadataPanel}
             aria-label="Close details panel"
           >
-            <X className="w-4 h-4 text-gray-600" />
+            <X className="w-4 h-4" style={{ color: '#78797A' }} />
           </button>
         </div>
       </div>
 
-      <div className="flex-1 overflow-auto p-4">
+      <div className="flex-1 overflow-auto" style={{ padding: '24px 16px' }}>
         {!selectedNode ? (
           <div className="text-sm text-gray-500 font-macan">Select a node in the graph to view metadata.</div>
         ) : (
