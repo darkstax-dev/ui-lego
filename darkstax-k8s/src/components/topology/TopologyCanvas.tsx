@@ -736,13 +736,21 @@ export function TopologyCanvas() {
     };
   }, []);
 
-  const onNodeClick = (node: K8sNodeData) => {
+  const onNodeSelect = (node: K8sNodeData) => {
     if (node.category === 'aggregate') {
       setFocusAggregate(node.id);
     }
 
     setSelectedNode(node);
-    openMetadataPanel(node);
+  };
+
+  const openNodeDetails = (node: K8sNodeData) => {
+    if (node.category === 'aggregate') {
+      setFocusAggregate(node.id);
+    }
+
+    setSelectedNode(node);
+    openMetadataPanel(node, 'metadata');
   };
 
   const renderGroup = (group: K8sNodeGroup, depth: number) => {
@@ -793,7 +801,7 @@ export function TopologyCanvas() {
             </button>
           )}
 
-          <NodeTile node={ownerNode} onClick={onNodeClick} />
+          <NodeTile node={ownerNode} onClick={onNodeSelect} />
 
           <div className="text-[10px] text-gray-600 font-macan">
             {group.memberIds.length}m{group.collapsed && ' ✓'}
@@ -818,12 +826,12 @@ export function TopologyCanvas() {
                         clusterKey={`${group.id}:${type}`}
                         nodeType={type}
                         nodes={nodesForType}
-                        onNodeClick={onNodeClick}
+                        onNodeClick={onNodeSelect}
                       />,
                     ];
                   }
 
-                  return nodesForType.map((node) => <NodeTile key={node.id} node={node} onClick={onNodeClick} />);
+                  return nodesForType.map((node) => <NodeTile key={node.id} node={node} onClick={onNodeSelect} />);
                 })}
               </div>
             )}
@@ -940,7 +948,7 @@ export function TopologyCanvas() {
                   left: (node.position?.x ?? 0) - (layoutBounds?.offsetX ?? 0),
                   top: (node.position?.y ?? 0) - (layoutBounds?.offsetY ?? 0),
                 }}
-                onClick={() => onNodeClick(node)}
+                onClick={() => onNodeSelect(node)}
               >
                 <KubernetesIconWrapper
                   type={node.type}
