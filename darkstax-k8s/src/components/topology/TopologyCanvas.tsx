@@ -558,7 +558,7 @@ export function TopologyCanvas() {
           }
 
           // Keep aggregate->workload controller as a fallback (in case ownership grouping isn't present)
-          // but avoid connecting aggregates directly to services/network/config-storage.
+          // but avoid connecting aggregates directly to services/network/storage/config.
           if (!isWorkloadController(target)) return;
 
           const key = `${node.id}->${targetId}`;
