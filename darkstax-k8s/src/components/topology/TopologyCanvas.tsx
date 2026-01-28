@@ -973,7 +973,7 @@ export function TopologyCanvas() {
               onClick={() => {
                 const node = nodeById.get(contextMenu.nodeId);
                 if (node) {
-                  onNodeClick(node);
+                  openNodeDetails(node);
                 }
                 setContextMenu(null);
               }}
