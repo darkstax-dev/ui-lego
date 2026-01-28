@@ -200,6 +200,13 @@
   --color-white: #ffffff;
   --color-black: #0e0e0e;
 
+  /* Status Colors */
+  --status-ready: #ebebeb;
+  --status-deploying: #faa536;
+  --status-active: #2b9952;
+  --status-error: #aa1a00;
+  --status-terminated: #0e2846;
+
   /* ===== FIGMA DESIGN TOKEN ALIASES ===== */
 
   /* Figma-specific token names for SecondaryNavigation */
@@ -416,6 +423,13 @@
   /* Dividers */
   --divider-light: var(--color-blue-950);
   --divider-dark: #c8c8c8;
+
+  /* Status Colors - manual dark mode */
+  --status-ready: rgba(255, 255, 255, 0.20);
+  --status-deploying: #faa536;
+  --status-active: #2b9952;
+  --status-error: #aa1a00;
+  --status-terminated: rgba(255, 255, 255, 0.20);
 }
 
 /* ===== UTILITY CLASSES ===== */
