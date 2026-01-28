@@ -67,7 +67,7 @@
       "resourceTypes": ["service", "ingress"],
       "laneConfig": {
         "display": true,
-        "height": 200,
+        "height": "auto",
         "order": 2
       },
       "color": "#00D1B2",
@@ -80,7 +80,7 @@
       "resourceTypes": ["multus"],
       "laneConfig": {
         "display": true,
-        "height": 200,
+        "height": "auto",
         "order": 3
       },
       "color": "#F38181",
