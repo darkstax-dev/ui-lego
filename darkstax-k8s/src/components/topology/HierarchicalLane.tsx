@@ -27,6 +27,7 @@ export function HierarchicalLane({ category, label, nodes, height }: Hierarchica
     setSelectedNode,
     setFocusAggregate,
     clearFocus,
+    focusAggregateId,
   } = useUIStore();
   const { groups, toggleGroupCollapse } = useTopologyStore();
   const { setNodeRef, isOver } = useDroppable({
@@ -234,10 +235,13 @@ export function HierarchicalLane({ category, label, nodes, height }: Hierarchica
   }, [laneContentWidth]);
 
   const laneMaxRows = useMemo(() => {
+    if (isAggregateLane && focusAggregateId) return 1;
+
     // Service + Network lanes should paginate after 2 rows.
     if (category === 'service' || category === 'network') return LANE_MAX_ROWS_COMPACT;
+
     return LANE_MAX_ROWS_DEFAULT;
-  }, [category]);
+  }, [category, focusAggregateId, isAggregateLane]);
 
   const pageSize = useMemo(() => {
     if (itemsPerRow <= 0) return 0;

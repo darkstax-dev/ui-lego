@@ -242,6 +242,7 @@ export function TopologyCanvas() {
   >([]);
   const [contextMenu, setContextMenu] = useState<null | { x: number; y: number; nodeId: string }>(null);
   const [zoom, setZoom] = useState(1);
+  const [viewportHeight, setViewportHeight] = useState(0);
   const [showShortcuts, setShowShortcuts] = useState(false);
   const [showJumpToast, setShowJumpToast] = useState(false);
 
@@ -253,6 +254,18 @@ export function TopologyCanvas() {
     setNodes(kubernetesAggregateWorkloadsScenario.nodes);
     setGroups(scenarioGroups);
   }, [setNodes, setGroups]);
+
+  useLayoutEffect(() => {
+    const el = scrollRef.current;
+    if (!el) return;
+
+    const update = () => setViewportHeight(el.clientHeight);
+    update();
+
+    const ro = new ResizeObserver(update);
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, []);
 
   const isHiddenByCollapsedGroup = useMemo(() => {
     const collapsedGroups = groups.filter((g) => g.collapsed);
@@ -920,13 +933,24 @@ export function TopologyCanvas() {
                 return null;
               }
 
+              const laneHeight =
+                lane.id === 'aggregate'
+                  ? focusAggregateId
+                    ? 'auto'
+                    : Math.max(
+                        typeof lane.height === 'number' ? lane.height : 0,
+                        // Fill the visible canvas when aggregate is the only visible lane.
+                        viewportHeight > 0 ? viewportHeight / zoom - 40 : 0
+                      )
+                  : lane.height;
+
               return (
                 <HierarchicalLane
                   key={lane.id}
                   category={lane.id as any}
                   label={lane.label}
                   nodes={nodesInLane}
-                  height={lane.height}
+                  height={laneHeight}
                 />
               );
             })}
