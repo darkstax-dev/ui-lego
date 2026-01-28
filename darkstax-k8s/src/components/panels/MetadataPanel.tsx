@@ -13,15 +13,15 @@ export function MetadataPanel() {
   if (!metadataPanelOpen) return null;
 
   return (
-    <aside className="absolute top-0 right-0 bottom-0 z-30 w-[420px] max-w-[90vw] border-l shadow-[-4px_0px_20px_-10px_rgba(12,12,13,0.2)] flex flex-col" style={{ backgroundColor: '#CECECE', borderLeftColor: '#C8C8C8' }}>
+    <aside className="absolute top-0 right-0 bottom-0 z-30 w-[420px] max-w-[90vw] border-l border-divider shadow-[-4px_0px_20px_-10px_rgba(12,12,13,0.2)] flex flex-col bg-surface-default">
       <div className="flex items-center justify-between" style={{ padding: '24px 16px 0 16px' }}>
         <div className="flex items-center gap-0">
           <button
             type="button"
             className={`px-3 py-1 font-macan-mono text-[16px] font-medium leading-[110%] rounded-t bg-transparent border-0 border-b transition-colors ${
               metadataPanelTab === 'metadata'
-                ? 'text-blue-dark-950 border-blue-dark-950'
-                : 'text-gray-500 border-gray-500'
+                ? 'text-primary border-text-primary'
+                : 'text-secondary border-secondary'
             }`}
             onClick={() => setMetadataPanelTab('metadata')}
           >
@@ -31,8 +31,8 @@ export function MetadataPanel() {
             type="button"
             className={`px-3 py-1 font-macan-mono text-[16px] font-medium leading-[110%] rounded-t bg-transparent border-0 border-b transition-colors ${
               metadataPanelTab === 'raw'
-                ? 'text-blue-dark-950 border-blue-dark-950'
-                : 'text-gray-500 border-gray-500'
+                ? 'text-primary border-text-primary'
+                : 'text-secondary border-secondary'
             }`}
             onClick={() => setMetadataPanelTab('raw')}
           >
@@ -43,63 +43,62 @@ export function MetadataPanel() {
         <div className="flex items-center gap-3">
           <button
             type="button"
-            className="w-8 h-8 inline-flex items-center justify-center hover:opacity-80"
-            style={{ background: 'transparent' }}
+            className="w-8 h-8 inline-flex items-center justify-center hover:opacity-80 text-secondary"
             onClick={closeMetadataPanel}
             aria-label="Close details panel"
           >
-            <X className="w-4 h-4" style={{ color: '#78797A' }} />
+            <X className="w-4 h-4" />
           </button>
         </div>
       </div>
 
       <div className="flex-1 overflow-auto" style={{ padding: '24px 16px' }}>
         {!selectedNode ? (
-          <div className="text-sm font-macan" style={{ color: '#78797A' }}>Select a node in the graph to view metadata.</div>
+          <div className="text-sm font-macan text-secondary">Select a node in the graph to view metadata.</div>
         ) : (
           <>
             {metadataPanelTab === 'metadata' && (
               <>
                 <div className="mb-4">
-                  <h3 className="text-sm font-medium mb-2 font-macan-mono uppercase" style={{ color: '#78797A', fontSize: '12px', fontWeight: 600, letterSpacing: '0.1em' }}>Overview</h3>
-                  <div className="p-3 space-y-2" style={{ backgroundColor: '#DFDFDF', border: '1px solid #C8C8C8' }}>
+                  <h3 className="text-sm font-medium mb-2 font-macan-mono uppercase text-secondary text-xs font-semibold tracking-wider">Overview</h3>
+                  <div className="p-3 space-y-2 bg-surface-card border border-divider">
                     <div className="flex items-start gap-2">
-                      <span className="text-xs uppercase tracking-wide font-macan-mono" style={{ color: '#78797A', letterSpacing: '0.1em' }}>ID</span>
-                      <span className="text-sm font-macan-mono break-all" style={{ color: '#00112B' }}>{selectedNode.id}</span>
+                      <span className="text-xs uppercase tracking-wide font-macan-mono text-secondary">ID</span>
+                      <span className="text-sm font-macan-mono break-all text-primary">{selectedNode.id}</span>
                     </div>
                     <div className="flex items-start gap-2">
-                      <span className="text-xs uppercase tracking-wide font-macan-mono" style={{ color: '#78797A', letterSpacing: '0.1em' }}>Type</span>
-                      <span className="text-sm font-macan capitalize" style={{ color: '#00112B' }}>{selectedNode.type}</span>
+                      <span className="text-xs uppercase tracking-wide font-macan-mono text-secondary">Type</span>
+                      <span className="text-sm font-macan capitalize text-primary">{selectedNode.type}</span>
                     </div>
                     <div className="flex items-start gap-2">
-                      <span className="text-xs uppercase tracking-wide font-macan-mono" style={{ color: '#78797A', letterSpacing: '0.1em' }}>Label</span>
-                      <span className="text-sm font-macan" style={{ color: '#00112B' }}>{selectedNode.label}</span>
+                      <span className="text-xs uppercase tracking-wide font-macan-mono text-secondary">Label</span>
+                      <span className="text-sm font-macan text-primary">{selectedNode.label}</span>
                     </div>
                     <div className="flex items-start gap-2">
-                      <span className="text-xs uppercase tracking-wide font-macan-mono" style={{ color: '#78797A', letterSpacing: '0.1em' }}>Category</span>
-                      <span className="text-sm font-macan capitalize" style={{ color: '#00112B' }}>{selectedNode.category}</span>
+                      <span className="text-xs uppercase tracking-wide font-macan-mono text-secondary">Category</span>
+                      <span className="text-sm font-macan capitalize text-primary">{selectedNode.category}</span>
                     </div>
                   </div>
                 </div>
 
                 {selectedNode.status && (
                   <div className="mb-4">
-                    <h3 className="text-sm font-medium mb-2 font-macan-mono uppercase" style={{ color: '#78797A', fontSize: '12px', fontWeight: 600, letterSpacing: '0.1em' }}>Status</h3>
-                    <p className="text-sm font-macan capitalize" style={{ color: '#00112B' }}>{selectedNode.status}</p>
+                    <h3 className="text-sm font-medium mb-2 font-macan-mono uppercase text-secondary text-xs font-semibold tracking-wider">Status</h3>
+                    <p className="text-sm font-macan capitalize text-primary">{selectedNode.status}</p>
                   </div>
                 )}
 
                 <div className="mb-4">
-                  <h3 className="text-sm font-medium mb-2 font-macan-mono uppercase" style={{ color: '#78797A', fontSize: '12px', fontWeight: 600, letterSpacing: '0.1em' }}>Key Metadata</h3>
-                  <div className="p-3 space-y-2 text-sm font-macan" style={{ backgroundColor: '#DFDFDF', border: '1px solid #C8C8C8', color: '#00112B' }}>
+                  <h3 className="text-sm font-medium mb-2 font-macan-mono uppercase text-secondary text-xs font-semibold tracking-wider">Key Metadata</h3>
+                  <div className="p-3 space-y-2 text-sm font-macan bg-surface-card border border-divider text-primary">
                     {(
                       ['Name', 'Namespace', 'Owner', 'Replicas', 'Status', 'IP', 'Node'] as const
                     )
                       .filter((key) => selectedNode.metadata?.[key] !== undefined)
                       .map((key) => (
                         <div key={key} className="flex justify-between gap-3">
-                          <span style={{ color: '#78797A' }}>{key}</span>
-                          <span className="text-right" style={{ color: '#00112B' }}>
+                          <span className="text-secondary">{key}</span>
+                          <span className="text-right text-primary">
                             {Array.isArray(selectedNode.metadata?.[key])
                               ? selectedNode.metadata?.[key].join(', ')
                               : String(selectedNode.metadata?.[key])}
@@ -109,14 +108,14 @@ export function MetadataPanel() {
                     {(
                       ['Name', 'Namespace', 'Owner', 'Replicas', 'Status', 'IP', 'Node'] as const
                     ).every((key) => selectedNode.metadata?.[key] === undefined) && (
-                      <div style={{ color: '#78797A' }}>No highlighted metadata fields.</div>
+                      <div className="text-secondary">No highlighted metadata fields.</div>
                     )}
                   </div>
                 </div>
 
                 <div className="mb-4">
-                  <h3 className="text-sm font-medium mb-2 font-macan-mono uppercase" style={{ color: '#78797A', fontSize: '12px', fontWeight: 600, letterSpacing: '0.1em' }}>Connections</h3>
-                  <div className="p-3 text-sm font-macan" style={{ backgroundColor: '#DFDFDF', border: '1px solid #C8C8C8', color: '#00112B' }}>
+                  <h3 className="text-sm font-medium mb-2 font-macan-mono uppercase text-secondary text-xs font-semibold tracking-wider">Connections</h3>
+                  <div className="p-3 text-sm font-macan bg-surface-card border border-divider text-primary">
                     {selectedNode.connections?.length ? (
                       <ul className="list-disc list-inside space-y-1">
                         {selectedNode.connections.map((connection) => (
@@ -126,15 +125,15 @@ export function MetadataPanel() {
                         ))}
                       </ul>
                     ) : (
-                      <span style={{ color: '#78797A' }}>No connections available.</span>
+                      <span className="text-secondary">No connections available.</span>
                     )}
                   </div>
                 </div>
 
                 {selectedNode.position && (
                   <div className="mb-4">
-                    <h3 className="text-sm font-medium mb-2 font-macan-mono uppercase" style={{ color: '#78797A', fontSize: '12px', fontWeight: 600, letterSpacing: '0.1em' }}>Position</h3>
-                    <p className="text-sm font-macan-mono" style={{ color: '#00112B' }}>
+                    <h3 className="text-sm font-medium mb-2 font-macan-mono uppercase text-secondary text-xs font-semibold tracking-wider">Position</h3>
+                    <p className="text-sm font-macan-mono text-primary">
                       x: {selectedNode.position.x}, y: {selectedNode.position.y}
                     </p>
                   </div>
@@ -144,9 +143,9 @@ export function MetadataPanel() {
 
             {metadataPanelTab === 'raw' && (
               <div className="mb-4">
-                <h3 className="text-sm font-medium mb-2 font-macan-mono uppercase" style={{ color: '#78797A', fontSize: '12px', fontWeight: 600, letterSpacing: '0.1em' }}>Raw Metadata</h3>
-                <div className="p-3" style={{ backgroundColor: '#DFDFDF', border: '1px solid #C8C8C8' }}>
-                  <pre className="m-0 whitespace-pre-wrap break-words text-[13px] font-mono" style={{ color: '#00112B' }}>
+                <h3 className="text-sm font-medium mb-2 font-macan-mono uppercase text-secondary text-xs font-semibold tracking-wider">Raw Metadata</h3>
+                <div className="p-3 bg-surface-card border border-divider">
+                  <pre className="m-0 whitespace-pre-wrap break-words text-[13px] font-mono text-primary">
                     {JSON.stringify(selectedNode.metadata || {}, null, 2)}
                   </pre>
                 </div>
