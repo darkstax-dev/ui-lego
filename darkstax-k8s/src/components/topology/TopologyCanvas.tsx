@@ -274,47 +274,6 @@ export function TopologyCanvas() {
     return filteredNodes.filter((n) => !isHiddenByCollapsedGroup(n.id));
   }, [filteredNodes, isHiddenByCollapsedGroup]);
 
-  const layoutNodes = useMemo(() => {
-    if (layoutMode === 'tree') {
-      return applyOwnershipTreeLayout(renderedNodes, groups, { nodeWidth: 120, nodeHeight: 80, spacing: 60 });
-    }
-    if (layoutMode === 'force') {
-      return applyCircularLayout(renderedNodes);
-    }
-
-    // In lane-based hierarchy mode, DOM visibility is controlled by lane paging + group expansion.
-    // We still scope to the current "focus" subset so we don't try to render connections for thousands of hidden nodes.
-    if (layoutMode === 'hierarchy') {
-      if (!hierarchyVisibleNodeIds) return filteredNodes;
-      return filteredNodes.filter((node) => hierarchyVisibleNodeIds.has(node.id));
-    }
-
-    return renderedNodes;
-  }, [filteredNodes, hierarchyVisibleNodeIds, layoutMode, renderedNodes, groups]);
-
-  const layoutBounds = useMemo(() => {
-    if (layoutMode === 'hierarchy') return null;
-    const positions = layoutNodes
-      .map((node) => node.position)
-      .filter((pos): pos is { x: number; y: number } => !!pos);
-    if (positions.length === 0) return null;
-
-    const padding = 120;
-    const xs = positions.map((pos) => pos.x);
-    const ys = positions.map((pos) => pos.y);
-    const minX = Math.min(...xs);
-    const maxX = Math.max(...xs);
-    const minY = Math.min(...ys);
-    const maxY = Math.max(...ys);
-
-    return {
-      width: maxX - minX + padding * 2,
-      height: maxY - minY + padding * 2,
-      offsetX: minX - padding,
-      offsetY: minY - padding,
-    };
-  }, [layoutMode, layoutNodes]);
-
   const nodeById = useMemo(() => {
     return new Map(filteredNodes.map((n) => [n.id, n] as const));
   }, [filteredNodes]);
@@ -370,6 +329,47 @@ export function TopologyCanvas() {
 
     return new Set(filteredNodes.filter((n) => n.category === 'aggregate').map((n) => n.id));
   }, [filteredNodes, focusAggregateId, focusedNodeIds, layoutMode]);
+
+  const layoutNodes = useMemo(() => {
+    if (layoutMode === 'tree') {
+      return applyOwnershipTreeLayout(renderedNodes, groups, { nodeWidth: 120, nodeHeight: 80, spacing: 60 });
+    }
+    if (layoutMode === 'force') {
+      return applyCircularLayout(renderedNodes);
+    }
+
+    // In lane-based hierarchy mode, DOM visibility is controlled by lane paging + group expansion.
+    // We still scope to the current "focus" subset so we don't try to render connections for thousands of hidden nodes.
+    if (layoutMode === 'hierarchy') {
+      if (!hierarchyVisibleNodeIds) return filteredNodes;
+      return filteredNodes.filter((node) => hierarchyVisibleNodeIds.has(node.id));
+    }
+
+    return renderedNodes;
+  }, [filteredNodes, hierarchyVisibleNodeIds, layoutMode, renderedNodes, groups]);
+
+  const layoutBounds = useMemo(() => {
+    if (layoutMode === 'hierarchy') return null;
+    const positions = layoutNodes
+      .map((node) => node.position)
+      .filter((pos): pos is { x: number; y: number } => !!pos);
+    if (positions.length === 0) return null;
+
+    const padding = 120;
+    const xs = positions.map((pos) => pos.x);
+    const ys = positions.map((pos) => pos.y);
+    const minX = Math.min(...xs);
+    const maxX = Math.max(...xs);
+    const minY = Math.min(...ys);
+    const maxY = Math.max(...ys);
+
+    return {
+      width: maxX - minX + padding * 2,
+      height: maxY - minY + padding * 2,
+      offsetX: minX - padding,
+      offsetY: minY - padding,
+    };
+  }, [layoutMode, layoutNodes]);
 
   const computeConnections = () => {
     const svgEl = svgRef.current;
