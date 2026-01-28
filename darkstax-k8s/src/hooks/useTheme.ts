@@ -12,13 +12,10 @@ export function useTheme() {
   // For visual testing we allow forcing the initial theme via URL:
   //   ?theme=light or ?theme=dark
   // When a theme is forced by URL, we do NOT persist it to localStorage.
-  const [shouldPersist] = useState(() => {
-    const urlTheme = new URLSearchParams(window.location.search).get('theme');
-    return urlTheme !== 'light' && urlTheme !== 'dark';
-  });
+  const urlTheme = new URLSearchParams(window.location.search).get('theme');
+  const shouldPersist = urlTheme !== 'light' && urlTheme !== 'dark';
 
   const [theme, setTheme] = useState<Theme>(() => {
-    const urlTheme = new URLSearchParams(window.location.search).get('theme');
     if (urlTheme === 'light' || urlTheme === 'dark') return urlTheme;
 
     // Check localStorage for saved preference
