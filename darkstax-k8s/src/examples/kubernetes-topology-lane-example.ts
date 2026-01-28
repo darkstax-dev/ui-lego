@@ -255,7 +255,7 @@ export function validateTopologyData(nodes: K8sNodeData[]): {
     }
 
     // Category validation
-    const validCategories = ['load', 'service', 'network', 'config-storage', 'aggregate'];
+    const validCategories = ['load', 'service', 'network', 'storage', 'config', 'aggregate'];
     if (node.category && !validCategories.includes(node.category)) {
       errors.push(`Node ${node.id}: Invalid category '${node.category}'. Must be one of: ${validCategories.join(', ')}`);
     }

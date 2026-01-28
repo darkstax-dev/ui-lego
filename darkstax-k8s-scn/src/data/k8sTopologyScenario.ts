@@ -376,7 +376,7 @@ export const kubernetesTopologyScenario: K8sTopologyScenario = {
       id: 'configmap-frontend',
       type: 'configmap',
       label: 'frontend-config',
-      category: 'config-storage',
+      category: 'config',
       metadata: {
         Type: 'configmap',
         Name: 'frontend-config',
@@ -393,7 +393,7 @@ export const kubernetesTopologyScenario: K8sTopologyScenario = {
       id: 'configmap-backend',
       type: 'configmap',
       label: 'backend-config',
-      category: 'config-storage',
+      category: 'config',
       metadata: {
         Type: 'configmap',
         Name: 'backend-config',
@@ -410,7 +410,7 @@ export const kubernetesTopologyScenario: K8sTopologyScenario = {
       id: 'secret-frontend',
       type: 'secret',
       label: 'frontend-secrets',
-      category: 'config-storage',
+      category: 'config',
       metadata: {
         Type: 'secret',
         Name: 'frontend-secrets',
@@ -425,7 +425,7 @@ export const kubernetesTopologyScenario: K8sTopologyScenario = {
       id: 'secret-db',
       type: 'secret',
       label: 'postgres-credentials',
-      category: 'config-storage',
+      category: 'config',
       metadata: {
         Type: 'secret',
         Name: 'postgres-credentials',
@@ -440,7 +440,7 @@ export const kubernetesTopologyScenario: K8sTopologyScenario = {
       id: 'pvc-db-1',
       type: 'persistentvolumeclaim',
       label: 'data-postgres-0',
-      category: 'config-storage',
+      category: 'storage',
       metadata: {
         Type: 'persistentvolumeclaim',
         Name: 'data-postgres-0',
@@ -457,7 +457,7 @@ export const kubernetesTopologyScenario: K8sTopologyScenario = {
       id: 'pvc-db-2',
       type: 'persistentvolumeclaim',
       label: 'data-postgres-1',
-      category: 'config-storage',
+      category: 'storage',
       metadata: {
         Type: 'persistentvolumeclaim',
         Name: 'data-postgres-1',
@@ -474,7 +474,7 @@ export const kubernetesTopologyScenario: K8sTopologyScenario = {
       id: 'pv-1',
       type: 'persistentvolume',
       label: 'pv-001',
-      category: 'config-storage',
+      category: 'storage',
       metadata: {
         Type: 'persistentvolume',
         Name: 'pv-001',
@@ -491,7 +491,7 @@ export const kubernetesTopologyScenario: K8sTopologyScenario = {
       id: 'pv-2',
       type: 'persistentvolume',
       label: 'pv-002',
-      category: 'config-storage',
+      category: 'storage',
       metadata: {
         Type: 'persistentvolume',
         Name: 'pv-002',

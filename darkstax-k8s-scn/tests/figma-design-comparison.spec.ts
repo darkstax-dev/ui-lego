@@ -391,7 +391,7 @@ test.describe('Figma Design - Canvas Topology Area', () => {
   });
 
   test('should display hierarchical lanes (Load, Service, Network, Config)', async ({ page }) => {
-    const expectedLanes = ['Load', 'Service', 'Network', 'Config and Storage'];
+    const expectedLanes = ['Load', 'Service', 'Network', 'Storage', 'Config'];
     
     for (const lane of expectedLanes) {
       const laneLabel = page.getByText(lane);
