@@ -18,38 +18,22 @@ export function MetadataPanel() {
         <div className="flex items-center gap-0">
           <button
             type="button"
-            className="font-macan-mono transition-colors"
-            style={{
-              padding: '4px 12px',
-              borderRadius: '4px 4px 0 0',
-              borderBottom: metadataPanelTab === 'metadata' ? '1px solid #00112B' : '1px solid #78797A',
-              color: metadataPanelTab === 'metadata' ? '#00112B' : '#78797A',
-              fontSize: '16px',
-              fontWeight: 500,
-              lineHeight: '110%',
-              background: 'transparent',
-              border: 'none',
-              borderBottom: metadataPanelTab === 'metadata' ? '1px solid #00112B' : '1px solid #78797A',
-            }}
+            className={`px-3 py-1 font-macan-mono text-[16px] font-medium leading-[110%] rounded-t bg-transparent border-0 border-b transition-colors ${
+              metadataPanelTab === 'metadata'
+                ? 'text-blue-dark-950 border-blue-dark-950'
+                : 'text-gray-500 border-gray-500'
+            }`}
             onClick={() => setMetadataPanelTab('metadata')}
           >
             Metadata
           </button>
           <button
             type="button"
-            className="font-macan-mono transition-colors"
-            style={{
-              padding: '4px 12px',
-              borderRadius: '4px 4px 0 0',
-              borderBottom: metadataPanelTab === 'raw' ? '1px solid #00112B' : '1px solid #78797A',
-              color: metadataPanelTab === 'raw' ? '#00112B' : '#78797A',
-              fontSize: '16px',
-              fontWeight: 500,
-              lineHeight: '110%',
-              background: 'transparent',
-              border: 'none',
-              borderBottom: metadataPanelTab === 'raw' ? '1px solid #00112B' : '1px solid #78797A',
-            }}
+            className={`px-3 py-1 font-macan-mono text-[16px] font-medium leading-[110%] rounded-t bg-transparent border-0 border-b transition-colors ${
+              metadataPanelTab === 'raw'
+                ? 'text-blue-dark-950 border-blue-dark-950'
+                : 'text-gray-500 border-gray-500'
+            }`}
             onClick={() => setMetadataPanelTab('raw')}
           >
             Raw
