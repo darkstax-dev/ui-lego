@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { useState } from 'react';
 import { ChevronUp, X } from 'lucide-react';
 import { useUIStore } from '../../store/uiStore';
 
