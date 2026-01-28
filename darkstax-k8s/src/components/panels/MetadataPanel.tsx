@@ -1,45 +1,45 @@
-import { useState } from 'react';
-import { ChevronUp, X } from 'lucide-react';
+import { X } from 'lucide-react';
 import { useUIStore } from '../../store/uiStore';
 
 export function MetadataPanel() {
-  const { selectedNode, metadataPanelOpen, toggleMetadataPanel, closeMetadataPanel } = useUIStore();
-  const [activeTab, setActiveTab] = useState<'metadata' | 'raw'>('metadata');
+  const {
+    selectedNode,
+    metadataPanelOpen,
+    closeMetadataPanel,
+    metadataPanelTab,
+    setMetadataPanelTab,
+  } = useUIStore();
 
-  if (!metadataPanelOpen) {
-    return (
-      <button
-        type="button"
-        className="absolute bottom-4 left-1/2 -translate-x-1/2 z-30 inline-flex items-center gap-2 rounded-full bg-white/90 border border-gray-300 px-4 py-2 text-sm font-macan text-blue-dark-950 shadow"
-        onClick={toggleMetadataPanel}
-      >
-        <ChevronUp className="w-4 h-4" />
-        Details
-      </button>
-    );
-  }
+  if (!metadataPanelOpen) return null;
 
   return (
-    <section className="absolute bottom-0 left-0 right-0 z-30 bg-white border-t border-gray-200 shadow-[0px_-4px_20px_-10px_rgba(12,12,13,0.2)]">
+    <aside className="absolute top-0 right-0 bottom-0 z-30 w-[420px] max-w-[90vw] bg-white border-l border-gray-200 shadow-[-4px_0px_20px_-10px_rgba(12,12,13,0.2)] flex flex-col">
       <div className="flex items-center justify-between px-4 h-12 border-b border-gray-200">
         <div className="flex items-center gap-4 text-sm font-macan text-blue-dark-950">
           <button
+            type="button"
             className={`pb-2 border-b-2 transition-colors ${
-              activeTab === 'metadata' ? 'border-blue-700 text-blue-700' : 'border-transparent text-gray-500'
+              metadataPanelTab === 'metadata'
+                ? 'border-blue-700 text-blue-700'
+                : 'border-transparent text-gray-500 hover:text-gray-700'
             }`}
-            onClick={() => setActiveTab('metadata')}
+            onClick={() => setMetadataPanelTab('metadata')}
           >
             Metadata
           </button>
           <button
+            type="button"
             className={`pb-2 border-b-2 transition-colors ${
-              activeTab === 'raw' ? 'border-blue-700 text-blue-700' : 'border-transparent text-gray-500'
+              metadataPanelTab === 'raw'
+                ? 'border-blue-700 text-blue-700'
+                : 'border-transparent text-gray-500 hover:text-gray-700'
             }`}
-            onClick={() => setActiveTab('raw')}
+            onClick={() => setMetadataPanelTab('raw')}
           >
             Raw
           </button>
         </div>
+
         <div className="flex items-center gap-3">
           <span className="text-xs text-gray-500 font-macan">Details</span>
           <button
@@ -53,14 +53,12 @@ export function MetadataPanel() {
         </div>
       </div>
 
-      <div className="h-64 overflow-auto p-4">
+      <div className="flex-1 overflow-auto p-4">
         {!selectedNode ? (
-          <div className="text-sm text-gray-500 font-macan">
-            Select a node in the graph to view metadata.
-          </div>
+          <div className="text-sm text-gray-500 font-macan">Select a node in the graph to view metadata.</div>
         ) : (
           <>
-            {activeTab === 'metadata' && (
+            {metadataPanelTab === 'metadata' && (
               <>
                 <div className="mb-4">
                   <h3 className="text-sm font-medium text-gray-500 mb-2 font-macan">Overview</h3>
@@ -144,7 +142,7 @@ export function MetadataPanel() {
               </>
             )}
 
-            {activeTab === 'raw' && (
+            {metadataPanelTab === 'raw' && (
               <div className="mb-4">
                 <h3 className="text-sm font-medium text-gray-500 mb-2 font-macan">Raw Metadata</h3>
                 <div className="bg-gray-100 p-3 rounded">
@@ -157,6 +155,6 @@ export function MetadataPanel() {
           </>
         )}
       </div>
-    </section>
+    </aside>
   );
 }
