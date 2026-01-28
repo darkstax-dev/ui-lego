@@ -71,14 +71,14 @@ export function MetadataPanel() {
 
       <div className="flex-1 overflow-auto" style={{ padding: '24px 16px' }}>
         {!selectedNode ? (
-          <div className="text-sm text-gray-500 font-macan">Select a node in the graph to view metadata.</div>
+          <div className="text-sm font-macan" style={{ color: '#78797A' }}>Select a node in the graph to view metadata.</div>
         ) : (
           <>
             {metadataPanelTab === 'metadata' && (
               <>
                 <div className="mb-4">
-                  <h3 className="text-sm font-medium text-gray-500 mb-2 font-macan">Overview</h3>
-                  <div className="bg-gray-100 p-3 rounded space-y-2">
+                  <h3 className="text-sm font-medium mb-2 font-macan-mono uppercase" style={{ color: '#78797A', fontSize: '12px', fontWeight: 600, letterSpacing: '0.1em' }}>Overview</h3>
+                  <div className="p-3 space-y-2" style={{ backgroundColor: '#DFDFDF', border: '1px solid #C8C8C8' }}>
                     <div className="flex items-start gap-2">
                       <span className="text-xs uppercase tracking-wide text-gray-500 font-macan">ID</span>
                       <span className="text-sm font-macan-mono text-blue-dark-950 break-all">{selectedNode.id}</span>
