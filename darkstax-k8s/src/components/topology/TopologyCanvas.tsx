@@ -230,6 +230,7 @@ export function TopologyCanvas() {
     layoutMode,
     detailLanesExpanded,
     focusAggregateId,
+    setFocusAggregate,
   } = useUIStore();
   const { nodes, groups, setNodes, setGroups, toggleGroupCollapse } = useTopologyStore();
   const scrollRef = useRef<HTMLDivElement | null>(null);
@@ -692,13 +693,8 @@ export function TopologyCanvas() {
   }, []);
 
   const onNodeClick = (node: K8sNodeData) => {
-    if (node.id === 'dc-01') {
-      const productionNode = nodes.find((n) => n.id === 'ns-production');
-      if (productionNode) {
-        setSelectedNode(productionNode);
-        openMetadataPanel(productionNode);
-        return;
-      }
+    if (node.category === 'aggregate') {
+      setFocusAggregate(node.id);
     }
 
     setSelectedNode(node);
