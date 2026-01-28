@@ -6,8 +6,10 @@ interface UIStore {
   selectedNode: K8sNodeData | null;
   setSelectedNode: (node: K8sNodeData | null) => void;
   clearSelection: () => void;
-  openMetadataPanel: (node?: K8sNodeData) => void;
+  openMetadataPanel: (node?: K8sNodeData, tab?: 'metadata' | 'raw') => void;
   closeMetadataPanel: () => void;
+  metadataPanelTab: 'metadata' | 'raw';
+  setMetadataPanelTab: (tab: 'metadata' | 'raw') => void;
 
   // Focus mode (aggregate)
   focusAggregateId: string | null;
