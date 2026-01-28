@@ -1,6 +1,10 @@
 @import url('../../tokens.css');
 
-.taskdrawer { display: flex; flex-direction: column; gap: var(--sds-size-space-400); }
+.taskdrawer {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
 .taskdrawer-tabs { display: flex; gap: 0; }
 .taskdrawer-tab {
   background: transparent;
