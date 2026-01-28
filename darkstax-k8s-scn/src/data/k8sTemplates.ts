@@ -72,33 +72,33 @@ export const k8sResourceTemplates: K8sResourceTemplate[] = [
     description: 'Multus CNI'
   },
   
-  // Config and Storage
+  // Config
   {
     id: 'tpl-secret',
     type: 'secret',
     label: 'Secret',
-    category: 'config-storage',
+    category: 'config',
     description: 'Secret resource'
   },
   {
     id: 'tpl-configmap',
     type: 'configmap',
     label: 'ConfigMap',
-    category: 'config-storage',
+    category: 'config',
     description: 'ConfigMap resource'
   },
   {
     id: 'tpl-pv',
     type: 'persistentvolume',
     label: 'PersistentVolume',
-    category: 'config-storage',
+    category: 'storage',
     description: 'PersistentVolume resource'
   },
   {
     id: 'tpl-pvc',
     type: 'persistentvolumeclaim',
     label: 'PVC',
-    category: 'config-storage',
+    category: 'storage',
     description: 'PersistentVolumeClaim resource'
   },
 ];
