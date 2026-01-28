@@ -1,12 +1,27 @@
 import { useState } from 'react';
+import { useState } from 'react';
+import { ChevronUp, X } from 'lucide-react';
 import { useUIStore } from '../../store/uiStore';
 
 export function MetadataPanel() {
-  const { selectedNode } = useUIStore();
+  const { selectedNode, metadataPanelOpen, toggleMetadataPanel, closeMetadataPanel } = useUIStore();
   const [activeTab, setActiveTab] = useState<'metadata' | 'raw'>('metadata');
 
+  if (!metadataPanelOpen) {
+    return (
+      <button
+        type="button"
+        className="absolute bottom-4 left-1/2 -translate-x-1/2 z-30 inline-flex items-center gap-2 rounded-full bg-white/90 border border-gray-300 px-4 py-2 text-sm font-macan text-blue-dark-950 shadow"
+        onClick={toggleMetadataPanel}
+      >
+        <ChevronUp className="w-4 h-4" />
+        Details
+      </button>
+    );
+  }
+
   return (
-    <section className="bg-white border-t border-gray-200 shadow-[0px_-4px_20px_-10px_rgba(12,12,13,0.2)]">
+    <section className="absolute bottom-0 left-0 right-0 z-30 bg-white border-t border-gray-200 shadow-[0px_-4px_20px_-10px_rgba(12,12,13,0.2)]">
       <div className="flex items-center justify-between px-4 h-12 border-b border-gray-200">
         <div className="flex items-center gap-4 text-sm font-macan text-blue-dark-950">
           <button
@@ -26,7 +41,17 @@ export function MetadataPanel() {
             Raw
           </button>
         </div>
-        <span className="text-xs text-gray-500 font-macan">Details</span>
+        <div className="flex items-center gap-3">
+          <span className="text-xs text-gray-500 font-macan">Details</span>
+          <button
+            type="button"
+            className="w-8 h-8 inline-flex items-center justify-center rounded hover:bg-gray-100"
+            onClick={closeMetadataPanel}
+            aria-label="Close details panel"
+          >
+            <X className="w-4 h-4 text-gray-600" />
+          </button>
+        </div>
       </div>
 
       <div className="h-64 overflow-auto p-4">
