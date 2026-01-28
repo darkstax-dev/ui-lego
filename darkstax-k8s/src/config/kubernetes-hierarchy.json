@@ -67,7 +67,7 @@
       "resourceTypes": ["service", "ingress"],
       "laneConfig": {
         "display": true,
-        "height": 200,
+        "height": "auto",
         "order": 2
       },
       "color": "#00D1B2",
@@ -80,21 +80,34 @@
       "resourceTypes": ["multus"],
       "laneConfig": {
         "display": true,
-        "height": 200,
+        "height": "auto",
         "order": 3
       },
       "color": "#F38181",
       "icon": "wifi"
     },
     {
-      "id": "config-storage",
-      "label": "Config and Storage",
-      "description": "Configuration and persistent storage resources",
-      "resourceTypes": ["configmap", "secret", "persistentvolume", "persistentvolumeclaim"],
+      "id": "storage",
+      "label": "Storage",
+      "description": "Persistent storage resources",
+      "resourceTypes": ["persistentvolume", "persistentvolumeclaim"],
       "laneConfig": {
         "display": true,
         "height": "auto",
         "order": 4
+      },
+      "color": "#AA96DA",
+      "icon": "database"
+    },
+    {
+      "id": "config",
+      "label": "Config",
+      "description": "Configuration resources",
+      "resourceTypes": ["configmap", "secret"],
+      "laneConfig": {
+        "display": true,
+        "height": "auto",
+        "order": 5
       },
       "color": "#AA96DA",
       "icon": "database"
@@ -111,6 +124,37 @@
         "type": "property-match",
         "ownerProperty": "Type",
         "ownerValue": "datacenter",
+        "memberProperty": "ParentAggregate",
+        "memberValue": "${ownerId}"
+      },
+      "hierarchyLevel": 0,
+      "collapsible": true,
+      "defaultCollapsed": true,
+      "style": {
+        "fillColor": "rgba(78, 205, 196, 0.04)",
+        "strokeColor": "rgba(78, 205, 196, 0.25)",
+        "strokeWidth": 2,
+        "strokeDashArray": "10, 5",
+        "borderRadius": 26,
+        "padding": 30,
+        "labelPosition": "top-left",
+        "labelStyle": {
+          "fontSize": 13,
+          "fontWeight": 600,
+          "color": "#2C3E50"
+        }
+      }
+    },
+    {
+      "id": "group-by-mobiletower",
+      "name": "Group Resources by Mobile Tower",
+      "description": "Group resources under their parent mobile tower",
+      "enabled": true,
+      "priority": 0,
+      "criteria": {
+        "type": "property-match",
+        "ownerProperty": "Type",
+        "ownerValue": "mobiletower",
         "memberProperty": "ParentAggregate",
         "memberValue": "${ownerId}"
       },

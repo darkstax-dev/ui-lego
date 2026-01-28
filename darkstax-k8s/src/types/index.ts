@@ -19,7 +19,8 @@ export type K8sResourceCategory =
   | 'load'
   | 'service'
   | 'network'
-  | 'config-storage'
+  | 'storage'
+  | 'config'
   | 'aggregate';
 
 export interface K8sResourceTemplate {

@@ -229,6 +229,9 @@ export function TopologyCanvas() {
     selectedNode,
     layoutMode,
     detailLanesExpanded,
+    focusAggregateId,
+    setFocusAggregate,
+    clearFocus,
   } = useUIStore();
   const { nodes, groups, setNodes, setGroups, toggleGroupCollapse } = useTopologyStore();
   const scrollRef = useRef<HTMLDivElement | null>(null);
@@ -238,6 +241,10 @@ export function TopologyCanvas() {
     Array<{ id: string; d: string; fromId: string; toId: string }>
   >([]);
   const [contextMenu, setContextMenu] = useState<null | { x: number; y: number; nodeId: string }>(null);
+  const [zoom, setZoom] = useState(1);
+  const [viewportHeight, setViewportHeight] = useState(0);
+  const [showShortcuts, setShowShortcuts] = useState(false);
+  const [showJumpToast, setShowJumpToast] = useState(false);
 
   useEffect(() => {
     const scenarioGroups =
@@ -247,6 +254,18 @@ export function TopologyCanvas() {
     setNodes(kubernetesAggregateWorkloadsScenario.nodes);
     setGroups(scenarioGroups);
   }, [setNodes, setGroups]);
+
+  useLayoutEffect(() => {
+    const el = scrollRef.current;
+    if (!el) return;
+
+    const update = () => setViewportHeight(el.clientHeight);
+    update();
+
+    const ro = new ResizeObserver(update);
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, []);
 
   const isHiddenByCollapsedGroup = useMemo(() => {
     const collapsedGroups = groups.filter((g) => g.collapsed);
@@ -268,6 +287,62 @@ export function TopologyCanvas() {
     return filteredNodes.filter((n) => !isHiddenByCollapsedGroup(n.id));
   }, [filteredNodes, isHiddenByCollapsedGroup]);
 
+  const nodeById = useMemo(() => {
+    return new Map(filteredNodes.map((n) => [n.id, n] as const));
+  }, [filteredNodes]);
+
+  const groupTree = useMemo(() => buildGroupTree(groups), [groups]);
+
+  const focusedNodeIds = useMemo(() => {
+    if (!focusAggregateId) return null;
+
+    const focused = new Set<string>();
+    focused.add(focusAggregateId);
+
+    const focusNode = nodeById.get(focusAggregateId);
+    if (focusNode?.connections) {
+      for (const targetId of focusNode.connections) {
+        const target = nodeById.get(targetId);
+        if (target?.category === 'aggregate') {
+          focused.add(targetId);
+        }
+      }
+    }
+
+    const visitedOwners = new Set<string>();
+    const queue: string[] = [focusAggregateId];
+
+    while (queue.length > 0) {
+      const ownerId = queue.shift();
+      if (!ownerId) continue;
+      if (visitedOwners.has(ownerId)) continue;
+      visitedOwners.add(ownerId);
+
+      const group = groupTree.byOwnerId.get(ownerId);
+      if (!group) continue;
+
+      for (const memberId of group.memberIds) {
+        if (focused.has(memberId)) continue;
+        focused.add(memberId);
+        if (groupTree.byOwnerId.has(memberId)) {
+          queue.push(memberId);
+        }
+      }
+    }
+
+    return focused;
+  }, [focusAggregateId, groupTree.byOwnerId, nodeById]);
+
+  const hierarchyVisibleNodeIds = useMemo(() => {
+    if (layoutMode !== 'hierarchy') return null;
+
+    if (focusAggregateId && focusedNodeIds) {
+      return focusedNodeIds;
+    }
+
+    return new Set(filteredNodes.filter((n) => n.category === 'aggregate').map((n) => n.id));
+  }, [filteredNodes, focusAggregateId, focusedNodeIds, layoutMode]);
+
   const layoutNodes = useMemo(() => {
     if (layoutMode === 'tree') {
       return applyOwnershipTreeLayout(renderedNodes, groups, { nodeWidth: 120, nodeHeight: 80, spacing: 60 });
@@ -276,14 +351,15 @@ export function TopologyCanvas() {
       return applyCircularLayout(renderedNodes);
     }
 
-    // In lane-based hierarchy mode, the DOM visibility is controlled by lane paging + group expansion.
-    // Do not hide nodes via collapsed groups here, otherwise links won't render for visible nodes.
+    // In lane-based hierarchy mode, DOM visibility is controlled by lane paging + group expansion.
+    // We still scope to the current "focus" subset so we don't try to render connections for thousands of hidden nodes.
     if (layoutMode === 'hierarchy') {
-      return filteredNodes;
+      if (!hierarchyVisibleNodeIds) return filteredNodes;
+      return filteredNodes.filter((node) => hierarchyVisibleNodeIds.has(node.id));
     }
 
     return renderedNodes;
-  }, [filteredNodes, layoutMode, renderedNodes, groups]);
+  }, [filteredNodes, hierarchyVisibleNodeIds, layoutMode, renderedNodes, groups]);
 
   const layoutBounds = useMemo(() => {
     if (layoutMode === 'hierarchy') return null;
@@ -307,14 +383,6 @@ export function TopologyCanvas() {
       offsetY: minY - padding,
     };
   }, [layoutMode, layoutNodes]);
-
-  const nodeById = useMemo(() => {
-    return new Map(filteredNodes.map((n) => [n.id, n] as const));
-  }, [filteredNodes]);
-
-  const groupTree = useMemo(() => buildGroupTree(groups), [groups]);
-
-
 
   const computeConnections = () => {
     const svgEl = svgRef.current;
@@ -503,7 +571,7 @@ export function TopologyCanvas() {
           }
 
           // Keep aggregate->workload controller as a fallback (in case ownership grouping isn't present)
-          // but avoid connecting aggregates directly to services/network/config-storage.
+          // but avoid connecting aggregates directly to services/network/storage/config.
           if (!isWorkloadController(target)) return;
 
           const key = `${node.id}->${targetId}`;
@@ -566,7 +634,7 @@ export function TopologyCanvas() {
         cancelAnimationFrame(rafRef.current);
       }
     };
-  }, [layoutNodes, groups, filters, layoutMode, detailLanesExpanded]);
+  }, [layoutNodes, groups, filters, layoutMode, detailLanesExpanded, zoom]);
 
   useEffect(() => {
     const el = scrollRef.current;
@@ -608,8 +676,48 @@ export function TopologyCanvas() {
     };
 
     const onKeyDown = (ev: KeyboardEvent) => {
+      const target = ev.target as HTMLElement | null;
+      const isTypingTarget =
+        !!target &&
+        (target.tagName === 'INPUT' || target.tagName === 'TEXTAREA' || (target as HTMLElement).isContentEditable);
+
+      if (isTypingTarget) return;
+
       if (ev.key === 'Escape') {
         setContextMenu(null);
+        setShowShortcuts(false);
+        clearFocus();
+        return;
+      }
+
+      if (ev.shiftKey && ev.key === '?') {
+        ev.preventDefault();
+        setShowShortcuts(true);
+        return;
+      }
+
+      if ((ev.ctrlKey || ev.metaKey) && ev.key.toLowerCase() === 'k') {
+        ev.preventDefault();
+        setShowJumpToast(true);
+        window.setTimeout(() => setShowJumpToast(false), 1200);
+        return;
+      }
+
+      if (ev.key === '+' || ev.key === '=') {
+        ev.preventDefault();
+        setZoom((v) => Math.min(2, Number((v + 0.1).toFixed(2))));
+        return;
+      }
+
+      if (ev.key === '-') {
+        ev.preventDefault();
+        setZoom((v) => Math.max(0.5, Number((v - 0.1).toFixed(2))));
+        return;
+      }
+
+      if (ev.key === '0') {
+        ev.preventDefault();
+        setZoom(1);
       }
     };
 
@@ -641,18 +749,21 @@ export function TopologyCanvas() {
     };
   }, []);
 
-  const onNodeClick = (node: K8sNodeData) => {
-    if (node.id === 'dc-01') {
-      const productionNode = nodes.find((n) => n.id === 'ns-production');
-      if (productionNode) {
-        setSelectedNode(productionNode);
-        openMetadataPanel(productionNode);
-        return;
-      }
+  const onNodeSelect = (node: K8sNodeData) => {
+    if (node.category === 'aggregate') {
+      setFocusAggregate(node.id);
     }
 
     setSelectedNode(node);
-    openMetadataPanel(node);
+  };
+
+  const openNodeDetails = (node: K8sNodeData) => {
+    if (node.category === 'aggregate') {
+      setFocusAggregate(node.id);
+    }
+
+    setSelectedNode(node);
+    openMetadataPanel(node, 'metadata');
   };
 
   const renderGroup = (group: K8sNodeGroup, depth: number) => {
@@ -703,7 +814,7 @@ export function TopologyCanvas() {
             </button>
           )}
 
-          <NodeTile node={ownerNode} onClick={onNodeClick} />
+          <NodeTile node={ownerNode} onClick={onNodeSelect} />
 
           <div className="text-[10px] text-gray-600 font-macan">
             {group.memberIds.length}m{group.collapsed && ' ✓'}
@@ -728,12 +839,12 @@ export function TopologyCanvas() {
                         clusterKey={`${group.id}:${type}`}
                         nodeType={type}
                         nodes={nodesForType}
-                        onNodeClick={onNodeClick}
+                        onNodeClick={onNodeSelect}
                       />,
                     ];
                   }
 
-                  return nodesForType.map((node) => <NodeTile key={node.id} node={node} onClick={onNodeClick} />);
+                  return nodesForType.map((node) => <NodeTile key={node.id} node={node} onClick={onNodeSelect} />);
                 })}
               </div>
             )}
@@ -751,18 +862,24 @@ export function TopologyCanvas() {
   const nodesByCategory = useMemo(() => {
     const grouped: Record<string, K8sNodeData[]> = {};
 
-    laneCategories.forEach(lane => {
-      grouped[lane.id] = filteredNodes.filter(
-        node => node.category === lane.id
-      );
+    const baseNodes =
+      layoutMode === 'hierarchy' && hierarchyVisibleNodeIds
+        ? filteredNodes.filter((node) => hierarchyVisibleNodeIds.has(node.id))
+        : filteredNodes;
+
+    laneCategories.forEach((lane) => {
+      grouped[lane.id] = baseNodes.filter((node) => node.category === lane.id);
     });
 
     return grouped;
-  }, [laneCategories, filteredNodes]);
+  }, [filteredNodes, hierarchyVisibleNodeIds, laneCategories, layoutMode]);
 
   return (
     <div ref={scrollRef} className="w-full h-full relative overflow-auto">
-      <div className="w-full min-h-full bg-gray-300 relative p-5 pt-5">
+      <div
+        className="w-full min-h-full bg-gray-300 relative p-5 pt-5"
+        style={{ transform: `scale(${zoom})`, transformOrigin: '0 0' }}
+      >
         <div
           className="absolute inset-0 pointer-events-none opacity-25"
           style={{
@@ -799,6 +916,12 @@ export function TopologyCanvas() {
         {layoutMode === 'hierarchy' ? (
           <div className="relative z-10 flex flex-col">
             {laneCategories.map((lane) => {
+              // Overview mode: aggregate lane only.
+              if (lane.id !== 'aggregate' && !focusAggregateId) {
+                return null;
+              }
+
+              // Focus mode: detail lanes controlled by the expanded flag.
               if (lane.id !== 'aggregate' && !detailLanesExpanded) {
                 return null;
               }
@@ -810,13 +933,24 @@ export function TopologyCanvas() {
                 return null;
               }
 
+              const laneHeight =
+                lane.id === 'aggregate'
+                  ? focusAggregateId
+                    ? 'auto'
+                    : Math.max(
+                        typeof lane.height === 'number' ? lane.height : 0,
+                        // Fill the visible canvas when aggregate is the only visible lane.
+                        viewportHeight > 0 ? viewportHeight / zoom - 40 : 0
+                      )
+                  : lane.height;
+
               return (
                 <HierarchicalLane
                   key={lane.id}
                   category={lane.id as any}
                   label={lane.label}
                   nodes={nodesInLane}
-                  height={lane.height}
+                  height={laneHeight}
                 />
               );
             })}
@@ -838,7 +972,7 @@ export function TopologyCanvas() {
                   left: (node.position?.x ?? 0) - (layoutBounds?.offsetX ?? 0),
                   top: (node.position?.y ?? 0) - (layoutBounds?.offsetY ?? 0),
                 }}
-                onClick={() => onNodeClick(node)}
+                onClick={() => onNodeSelect(node)}
               >
                 <KubernetesIconWrapper
                   type={node.type}
@@ -863,13 +997,44 @@ export function TopologyCanvas() {
               onClick={() => {
                 const node = nodeById.get(contextMenu.nodeId);
                 if (node) {
-                  onNodeClick(node);
+                  openNodeDetails(node);
                 }
                 setContextMenu(null);
               }}
             >
-              Open details
+              View details
             </button>
+          </div>
+        )}
+
+        {showJumpToast && (
+          <div className="fixed top-4 left-1/2 -translate-x-1/2 z-40 rounded bg-blue-dark-950 text-white px-3 py-2 text-sm font-macan shadow">
+            Jump to node: coming soon
+          </div>
+        )}
+
+        {showShortcuts && (
+          <div className="fixed inset-0 z-40 bg-black/40 flex items-center justify-center p-4">
+            <div className="w-full max-w-lg rounded-lg bg-white border border-gray-200 shadow-xl">
+              <div className="flex items-center justify-between px-4 h-12 border-b border-gray-200">
+                <div className="text-sm font-macan text-blue-dark-950">Keyboard shortcuts</div>
+                <button
+                  type="button"
+                  className="text-sm font-macan text-gray-600 hover:text-gray-900"
+                  onClick={() => setShowShortcuts(false)}
+                >
+                  Close
+                </button>
+              </div>
+              <div className="p-4 text-sm text-blue-dark-950 font-macan space-y-2">
+                <div className="flex justify-between gap-4"><span>Esc</span><span className="text-gray-600">Back to overview</span></div>
+                <div className="flex justify-between gap-4"><span>Shift + ?</span><span className="text-gray-600">Show this dialog</span></div>
+                <div className="flex justify-between gap-4"><span>+</span><span className="text-gray-600">Zoom in</span></div>
+                <div className="flex justify-between gap-4"><span>-</span><span className="text-gray-600">Zoom out</span></div>
+                <div className="flex justify-between gap-4"><span>0</span><span className="text-gray-600">Reset zoom</span></div>
+                <div className="flex justify-between gap-4"><span>Ctrl/Cmd + K</span><span className="text-gray-600">Jump to node (coming soon)</span></div>
+              </div>
+            </div>
           </div>
         )}
       </div>

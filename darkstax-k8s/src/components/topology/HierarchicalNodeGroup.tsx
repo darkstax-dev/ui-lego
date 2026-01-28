@@ -2,7 +2,6 @@ import type { MouseEvent } from 'react';
 import { K8sNodeData } from '../../types';
 import { KubernetesIconWrapper } from '../ui/KubernetesIconWrapper';
 import { useUIStore } from '../../store/uiStore';
-import { useTopologyStore } from '../../store/topologyStore';
 
 interface HierarchicalNodeGroupProps {
   parentNode: K8sNodeData;
@@ -24,8 +23,7 @@ export function HierarchicalNodeGroup({
   onParentClick,
   onParentDoubleClick,
 }: HierarchicalNodeGroupProps) {
-  const { setSelectedNode, openMetadataPanel } = useUIStore();
-  const { nodes } = useTopologyStore();
+  const { setSelectedNode } = useUIStore();
 
   const aggregatedChildCount = memberCount ?? childNodes.length;
 
@@ -35,12 +33,7 @@ export function HierarchicalNodeGroup({
     if (onParentClick) {
       onParentClick(parentNode);
     } else {
-
-      const nextNode =
-        parentNode.id === 'dc-01' ? nodes.find((n) => n.id === 'ns-production') ?? parentNode : parentNode;
-
-      setSelectedNode(nextNode);
-      openMetadataPanel(nextNode);
+      setSelectedNode(parentNode);
     }
 
     if (onToggleCollapse && aggregatedChildCount > 0) {
@@ -50,7 +43,6 @@ export function HierarchicalNodeGroup({
 
   const handleChildClick = (node: K8sNodeData) => {
     setSelectedNode(node);
-    openMetadataPanel(node);
   };
 
   return (

@@ -77,11 +77,14 @@ test.describe('Aggregate → Kubernetes hierarchy relationship', () => {
 
     // Auto-paging should bring linked nodes into view.
     const networkLane = page.getByTestId('lane-network');
-    const configLane = page.getByTestId('lane-config-storage');
+    const storageLane = page.getByTestId('lane-storage');
+    const configLane = page.getByTestId('lane-config');
     await expect(networkLane).toBeVisible();
+    await expect(storageLane).toBeVisible();
     await expect(configLane).toBeVisible();
 
     await expect(networkLane.locator(`[data-node-id="multus-${suffix}-a"]`)).toBeVisible();
+    await expect(storageLane.locator(`[data-node-id="pvc-${suffix}"]`)).toBeVisible();
     await expect(configLane.locator(`[data-node-id="configmap-${suffix}"]`)).toBeVisible();
 
     // Connection paths should be computed for the now-visible linked nodes.

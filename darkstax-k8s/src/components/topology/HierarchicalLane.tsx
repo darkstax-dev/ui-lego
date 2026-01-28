@@ -15,7 +15,8 @@ interface HierarchicalLaneProps {
   height: number | 'auto';
 }
 
-const LANE_MAX_ROWS = 4;
+const LANE_MAX_ROWS_DEFAULT = 4;
+const LANE_MAX_ROWS_COMPACT = 2;
 // Approximate visual width of a node tile (icon + label) used to estimate how many fit per row.
 const TILE_EST_WIDTH_PX = 96;
 const TILE_GAP_PX = 32; // gap-8
@@ -24,11 +25,11 @@ export function HierarchicalLane({ category, label, nodes, height }: Hierarchica
   const {
     selectedNode,
     setSelectedNode,
-    openMetadataPanel,
-    expandDetailLanes,
-    collapseDetailLanes,
+    setFocusAggregate,
+    clearFocus,
+    focusAggregateId,
   } = useUIStore();
-  const { nodes: topologyNodes, groups, toggleGroupCollapse } = useTopologyStore();
+  const { groups, toggleGroupCollapse } = useTopologyStore();
   const { setNodeRef, isOver } = useDroppable({
     id: `lane-${category}`,
     data: { category },
@@ -77,21 +78,15 @@ export function HierarchicalLane({ category, label, nodes, height }: Hierarchica
     // Delay the single-click handler so a double-click can cancel it.
     clearAggregateClickTimeout();
     clickTimeoutRef.current = window.setTimeout(() => {
-      const nextNode =
-        node.id === 'dc-01'
-          ? topologyNodes.find((n) => n.id === 'ns-production') ?? node
-          : node;
-
-      setSelectedNode(nextNode);
-      openMetadataPanel(nextNode);
-      expandDetailLanes();
+      setFocusAggregate(node.id);
+      setSelectedNode(node);
       clickTimeoutRef.current = null;
     }, 200);
   };
 
   const handleAggregateNodeDoubleClick = () => {
     clearAggregateClickTimeout();
-    collapseDetailLanes();
+    clearFocus();
   };
 
   // Organize nodes into parent-child hierarchy
@@ -138,13 +133,39 @@ export function HierarchicalLane({ category, label, nodes, height }: Hierarchica
     | { kind: 'group'; node: K8sNodeData }
     | { kind: 'node'; node: K8sNodeData };
 
-  const topLevelItems: TopLevelItem[] = useMemo(
-    () => [
+  const topLevelItems: TopLevelItem[] = useMemo(() => {
+    const items: TopLevelItem[] = [
       ...parentNodes.map((node) => ({ kind: 'group' as const, node })),
       ...standaloneNodes.map((node) => ({ kind: 'node' as const, node })),
-    ],
-    [parentNodes, standaloneNodes]
-  );
+    ];
+
+    if (!isAggregateLane) return items;
+
+    const typeRank = (type: string) => {
+      if (type === 'datacenter') return 0;
+      if (type === 'mobiletower') return 1;
+      return 2;
+    };
+
+    const numberSuffix = (value: string) => {
+      const match = value.match(/(\d+)(?!.*\d)/);
+      return match ? Number.parseInt(match[1], 10) : Number.NaN;
+    };
+
+    return items.slice().sort((a, b) => {
+      const aNum = numberSuffix(a.node.id);
+      const bNum = numberSuffix(b.node.id);
+
+      if (!Number.isNaN(aNum) && !Number.isNaN(bNum) && aNum !== bNum) {
+        return aNum - bNum;
+      }
+
+      const rankDiff = typeRank(a.node.type) - typeRank(b.node.type);
+      if (rankDiff !== 0) return rankDiff;
+
+      return (a.node.label ?? a.node.id).localeCompare(b.node.label ?? b.node.id);
+    });
+  }, [isAggregateLane, parentNodes, standaloneNodes]);
 
   const aggregateFilterOptions: MultiSelectOption[] = useMemo(() => {
     if (!isAggregateLane) return [];
@@ -213,10 +234,19 @@ export function HierarchicalLane({ category, label, nodes, height }: Hierarchica
     );
   }, [laneContentWidth]);
 
+  const laneMaxRows = useMemo(() => {
+    if (isAggregateLane && focusAggregateId) return 1;
+
+    // Service + Network lanes should paginate after 2 rows.
+    if (category === 'service' || category === 'network') return LANE_MAX_ROWS_COMPACT;
+
+    return LANE_MAX_ROWS_DEFAULT;
+  }, [category, focusAggregateId, isAggregateLane]);
+
   const pageSize = useMemo(() => {
     if (itemsPerRow <= 0) return 0;
-    return itemsPerRow * LANE_MAX_ROWS;
-  }, [itemsPerRow]);
+    return itemsPerRow * laneMaxRows;
+  }, [itemsPerRow, laneMaxRows]);
 
   const [pageIndex, setPageIndex] = useState(0);
 
@@ -343,7 +373,7 @@ export function HierarchicalLane({ category, label, nodes, height }: Hierarchica
       <div
         ref={setLaneContentNodeRef}
         data-testid={`lane-drop-${category}`}
-        className={`flex-1 p-4 relative transition-colors ${
+        className={`flex-1 p-4 relative transition-colors flex flex-col ${
           isOver ? 'bg-blue-100 border-2 border-blue-500 border-dashed' : ''
         } ${laneHasPaging ? 'pb-14' : ''}`}
       >
@@ -397,64 +427,67 @@ export function HierarchicalLane({ category, label, nodes, height }: Hierarchica
           </div>
         )}
 
-        {nodes.length === 0 ? (
-          <div className="h-full flex items-center justify-center text-gray-500 font-macan text-sm">
-            Drop {category} resources here
-          </div>
-        ) : (
-          <div className="flex flex-wrap gap-8">
-            {visibleItems.map((item) => {
-              if (item.kind === 'group') {
-                const parentNode = item.node;
-                const group = groups.find((g) => g.ownerId === parentNode.id);
-                const memberCount = group?.memberIds.length ?? 0;
+        <div className="flex-1 flex items-center justify-center">
+          {nodes.length === 0 ? (
+            <div className="flex items-center justify-center text-gray-500 font-macan text-sm">
+              Drop {category} resources here
+            </div>
+          ) : (
+            <div className="flex flex-wrap gap-8 justify-center">
+              {visibleItems.map((item) => {
+                if (item.kind === 'group') {
+                  const parentNode = item.node;
+                  const group = groups.find((g) => g.ownerId === parentNode.id);
+                  const memberCount = group?.memberIds.length ?? 0;
 
+                  return (
+                    <HierarchicalNodeGroup
+                      key={parentNode.id}
+                      parentNode={parentNode}
+                      childNodes={childNodesByParent.get(parentNode.id) || []}
+                      memberCount={memberCount}
+                      collapsed={!!group?.collapsed}
+                      onToggleCollapse={
+                        memberCount > 0 && group ? () => toggleGroupCollapse(group.id) : undefined
+                      }
+                      onParentClick={isAggregateLane ? handleAggregateNodeClick : undefined}
+                      onParentDoubleClick={isAggregateLane ? handleAggregateNodeDoubleClick : undefined}
+                    />
+                  );
+                }
+
+                const node = item.node;
                 return (
-                  <HierarchicalNodeGroup
-                    key={parentNode.id}
-                    parentNode={parentNode}
-                    childNodes={childNodesByParent.get(parentNode.id) || []}
-                    memberCount={memberCount}
-                    collapsed={!!group?.collapsed}
-                    onToggleCollapse={memberCount > 0 && group ? () => toggleGroupCollapse(group.id) : undefined}
-                    onParentClick={isAggregateLane ? handleAggregateNodeClick : undefined}
-                    onParentDoubleClick={isAggregateLane ? handleAggregateNodeDoubleClick : undefined}
-                  />
+                  <div
+                    key={node.id}
+                    data-node-id={node.id}
+                    className="cursor-pointer transition-transform hover:scale-105"
+                    onClick={() => {
+                      if (isAggregateLane) {
+                        handleAggregateNodeClick(node);
+                        return;
+                      }
+
+                      setSelectedNode(node);
+                    }}
+                    onDoubleClick={(e) => {
+                      if (!isAggregateLane) return;
+                      e.stopPropagation();
+                      handleAggregateNodeDoubleClick();
+                    }}
+                  >
+                    <KubernetesIconWrapper
+                      type={node.type}
+                      status={node.status}
+                      label={node.label}
+                      showIndicator={false}
+                    />
+                  </div>
                 );
-              }
-
-              const node = item.node;
-              return (
-                <div
-                  key={node.id}
-                  data-node-id={node.id}
-                  className="cursor-pointer transition-transform hover:scale-105"
-                  onClick={() => {
-                    if (isAggregateLane) {
-                      handleAggregateNodeClick(node);
-                      return;
-                    }
-
-                    setSelectedNode(node);
-                    openMetadataPanel(node);
-                  }}
-                  onDoubleClick={(e) => {
-                    if (!isAggregateLane) return;
-                    e.stopPropagation();
-                    handleAggregateNodeDoubleClick();
-                  }}
-                >
-                  <KubernetesIconWrapper
-                    type={node.type}
-                    status={node.status}
-                    label={node.label}
-                    showIndicator={false}
-                  />
-                </div>
-              );
-            })}
-          </div>
-        )}
+              })}
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );
