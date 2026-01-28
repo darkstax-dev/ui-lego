@@ -43,6 +43,7 @@ export default {
         // Semantic colors
         'surface-default': 'var(--surface-default)',
         'surface-card': 'var(--surface-card)',
+        'surface-subtle': 'var(--surface-subtle)',
         'text-primary': 'var(--text-blue-main)',
         'text-secondary': 'var(--text-gray-main)',
         'nav-bg': 'var(--nav-main-bg)',
