@@ -138,13 +138,39 @@ export function HierarchicalLane({ category, label, nodes, height }: Hierarchica
     | { kind: 'group'; node: K8sNodeData }
     | { kind: 'node'; node: K8sNodeData };
 
-  const topLevelItems: TopLevelItem[] = useMemo(
-    () => [
+  const topLevelItems: TopLevelItem[] = useMemo(() => {
+    const items: TopLevelItem[] = [
       ...parentNodes.map((node) => ({ kind: 'group' as const, node })),
       ...standaloneNodes.map((node) => ({ kind: 'node' as const, node })),
-    ],
-    [parentNodes, standaloneNodes]
-  );
+    ];
+
+    if (!isAggregateLane) return items;
+
+    const typeRank = (type: string) => {
+      if (type === 'datacenter') return 0;
+      if (type === 'mobiletower') return 1;
+      return 2;
+    };
+
+    const numberSuffix = (value: string) => {
+      const match = value.match(/(\d+)(?!.*\d)/);
+      return match ? Number.parseInt(match[1], 10) : Number.NaN;
+    };
+
+    return items.slice().sort((a, b) => {
+      const aNum = numberSuffix(a.node.id);
+      const bNum = numberSuffix(b.node.id);
+
+      if (!Number.isNaN(aNum) && !Number.isNaN(bNum) && aNum !== bNum) {
+        return aNum - bNum;
+      }
+
+      const rankDiff = typeRank(a.node.type) - typeRank(b.node.type);
+      if (rankDiff !== 0) return rankDiff;
+
+      return (a.node.label ?? a.node.id).localeCompare(b.node.label ?? b.node.id);
+    });
+  }, [isAggregateLane, parentNodes, standaloneNodes]);
 
   const aggregateFilterOptions: MultiSelectOption[] = useMemo(() => {
     if (!isAggregateLane) return [];
