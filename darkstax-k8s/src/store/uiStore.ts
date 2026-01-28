@@ -83,16 +83,20 @@ export const useUIStore = create<UIStore>((set) => ({
     set({
       selectedNode: null,
       metadataPanelOpen: false,
+      metadataPanelTab: 'metadata',
     }),
-  openMetadataPanel: (node) =>
+  openMetadataPanel: (node, tab = 'metadata') =>
     set((state) => ({
       selectedNode: node ?? state.selectedNode,
       metadataPanelOpen: true,
+      metadataPanelTab: tab,
     })),
   closeMetadataPanel: () =>
     set({
       metadataPanelOpen: false,
     }),
+  metadataPanelTab: 'metadata',
+  setMetadataPanelTab: (tab) => set({ metadataPanelTab: tab }),
 
   // Focus mode (aggregate)
   focusAggregateId: null,
@@ -107,6 +111,7 @@ export const useUIStore = create<UIStore>((set) => ({
       detailLanesExpanded: false,
       selectedNode: null,
       metadataPanelOpen: false,
+      metadataPanelTab: 'metadata',
     }),
 
   // Panel states
