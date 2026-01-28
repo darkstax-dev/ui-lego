@@ -1,6 +1,7 @@
 import { Menu, UserCircle } from 'lucide-react';
 import { SearchFilter } from '../controls/SearchFilter';
 import { LayoutSelector } from '../controls/LayoutSelector';
+import { ThemeToggle } from '../controls/ThemeToggle';
 
 export function AppHeader() {
   return (
@@ -24,6 +25,7 @@ export function AppHeader() {
         <div className="max-w-md w-full">
           <SearchFilter />
         </div>
+        <ThemeToggle />
         <button
           className="w-9 h-9 flex items-center justify-center rounded hover:bg-blue-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60"
           aria-label="User menu"
