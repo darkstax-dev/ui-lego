@@ -24,7 +24,6 @@ export function HierarchicalLane({ category, label, nodes, height }: Hierarchica
   const {
     selectedNode,
     setSelectedNode,
-    openMetadataPanel,
     setFocusAggregate,
     clearFocus,
   } = useUIStore();
@@ -79,7 +78,6 @@ export function HierarchicalLane({ category, label, nodes, height }: Hierarchica
     clickTimeoutRef.current = window.setTimeout(() => {
       setFocusAggregate(node.id);
       setSelectedNode(node);
-      openMetadataPanel(node);
       clickTimeoutRef.current = null;
     }, 200);
   };
@@ -457,7 +455,6 @@ export function HierarchicalLane({ category, label, nodes, height }: Hierarchica
                     }
 
                     setSelectedNode(node);
-                    openMetadataPanel(node);
                   }}
                   onDoubleClick={(e) => {
                     if (!isAggregateLane) return;
