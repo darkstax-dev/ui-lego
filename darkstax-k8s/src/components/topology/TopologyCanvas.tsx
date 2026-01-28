@@ -978,7 +978,7 @@ export function TopologyCanvas() {
                 setContextMenu(null);
               }}
             >
-              Open details
+              View details
             </button>
           </div>
         )}
