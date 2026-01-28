@@ -1,0 +1,155 @@
+# Page snapshot
+
+```yaml
+- generic [ref=e2]:
+  - main [ref=e7]:
+    - generic [ref=e9]:
+      - img
+      - generic [ref=e10]:
+        - generic [ref=e11]:
+          - generic [ref=e13]: Aggregate
+          - generic [ref=e14]:
+            - generic [ref=e18]:
+              - combobox "Filter aggregate…" [ref=e19]
+              - generic [ref=e20]:
+                - generic [ref=e21]: "0"
+                - button "Toggle dropdown" [ref=e22] [cursor=pointer]:
+                  - img [ref=e23]
+            - generic [ref=e26]:
+              - generic [ref=e29] [cursor=pointer]:
+                - generic [ref=e30]:
+                  - img [ref=e31]
+                  - img [ref=e33]
+                  - img [ref=e36]
+                  - generic [ref=e40]: "8"
+                - generic [ref=e41]: DC03
+              - generic [ref=e44] [cursor=pointer]:
+                - generic [ref=e45]:
+                  - img [ref=e46]
+                  - img [ref=e48]
+                  - img [ref=e51]
+                  - generic [ref=e54]: "10"
+                - generic [ref=e55]: Tower03
+        - generic [ref=e56]:
+          - generic [ref=e58]: Workload
+          - generic [ref=e62] [cursor=pointer]:
+            - generic [ref=e63]:
+              - img [ref=e64]
+              - img [ref=e66]
+              - img [ref=e69]
+            - generic [ref=e71]: diag-dc-03
+        - generic [ref=e72]:
+          - generic [ref=e74]: Service
+          - generic [ref=e78] [cursor=pointer]:
+            - generic [ref=e79]:
+              - img [ref=e80]
+              - img [ref=e82]
+              - img [ref=e85]
+            - generic [ref=e87]: svc-dc-03
+        - generic [ref=e88]:
+          - generic [ref=e90]: Network
+          - generic [ref=e92]:
+            - generic [ref=e94] [cursor=pointer]:
+              - generic [ref=e95]:
+                - img [ref=e96]
+                - img [ref=e98]
+                - img [ref=e101]
+              - generic [ref=e111]: net-a-dc-03
+            - generic [ref=e113] [cursor=pointer]:
+              - generic [ref=e114]:
+                - img [ref=e115]
+                - img [ref=e117]
+                - img [ref=e120]
+              - generic [ref=e130]: net-b-dc-03
+        - generic [ref=e131]:
+          - generic [ref=e133]: Storage
+          - generic [ref=e135]:
+            - generic [ref=e137] [cursor=pointer]:
+              - generic [ref=e138]:
+                - img [ref=e139]
+                - img [ref=e141]
+                - img [ref=e144]
+              - generic [ref=e146]: pvc-dc-03
+            - generic [ref=e148] [cursor=pointer]:
+              - generic [ref=e149]:
+                - img [ref=e150]
+                - img [ref=e152]
+                - img [ref=e155]
+              - generic [ref=e159]: pv-dc-03
+        - generic [ref=e160]:
+          - generic [ref=e162]: Config
+          - generic [ref=e164]:
+            - generic [ref=e166] [cursor=pointer]:
+              - generic [ref=e167]:
+                - img [ref=e168]
+                - img [ref=e170]
+                - img [ref=e173]
+              - generic [ref=e175]: cm-dc-03
+            - generic [ref=e177] [cursor=pointer]:
+              - generic [ref=e178]:
+                - img [ref=e179]
+                - img [ref=e181]
+                - img [ref=e184]
+              - generic [ref=e186]: secret-dc-03
+    - generic [ref=e187]:
+      - generic [ref=e188]:
+        - img [ref=e189]
+        - textbox "Search actions..." [ref=e192]
+      - generic [ref=e193]:
+        - button "Aggregate" [ref=e195]:
+          - generic [ref=e196]: Aggregate
+          - img [ref=e197]
+        - generic [ref=e200]:
+          - button "Kubernetes" [ref=e201]:
+            - generic [ref=e202]: Kubernetes
+            - img [ref=e203]
+          - generic [ref=e205]:
+            - button [ref=e206]:
+              - generic [ref=e208]:
+                - img [ref=e209]
+                - img [ref=e212]
+            - button [ref=e215]:
+              - generic [ref=e217]:
+                - img [ref=e218]
+                - img [ref=e221]
+            - button [ref=e223]:
+              - generic [ref=e225]:
+                - img [ref=e226]
+                - img [ref=e229]
+            - button [ref=e231]:
+              - generic [ref=e233]:
+                - img [ref=e234]
+                - img [ref=e237]
+            - button [ref=e244]:
+              - generic [ref=e246]:
+                - img [ref=e247]
+                - img [ref=e250]
+            - button [ref=e252]:
+              - generic [ref=e254]:
+                - img [ref=e255]
+                - img [ref=e258]
+            - button [ref=e261]:
+              - generic [ref=e263]:
+                - img [ref=e264]
+                - img [ref=e267]
+            - button [ref=e277]:
+              - generic [ref=e279]:
+                - img [ref=e280]
+                - img [ref=e283]
+            - button [ref=e285]:
+              - generic [ref=e287]:
+                - img [ref=e288]
+                - img [ref=e291]
+            - button [ref=e293]:
+              - generic [ref=e295]:
+                - img [ref=e296]
+                - img [ref=e299]
+            - button [ref=e303]:
+              - generic [ref=e305]:
+                - img [ref=e306]
+                - img [ref=e309]
+        - button "Templates" [ref=e313]:
+          - generic [ref=e314]: Templates
+          - img [ref=e315]
+  - status [ref=e317]
+```
