@@ -229,6 +229,7 @@ export function TopologyCanvas() {
     selectedNode,
     layoutMode,
     detailLanesExpanded,
+    focusAggregateId,
   } = useUIStore();
   const { nodes, groups, setNodes, setGroups, toggleGroupCollapse } = useTopologyStore();
   const scrollRef = useRef<HTMLDivElement | null>(null);
@@ -276,14 +277,15 @@ export function TopologyCanvas() {
       return applyCircularLayout(renderedNodes);
     }
 
-    // In lane-based hierarchy mode, the DOM visibility is controlled by lane paging + group expansion.
-    // Do not hide nodes via collapsed groups here, otherwise links won't render for visible nodes.
+    // In lane-based hierarchy mode, DOM visibility is controlled by lane paging + group expansion.
+    // We still scope to the current "focus" subset so we don't try to render connections for thousands of hidden nodes.
     if (layoutMode === 'hierarchy') {
-      return filteredNodes;
+      if (!hierarchyVisibleNodeIds) return filteredNodes;
+      return filteredNodes.filter((node) => hierarchyVisibleNodeIds.has(node.id));
     }
 
     return renderedNodes;
-  }, [filteredNodes, layoutMode, renderedNodes, groups]);
+  }, [filteredNodes, hierarchyVisibleNodeIds, layoutMode, renderedNodes, groups]);
 
   const layoutBounds = useMemo(() => {
     if (layoutMode === 'hierarchy') return null;
@@ -314,7 +316,55 @@ export function TopologyCanvas() {
 
   const groupTree = useMemo(() => buildGroupTree(groups), [groups]);
 
+  const focusedNodeIds = useMemo(() => {
+    if (!focusAggregateId) return null;
 
+    const focused = new Set<string>();
+    focused.add(focusAggregateId);
+
+    const focusNode = nodeById.get(focusAggregateId);
+    if (focusNode?.connections) {
+      for (const targetId of focusNode.connections) {
+        const target = nodeById.get(targetId);
+        if (target?.category === 'aggregate') {
+          focused.add(targetId);
+        }
+      }
+    }
+
+    const visitedOwners = new Set<string>();
+    const queue: string[] = [focusAggregateId];
+
+    while (queue.length > 0) {
+      const ownerId = queue.shift();
+      if (!ownerId) continue;
+      if (visitedOwners.has(ownerId)) continue;
+      visitedOwners.add(ownerId);
+
+      const group = groupTree.byOwnerId.get(ownerId);
+      if (!group) continue;
+
+      for (const memberId of group.memberIds) {
+        if (focused.has(memberId)) continue;
+        focused.add(memberId);
+        if (groupTree.byOwnerId.has(memberId)) {
+          queue.push(memberId);
+        }
+      }
+    }
+
+    return focused;
+  }, [focusAggregateId, groupTree.byOwnerId, nodeById]);
+
+  const hierarchyVisibleNodeIds = useMemo(() => {
+    if (layoutMode !== 'hierarchy') return null;
+
+    if (focusAggregateId && focusedNodeIds) {
+      return focusedNodeIds;
+    }
+
+    return new Set(filteredNodes.filter((n) => n.category === 'aggregate').map((n) => n.id));
+  }, [filteredNodes, focusAggregateId, focusedNodeIds, layoutMode]);
 
   const computeConnections = () => {
     const svgEl = svgRef.current;
@@ -751,14 +801,17 @@ export function TopologyCanvas() {
   const nodesByCategory = useMemo(() => {
     const grouped: Record<string, K8sNodeData[]> = {};
 
-    laneCategories.forEach(lane => {
-      grouped[lane.id] = filteredNodes.filter(
-        node => node.category === lane.id
-      );
+    const baseNodes =
+      layoutMode === 'hierarchy' && hierarchyVisibleNodeIds
+        ? filteredNodes.filter((node) => hierarchyVisibleNodeIds.has(node.id))
+        : filteredNodes;
+
+    laneCategories.forEach((lane) => {
+      grouped[lane.id] = baseNodes.filter((node) => node.category === lane.id);
     });
 
     return grouped;
-  }, [laneCategories, filteredNodes]);
+  }, [filteredNodes, hierarchyVisibleNodeIds, laneCategories, layoutMode]);
 
   return (
     <div ref={scrollRef} className="w-full h-full relative overflow-auto">
@@ -799,6 +852,12 @@ export function TopologyCanvas() {
         {layoutMode === 'hierarchy' ? (
           <div className="relative z-10 flex flex-col">
             {laneCategories.map((lane) => {
+              // Overview mode: aggregate lane only.
+              if (lane.id !== 'aggregate' && !focusAggregateId) {
+                return null;
+              }
+
+              // Focus mode: detail lanes controlled by the expanded flag.
               if (lane.id !== 'aggregate' && !detailLanesExpanded) {
                 return null;
               }
