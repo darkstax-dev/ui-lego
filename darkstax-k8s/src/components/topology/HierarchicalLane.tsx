@@ -25,10 +25,10 @@ export function HierarchicalLane({ category, label, nodes, height }: Hierarchica
     selectedNode,
     setSelectedNode,
     openMetadataPanel,
-    expandDetailLanes,
-    collapseDetailLanes,
+    setFocusAggregate,
+    clearFocus,
   } = useUIStore();
-  const { nodes: topologyNodes, groups, toggleGroupCollapse } = useTopologyStore();
+  const { groups, toggleGroupCollapse } = useTopologyStore();
   const { setNodeRef, isOver } = useDroppable({
     id: `lane-${category}`,
     data: { category },
@@ -77,21 +77,16 @@ export function HierarchicalLane({ category, label, nodes, height }: Hierarchica
     // Delay the single-click handler so a double-click can cancel it.
     clearAggregateClickTimeout();
     clickTimeoutRef.current = window.setTimeout(() => {
-      const nextNode =
-        node.id === 'dc-01'
-          ? topologyNodes.find((n) => n.id === 'ns-production') ?? node
-          : node;
-
-      setSelectedNode(nextNode);
-      openMetadataPanel(nextNode);
-      expandDetailLanes();
+      setFocusAggregate(node.id);
+      setSelectedNode(node);
+      openMetadataPanel(node);
       clickTimeoutRef.current = null;
     }, 200);
   };
 
   const handleAggregateNodeDoubleClick = () => {
     clearAggregateClickTimeout();
-    collapseDetailLanes();
+    clearFocus();
   };
 
   // Organize nodes into parent-child hierarchy
