@@ -7,23 +7,24 @@ export function MetadataPanel() {
   if (!metadataPanelOpen || !selectedNode) return null;
   
   return (
-    <div className="w-96 h-full bg-white border-l border-gray-400 flex flex-col shadow-[-16px_0px_16px_-8px_rgba(12,12,13,0.1)]">
+    <div className="w-96 h-full border-l flex flex-col shadow-[-16px_0px_16px_-8px_rgba(12,12,13,0.1)]" style={{ backgroundColor: '#CECECE', borderLeftColor: '#C8C8C8' }}>
       {/* Header */}
-      <div className="p-4 border-b border-gray-400 flex items-center justify-between">
-        <h2 className="font-macan text-lg font-semibold text-blue-dark-950">
+      <div className="flex items-center justify-between" style={{ padding: '24px 16px', borderBottom: '1px dashed #ADADAD' }}>
+        <h2 className="font-macan-mono text-lg font-semibold uppercase" style={{ color: '#00112B', fontSize: '16px', fontWeight: 600, letterSpacing: '0.1em' }}>
           Node Details
         </h2>
-        <button 
+        <button
           onClick={closeMetadataPanel}
-          className="w-8 h-8 flex items-center justify-center hover:bg-gray-200 transition-colors"
+          className="w-8 h-8 flex items-center justify-center hover:opacity-80 transition-opacity"
+          style={{ background: 'transparent' }}
           aria-label="Close metadata panel"
         >
-          <X className="w-5 h-5 text-gray-500" />
+          <X className="w-5 h-5" style={{ color: '#78797A' }} />
         </button>
       </div>
-      
+
       {/* Content */}
-      <div className="flex-1 overflow-auto p-4">
+      <div className="flex-1 overflow-auto" style={{ padding: '24px 16px' }}>
         {/* ID */}
         <div className="mb-4">
           <h3 className="text-sm font-medium text-gray-500 mb-2 font-macan">ID</h3>
