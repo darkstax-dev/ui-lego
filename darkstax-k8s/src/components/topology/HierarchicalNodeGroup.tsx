@@ -23,7 +23,7 @@ export function HierarchicalNodeGroup({
   onParentClick,
   onParentDoubleClick,
 }: HierarchicalNodeGroupProps) {
-  const { setSelectedNode, openMetadataPanel } = useUIStore();
+  const { setSelectedNode } = useUIStore();
 
   const aggregatedChildCount = memberCount ?? childNodes.length;
 
@@ -34,7 +34,6 @@ export function HierarchicalNodeGroup({
       onParentClick(parentNode);
     } else {
       setSelectedNode(parentNode);
-      openMetadataPanel(parentNode);
     }
 
     if (onToggleCollapse && aggregatedChildCount > 0) {
@@ -44,7 +43,6 @@ export function HierarchicalNodeGroup({
 
   const handleChildClick = (node: K8sNodeData) => {
     setSelectedNode(node);
-    openMetadataPanel(node);
   };
 
   return (
