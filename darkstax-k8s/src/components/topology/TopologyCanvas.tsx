@@ -231,6 +231,7 @@ export function TopologyCanvas() {
     detailLanesExpanded,
     focusAggregateId,
     setFocusAggregate,
+    clearFocus,
   } = useUIStore();
   const { nodes, groups, setNodes, setGroups, toggleGroupCollapse } = useTopologyStore();
   const scrollRef = useRef<HTMLDivElement | null>(null);
@@ -240,6 +241,9 @@ export function TopologyCanvas() {
     Array<{ id: string; d: string; fromId: string; toId: string }>
   >([]);
   const [contextMenu, setContextMenu] = useState<null | { x: number; y: number; nodeId: string }>(null);
+  const [zoom, setZoom] = useState(1);
+  const [showShortcuts, setShowShortcuts] = useState(false);
+  const [showJumpToast, setShowJumpToast] = useState(false);
 
   useEffect(() => {
     const scenarioGroups =
@@ -617,7 +621,7 @@ export function TopologyCanvas() {
         cancelAnimationFrame(rafRef.current);
       }
     };
-  }, [layoutNodes, groups, filters, layoutMode, detailLanesExpanded]);
+  }, [layoutNodes, groups, filters, layoutMode, detailLanesExpanded, zoom]);
 
   useEffect(() => {
     const el = scrollRef.current;
@@ -659,8 +663,48 @@ export function TopologyCanvas() {
     };
 
     const onKeyDown = (ev: KeyboardEvent) => {
+      const target = ev.target as HTMLElement | null;
+      const isTypingTarget =
+        !!target &&
+        (target.tagName === 'INPUT' || target.tagName === 'TEXTAREA' || (target as HTMLElement).isContentEditable);
+
+      if (isTypingTarget) return;
+
       if (ev.key === 'Escape') {
         setContextMenu(null);
+        setShowShortcuts(false);
+        clearFocus();
+        return;
+      }
+
+      if (ev.shiftKey && ev.key === '?') {
+        ev.preventDefault();
+        setShowShortcuts(true);
+        return;
+      }
+
+      if ((ev.ctrlKey || ev.metaKey) && ev.key.toLowerCase() === 'k') {
+        ev.preventDefault();
+        setShowJumpToast(true);
+        window.setTimeout(() => setShowJumpToast(false), 1200);
+        return;
+      }
+
+      if (ev.key === '+' || ev.key === '=') {
+        ev.preventDefault();
+        setZoom((v) => Math.min(2, Number((v + 0.1).toFixed(2))));
+        return;
+      }
+
+      if (ev.key === '-') {
+        ev.preventDefault();
+        setZoom((v) => Math.max(0.5, Number((v - 0.1).toFixed(2))));
+        return;
+      }
+
+      if (ev.key === '0') {
+        ev.preventDefault();
+        setZoom(1);
       }
     };
 
@@ -811,7 +855,10 @@ export function TopologyCanvas() {
 
   return (
     <div ref={scrollRef} className="w-full h-full relative overflow-auto">
-      <div className="w-full min-h-full bg-gray-300 relative p-5 pt-5">
+      <div
+        className="w-full min-h-full bg-gray-300 relative p-5 pt-5"
+        style={{ transform: `scale(${zoom})`, transformOrigin: '0 0' }}
+      >
         <div
           className="absolute inset-0 pointer-events-none opacity-25"
           style={{
@@ -925,6 +972,37 @@ export function TopologyCanvas() {
             >
               Open details
             </button>
+          </div>
+        )}
+
+        {showJumpToast && (
+          <div className="fixed top-4 left-1/2 -translate-x-1/2 z-40 rounded bg-blue-dark-950 text-white px-3 py-2 text-sm font-macan shadow">
+            Jump to node: coming soon
+          </div>
+        )}
+
+        {showShortcuts && (
+          <div className="fixed inset-0 z-40 bg-black/40 flex items-center justify-center p-4">
+            <div className="w-full max-w-lg rounded-lg bg-white border border-gray-200 shadow-xl">
+              <div className="flex items-center justify-between px-4 h-12 border-b border-gray-200">
+                <div className="text-sm font-macan text-blue-dark-950">Keyboard shortcuts</div>
+                <button
+                  type="button"
+                  className="text-sm font-macan text-gray-600 hover:text-gray-900"
+                  onClick={() => setShowShortcuts(false)}
+                >
+                  Close
+                </button>
+              </div>
+              <div className="p-4 text-sm text-blue-dark-950 font-macan space-y-2">
+                <div className="flex justify-between gap-4"><span>Esc</span><span className="text-gray-600">Back to overview</span></div>
+                <div className="flex justify-between gap-4"><span>Shift + ?</span><span className="text-gray-600">Show this dialog</span></div>
+                <div className="flex justify-between gap-4"><span>+</span><span className="text-gray-600">Zoom in</span></div>
+                <div className="flex justify-between gap-4"><span>-</span><span className="text-gray-600">Zoom out</span></div>
+                <div className="flex justify-between gap-4"><span>0</span><span className="text-gray-600">Reset zoom</span></div>
+                <div className="flex justify-between gap-4"><span>Ctrl/Cmd + K</span><span className="text-gray-600">Jump to node (coming soon)</span></div>
+              </div>
+            </div>
           </div>
         )}
       </div>
