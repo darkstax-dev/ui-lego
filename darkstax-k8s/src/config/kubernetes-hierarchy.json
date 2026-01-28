@@ -87,14 +87,27 @@
       "icon": "wifi"
     },
     {
-      "id": "config-storage",
-      "label": "Config and Storage",
-      "description": "Configuration and persistent storage resources",
-      "resourceTypes": ["configmap", "secret", "persistentvolume", "persistentvolumeclaim"],
+      "id": "storage",
+      "label": "Storage",
+      "description": "Persistent storage resources",
+      "resourceTypes": ["persistentvolume", "persistentvolumeclaim"],
       "laneConfig": {
         "display": true,
         "height": "auto",
         "order": 4
+      },
+      "color": "#AA96DA",
+      "icon": "database"
+    },
+    {
+      "id": "config",
+      "label": "Config",
+      "description": "Configuration resources",
+      "resourceTypes": ["configmap", "secret"],
+      "laneConfig": {
+        "display": true,
+        "height": "auto",
+        "order": 5
       },
       "color": "#AA96DA",
       "icon": "database"

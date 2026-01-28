@@ -38,10 +38,10 @@ const categoryByType: Record<K8sResourceType, K8sResourceCategory> = {
   ingress: 'service',
   multus: 'network',
   node: 'network',
-  configmap: 'config-storage',
-  secret: 'config-storage',
-  persistentvolume: 'config-storage',
-  persistentvolumeclaim: 'config-storage',
+  configmap: 'config',
+  secret: 'config',
+  persistentvolume: 'storage',
+  persistentvolumeclaim: 'storage',
 };
 
 const statusFromMetadata = (metadata: Record<string, any>) => {
