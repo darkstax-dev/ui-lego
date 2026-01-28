@@ -8,13 +8,18 @@ interface UIStore {
   clearSelection: () => void;
   openMetadataPanel: (node?: K8sNodeData) => void;
   closeMetadataPanel: () => void;
-  
+
+  // Focus mode (aggregate)
+  focusAggregateId: string | null;
+  setFocusAggregate: (aggregateId: string) => void;
+  clearFocus: () => void;
+
   // Panel states
   metadataPanelOpen: boolean;
   toggleMetadataPanel: () => void;
   resourceMenuOpen: boolean;
   toggleResourceMenu: () => void;
-  
+
   // Filters
   filters: Filter[];
   searchQuery: string;
@@ -23,7 +28,7 @@ interface UIStore {
   removeFilter: (id: string) => void;
   toggleFilter: (id: string) => void;
   clearFilters: () => void;
-  
+
   // Layout
   layoutMode: LayoutMode;
   setLayoutMode: (mode: LayoutMode) => void;
@@ -68,21 +73,40 @@ const persistFilters = (filters: Filter[]) => {
 export const useUIStore = create<UIStore>((set) => ({
   // Selection
   selectedNode: null,
-  setSelectedNode: (node) => set({
-    selectedNode: node,
-  }),
-  clearSelection: () => set({
-    selectedNode: null,
-    metadataPanelOpen: false
-  }),
-  openMetadataPanel: (node) => set((state) => ({
-    selectedNode: node ?? state.selectedNode,
-    metadataPanelOpen: true,
-  })),
-  closeMetadataPanel: () => set({
-    metadataPanelOpen: false,
-  }),
-  
+  setSelectedNode: (node) =>
+    set({
+      selectedNode: node,
+    }),
+  clearSelection: () =>
+    set({
+      selectedNode: null,
+      metadataPanelOpen: false,
+    }),
+  openMetadataPanel: (node) =>
+    set((state) => ({
+      selectedNode: node ?? state.selectedNode,
+      metadataPanelOpen: true,
+    })),
+  closeMetadataPanel: () =>
+    set({
+      metadataPanelOpen: false,
+    }),
+
+  // Focus mode (aggregate)
+  focusAggregateId: null,
+  setFocusAggregate: (aggregateId) =>
+    set({
+      focusAggregateId: aggregateId,
+      detailLanesExpanded: true,
+    }),
+  clearFocus: () =>
+    set({
+      focusAggregateId: null,
+      detailLanesExpanded: false,
+      selectedNode: null,
+      metadataPanelOpen: false,
+    }),
+
   // Panel states
   metadataPanelOpen: false,
   toggleMetadataPanel: () => set((state) => ({ 
