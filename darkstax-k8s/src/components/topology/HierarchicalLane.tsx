@@ -338,7 +338,7 @@ export function HierarchicalLane({ category, label, nodes, height }: Hierarchica
         minHeight: laneHeight,
         padding: '4px',
         gap: '10px',
-        background: '#002B4D',
+        background: 'var(--surface-card)',
       }}
       data-testid={`lane-${category}`}
     >
@@ -349,13 +349,13 @@ export function HierarchicalLane({ category, label, nodes, height }: Hierarchica
           width: '45px',
           padding: '4px 8px',
           flexShrink: 0,
-          background: '#14273A',
+          background: 'var(--nav-secondary-bg)',
         }}
       >
         <div
           style={{
             transform: 'rotate(-90deg)',
-            color: '#FFFFFF',
+            color: 'var(--text-blue-main)',
             textAlign: 'center',
             fontFamily: 'Macan, -apple-system, Roboto, Helvetica, sans-serif',
             fontSize: '24px',

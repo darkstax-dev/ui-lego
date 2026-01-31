@@ -70,7 +70,7 @@ export function HierarchicalLane({ category, label, nodes, height }: Hierarchica
         padding: '4px',
         gap: '10px',
         alignSelf: 'stretch',
-        background: '#002B4D',
+        background: 'var(--surface-card)',
         marginBottom: '4px'
       }}
       data-testid={`lane-${category}`}
@@ -85,13 +85,13 @@ export function HierarchicalLane({ category, label, nodes, height }: Hierarchica
           alignItems: 'center',
           gap: '10px',
           flex: '1 0 0',
-          background: '#14273A'
+          background: 'var(--nav-secondary-bg)'
         }}
       >
         <div
           style={{
             transform: 'rotate(-90deg)',
-            color: '#FFFFFF',
+            color: 'var(--text-blue-main)',
             textAlign: 'center',
             fontFamily: 'Macan, -apple-system, Roboto, Helvetica, sans-serif',
             fontSize: '24px',
