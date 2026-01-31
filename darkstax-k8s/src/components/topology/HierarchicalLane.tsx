@@ -17,9 +17,11 @@ interface HierarchicalLaneProps {
 
 const LANE_MAX_ROWS_DEFAULT = 4;
 const LANE_MAX_ROWS_COMPACT = 2;
-// Approximate visual width of a node tile (icon + label) used to estimate how many fit per row.
+// Approximate visual size of a node tile (icon + label) used to estimate how many fit per row.
 const TILE_EST_WIDTH_PX = 96;
-const TILE_GAP_PX = 32; // gap-8
+const TILE_EST_HEIGHT_PX = 90;
+const TILE_GAP_PX_DEFAULT = 32; // gap-8
+const TILE_GAP_PX_AGGREGATE = 40; // gap-10
 
 export function HierarchicalLane({ category, label, nodes, height }: HierarchicalLaneProps) {
   const {
@@ -42,6 +44,10 @@ export function HierarchicalLane({ category, label, nodes, height }: Hierarchica
 
   const laneContentRef = useRef<HTMLDivElement | null>(null);
   const [laneContentWidth, setLaneContentWidth] = useState(0);
+
+  const laneItemsAreaRef = useRef<HTMLDivElement | null>(null);
+  const [laneItemsAreaHeight, setLaneItemsAreaHeight] = useState(0);
+
   const [aggregateFilterValues, setAggregateFilterValues] = useState<MultiSelectOption[]>([]);
 
   const setLaneContentNodeRef = useCallback(
@@ -51,6 +57,10 @@ export function HierarchicalLane({ category, label, nodes, height }: Hierarchica
     },
     [setNodeRef]
   );
+
+  const setLaneItemsAreaNodeRef = useCallback((node: HTMLDivElement | null) => {
+    laneItemsAreaRef.current = node;
+  }, []);
 
   useLayoutEffect(() => {
     const el = laneContentRef.current;
@@ -62,6 +72,21 @@ export function HierarchicalLane({ category, label, nodes, height }: Hierarchica
     const observer = new ResizeObserver((entries) => {
       const next = entries[0]?.contentRect?.width;
       if (typeof next === 'number') setLaneContentWidth(next);
+    });
+
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [category]);
+
+  useLayoutEffect(() => {
+    const el = laneItemsAreaRef.current;
+    if (!el) return;
+
+    setLaneItemsAreaHeight(el.getBoundingClientRect().height);
+
+    const observer = new ResizeObserver((entries) => {
+      const next = entries[0]?.contentRect?.height;
+      if (typeof next === 'number') setLaneItemsAreaHeight(next);
     });
 
     observer.observe(el);
@@ -225,23 +250,32 @@ export function HierarchicalLane({ category, label, nodes, height }: Hierarchica
     });
   }, [aggregateFilterTokens.length, childNodesByParent, isAggregateLane, nodeMatchesAggregateFilters, topLevelItems]);
 
+  const tileGapPx = isAggregateLane ? TILE_GAP_PX_AGGREGATE : TILE_GAP_PX_DEFAULT;
+
   const itemsPerRow = useMemo(() => {
     if (laneContentWidth <= 0) return 0;
 
-    return Math.max(
-      1,
-      Math.floor((laneContentWidth + TILE_GAP_PX) / (TILE_EST_WIDTH_PX + TILE_GAP_PX))
-    );
-  }, [laneContentWidth]);
+    return Math.max(1, Math.floor((laneContentWidth + tileGapPx) / (TILE_EST_WIDTH_PX + tileGapPx)));
+  }, [laneContentWidth, tileGapPx]);
 
   const laneMaxRows = useMemo(() => {
-    if (isAggregateLane && focusAggregateId) return 1;
+    if (isAggregateLane) {
+      if (focusAggregateId) return 1;
+
+      // Aggregate lane should fill available space and paginate based on what fits.
+      if (laneItemsAreaHeight > 0) {
+        const estRowHeight = TILE_EST_HEIGHT_PX + tileGapPx;
+        return Math.max(1, Math.floor((laneItemsAreaHeight + tileGapPx) / estRowHeight));
+      }
+
+      return LANE_MAX_ROWS_DEFAULT;
+    }
 
     // Service + Network lanes should paginate after 2 rows.
     if (category === 'service' || category === 'network') return LANE_MAX_ROWS_COMPACT;
 
     return LANE_MAX_ROWS_DEFAULT;
-  }, [category, focusAggregateId, isAggregateLane]);
+  }, [category, focusAggregateId, isAggregateLane, laneItemsAreaHeight, tileGapPx]);
 
   const pageSize = useMemo(() => {
     if (itemsPerRow <= 0) return 0;
@@ -373,7 +407,7 @@ export function HierarchicalLane({ category, label, nodes, height }: Hierarchica
       <div
         ref={setLaneContentNodeRef}
         data-testid={`lane-drop-${category}`}
-        className={`flex-1 p-4 relative transition-colors flex flex-col ${
+        className={`flex-1 p-4 relative transition-colors flex flex-col min-h-0 ${
           isOver ? 'bg-surface-subtle border-2 border-blue-700 border-dashed' : ''
         } ${laneHasPaging ? 'pb-14' : ''}`}
       >
@@ -427,13 +461,13 @@ export function HierarchicalLane({ category, label, nodes, height }: Hierarchica
           </div>
         )}
 
-        <div className="flex-1 flex items-center justify-center">
+        <div ref={setLaneItemsAreaNodeRef} className="flex-1 min-h-0 flex items-center justify-center">
           {nodes.length === 0 ? (
             <div className="flex items-center justify-center text-secondary font-macan text-sm">
               Drop {category} resources here
             </div>
           ) : (
-            <div className="flex flex-wrap gap-8 justify-center">
+            <div className={`flex flex-wrap justify-center ${isAggregateLane ? 'gap-10' : 'gap-8'}`}>
               {visibleItems.map((item) => {
                 if (item.kind === 'group') {
                   const parentNode = item.node;
