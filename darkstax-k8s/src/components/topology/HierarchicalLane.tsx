@@ -100,27 +100,6 @@ export function HierarchicalLane({ category, label, nodes, height }: Hierarchica
     return () => observer.disconnect();
   }, [category]);
 
-  useLayoutEffect(() => {
-    // Measure the first visible tile so row calculations match the actual rendered size.
-    if (!isAggregateLane || focusAggregateId) {
-      setTileMeasuredHeight(0);
-      return;
-    }
-
-    const el = tileMeasureRef.current;
-    if (!el) return;
-
-    setTileMeasuredHeight(el.getBoundingClientRect().height);
-
-    const observer = new ResizeObserver((entries) => {
-      const next = entries[0]?.contentRect?.height;
-      if (typeof next === 'number') setTileMeasuredHeight(next);
-    });
-
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, [focusAggregateId, isAggregateLane, pageIndex, pageSize, aggregateFilterTokens.length]);
-
   const clearAggregateClickTimeout = () => {
     if (clickTimeoutRef.current == null) return;
     window.clearTimeout(clickTimeoutRef.current);
@@ -316,6 +295,27 @@ export function HierarchicalLane({ category, label, nodes, height }: Hierarchica
   useEffect(() => {
     setPageIndex(0);
   }, [category, nodes.length, pageSize, aggregateFilterTokens.length]);
+
+  useLayoutEffect(() => {
+    // Measure the first visible tile so row calculations match the actual rendered size.
+    if (!isAggregateLane || focusAggregateId) {
+      setTileMeasuredHeight(0);
+      return;
+    }
+
+    const el = tileMeasureRef.current;
+    if (!el) return;
+
+    setTileMeasuredHeight(el.getBoundingClientRect().height);
+
+    const observer = new ResizeObserver((entries) => {
+      const next = entries[0]?.contentRect?.height;
+      if (typeof next === 'number') setTileMeasuredHeight(next);
+    });
+
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [aggregateFilterTokens.length, focusAggregateId, isAggregateLane, pageIndex]);
 
   const lastAutoPagedSelectionRef = useRef<string | null>(null);
 
