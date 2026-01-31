@@ -515,7 +515,18 @@ export function HierarchicalLane({ category, label, nodes, height }: Hierarchica
               Drop {category} resources here
             </div>
           ) : (
-            <div className={`flex flex-wrap justify-center ${isAggregateLane ? 'gap-10' : 'gap-8'}`}>
+            <div
+              className={
+                isAggregateLane
+                  ? 'grid justify-center content-start gap-10'
+                  : 'flex flex-wrap justify-center gap-8'
+              }
+              style={
+                isAggregateLane
+                  ? { gridTemplateColumns: `repeat(${Math.max(1, itemsPerRow)}, max-content)` }
+                  : undefined
+              }
+            >
               {visibleItems.map((item, index) => {
                 const shouldMeasureTile = isAggregateLane && !focusAggregateId && index === 0;
                 const tileRef = shouldMeasureTile ? setTileMeasureNodeRef : undefined;
