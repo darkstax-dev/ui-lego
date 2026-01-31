@@ -333,27 +333,29 @@ export function HierarchicalLane({ category, label, nodes, height }: Hierarchica
 
   return (
     <div
-      className="flex flex-row mb-2.5 bg-surface-card"
+      className="flex flex-row mb-2.5"
       style={{
         minHeight: laneHeight,
         padding: '4px',
         gap: '10px',
+        background: '#DFDFDF',
       }}
       data-testid={`lane-${category}`}
     >
       {/* Vertical Lane Label */}
       <div
-        className="flex items-center justify-center bg-nav-secondary"
+        className="flex items-center justify-center"
         style={{
           width: '45px',
           padding: '4px 8px',
           flexShrink: 0,
+          background: '#CECECE',
         }}
       >
         <div
           style={{
             transform: 'rotate(-90deg)',
-            color: 'var(--text-blue-main)',
+            color: '#00112B',
             textAlign: 'center',
             fontFamily: 'Macan, -apple-system, Roboto, Helvetica, sans-serif',
             fontSize: '24px',
