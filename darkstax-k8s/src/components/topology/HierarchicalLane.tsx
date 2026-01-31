@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { useDroppable } from '@dnd-kit/core';
-import { Maximize2, Minus, Plus } from 'lucide-react';
+import { Minus, Plus } from 'lucide-react';
 import { MultiSelect, type MultiSelectOption } from 'ui-lego';
 import { K8sNodeData, K8sResourceCategory } from '../../types';
 import { KubernetesIconWrapper } from '../ui/KubernetesIconWrapper';
@@ -548,7 +548,6 @@ export function HierarchicalLane({ category, label, nodes, height }: Hierarchica
                         }
                         onParentClick={isAggregateLane ? handleAggregateNodeClick : undefined}
                         onParentDoubleClick={isAggregateLane ? handleAggregateNodeDoubleClick : undefined}
-                        onExpand={isAggregateLane ? handleAggregateNodeFocus : undefined}
                       />
                     </div>
                   );
@@ -560,7 +559,7 @@ export function HierarchicalLane({ category, label, nodes, height }: Hierarchica
                     ref={tileRef}
                     key={node.id}
                     data-node-id={node.id}
-                    className="cursor-pointer transition-transform hover:scale-105 relative"
+                    className="cursor-pointer transition-transform hover:scale-105"
                     onClick={() => {
                       if (isAggregateLane) {
                         handleAggregateNodeClick(node);
@@ -575,20 +574,6 @@ export function HierarchicalLane({ category, label, nodes, height }: Hierarchica
                       handleAggregateNodeDoubleClick(node);
                     }}
                   >
-                    {isAggregateLane && (
-                      <button
-                        type="button"
-                        className="absolute -top-1 -right-1 z-10 w-5 h-5 rounded bg-white/90 border border-blue-dark-950/20 shadow-sm flex items-center justify-center hover:bg-white"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          handleAggregateNodeFocus(node);
-                        }}
-                        aria-label="Focus aggregate"
-                        title="Focus (drill in)"
-                      >
-                        <Maximize2 className="w-3 h-3 text-blue-dark-950" />
-                      </button>
-                    )}
                     <KubernetesIconWrapper
                       type={node.type}
                       status={node.status}
