@@ -46,9 +46,11 @@ export function HierarchicalLane({ category, label, nodes, height }: Hierarchica
   const [laneContentWidth, setLaneContentWidth] = useState(0);
 
   const laneItemsAreaRef = useRef<HTMLDivElement | null>(null);
+  const [laneItemsAreaWidth, setLaneItemsAreaWidth] = useState(0);
   const [laneItemsAreaHeight, setLaneItemsAreaHeight] = useState(0);
 
   const tileMeasureRef = useRef<HTMLDivElement | null>(null);
+  const [tileMeasuredWidth, setTileMeasuredWidth] = useState(0);
   const [tileMeasuredHeight, setTileMeasuredHeight] = useState(0);
 
   const [aggregateFilterValues, setAggregateFilterValues] = useState<MultiSelectOption[]>([]);
@@ -89,11 +91,15 @@ export function HierarchicalLane({ category, label, nodes, height }: Hierarchica
     const el = laneItemsAreaRef.current;
     if (!el) return;
 
-    setLaneItemsAreaHeight(el.getBoundingClientRect().height);
+    const rect = el.getBoundingClientRect();
+    setLaneItemsAreaWidth(rect.width);
+    setLaneItemsAreaHeight(rect.height);
 
     const observer = new ResizeObserver((entries) => {
-      const next = entries[0]?.contentRect?.height;
-      if (typeof next === 'number') setLaneItemsAreaHeight(next);
+      const next = entries[0]?.contentRect;
+      if (!next) return;
+      setLaneItemsAreaWidth(next.width);
+      setLaneItemsAreaHeight(next.height);
     });
 
     observer.observe(el);
@@ -260,10 +266,13 @@ export function HierarchicalLane({ category, label, nodes, height }: Hierarchica
   const tileGapPx = isAggregateLane ? TILE_GAP_PX_AGGREGATE : TILE_GAP_PX_DEFAULT;
 
   const itemsPerRow = useMemo(() => {
-    if (laneContentWidth <= 0) return 0;
+    const containerWidth = laneItemsAreaWidth > 0 ? laneItemsAreaWidth : laneContentWidth;
+    if (containerWidth <= 0) return 0;
 
-    return Math.max(1, Math.floor((laneContentWidth + tileGapPx) / (TILE_EST_WIDTH_PX + tileGapPx)));
-  }, [laneContentWidth, tileGapPx]);
+    const tileWidthPx = tileMeasuredWidth > 0 ? tileMeasuredWidth : TILE_EST_WIDTH_PX;
+
+    return Math.max(1, Math.floor((containerWidth + tileGapPx) / (tileWidthPx + tileGapPx)));
+  }, [laneContentWidth, laneItemsAreaWidth, tileGapPx, tileMeasuredWidth]);
 
   const laneMaxRows = useMemo(() => {
     if (isAggregateLane) {
@@ -297,8 +306,9 @@ export function HierarchicalLane({ category, label, nodes, height }: Hierarchica
   }, [category, nodes.length, pageSize, aggregateFilterTokens.length]);
 
   useLayoutEffect(() => {
-    // Measure the first visible tile so row calculations match the actual rendered size.
+    // Measure the first visible tile so row/col calculations match the actual rendered size.
     if (!isAggregateLane || focusAggregateId) {
+      setTileMeasuredWidth(0);
       setTileMeasuredHeight(0);
       return;
     }
@@ -306,11 +316,15 @@ export function HierarchicalLane({ category, label, nodes, height }: Hierarchica
     const el = tileMeasureRef.current;
     if (!el) return;
 
-    setTileMeasuredHeight(el.getBoundingClientRect().height);
+    const rect = el.getBoundingClientRect();
+    setTileMeasuredWidth(rect.width);
+    setTileMeasuredHeight(rect.height);
 
     const observer = new ResizeObserver((entries) => {
-      const next = entries[0]?.contentRect?.height;
-      if (typeof next === 'number') setTileMeasuredHeight(next);
+      const next = entries[0]?.contentRect;
+      if (!next) return;
+      setTileMeasuredWidth(next.width);
+      setTileMeasuredHeight(next.height);
     });
 
     observer.observe(el);
