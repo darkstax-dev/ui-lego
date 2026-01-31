@@ -59,24 +59,24 @@ export function MetadataPanel() {
           <>
             {metadataPanelTab === 'metadata' && (
               <>
-                <div className="mb-4">
-                  <h3 className="text-sm font-medium mb-2 font-macan-mono uppercase text-secondary text-xs font-semibold tracking-wider">Overview</h3>
-                  <div className="p-3 space-y-2 bg-surface-card border border-divider">
+                <div className="flex flex-col gap-4">
+                  <h3 className="font-macan-mono uppercase text-primary text-base font-semibold tracking-[1.6px] leading-[110%]">Overview</h3>
+                  <div className="p-4 flex flex-col gap-2 bg-surface-card">
                     <div className="flex items-start gap-2">
-                      <span className="text-xs uppercase tracking-wide font-macan-mono text-secondary">ID</span>
-                      <span className="text-sm font-macan-mono break-all text-primary">{selectedNode.id}</span>
+                      <span className="text-xs uppercase tracking-[1.2px] font-macan-mono text-secondary font-book leading-[120%]">ID</span>
+                      <span className="text-sm font-macan-mono break-all text-primary font-book leading-[120%]">{selectedNode.id}</span>
                     </div>
                     <div className="flex items-start gap-2">
-                      <span className="text-xs uppercase tracking-wide font-macan-mono text-secondary">Type</span>
-                      <span className="text-sm font-macan capitalize text-primary">{selectedNode.type}</span>
+                      <span className="text-xs uppercase tracking-[1.2px] font-macan-mono text-secondary font-book leading-[120%]">Type</span>
+                      <span className="text-sm font-macan capitalize text-primary font-book leading-[120%]">{selectedNode.type}</span>
                     </div>
                     <div className="flex items-start gap-2">
-                      <span className="text-xs uppercase tracking-wide font-macan-mono text-secondary">Label</span>
-                      <span className="text-sm font-macan text-primary">{selectedNode.label}</span>
+                      <span className="text-xs uppercase tracking-[1.2px] font-macan-mono text-secondary font-book leading-[120%]">Label</span>
+                      <span className="text-sm font-macan text-primary font-book leading-[120%]">{selectedNode.label}</span>
                     </div>
                     <div className="flex items-start gap-2">
-                      <span className="text-xs uppercase tracking-wide font-macan-mono text-secondary">Category</span>
-                      <span className="text-sm font-macan capitalize text-primary">{selectedNode.category}</span>
+                      <span className="text-xs uppercase tracking-[1.2px] font-macan-mono text-secondary font-book leading-[120%]">Category</span>
+                      <span className="text-sm font-macan capitalize text-primary font-book leading-[120%]">{selectedNode.category}</span>
                     </div>
                   </div>
                 </div>
