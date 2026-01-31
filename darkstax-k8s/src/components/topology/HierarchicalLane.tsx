@@ -472,7 +472,7 @@ export function HierarchicalLane({ category, label, nodes, height }: Hierarchica
 
         {laneHasPaging && (
           <div
-            className="absolute bottom-1 left-1 z-40 flex items-center gap-1 bg-surface-card border border-divider"
+            className="absolute bottom-1 left-1 z-40 flex items-center gap-1 bg-surface-card"
             onMouseDown={(e) => e.stopPropagation()}
           >
             <button
