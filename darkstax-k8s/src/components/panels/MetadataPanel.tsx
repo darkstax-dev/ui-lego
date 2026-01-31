@@ -82,23 +82,23 @@ export function MetadataPanel() {
                 </div>
 
                 {selectedNode.status && (
-                  <div className="mb-4">
-                    <h3 className="text-sm font-medium mb-2 font-macan-mono uppercase text-secondary text-xs font-semibold tracking-wider">Status</h3>
-                    <p className="text-sm font-macan capitalize text-primary">{selectedNode.status}</p>
+                  <div className="flex flex-col gap-2">
+                    <h3 className="font-macan-mono uppercase text-primary text-base font-semibold tracking-[1.6px] leading-[110%]">Status</h3>
+                    <p className="text-sm font-macan capitalize text-primary font-book leading-[120%]">{selectedNode.status}</p>
                   </div>
                 )}
 
-                <div className="mb-4">
-                  <h3 className="text-sm font-medium mb-2 font-macan-mono uppercase text-secondary text-xs font-semibold tracking-wider">Key Metadata</h3>
-                  <div className="p-3 space-y-2 text-sm font-macan bg-surface-card border border-divider text-primary">
+                <div className="flex flex-col gap-4">
+                  <h3 className="font-macan-mono uppercase text-primary text-base font-semibold tracking-[1.6px] leading-[110%]">Key Metadata</h3>
+                  <div className="p-4 flex flex-col gap-2 text-sm font-macan bg-surface-card text-primary">
                     {(
                       ['Name', 'Namespace', 'Owner', 'Replicas', 'Status', 'IP', 'Node'] as const
                     )
                       .filter((key) => selectedNode.metadata?.[key] !== undefined)
                       .map((key) => (
                         <div key={key} className="flex justify-between gap-3">
-                          <span className="text-secondary">{key}</span>
-                          <span className="text-right text-primary">
+                          <span className="text-secondary font-book leading-[120%]">{key}</span>
+                          <span className="text-right text-primary font-book leading-[120%]">
                             {Array.isArray(selectedNode.metadata?.[key])
                               ? selectedNode.metadata?.[key].join(', ')
                               : String(selectedNode.metadata?.[key])}
@@ -108,32 +108,32 @@ export function MetadataPanel() {
                     {(
                       ['Name', 'Namespace', 'Owner', 'Replicas', 'Status', 'IP', 'Node'] as const
                     ).every((key) => selectedNode.metadata?.[key] === undefined) && (
-                      <div className="text-secondary">No highlighted metadata fields.</div>
+                      <div className="text-secondary font-book leading-[120%]">No highlighted metadata fields.</div>
                     )}
                   </div>
                 </div>
 
-                <div className="mb-4">
-                  <h3 className="text-sm font-medium mb-2 font-macan-mono uppercase text-secondary text-xs font-semibold tracking-wider">Connections</h3>
-                  <div className="p-3 text-sm font-macan bg-surface-card border border-divider text-primary">
+                <div className="flex flex-col gap-4">
+                  <h3 className="font-macan-mono uppercase text-primary text-base font-semibold tracking-[1.6px] leading-[110%]">Connections</h3>
+                  <div className="p-4 text-sm font-macan bg-surface-card text-primary">
                     {selectedNode.connections?.length ? (
-                      <ul className="list-disc list-inside space-y-1">
+                      <ul className="list-disc list-inside flex flex-col gap-1">
                         {selectedNode.connections.map((connection) => (
-                          <li key={connection} className="break-all">
+                          <li key={connection} className="break-all font-book leading-[120%]">
                             {connection}
                           </li>
                         ))}
                       </ul>
                     ) : (
-                      <span className="text-secondary">No connections available.</span>
+                      <span className="text-secondary font-book leading-[120%]">No connections available.</span>
                     )}
                   </div>
                 </div>
 
                 {selectedNode.position && (
-                  <div className="mb-4">
-                    <h3 className="text-sm font-medium mb-2 font-macan-mono uppercase text-secondary text-xs font-semibold tracking-wider">Position</h3>
-                    <p className="text-sm font-macan-mono text-primary">
+                  <div className="flex flex-col gap-2">
+                    <h3 className="font-macan-mono uppercase text-primary text-base font-semibold tracking-[1.6px] leading-[110%]">Position</h3>
+                    <p className="text-sm font-macan-mono text-primary font-book leading-[120%]">
                       x: {selectedNode.position.x}, y: {selectedNode.position.y}
                     </p>
                   </div>
@@ -142,10 +142,10 @@ export function MetadataPanel() {
             )}
 
             {metadataPanelTab === 'raw' && (
-              <div className="mb-4">
-                <h3 className="text-sm font-medium mb-2 font-macan-mono uppercase text-secondary text-xs font-semibold tracking-wider">Raw Metadata</h3>
-                <div className="p-3 bg-surface-card border border-divider">
-                  <pre className="m-0 whitespace-pre-wrap break-words text-[13px] font-mono text-primary">
+              <div className="flex flex-col gap-4">
+                <h3 className="font-macan-mono uppercase text-primary text-base font-semibold tracking-[1.6px] leading-[110%]">Raw Metadata</h3>
+                <div className="p-4 bg-surface-card">
+                  <pre className="m-0 whitespace-pre-wrap break-words text-[13px] font-mono text-primary font-book leading-[120%]">
                     {JSON.stringify(selectedNode.metadata || {}, null, 2)}
                   </pre>
                 </div>
