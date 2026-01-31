@@ -13,15 +13,15 @@ export function MetadataPanel() {
   if (!metadataPanelOpen) return null;
 
   return (
-    <aside className="absolute top-0 right-0 bottom-0 z-30 w-[420px] max-w-[90vw] border-l border-divider flex flex-col bg-surface-default">
-      <div className="flex items-center justify-between" style={{ padding: '24px 16px 0 16px' }}>
+    <aside className="absolute top-0 right-0 bottom-0 z-30 w-[420px] max-w-[90vw] border-l border-divider shadow-[-4px_0px_20px_-10px_rgba(12,12,13,0.2)] flex flex-col bg-surface-default">
+      <div className="flex items-center justify-between px-4 pt-6">
         <div className="flex items-center gap-0">
           <button
             type="button"
             className={`px-3 py-1 font-macan-mono text-[16px] font-medium leading-[110%] bg-transparent border-0 border-b-[2px] transition-colors ${
               metadataPanelTab === 'metadata'
                 ? 'text-primary border-text-primary'
-                : 'text-secondary border-transparent'
+                : 'text-secondary border-divider'
             }`}
             onClick={() => setMetadataPanelTab('metadata')}
           >
@@ -32,7 +32,7 @@ export function MetadataPanel() {
             className={`px-3 py-1 font-macan-mono text-[16px] font-medium leading-[110%] bg-transparent border-0 border-b-[2px] transition-colors ${
               metadataPanelTab === 'raw'
                 ? 'text-primary border-text-primary'
-                : 'text-secondary border-transparent'
+                : 'text-secondary border-divider'
             }`}
             onClick={() => setMetadataPanelTab('raw')}
           >
@@ -52,53 +52,53 @@ export function MetadataPanel() {
         </div>
       </div>
 
-      <div className="flex-1 overflow-auto" style={{ padding: '24px 16px', gap: '24px', display: 'flex', flexDirection: 'column' }}>
+      <div className="flex-1 overflow-auto px-4 py-6 flex flex-col gap-6">
         {!selectedNode ? (
-          <div className="text-sm font-macan text-secondary font-book leading-[120%]">Select a node in the graph to view metadata.</div>
+          <div className="text-sm font-macan text-secondary">Select a node in the graph to view metadata.</div>
         ) : (
           <>
             {metadataPanelTab === 'metadata' && (
               <>
-                <div className="flex flex-col gap-4">
-                  <h3 className="font-macan-mono uppercase text-primary text-base font-semibold tracking-[1.6px] leading-[110%]">Overview</h3>
-                  <div className="p-4 flex flex-col gap-2 bg-surface-card">
+                <div className="mb-4">
+                  <h3 className="text-xs font-semibold mb-2 font-macan-mono uppercase text-secondary tracking-wider">Overview</h3>
+                  <div className="p-3 space-y-2 bg-surface-card border border-divider">
                     <div className="flex items-start gap-2">
-                      <span className="text-xs uppercase tracking-[1.2px] font-macan-mono text-secondary font-book leading-[120%]">ID</span>
-                      <span className="text-sm font-macan-mono break-all text-primary font-book leading-[120%]">{selectedNode.id}</span>
+                      <span className="text-xs uppercase tracking-wide font-macan-mono text-secondary">ID</span>
+                      <span className="text-sm font-macan-mono break-all text-primary">{selectedNode.id}</span>
                     </div>
                     <div className="flex items-start gap-2">
-                      <span className="text-xs uppercase tracking-[1.2px] font-macan-mono text-secondary font-book leading-[120%]">Type</span>
-                      <span className="text-sm font-macan capitalize text-primary font-book leading-[120%]">{selectedNode.type}</span>
+                      <span className="text-xs uppercase tracking-wide font-macan-mono text-secondary">Type</span>
+                      <span className="text-sm font-macan capitalize text-primary">{selectedNode.type}</span>
                     </div>
                     <div className="flex items-start gap-2">
-                      <span className="text-xs uppercase tracking-[1.2px] font-macan-mono text-secondary font-book leading-[120%]">Label</span>
-                      <span className="text-sm font-macan text-primary font-book leading-[120%]">{selectedNode.label}</span>
+                      <span className="text-xs uppercase tracking-wide font-macan-mono text-secondary">Label</span>
+                      <span className="text-sm font-macan text-primary">{selectedNode.label}</span>
                     </div>
                     <div className="flex items-start gap-2">
-                      <span className="text-xs uppercase tracking-[1.2px] font-macan-mono text-secondary font-book leading-[120%]">Category</span>
-                      <span className="text-sm font-macan capitalize text-primary font-book leading-[120%]">{selectedNode.category}</span>
+                      <span className="text-xs uppercase tracking-wide font-macan-mono text-secondary">Category</span>
+                      <span className="text-sm font-macan capitalize text-primary">{selectedNode.category}</span>
                     </div>
                   </div>
                 </div>
 
                 {selectedNode.status && (
-                  <div className="flex flex-col gap-2">
-                    <h3 className="font-macan-mono uppercase text-primary text-base font-semibold tracking-[1.6px] leading-[110%]">Status</h3>
-                    <p className="text-sm font-macan capitalize text-primary font-book leading-[120%]">{selectedNode.status}</p>
+                  <div className="mb-4">
+                    <h3 className="text-xs font-semibold mb-2 font-macan-mono uppercase text-secondary tracking-wider">Status</h3>
+                    <p className="text-sm font-macan capitalize text-primary">{selectedNode.status}</p>
                   </div>
                 )}
 
-                <div className="flex flex-col gap-4">
-                  <h3 className="font-macan-mono uppercase text-primary text-base font-semibold tracking-[1.6px] leading-[110%]">Key Metadata</h3>
-                  <div className="p-4 flex flex-col gap-2 text-sm font-macan bg-surface-card text-primary">
+                <div className="mb-4">
+                  <h3 className="text-xs font-semibold mb-2 font-macan-mono uppercase text-secondary tracking-wider">Key Metadata</h3>
+                  <div className="p-3 space-y-2 text-sm font-macan bg-surface-card border border-divider text-primary">
                     {(
                       ['Name', 'Namespace', 'Owner', 'Replicas', 'Status', 'IP', 'Node'] as const
                     )
                       .filter((key) => selectedNode.metadata?.[key] !== undefined)
                       .map((key) => (
                         <div key={key} className="flex justify-between gap-3">
-                          <span className="text-secondary font-book leading-[120%]">{key}</span>
-                          <span className="text-right text-primary font-book leading-[120%]">
+                          <span className="text-secondary">{key}</span>
+                          <span className="text-right text-primary">
                             {Array.isArray(selectedNode.metadata?.[key])
                               ? selectedNode.metadata?.[key].join(', ')
                               : String(selectedNode.metadata?.[key])}
@@ -108,32 +108,32 @@ export function MetadataPanel() {
                     {(
                       ['Name', 'Namespace', 'Owner', 'Replicas', 'Status', 'IP', 'Node'] as const
                     ).every((key) => selectedNode.metadata?.[key] === undefined) && (
-                      <div className="text-secondary font-book leading-[120%]">No highlighted metadata fields.</div>
+                      <div className="text-secondary">No highlighted metadata fields.</div>
                     )}
                   </div>
                 </div>
 
-                <div className="flex flex-col gap-4">
-                  <h3 className="font-macan-mono uppercase text-primary text-base font-semibold tracking-[1.6px] leading-[110%]">Connections</h3>
-                  <div className="p-4 text-sm font-macan bg-surface-card text-primary">
+                <div className="mb-4">
+                  <h3 className="text-xs font-semibold mb-2 font-macan-mono uppercase text-secondary tracking-wider">Connections</h3>
+                  <div className="p-3 text-sm font-macan bg-surface-card border border-divider text-primary">
                     {selectedNode.connections?.length ? (
-                      <ul className="list-disc list-inside flex flex-col gap-1">
+                      <ul className="list-disc list-inside space-y-1">
                         {selectedNode.connections.map((connection) => (
-                          <li key={connection} className="break-all font-book leading-[120%]">
+                          <li key={connection} className="break-all">
                             {connection}
                           </li>
                         ))}
                       </ul>
                     ) : (
-                      <span className="text-secondary font-book leading-[120%]">No connections available.</span>
+                      <span className="text-secondary">No connections available.</span>
                     )}
                   </div>
                 </div>
 
                 {selectedNode.position && (
-                  <div className="flex flex-col gap-2">
-                    <h3 className="font-macan-mono uppercase text-primary text-base font-semibold tracking-[1.6px] leading-[110%]">Position</h3>
-                    <p className="text-sm font-macan-mono text-primary font-book leading-[120%]">
+                  <div className="mb-4">
+                    <h3 className="text-xs font-semibold mb-2 font-macan-mono uppercase text-secondary tracking-wider">Position</h3>
+                    <p className="text-sm font-macan-mono text-primary">
                       x: {selectedNode.position.x}, y: {selectedNode.position.y}
                     </p>
                   </div>
@@ -142,10 +142,10 @@ export function MetadataPanel() {
             )}
 
             {metadataPanelTab === 'raw' && (
-              <div className="flex flex-col gap-4">
-                <h3 className="font-macan-mono uppercase text-primary text-base font-semibold tracking-[1.6px] leading-[110%]">Raw Metadata</h3>
-                <div className="p-4 bg-surface-card">
-                  <pre className="m-0 whitespace-pre-wrap break-words text-[13px] font-mono text-primary font-book leading-[120%]">
+              <div className="mb-4">
+                <h3 className="text-xs font-semibold mb-2 font-macan-mono uppercase text-secondary tracking-wider">Raw Metadata</h3>
+                <div className="p-3 bg-surface-card border border-divider">
+                  <pre className="m-0 whitespace-pre-wrap break-words text-[13px] font-mono text-primary">
                     {JSON.stringify(selectedNode.metadata || {}, null, 2)}
                   </pre>
                 </div>
