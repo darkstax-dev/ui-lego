@@ -19,7 +19,7 @@ const LANE_MAX_ROWS_DEFAULT = 4;
 const LANE_MAX_ROWS_COMPACT = 2;
 // Approximate visual size of a node tile (icon + label) used to estimate how many fit per row.
 const TILE_EST_WIDTH_PX = 96;
-const TILE_EST_HEIGHT_PX = 90;
+const TILE_EST_HEIGHT_PX = 84;
 const TILE_GAP_PX_DEFAULT = 32; // gap-8
 const TILE_GAP_PX_AGGREGATE = 40; // gap-10
 
@@ -48,6 +48,9 @@ export function HierarchicalLane({ category, label, nodes, height }: Hierarchica
   const laneItemsAreaRef = useRef<HTMLDivElement | null>(null);
   const [laneItemsAreaHeight, setLaneItemsAreaHeight] = useState(0);
 
+  const tileMeasureRef = useRef<HTMLDivElement | null>(null);
+  const [tileMeasuredHeight, setTileMeasuredHeight] = useState(0);
+
   const [aggregateFilterValues, setAggregateFilterValues] = useState<MultiSelectOption[]>([]);
 
   const setLaneContentNodeRef = useCallback(
@@ -60,6 +63,10 @@ export function HierarchicalLane({ category, label, nodes, height }: Hierarchica
 
   const setLaneItemsAreaNodeRef = useCallback((node: HTMLDivElement | null) => {
     laneItemsAreaRef.current = node;
+  }, []);
+
+  const setTileMeasureNodeRef = useCallback((node: HTMLDivElement | null) => {
+    tileMeasureRef.current = node;
   }, []);
 
   useLayoutEffect(() => {
@@ -92,6 +99,27 @@ export function HierarchicalLane({ category, label, nodes, height }: Hierarchica
     observer.observe(el);
     return () => observer.disconnect();
   }, [category]);
+
+  useLayoutEffect(() => {
+    // Measure the first visible tile so row calculations match the actual rendered size.
+    if (!isAggregateLane || focusAggregateId) {
+      setTileMeasuredHeight(0);
+      return;
+    }
+
+    const el = tileMeasureRef.current;
+    if (!el) return;
+
+    setTileMeasuredHeight(el.getBoundingClientRect().height);
+
+    const observer = new ResizeObserver((entries) => {
+      const next = entries[0]?.contentRect?.height;
+      if (typeof next === 'number') setTileMeasuredHeight(next);
+    });
+
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [focusAggregateId, isAggregateLane, pageIndex, pageSize, aggregateFilterTokens.length]);
 
   const clearAggregateClickTimeout = () => {
     if (clickTimeoutRef.current == null) return;
@@ -264,7 +292,8 @@ export function HierarchicalLane({ category, label, nodes, height }: Hierarchica
 
       // Aggregate lane should fill available space and paginate based on what fits.
       if (laneItemsAreaHeight > 0) {
-        const estRowHeight = TILE_EST_HEIGHT_PX + tileGapPx;
+        const tileHeightPx = tileMeasuredHeight > 0 ? tileMeasuredHeight : TILE_EST_HEIGHT_PX;
+        const estRowHeight = tileHeightPx + tileGapPx;
         return Math.max(1, Math.floor((laneItemsAreaHeight + tileGapPx) / estRowHeight));
       }
 
@@ -275,7 +304,7 @@ export function HierarchicalLane({ category, label, nodes, height }: Hierarchica
     if (category === 'service' || category === 'network') return LANE_MAX_ROWS_COMPACT;
 
     return LANE_MAX_ROWS_DEFAULT;
-  }, [category, focusAggregateId, isAggregateLane, laneItemsAreaHeight, tileGapPx]);
+  }, [category, focusAggregateId, isAggregateLane, laneItemsAreaHeight, tileGapPx, tileMeasuredHeight]);
 
   const pageSize = useMemo(() => {
     if (itemsPerRow <= 0) return 0;
@@ -461,38 +490,48 @@ export function HierarchicalLane({ category, label, nodes, height }: Hierarchica
           </div>
         )}
 
-        <div ref={setLaneItemsAreaNodeRef} className="flex-1 min-h-0 flex items-center justify-center">
+        <div
+          ref={setLaneItemsAreaNodeRef}
+          className={`flex-1 min-h-0 flex justify-center ${
+            isAggregateLane ? 'items-start pt-2' : 'items-center'
+          }`}
+        >
           {nodes.length === 0 ? (
             <div className="flex items-center justify-center text-secondary font-macan text-sm">
               Drop {category} resources here
             </div>
           ) : (
             <div className={`flex flex-wrap justify-center ${isAggregateLane ? 'gap-10' : 'gap-8'}`}>
-              {visibleItems.map((item) => {
+              {visibleItems.map((item, index) => {
+                const shouldMeasureTile = isAggregateLane && !focusAggregateId && index === 0;
+                const tileRef = shouldMeasureTile ? setTileMeasureNodeRef : undefined;
+
                 if (item.kind === 'group') {
                   const parentNode = item.node;
                   const group = groups.find((g) => g.ownerId === parentNode.id);
                   const memberCount = group?.memberIds.length ?? 0;
 
                   return (
-                    <HierarchicalNodeGroup
-                      key={parentNode.id}
-                      parentNode={parentNode}
-                      childNodes={childNodesByParent.get(parentNode.id) || []}
-                      memberCount={memberCount}
-                      collapsed={!!group?.collapsed}
-                      onToggleCollapse={
-                        memberCount > 0 && group ? () => toggleGroupCollapse(group.id) : undefined
-                      }
-                      onParentClick={isAggregateLane ? handleAggregateNodeClick : undefined}
-                      onParentDoubleClick={isAggregateLane ? handleAggregateNodeDoubleClick : undefined}
-                    />
+                    <div key={parentNode.id} ref={tileRef} className="inline-block">
+                      <HierarchicalNodeGroup
+                        parentNode={parentNode}
+                        childNodes={childNodesByParent.get(parentNode.id) || []}
+                        memberCount={memberCount}
+                        collapsed={!!group?.collapsed}
+                        onToggleCollapse={
+                          memberCount > 0 && group ? () => toggleGroupCollapse(group.id) : undefined
+                        }
+                        onParentClick={isAggregateLane ? handleAggregateNodeClick : undefined}
+                        onParentDoubleClick={isAggregateLane ? handleAggregateNodeDoubleClick : undefined}
+                      />
+                    </div>
                   );
                 }
 
                 const node = item.node;
                 return (
                   <div
+                    ref={tileRef}
                     key={node.id}
                     data-node-id={node.id}
                     className="cursor-pointer transition-transform hover:scale-105"
