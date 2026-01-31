@@ -230,7 +230,6 @@ export function TopologyCanvas() {
     layoutMode,
     detailLanesExpanded,
     focusAggregateId,
-    setFocusAggregate,
     clearFocus,
   } = useUIStore();
   const { nodes, groups, setNodes, setGroups, toggleGroupCollapse } = useTopologyStore();
@@ -750,18 +749,11 @@ export function TopologyCanvas() {
   }, []);
 
   const onNodeSelect = (node: K8sNodeData) => {
-    if (node.category === 'aggregate') {
-      setFocusAggregate(node.id);
-    }
-
+    // Selection should not change topology scope; focusing is an explicit action.
     setSelectedNode(node);
   };
 
   const openNodeDetails = (node: K8sNodeData) => {
-    if (node.category === 'aggregate') {
-      setFocusAggregate(node.id);
-    }
-
     setSelectedNode(node);
     openMetadataPanel(node, 'metadata');
   };
