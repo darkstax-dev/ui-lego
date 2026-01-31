@@ -13,15 +13,15 @@ export function MetadataPanel() {
   if (!metadataPanelOpen) return null;
 
   return (
-    <aside className="absolute top-0 right-0 bottom-0 z-30 w-[420px] max-w-[90vw] border-l border-divider shadow-[-4px_0px_20px_-10px_rgba(12,12,13,0.2)] flex flex-col bg-surface-default">
+    <aside className="absolute top-0 right-0 bottom-0 z-30 w-[420px] max-w-[90vw] border-l border-divider flex flex-col bg-surface-default">
       <div className="flex items-center justify-between" style={{ padding: '24px 16px 0 16px' }}>
         <div className="flex items-center gap-0">
           <button
             type="button"
-            className={`px-3 py-1 font-macan-mono text-[16px] font-medium leading-[110%] rounded-t bg-transparent border-0 border-b transition-colors ${
+            className={`px-3 py-1 font-macan-mono text-[16px] font-medium leading-[110%] bg-transparent border-0 border-b-[2px] transition-colors ${
               metadataPanelTab === 'metadata'
                 ? 'text-primary border-text-primary'
-                : 'text-secondary border-secondary'
+                : 'text-secondary border-transparent'
             }`}
             onClick={() => setMetadataPanelTab('metadata')}
           >
@@ -29,10 +29,10 @@ export function MetadataPanel() {
           </button>
           <button
             type="button"
-            className={`px-3 py-1 font-macan-mono text-[16px] font-medium leading-[110%] rounded-t bg-transparent border-0 border-b transition-colors ${
+            className={`px-3 py-1 font-macan-mono text-[16px] font-medium leading-[110%] bg-transparent border-0 border-b-[2px] transition-colors ${
               metadataPanelTab === 'raw'
                 ? 'text-primary border-text-primary'
-                : 'text-secondary border-secondary'
+                : 'text-secondary border-transparent'
             }`}
             onClick={() => setMetadataPanelTab('raw')}
           >
@@ -52,7 +52,7 @@ export function MetadataPanel() {
         </div>
       </div>
 
-      <div className="flex-1 overflow-auto" style={{ padding: '24px 16px' }}>
+      <div className="flex-1 overflow-auto" style={{ padding: '24px 16px', gap: '24px', display: 'flex', flexDirection: 'column' }}>
         {!selectedNode ? (
           <div className="text-sm font-macan text-secondary">Select a node in the graph to view metadata.</div>
         ) : (
