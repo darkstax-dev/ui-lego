@@ -518,12 +518,15 @@ export function HierarchicalLane({ category, label, nodes, height }: Hierarchica
             <div
               className={
                 isAggregateLane
-                  ? 'grid justify-center content-start gap-10'
+                  ? 'grid w-full content-start gap-10'
                   : 'flex flex-wrap justify-center gap-8'
               }
               style={
                 isAggregateLane
-                  ? { gridTemplateColumns: `repeat(${Math.max(1, itemsPerRow)}, max-content)` }
+                  ? {
+                      gridTemplateColumns: `repeat(${Math.max(1, itemsPerRow)}, max-content)`,
+                      justifyContent: 'space-evenly',
+                    }
                   : undefined
               }
             >
