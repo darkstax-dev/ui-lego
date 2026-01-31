@@ -54,7 +54,7 @@ export function MetadataPanel() {
 
       <div className="flex-1 overflow-auto" style={{ padding: '24px 16px', gap: '24px', display: 'flex', flexDirection: 'column' }}>
         {!selectedNode ? (
-          <div className="text-sm font-macan text-secondary">Select a node in the graph to view metadata.</div>
+          <div className="text-sm font-macan text-secondary font-book leading-[120%]">Select a node in the graph to view metadata.</div>
         ) : (
           <>
             {metadataPanelTab === 'metadata' && (
