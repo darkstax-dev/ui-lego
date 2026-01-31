@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { useDroppable } from '@dnd-kit/core';
-import { Minus, Plus } from 'lucide-react';
+import { Maximize2, Minus, Plus } from 'lucide-react';
 import { MultiSelect, type MultiSelectOption } from 'ui-lego';
 import { K8sNodeData, K8sResourceCategory } from '../../types';
 import { KubernetesIconWrapper } from '../ui/KubernetesIconWrapper';
@@ -40,7 +40,6 @@ export function HierarchicalLane({ category, label, nodes, height }: Hierarchica
   const laneHeight = typeof height === 'number' ? `${height}px` : height;
 
   const isAggregateLane = category === 'aggregate';
-  const clickTimeoutRef = useRef<number | null>(null);
 
   const laneContentRef = useRef<HTMLDivElement | null>(null);
   const [laneContentWidth, setLaneContentWidth] = useState(0);
@@ -106,25 +105,23 @@ export function HierarchicalLane({ category, label, nodes, height }: Hierarchica
     return () => observer.disconnect();
   }, [category]);
 
-  const clearAggregateClickTimeout = () => {
-    if (clickTimeoutRef.current == null) return;
-    window.clearTimeout(clickTimeoutRef.current);
-    clickTimeoutRef.current = null;
-  };
-
   const handleAggregateNodeClick = (node: K8sNodeData) => {
-    // Delay the single-click handler so a double-click can cancel it.
-    clearAggregateClickTimeout();
-    clickTimeoutRef.current = window.setTimeout(() => {
-      setFocusAggregate(node.id);
-      setSelectedNode(node);
-      clickTimeoutRef.current = null;
-    }, 200);
+    setSelectedNode(node);
   };
 
-  const handleAggregateNodeDoubleClick = () => {
-    clearAggregateClickTimeout();
-    clearFocus();
+  const handleAggregateNodeFocus = (node: K8sNodeData) => {
+    setFocusAggregate(node.id);
+    setSelectedNode(node);
+  };
+
+  const handleAggregateNodeDoubleClick = (node: K8sNodeData) => {
+    // Toggle focus for the aggregate node.
+    if (focusAggregateId === node.id) {
+      clearFocus();
+      return;
+    }
+
+    handleAggregateNodeFocus(node);
   };
 
   // Organize nodes into parent-child hierarchy
@@ -551,6 +548,7 @@ export function HierarchicalLane({ category, label, nodes, height }: Hierarchica
                         }
                         onParentClick={isAggregateLane ? handleAggregateNodeClick : undefined}
                         onParentDoubleClick={isAggregateLane ? handleAggregateNodeDoubleClick : undefined}
+                        onExpand={isAggregateLane ? handleAggregateNodeFocus : undefined}
                       />
                     </div>
                   );
@@ -562,7 +560,7 @@ export function HierarchicalLane({ category, label, nodes, height }: Hierarchica
                     ref={tileRef}
                     key={node.id}
                     data-node-id={node.id}
-                    className="cursor-pointer transition-transform hover:scale-105"
+                    className="cursor-pointer transition-transform hover:scale-105 relative"
                     onClick={() => {
                       if (isAggregateLane) {
                         handleAggregateNodeClick(node);
@@ -574,9 +572,23 @@ export function HierarchicalLane({ category, label, nodes, height }: Hierarchica
                     onDoubleClick={(e) => {
                       if (!isAggregateLane) return;
                       e.stopPropagation();
-                      handleAggregateNodeDoubleClick();
+                      handleAggregateNodeDoubleClick(node);
                     }}
                   >
+                    {isAggregateLane && (
+                      <button
+                        type="button"
+                        className="absolute -top-1 -right-1 z-10 w-5 h-5 rounded bg-white/90 border border-blue-dark-950/20 shadow-sm flex items-center justify-center hover:bg-white"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleAggregateNodeFocus(node);
+                        }}
+                        aria-label="Focus aggregate"
+                        title="Focus (drill in)"
+                      >
+                        <Maximize2 className="w-3 h-3 text-blue-dark-950" />
+                      </button>
+                    )}
                     <KubernetesIconWrapper
                       type={node.type}
                       status={node.status}
