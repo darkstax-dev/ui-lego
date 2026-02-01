@@ -20,7 +20,14 @@ export function HierarchicalLane({ category, label, nodes, height }: Hierarchica
     data: { category }
   });
 
-  const laneHeight = typeof height === 'number' ? `${height}px` : height;
+  const HEIGHT_BUMP_PX = 6;
+  const heightBumpCategories: K8sResourceCategory[] = ['load', 'service', 'network', 'storage', 'config'];
+  const shouldBumpLaneHeight = heightBumpCategories.includes(category);
+
+  const laneMinHeight =
+    typeof height === 'number'
+      ? `${height + (shouldBumpLaneHeight ? HEIGHT_BUMP_PX : 0)}px`
+      : height;
 
   // Organize nodes into parent-child hierarchy
   const organizeHierarchy = () => {
@@ -66,8 +73,9 @@ export function HierarchicalLane({ category, label, nodes, height }: Hierarchica
     <div
       className="flex flex-row"
       style={{
-        minHeight: laneHeight,
+        minHeight: laneMinHeight,
         padding: '4px',
+        paddingBottom: shouldBumpLaneHeight && height === 'auto' ? `${4 + HEIGHT_BUMP_PX}px` : undefined,
         gap: '10px',
         alignSelf: 'stretch',
         background: 'var(--surface-card)',
