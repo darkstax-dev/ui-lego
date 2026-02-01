@@ -860,12 +860,122 @@ export function TopologyCanvas() {
         ? filteredNodes.filter((node) => hierarchyVisibleNodeIds.has(node.id))
         : filteredNodes;
 
+    // In hierarchy mode, reduce link crossings by ordering nodes in each lane so that connected
+    // nodes tend to align vertically across lanes (a lightweight Sugiyama-style barycenter pass).
+    const shouldOptimizeOrdering = layoutMode === 'hierarchy' && detailLanesExpanded;
+
+    if (!shouldOptimizeOrdering) {
+      laneCategories.forEach((lane) => {
+        grouped[lane.id] = baseNodes.filter((node) => node.category === lane.id);
+      });
+      return grouped;
+    }
+
+    const laneIndexById = new Map(laneCategories.map((lane, idx) => [lane.id, idx] as const));
+
+    const nodesById = new Map(baseNodes.map((n) => [n.id, n] as const));
+
+    const neighborsById = new Map<string, Set<string>>();
+    const addNeighbor = (a: string, b: string) => {
+      if (a === b) return;
+      const setA = neighborsById.get(a) ?? new Set<string>();
+      setA.add(b);
+      neighborsById.set(a, setA);
+
+      const setB = neighborsById.get(b) ?? new Set<string>();
+      setB.add(a);
+      neighborsById.set(b, setB);
+    };
+
+    // Graph connections (treat as undirected for ordering).
+    baseNodes.forEach((node) => {
+      node.connections?.forEach((targetId) => {
+        if (!nodesById.has(targetId)) return;
+        addNeighbor(node.id, targetId);
+      });
+    });
+
+    // Ownership/group connections (also influence alignment).
+    groups.forEach((group) => {
+      if (!nodesById.has(group.ownerId)) return;
+      group.memberIds.forEach((memberId) => {
+        if (!nodesById.has(memberId)) return;
+        addNeighbor(group.ownerId, memberId);
+      });
+    });
+
+    // Seed lane buckets in current order.
     laneCategories.forEach((lane) => {
       grouped[lane.id] = baseNodes.filter((node) => node.category === lane.id);
     });
 
+    // Current per-lane order indexes (updated as we sort lanes).
+    const orderIndexByNodeId = new Map<string, number>();
+    const rebuildOrderIndexForLane = (laneId: string) => {
+      const laneNodes = grouped[laneId] ?? [];
+      laneNodes.forEach((n, idx) => orderIndexByNodeId.set(n.id, idx));
+    };
+    laneCategories.forEach((lane) => rebuildOrderIndexForLane(lane.id));
+
+    const scoreNode = (nodeId: string): number | null => {
+      const node = nodesById.get(nodeId);
+      if (!node) return null;
+
+      const myLaneIdx = laneIndexById.get(node.category) ?? 0;
+      const neighbors = neighborsById.get(nodeId);
+      if (!neighbors || neighbors.size === 0) return null;
+
+      let weightedSum = 0;
+      let weightTotal = 0;
+
+      neighbors.forEach((neighborId) => {
+        const neighbor = nodesById.get(neighborId);
+        if (!neighbor) return;
+
+        const neighborOrder = orderIndexByNodeId.get(neighborId);
+        if (neighborOrder === undefined) return;
+
+        const neighborLaneIdx = laneIndexById.get(neighbor.category) ?? myLaneIdx;
+        const laneDistance = Math.max(1, Math.abs(neighborLaneIdx - myLaneIdx));
+        const weight = 1 / laneDistance;
+
+        weightedSum += neighborOrder * weight;
+        weightTotal += weight;
+      });
+
+      if (weightTotal === 0) return null;
+      return weightedSum / weightTotal;
+    };
+
+    const sortLaneByBarycenter = (laneId: string) => {
+      const laneNodes = grouped[laneId] ?? [];
+      const priorIndex = new Map(laneNodes.map((n, idx) => [n.id, idx] as const));
+
+      laneNodes.sort((a, b) => {
+        const sa = scoreNode(a.id);
+        const sb = scoreNode(b.id);
+
+        if (sa === null && sb === null) {
+          return (priorIndex.get(a.id) ?? 0) - (priorIndex.get(b.id) ?? 0);
+        }
+        if (sa === null) return 1;
+        if (sb === null) return -1;
+        if (sa !== sb) return sa - sb;
+        return (priorIndex.get(a.id) ?? 0) - (priorIndex.get(b.id) ?? 0);
+      });
+
+      grouped[laneId] = laneNodes;
+      rebuildOrderIndexForLane(laneId);
+    };
+
+    // A few alternating passes is usually enough to reduce crossings significantly.
+    for (let iter = 0; iter < 4; iter++) {
+      for (let i = 1; i < laneCategories.length; i++) sortLaneByBarycenter(laneCategories[i].id);
+      for (let i = laneCategories.length - 2; i >= 0; i--) sortLaneByBarycenter(laneCategories[i].id);
+    }
+
     return grouped;
-  }, [filteredNodes, hierarchyVisibleNodeIds, laneCategories, layoutMode]);
+  }, [detailLanesExpanded, filteredNodes, groups, hierarchyVisibleNodeIds, laneCategories, layoutMode]);
 
   return (
     <div ref={scrollRef} className="w-full h-full relative overflow-auto">
