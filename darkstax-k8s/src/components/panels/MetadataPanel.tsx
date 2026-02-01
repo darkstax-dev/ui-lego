@@ -29,7 +29,7 @@ export function MetadataPanel() {
   return (
     <aside className="metadata-panel absolute top-0 right-0 bottom-0 z-30 w-[420px] max-w-[90vw] border-l border-divider shadow-[-4px_0px_20px_-10px_rgba(12,12,13,0.2)] flex flex-col">
       <div className="px-4 pt-6">
-        <div className="flex items-center justify-between border-b border-divider">
+        <div className="flex items-center justify-between">
           <div className="flex items-end gap-6">
             <button
               type="button"
@@ -78,7 +78,7 @@ export function MetadataPanel() {
                     Overview
                   </h3>
 
-                  <div className="metadata-panel__card p-4 border border-divider">
+                  <div className="metadata-panel__card p-4">
                     <div className="grid grid-cols-2 gap-x-6 gap-y-6">
                       <div className="flex flex-col gap-2 min-w-0">
                         <span className="font-macan-mono text-[12px] font-book tracking-[1.2px] text-secondary">
@@ -144,7 +144,7 @@ export function MetadataPanel() {
                     Key Metadata
                   </h3>
 
-                  <div className="metadata-panel__card p-4 border border-divider">
+                  <div className="metadata-panel__card p-4">
                     <div className="flex flex-col gap-3 text-[14px] font-macan">
                       {(
                         ['Name', 'Namespace', 'Owner', 'Replicas', 'Status', 'IP', 'Node'] as const
@@ -177,7 +177,7 @@ export function MetadataPanel() {
                     Connections
                   </h3>
 
-                  <div className="metadata-panel__card p-4 border border-divider text-primary">
+                  <div className="metadata-panel__card p-4 text-primary">
                     {selectedNode.connections?.length ? (
                       <ul className="list-disc list-inside space-y-1 text-[14px] font-macan-mono font-book">
                         {selectedNode.connections.map((connection) => (
@@ -198,7 +198,7 @@ export function MetadataPanel() {
                       Position
                     </h3>
 
-                    <div className="metadata-panel__card p-4 border border-divider">
+                    <div className="metadata-panel__card p-4">
                       <p className="text-[14px] font-macan-mono font-book text-primary">
                         x: {selectedNode.position.x}, y: {selectedNode.position.y}
                       </p>
