@@ -26,3 +26,13 @@ code {
   height: 100vh;
   overflow: hidden;
 }
+
+/* Metadata panel backgrounds should never appear transparent.
+   Use token values when available, with fallbacks matching Figma light theme. */
+.metadata-panel {
+  background-color: var(--surface-default, #CECECE);
+}
+
+.metadata-panel__card {
+  background-color: var(--surface-card, #DFDFDF);
+}
