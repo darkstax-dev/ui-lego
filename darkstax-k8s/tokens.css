@@ -300,6 +300,12 @@
   /* Dividers */
   --divider-light: #c8c8c8;
   --divider-dark: var(--color-blue-950);
+
+  /* Kubernetes Icon Wrapper - Light Theme */
+  --k8s-icon-fill: var(--Blue-Dark-blue-950, #072B56);
+  --k8s-icon-text: var(--Blue-Dark-blue-950, #00112B);
+  --k8s-hexagon-fill: white;
+  --k8s-hexagon-fill-opacity: 1;
 }
 
 /* ===== DARK MODE OVERRIDES ===== */
