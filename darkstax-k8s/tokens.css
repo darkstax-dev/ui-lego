@@ -377,9 +377,9 @@
 
     /* Status Colors - dark mode */
     --status-ready: rgba(255, 255, 255, 0.20);
-    --status-deploying: #faa536;
-    --status-active: #2b9952;
-    --status-error: #aa1a00;
+    --status-deploying: #ED8B30;
+    --status-active: #108541;
+    --status-error: #B6261F;
     --status-terminated: rgba(255, 255, 255, 0.20);
 
     /* Kubernetes Icon Wrapper - Dark Theme */
@@ -458,9 +458,9 @@
 
   /* Status Colors - manual dark mode */
   --status-ready: rgba(255, 255, 255, 0.20);
-  --status-deploying: #faa536;
-  --status-active: #2b9952;
-  --status-error: #aa1a00;
+  --status-deploying: #ED8B30;
+  --status-active: #108541;
+  --status-error: #B6261F;
   --status-terminated: rgba(255, 255, 255, 0.20);
 
   /* Kubernetes Icon Wrapper - Dark Theme */
