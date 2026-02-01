@@ -88,7 +88,7 @@ export function KubernetesIconWrapper({
           />
         </svg>
 
-        {/* Inner hexagon with theme-aware fill and green stroke */}
+        {/* Inner hexagon with theme-aware fill and status stroke */}
         <svg
           width="50"
           height="56"
