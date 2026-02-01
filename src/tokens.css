@@ -292,6 +292,12 @@
   /* Dividers */
   --divider-light: #c8c8c8;
   --divider-dark: var(--color-blue-950);
+
+  /* Search input tokens - Light theme */
+  --search-input-bg: #ECECEC;
+  --search-input-text: #78797A;
+  --search-input-placeholder: #78797A;
+  --search-input-icon: #78797A;
 }
 
 /* ===== DARK MODE OVERRIDES ===== */
