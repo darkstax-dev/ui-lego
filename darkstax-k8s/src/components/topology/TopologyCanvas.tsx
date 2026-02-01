@@ -430,8 +430,11 @@ export function TopologyCanvas() {
       return { x, y: yBase + anchorRect.height / 2 };
     };
 
+    setSvgViewport({ w: svgRect.width, h: svgRect.height });
+
     const renderedIds = new Set(layoutNodes.map((n) => n.id));
     const paths: Array<{ id: string; d: string; fromId: string; toId: string }> = [];
+    const occluders: Array<{ id: string; x: number; y: number; w: number; h: number }> = [];
 
     // In lane-based hierarchy mode, draw:
     // 1) ownership (group parent -> child) connections
