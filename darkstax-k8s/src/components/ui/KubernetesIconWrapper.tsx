@@ -71,7 +71,7 @@ export function KubernetesIconWrapper({
   return (
     <div className="KubernetesIconWrapper flex flex-col items-center gap-0.5 relative">
       {/* Hexagonal Background with Theme-Aware Styling */}
-      <div className="relative w-[52px]">
+      <div className="relative w-[52px]" data-anchor="node-body">
         {/* Outer hexagon with blur effect */}
         <svg
           width="50"
