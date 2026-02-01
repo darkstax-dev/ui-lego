@@ -3,7 +3,7 @@
   position: relative;
   width: 100%;
   min-width: 240px;
-  background: var(--Inputs-Input-Background);
+  background: var(--search-input-bg);
   border-radius: var(--sds-size-radius-200);
   font-family: var(--font-family-macan);
 }
