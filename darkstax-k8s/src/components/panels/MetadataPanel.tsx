@@ -61,7 +61,7 @@ export function MetadataPanel() {
               <>
                 <div className="mb-4">
                   <h3 className="text-xs font-semibold mb-2 font-macan-mono uppercase text-secondary tracking-wider">Overview</h3>
-                  <div className="p-3 space-y-2 bg-surface-card border border-divider">
+                  <div className="p-3 space-y-2 bg-[#DFDFDF] border border-divider">
                     <div className="flex items-start gap-2">
                       <span className="text-xs uppercase tracking-wide font-macan-mono text-secondary">ID</span>
                       <span className="text-sm font-macan-mono break-all text-primary">{selectedNode.id}</span>
@@ -90,7 +90,7 @@ export function MetadataPanel() {
 
                 <div className="mb-4">
                   <h3 className="text-xs font-semibold mb-2 font-macan-mono uppercase text-secondary tracking-wider">Key Metadata</h3>
-                  <div className="p-3 space-y-2 text-sm font-macan bg-surface-card border border-divider text-primary">
+                  <div className="p-3 space-y-2 text-sm font-macan bg-[#DFDFDF] border border-divider text-primary">
                     {(
                       ['Name', 'Namespace', 'Owner', 'Replicas', 'Status', 'IP', 'Node'] as const
                     )
@@ -115,7 +115,7 @@ export function MetadataPanel() {
 
                 <div className="mb-4">
                   <h3 className="text-xs font-semibold mb-2 font-macan-mono uppercase text-secondary tracking-wider">Connections</h3>
-                  <div className="p-3 text-sm font-macan bg-surface-card border border-divider text-primary">
+                  <div className="p-3 text-sm font-macan bg-[#DFDFDF] border border-divider text-primary">
                     {selectedNode.connections?.length ? (
                       <ul className="list-disc list-inside space-y-1">
                         {selectedNode.connections.map((connection) => (
@@ -144,7 +144,7 @@ export function MetadataPanel() {
             {metadataPanelTab === 'raw' && (
               <div className="mb-4">
                 <h3 className="text-xs font-semibold mb-2 font-macan-mono uppercase text-secondary tracking-wider">Raw Metadata</h3>
-                <div className="p-3 bg-surface-card border border-divider">
+                <div className="p-3 bg-[#DFDFDF] border border-divider">
                   <pre className="m-0 whitespace-pre-wrap break-words text-[13px] font-mono text-primary">
                     {JSON.stringify(selectedNode.metadata || {}, null, 2)}
                   </pre>
