@@ -94,7 +94,7 @@ export const kubernetesTopologyScenario: K8sTopologyScenario = {
           pods: '25'
         }
       },
-      status: 'active',
+      status: 'ready',
     },
     {
       id: 'deploy-frontend',
