@@ -41,7 +41,7 @@
       "resourceTypes": ["datacenter", "mobiletower"],
       "laneConfig": {
         "display": true,
-        "height": 360,
+        "height": 200,
         "order": 0
       },
       "color": "#4ECDC4",
