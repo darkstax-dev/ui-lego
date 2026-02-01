@@ -90,14 +90,15 @@ export function ResourceMenuPanel() {
       data-testid="resource-menu-panel"
     >
       {/* Search Input */}
-      <div className="h-10 px-4 bg-gray-100 flex items-center gap-2 rounded">
-        <Search className="w-4 h-4 text-gray-500 flex-shrink-0" />
+      <div className="h-10 px-4 flex items-center gap-2" style={{ backgroundColor: 'var(--color-blue-950)' }}>
+        <Search className="w-4 h-4 flex-shrink-0" style={{ color: 'var(--color-gray-300)' }} />
         <input
           type="text"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
           placeholder="Search actions..."
-          className="flex-1 bg-transparent text-base font-inter text-gray-500 placeholder:text-gray-500 outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:ring-offset-gray-200"
+          className="flex-1 bg-transparent text-base font-inter outline-none"
+          style={{ color: 'var(--color-gray-300)' }}
         />
       </div>
 
