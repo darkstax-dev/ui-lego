@@ -1,53 +1,64 @@
+import { Info } from 'lucide-react';
 import { useUIStore } from '../../store/uiStore';
 import { statusColors } from '../../data/k8sTemplates';
 
 export function StatusLegendTooltip() {
-  const { showStatusLegend } = useUIStore();
-
-  if (!showStatusLegend) return null;
+  const { showStatusLegend, toggleStatusLegend } = useUIStore();
 
   return (
-    <div
-      className="absolute right-12 bottom-24 w-[234px] shadow-[0px_4px_4px_-1px_rgba(12,12,13,0.1)] p-3 flex flex-col gap-3 z-50 rounded-sm"
-      style={{ backgroundColor: 'var(--surface-card)' }}
-    >
-      {/* Beak/Arrow */}
-      <div
-        className="absolute -bottom-[6px] left-1/2 -translate-x-1/2 w-3 h-3 rotate-45"
-        style={{ backgroundColor: 'var(--surface-card)' }}
-      />
+    <div className="fixed bottom-6 right-6 z-50">
+      <div className="relative">
+        <button
+          type="button"
+          aria-label="Toggle status legend"
+          onClick={toggleStatusLegend}
+          className="w-10 h-10 bg-blue-dark-950 flex items-center justify-center hover:bg-blue-950 transition-colors"
+        >
+          <Info className="w-5 h-5 text-white" fill="white" />
+        </button>
 
-      {/* Title */}
-      <div
-        className="font-macan-mono text-base font-medium leading-tight"
-        style={{ color: 'var(--text-blue-main)' }}
-      >
-        Status Legend
-      </div>
-
-      {/* Status Items */}
-      <div className="flex flex-col gap-3">
-        {Object.entries(statusColors).map(([status, { hex, label }]) => (
-          <div key={status} className="flex items-center gap-2">
-            {/* Status Hexagon */}
-            <svg width="18" height="20" viewBox="0 0 18 20" fill="none" className="flex-shrink-0">
-              <path
-                d="M8.80015 0.0518371C8.92382 -0.0172791 9.07618 -0.017279 9.19985 0.0518371L17.8001 4.85838C17.9238 4.92749 18 5.05523 18 5.19346V14.8065C18 14.9448 17.9238 15.0725 17.8001 15.1416L9.19985 19.9482C9.07618 20.0173 8.92382 20.0173 8.80015 19.9482L0.199852 15.1416C0.0761831 15.0725 0 14.9448 0 14.8065V5.19346C0 5.05523 0.0761832 4.92749 0.199852 4.85838L8.80015 0.0518371Z"
-                fill={hex}
-                stroke={status === 'ready' || status === 'terminated' ? 'rgba(0,0,0,0.1)' : 'none'}
-                strokeWidth={status === 'ready' || status === 'terminated' ? '1' : '0'}
-              />
-            </svg>
-
-            {/* Status Label */}
+        {showStatusLegend && (
+          <div
+            className="absolute right-0 bottom-[calc(100%+16px)] w-[234px] shadow-[0px_4px_4px_-1px_rgba(12,12,13,0.1)] p-3 flex flex-col gap-3"
+            style={{ backgroundColor: 'var(--surface-card)' }}
+          >
+            {/* Beak/Arrow */}
             <div
-              className="font-inter text-sm leading-[140%]"
+              className="absolute -bottom-[6px] right-4 w-3 h-3 rotate-45"
+              style={{ backgroundColor: 'var(--surface-card)' }}
+            />
+
+            {/* Title */}
+            <div
+              className="font-macan-mono text-base font-medium leading-tight"
               style={{ color: 'var(--text-blue-main)' }}
             >
-              {label}
+              Status Legend
+            </div>
+
+            {/* Status Items */}
+            <div className="flex flex-col gap-3">
+              {Object.entries(statusColors).map(([status, { hex, label }]) => (
+                <div key={status} className="flex items-center gap-2">
+                  {/* Status Hexagon */}
+                  <svg width="18" height="20" viewBox="0 0 18 20" fill="none" className="flex-shrink-0">
+                    <path
+                      d="M8.80015 0.0518371C8.92382 -0.0172791 9.07618 -0.017279 9.19985 0.0518371L17.8001 4.85838C17.9238 4.92749 18 5.05523 18 5.19346V14.8065C18 14.9448 17.9238 15.0725 17.8001 15.1416L9.19985 19.9482C9.07618 20.0173 8.92382 20.0173 8.80015 19.9482L0.199852 15.1416C0.0761831 15.0725 0 14.9448 0 14.8065V5.19346C0 5.05523 0.0761832 4.92749 0.199852 4.85838L8.80015 0.0518371Z"
+                      fill={hex}
+                      stroke={status === 'ready' || status === 'terminated' ? 'rgba(0,0,0,0.1)' : 'none'}
+                      strokeWidth={status === 'ready' || status === 'terminated' ? '1' : '0'}
+                    />
+                  </svg>
+
+                  {/* Status Label */}
+                  <div className="font-inter text-sm leading-[140%]" style={{ color: 'var(--text-blue-main)' }}>
+                    {label}
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
-        ))}
+        )}
       </div>
     </div>
   );

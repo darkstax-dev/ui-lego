@@ -169,7 +169,7 @@ export const useUIStore = create<UIStore>((set) => ({
   collapseDetailLanes: () => set({ detailLanesExpanded: false }),
 
   // Status legend
-  showStatusLegend: true,
+  showStatusLegend: false,
   toggleStatusLegend: () => set((state) => ({
     showStatusLegend: !state.showStatusLegend
   })),
