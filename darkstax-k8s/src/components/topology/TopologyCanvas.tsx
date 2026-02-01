@@ -436,6 +436,23 @@ export function TopologyCanvas() {
     const paths: Array<{ id: string; d: string; fromId: string; toId: string }> = [];
     const occluders: Array<{ id: string; x: number; y: number; w: number; h: number }> = [];
 
+    // In hierarchy mode we also build an occlusion mask so links can be drawn
+    // above nodes without ever being visible on top of the node icon.
+    renderedIds.forEach((id) => {
+      const nodeEl = getNodeEl(id);
+      const iconEl = (nodeEl?.querySelector('[data-anchor="node-body"]') as HTMLElement | null) ?? nodeEl;
+      const r = iconEl?.getBoundingClientRect();
+      if (!r) return;
+
+      occluders.push({
+        id,
+        x: r.left - svgRect.left,
+        y: r.top - svgRect.top,
+        w: r.width,
+        h: r.height,
+      });
+    });
+
     // In lane-based hierarchy mode, draw:
     // 1) ownership (group parent -> child) connections
     // 2) lane-adjacent connections (load -> service -> network -> config/storage)
