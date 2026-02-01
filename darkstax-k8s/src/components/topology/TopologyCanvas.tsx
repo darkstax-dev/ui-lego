@@ -1,6 +1,5 @@
 import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import {
-  ChevronDown,
   ChevronLeft,
   ChevronRight,
   ChevronsLeft,
@@ -83,11 +82,12 @@ function TypeCluster({
         }}
         type="button"
       >
-        {expanded ? (
-          <ChevronDown className="w-4 h-4 text-blue-dark-950" />
-        ) : (
-          <ChevronRight className="w-4 h-4 text-blue-dark-950" />
-        )}
+        <span
+          className="w-4 h-4 inline-flex items-center justify-center font-semibold leading-none text-[16px] text-blue-dark-950"
+          aria-hidden="true"
+        >
+          {expanded ? '−' : '+'}
+        </span>
         <span className="text-xs font-macan text-blue-dark-950 truncate max-w-[180px]">
           {nodeType}(s)
         </span>
@@ -798,11 +798,12 @@ export function TopologyCanvas() {
               aria-label={group.collapsed ? 'Expand' : 'Collapse'}
               type="button"
             >
-              {group.collapsed ? (
-                <ChevronRight className="w-4 h-4 text-blue-dark-950" />
-              ) : (
-                <ChevronDown className="w-4 h-4 text-blue-dark-950" />
-              )}
+              <span
+                className="w-4 h-4 inline-flex items-center justify-center font-semibold leading-none text-[16px] text-blue-dark-950"
+                aria-hidden="true"
+              >
+                {group.collapsed ? '+' : '−'}
+              </span>
             </button>
           )}
 

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Search, ChevronDown, ChevronUp, Layers } from 'lucide-react';
+import { Search, Layers } from 'lucide-react';
 import { useDraggable } from '@dnd-kit/core';
 import { k8sResourceTemplates } from '../../data/k8sTemplates';
 import { KubernetesIconWrapper } from '../ui/KubernetesIconWrapper';
@@ -108,11 +108,12 @@ export function ResourceMenuPanel() {
             onClick={() => toggleSection('aggregate')}
           >
             <span className="text-blue-dark-950 font-macan text-base font-semibold">Aggregate</span>
-            {expandedSections.aggregate ? (
-              <ChevronUp className="w-5 h-5 text-gray-500" />
-            ) : (
-              <ChevronDown className="w-5 h-5 text-gray-500" />
-            )}
+            <span
+              className="w-5 h-5 text-gray-500 inline-flex items-center justify-center font-semibold leading-none text-[18px]"
+              aria-hidden="true"
+            >
+              {expandedSections.aggregate ? '−' : '+'}
+            </span>
           </button>
         </div>
 
@@ -127,11 +128,12 @@ export function ResourceMenuPanel() {
             onClick={() => toggleSection('kubernetes')}
           >
             <span className="text-blue-dark-950 font-macan text-base font-semibold">Kubernetes</span>
-            {expandedSections.kubernetes ? (
-              <ChevronUp className="w-5 h-5 text-gray-500" />
-            ) : (
-              <ChevronDown className="w-5 h-5 text-gray-500" />
-            )}
+            <span
+              className="w-5 h-5 text-gray-500 inline-flex items-center justify-center font-semibold leading-none text-[18px]"
+              aria-hidden="true"
+            >
+              {expandedSections.kubernetes ? '−' : '+'}
+            </span>
           </button>
 
           {expandedSections.kubernetes && (
@@ -154,11 +156,12 @@ export function ResourceMenuPanel() {
             onClick={() => toggleSection('templates')}
           >
             <span className="text-blue-dark-950 font-macan text-base font-semibold">Templates</span>
-            {expandedSections.templates ? (
-              <ChevronUp className="w-5 h-5 text-gray-500" />
-            ) : (
-              <ChevronDown className="w-5 h-5 text-gray-500" />
-            )}
+            <span
+              className="w-5 h-5 text-gray-500 inline-flex items-center justify-center font-semibold leading-none text-[18px]"
+              aria-hidden="true"
+            >
+              {expandedSections.templates ? '−' : '+'}
+            </span>
           </button>
         </div>
       </div>

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Info, ChevronDown, ChevronUp } from 'lucide-react';
+import { Info } from 'lucide-react';
 import { cn } from '@/utils/cn';
 
 interface LegendItem {
@@ -38,11 +38,12 @@ export function TopologyLegend() {
         )}
       >
         <Info className="w-5 h-5" />
-        {isExpanded ? (
-          <ChevronUp className="w-4 h-4" />
-        ) : (
-          <ChevronDown className="w-4 h-4" />
-        )}
+        <span
+          className="w-4 h-4 inline-flex items-center justify-center font-semibold leading-none text-[16px]"
+          aria-hidden="true"
+        >
+          {isExpanded ? '−' : '+'}
+        </span>
       </button>
 
       {isExpanded && (
