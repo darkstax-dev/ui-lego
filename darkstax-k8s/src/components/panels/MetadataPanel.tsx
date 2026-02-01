@@ -214,7 +214,7 @@ export function MetadataPanel() {
                   Raw Metadata
                 </h3>
 
-                <div className="metadata-panel__card p-4 border border-divider">
+                <div className="metadata-panel__card p-4">
                   <pre className="m-0 whitespace-pre-wrap break-words text-[13px] font-mono text-primary">
                     {JSON.stringify(selectedNode.metadata || {}, null, 2)}
                   </pre>
