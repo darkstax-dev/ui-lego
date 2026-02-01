@@ -73,11 +73,11 @@ export function ResourceMenuPanel() {
       >
         <button
           type="button"
-          className="w-full h-full flex items-center justify-center bg-[rgb(206,206,206)] hover:bg-[rgb(206,206,206)]"
+          className="w-full h-full flex items-center justify-center bg-surface-default hover:bg-surface-default transition-colors"
           onClick={() => setExpandedSections((prev) => ({ ...prev, kubernetes: true }))}
           aria-label="Open resource menu"
         >
-          <Layers className="w-5 h-5 text-blue-dark-950" />
+          <Layers className="w-5 h-5" style={{ color: 'var(--text-blue-main)' }} />
         </button>
       </div>
     );
