@@ -6,20 +6,21 @@ export function StatusLegendTooltip() {
   const { showStatusLegend, toggleStatusLegend } = useUIStore();
 
   return (
-    <div className="fixed bottom-6 right-6 z-50">
+    <div className="fixed bottom-6 right-6 z-[9999] pointer-events-auto">
       <div className="relative">
         <button
           type="button"
           aria-label="Toggle status legend"
           onClick={toggleStatusLegend}
-          className="w-10 h-10 bg-blue-dark-950 flex items-center justify-center hover:bg-blue-950 transition-colors"
+          className="w-10 h-10 flex items-center justify-center transition-colors rounded-none"
+          style={{ backgroundColor: 'var(--color-blue-dark-950)' }}
         >
-          <Info className="w-5 h-5 text-white" fill="white" />
+          <Info className="w-5 h-5" style={{ color: 'white' }} />
         </button>
 
         {showStatusLegend && (
           <div
-            className="absolute right-0 bottom-[calc(100%+16px)] w-[234px] shadow-[0px_4px_4px_-1px_rgba(12,12,13,0.1)] p-3 flex flex-col gap-3"
+            className="absolute right-0 bottom-[calc(100%+16px)] w-[234px] shadow-[0px_4px_4px_-1px_rgba(12,12,13,0.1)] p-3 flex flex-col gap-3 rounded-none"
             style={{ backgroundColor: 'var(--surface-card)' }}
           >
             {/* Beak/Arrow */}
