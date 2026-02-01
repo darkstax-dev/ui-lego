@@ -468,6 +468,12 @@
   --k8s-icon-text: var(--color-gray-200, #DFDFDF);
   --k8s-hexagon-fill: #2C3E5C;
   --k8s-hexagon-fill-opacity: 1;
+
+  /* Search input tokens - Dark theme */
+  --search-input-bg: #072B56;
+  --search-input-text: #CECECE;
+  --search-input-placeholder: #CECECE;
+  --search-input-icon: #CECECE;
 }
 
 /* ===== UTILITY CLASSES ===== */
