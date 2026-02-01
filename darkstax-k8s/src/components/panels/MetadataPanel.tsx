@@ -61,7 +61,7 @@ export function MetadataPanel() {
               <>
                 <div className="mb-4">
                   <h3 className="text-xs font-semibold mb-2 font-macan-mono uppercase text-secondary tracking-wider">Overview</h3>
-                  <div className="p-3 space-y-2 bg-[#DFDFDF] border border-divider">
+                  <div className="p-3 space-y-2 bg-surface-card border border-divider">
                     <div className="flex items-start gap-2">
                       <span className="text-xs uppercase tracking-wide font-macan-mono text-secondary">ID</span>
                       <span className="text-sm font-macan-mono break-all text-primary">{selectedNode.id}</span>
