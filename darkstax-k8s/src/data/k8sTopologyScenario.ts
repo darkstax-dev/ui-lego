@@ -559,7 +559,7 @@ export const kubernetesTopologyScenario: K8sTopologyScenario = {
         BackoffLimit: 3,
         Status: 'Completed'
       },
-      status: 'active',
+      status: 'terminated',
       connections: ['svc-database']
     }
   ],
