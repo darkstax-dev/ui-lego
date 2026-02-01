@@ -39,6 +39,6 @@ code {
 
 /* Resource Menu Panel search input placeholder styling */
 [data-testid="resource-menu-panel"] input::placeholder {
-  color: var(--color-gray-300);
+  color: var(--search-input-placeholder);
   opacity: 1;
 }
