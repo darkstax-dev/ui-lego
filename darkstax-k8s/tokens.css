@@ -450,6 +450,12 @@
   --status-active: #2b9952;
   --status-error: #aa1a00;
   --status-terminated: rgba(255, 255, 255, 0.20);
+
+  /* Kubernetes Icon Wrapper - Dark Theme */
+  --k8s-icon-fill: white;
+  --k8s-icon-text: var(--color-gray-200, #DFDFDF);
+  --k8s-hexagon-fill: white;
+  --k8s-hexagon-fill-opacity: 0.2;
 }
 
 /* ===== UTILITY CLASSES ===== */
