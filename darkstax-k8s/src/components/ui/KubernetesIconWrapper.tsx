@@ -69,9 +69,9 @@ export function KubernetesIconWrapper({
 
   return (
     <div className="KubernetesIconWrapper flex flex-col items-center gap-0.5 relative">
-      {/* Hexagonal Background with Dark Theme Styling */}
+      {/* Hexagonal Background with Light Theme Styling */}
       <div className="relative w-[52px]">
-        {/* Outer hexagon with blur effect (always visible in dark theme) */}
+        {/* Outer hexagon with blur effect */}
         <svg
           width="50"
           height="56"
@@ -82,12 +82,13 @@ export function KubernetesIconWrapper({
         >
           <path
             d="M24.1992 -0.290039C24.6951 -0.569392 25.3049 -0.569392 25.8008 -0.290039L49.6904 13.168C50.1875 13.4481 50.5 13.9703 50.5 14.542V41.458C50.5 42.0297 50.1875 42.5519 49.6904 42.832L25.8008 56.29C25.3049 56.5694 24.6951 56.5694 24.1992 56.29L0.30957 42.832C-0.18747 42.5519 -0.5 42.0297 -0.5 41.458V14.542C-0.5 13.9703 -0.187471 13.4481 0.30957 13.168L24.1992 -0.290039Z"
-            fill="rgba(255, 255, 255, 0.2)"
+            fill="white"
+            fillOpacity="0.2"
             stroke="var(--color-green-600, #23A45A)"
           />
         </svg>
 
-        {/* Inner hexagon with semi-transparent white fill and green stroke */}
+        {/* Inner hexagon with white fill and green stroke */}
         <svg
           width="50"
           height="56"
@@ -97,15 +98,15 @@ export function KubernetesIconWrapper({
         >
           <path
             d="M24.4449 0.145144C24.7884 -0.0483814 25.2116 -0.0483813 25.5551 0.145144L49.4449 13.6035C49.7884 13.797 50 14.1546 50 14.5417V41.4583C50 41.8454 49.7884 42.203 49.4449 42.3965L25.5551 55.8549C25.2116 56.0484 24.7884 56.0484 24.4449 55.8549L0.555144 42.3965C0.21162 42.203 0 41.8454 0 41.4583V14.5417C0 14.1546 0.21162 13.797 0.555144 13.6035L24.4449 0.145144Z"
-            fill="rgba(255, 255, 255, 0.2)"
+            fill="white"
             stroke="var(--color-green-600, #23A45A)"
             strokeWidth="1"
           />
         </svg>
 
-        {/* K8s Icon - white color for dark theme */}
+        {/* K8s Icon - dark blue color for light theme */}
         <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
-          <IconComponent fill="white" />
+          <IconComponent fill="var(--Blue-Dark-blue-950, #072B56)" />
         </div>
 
         {/* Indicator Badge */}
@@ -126,7 +127,7 @@ export function KubernetesIconWrapper({
         <div
           data-anchor="node-label"
           className="font-macan-mono text-[8px] font-medium leading-normal text-center"
-          style={{ color: 'var(--color-gray-200, #DFDFDF)' }}
+          style={{ color: 'var(--Blue-Dark-blue-950, #00112B)' }}
         >
           {label}
         </div>
