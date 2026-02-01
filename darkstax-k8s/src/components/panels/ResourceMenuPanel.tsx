@@ -90,7 +90,13 @@ export function ResourceMenuPanel() {
       data-testid="resource-menu-panel"
     >
       {/* Search Input */}
-      <div className="h-10 px-4 flex items-center gap-2" style={{ backgroundColor: 'var(--search-input-bg)' }}>
+      <div
+        className="h-10 px-4 flex items-center gap-2"
+        style={{
+          backgroundColor: 'var(--search-input-bg)',
+          borderRadius: 'var(--sds-size-radius-200)',
+        }}
+      >
         <Search className="w-4 h-4 flex-shrink-0" style={{ color: 'var(--search-input-icon)' }} />
         <input
           type="text"
