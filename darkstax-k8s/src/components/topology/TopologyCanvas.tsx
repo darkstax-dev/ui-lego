@@ -1062,7 +1062,7 @@ export function TopologyCanvas() {
               strokeWidth="2"
               strokeDasharray="8 4"
               opacity="0.8"
-              mask="url(#node-occlusion-mask)"
+              mask={svgViewport.w > 0 ? 'url(#node-occlusion-mask)' : undefined}
             />
           ))}
         </svg>
