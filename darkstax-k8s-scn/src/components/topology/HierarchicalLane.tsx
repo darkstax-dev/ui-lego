@@ -71,7 +71,7 @@ export function HierarchicalLane({ category, label, nodes, height }: Hierarchica
 
   return (
     <div
-      className="flex flex-row"
+      className="flex flex-row items-stretch"
       style={{
         minHeight: laneMinHeight,
         padding: '4px',
@@ -92,8 +92,6 @@ export function HierarchicalLane({ category, label, nodes, height }: Hierarchica
           justifyContent: 'center',
           alignItems: 'center',
           gap: '10px',
-          flexShrink: 0,
-          alignSelf: 'stretch',
           background: 'var(--nav-secondary-bg)'
         }}
       >
