@@ -29,7 +29,7 @@
   align-items: center;
   gap: var(--sds-size-space-200);
   padding: var(--sds-size-space-300) var(--sds-size-space-400) var(--sds-size-space-300) var(--sds-size-space-400);
-  background: var(--Inputs-Input-Background);
+  background: var(--search-input-bg);
 }
 
 .multiselect--has-tags .multiselect__input-container {
