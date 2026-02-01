@@ -88,7 +88,7 @@ export function HierarchicalLane({ category, label, nodes, height }: Hierarchica
         style={{
           display: 'flex',
           width: '29px',
-          padding: '4px 6px',
+          padding: '4px',
           justifyContent: 'center',
           alignItems: 'center',
           gap: '10px',
