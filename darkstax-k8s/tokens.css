@@ -454,8 +454,8 @@
   /* Kubernetes Icon Wrapper - Dark Theme */
   --k8s-icon-fill: white;
   --k8s-icon-text: var(--color-gray-200, #DFDFDF);
-  --k8s-hexagon-fill: white;
-  --k8s-hexagon-fill-opacity: 0.2;
+  --k8s-hexagon-fill: #2C3E5C;
+  --k8s-hexagon-fill-opacity: 1;
 }
 
 /* ===== UTILITY CLASSES ===== */
