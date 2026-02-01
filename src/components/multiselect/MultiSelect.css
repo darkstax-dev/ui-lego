@@ -45,12 +45,12 @@
   font-weight: 450;
   line-height: 120%;
   letter-spacing: -0.32px;
-  color: var(--Text-Blue-text-Main-text);
+  color: var(--search-input-text);
   outline: none;
 }
 
 .multiselect__input::placeholder {
-  color: var(--Inputs-Placeholder-text);
+  color: var(--search-input-placeholder);
 }
 
 .multiselect__input:disabled {
