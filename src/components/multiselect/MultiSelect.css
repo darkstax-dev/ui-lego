@@ -21,7 +21,7 @@
   gap: var(--sds-size-space-200);
   padding: var(--sds-size-space-200) var(--sds-size-space-300);
   min-height: 40px;
-  background: var(--Inputs-Input-Background);
+  background: var(--search-input-bg);
 }
 
 .multiselect__input-container {
