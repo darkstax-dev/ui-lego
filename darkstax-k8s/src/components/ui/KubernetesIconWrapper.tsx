@@ -72,14 +72,13 @@ export function KubernetesIconWrapper({
     <div className="KubernetesIconWrapper flex flex-col items-center gap-0.5 relative">
       {/* Hexagonal Background with Theme-Aware Styling */}
       <div className="relative w-[52px]" data-anchor="node-body">
-        {/* Outer hexagon with blur effect */}
+        {/* Outer hexagon */}
         <svg
           width="50"
           height="56"
           viewBox="0 0 50 56"
           fill="none"
           className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
-          style={{ filter: 'blur(4px)' }}
         >
           <path
             d="M24.1992 -0.290039C24.6951 -0.569392 25.3049 -0.569392 25.8008 -0.290039L49.6904 13.168C50.1875 13.4481 50.5 13.9703 50.5 14.542V41.458C50.5 42.0297 50.1875 42.5519 49.6904 42.832L25.8008 56.29C25.3049 56.5694 24.6951 56.5694 24.1992 56.29L0.30957 42.832C-0.18747 42.5519 -0.5 42.0297 -0.5 41.458V14.542C-0.5 13.9703 -0.187471 13.4481 0.30957 13.168L24.1992 -0.290039Z"
