@@ -67,7 +67,8 @@ export function ResourceMenuPanel() {
   if (isCompact) {
     return (
       <div
-        className="absolute top-4 right-4 z-30 bg-gray-200 shadow-[0px_16px_16px_-8px_rgba(12,12,13,0.1)] w-14 h-14 box-border"
+        className="absolute top-4 right-4 z-30 shadow-[0px_16px_16px_-8px_rgba(12,12,13,0.1)] w-14 h-14 box-border"
+        style={{ backgroundColor: 'var(--nav-secondary-bg)' }}
         data-testid="resource-menu-panel"
       >
         <button
@@ -84,7 +85,8 @@ export function ResourceMenuPanel() {
 
   return (
     <div
-      className="absolute top-4 right-4 z-30 bg-gray-200 shadow-[0px_16px_16px_-8px_rgba(12,12,13,0.1)] flex flex-col p-4 gap-4 overflow-hidden w-[280px] min-w-[280px] max-w-[280px] h-[calc(100%-2rem)] box-border"
+      className="absolute top-4 right-4 z-30 shadow-[0px_16px_16px_-8px_rgba(12,12,13,0.1)] flex flex-col p-4 gap-4 overflow-hidden w-[280px] min-w-[280px] max-w-[280px] h-[calc(100%-2rem)] box-border"
+      style={{ backgroundColor: 'var(--nav-secondary-bg)' }}
       data-testid="resource-menu-panel"
     >
       {/* Search Input */}
