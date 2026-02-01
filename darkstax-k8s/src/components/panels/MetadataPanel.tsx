@@ -13,7 +13,7 @@ export function MetadataPanel() {
   if (!metadataPanelOpen) return null;
 
   return (
-    <aside className="absolute top-0 right-0 bottom-0 z-30 w-[420px] max-w-[90vw] border-l border-divider shadow-[-4px_0px_20px_-10px_rgba(12,12,13,0.2)] flex flex-col" style={{ backgroundColor: '#CECECE' }}>
+    <aside className="absolute top-0 right-0 bottom-0 z-30 w-[420px] max-w-[90vw] border-l border-divider shadow-[-4px_0px_20px_-10px_rgba(12,12,13,0.2)] flex flex-col bg-[#CECECE]">
       <div className="flex items-center justify-between px-4 pt-6">
         <div className="flex items-center gap-0">
           <button
