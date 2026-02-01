@@ -44,7 +44,7 @@ export function HierarchicalLane({ category, label, nodes, height }: Hierarchica
   const laneMinHeight =
     typeof height === 'number'
       ? `${height + (shouldBumpLaneHeight ? HEIGHT_BUMP_PX : 0)}px`
-      : height;
+      : '200px';
 
   const isAggregateLane = category === 'aggregate';
 
