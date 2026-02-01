@@ -58,9 +58,10 @@ export function KubernetesIconWrapper({
   status = 'ready',
   showIndicator = false,
   indicatorCount,
-  label
+  label,
 }: KubernetesIconWrapperProps) {
   const IconComponent = iconMap[type];
+  const borderColor = statusBorderColors[status] ?? 'transparent';
 
   if (!IconComponent) {
     console.warn(`No icon found for type: ${type}`);
