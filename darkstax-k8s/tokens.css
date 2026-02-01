@@ -201,12 +201,12 @@
   --color-white: #ffffff;
   --color-black: #0e0e0e;
 
-  /* Status Colors */
-  --status-ready: #ebebeb;
-  --status-deploying: #faa536;
-  --status-active: #2b9952;
-  --status-error: #aa1a00;
-  --status-terminated: #0e2846;
+  /* Status Colors - Matching Figma Design */
+  --status-ready: #ECECEC;
+  --status-deploying: #ED8B30;
+  --status-active: #108541;
+  --status-error: #B6261F;
+  --status-terminated: #00112B;
 
   /* ===== FIGMA DESIGN TOKEN ALIASES ===== */
 
