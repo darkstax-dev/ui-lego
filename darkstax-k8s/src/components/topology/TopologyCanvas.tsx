@@ -606,6 +606,7 @@ export function TopologyCanvas() {
       });
 
       setConnectionPaths(paths);
+      setNodeOccluders(occluders);
       return;
     }
 
@@ -637,6 +638,7 @@ export function TopologyCanvas() {
     });
 
     setConnectionPaths(paths);
+    setNodeOccluders(occluders);
   };
 
   const computeConnectionsRef = useRef(computeConnections);
