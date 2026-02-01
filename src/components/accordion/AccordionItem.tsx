@@ -1,6 +1,4 @@
 import React, { useState } from 'react'
-import ChevronUp from '../icons/ChevronUp'
-import ChevronDown from '../icons/ChevronDown'
 import './AccordionItem.css'
 
 interface AccordionItemProps {
@@ -32,8 +30,8 @@ const AccordionItem: React.FC<AccordionItemProps> = ({
         <div className="accordion-item__title">
           {title}
         </div>
-        <div className="accordion-item__icon">
-          {isOpen ? <ChevronUp stroke="var(--sds-color-text-default-default)" /> : <ChevronDown stroke="var(--sds-color-text-default-default)" />}
+        <div className="accordion-item__icon" aria-hidden="true">
+          <span className="accordion-item__icon-text">{isOpen ? '−' : '+'}</span>
         </div>
       </button>
       {isOpen && (

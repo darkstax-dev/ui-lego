@@ -7,60 +7,61 @@ export function MetadataPanel() {
   if (!metadataPanelOpen || !selectedNode) return null;
   
   return (
-    <div className="w-96 h-full bg-white border-l border-gray-400 flex flex-col shadow-[-16px_0px_16px_-8px_rgba(12,12,13,0.1)]">
+    <div className="w-96 h-full border-l flex flex-col shadow-[-16px_0px_16px_-8px_rgba(12,12,13,0.1)]" style={{ backgroundColor: '#CECECE', borderLeftColor: '#C8C8C8' }}>
       {/* Header */}
-      <div className="p-4 border-b border-gray-400 flex items-center justify-between">
-        <h2 className="font-macan text-lg font-semibold text-blue-dark-950">
+      <div className="flex items-center justify-between" style={{ padding: '24px 16px', borderBottom: '1px dashed #ADADAD' }}>
+        <h2 className="font-macan-mono text-lg font-semibold uppercase" style={{ color: '#00112B', fontSize: '16px', fontWeight: 600, letterSpacing: '0.1em' }}>
           Node Details
         </h2>
-        <button 
+        <button
           onClick={closeMetadataPanel}
-          className="w-8 h-8 flex items-center justify-center hover:bg-gray-200 transition-colors"
+          className="w-8 h-8 flex items-center justify-center hover:opacity-80 transition-opacity"
+          style={{ background: 'transparent' }}
           aria-label="Close metadata panel"
         >
-          <X className="w-5 h-5 text-gray-500" />
+          <X className="w-5 h-5" style={{ color: '#78797A' }} />
         </button>
       </div>
-      
+
       {/* Content */}
-      <div className="flex-1 overflow-auto p-4">
+      <div className="flex-1 overflow-auto" style={{ padding: '24px 16px' }}>
         {/* ID */}
         <div className="mb-4">
-          <h3 className="text-sm font-medium text-gray-500 mb-2 font-macan">ID</h3>
-          <p className="text-sm font-macan-mono text-blue-dark-950">{selectedNode.id}</p>
+          <h3 className="text-sm font-medium mb-2 font-macan-mono uppercase" style={{ color: '#78797A', fontSize: '12px', fontWeight: 600, letterSpacing: '0.1em' }}>ID</h3>
+          <p className="text-sm font-macan-mono" style={{ color: '#00112B' }}>{selectedNode.id}</p>
         </div>
-        
+
         {/* Type */}
         <div className="mb-4">
-          <h3 className="text-sm font-medium text-gray-500 mb-2 font-macan">Type</h3>
-          <p className="text-sm font-macan text-blue-dark-950 capitalize">{selectedNode.type}</p>
+          <h3 className="text-sm font-medium mb-2 font-macan-mono uppercase" style={{ color: '#78797A', fontSize: '12px', fontWeight: 600, letterSpacing: '0.1em' }}>Type</h3>
+          <p className="text-sm font-macan capitalize" style={{ color: '#00112B' }}>{selectedNode.type}</p>
         </div>
-        
+
         {/* Label */}
         <div className="mb-4">
-          <h3 className="text-sm font-medium text-gray-500 mb-2 font-macan">Label</h3>
-          <p className="text-sm font-macan text-blue-dark-950">{selectedNode.label}</p>
+          <h3 className="text-sm font-medium mb-2 font-macan-mono uppercase" style={{ color: '#78797A', fontSize: '12px', fontWeight: 600, letterSpacing: '0.1em' }}>Label</h3>
+          <p className="text-sm font-macan" style={{ color: '#00112B' }}>{selectedNode.label}</p>
         </div>
-        
+
         {/* Category */}
         <div className="mb-4">
-          <h3 className="text-sm font-medium text-gray-500 mb-2 font-macan">Category</h3>
-          <p className="text-sm font-macan text-blue-dark-950 capitalize">{selectedNode.category}</p>
+          <h3 className="text-sm font-medium mb-2 font-macan-mono uppercase" style={{ color: '#78797A', fontSize: '12px', fontWeight: 600, letterSpacing: '0.1em' }}>Category</h3>
+          <p className="text-sm font-macan capitalize" style={{ color: '#00112B' }}>{selectedNode.category}</p>
         </div>
-        
+
         {/* Status */}
         {selectedNode.status && (
           <div className="mb-4">
-            <h3 className="text-sm font-medium text-gray-500 mb-2 font-macan">Status</h3>
-            <p className="text-sm font-macan text-blue-dark-950 capitalize">{selectedNode.status}</p>
+            <h3 className="text-sm font-medium mb-2 font-macan-mono uppercase" style={{ color: '#78797A', fontSize: '12px', fontWeight: 600, letterSpacing: '0.1em' }}>Status</h3>
+            <p className="text-sm font-macan capitalize" style={{ color: '#00112B' }}>{selectedNode.status}</p>
           </div>
         )}
         
         {/* Metadata */}
         <div className="mb-4">
-          <h3 className="text-sm font-medium text-gray-500 mb-2 font-macan">Metadata</h3>
-          <div className="bg-gray-100 p-3 rounded">
-            <pre className="m-0 whitespace-pre-wrap break-words text-[13px] font-mono text-blue-dark-950">
+          <h3 className="text-sm font-medium mb-2 font-macan-mono uppercase" style={{ color: '#78797A', fontSize: '12px', fontWeight: 600, letterSpacing: '0.1em' }}>Metadata</h3>
+          <div className="p-3" style={{ backgroundColor: '#DFDFDF', border: '1px solid #C8C8C8' }}>
+            <pre className="m-0 whitespace-pre-wrap break-words text-[13px] font-mono" style={{ color: '#00112B' }}>
               {JSON.stringify(selectedNode.metadata || {}, null, 2)}
             </pre>
           </div>
@@ -69,8 +70,8 @@ export function MetadataPanel() {
         {/* Position (if available) */}
         {selectedNode.position && (
           <div className="mb-4">
-            <h3 className="text-sm font-medium text-gray-500 mb-2 font-macan">Position</h3>
-            <p className="text-sm font-macan-mono text-blue-dark-950">
+            <h3 className="text-sm font-medium mb-2 font-macan-mono uppercase" style={{ color: '#78797A', fontSize: '12px', fontWeight: 600, letterSpacing: '0.1em' }}>Position</h3>
+            <p className="text-sm font-macan-mono" style={{ color: '#00112B' }}>
               x: {selectedNode.position.x}, y: {selectedNode.position.y}
             </p>
           </div>

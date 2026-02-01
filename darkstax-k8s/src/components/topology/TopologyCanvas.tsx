@@ -1,6 +1,5 @@
 import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import {
-  ChevronDown,
   ChevronLeft,
   ChevronRight,
   ChevronsLeft,
@@ -83,11 +82,12 @@ function TypeCluster({
         }}
         type="button"
       >
-        {expanded ? (
-          <ChevronDown className="w-4 h-4 text-blue-dark-950" />
-        ) : (
-          <ChevronRight className="w-4 h-4 text-blue-dark-950" />
-        )}
+        <span
+          className="w-4 h-4 inline-flex items-center justify-center font-semibold leading-none text-[16px] text-blue-dark-950"
+          aria-hidden="true"
+        >
+          {expanded ? '−' : '+'}
+        </span>
         <span className="text-xs font-macan text-blue-dark-950 truncate max-w-[180px]">
           {nodeType}(s)
         </span>
@@ -230,7 +230,6 @@ export function TopologyCanvas() {
     layoutMode,
     detailLanesExpanded,
     focusAggregateId,
-    setFocusAggregate,
     clearFocus,
   } = useUIStore();
   const { nodes, groups, setNodes, setGroups, toggleGroupCollapse } = useTopologyStore();
@@ -240,6 +239,10 @@ export function TopologyCanvas() {
   const [connectionPaths, setConnectionPaths] = useState<
     Array<{ id: string; d: string; fromId: string; toId: string }>
   >([]);
+  const [nodeOccluders, setNodeOccluders] = useState<Array<{ id: string; x: number; y: number; w: number; h: number }>>(
+    []
+  );
+  const [svgViewport, setSvgViewport] = useState<{ w: number; h: number }>({ w: 0, h: 0 });
   const [contextMenu, setContextMenu] = useState<null | { x: number; y: number; nodeId: string }>(null);
   const [zoom, setZoom] = useState(1);
   const [viewportHeight, setViewportHeight] = useState(0);
@@ -427,8 +430,28 @@ export function TopologyCanvas() {
       return { x, y: yBase + anchorRect.height / 2 };
     };
 
+    setSvgViewport({ w: svgRect.width, h: svgRect.height });
+
     const renderedIds = new Set(layoutNodes.map((n) => n.id));
     const paths: Array<{ id: string; d: string; fromId: string; toId: string }> = [];
+    const occluders: Array<{ id: string; x: number; y: number; w: number; h: number }> = [];
+
+    // In hierarchy mode we also build an occlusion mask so links can be drawn
+    // above nodes without ever being visible on top of the node icon.
+    renderedIds.forEach((id) => {
+      const nodeEl = getNodeEl(id);
+      const iconEl = (nodeEl?.querySelector('[data-anchor="node-body"]') as HTMLElement | null) ?? nodeEl;
+      const r = iconEl?.getBoundingClientRect();
+      if (!r) return;
+
+      occluders.push({
+        id,
+        x: r.left - svgRect.left,
+        y: r.top - svgRect.top,
+        w: r.width,
+        h: r.height,
+      });
+    });
 
     // In lane-based hierarchy mode, draw:
     // 1) ownership (group parent -> child) connections
@@ -583,6 +606,7 @@ export function TopologyCanvas() {
       });
 
       setConnectionPaths(paths);
+      setNodeOccluders(occluders);
       return;
     }
 
@@ -614,6 +638,7 @@ export function TopologyCanvas() {
     });
 
     setConnectionPaths(paths);
+    setNodeOccluders(occluders);
   };
 
   const computeConnectionsRef = useRef(computeConnections);
@@ -750,18 +775,11 @@ export function TopologyCanvas() {
   }, []);
 
   const onNodeSelect = (node: K8sNodeData) => {
-    if (node.category === 'aggregate') {
-      setFocusAggregate(node.id);
-    }
-
+    // Selection should not change topology scope; focusing is an explicit action.
     setSelectedNode(node);
   };
 
   const openNodeDetails = (node: K8sNodeData) => {
-    if (node.category === 'aggregate') {
-      setFocusAggregate(node.id);
-    }
-
     setSelectedNode(node);
     openMetadataPanel(node, 'metadata');
   };
@@ -806,11 +824,12 @@ export function TopologyCanvas() {
               aria-label={group.collapsed ? 'Expand' : 'Collapse'}
               type="button"
             >
-              {group.collapsed ? (
-                <ChevronRight className="w-4 h-4 text-blue-dark-950" />
-              ) : (
-                <ChevronDown className="w-4 h-4 text-blue-dark-950" />
-              )}
+              <span
+                className="w-4 h-4 inline-flex items-center justify-center font-semibold leading-none text-[16px] text-blue-dark-950"
+                aria-hidden="true"
+              >
+                {group.collapsed ? '+' : '−'}
+              </span>
             </button>
           )}
 
@@ -867,23 +886,133 @@ export function TopologyCanvas() {
         ? filteredNodes.filter((node) => hierarchyVisibleNodeIds.has(node.id))
         : filteredNodes;
 
+    // In hierarchy mode, reduce link crossings by ordering nodes in each lane so that connected
+    // nodes tend to align vertically across lanes (a lightweight Sugiyama-style barycenter pass).
+    const shouldOptimizeOrdering = layoutMode === 'hierarchy' && detailLanesExpanded;
+
+    if (!shouldOptimizeOrdering) {
+      laneCategories.forEach((lane) => {
+        grouped[lane.id] = baseNodes.filter((node) => node.category === lane.id);
+      });
+      return grouped;
+    }
+
+    const laneIndexById = new Map(laneCategories.map((lane, idx) => [lane.id, idx] as const));
+
+    const nodesById = new Map(baseNodes.map((n) => [n.id, n] as const));
+
+    const neighborsById = new Map<string, Set<string>>();
+    const addNeighbor = (a: string, b: string) => {
+      if (a === b) return;
+      const setA = neighborsById.get(a) ?? new Set<string>();
+      setA.add(b);
+      neighborsById.set(a, setA);
+
+      const setB = neighborsById.get(b) ?? new Set<string>();
+      setB.add(a);
+      neighborsById.set(b, setB);
+    };
+
+    // Graph connections (treat as undirected for ordering).
+    baseNodes.forEach((node) => {
+      node.connections?.forEach((targetId) => {
+        if (!nodesById.has(targetId)) return;
+        addNeighbor(node.id, targetId);
+      });
+    });
+
+    // Ownership/group connections (also influence alignment).
+    groups.forEach((group) => {
+      if (!nodesById.has(group.ownerId)) return;
+      group.memberIds.forEach((memberId) => {
+        if (!nodesById.has(memberId)) return;
+        addNeighbor(group.ownerId, memberId);
+      });
+    });
+
+    // Seed lane buckets in current order.
     laneCategories.forEach((lane) => {
       grouped[lane.id] = baseNodes.filter((node) => node.category === lane.id);
     });
 
+    // Current per-lane order indexes (updated as we sort lanes).
+    const orderIndexByNodeId = new Map<string, number>();
+    const rebuildOrderIndexForLane = (laneId: string) => {
+      const laneNodes = grouped[laneId] ?? [];
+      laneNodes.forEach((n, idx) => orderIndexByNodeId.set(n.id, idx));
+    };
+    laneCategories.forEach((lane) => rebuildOrderIndexForLane(lane.id));
+
+    const scoreNode = (nodeId: string): number | null => {
+      const node = nodesById.get(nodeId);
+      if (!node) return null;
+
+      const myLaneIdx = laneIndexById.get(node.category) ?? 0;
+      const neighbors = neighborsById.get(nodeId);
+      if (!neighbors || neighbors.size === 0) return null;
+
+      let weightedSum = 0;
+      let weightTotal = 0;
+
+      neighbors.forEach((neighborId) => {
+        const neighbor = nodesById.get(neighborId);
+        if (!neighbor) return;
+
+        const neighborOrder = orderIndexByNodeId.get(neighborId);
+        if (neighborOrder === undefined) return;
+
+        const neighborLaneIdx = laneIndexById.get(neighbor.category) ?? myLaneIdx;
+        const laneDistance = Math.max(1, Math.abs(neighborLaneIdx - myLaneIdx));
+        const weight = 1 / laneDistance;
+
+        weightedSum += neighborOrder * weight;
+        weightTotal += weight;
+      });
+
+      if (weightTotal === 0) return null;
+      return weightedSum / weightTotal;
+    };
+
+    const sortLaneByBarycenter = (laneId: string) => {
+      const laneNodes = grouped[laneId] ?? [];
+      const priorIndex = new Map(laneNodes.map((n, idx) => [n.id, idx] as const));
+
+      laneNodes.sort((a, b) => {
+        const sa = scoreNode(a.id);
+        const sb = scoreNode(b.id);
+
+        if (sa === null && sb === null) {
+          return (priorIndex.get(a.id) ?? 0) - (priorIndex.get(b.id) ?? 0);
+        }
+        if (sa === null) return 1;
+        if (sb === null) return -1;
+        if (sa !== sb) return sa - sb;
+        return (priorIndex.get(a.id) ?? 0) - (priorIndex.get(b.id) ?? 0);
+      });
+
+      grouped[laneId] = laneNodes;
+      rebuildOrderIndexForLane(laneId);
+    };
+
+    // A few alternating passes is usually enough to reduce crossings significantly.
+    for (let iter = 0; iter < 4; iter++) {
+      for (let i = 1; i < laneCategories.length; i++) sortLaneByBarycenter(laneCategories[i].id);
+      for (let i = laneCategories.length - 2; i >= 0; i--) sortLaneByBarycenter(laneCategories[i].id);
+    }
+
     return grouped;
-  }, [filteredNodes, hierarchyVisibleNodeIds, laneCategories, layoutMode]);
+  }, [detailLanesExpanded, filteredNodes, groups, hierarchyVisibleNodeIds, laneCategories, layoutMode]);
 
   return (
     <div ref={scrollRef} className="w-full h-full relative overflow-auto">
       <div
-        className="w-full min-h-full bg-gray-300 relative p-5 pt-5"
+        className="w-full min-h-full bg-surface-default relative p-5 pt-5"
         style={{ transform: `scale(${zoom})`, transformOrigin: '0 0' }}
       >
         <div
           className="absolute inset-0 pointer-events-none opacity-25"
           style={{
-            backgroundImage: `radial-gradient(circle, #00112B 1px, transparent 1px)`,
+            backgroundImage: `radial-gradient(circle, var(--text-blue-main) 1px, transparent 1px)`,
             backgroundSize: '28.53px 26px',
             backgroundPosition: '0 0',
           }}
@@ -897,6 +1026,30 @@ export function TopologyCanvas() {
           style={{ overflow: 'visible' }}
           data-testid="connection-layer"
         >
+          <defs>
+            <mask
+              id="node-occlusion-mask"
+              maskUnits="userSpaceOnUse"
+              x={0}
+              y={0}
+              width={svgViewport.w}
+              height={svgViewport.h}
+            >
+              <rect x={0} y={0} width={svgViewport.w} height={svgViewport.h} fill="white" />
+              {nodeOccluders.map((o) => (
+                <rect
+                  key={o.id}
+                  x={o.x - 4}
+                  y={o.y - 4}
+                  width={o.w + 8}
+                  height={o.h + 8}
+                  rx={10}
+                  ry={10}
+                  fill="black"
+                />
+              ))}
+            </mask>
+          </defs>
           {(selectedNode
             ? connectionPaths.filter((p) => p.fromId === selectedNode.id || p.toId === selectedNode.id)
             : []
@@ -905,10 +1058,11 @@ export function TopologyCanvas() {
               key={p.id}
               d={p.d}
               fill="none"
-              stroke="#00112B"
+              stroke="var(--text-blue-main)"
               strokeWidth="2"
               strokeDasharray="8 4"
               opacity="0.8"
+              mask={svgViewport.w > 0 ? 'url(#node-occlusion-mask)' : undefined}
             />
           ))}
         </svg>

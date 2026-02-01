@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Search, ChevronDown, ChevronUp, Layers } from 'lucide-react';
+import { Search, Layers } from 'lucide-react';
 import { useDraggable } from '@dnd-kit/core';
 import { k8sResourceTemplates } from '../../data/k8sTemplates';
 import { KubernetesIconWrapper } from '../ui/KubernetesIconWrapper';
@@ -67,16 +67,17 @@ export function ResourceMenuPanel() {
   if (isCompact) {
     return (
       <div
-        className="absolute top-4 right-4 z-30 bg-gray-200 shadow-[0px_16px_16px_-8px_rgba(12,12,13,0.1)] rounded-lg w-14 h-14 box-border"
+        className="absolute top-4 right-4 z-30 shadow-[0px_16px_16px_-8px_rgba(12,12,13,0.1)] w-14 h-14 box-border"
+        style={{ backgroundColor: 'var(--nav-secondary-bg)' }}
         data-testid="resource-menu-panel"
       >
         <button
           type="button"
-          className="w-full h-full flex items-center justify-center bg-[rgb(206,206,206)] hover:bg-[rgb(206,206,206)]"
+          className="w-full h-full flex items-center justify-center bg-surface-default hover:bg-surface-default transition-colors"
           onClick={() => setExpandedSections((prev) => ({ ...prev, kubernetes: true }))}
           aria-label="Open resource menu"
         >
-          <Layers className="w-5 h-5 text-blue-dark-950" />
+          <Layers className="w-5 h-5" style={{ color: 'var(--text-blue-main)' }} />
         </button>
       </div>
     );
@@ -84,18 +85,26 @@ export function ResourceMenuPanel() {
 
   return (
     <div
-      className="absolute top-4 right-4 z-30 bg-gray-200 shadow-[0px_16px_16px_-8px_rgba(12,12,13,0.1)] rounded-lg flex flex-col p-4 gap-4 overflow-hidden w-[280px] min-w-[280px] max-w-[280px] h-[calc(100%-2rem)] box-border"
+      className="absolute top-4 right-4 z-30 shadow-[0px_16px_16px_-8px_rgba(12,12,13,0.1)] flex flex-col p-4 gap-4 overflow-hidden w-[300px] min-w-[300px] max-w-[300px] h-[calc(100%-2rem)] box-border"
+      style={{ backgroundColor: 'var(--nav-secondary-bg)' }}
       data-testid="resource-menu-panel"
     >
       {/* Search Input */}
-      <div className="h-10 px-4 bg-gray-100 flex items-center gap-2 rounded">
-        <Search className="w-4 h-4 text-gray-500 flex-shrink-0" />
+      <div
+        className="h-10 px-4 flex items-center gap-2"
+        style={{
+          backgroundColor: 'var(--search-input-bg)',
+          borderRadius: 'var(--sds-size-radius-200)',
+        }}
+      >
+        <Search className="w-4 h-4 flex-shrink-0" style={{ color: 'var(--search-input-icon)' }} />
         <input
           type="text"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
           placeholder="Search actions..."
-          className="flex-1 bg-transparent text-base font-inter text-gray-500 placeholder:text-gray-500 outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:ring-offset-gray-200"
+          className="flex-1 bg-transparent text-base font-inter outline-none"
+          style={{ color: 'var(--search-input-text)' }}
         />
       </div>
 
@@ -108,11 +117,12 @@ export function ResourceMenuPanel() {
             onClick={() => toggleSection('aggregate')}
           >
             <span className="text-blue-dark-950 font-macan text-base font-semibold">Aggregate</span>
-            {expandedSections.aggregate ? (
-              <ChevronUp className="w-5 h-5 text-gray-500" />
-            ) : (
-              <ChevronDown className="w-5 h-5 text-gray-500" />
-            )}
+            <span
+              className="w-5 h-5 text-gray-500 inline-flex items-center justify-center font-semibold leading-none text-[18px]"
+              aria-hidden="true"
+            >
+              {expandedSections.aggregate ? '−' : '+'}
+            </span>
           </button>
         </div>
 
@@ -127,11 +137,12 @@ export function ResourceMenuPanel() {
             onClick={() => toggleSection('kubernetes')}
           >
             <span className="text-blue-dark-950 font-macan text-base font-semibold">Kubernetes</span>
-            {expandedSections.kubernetes ? (
-              <ChevronUp className="w-5 h-5 text-gray-500" />
-            ) : (
-              <ChevronDown className="w-5 h-5 text-gray-500" />
-            )}
+            <span
+              className="w-5 h-5 text-gray-500 inline-flex items-center justify-center font-semibold leading-none text-[18px]"
+              aria-hidden="true"
+            >
+              {expandedSections.kubernetes ? '−' : '+'}
+            </span>
           </button>
 
           {expandedSections.kubernetes && (
@@ -154,11 +165,12 @@ export function ResourceMenuPanel() {
             onClick={() => toggleSection('templates')}
           >
             <span className="text-blue-dark-950 font-macan text-base font-semibold">Templates</span>
-            {expandedSections.templates ? (
-              <ChevronUp className="w-5 h-5 text-gray-500" />
-            ) : (
-              <ChevronDown className="w-5 h-5 text-gray-500" />
-            )}
+            <span
+              className="w-5 h-5 text-gray-500 inline-flex items-center justify-center font-semibold leading-none text-[18px]"
+              aria-hidden="true"
+            >
+              {expandedSections.templates ? '−' : '+'}
+            </span>
           </button>
         </div>
       </div>

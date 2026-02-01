@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { ChevronDown, ChevronRight, Copy, Check } from 'lucide-react';
+import { Copy, Check } from 'lucide-react';
 
 interface ObjectDetailProps {
   object: any;
@@ -40,11 +40,13 @@ export function ObjectDetail({ object, level = 0, defaultExpanded = true }: Obje
             onClick={() => toggleExpand(key)}
             className="flex items-center gap-1 py-1 px-1 -mx-1 w-full text-left"
           >
-            {isExpanded ? (
-              <ChevronDown className="w-4 h-4" style={{ color: 'var(--text-gray-main)' }} />
-            ) : (
-              <ChevronRight className="w-4 h-4" style={{ color: 'var(--text-gray-main)' }} />
-            )}
+            <span
+              className="w-4 h-4 inline-flex items-center justify-center font-semibold leading-none text-[16px]"
+              style={{ color: 'var(--text-gray-main)' }}
+              aria-hidden="true"
+            >
+              {isExpanded ? '−' : '+'}
+            </span>
             <span className="body-small-macan-book" style={{ color: 'var(--text-gray-main)' }}>{key}</span>
             <span className="body-small-mono-book" style={{ color: 'var(--text-gray-disabled)' }}>
               {Object.keys(value).length} {Object.keys(value).length === 1 ? 'item' : 'items'}
@@ -66,11 +68,13 @@ export function ObjectDetail({ object, level = 0, defaultExpanded = true }: Obje
             onClick={() => toggleExpand(key)}
             className="flex items-center gap-1 py-1 px-1 -mx-1 w-full text-left"
           >
-            {isExpanded ? (
-              <ChevronDown className="w-4 h-4" style={{ color: 'var(--text-gray-main)' }} />
-            ) : (
-              <ChevronRight className="w-4 h-4" style={{ color: 'var(--text-gray-main)' }} />
-            )}
+            <span
+              className="w-4 h-4 inline-flex items-center justify-center font-semibold leading-none text-[16px]"
+              style={{ color: 'var(--text-gray-main)' }}
+              aria-hidden="true"
+            >
+              {isExpanded ? '−' : '+'}
+            </span>
             <span className="body-small-macan-book" style={{ color: 'var(--text-gray-main)' }}>{key}</span>
             <span className="body-small-mono-book" style={{ color: 'var(--text-gray-disabled)' }}>
               [{value.length}]

@@ -5,151 +5,470 @@
   - main [ref=e7]:
     - generic [ref=e9]:
       - img
-      - generic [ref=e10]:
-        - generic [ref=e11]:
-          - generic [ref=e13]: Aggregate
-          - generic [ref=e14]:
-            - generic [ref=e18]:
-              - combobox "Filter aggregate…" [ref=e19]
-              - generic [ref=e20]:
-                - generic [ref=e21]: "0"
-                - button "Toggle dropdown" [ref=e22] [cursor=pointer]:
-                  - img [ref=e23]
-            - generic [ref=e26]:
-              - generic [ref=e29] [cursor=pointer]:
-                - generic [ref=e30]:
-                  - img [ref=e31]
-                  - img [ref=e33]
-                  - img [ref=e36]
-                  - generic [ref=e40]: "8"
-                - generic [ref=e41]: DC03
-              - generic [ref=e44] [cursor=pointer]:
-                - generic [ref=e45]:
-                  - img [ref=e46]
-                  - img [ref=e48]
-                  - img [ref=e51]
-                  - generic [ref=e54]: "10"
-                - generic [ref=e55]: Tower03
-        - generic [ref=e56]:
-          - generic [ref=e58]: Workload
-          - generic [ref=e62] [cursor=pointer]:
-            - generic [ref=e63]:
-              - img [ref=e64]
-              - img [ref=e66]
-              - img [ref=e69]
-            - generic [ref=e71]: diag-dc-03
-        - generic [ref=e72]:
-          - generic [ref=e74]: Service
-          - generic [ref=e78] [cursor=pointer]:
-            - generic [ref=e79]:
-              - img [ref=e80]
-              - img [ref=e82]
-              - img [ref=e85]
-            - generic [ref=e87]: svc-dc-03
-        - generic [ref=e88]:
-          - generic [ref=e90]: Network
-          - generic [ref=e92]:
-            - generic [ref=e94] [cursor=pointer]:
-              - generic [ref=e95]:
-                - img [ref=e96]
+      - generic [ref=e11]:
+        - generic [ref=e13]: Aggregate
+        - generic [ref=e14]:
+          - generic [ref=e18]:
+            - combobox "Filter aggregate…" [ref=e19]
+            - button "Expand options" [ref=e21] [cursor=pointer]:
+              - generic [ref=e22]: +
+          - generic [ref=e23]:
+            - button "Previous page" [disabled] [ref=e24]:
+              - img [ref=e25]
+            - generic [ref=e26]: 1/2
+            - button "Next page" [ref=e27]:
+              - img [ref=e28]
+          - generic [ref=e30]:
+            - generic [ref=e34] [cursor=pointer]:
+              - generic [ref=e35]:
+                - img [ref=e36]
+                - img [ref=e38]
+                - img [ref=e41]
+                - generic [ref=e45]: "60"
+              - generic [ref=e46]: DC01
+            - generic [ref=e50] [cursor=pointer]:
+              - generic [ref=e51]:
+                - img [ref=e52]
+                - img [ref=e54]
+                - img [ref=e57]
+                - generic [ref=e60]: "8"
+              - generic [ref=e61]: Tower01
+            - generic [ref=e65] [cursor=pointer]:
+              - generic [ref=e66]:
+                - img [ref=e67]
+                - img [ref=e69]
+                - img [ref=e72]
+                - generic [ref=e76]: "50"
+              - generic [ref=e77]: DC02
+            - generic [ref=e81] [cursor=pointer]:
+              - generic [ref=e82]:
+                - img [ref=e83]
+                - img [ref=e85]
+                - img [ref=e88]
+                - generic [ref=e91]: "10"
+              - generic [ref=e92]: Tower02
+            - generic [ref=e96] [cursor=pointer]:
+              - generic [ref=e97]:
                 - img [ref=e98]
-                - img [ref=e101]
-              - generic [ref=e111]: net-a-dc-03
-            - generic [ref=e113] [cursor=pointer]:
-              - generic [ref=e114]:
-                - img [ref=e115]
-                - img [ref=e117]
-                - img [ref=e120]
-              - generic [ref=e130]: net-b-dc-03
-        - generic [ref=e131]:
-          - generic [ref=e133]: Storage
-          - generic [ref=e135]:
-            - generic [ref=e137] [cursor=pointer]:
-              - generic [ref=e138]:
-                - img [ref=e139]
-                - img [ref=e141]
-                - img [ref=e144]
-              - generic [ref=e146]: pvc-dc-03
-            - generic [ref=e148] [cursor=pointer]:
-              - generic [ref=e149]:
+                - img [ref=e100]
+                - img [ref=e103]
+                - generic [ref=e107]: "8"
+              - generic [ref=e108]: DC03
+            - generic [ref=e112] [cursor=pointer]:
+              - generic [ref=e113]:
+                - img [ref=e114]
+                - img [ref=e116]
+                - img [ref=e119]
+                - generic [ref=e122]: "10"
+              - generic [ref=e123]: Tower03
+            - generic [ref=e127] [cursor=pointer]:
+              - generic [ref=e128]:
+                - img [ref=e129]
+                - img [ref=e131]
+                - img [ref=e134]
+                - generic [ref=e138]: "10"
+              - generic [ref=e139]: DC04
+            - generic [ref=e143] [cursor=pointer]:
+              - generic [ref=e144]:
+                - img [ref=e145]
+                - img [ref=e147]
                 - img [ref=e150]
-                - img [ref=e152]
-                - img [ref=e155]
-              - generic [ref=e159]: pv-dc-03
-        - generic [ref=e160]:
-          - generic [ref=e162]: Config
-          - generic [ref=e164]:
-            - generic [ref=e166] [cursor=pointer]:
-              - generic [ref=e167]:
-                - img [ref=e168]
-                - img [ref=e170]
-                - img [ref=e173]
-              - generic [ref=e175]: cm-dc-03
-            - generic [ref=e177] [cursor=pointer]:
-              - generic [ref=e178]:
-                - img [ref=e179]
+                - generic [ref=e153]: "8"
+              - generic [ref=e154]: Tower04
+            - generic [ref=e158] [cursor=pointer]:
+              - generic [ref=e159]:
+                - img [ref=e160]
+                - img [ref=e162]
+                - img [ref=e165]
+                - generic [ref=e169]: "10"
+              - generic [ref=e170]: DC05
+            - generic [ref=e174] [cursor=pointer]:
+              - generic [ref=e175]:
+                - img [ref=e176]
+                - img [ref=e178]
                 - img [ref=e181]
-                - img [ref=e184]
-              - generic [ref=e186]: secret-dc-03
-    - generic [ref=e187]:
-      - generic [ref=e188]:
-        - img [ref=e189]
-        - textbox "Search actions..." [ref=e192]
-      - generic [ref=e193]:
-        - button "Aggregate" [ref=e195]:
-          - generic [ref=e196]: Aggregate
-          - img [ref=e197]
-        - generic [ref=e200]:
-          - button "Kubernetes" [ref=e201]:
-            - generic [ref=e202]: Kubernetes
-            - img [ref=e203]
-          - generic [ref=e205]:
-            - button [ref=e206]:
-              - generic [ref=e208]:
+                - generic [ref=e184]: "10"
+              - generic [ref=e185]: Tower05
+            - generic [ref=e189] [cursor=pointer]:
+              - generic [ref=e190]:
+                - img [ref=e191]
+                - img [ref=e193]
+                - img [ref=e196]
+                - generic [ref=e200]: "8"
+              - generic [ref=e201]: DC06
+            - generic [ref=e205] [cursor=pointer]:
+              - generic [ref=e206]:
+                - img [ref=e207]
                 - img [ref=e209]
                 - img [ref=e212]
-            - button [ref=e215]:
-              - generic [ref=e217]:
-                - img [ref=e218]
-                - img [ref=e221]
-            - button [ref=e223]:
-              - generic [ref=e225]:
-                - img [ref=e226]
-                - img [ref=e229]
-            - button [ref=e231]:
-              - generic [ref=e233]:
-                - img [ref=e234]
-                - img [ref=e237]
-            - button [ref=e244]:
-              - generic [ref=e246]:
-                - img [ref=e247]
-                - img [ref=e250]
-            - button [ref=e252]:
-              - generic [ref=e254]:
+                - generic [ref=e215]: "10"
+              - generic [ref=e216]: Tower06
+            - generic [ref=e220] [cursor=pointer]:
+              - generic [ref=e221]:
+                - img [ref=e222]
+                - img [ref=e224]
+                - img [ref=e227]
+                - generic [ref=e231]: "10"
+              - generic [ref=e232]: DC07
+            - generic [ref=e236] [cursor=pointer]:
+              - generic [ref=e237]:
+                - img [ref=e238]
+                - img [ref=e240]
+                - img [ref=e243]
+                - generic [ref=e246]: "8"
+              - generic [ref=e247]: Tower07
+            - generic [ref=e251] [cursor=pointer]:
+              - generic [ref=e252]:
+                - img [ref=e253]
                 - img [ref=e255]
                 - img [ref=e258]
-            - button [ref=e261]:
-              - generic [ref=e263]:
-                - img [ref=e264]
-                - img [ref=e267]
-            - button [ref=e277]:
-              - generic [ref=e279]:
-                - img [ref=e280]
-                - img [ref=e283]
-            - button [ref=e285]:
-              - generic [ref=e287]:
-                - img [ref=e288]
-                - img [ref=e291]
-            - button [ref=e293]:
-              - generic [ref=e295]:
-                - img [ref=e296]
-                - img [ref=e299]
-            - button [ref=e303]:
-              - generic [ref=e305]:
-                - img [ref=e306]
-                - img [ref=e309]
-        - button "Templates" [ref=e313]:
-          - generic [ref=e314]: Templates
-          - img [ref=e315]
-  - status [ref=e317]
+                - generic [ref=e262]: "10"
+              - generic [ref=e263]: DC08
+            - generic [ref=e267] [cursor=pointer]:
+              - generic [ref=e268]:
+                - img [ref=e269]
+                - img [ref=e271]
+                - img [ref=e274]
+                - generic [ref=e277]: "10"
+              - generic [ref=e278]: Tower08
+            - generic [ref=e282] [cursor=pointer]:
+              - generic [ref=e283]:
+                - img [ref=e284]
+                - img [ref=e286]
+                - img [ref=e289]
+                - generic [ref=e293]: "8"
+              - generic [ref=e294]: DC09
+            - generic [ref=e298] [cursor=pointer]:
+              - generic [ref=e299]:
+                - img [ref=e300]
+                - img [ref=e302]
+                - img [ref=e305]
+                - generic [ref=e308]: "10"
+              - generic [ref=e309]: Tower09
+            - generic [ref=e313] [cursor=pointer]:
+              - generic [ref=e314]:
+                - img [ref=e315]
+                - img [ref=e317]
+                - img [ref=e320]
+                - generic [ref=e324]: "10"
+              - generic [ref=e325]: DC10
+            - generic [ref=e329] [cursor=pointer]:
+              - generic [ref=e330]:
+                - img [ref=e331]
+                - img [ref=e333]
+                - img [ref=e336]
+                - generic [ref=e339]: "8"
+              - generic [ref=e340]: Tower10
+            - generic [ref=e344] [cursor=pointer]:
+              - generic [ref=e345]:
+                - img [ref=e346]
+                - img [ref=e348]
+                - img [ref=e351]
+                - generic [ref=e355]: "10"
+              - generic [ref=e356]: DC11
+            - generic [ref=e360] [cursor=pointer]:
+              - generic [ref=e361]:
+                - img [ref=e362]
+                - img [ref=e364]
+                - img [ref=e367]
+                - generic [ref=e370]: "10"
+              - generic [ref=e371]: Tower11
+            - generic [ref=e375] [cursor=pointer]:
+              - generic [ref=e376]:
+                - img [ref=e377]
+                - img [ref=e379]
+                - img [ref=e382]
+                - generic [ref=e386]: "8"
+              - generic [ref=e387]: DC12
+            - generic [ref=e391] [cursor=pointer]:
+              - generic [ref=e392]:
+                - img [ref=e393]
+                - img [ref=e395]
+                - img [ref=e398]
+                - generic [ref=e401]: "10"
+              - generic [ref=e402]: Tower12
+            - generic [ref=e406] [cursor=pointer]:
+              - generic [ref=e407]:
+                - img [ref=e408]
+                - img [ref=e410]
+                - img [ref=e413]
+                - generic [ref=e417]: "10"
+              - generic [ref=e418]: DC13
+            - generic [ref=e422] [cursor=pointer]:
+              - generic [ref=e423]:
+                - img [ref=e424]
+                - img [ref=e426]
+                - img [ref=e429]
+                - generic [ref=e432]: "8"
+              - generic [ref=e433]: Tower13
+            - generic [ref=e437] [cursor=pointer]:
+              - generic [ref=e438]:
+                - img [ref=e439]
+                - img [ref=e441]
+                - img [ref=e444]
+                - generic [ref=e448]: "10"
+              - generic [ref=e449]: DC14
+            - generic [ref=e453] [cursor=pointer]:
+              - generic [ref=e454]:
+                - img [ref=e455]
+                - img [ref=e457]
+                - img [ref=e460]
+                - generic [ref=e463]: "10"
+              - generic [ref=e464]: Tower14
+            - generic [ref=e468] [cursor=pointer]:
+              - generic [ref=e469]:
+                - img [ref=e470]
+                - img [ref=e472]
+                - img [ref=e475]
+                - generic [ref=e479]: "8"
+              - generic [ref=e480]: DC15
+            - generic [ref=e484] [cursor=pointer]:
+              - generic [ref=e485]:
+                - img [ref=e486]
+                - img [ref=e488]
+                - img [ref=e491]
+                - generic [ref=e494]: "10"
+              - generic [ref=e495]: Tower15
+            - generic [ref=e499] [cursor=pointer]:
+              - generic [ref=e500]:
+                - img [ref=e501]
+                - img [ref=e503]
+                - img [ref=e506]
+                - generic [ref=e510]: "10"
+              - generic [ref=e511]: DC16
+            - generic [ref=e515] [cursor=pointer]:
+              - generic [ref=e516]:
+                - img [ref=e517]
+                - img [ref=e519]
+                - img [ref=e522]
+                - generic [ref=e525]: "8"
+              - generic [ref=e526]: Tower16
+            - generic [ref=e530] [cursor=pointer]:
+              - generic [ref=e531]:
+                - img [ref=e532]
+                - img [ref=e534]
+                - img [ref=e537]
+                - generic [ref=e541]: "10"
+              - generic [ref=e542]: DC17
+            - generic [ref=e546] [cursor=pointer]:
+              - generic [ref=e547]:
+                - img [ref=e548]
+                - img [ref=e550]
+                - img [ref=e553]
+                - generic [ref=e556]: "10"
+              - generic [ref=e557]: Tower17
+            - generic [ref=e561] [cursor=pointer]:
+              - generic [ref=e562]:
+                - img [ref=e563]
+                - img [ref=e565]
+                - img [ref=e568]
+                - generic [ref=e572]: "8"
+              - generic [ref=e573]: DC18
+            - generic [ref=e577] [cursor=pointer]:
+              - generic [ref=e578]:
+                - img [ref=e579]
+                - img [ref=e581]
+                - img [ref=e584]
+                - generic [ref=e587]: "10"
+              - generic [ref=e588]: Tower18
+            - generic [ref=e592] [cursor=pointer]:
+              - generic [ref=e593]:
+                - img [ref=e594]
+                - img [ref=e596]
+                - img [ref=e599]
+                - generic [ref=e603]: "10"
+              - generic [ref=e604]: DC19
+            - generic [ref=e608] [cursor=pointer]:
+              - generic [ref=e609]:
+                - img [ref=e610]
+                - img [ref=e612]
+                - img [ref=e615]
+                - generic [ref=e618]: "8"
+              - generic [ref=e619]: Tower19
+            - generic [ref=e623] [cursor=pointer]:
+              - generic [ref=e624]:
+                - img [ref=e625]
+                - img [ref=e627]
+                - img [ref=e630]
+                - generic [ref=e634]: "10"
+              - generic [ref=e635]: DC20
+            - generic [ref=e639] [cursor=pointer]:
+              - generic [ref=e640]:
+                - img [ref=e641]
+                - img [ref=e643]
+                - img [ref=e646]
+                - generic [ref=e649]: "10"
+              - generic [ref=e650]: Tower20
+            - generic [ref=e654] [cursor=pointer]:
+              - generic [ref=e655]:
+                - img [ref=e656]
+                - img [ref=e658]
+                - img [ref=e661]
+                - generic [ref=e665]: "8"
+              - generic [ref=e666]: DC21
+            - generic [ref=e670] [cursor=pointer]:
+              - generic [ref=e671]:
+                - img [ref=e672]
+                - img [ref=e674]
+                - img [ref=e677]
+                - generic [ref=e680]: "10"
+              - generic [ref=e681]: Tower21
+            - generic [ref=e685] [cursor=pointer]:
+              - generic [ref=e686]:
+                - img [ref=e687]
+                - img [ref=e689]
+                - img [ref=e692]
+                - generic [ref=e696]: "10"
+              - generic [ref=e697]: DC22
+            - generic [ref=e701] [cursor=pointer]:
+              - generic [ref=e702]:
+                - img [ref=e703]
+                - img [ref=e705]
+                - img [ref=e708]
+                - generic [ref=e711]: "8"
+              - generic [ref=e712]: Tower22
+            - generic [ref=e716] [cursor=pointer]:
+              - generic [ref=e717]:
+                - img [ref=e718]
+                - img [ref=e720]
+                - img [ref=e723]
+                - generic [ref=e727]: "10"
+              - generic [ref=e728]: DC23
+            - generic [ref=e732] [cursor=pointer]:
+              - generic [ref=e733]:
+                - img [ref=e734]
+                - img [ref=e736]
+                - img [ref=e739]
+                - generic [ref=e742]: "10"
+              - generic [ref=e743]: Tower23
+            - generic [ref=e747] [cursor=pointer]:
+              - generic [ref=e748]:
+                - img [ref=e749]
+                - img [ref=e751]
+                - img [ref=e754]
+                - generic [ref=e758]: "8"
+              - generic [ref=e759]: DC24
+            - generic [ref=e763] [cursor=pointer]:
+              - generic [ref=e764]:
+                - img [ref=e765]
+                - img [ref=e767]
+                - img [ref=e770]
+                - generic [ref=e773]: "10"
+              - generic [ref=e774]: Tower24
+            - generic [ref=e778] [cursor=pointer]:
+              - generic [ref=e779]:
+                - img [ref=e780]
+                - img [ref=e782]
+                - img [ref=e785]
+                - generic [ref=e789]: "10"
+              - generic [ref=e790]: DC25
+            - generic [ref=e794] [cursor=pointer]:
+              - generic [ref=e795]:
+                - img [ref=e796]
+                - img [ref=e798]
+                - img [ref=e801]
+                - generic [ref=e804]: "8"
+              - generic [ref=e805]: Tower25
+            - generic [ref=e809] [cursor=pointer]:
+              - generic [ref=e810]:
+                - img [ref=e811]
+                - img [ref=e813]
+                - img [ref=e816]
+                - generic [ref=e820]: "10"
+              - generic [ref=e821]: DC26
+            - generic [ref=e825] [cursor=pointer]:
+              - generic [ref=e826]:
+                - img [ref=e827]
+                - img [ref=e829]
+                - img [ref=e832]
+                - generic [ref=e835]: "10"
+              - generic [ref=e836]: Tower26
+            - generic [ref=e840] [cursor=pointer]:
+              - generic [ref=e841]:
+                - img [ref=e842]
+                - img [ref=e844]
+                - img [ref=e847]
+                - generic [ref=e851]: "8"
+              - generic [ref=e852]: DC27
+            - generic [ref=e856] [cursor=pointer]:
+              - generic [ref=e857]:
+                - img [ref=e858]
+                - img [ref=e860]
+                - img [ref=e863]
+                - generic [ref=e866]: "10"
+              - generic [ref=e867]: Tower27
+    - generic [ref=e868]:
+      - generic [ref=e869]:
+        - img [ref=e870]
+        - textbox "Search actions..." [ref=e873]
+      - generic [ref=e874]:
+        - button "Aggregate" [ref=e876]:
+          - generic [ref=e877]: Aggregate
+          - generic [ref=e878]: −
+        - generic [ref=e880]:
+          - button "Kubernetes" [ref=e881]:
+            - generic [ref=e882]: Kubernetes
+            - generic [ref=e883]: −
+          - generic [ref=e884]:
+            - button [ref=e885]:
+              - generic [ref=e887]:
+                - img [ref=e888]
+                - img [ref=e890]
+                - img [ref=e893]
+            - button [ref=e896]:
+              - generic [ref=e898]:
+                - img [ref=e899]
+                - img [ref=e901]
+                - img [ref=e904]
+            - button [ref=e906]:
+              - generic [ref=e908]:
+                - img [ref=e909]
+                - img [ref=e911]
+                - img [ref=e914]
+            - button [ref=e916]:
+              - generic [ref=e918]:
+                - img [ref=e919]
+                - img [ref=e921]
+                - img [ref=e924]
+            - button [ref=e931]:
+              - generic [ref=e933]:
+                - img [ref=e934]
+                - img [ref=e936]
+                - img [ref=e939]
+            - button [ref=e941]:
+              - generic [ref=e943]:
+                - img [ref=e944]
+                - img [ref=e946]
+                - img [ref=e949]
+            - button [ref=e952]:
+              - generic [ref=e954]:
+                - img [ref=e955]
+                - img [ref=e957]
+                - img [ref=e960]
+            - button [ref=e970]:
+              - generic [ref=e972]:
+                - img [ref=e973]
+                - img [ref=e975]
+                - img [ref=e978]
+            - button [ref=e980]:
+              - generic [ref=e982]:
+                - img [ref=e983]
+                - img [ref=e985]
+                - img [ref=e988]
+            - button [ref=e990]:
+              - generic [ref=e992]:
+                - img [ref=e993]
+                - img [ref=e995]
+                - img [ref=e998]
+            - button [ref=e1002]:
+              - generic [ref=e1004]:
+                - img [ref=e1005]
+                - img [ref=e1007]
+                - img [ref=e1010]
+        - button "Templates" [ref=e1014]:
+          - generic [ref=e1015]: Templates
+          - generic [ref=e1016]: +
+    - button "Toggle status legend" [ref=e1019]:
+      - img [ref=e1020]
+  - status [ref=e1022]
 ```

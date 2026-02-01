@@ -1,5 +1,4 @@
 import type React from 'react';
-import { ChevronDown, ChevronRight } from 'lucide-react';
 import { K8sNodeData } from '../../types';
 import { KubernetesIconWrapper } from '../ui/KubernetesIconWrapper';
 import { useUIStore } from '../../store/uiStore';
@@ -37,11 +36,12 @@ export function HierarchicalNodeGroup({ parentNode, childNodes, collapsed = fals
             className="flex-shrink-0 w-6 h-6 flex items-center justify-center bg-gray-200 hover:bg-gray-300 transition-colors rounded"
             aria-label={collapsed ? 'Expand' : 'Collapse'}
           >
-            {collapsed ? (
-              <ChevronRight className="w-4 h-4 text-blue-dark-950" />
-            ) : (
-              <ChevronDown className="w-4 h-4 text-blue-dark-950" />
-            )}
+            <span
+              className="w-4 h-4 inline-flex items-center justify-center font-semibold leading-none text-[16px] text-blue-dark-950"
+              aria-hidden="true"
+            >
+              {collapsed ? '+' : '−'}
+            </span>
           </button>
         )}
         <div

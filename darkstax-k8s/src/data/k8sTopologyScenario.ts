@@ -94,7 +94,7 @@ export const kubernetesTopologyScenario: K8sTopologyScenario = {
           pods: '25'
         }
       },
-      status: 'active',
+      status: 'ready',
     },
     {
       id: 'deploy-frontend',
@@ -559,7 +559,7 @@ export const kubernetesTopologyScenario: K8sTopologyScenario = {
         BackoffLimit: 3,
         Status: 'Completed'
       },
-      status: 'active',
+      status: 'terminated',
       connections: ['svc-database']
     }
   ],

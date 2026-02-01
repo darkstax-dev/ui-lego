@@ -168,6 +168,7 @@
   --color-gray-300: #cecece;
   --color-gray-200: #dfdfdf;
   --color-gray-100: #ececec;
+  --color-gray-50: #f8f8f8;
 
   /* Red Scale */
   --color-red-700: #b6261f;
@@ -199,6 +200,13 @@
   /* Neutral Colors */
   --color-white: #ffffff;
   --color-black: #0e0e0e;
+
+  /* Status Colors - Matching Figma Design */
+  --status-ready: #ECECEC;
+  --status-deploying: #ED8B30;
+  --status-active: #108541;
+  --status-error: #B6261F;
+  --status-terminated: #00112B;
 
   /* ===== FIGMA DESIGN TOKEN ALIASES ===== */
 
@@ -244,6 +252,12 @@
   --Blue-Dark-blue-950: #00112B;
   --Drop-down-light-Background-default: #ECECEC;
   --Gray-300: #CECECE;
+
+  /* Search input tokens - Light theme */
+  --search-input-bg: #ECECEC;
+  --search-input-text: #78797A;
+  --search-input-placeholder: #78797A;
+  --search-input-icon: #78797A;
 
   /* ===== SEMANTIC TOKENS - LIGHT MODE ===== */
 
@@ -292,6 +306,12 @@
   /* Dividers */
   --divider-light: #c8c8c8;
   --divider-dark: var(--color-blue-950);
+
+  /* Kubernetes Icon Wrapper - Light Theme */
+  --k8s-icon-fill: var(--Blue-Dark-blue-950, #072B56);
+  --k8s-icon-text: var(--Blue-Dark-blue-950, #00112B);
+  --k8s-hexagon-fill: white;
+  --k8s-hexagon-fill-opacity: 1;
 }
 
 /* ===== DARK MODE OVERRIDES ===== */
@@ -354,6 +374,25 @@
     /* Dividers */
     --divider-light: var(--color-blue-950);
     --divider-dark: #c8c8c8;
+
+    /* Status Colors - dark mode */
+    --status-ready: rgba(255, 255, 255, 0.20);
+    --status-deploying: #ED8B30;
+    --status-active: #108541;
+    --status-error: #B6261F;
+    --status-terminated: rgba(255, 255, 255, 0.20);
+
+    /* Kubernetes Icon Wrapper - Dark Theme */
+    --k8s-icon-fill: white;
+    --k8s-icon-text: var(--color-gray-200, #DFDFDF);
+    --k8s-hexagon-fill: #2C3E5C;
+    --k8s-hexagon-fill-opacity: 1;
+
+    /* Search input tokens - Dark theme */
+    --search-input-bg: #072B56;
+    --search-input-text: #CECECE;
+    --search-input-placeholder: #CECECE;
+    --search-input-icon: #CECECE;
   }
 }
 
@@ -416,6 +455,25 @@
   /* Dividers */
   --divider-light: var(--color-blue-950);
   --divider-dark: #c8c8c8;
+
+  /* Status Colors - manual dark mode */
+  --status-ready: rgba(255, 255, 255, 0.20);
+  --status-deploying: #ED8B30;
+  --status-active: #108541;
+  --status-error: #B6261F;
+  --status-terminated: rgba(255, 255, 255, 0.20);
+
+  /* Kubernetes Icon Wrapper - Dark Theme */
+  --k8s-icon-fill: white;
+  --k8s-icon-text: var(--color-gray-200, #DFDFDF);
+  --k8s-hexagon-fill: #2C3E5C;
+  --k8s-hexagon-fill-opacity: 1;
+
+  /* Search input tokens - Dark theme */
+  --search-input-bg: #072B56;
+  --search-input-text: #CECECE;
+  --search-input-placeholder: #CECECE;
+  --search-input-icon: #CECECE;
 }
 
 /* ===== UTILITY CLASSES ===== */

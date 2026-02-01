@@ -60,6 +60,12 @@
   height: 20px;
 }
 
+.accordion-item__icon-text {
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1;
+}
+
 .accordion-item__content {
   display: flex;
   justify-content: center;

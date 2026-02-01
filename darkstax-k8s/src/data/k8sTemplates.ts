@@ -104,9 +104,9 @@ export const k8sResourceTemplates: K8sResourceTemplate[] = [
 ];
 
 export const statusColors = {
-  ready: { hex: '#EBEBEB', label: 'Not deployed / Ready' },
-  deploying: { hex: '#FAA536', label: 'Deploying' },
-  active: { hex: '#2B9952', label: 'Active / Deployed / Running' },
-  error: { hex: '#AA1A00', label: 'Error' },
-  terminated: { hex: '#0E2846', label: 'Terminated' },
+  ready: { hex: 'var(--status-ready)', label: 'Not deployed / Ready' },
+  deploying: { hex: 'var(--status-deploying)', label: 'Deploying' },
+  active: { hex: 'var(--status-active)', label: 'Active / Deployed / Running' },
+  error: { hex: 'var(--status-error)', label: 'Error' },
+  terminated: { hex: 'var(--status-terminated)', label: 'Terminated' },
 };

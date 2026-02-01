@@ -170,7 +170,7 @@ export const useUIStore = create<UIStore>((set) => ({
 
   // Status legend
   showStatusLegend: false,
-  toggleStatusLegend: () => set((state) => ({ 
-    showStatusLegend: !state.showStatusLegend 
+  toggleStatusLegend: () => set((state) => ({
+    showStatusLegend: !state.showStatusLegend
   })),
 }));

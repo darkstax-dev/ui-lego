@@ -254,40 +254,19 @@ const MultiSelect: React.FC<MultiSelectProps> = ({
           aria-activedescendant={activeDescendantId}
         />
         <div className="multiselect__controls">
-          <span className="multiselect__count">{value.length}</span>
           <button
             type="button"
             className="multiselect__toggle"
             onMouseDown={(e) => e.preventDefault()}
             onClick={toggleDropdown}
             disabled={disabled}
-            aria-label="Toggle dropdown"
+            aria-label={isOpen ? 'Collapse options' : 'Expand options'}
             aria-expanded={isOpen}
             aria-controls={listboxId}
           >
-            <svg
-              width="20"
-              height="20"
-              viewBox="0 0 20 20"
-              fill="none"
-              className={
-                isOpen
-                  ? 'multiselect__toggle-icon--up'
-                  : 'multiselect__toggle-icon--down'
-              }
-            >
-              <g clipPath="url(#clip0_2036_43391)">
-                <path
-                  d="M9.99999 9.02366L5.87499 13.1487L4.69666 11.9703L9.99999 6.66699L15.3033 11.9703L14.125 13.1487L9.99999 9.02366Z"
-                  fill="currentColor"
-                />
-              </g>
-              <defs>
-                <clipPath id="clip0_2036_43391">
-                  <rect width="20" height="20" fill="white" />
-                </clipPath>
-              </defs>
-            </svg>
+            <span className="multiselect__toggle-icon" aria-hidden="true">
+              {isOpen ? '−' : '+'}
+            </span>
           </button>
         </div>
       </div>

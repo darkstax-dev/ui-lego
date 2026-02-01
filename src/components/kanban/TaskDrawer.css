@@ -1,9 +1,29 @@
 @import url('../../tokens.css');
 
-.taskdrawer { display: flex; flex-direction: column; gap: var(--sds-size-space-400); }
-.taskdrawer-tabs { display: flex; gap: var(--sds-size-space-400); border-bottom: 1px solid var(--divider-light); }
-.taskdrawer-tab { background: transparent; color: var(--text-gray-main); border: none; padding: var(--sds-size-space-300) 0; cursor: pointer; font-weight: 600; font-family: var(--font-family-macan-mono); letter-spacing: var(--letter-spacing-wide); }
-.taskdrawer-tab.is-active { color: var(--text-blue-main); border-bottom: 2px solid var(--text-blue-main); margin-bottom: -1px; }
+.taskdrawer {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+.taskdrawer-tabs { display: flex; gap: 0; }
+.taskdrawer-tab {
+  background: transparent;
+  color: var(--color-gray-500);
+  border: none;
+  border-bottom: 1px solid var(--color-gray-500);
+  border-radius: 4px 4px 0 0;
+  padding: 4px 12px;
+  cursor: pointer;
+  font-weight: 500;
+  font-family: var(--font-family-macan-mono);
+  font-size: 16px;
+  line-height: 110%;
+  letter-spacing: var(--letter-spacing-normal);
+}
+.taskdrawer-tab.is-active {
+  color: var(--text-blue-main);
+  border-bottom: 1px solid var(--text-blue-main);
+}
 .taskdrawer-section { display: flex; flex-direction: column; gap: var(--sds-size-space-300); }
 .section-title { color: var(--text-gray-main); text-transform: uppercase; font-size: var(--font-size-xs); letter-spacing: var(--letter-spacing-wider); font-family: var(--font-family-macan-mono); }
 .section-title.with-count { display: flex; align-items: center; gap: var(--sds-size-space-200); }
@@ -52,7 +72,7 @@
 /* Log table */
 .taskdrawer-log-container { display: flex; flex-direction: column; gap: var(--sds-size-space-400); flex: 1; }
 .task-log-table { display: flex; flex-direction: column; border-radius: 0px; overflow: hidden; }
-.task-log-header { display: flex; align-items: center; background: var(--surface-subtle); border-bottom: 1px solid var(--divider-light); height: 48px; }
+.task-log-header { display: flex; align-items: center; background: var(--Background-Card); height: 48px; }
 .task-log-header-cell { flex: 1; padding: var(--sds-size-space-400); color: var(--text-blue-main); font-family: var(--font-family-macan-mono); font-size: var(--font-size-sm); font-weight: 600; line-height: var(--line-height-normal); letter-spacing: var(--letter-spacing-wide); text-transform: uppercase; }
 .task-log-header-cell:first-child,
 .task-log-cell:first-child { flex: 0 0 180px; width: 180px; }

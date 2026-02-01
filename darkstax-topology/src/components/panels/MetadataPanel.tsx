@@ -1,4 +1,4 @@
-import { Info, ChevronDown, ChevronUp } from 'lucide-react';
+import { Info } from 'lucide-react';
 import { useTopologyStore } from '@/store/topologyStore';
 import { useState } from 'react';
 
@@ -88,7 +88,22 @@ export function MetadataPanel() {
             }}>
               METADATA
             </span>
-            {metadataExpanded ? <ChevronUp size={24} color="#00112B" /> : <ChevronDown size={24} color="#00112B" />}
+            <span
+              aria-hidden="true"
+              style={{
+                width: 24,
+                height: 24,
+                display: 'inline-flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                color: '#00112B',
+                fontSize: '24px',
+                fontWeight: 600,
+                lineHeight: 1,
+              }}
+            >
+              {metadataExpanded ? '−' : '+'}
+            </span>
           </button>
 
           {/* METADATA Content */}
@@ -194,7 +209,22 @@ export function MetadataPanel() {
             }}>
               FEATURES
             </span>
-            {featuresExpanded ? <ChevronUp size={24} color="#00112B" /> : <ChevronDown size={24} color="#00112B" />}
+            <span
+              aria-hidden="true"
+              style={{
+                width: 24,
+                height: 24,
+                display: 'inline-flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                color: '#00112B',
+                fontSize: '24px',
+                fontWeight: 600,
+                lineHeight: 1,
+              }}
+            >
+              {featuresExpanded ? '−' : '+'}
+            </span>
           </button>
         </div>
 
@@ -218,7 +248,22 @@ export function MetadataPanel() {
             }}>
               METRICS
             </span>
-            {metricsExpanded ? <ChevronUp size={24} color="#00112B" /> : <ChevronDown size={24} color="#00112B" />}
+            <span
+              aria-hidden="true"
+              style={{
+                width: 24,
+                height: 24,
+                display: 'inline-flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                color: '#00112B',
+                fontSize: '24px',
+                fontWeight: 600,
+                lineHeight: 1,
+              }}
+            >
+              {metricsExpanded ? '−' : '+'}
+            </span>
           </button>
         </div>
 
@@ -242,7 +287,22 @@ export function MetadataPanel() {
             }}>
               OVS METRICS
             </span>
-            {ovsMetricsExpanded ? <ChevronUp size={24} color="#00112B" /> : <ChevronDown size={24} color="#00112B" />}
+            <span
+              aria-hidden="true"
+              style={{
+                width: 24,
+                height: 24,
+                display: 'inline-flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                color: '#00112B',
+                fontSize: '24px',
+                fontWeight: 600,
+                lineHeight: 1,
+              }}
+            >
+              {ovsMetricsExpanded ? '−' : '+'}
+            </span>
           </button>
         </div>
       </div>

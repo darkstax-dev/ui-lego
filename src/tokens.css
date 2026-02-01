@@ -292,6 +292,12 @@
   /* Dividers */
   --divider-light: #c8c8c8;
   --divider-dark: var(--color-blue-950);
+
+  /* Search input tokens - Light theme */
+  --search-input-bg: #ECECEC;
+  --search-input-text: #78797A;
+  --search-input-placeholder: #78797A;
+  --search-input-icon: #78797A;
 }
 
 /* ===== DARK MODE OVERRIDES ===== */
@@ -354,6 +360,12 @@
     /* Dividers */
     --divider-light: var(--color-blue-950);
     --divider-dark: #c8c8c8;
+
+    /* Search input tokens - Dark theme */
+    --search-input-bg: #072B56;
+    --search-input-text: #CECECE;
+    --search-input-placeholder: #CECECE;
+    --search-input-icon: #CECECE;
   }
 }
 
@@ -416,6 +428,12 @@
   /* Dividers */
   --divider-light: var(--color-blue-950);
   --divider-dark: #c8c8c8;
+
+  /* Search input tokens - Dark theme */
+  --search-input-bg: #072B56;
+  --search-input-text: #CECECE;
+  --search-input-placeholder: #CECECE;
+  --search-input-icon: #CECECE;
 }
 
 /* ===== UTILITY CLASSES ===== */

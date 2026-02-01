@@ -1,12 +1,13 @@
 import { Menu, UserCircle } from 'lucide-react';
 import { SearchFilter } from '../controls/SearchFilter';
 import { LayoutSelector } from '../controls/LayoutSelector';
+import { ThemeToggle } from '../controls/ThemeToggle';
 
 export function AppHeader() {
   return (
-    <header className="w-full h-14 bg-blue-800 text-white flex items-center px-4 gap-4 shadow-sm">
+    <header className="w-full h-14 bg-nav-bg text-white flex items-center px-4 gap-4 shadow-sm">
       <button
-        className="w-9 h-9 flex items-center justify-center rounded hover:bg-blue-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60"
+        className="w-9 h-9 flex items-center justify-center rounded hover:bg-blue-950 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60"
         aria-label="Open navigation"
       >
         <Menu className="w-5 h-5" />
@@ -24,8 +25,9 @@ export function AppHeader() {
         <div className="max-w-md w-full">
           <SearchFilter />
         </div>
+        <ThemeToggle />
         <button
-          className="w-9 h-9 flex items-center justify-center rounded hover:bg-blue-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60"
+          className="w-9 h-9 flex items-center justify-center rounded hover:bg-blue-950 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60"
           aria-label="User menu"
         >
           <UserCircle className="w-5 h-5" />

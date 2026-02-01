@@ -20,7 +20,14 @@ export function HierarchicalLane({ category, label, nodes, height }: Hierarchica
     data: { category }
   });
 
-  const laneHeight = typeof height === 'number' ? `${height}px` : height;
+  const HEIGHT_BUMP_PX = 6;
+  const heightBumpCategories: K8sResourceCategory[] = ['load', 'service', 'network', 'storage', 'config'];
+  const shouldBumpLaneHeight = heightBumpCategories.includes(category);
+
+  const laneMinHeight =
+    typeof height === 'number'
+      ? `${height + (shouldBumpLaneHeight ? HEIGHT_BUMP_PX : 0)}px`
+      : '200px';
 
   // Organize nodes into parent-child hierarchy
   const organizeHierarchy = () => {
@@ -64,13 +71,14 @@ export function HierarchicalLane({ category, label, nodes, height }: Hierarchica
 
   return (
     <div
-      className="flex flex-row"
+      className="flex flex-row items-stretch"
       style={{
-        minHeight: laneHeight,
+        minHeight: laneMinHeight,
         padding: '4px',
+        paddingBottom: shouldBumpLaneHeight && height === 'auto' ? `${4 + HEIGHT_BUMP_PX}px` : undefined,
         gap: '10px',
         alignSelf: 'stretch',
-        background: '#DFDFDF',
+        background: 'var(--surface-card)',
         marginBottom: '4px'
       }}
       data-testid={`lane-${category}`}
@@ -79,19 +87,18 @@ export function HierarchicalLane({ category, label, nodes, height }: Hierarchica
       <div
         style={{
           display: 'flex',
-          width: '45px',
-          padding: '4px 8px',
+          width: '29px',
+          padding: '4px',
           justifyContent: 'center',
           alignItems: 'center',
           gap: '10px',
-          flex: '1 0 0',
-          background: '#CECECE'
+          background: 'var(--nav-secondary-bg)'
         }}
       >
         <div
           style={{
             transform: 'rotate(-90deg)',
-            color: '#00112B',
+            color: 'var(--text-blue-main)',
             textAlign: 'center',
             fontFamily: 'Macan, -apple-system, Roboto, Helvetica, sans-serif',
             fontSize: '24px',
