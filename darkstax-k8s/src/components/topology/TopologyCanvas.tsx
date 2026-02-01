@@ -1020,12 +1020,36 @@ export function TopologyCanvas() {
 
         <svg
           ref={svgRef}
-          className="absolute inset-0 pointer-events-none z-[5]"
+          className="absolute inset-0 pointer-events-none z-20"
           width="100%"
           height="100%"
           style={{ overflow: 'visible' }}
           data-testid="connection-layer"
         >
+          <defs>
+            <mask
+              id="node-occlusion-mask"
+              maskUnits="userSpaceOnUse"
+              x={0}
+              y={0}
+              width={svgViewport.w}
+              height={svgViewport.h}
+            >
+              <rect x={0} y={0} width={svgViewport.w} height={svgViewport.h} fill="white" />
+              {nodeOccluders.map((o) => (
+                <rect
+                  key={o.id}
+                  x={o.x - 4}
+                  y={o.y - 4}
+                  width={o.w + 8}
+                  height={o.h + 8}
+                  rx={10}
+                  ry={10}
+                  fill="black"
+                />
+              ))}
+            </mask>
+          </defs>
           {(selectedNode
             ? connectionPaths.filter((p) => p.fromId === selectedNode.id || p.toId === selectedNode.id)
             : []
@@ -1038,6 +1062,7 @@ export function TopologyCanvas() {
               strokeWidth="2"
               strokeDasharray="8 4"
               opacity="0.8"
+              mask="url(#node-occlusion-mask)"
             />
           ))}
         </svg>
