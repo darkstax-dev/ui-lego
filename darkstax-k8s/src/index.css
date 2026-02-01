@@ -36,3 +36,9 @@ code {
 .metadata-panel__card {
   background-color: var(--surface-card, #DFDFDF);
 }
+
+/* Resource Menu Panel search input placeholder styling */
+[data-testid="resource-menu-panel"] input::placeholder {
+  color: var(--color-gray-300);
+  opacity: 1;
+}
