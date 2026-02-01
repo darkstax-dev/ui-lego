@@ -239,6 +239,10 @@ export function TopologyCanvas() {
   const [connectionPaths, setConnectionPaths] = useState<
     Array<{ id: string; d: string; fromId: string; toId: string }>
   >([]);
+  const [nodeOccluders, setNodeOccluders] = useState<Array<{ id: string; x: number; y: number; w: number; h: number }>>(
+    []
+  );
+  const [svgViewport, setSvgViewport] = useState<{ w: number; h: number }>({ w: 0, h: 0 });
   const [contextMenu, setContextMenu] = useState<null | { x: number; y: number; nodeId: string }>(null);
   const [zoom, setZoom] = useState(1);
   const [viewportHeight, setViewportHeight] = useState(0);
