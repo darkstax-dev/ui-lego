@@ -1,4 +1,3 @@
-import { ChevronDown } from 'lucide-react';
 import { useState } from 'react';
 import { SearchFilter } from '../controls/SearchFilter';
 import { LayoutSelector } from '../controls/LayoutSelector';
@@ -45,7 +44,12 @@ export function AppHeader() {
       {/* Dropdown */}
       <button className="px-4 pr-3 bg-gray-200 flex items-center justify-between hover:bg-gray-400 transition-colors" style={{ width: '180px', height: '40px', boxSizing: 'border-box' }}>
         <span className="text-gray-500 font-macan text-base">Select node</span>
-        <ChevronDown className="w-5 h-5 text-gray-500" />
+        <span
+          className="w-5 h-5 text-gray-500 inline-flex items-center justify-center font-semibold leading-none text-[18px]"
+          aria-hidden="true"
+        >
+          +
+        </span>
       </button>
 
       {/* Layout Selector */}
