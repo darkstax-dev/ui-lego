@@ -59,7 +59,7 @@
 }
 
 .top-bar__menu-item--active {
-  color: var(--btn-primary-red-fill);
+  color: var(--Orange, #FF3B31);
 }
 
 .top-bar__menu-icon {

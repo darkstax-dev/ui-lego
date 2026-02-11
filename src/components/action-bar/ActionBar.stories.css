@@ -1,0 +1,46 @@
+.action-bar-story-container {
+  background: var(--Background-Card, #DFDFDF);
+  min-height: 100vh;
+}
+
+.action-bar-story-demo {
+  background: var(--color-white, #FFFFFF);
+  padding: 24px;
+  margin: 16px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.action-bar-story-demo h2 {
+  margin: 0 0 16px 0;
+  color: var(--Text-Blue-text-Main-text, #00112B);
+  font-family: var(--font-family-macan);
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.action-bar-story-demo p {
+  margin: 0 0 12px 0;
+  color: var(--Gray-600, #6B7280);
+  font-family: var(--font-family-macan);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.action-bar-story-state {
+  padding: 12px;
+  background: var(--Background-Card, #DFDFDF);
+  border-radius: 4px;
+  border: 1px solid var(--Divider-Light, #C8C8C8);
+  font-family: var(--font-family-macan-mono);
+  font-size: 12px;
+}
+
+/* Storybook doc customization */
+.sbdocs .docs-story {
+  background: transparent;
+}
+
+.sbdocs .docs-story > div:first-child {
+  background: var(--Background-Card, #DFDFDF);
+}
