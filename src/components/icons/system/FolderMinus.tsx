@@ -7,30 +7,30 @@ interface IconProps {
   fill?: string
 }
 
-const FolderMinus: React.FC<IconProps> = ({ 
-  width = 24, 
-  height = 24, 
-  className = '', 
-  fill = 'var(--text-blue-main)' 
+const FolderMinus: React.FC<IconProps> = ({
+  width = 16,
+  height = 16,
+  className = '',
+  fill = '#00112B'
 }) => {
   return (
     <svg
       width={width}
       height={height}
-      viewBox="0 0 24 24"
+      viewBox="0 0 16 16"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       className={className}
     >
       <g clipPath="url(#clip0_folder_minus)">
         <path
-          d="M12.414 5H21C21.2652 5 21.5196 5.10536 21.7071 5.29289C21.8946 5.48043 22 5.73478 22 6V20C22 20.2652 21.8946 20.5196 21.7071 20.7071C21.5196 20.8946 21.2652 21 21 21H3C2.73478 21 2.48043 20.8946 2.29289 20.7071C2.10536 20.5196 2 20.2652 2 20V4C2 3.73478 2.10536 3.48043 2.29289 3.29289C2.48043 3.10536 2.73478 3 3 3H10.414L12.414 5ZM4 5V19H20V7H11.586L9.586 5H4ZM8 12H16V14H8V12Z"
+          d="M8.27616 3.33333H14.0002C14.177 3.33333 14.3465 3.40357 14.4716 3.5286C14.5966 3.65362 14.6668 3.82319 14.6668 4V13.3333C14.6668 13.5101 14.5966 13.6797 14.4716 13.8047C14.3465 13.9298 14.177 14 14.0002 14H2.00016C1.82335 14 1.65378 13.9298 1.52876 13.8047C1.40373 13.6797 1.3335 13.5101 1.3335 13.3333V2.66667C1.3335 2.48986 1.40373 2.32029 1.52876 2.19526C1.65378 2.07024 1.82335 2 2.00016 2H6.94283L8.27616 3.33333ZM5.3335 8V9.33333H10.6668V8H5.3335Z"
           fill={fill}
         />
       </g>
       <defs>
         <clipPath id="clip0_folder_minus">
-          <rect width="24" height="24" fill="white"/>
+          <rect width="16" height="16" fill="white"/>
         </clipPath>
       </defs>
     </svg>

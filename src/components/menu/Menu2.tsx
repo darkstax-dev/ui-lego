@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, forwardRef } from 'react'
+import React from 'react'
 import './Menu2.css'
 
 interface Menu2Props {
@@ -9,7 +9,7 @@ interface Menu2Props {
   'aria-labelledby'?: string
 }
 
-const Menu2 = forwardRef<HTMLDivElement, Menu2Props>(function Menu2({
+const Menu2 = React.forwardRef<HTMLDivElement, Menu2Props>(function Menu2({
   children,
   className = '',
   role = 'menu',
@@ -17,9 +17,9 @@ const Menu2 = forwardRef<HTMLDivElement, Menu2Props>(function Menu2({
   'aria-labelledby': ariaLabelledBy,
   ...props
 }, externalRef) {
-  const containerRef = useRef<HTMLDivElement | null>(null) as React.MutableRefObject<HTMLDivElement | null>
+  const containerRef = React.useRef<HTMLDivElement | null>(null) as React.MutableRefObject<HTMLDivElement | null>
 
-  useEffect(() => {
+  React.useEffect(() => {
     const onKeyDown = (e: KeyboardEvent) => {
       const el = containerRef.current
       if (!el) return
