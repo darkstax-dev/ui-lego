@@ -24,7 +24,7 @@ const meta: Meta<typeof Button> = {
   argTypes: {
     variant: {
       control: 'select',
-      options: ['primary', 'primary-simple', 'secondary', 'white'],
+      options: ['primary', 'primary-simple', 'secondary', 'white', 'response'],
       description: 'Visual style variant of the button',
       table: {
         type: { summary: 'string' },
@@ -98,6 +98,20 @@ export const White: Story = {
   },
   parameters: {
     backgrounds: { default: 'dark' },
+  },
+};
+
+export const Response: Story = {
+  args: {
+    variant: 'response',
+    children: 'RESPONSE',
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Outlined red button variant used for RESPONSE actions.',
+      },
+    },
   },
 };
 
