@@ -155,3 +155,28 @@
 .button--white.button--disabled .button__content {
   border-right-color: var(--Divider-Light, #C8C8C8);
 }
+
+/* Response variant */
+.button--response {
+  background: transparent;
+  color: var(--red-600-cta, #D9322A);
+  border: 1px solid var(--red-600-cta, #D9322A);
+  padding: 8px 16px;
+  height: auto;
+}
+
+.button--response .button__content {
+  padding: 0;
+}
+
+.button--response:hover:not(:disabled) {
+  background: rgba(217, 50, 42, 0.05);
+  border-color: var(--Red-500, #FF3B31);
+  color: var(--Red-500, #FF3B31);
+}
+
+.button--response.button--disabled {
+  color: var(--Text-Gray-text-Disabled-text, #CECECE);
+  border-color: var(--Text-Gray-text-Disabled-text, #CECECE);
+  cursor: not-allowed;
+}

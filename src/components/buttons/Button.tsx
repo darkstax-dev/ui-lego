@@ -2,7 +2,7 @@ import React, { forwardRef } from 'react'
 import './Button.css'
 import { Slot, PolymorphicProps } from '../../utils/Slot'
 
-export type ButtonVariant = 'primary' | 'primary-simple' | 'secondary' | 'white'
+export type ButtonVariant = 'primary' | 'primary-simple' | 'secondary' | 'white' | 'response'
 export type ButtonSizeLegacy = 'small' | 'big'
 export type ButtonSize = 'sm' | 'md' | 'lg' | ButtonSizeLegacy
 export type ButtonState = 'default' | 'hover' | 'disabled'

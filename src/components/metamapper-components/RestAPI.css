@@ -1,0 +1,226 @@
+.rest-api {
+  display: flex;
+  width: 340px;
+  flex-direction: column;
+  background: var(--Background-Card, #DFDFDF);
+  font-family: 'Inter', -apple-system, Roboto, Helvetica, sans-serif;
+}
+
+.rest-api__header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 16px;
+  background: var(--Background-Card, #DFDFDF);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.rest-api__icon-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+}
+
+.rest-api__title {
+  flex: 1;
+  color: var(--Text-Blue-text-Main-text, #00112B);
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 120%;
+}
+
+.rest-api__actions {
+  display: flex;
+  gap: 8px;
+}
+
+.rest-api__action-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: opacity 0.2s;
+}
+
+.rest-api__action-btn:hover {
+  opacity: 0.7;
+}
+
+.rest-api__content {
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+  gap: 12px;
+}
+
+.rest-api__url-bar {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.rest-api__method-dropdown {
+  position: relative;
+}
+
+.rest-api__method-btn {
+  display: flex;
+  height: 40px;
+  padding: 12px 16px;
+  justify-content: center;
+  align-items: center;
+  background: #FFF;
+  border: none;
+  color: var(--Text-Blue-text-Main-text, #00112B);
+  font-family: 'Inter', -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 100%;
+  cursor: pointer;
+  transition: background 0.2s;
+  min-width: 60px;
+}
+
+.rest-api__method-btn:hover {
+  background: #F5F5F5;
+}
+
+.rest-api__method-menu {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  background: #FFF;
+  border: 1px solid var(--Divider-Light, #C8C8C8);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  z-index: 10;
+  min-width: 100px;
+}
+
+.rest-api__method-option {
+  display: flex;
+  width: 100%;
+  padding: 10px 16px;
+  justify-content: flex-start;
+  align-items: center;
+  background: #FFF;
+  border: none;
+  color: var(--Text-Blue-text-Main-text, #00112B);
+  font-family: 'Inter', -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 100%;
+  cursor: pointer;
+  transition: background 0.2s;
+  text-align: left;
+}
+
+.rest-api__method-option:hover {
+  background: #F5F5F5;
+}
+
+.rest-api__method-option--selected {
+  background: rgba(217, 50, 42, 0.05);
+  color: var(--red-600-cta, #D9322A);
+  font-weight: 600;
+}
+
+.rest-api__input {
+  flex: 1;
+  display: flex;
+  height: 40px;
+  padding: 12px 16px;
+  align-items: center;
+  background: #FFF;
+  border: none;
+  color: var(--Text-Blue-text-Main-text, #00112B);
+  font-family: 'Inter', -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 100%;
+  outline: none;
+  transition: box-shadow 0.2s;
+}
+
+.rest-api__input:focus {
+  box-shadow: 0 0 0 2px rgba(217, 50, 42, 0.2);
+}
+
+.rest-api__button-group {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.rest-api__send-btn {
+  flex: 1;
+  display: flex;
+  height: 40px;
+  padding: 12px 20px;
+  justify-content: center;
+  align-items: center;
+  background: var(--red-600-cta, #D9322A);
+  border: none;
+  color: #FFF;
+  font-family: 'Macan Mono Trial', -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 110%;
+  letter-spacing: 1.6px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.rest-api__send-btn:hover {
+  background: #C02A23;
+}
+
+.rest-api__response-btn {
+  flex: 1;
+  display: flex;
+  height: 40px;
+  padding: 12px 20px;
+  justify-content: center;
+  align-items: center;
+  background: transparent;
+  border: 1px solid var(--red-600-cta, #D9322A);
+  color: var(--red-600-cta, #D9322A);
+  font-family: 'Macan Mono Trial', -apple-system, Roboto, Helvetica, sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 110%;
+  letter-spacing: 1.6px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.rest-api__response-btn:hover {
+  background: rgba(217, 50, 42, 0.05);
+  border-color: var(--Red-500, #FF3B31);
+  color: var(--Red-500, #FF3B31);
+}
+
+.rest-api__menu-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: opacity 0.2s;
+}
+
+.rest-api__menu-btn:hover {
+  opacity: 0.7;
+}
