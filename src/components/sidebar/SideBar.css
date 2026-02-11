@@ -1,7 +1,7 @@
 /* SideBar Component Styles */
 
 .sidebar {
-  background-color: var(--surface-card);
+  background-color: #DFDFDF;
   border-right: var(--sds-size-stroke-border) solid var(--sds-color-border-default-default);
   font-family: var(--font-family-macan);
   width: 240px;
