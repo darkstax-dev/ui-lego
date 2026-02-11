@@ -1,6 +1,7 @@
 import React from 'react';
 import './ActionBar.css';
 import Button from '../buttons/Button';
+import IconButton from '../buttons/IconButton';
 import SearchField from '../inputs/SearchField';
 import SwitchField from '../inputs/SwitchField';
 
@@ -95,34 +96,54 @@ export const ActionBar: React.FC<ActionBarProps> = ({
           </div>
 
           {/* Download Button */}
-          <button
-            className="action-bar__icon-button"
+          <IconButton
+            variant="secondary"
+            color="gray"
+            size="big"
             onClick={onDownload}
             aria-label="Download"
-          >
-            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-              <path d="M10 12.5L6.25 8.75L7.54167 7.41667L9.16667 9.04167V2.5H10.8333V9.04167L12.4583 7.41667L13.75 8.75L10 12.5ZM4.16667 17.5C3.70833 17.5 3.31583 17.3369 2.98917 17.0108C2.66306 16.6842 2.5 16.2917 2.5 15.8333V12.5H4.16667V15.8333H15.8333V12.5H17.5V15.8333C17.5 16.2917 17.3369 16.6842 17.0108 17.0108C16.6842 17.3369 16.2917 17.5 15.8333 17.5H4.16667Z" fill="currentColor"/>
-            </svg>
-          </button>
+            icon={
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                <g clipPath="url(#clip0_download)">
+                  <path d="M2.5 15.8333H17.5V17.5H2.5V15.8333ZM10.8333 10.9767L15.8925 5.91666L17.0708 7.09499L10 14.1667L2.92917 7.09582L4.1075 5.91666L9.16667 10.975V1.66666H10.8333V10.9767Z" fill="#78797A"/>
+                </g>
+                <defs>
+                  <clipPath id="clip0_download">
+                    <rect width="20" height="20" fill="white"/>
+                  </clipPath>
+                </defs>
+              </svg>
+            }
+          />
 
           {/* Upload Button */}
-          <button
-            className="action-bar__icon-button"
+          <IconButton
+            variant="secondary"
+            color="gray"
+            size="big"
             onClick={onUpload}
             aria-label="Upload"
-          >
-            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-              <path d="M10 2.5L13.75 6.25L12.4583 7.58333L10.8333 5.95833V12.5H9.16667V5.95833L7.54167 7.58333L6.25 6.25L10 2.5ZM4.16667 17.5C3.70833 17.5 3.31583 17.3369 2.98917 17.0108C2.66306 16.6842 2.5 16.2917 2.5 15.8333V12.5H4.16667V15.8333H15.8333V12.5H17.5V15.8333C17.5 16.2917 17.3369 16.6842 17.0108 17.0108C16.6842 17.3369 16.2917 17.5 15.8333 17.5H4.16667Z" fill="currentColor"/>
-            </svg>
-          </button>
+            icon={
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                <g clipPath="url(#clip0_upload)">
+                  <path d="M2.5 15.8333H17.5V17.5H2.5V15.8333ZM10.8333 4.85666V14.1667H9.16667V4.85666L4.1075 9.91666L2.92917 8.73832L10 1.66666L17.0708 8.73749L15.8925 9.91582L10.8333 4.85832V4.85666Z" fill="#78797A"/>
+                </g>
+                <defs>
+                  <clipPath id="clip0_upload">
+                    <rect width="20" height="20" fill="white"/>
+                  </clipPath>
+                </defs>
+              </svg>
+            }
+          />
 
           {/* Create Scenario Button */}
           <Button
             variant="primary"
-            size="md"
+            size="big"
             onClick={onCreateScenario}
           >
-            CREATE_SCENARIO
+            Create Scenario
           </Button>
         </div>
       </div>

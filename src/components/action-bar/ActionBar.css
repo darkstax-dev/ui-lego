@@ -1,7 +1,7 @@
 .action-bar {
   display: flex;
   width: 100%;
-  background: var(--Background-Card, #DFDFDF);
+  background: var(--Navigation-Secondary-nav-bg, #CECECE);
   border-bottom: 1px solid var(--Divider-Light, #C8C8C8);
   font-family: var(--font-family-macan);
 }
@@ -127,36 +127,6 @@
 /* Search */
 .action-bar__search {
   min-width: 200px;
-}
-
-/* Icon Buttons */
-.action-bar__icon-button {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 40px;
-  height: 40px;
-  padding: 10px;
-  background: transparent;
-  border: 1px solid var(--Divider-Light, #C8C8C8);
-  border-radius: 4px;
-  color: var(--Text-Blue-text-Main-text, #00112B);
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-.action-bar__icon-button:hover {
-  background: var(--color-white, #FFFFFF);
-  border-color: var(--Text-Blue-text-Main-text, #00112B);
-}
-
-.action-bar__icon-button:active {
-  transform: scale(0.95);
-}
-
-.action-bar__icon-button svg {
-  width: 20px;
-  height: 20px;
 }
 
 /* Responsive Design */

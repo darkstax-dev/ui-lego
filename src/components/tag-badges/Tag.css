@@ -111,7 +111,7 @@
 
 .tag--neutral:hover,
 .tag--neutral.tag--hover {
-  background: var(--sds-color-background-neutral-secondary);
+  background: #CECECE;
 }
 
 .tag--neutral .tag__remove svg {

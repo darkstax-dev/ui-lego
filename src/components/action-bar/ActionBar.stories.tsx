@@ -3,7 +3,7 @@ import { ActionBar } from './ActionBar';
 import React from 'react';
 
 const meta: Meta<typeof ActionBar> = {
-  title: 'Components/ActionBar',
+  title: 'Main Components/ActionBar',
   component: ActionBar,
   parameters: {
     layout: 'fullscreen',
