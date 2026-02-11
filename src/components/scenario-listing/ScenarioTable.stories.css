@@ -2,13 +2,13 @@
 
 /* Main Storybook background */
 .sb-show-main {
-  background-color: rgba(173, 173, 173, 1);
+  background-color: var(--Background-Card, #DFDFDF);
   /* match ScenarioTable background */
   padding: 0;
 }
 
 .docs-story>div:first-child {
-  background-color: rgba(173, 173, 173, 1);
+  background-color: var(--Background-Card, #DFDFDF);
   /* match ScenarioTable background */
   border-radius: 0;
   margin: 0;
@@ -17,7 +17,7 @@
 
 /* Custom story container for better presentation */
 .scenario-listing-story-container {
-  background: rgba(173, 173, 173, 1);
+  background: var(--Background-Card, #DFDFDF);
   /* match ScenarioTable background */
   min-height: 100vh;
   padding: var(--sds-size-space-800);
@@ -37,7 +37,7 @@
 
 /* Ensure proper spacing and style in story layout */
 .scenario-listing-story-container .scenario-table {
-  background: rgba(173, 173, 173, 1);
+  background: var(--Background-Card, #DFDFDF);
   /* match ScenarioTable background */
   color: rgba(0, 17, 43, 1);
   /* match ScenarioTable text */
@@ -62,36 +62,36 @@
 
 /* Documentation styles */
 .sbdocs .docs-story {
-  background: rgba(173, 173, 173, 1);
+  background: var(--Background-Card, #DFDFDF);
   /* match ScenarioTable background */
 }
 
 .sbdocs .docs-story .scenario-table {
   margin: 0 auto;
   max-width: 100%;
-  background: rgba(173, 173, 173, 1);
+  background: var(--Background-Card, #DFDFDF);
   color: rgba(0, 17, 43, 1);
 }
 
 /* Control panel override for better token usage */
 .sb-bar .sb-addon-panel {
-  background: rgba(173, 173, 173, 1);
+  background: var(--Background-Card, #DFDFDF);
   border-color: rgba(223, 223, 223, 0.5);
 }
 
 /* Dark mode adjustments */
 @media (prefers-color-scheme: dark) {
   .sb-show-main {
-    background-color: rgba(173, 173, 173, 1);
+    background-color: var(--Background-Card, #DFDFDF);
   }
 
   .scenario-listing-story-container {
-    background: rgba(173, 173, 173, 1);
+    background: var(--Background-Card, #DFDFDF);
   }
 
   .scenario-listing-story-container .scenario-table,
   .sbdocs .docs-story .scenario-table {
-    background: rgba(173, 173, 173, 1);
+    background: var(--Background-Card, #DFDFDF);
     color: rgba(0, 17, 43, 1);
   }
 }

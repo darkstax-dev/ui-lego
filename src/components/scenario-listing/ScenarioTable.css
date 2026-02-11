@@ -185,9 +185,9 @@
 
 .scenario-table__text {
   color: var(--Text-Blue-text-Main-text, #00112B);
-  font-family: var(--font-family-macan-mono);
+  font-family: var(--font-family-macan);
   font-size: 15px;
-  font-weight: 450;
+  font-weight: 400;
   line-height: 120%;
 }
 
