@@ -88,7 +88,7 @@ const ScenarioAccessibilityRoles: React.FC<ScenarioAccessibilityRolesProps> = ({
             CLOSE
           </Button>
           <Button
-            variant="primary"
+            variant="primary-simple"
             size="sm"
             onClick={handleSave}
             className="scenario-accessibility-roles__save-button"

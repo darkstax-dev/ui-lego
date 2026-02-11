@@ -6,7 +6,7 @@ import Button from '../buttons/Button'
 import './Drawer.stories.css'
 
 const meta: Meta<typeof Drawer> = {
-  title: 'Components/Drawer',
+  title: 'Main Components/Drawer',
   component: Drawer,
   tags: ['autodocs'],
   parameters: {
@@ -28,7 +28,7 @@ export const Default: Story = {
       const [open, setOpen] = React.useState(false)
       return (
         <div className="drawer-story">
-          <Button onClick={() => setOpen(true)} hideIcon size="sm">
+          <Button onClick={() => setOpen(true)} variant="primary-simple" size="sm">
             Open Drawer
           </Button>
 
@@ -55,7 +55,7 @@ export const ExampleDrawer: Story = {
       const [open, setOpen] = React.useState(false)
       return (
         <div className="drawer-story">
-          <Button onClick={() => setOpen(true)} hideIcon size="sm">
+          <Button onClick={() => setOpen(true)} variant="primary-simple" size="sm">
             Open Drawer
           </Button>
 
@@ -84,10 +84,10 @@ export const Positions: Story = {
       return (
         <div className="drawer-story drawer-positions">
           <div className="drawer-position-buttons">
-            <Button onClick={() => setOpenPos('right')} hideIcon size="sm">Open Right</Button>
-            <Button onClick={() => setOpenPos('left')} hideIcon size="sm">Open Left</Button>
-            <Button onClick={() => setOpenPos('top')} hideIcon size="sm">Open Top</Button>
-            <Button onClick={() => setOpenPos('bottom')} hideIcon size="sm">Open Bottom</Button>
+            <Button onClick={() => setOpenPos('right')} variant="primary-simple" size="sm">Open Right</Button>
+            <Button onClick={() => setOpenPos('left')} variant="primary-simple" size="sm">Open Left</Button>
+            <Button onClick={() => setOpenPos('top')} variant="primary-simple" size="sm">Open Top</Button>
+            <Button onClick={() => setOpenPos('bottom')} variant="primary-simple" size="sm">Open Bottom</Button>
           </div>
 
           <Drawer
@@ -150,9 +150,9 @@ export const Sizes: Story = {
       return (
         <div className="drawer-story drawer-sizes">
           <div className="drawer-position-buttons">
-            <Button onClick={() => setSizeOpen('small')} hideIcon size="sm">Small</Button>
-            <Button onClick={() => setSizeOpen('standard')} hideIcon size="sm">Standard</Button>
-            <Button onClick={() => setSizeOpen('large')} hideIcon size="sm">Large</Button>
+            <Button onClick={() => setSizeOpen('small')} variant="primary-simple" size="sm">Small</Button>
+            <Button onClick={() => setSizeOpen('standard')} variant="primary-simple" size="sm">Standard</Button>
+            <Button onClick={() => setSizeOpen('large')} variant="primary-simple" size="sm">Large</Button>
           </div>
 
           <Drawer
@@ -201,7 +201,7 @@ export const NoBackdrop: Story = {
       const [open, setOpen] = React.useState(false)
       return (
         <div className="drawer-story">
-          <Button onClick={() => setOpen(true)} hideIcon size="sm">Open without Backdrop</Button>
+          <Button onClick={() => setOpen(true)} variant="primary-simple" size="sm">Open without Backdrop</Button>
 
           <Drawer
             isOpen={open}

@@ -70,7 +70,7 @@
   gap: var(--sds-size-space-300);
   padding: var(--sds-size-space-400) var(--sds-size-space-600);
   border-top: var(--sds-size-stroke-border) solid var(--sds-color-border-default-default);
-  background: var(--color-gray-100);
+  background: #DFDFDF;
 }
 
 .scenario-accessibility-roles__close-button {

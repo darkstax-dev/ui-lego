@@ -5,7 +5,7 @@
   flex-direction: column;
   width: 100%;
   max-width: 1200px;
-  background: var(--background-primary);
+  background: #CECECE;
   border-radius: 0;
   overflow: hidden;
 }
@@ -15,9 +15,9 @@
   display: flex;
   height: 48px;
   padding: 0 var(--sds-size-space-400);
-  align-items: center;
-  border-bottom: 1px solid var(--divider-light);
-  background: #dfdfdf;
+  align-items: flex-start;
+  border-bottom: 1px solid var(--Divider-Light, #C8C8C8);
+  background: var(--Background-Card, #DFDFDF);
   position: relative;
 }
 
@@ -93,10 +93,10 @@
 }
 
 .scenario-table__header-text {
-  color: #00112b;
+  color: var(--Text-Blue-text-Main-text, #00112B);
   font-family: var(--font-family-macan-mono);
-  font-size: var(--sds-typography-body-size-small);
-  font-weight: var(--font-weight-semibold);
+  font-size: 14px;
+  font-weight: 600;
   line-height: 120%;
   letter-spacing: 0.7px;
   text-transform: uppercase;
@@ -129,13 +129,14 @@
   display: flex;
   min-height: 52px;
   padding: 0 var(--sds-size-space-400);
-  align-items: center;
-  border-bottom: 1px dashed var(--color-gray-400);
+  align-items: flex-start;
+  border-bottom: 1px dashed var(--Gray-400, #ADADAD);
   transition: background-color 0.2s ease;
+  background-color: transparent;
 }
 
 .scenario-table__row:hover {
-  background-color: #00112b05;
+  background-color: var(--Table-Table-hover, #DFDFDF);
 }
 
 .scenario-table__cell {
@@ -183,10 +184,10 @@
 }
 
 .scenario-table__text {
-  color: #00112b;
-  font-family: var(--font-family-macan-mono);
-  font-size: var(--font-size-base);
-  font-weight: var(--font-weight-book);
+  color: var(--Text-Blue-text-Main-text, #00112B);
+  font-family: var(--font-family-macan);
+  font-size: 15px;
+  font-weight: 400;
   line-height: 120%;
 }
 

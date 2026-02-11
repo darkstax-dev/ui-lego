@@ -70,7 +70,7 @@ export const TopBar: React.FC<TopBarProps> = ({
           {/* Menu Items */}
           <div className="top-bar__menu">
             {/* Dashboard */}
-            <button 
+            <button
               className={`top-bar__menu-item ${activeSection === 'dashboard' ? 'top-bar__menu-item--active' : ''}`}
               onClick={() => handleMenuClick('dashboard')}
             >
@@ -85,16 +85,29 @@ export const TopBar: React.FC<TopBarProps> = ({
                 </defs>
               </svg>
               <span className="top-bar__menu-text">Dashboard</span>
-              <svg className="top-bar__menu-expand" width="20" height="20" viewBox="0 0 20 20" fill="none">
-                <g clipPath="url(#clip0_add)">
-                  <path d="M9.16602 9.16675V4.16675H10.8327V9.16675H15.8327V10.8334H10.8327V15.8334H9.16602V10.8334H4.16602V9.16675H9.16602Z" fill="currentColor"/>
-                </g>
-                <defs>
-                  <clipPath id="clip0_add">
-                    <rect width="20" height="20" fill="white" transform="translate(-0.000488281)"/>
-                  </clipPath>
-                </defs>
-              </svg>
+              {activeSection === 'dashboard' ? (
+                <svg className="top-bar__menu-expand" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                  <g clipPath="url(#clip0_minus)">
+                    <path d="M4.16602 9.16675H15.8327V10.8334H4.16602V9.16675Z" fill="currentColor"/>
+                  </g>
+                  <defs>
+                    <clipPath id="clip0_minus">
+                      <rect width="20" height="20" fill="white" transform="translate(-0.000488281)"/>
+                    </clipPath>
+                  </defs>
+                </svg>
+              ) : (
+                <svg className="top-bar__menu-expand" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                  <g clipPath="url(#clip0_add)">
+                    <path d="M9.16602 9.16675V4.16675H10.8327V9.16675H15.8327V10.8334H10.8327V15.8334H9.16602V10.8334H4.16602V9.16675H9.16602Z" fill="currentColor"/>
+                  </g>
+                  <defs>
+                    <clipPath id="clip0_add">
+                      <rect width="20" height="20" fill="white" transform="translate(-0.000488281)"/>
+                    </clipPath>
+                  </defs>
+                </svg>
+              )}
             </button>
 
             {/* Topology Section with Select-like Dropdown */}
@@ -115,16 +128,29 @@ export const TopBar: React.FC<TopBarProps> = ({
                   </defs>
                 </svg>
                 <span className="top-bar__menu-text">Topology</span>
-                <svg className={`top-bar__menu-expand ${isTopologyOpen ? 'top-bar__menu-expand--open' : ''}`} width="20" height="20" viewBox="0 0 20 20" fill="none">
-                  <g clipPath="url(#clip0_subtract)">
-                    <path d="M4.16602 9.16675H15.8327V10.8334H4.16602V9.16675Z" fill="currentColor"/>
-                  </g>
-                  <defs>
-                    <clipPath id="clip0_subtract">
-                      <rect width="20" height="20" fill="white" transform="translate(-0.000488281)"/>
-                    </clipPath>
-                  </defs>
-                </svg>
+                {isTopologyOpen || activeSection === 'topology' ? (
+                  <svg className="top-bar__menu-expand" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                    <g clipPath="url(#clip0_subtract)">
+                      <path d="M4.16602 9.16675H15.8327V10.8334H4.16602V9.16675Z" fill="currentColor"/>
+                    </g>
+                    <defs>
+                      <clipPath id="clip0_subtract">
+                        <rect width="20" height="20" fill="white" transform="translate(-0.000488281)"/>
+                      </clipPath>
+                    </defs>
+                  </svg>
+                ) : (
+                  <svg className="top-bar__menu-expand" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                    <g clipPath="url(#clip0_add_topology)">
+                      <path d="M9.16602 9.16675V4.16675H10.8327V9.16675H15.8327V10.8334H10.8327V15.8334H9.16602V10.8334H4.16602V9.16675H9.16602Z" fill="currentColor"/>
+                    </g>
+                    <defs>
+                      <clipPath id="clip0_add_topology">
+                        <rect width="20" height="20" fill="white" transform="translate(-0.000488281)"/>
+                      </clipPath>
+                    </defs>
+                  </svg>
+                )}
               </button>
 
               {/* Topology Dropdown Menu - select-like behaviour */}
@@ -165,16 +191,29 @@ export const TopBar: React.FC<TopBarProps> = ({
                 <path d="M2.49951 2.5H7.49951V5.83333H2.49951V2.5ZM12.4995 8.33333H17.4995V11.6667H12.4995V8.33333ZM12.4995 14.1667H17.4995V17.5H12.4995V14.1667ZM10.8328 10.8333H5.83284V15H10.8328V16.6667H5.83284H4.16618V7.5H5.83284V9.16667H10.8328V10.8333Z" fill="currentColor"/>
               </svg>
               <span className="top-bar__menu-text">Modeling</span>
-              <svg className="top-bar__menu-expand" width="20" height="20" viewBox="0 0 20 20" fill="none">
-                <g clipPath="url(#clip0_add2)">
-                  <path d="M9.16602 9.16675V4.16675H10.8327V9.16675H15.8327V10.8334H10.8327V15.8334H9.16602V10.8334H4.16602V9.16675H9.16602Z" fill="currentColor"/>
-                </g>
-                <defs>
-                  <clipPath id="clip0_add2">
-                    <rect width="20" height="20" fill="white" transform="translate(-0.000488281)"/>
-                  </clipPath>
-                </defs>
-              </svg>
+              {activeSection === 'modeling' ? (
+                <svg className="top-bar__menu-expand" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                  <g clipPath="url(#clip0_minus_modeling)">
+                    <path d="M4.16602 9.16675H15.8327V10.8334H4.16602V9.16675Z" fill="currentColor"/>
+                  </g>
+                  <defs>
+                    <clipPath id="clip0_minus_modeling">
+                      <rect width="20" height="20" fill="white" transform="translate(-0.000488281)"/>
+                    </clipPath>
+                  </defs>
+                </svg>
+              ) : (
+                <svg className="top-bar__menu-expand" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                  <g clipPath="url(#clip0_add2)">
+                    <path d="M9.16602 9.16675V4.16675H10.8327V9.16675H15.8327V10.8334H10.8327V15.8334H9.16602V10.8334H4.16602V9.16675H9.16602Z" fill="currentColor"/>
+                  </g>
+                  <defs>
+                    <clipPath id="clip0_add2">
+                      <rect width="20" height="20" fill="white" transform="translate(-0.000488281)"/>
+                    </clipPath>
+                  </defs>
+                </svg>
+              )}
             </button>
 
             {/* Template */}
@@ -193,16 +232,29 @@ export const TopBar: React.FC<TopBarProps> = ({
                 </defs>
               </svg>
               <span className="top-bar__menu-text">Template</span>
-              <svg className="top-bar__menu-expand" width="20" height="20" viewBox="0 0 20 20" fill="none">
-                <g clipPath="url(#clip0_add3)">
-                  <path d="M9.16602 9.16675V4.16675H10.8327V9.16675H15.8327V10.8334H10.8327V15.8334H9.16602V10.8334H4.16602V9.16675H9.16602Z" fill="currentColor"/>
-                </g>
-                <defs>
-                  <clipPath id="clip0_add3">
-                    <rect width="20" height="20" fill="white" transform="translate(-0.000488281)"/>
-                  </clipPath>
-                </defs>
-              </svg>
+              {activeSection === 'template' ? (
+                <svg className="top-bar__menu-expand" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                  <g clipPath="url(#clip0_minus_template)">
+                    <path d="M4.16602 9.16675H15.8327V10.8334H4.16602V9.16675Z" fill="currentColor"/>
+                  </g>
+                  <defs>
+                    <clipPath id="clip0_minus_template">
+                      <rect width="20" height="20" fill="white" transform="translate(-0.000488281)"/>
+                    </clipPath>
+                  </defs>
+                </svg>
+              ) : (
+                <svg className="top-bar__menu-expand" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                  <g clipPath="url(#clip0_add3)">
+                    <path d="M9.16602 9.16675V4.16675H10.8327V9.16675H15.8327V10.8334H10.8327V15.8334H9.16602V10.8334H4.16602V9.16675H9.16602Z" fill="currentColor"/>
+                  </g>
+                  <defs>
+                    <clipPath id="clip0_add3">
+                      <rect width="20" height="20" fill="white" transform="translate(-0.000488281)"/>
+                    </clipPath>
+                  </defs>
+                </svg>
+              )}
             </button>
           </div>
         </div>

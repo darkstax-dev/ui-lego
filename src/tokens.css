@@ -234,6 +234,7 @@
   --Blue-Dark-blue-950: #00112B;
   --white-white-100: #FFF;
   --Text-Gray-text-Disabled-text: #CECECE;
+  --Orange: #FF3B31;
   --Red-500: #FF3B31;
   --Icon-Button-Disabled: #CECECE;
   --Divider-Light: #C8C8C8;
@@ -469,6 +470,15 @@
 /* ===== TYPOGRAPHY UTILITY CLASSES ===== */
 
 /* Font Face Declarations */
+@font-face {
+  font-family: 'Macan';
+  src: url('/fonts/Macan-Regular.woff2') format('woff2'),
+       url('/fonts/Macan-Regular.woff') format('woff');
+  font-weight: var(--font-weight-book);
+  font-style: normal;
+  font-display: swap;
+}
+
 @font-face {
   font-family: 'Macan';
   src: url('/fonts/Macan-Bold.woff2') format('woff2'),

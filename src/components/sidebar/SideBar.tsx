@@ -67,8 +67,8 @@ const SideBarItemComponent: React.FC<{
 
   return (
     <div className="sidebar-item-container">
-      <div 
-        className={`sidebar-item sidebar-item--level-${Math.min(level, 3)}`}
+      <div
+        className={`sidebar-item sidebar-item--level-${Math.min(level, 3)} ${hasChildren && isExpanded ? 'sidebar-item--expanded' : ''}`}
         onClick={handleItemClick}
       >
         <div className="sidebar-item__content">
@@ -76,7 +76,7 @@ const SideBarItemComponent: React.FC<{
           <span className="sidebar-item__label">{item.label}</span>
         </div>
       </div>
-      
+
       {hasChildren && isExpanded && (
         <div className="sidebar-item__children">
           {item.children?.map((child) => (

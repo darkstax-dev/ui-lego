@@ -1,0 +1,218 @@
+/* Header Component Styles */
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  background-color: var(--Background-Card, #DFDFDF);
+  border-bottom: 1px solid var(--Divider-Light, #C8C8C8);
+  height: 48px;
+  gap: 16px;
+}
+
+.header__left {
+  display: flex;
+  align-items: center;
+}
+
+.header__title {
+  font-family: var(--font-family-macan-mono-stencil);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 120%;
+  letter-spacing: 0.7px;
+  text-transform: uppercase;
+  color: var(--Dark-blue, #00112B);
+  margin: 0;
+}
+
+.header__right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+  justify-content: flex-end;
+}
+
+.header__toggle {
+  display: flex;
+  align-items: center;
+}
+
+.header__toggle-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  margin: 0;
+}
+
+.header__toggle-input {
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+  margin: 0;
+}
+
+.header__toggle-text {
+  font-family: var(--font-family-macan-mono);
+  font-size: 14px;
+  font-weight: 450;
+  line-height: 120%;
+  color: var(--Dark-blue, #00112B);
+  white-space: nowrap;
+}
+
+.header__filter-buttons {
+  display: flex;
+  gap: 4px;
+}
+
+.header__filter-button {
+  padding: 6px 12px;
+  background-color: transparent;
+  border: 1px solid var(--Dark-blue, #00112B);
+  font-family: var(--font-family-macan-mono);
+  font-size: 14px;
+  font-weight: 450;
+  line-height: 120%;
+  color: var(--Dark-blue, #00112B);
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+  white-space: nowrap;
+}
+
+.header__filter-button:hover {
+  background-color: rgba(0, 17, 43, 0.05);
+}
+
+.header__filter-button:active {
+  background-color: rgba(0, 17, 43, 0.1);
+}
+
+.header__search {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.header__search-icon {
+  position: absolute;
+  left: 12px;
+  color: var(--Gray-400, #ADADAD);
+  pointer-events: none;
+}
+
+.header__search-input {
+  padding: 6px 12px 6px 36px;
+  background-color: var(--surface-card, #DFDFDF);
+  border: 1px solid var(--Dark-blue, #00112B);
+  font-family: var(--font-family-macan-mono);
+  font-size: 14px;
+  font-weight: 450;
+  line-height: 120%;
+  color: var(--Dark-blue, #00112B);
+  min-width: 200px;
+}
+
+.header__search-input::placeholder {
+  color: var(--Gray-400, #ADADAD);
+}
+
+.header__search-input:focus {
+  outline: none;
+  border-color: var(--Dark-blue, #00112B);
+}
+
+.header__download-button,
+.header__upload-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px;
+  background-color: transparent;
+  border: 1px solid var(--Dark-blue, #00112B);
+  color: var(--Dark-blue, #00112B);
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+.header__download-button:hover,
+.header__upload-button:hover {
+  background-color: rgba(0, 17, 43, 0.05);
+}
+
+.header__download-button:active,
+.header__upload-button:active {
+  background-color: rgba(0, 17, 43, 0.1);
+}
+
+.header__create-button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 16px;
+  background-color: var(--Orange, #FF3B31);
+  border: none;
+  font-family: var(--font-family-macan-mono);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 120%;
+  letter-spacing: 0.7px;
+  text-transform: uppercase;
+  color: var(--White, #FFFFFF);
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+  white-space: nowrap;
+}
+
+.header__create-button:hover {
+  background-color: #E63429;
+}
+
+.header__create-button:active {
+  background-color: #CC2E24;
+}
+
+.header__create-icon {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+/* Responsive design */
+@media (max-width: 1024px) {
+  .header {
+    flex-wrap: wrap;
+    height: auto;
+  }
+
+  .header__right {
+    flex-wrap: wrap;
+  }
+
+  .header__search-input {
+    min-width: 150px;
+  }
+}
+
+@media (max-width: 768px) {
+  .header {
+    padding: 8px 12px;
+  }
+
+  .header__title {
+    font-size: 12px;
+  }
+
+  .header__toggle-text,
+  .header__filter-button,
+  .header__search-input,
+  .header__create-button {
+    font-size: 12px;
+  }
+
+  .header__search-input {
+    min-width: 120px;
+  }
+}
