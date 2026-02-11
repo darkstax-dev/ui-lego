@@ -3,7 +3,7 @@
 .sidebar {
   background-color: var(--surface-card);
   border-right: var(--sds-size-stroke-border) solid var(--sds-color-border-default-default);
-  font-family: var(--font-family-macan-mono);
+  font-family: var(--font-family-macan);
   width: 240px;
   height: 100%;
   overflow-y: auto;
@@ -109,7 +109,6 @@
 /* Children container */
 .sidebar-item__children {
   margin-left: var(--sds-size-space-400);
-  border-left: 1px solid var(--sds-color-border-neutral-tertiary);
   padding-left: var(--sds-size-space-200);
 }
 
@@ -127,10 +126,6 @@
   .sidebar-item__label {
     color: var(--text-blue-main);
   }
-
-  .sidebar-item__children {
-    border-left-color: var(--divider-light);
-  }
 }
 
 [data-theme="dark"] .sidebar {
@@ -144,10 +139,6 @@
 
 [data-theme="dark"] .sidebar-item__label {
   color: var(--text-blue-main);
-}
-
-[data-theme="dark"] .sidebar-item__children {
-  border-left-color: var(--divider-light);
 }
 
 /* Responsive design */

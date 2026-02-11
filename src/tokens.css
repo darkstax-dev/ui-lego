@@ -471,6 +471,15 @@
 /* Font Face Declarations */
 @font-face {
   font-family: 'Macan';
+  src: url('/fonts/Macan-Regular.woff2') format('woff2'),
+       url('/fonts/Macan-Regular.woff') format('woff');
+  font-weight: var(--font-weight-book);
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Macan';
   src: url('/fonts/Macan-Bold.woff2') format('woff2'),
        url('/fonts/Macan-Bold.woff') format('woff');
   font-weight: var(--font-weight-bold);
