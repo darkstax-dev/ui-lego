@@ -4,7 +4,7 @@ import { SideBar, SideBarItem } from './SideBar';
 import './SideBar.stories.css';
 
 const meta: Meta<typeof SideBar> = {
-  title: 'Components/SideBar',
+  title: 'Main Components/SideBar',
   component: SideBar,
   tags: ['autodocs'],
   parameters: {

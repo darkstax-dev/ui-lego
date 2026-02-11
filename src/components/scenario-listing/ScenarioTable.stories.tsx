@@ -6,7 +6,7 @@ import { ScenarioItem, SortableColumn, SortDirection } from './types'
 
 const meta: Meta<typeof ScenarioTable> = {
   id: 'components-scenario-listing-scenariotable-component',
-  title: 'Components/Scenario Listing/ScenarioTable (Component)',
+  title: 'Main Components/Scenario Listing',
   component: ScenarioTable,
   parameters: {
     layout: 'fullscreen',

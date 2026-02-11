@@ -6,7 +6,7 @@ import Button from '../buttons/Button'
 import './Drawer.stories.css'
 
 const meta: Meta<typeof Drawer> = {
-  title: 'Components/Drawer',
+  title: 'Main Components/Drawer',
   component: Drawer,
   tags: ['autodocs'],
   parameters: {

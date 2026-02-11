@@ -5,7 +5,7 @@ import { FiHome, FiSettings, FiUser, FiLogOut, FiEdit, FiTrash2 } from 'react-ic
 import './Menu.stories.css';
 
 const meta: Meta<typeof Menu> = {
-  title: 'Components/Menu',
+  title: 'Main Components/Menu',
   component: Menu,
   tags: ['autodocs'],
   parameters: {

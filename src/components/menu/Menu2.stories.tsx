@@ -4,7 +4,7 @@ import Menu2 from './Menu2'
 import MenuItem2 from './MenuItem2'
 
 const meta: Meta<typeof Menu2> = {
-  title: 'Components/Menu2',
+  title: 'Main Components/Menu2',
   component: Menu2,
   tags: ['autodocs'],
   parameters: {

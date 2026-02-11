@@ -32,6 +32,15 @@
   background-color: var(--sds-color-background-neutral-tertiary);
 }
 
+/* Expanded folder styling - dark background when folder is open */
+.sidebar-item--expanded {
+  background-color: #CECECE;
+}
+
+.sidebar-item--expanded:hover {
+  background-color: #BEBEBE;
+}
+
 .sidebar-item__content {
   display: flex;
   align-items: center;
