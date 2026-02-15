@@ -1,0 +1,154 @@
+/* CommandCenterMap Component Styles */
+
+.command-center-map {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: var(--surface-default);
+}
+
+/* Timeline */
+.command-center-map__timeline {
+  display: flex;
+  width: 100%;
+  padding: 8px 20px;
+  align-items: flex-start;
+  gap: 64px;
+  background: var(--Background-Card, var(--color-gray-200));
+  flex-shrink: 0;
+  border-bottom: 1px solid var(--Divider-Light, var(--divider-light));
+}
+
+.command-center-map__timeline-item {
+  width: 40px;
+  flex-shrink: 0;
+  color: var(--color-gray-500);
+  font-family: var(--font-family-macan-mono);
+  font-size: var(--font-size-md);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-tight);
+}
+
+/* Map Container */
+.command-center-map__container {
+  position: relative;
+  flex: 1;
+  width: 100%;
+  overflow: hidden;
+}
+
+/* Event Card Overlay */
+.command-center-map__event-card {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  z-index: 10;
+  max-height: calc(100% - 40px);
+  overflow-y: auto;
+}
+
+/* View Controls */
+.command-center-map__controls {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  z-index: 5;
+}
+
+.command-center-map__control-btn {
+  display: flex;
+  padding: 10px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  align-self: stretch;
+  background: var(--Background-Card, var(--color-gray-200));
+  overflow: hidden;
+  border: none;
+  cursor: pointer;
+  color: var(--color-gray-500);
+  transition: all 0.2s;
+  font-family: var(--font-family-macan-mono);
+}
+
+.command-center-map__control-btn:hover {
+  background: var(--color-gray-100);
+  color: var(--Text-Blue-text-Main-text);
+}
+
+.command-center-map__control-btn svg {
+  flex-shrink: 0;
+}
+
+/* Dark Theme Support */
+[data-theme="dark"] .command-center-map {
+  background: var(--color-blue-medium-950);
+}
+
+[data-theme="dark"] .command-center-map__timeline {
+  background: var(--color-blue-dark-950);
+  border-bottom-color: var(--color-blue-950);
+}
+
+[data-theme="dark"] .command-center-map__control-btn {
+  background: var(--color-blue-dark-950);
+  color: var(--color-gray-400);
+}
+
+[data-theme="dark"] .command-center-map__control-btn:hover {
+  background: var(--color-blue-950);
+  color: var(--color-gray-200);
+}
+
+@media (prefers-color-scheme: dark) {
+  .command-center-map {
+    background: var(--color-blue-medium-950);
+  }
+
+  .command-center-map__timeline {
+    background: var(--color-blue-dark-950);
+    border-bottom-color: var(--color-blue-950);
+  }
+
+  .command-center-map__control-btn {
+    background: var(--color-blue-dark-950);
+    color: var(--color-gray-400);
+  }
+
+  .command-center-map__control-btn:hover {
+    background: var(--color-blue-950);
+    color: var(--color-gray-200);
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .command-center-map__event-card {
+    top: 10px;
+    left: 10px;
+    right: 10px;
+    max-height: calc(100% - 20px);
+  }
+
+  .command-center-map__controls {
+    bottom: 10px;
+    right: 10px;
+  }
+
+  .command-center-map__timeline {
+    gap: 32px;
+    padding: 8px 10px;
+  }
+
+  .command-center-map__timeline-item {
+    width: 30px;
+    font-size: var(--font-size-sm);
+  }
+}
