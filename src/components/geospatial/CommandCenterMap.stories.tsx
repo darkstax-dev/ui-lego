@@ -4,7 +4,9 @@ import { CommandCenterMap, EventMarker } from './CommandCenterMap';
 import { EventDetectionData } from './EventDetectionCard';
 
 // IMPORTANT: Replace with your actual Mapbox access token
-const MAPBOX_TOKEN = process.env.STORYBOOK_MAPBOX_TOKEN || 
+// Get one at: https://account.mapbox.com/access-tokens/
+// Note: This is a placeholder token. For actual map rendering, you need a valid token.
+const MAPBOX_TOKEN =
   'pk.eyJ1IjoiZXhhbXBsZSIsImEiOiJjbGV4YW1wbGUifQ.example';
 
 const meta: Meta<typeof CommandCenterMap> = {
@@ -14,16 +16,28 @@ const meta: Meta<typeof CommandCenterMap> = {
     layout: 'fullscreen',
     docs: {
       description: {
-        component: `Command center map component combining 3D Mapbox visualization with event detection cards. 
-        
-Features:
-- 3D building visualization
-- Event detection card overlay
-- Timeline header
-- View controls
-- Dark/Light theme support
+        component: `Command center map component combining 3D Mapbox visualization with event detection cards.
 
-**Note:** Requires a valid Mapbox access token.`,
+**Setup Instructions:**
+
+1. Get a Mapbox access token at https://account.mapbox.com/access-tokens/
+2. For Storybook, create \`.storybook/.env.local\`:
+   \`\`\`bash
+   VITE_MAPBOX_TOKEN=pk.your_token_here
+   \`\`\`
+
+**Features:**
+- 3D building visualization
+- Event detection card overlay with image, confidence, and actions
+- Timeline header with hour markers
+- View control buttons (2D view, Reset view)
+- Event selection and management
+- Dark/Light theme support
+- Fully responsive design
+
+**Theme Support:**
+- Light theme: Gray backgrounds with blue text
+- Dark theme: Dark blue backgrounds with light text`,
       },
     },
   },

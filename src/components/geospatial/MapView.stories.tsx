@@ -3,7 +3,8 @@ import { MapView } from './MapView';
 
 // IMPORTANT: Replace with your actual Mapbox access token
 // Get one at: https://account.mapbox.com/access-tokens/
-const MAPBOX_TOKEN = process.env.STORYBOOK_MAPBOX_TOKEN || 
+// Note: This is a placeholder token. For actual map rendering, you need a valid token.
+const MAPBOX_TOKEN =
   'pk.eyJ1IjoiZXhhbXBsZSIsImEiOiJjbGV4YW1wbGUifQ.example';
 
 const meta: Meta<typeof MapView> = {
@@ -13,12 +14,26 @@ const meta: Meta<typeof MapView> = {
     layout: 'fullscreen',
     docs: {
       description: {
-        component: `Interactive 3D map component using Mapbox GL. 
-        
-**Note:** You need to provide a valid Mapbox access token to use this component. 
-Get one at [Mapbox](https://account.mapbox.com/access-tokens/).
+        component: `Interactive 3D map component using Mapbox GL.
 
-Set the token via environment variable: \`STORYBOOK_MAPBOX_TOKEN\` or pass it directly to the component.`,
+**Setup Instructions:**
+
+1. Get a Mapbox access token at https://account.mapbox.com/access-tokens/
+2. For Storybook, create \`.storybook/.env.local\`:
+   \`\`\`bash
+   VITE_MAPBOX_TOKEN=pk.your_token_here
+   \`\`\`
+3. Pass token to component:
+   \`\`\`tsx
+   <MapView mapboxAccessToken={import.meta.env.VITE_MAPBOX_TOKEN} />
+   \`\`\`
+
+**Features:**
+- 3D building visualization at zoom 14+
+- Multiple map styles (dark, light, satellite, streets)
+- Configurable pitch, bearing, zoom, and center
+- Responsive design
+- Theme support`,
       },
     },
   },
