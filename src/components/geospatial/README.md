@@ -4,6 +4,66 @@ A collection of geospatial visualization components built with Mapbox GL and Niv
 
 ## Components
 
+### FeedManager
+
+A comprehensive data feed management panel for monitoring contributing feeds, camera feeds, and object detection alerts in command center applications.
+
+**Features:**
+- Multiple tabs: Emergency, Feeds, and Activity views
+- Adjustable distance slider (0-1000 miles)
+- Contributing feeds with toggle checkboxes
+- Feed data fields for weather and emergency information
+- Contributing information sources display
+- Camera feed selection and monitoring
+- Impact detection alerts
+- Object detection with confidence scores
+- Detected items list with threat assessment
+- Item selection with checkboxes
+- Situational awareness text area
+- Submit action button
+- Dark/Light theme support
+
+**Usage:**
+```tsx
+import { FeedManager } from './components/geospatial';
+
+const cameraFeeds = [
+  {
+    id: 'east_coast',
+    location: 'East_Coast',
+    imageUrl: 'https://example.com/camera1.jpg',
+  },
+];
+
+const detectedItems = [
+  {
+    id: '1',
+    confidence: 97,
+    name: 'Baseball Bat',
+    status: 'unauthorized',
+    selected: true,
+  },
+];
+
+<FeedManager
+  activeTab="feeds"
+  distance={400}
+  cameraFeeds={cameraFeeds}
+  detectedItems={detectedItems}
+  impactDetection="Flood warning"
+  detectionTitle="Weapon"
+  primaryDetection={{
+    name: 'Pipe',
+    confidence: 97,
+    location: 'Eastside',
+    model: '765',
+  }}
+  onTabChange={(tab) => console.log('Tab:', tab)}
+  onDistanceChange={(dist) => console.log('Distance:', dist)}
+  onSubmit={(data) => console.log('Submitted:', data)}
+/>
+```
+
 ### EventDetectionCard
 
 A card component for displaying security event detection results with confidence scores, images, and actionable items.
@@ -170,6 +230,9 @@ Components use the following token categories:
 
 ```
 src/components/geospatial/
+├── FeedManager.tsx              # Feed management panel
+├── FeedManager.css              # Feed manager styles
+├── FeedManager.stories.tsx
 ├── EventDetectionCard.tsx       # Event card component
 ├── EventDetectionCard.css       # Event card styles
 ├── EventDetectionCard.stories.tsx
@@ -192,6 +255,7 @@ npm run storybook
 ```
 
 Navigate to:
+- Components → Geospatial → FeedManager
 - Components → Geospatial → EventDetectionCard
 - Components → Geospatial → MapView
 - Components → Geospatial → CommandCenterMap
