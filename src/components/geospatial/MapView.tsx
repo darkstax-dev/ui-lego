@@ -62,8 +62,14 @@ export const MapView: React.FC<MapViewProps> = ({
 }) => {
   const mapRef = useRef<MapRef>(null);
   const [isMapLoaded, setIsMapLoaded] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const styleUrl = customStyleUrl || MAPBOX_STYLES[mapStyle];
+
+  // Check if token is valid
+  const isValidToken = mapboxAccessToken &&
+    mapboxAccessToken.startsWith('pk.') &&
+    mapboxAccessToken.length > 20;
 
   useEffect(() => {
     if (!isMapLoaded || !enable3DBuildings || !mapRef.current) return;
@@ -144,14 +150,72 @@ export const MapView: React.FC<MapViewProps> = ({
     onLoad?.();
   };
 
+  const handleMapError = (e: any) => {
+    const errorMsg = e?.error?.message || 'Failed to load map';
+    setError(errorMsg);
+    console.error('Map error:', errorMsg);
+  };
+
+  if (!isValidToken) {
+    return (
+      <div
+        className={`map-view map-view--error ${className}`}
+        style={{
+          height: typeof height === 'number' ? `${height}px` : height,
+          width: typeof width === 'number' ? `${width}px` : width,
+        }}
+      >
+        <div style={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          height: '100%',
+          backgroundColor: 'var(--color-gray-100)',
+          flexDirection: 'column',
+          gap: '16px',
+          padding: '20px',
+          textAlign: 'center',
+        }}>
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" style={{ opacity: 0.5 }}>
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z" fill="currentColor"/>
+          </svg>
+          <div>
+            <h3 style={{ margin: '0 0 8px 0', fontSize: '16px', fontWeight: 600 }}>
+              Mapbox Token Required
+            </h3>
+            <p style={{ margin: 0, fontSize: '14px', opacity: 0.7 }}>
+              To use maps, provide a valid Mapbox access token (starts with pk.)
+            </p>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   return (
-    <div 
+    <div
       className={`map-view ${className}`}
-      style={{ 
+      style={{
         height: typeof height === 'number' ? `${height}px` : height,
         width: typeof width === 'number' ? `${width}px` : width,
       }}
     >
+      {error && (
+        <div style={{
+          position: 'absolute',
+          top: '10px',
+          left: '10px',
+          right: '10px',
+          backgroundColor: '#fee9e7',
+          color: '#b6261f',
+          padding: '12px',
+          borderRadius: '4px',
+          fontSize: '14px',
+          zIndex: 1,
+        }}>
+          Map Error: {error}
+        </div>
+      )}
       <Map
         ref={mapRef}
         mapboxAccessToken={mapboxAccessToken}
@@ -164,6 +228,7 @@ export const MapView: React.FC<MapViewProps> = ({
         }}
         mapStyle={styleUrl}
         onLoad={handleMapLoad}
+        onError={handleMapError}
         attributionControl={false}
         style={{ width: '100%', height: '100%' }}
       >

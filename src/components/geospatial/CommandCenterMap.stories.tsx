@@ -3,10 +3,13 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { CommandCenterMap, EventMarker } from './CommandCenterMap';
 import { EventDetectionData } from './EventDetectionCard';
 
-// IMPORTANT: Replace with your actual Mapbox access token
-// Get one at: https://account.mapbox.com/access-tokens/
-// Note: This is a placeholder token. For actual map rendering, you need a valid token.
-const MAPBOX_TOKEN =
+// IMPORTANT: To use these stories, you must provide a valid Mapbox access token
+// Steps:
+// 1. Get a free token at: https://account.mapbox.com/access-tokens/
+// 2. Create .storybook/.env.local with: VITE_MAPBOX_TOKEN=pk.your_token_here
+// 3. Restart Storybook
+// For now, using placeholder - maps won't render without a valid token
+const MAPBOX_TOKEN = import.meta.env.VITE_MAPBOX_TOKEN ||
   'pk.eyJ1IjoiZXhhbXBsZSIsImEiOiJjbGV4YW1wbGUifQ.example';
 
 const meta: Meta<typeof CommandCenterMap> = {
@@ -130,6 +133,47 @@ const sampleEvents: EventMarker[] = [
     eventData: fireDetectionEvent,
   },
 ];
+
+// Setup Instructions Story
+export const SetupInstructions: Story = {
+  render: () => (
+    <div style={{ padding: '40px', textAlign: 'center' }}>
+      <h2>Command Center Setup Required</h2>
+      <p style={{ fontSize: '16px', marginBottom: '20px' }}>
+        The Command Center Map combines event detection with 3D mapping.
+        To view interactive maps, follow these steps:
+      </p>
+      <ol style={{ textAlign: 'left', display: 'inline-block', fontSize: '14px' }}>
+        <li style={{ marginBottom: '12px' }}>
+          Visit <a href="https://account.mapbox.com/access-tokens/" target="_blank" rel="noreferrer">
+            account.mapbox.com/access-tokens/
+          </a>
+        </li>
+        <li style={{ marginBottom: '12px' }}>
+          Create a free account and generate a token (starts with <code>pk.</code>)
+        </li>
+        <li style={{ marginBottom: '12px' }}>
+          Create <code>.storybook/.env.local</code> file with:
+          <pre style={{
+            backgroundColor: '#f5f5f5',
+            padding: '12px',
+            borderRadius: '4px',
+            margin: '8px 0',
+            textAlign: 'left',
+          }}>
+            VITE_MAPBOX_TOKEN=pk.your_token_here
+          </pre>
+        </li>
+        <li style={{ marginBottom: '12px' }}>
+          Restart Storybook: <code>npm run storybook</code>
+        </li>
+      </ol>
+      <p style={{ marginTop: '20px', opacity: 0.7 }}>
+        After setup, all command center stories below will display interactive 3D maps with event overlays.
+      </p>
+    </div>
+  ),
+};
 
 export const Default: Story = {
   args: {
