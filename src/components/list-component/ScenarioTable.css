@@ -16,8 +16,17 @@
   height: 48px;
   padding: 0 var(--sds-size-space-400);
   align-items: flex-start;
-  border-bottom: 1px solid var(--Divider-Light, #C8C8C8);
-  background: var(--Background-Card, #DFDFDF);
+  background-color: var(--Background-Card, #DFDFDF);
+  background-image: repeating-linear-gradient(
+    to right,
+    var(--color-gray-400, #ADADAD) 0px,
+    var(--color-gray-400, #ADADAD) 5px,
+    transparent 5px,
+    transparent 10px
+  );
+  background-position: bottom;
+  background-size: 100% 1px;
+  background-repeat: no-repeat;
   position: relative;
 }
 
@@ -130,7 +139,16 @@
   min-height: 52px;
   padding: 0 var(--sds-size-space-400);
   align-items: flex-start;
-  border-bottom: 1px dashed var(--Gray-400, #ADADAD);
+  background-image: repeating-linear-gradient(
+    to right,
+    var(--color-gray-400, #ADADAD) 0px,
+    var(--color-gray-400, #ADADAD) 5px,
+    transparent 5px,
+    transparent 10px
+  );
+  background-position: bottom;
+  background-size: 100% 1px;
+  background-repeat: no-repeat;
   transition: background-color 0.2s ease;
   background-color: transparent;
 }
