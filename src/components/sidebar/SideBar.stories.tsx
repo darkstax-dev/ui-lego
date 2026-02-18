@@ -1,6 +1,7 @@
 import React from 'react';
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { SideBar, SideBarItem } from './SideBar';
+import SideBarDemo from './SideBarDemo';
 import './SideBar.stories.css';
 
 const meta: Meta<typeof SideBar> = {
@@ -172,6 +173,18 @@ export const Complex: Story = {
     docs: {
       description: {
         story: 'Complex sidebar structure with many collapsible folders and multiple levels, matching the reference design.'
+      }
+    }
+  }
+};
+
+export const FullDemo: StoryObj = {
+  render: () => <SideBarDemo />,
+  parameters: {
+    layout: 'fullscreen',
+    docs: {
+      description: {
+        story: 'Interactive sidebar demo with expand/collapse functionality and hierarchical folder structure.'
       }
     }
   }

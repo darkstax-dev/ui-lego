@@ -124,7 +124,7 @@
   --sds-typography-weight-regular: 400;
 
   /* Font Weights */
-  --font-weight-book: 450;
+  --font-weight-book: 400;
   --font-weight-medium: 500;
   --font-weight-semibold: 600;
   --font-weight-bold: 700;
@@ -474,7 +474,7 @@
   font-family: 'Macan';
   src: url('/fonts/Macan-Regular.woff2') format('woff2'),
        url('/fonts/Macan-Regular.woff') format('woff');
-  font-weight: var(--font-weight-book);
+  font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
@@ -483,7 +483,7 @@
   font-family: 'Macan';
   src: url('/fonts/Macan-Bold.woff2') format('woff2'),
        url('/fonts/Macan-Bold.woff') format('woff');
-  font-weight: var(--font-weight-bold);
+  font-weight: 700;
   font-style: normal;
   font-display: swap;
 }
@@ -492,7 +492,7 @@
   font-family: 'Macan Mono Trial';
   src: url('/fonts/Macan-Mono-Bold.woff2') format('woff2'),
        url('/fonts/Macan-Mono-Bold.woff') format('woff');
-  font-weight: var(--font-weight-bold);
+  font-weight: 700;
   font-style: normal;
   font-display: swap;
 }
@@ -501,7 +501,7 @@
   font-family: 'Macan Mono Stencil Trial';
   src: url('/fonts/Macan-Mono-Stencil-Bold.woff2') format('woff2'),
        url('/fonts/Macan-Mono-Stencil-Bold.woff') format('woff');
-  font-weight: var(--font-weight-bold);
+  font-weight: 700;
   font-style: normal;
   font-display: swap;
 }
@@ -510,7 +510,7 @@
   font-family: 'Macan Mono Stencil Trial';
   src: url('/fonts/Macan-Mono-Stencil-Regular.woff2') format('woff2'),
        url('/fonts/Macan-Mono-Stencil-Regular.woff') format('woff');
-  font-weight: var(--font-weight-medium);
+  font-weight: 500;
   font-style: normal;
   font-display: swap;
 }

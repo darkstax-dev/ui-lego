@@ -3,7 +3,7 @@ import React from 'react'
 import { CreateScenarioPage } from '.'
 
 const meta: Meta = {
-  title: 'Pages/Create Scenario',
+  title: 'Upcoming Pages/Create Scenario',
 }
 
 export default meta

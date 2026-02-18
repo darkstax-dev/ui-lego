@@ -46,9 +46,8 @@ export * from './components/notifications'
 // Tabs exports
 export * from './components/tabs'
 
-// Menu exports
-export * from './components/menu'
-
+// Basic Menu exports
+export * from './components/basic-menu'
 
 // Monaco Editor exports
 export * from './components/monaco-editor'
@@ -85,11 +84,11 @@ export * from './components/drawer'
 // Divider exports
 export * from './components/divider'
 
-// Scenario Listing exports
-export * from './components/scenario-listing'
+// Selection Modal exports
+export * from './components/list-component/index.ts'
 
-// Scenario exports
-export * from './components/scenario'
+// Option Menu exports
+export * from './components/option-menu'
 
 // Checkbox exports
 export * from './components/checkbox'

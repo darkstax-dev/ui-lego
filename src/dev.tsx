@@ -25,7 +25,7 @@ import NavigationDemo from './components/navigation/NavigationDemo'
 import { MainNavigation } from './components/navigation/MainNavigation'
 import { TopBarDemo } from './components/bar'
 import TagBadgeDemo from './components/tag-badges/TagBadgeDemo'
-import MenuDemo from './components/menu/MenuDemo'
+import Menu2Demo from './components/basic-menu/MenuDemo'
 import TooltipDemo from './components/tooltip/TooltipDemo'
 import { EffectsDemo } from './components/effects'
 import AccordionDemo from './components/accordion/AccordionDemo'
@@ -932,7 +932,7 @@ function App() {
       <section className="component-section">
         <h1>Menu Components</h1>
         <h2>Context menus and dropdown menu items with states and shortcuts</h2>
-        <MenuDemo />
+        <Menu2Demo />
       </section>
 
       <section className="component-section">

@@ -24,11 +24,12 @@
 
 .action-bar__title {
   color: var(--Text-Blue-text-Main-text, #00112B);
-  font-family: var(--font-family-macan-mono);
-  font-size: 18px;
-  font-weight: 600;
+  font-family: var(--font-family-macan-mono-stencil);
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 500;
   line-height: 120%;
-  letter-spacing: 0.9px;
+  letter-spacing: 1.6px;
   text-transform: uppercase;
   margin: 0;
 }
@@ -60,12 +61,14 @@
 
 .action-bar__filter-button {
   display: flex;
+  width: 240px;
+  flex-direction: row;
   align-items: center;
-  gap: 8px;
-  padding: 8px 12px;
-  background: var(--color-white, #FFFFFF);
-  border: 1px solid var(--Divider-Light, #C8C8C8);
-  border-radius: 4px;
+  justify-content: space-between;
+  gap: var(--sds-size-space-200);
+  padding: var(--sds-size-space-200) var(--sds-size-space-300);
+  background: var(--color-gray-200);
+  border: none;
   color: var(--Text-Blue-text-Main-text, #00112B);
   font-family: var(--font-family-macan);
   font-size: 14px;
@@ -73,11 +76,10 @@
   line-height: 120%;
   cursor: pointer;
   transition: all 0.2s ease;
-  min-width: 100px;
 }
 
 .action-bar__filter-button:hover {
-  border-color: var(--Text-Blue-text-Main-text, #00112B);
+  background: rgba(223, 223, 223, 0.8);
 }
 
 .action-bar__filter-button svg {
@@ -122,6 +124,23 @@
 .action-bar__filter-option--selected {
   font-weight: 600;
   background: var(--Background-Card, #DFDFDF);
+}
+
+/* Icon Buttons (Export/Import) */
+.action-bar__icon-button {
+  display: flex;
+  padding: 10px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  background: var(--Icon-Button-Gray-btn-Fill, #DFDFDF);
+  border: none;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.action-bar__icon-button:hover {
+  background: var(--color-gray-300, #CECECE);
 }
 
 /* Search */

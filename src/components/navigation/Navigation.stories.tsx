@@ -1,10 +1,11 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { SecondaryNavigation } from './SecondaryNavigation';
+import NavigationDemo from './NavigationDemo';
 import './Navigation.stories.css';
 
 const meta: Meta = {
-  title: 'Components/Navigation',
+  title: 'Main Components/Secondary Navigation',
   component: SecondaryNavigation,
   tags: ['autodocs'],
   parameters: {
@@ -158,3 +159,15 @@ export const WithBackButton = WithBackTemplate;
 export const WithoutLockToggle = NoLockTemplate;
 export const Minimal = MinimalTemplate;
 export const FullFeatured = FullFeaturedTemplate;
+
+export const FullDemo: StoryObj = {
+  render: () => <NavigationDemo />,
+  parameters: {
+    layout: 'fullscreen',
+    docs: {
+      description: {
+        story: 'Full navigation demo showing Main Navigation, Secondary Navigation, and Folders Left Panel working together.'
+      }
+    }
+  }
+};

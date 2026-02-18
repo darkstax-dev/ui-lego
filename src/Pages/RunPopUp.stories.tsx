@@ -4,7 +4,7 @@ import RunPopUp from './RunPopUp'
 import Button from '../components/buttons/Button'
 
 const meta: Meta<typeof RunPopUp> = {
-  title: 'Pages/RunPopUp',
+  title: 'Upcoming Pages/RunPopUp',
   component: RunPopUp,
   tags: ['autodocs'],
   parameters: {

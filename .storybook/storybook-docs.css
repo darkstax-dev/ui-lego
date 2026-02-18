@@ -1,19 +1,25 @@
-/* Fix code block visibility in Storybook docs */
-.sbdocs-preview,
-.docblock-source {
-  background: #1e1e1e !important;
-}
+/* =====================================================
+   Storybook docs - code block fixes
+   Only targets actual <pre> and <code> elements,
+   not prose text, to avoid gray highlight on content.
+   ===================================================== */
 
-/* Fix code text visibility */
-.prismjs,
-.docblock-source code,
-.sbdocs .sbdocs-pre code,
-.sbdocs pre code {
+/* Only pre blocks and code inside pre — not inline code in prose */
+pre {
+  background: #1e1e1e !important;
   color: #d4d4d4 !important;
-  background: #1e1e1e !important;
+  border-radius: 4px !important;
+  padding: 16px !important;
+  overflow-x: auto !important;
 }
 
-/* Ensure syntax highlighting is visible */
+pre code {
+  background: transparent !important;
+  color: #d4d4d4 !important;
+  padding: 0 !important;
+}
+
+/* Prism.js syntax tokens */
 .token.comment,
 .token.prolog,
 .token.doctype,
@@ -69,67 +75,34 @@
   color: #d16969 !important;
 }
 
-/* Code block container */
-.sbdocs .sbdocs-pre {
+/* Shiki highlighter (Storybook 9 default) */
+.shiki {
   background: #1e1e1e !important;
-  border: 1px solid #3e3e42 !important;
-  border-radius: 4px !important;
-  padding: 16px !important;
-  overflow-x: auto !important;
 }
 
-/* Inline code */
-.sbdocs code:not(pre code) {
-  background: #2d2d30 !important;
-  color: #ce9178 !important;
-  padding: 2px 6px !important;
-  border-radius: 3px !important;
-  font-size: 0.9em !important;
+.shiki code {
+  background: transparent !important;
 }
 
-/* Source code panels in Canvas tab */
-.docblock-source {
-  border: 1px solid #3e3e42 !important;
-  border-radius: 4px !important;
+/* Remove any background highlight from plain text spans inside pre */
+pre span {
+  background: transparent !important;
 }
 
-.docblock-source pre {
-  background: #1e1e1e !important;
-  margin: 0 !important;
-  padding: 16px !important;
-}
-
-/* Copy button styling */
-.docblock-code-toggle {
+/* Copy/action buttons in code blocks */
+button[title="Copy"],
+button[title="Copy code"],
+button[title="Hide code"],
+button[title="Show code"] {
   background: #3e3e42 !important;
   color: #cccccc !important;
   border: 1px solid #555 !important;
 }
 
-.docblock-code-toggle:hover {
-  background: #505050 !important;
-  color: #ffffff !important;
-}
-
-/* Hide code button styling */
-button[title="Hide code"] {
-  background: #3e3e42 !important;
-  color: #cccccc !important;
-}
-
-button[title="Hide code"]:hover {
-  background: #505050 !important;
-  color: #ffffff !important;
-}
-
-/* Copy code button */
-button[title="Copy"] {
-  background: #3e3e42 !important;
-  color: #cccccc !important;
-  border: 1px solid #555 !important;
-}
-
-button[title="Copy"]:hover {
+button[title="Copy"]:hover,
+button[title="Copy code"]:hover,
+button[title="Hide code"]:hover,
+button[title="Show code"]:hover {
   background: #505050 !important;
   color: #ffffff !important;
 }

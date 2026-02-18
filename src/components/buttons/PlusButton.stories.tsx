@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite'
 import PlusButton from './PlusButton'
 
 const meta: Meta<typeof PlusButton> = {
-  title: 'Components/Buttons/PlusButton',
+  title: 'Main Components/Buttons/Plus Button',
   component: PlusButton,
   parameters: {
     layout: 'centered',

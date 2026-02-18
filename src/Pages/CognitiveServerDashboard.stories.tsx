@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react'
 import CognitiveServerDashboard from './CognitiveServerDashboard'
 
 const meta: Meta<typeof CognitiveServerDashboard> = {
-  title: 'Pages/CognitiveServerDashboard',
+  title: 'Upcoming Pages/CognitiveServerDashboard',
   component: CognitiveServerDashboard,
   parameters: {
     layout: 'fullscreen',

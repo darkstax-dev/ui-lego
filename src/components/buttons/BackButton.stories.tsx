@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite'
 import BackButton from './BackButton'
 
 const meta: Meta<typeof BackButton> = {
-  title: 'Components/BackButton',
+  title: 'Main Components/Buttons/Back Button',
   component: BackButton,
   parameters: {
     layout: 'centered',

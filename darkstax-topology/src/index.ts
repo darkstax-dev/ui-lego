@@ -14,8 +14,6 @@ export {
   ObjectDetail
 } from './components/panels';
 
-export { TopologyLegend } from './components/legend';
-
 export { useD3AutoLayout } from './hooks/useD3AutoLayout';
 export { useWebSocket } from './hooks/useWebSocket';
 

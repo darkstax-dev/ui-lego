@@ -5,7 +5,7 @@ import Button from './Button';
 import './Button.stories.css';
 
 const meta: Meta<typeof Button> = {
-  title: 'Components/Button',
+  title: 'Main Components/Buttons/Button',
   component: Button,
   tags: ['autodocs'],
   parameters: {

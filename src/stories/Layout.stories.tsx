@@ -2,8 +2,8 @@ import type { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
 import { TopBar } from '../components/bar/TopBar';
 import { ActionBar } from '../components/action-bar/ActionBar';
-import ScenarioTable from '../components/scenario-listing/ScenarioTable';
-import type { Scenario } from '../components/scenario-listing/types';
+import ScenarioTable from '../components/list-component/ScenarioTable';
+import type { Scenario } from '../components/list-component/types';
 
 const meta: Meta = {
   title: 'Examples/Complete Layout',

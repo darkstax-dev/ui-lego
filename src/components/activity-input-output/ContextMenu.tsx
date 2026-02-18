@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
-import Menu from '../menu/Menu'
-import MenuItem from '../menu/MenuItem'
+import Menu from '../basic-menu/Menu'
+import MenuItem from '../basic-menu/MenuItem'
 import './ContextMenu.css'
 
 export interface ContextMenuProps {
@@ -60,9 +60,6 @@ const ContextMenu: React.FC<ContextMenuProps> = ({
         {onOpen && (
           <MenuItem
             label="Open"
-            hasIcon={false}
-            hasShortcut={false}
-            hasDescription={false}
             onClick={() => {
               onOpen()
               onClose()
@@ -73,10 +70,7 @@ const ContextMenu: React.FC<ContextMenuProps> = ({
         <div className="context-menu__submenu-container">
           <MenuItem
             label="Action Input"
-            hasIcon={false}
-            hasDescription={false}
-            hasShortcut={false}
-            icon={<ChevronIcon />}
+            hasTrailingArrow
             onClick={handleInputClick}
           />
           
@@ -86,9 +80,6 @@ const ContextMenu: React.FC<ContextMenuProps> = ({
                 <MenuItem
                   key={option}
                   label={option}
-                  hasIcon={false}
-                  hasShortcut={false}
-                  hasDescription={false}
                   onClick={() => {
                     onAddInput(option)
                     onClose()
@@ -102,10 +93,7 @@ const ContextMenu: React.FC<ContextMenuProps> = ({
         <div className="context-menu__submenu-container">
           <MenuItem
             label="Action Output"
-            hasIcon={false}
-            hasDescription={false}
-            hasShortcut={false}
-            icon={<ChevronIcon />}
+            hasTrailingArrow
             onClick={handleOutputClick}
           />
           
@@ -115,9 +103,6 @@ const ContextMenu: React.FC<ContextMenuProps> = ({
                 <MenuItem
                   key={option}
                   label={option}
-                  hasIcon={false}
-                  hasShortcut={false}
-                  hasDescription={false}
                   onClick={() => {
                     onAddOutput(option)
                     onClose()
@@ -130,10 +115,7 @@ const ContextMenu: React.FC<ContextMenuProps> = ({
         
         <MenuItem
           label="Delete"
-          hasIcon={false}
-          hasShortcut={false}
-          hasDescription={false}
-          className="context-menu__item--danger"
+          variant="danger"
           onClick={() => {
             onDelete()
             onClose()

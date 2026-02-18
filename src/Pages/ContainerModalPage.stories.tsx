@@ -3,7 +3,7 @@ import React from 'react'
 import { ContainerModalPage } from './ContainerModalPage'
 
 const meta: Meta<typeof ContainerModalPage> = {
-  title: 'Pages/Container Modal',
+  title: 'Upcoming Pages/Container Modal',
   component: ContainerModalPage,
   parameters: {
     layout: 'fullscreen',

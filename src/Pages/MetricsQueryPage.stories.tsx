@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite'
 import MetricsQueryPage from './MetricsQueryPage'
 
 const meta: Meta<typeof MetricsQueryPage> = {
-  title: 'Pages/MetricsQueryPage',
+  title: 'Upcoming Pages/MetricsQueryPage',
   component: MetricsQueryPage,
   parameters: {
     layout: 'fullscreen',

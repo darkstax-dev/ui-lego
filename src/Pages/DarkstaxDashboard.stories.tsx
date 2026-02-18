@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react'
 import DarkstaxDashboard from './DarkstaxDashboard'
 
 const meta: Meta<typeof DarkstaxDashboard> = {
-  title: 'Pages/DarkstaxDashboard',
+  title: 'Upcoming Pages/DarkstaxDashboard',
   component: DarkstaxDashboard,
   parameters: {
     layout: 'fullscreen',
