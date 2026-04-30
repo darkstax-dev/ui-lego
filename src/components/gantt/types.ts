@@ -1,6 +1,6 @@
 export type ViewMode = 'month' | 'week' | 'day' | 'hour' | '30min'
 
-export type TaskStatus = 'not-started' | 'in-progress' | 'completed' | 'on-hold' | 'cancelled'
+export type TaskStatus = 'not-started' | 'in-progress' | 'completed' | 'on-hold' | 'cancelled' | 'pending'
 
 export interface GanttTask {
   id: string
@@ -10,12 +10,18 @@ export interface GanttTask {
   status?: TaskStatus
   progress?: number // 0-100
   assignee?: string
+  assigneeAvatar?: string
   priority?: 'low' | 'medium' | 'high'
   color?: string
   children?: GanttTask[]
   parentId?: string
   projectId?: string
   metadata?: Record<string, unknown>
+  product?: string
+  customer?: string
+  agentComment?: string
+  checklist?: Array<{ text: string; checked?: boolean }>
+  attachments?: Array<{ fileName: string }>
 }
 
 export interface GanttColumn {
@@ -58,6 +64,15 @@ export interface GanttChartProps {
   timeRangeEnd?: Date
   onTimeRangeChange?: (start: Date, end: Date) => void
   showTimeRangeSlider?: boolean
+  /** When true, shows input-style fields for Start/End time instead of slider */
+  timeInputMode?: boolean
+  headerTitle?: string
+  showHeader?: boolean
+  projectName?: string
+  agentNames?: string[]
+  selectedAgent?: string
+  onAgentChange?: (agent: string) => void
+  onSearchChange?: (value: string) => void
 }
 
 export interface TimelineUnit {

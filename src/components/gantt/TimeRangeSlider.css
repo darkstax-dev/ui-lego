@@ -3,52 +3,72 @@
 .time-range-slider {
   display: flex;
   flex-direction: column;
-  gap: var(--sds-size-space-200);
-  padding: var(--sds-size-space-300) var(--sds-size-space-400);
-  background-color: var(--surface-card);
-  border-bottom: var(--sds-size-stroke-border) solid var(--sds-color-border-default-default);
+  gap: 0;
+  padding: 0;
+  background-color: transparent;
 }
 
 .time-range-slider-header {
   display: flex;
   align-items: center;
-  gap: var(--sds-size-space-600);
-  margin-bottom: var(--sds-size-space-200);
+  gap: 16px;
 }
 
 .time-range-date-picker {
+  position: relative;
   display: flex;
   align-items: center;
-  gap: var(--sds-size-space-300);
 }
 
-.date-picker-label {
+/* Trigger button for the calendar popup */
+.date-picker-trigger {
+  display: flex;
+  height: 40px;
+  padding: var(--sds-size-space-300) var(--sds-size-space-300) var(--sds-size-space-300) var(--sds-size-space-400);
+  justify-content: space-between;
+  align-items: center;
+  align-self: stretch;
+  background: var(--Inputs-Input-Background, #DFDFDF);
+  border: var(--sds-size-stroke-border) solid var(--sds-color-border-default-default);
+  border-radius: 0;
+  cursor: pointer;
   font-family: var(--font-family-macan);
   font-size: var(--font-size-sm);
-  font-weight: var(--font-weight-medium);
+  font-weight: 400;
   color: var(--text-blue-main);
+  transition: background-color 0.15s ease;
+  box-shadow: none;
+  gap: 8px;
+}
+
+.date-picker-trigger:hover {
+  border-color: var(--sds-color-border-default-default);
+}
+
+.date-picker-trigger-text {
   white-space: nowrap;
 }
 
-.date-picker-input {
-  padding: var(--sds-size-space-200) var(--sds-size-space-300);
-  font-family: var(--font-family-macan);
-  font-size: var(--font-size-sm);
+.date-picker-trigger-icon {
+  flex-shrink: 0;
   color: var(--text-blue-main);
-  background-color: var(--surface-default);
-  border: var(--sds-size-stroke-border) solid var(--sds-color-border-default-default);
-  border-radius: var(--sds-size-radius-100);
-  cursor: pointer;
-  transition: all 0.15s ease;
 }
 
-.date-picker-input:hover {
-  border-color: var(--color-blue-700);
+/* Calendar popup positioning */
+.date-picker-calendar-popup {
+  position: absolute;
+  top: calc(100% + 4px);
+  right: 0;
+  z-index: 200;
 }
 
-.date-picker-input:focus {
-  outline: 2px solid var(--color-blue-700);
-  outline-offset: 2px;
+/* Right side: time range labels + slider */
+.time-range-slider-right {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sds-size-space-200);
+  width: 240px;
+  flex-shrink: 0;
 }
 
 .time-range-slider-labels {
@@ -56,30 +76,32 @@
   justify-content: space-between;
   align-items: center;
   gap: var(--sds-size-space-300);
-  flex: 1;
 }
 
 .time-range-label {
+  color: var(--Text-Blue-text-Main-text, #00112B);
   font-family: var(--font-family-macan-mono);
-  font-size: var(--font-size-sm);
-  font-weight: var(--font-weight-semibold);
-  color: var(--text-blue-main);
-  letter-spacing: var(--letter-spacing-normal);
+  font-size: 12px;
+  font-style: normal;
+  font-weight: var(--font-weight-book, 450);
+  line-height: 120%;
+  letter-spacing: 1.2px;
 }
 
 .time-range-slider-track {
   position: relative;
-  height: 6px;
-  background-color: var(--color-gray-300);
-  border-radius: 3px;
+  width: 240px;
+  height: 4px;
+  background: var(--Text-Gray-text-Secondary-text, #ADADAD);
+  border-radius: 0;
   cursor: pointer;
 }
 
 .time-range-slider-range {
   position: absolute;
   height: 100%;
-  background-color: var(--color-blue-700);
-  border-radius: 3px;
+  background: var(--Blue-Dark-blue-950, #00112B);
+  border-radius: 0;
   transition: all 0.1s ease;
 }
 
@@ -87,29 +109,55 @@
   position: absolute;
   top: 50%;
   transform: translate(-50%, -50%);
-  width: 18px;
-  height: 18px;
-  background-color: var(--color-blue-700);
-  border: 2px solid var(--color-white);
+  width: 16px;
+  height: 16px;
+  background-color: var(--Blue-Dark-blue-950, #00112B);
+  border: none;
   border-radius: 50%;
   cursor: grab;
   transition: all 0.15s ease;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  box-shadow: none;
+  padding: 0;
 }
 
 .time-range-slider-thumb:hover {
-  transform: translate(-50%, -50%) scale(1.2);
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
+  transform: translate(-50%, -50%) scale(1.15);
 }
 
 .time-range-slider-thumb:active {
   cursor: grabbing;
-  transform: translate(-50%, -50%) scale(1.15);
+  transform: translate(-50%, -50%) scale(1.1);
 }
 
 .time-range-slider-thumb:focus {
-  outline: 2px solid var(--color-blue-700);
-  outline-offset: 2px;
+  outline: none;
+}
+
+/* Input-mode time fields (Select Date / Start time / End time) */
+.time-range-input-field {
+  display: flex;
+  height: 40px;
+  padding: var(--sds-size-space-300) var(--sds-size-space-300) var(--sds-size-space-300) var(--sds-size-space-400);
+  justify-content: space-between;
+  align-items: center;
+  background: var(--Inputs-Input-Background, #DFDFDF);
+  border: var(--sds-size-stroke-border) solid var(--sds-color-border-default-default);
+  cursor: pointer;
+  gap: 8px;
+  min-width: 120px;
+}
+
+.time-range-input-text {
+  white-space: nowrap;
+  font-family: var(--font-family-macan);
+  font-size: var(--font-size-sm, 14px);
+  font-weight: 400;
+  color: var(--Inputs-Placeholder-text, #78797A);
+}
+
+.time-range-input-icon {
+  flex-shrink: 0;
+  color: var(--text-blue-main, #00112B);
 }
 
 /* Dark mode */

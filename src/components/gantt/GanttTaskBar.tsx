@@ -1,7 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react'
 import { GanttTask } from './types'
 import { getTaskColor } from './utils'
-import Tooltip from '../tooltip/Tooltip'
 
 export interface GanttTaskBarProps {
   task: GanttTask
@@ -32,6 +31,8 @@ const GanttTaskBar: React.FC<GanttTaskBarProps> = ({
   const [isResizing, setIsResizing] = useState<'left' | 'right' | null>(null)
   const [dragStart, setDragStart] = useState({ x: 0, left: 0, width: 0 })
   const [showTooltip, setShowTooltip] = useState(false)
+  const [tooltipBelow, setTooltipBelow] = useState(false)
+  const [tooltipPosition, setTooltipPosition] = useState({ top: 0, left: 0 })
   const taskRef = useRef<HTMLDivElement>(null)
 
   const taskColor = getTaskColor(task.status, task.color)
@@ -107,6 +108,18 @@ const GanttTaskBar: React.FC<GanttTaskBarProps> = ({
 
   const isNotStarted = task.status === 'not-started' || !task.status
 
+  // Determine status class for CSS
+  const getStatusClass = (): string => {
+    switch (task.status) {
+      case 'in-progress': return 'in-progress'
+      case 'completed': return 'completed'
+      case 'on-hold': return 'on-hold'
+      case 'pending': return 'pending'
+      case 'not-started': return 'not-started'
+      default: return 'not-started'
+    }
+  }
+
   // Calculate hours for tooltip
   const calculateHours = (start: Date, end: Date): number => {
     const diffMs = end.getTime() - start.getTime()
@@ -120,7 +133,7 @@ const GanttTaskBar: React.FC<GanttTaskBarProps> = ({
   const formatStatus = (status?: string): string => {
     if (!status || status === 'not-started') return 'Not started'
     if (status === 'in-progress') return 'In process'
-    if (status === 'on-hold') return 'Pending'
+    if (status === 'on-hold' || status === 'pending') return 'Pending'
     if (status === 'completed') return 'Completed'
     return status
   }
@@ -134,9 +147,16 @@ const GanttTaskBar: React.FC<GanttTaskBarProps> = ({
     })
   }
 
+  const getTooltipTitle = (): string => {
+    if (task.status === 'completed') {
+      return `Completed ${formatCompletedDate(task.endDate)}`
+    }
+    return formatStatus(task.status)
+  }
+
   const getTooltipBody = (): string => {
     if (task.status === 'completed') {
-      return `Completed: ${formatCompletedDate(task.endDate)}\nSpent time: ${approxTime}`
+      return `Spent time: ${approxTime}`
     }
     return `Approx.time: ${approxTime}`
   }
@@ -144,7 +164,7 @@ const GanttTaskBar: React.FC<GanttTaskBarProps> = ({
   return (
     <div
       ref={taskRef}
-      className={`gantt-task-bar ${isChild ? 'child-task' : ''} ${isDragging ? 'dragging' : ''} ${isResizing ? 'resizing' : ''} ${isNotStarted ? 'not-started' : ''}`}
+      className={`gantt-task-bar ${getStatusClass()} ${isChild ? 'child-task' : ''} ${isDragging ? 'dragging' : ''} ${isResizing ? 'resizing' : ''}`}
       style={{
         left: `${left}px`,
         width: `${width}px`,
@@ -155,10 +175,35 @@ const GanttTaskBar: React.FC<GanttTaskBarProps> = ({
       onClick={handleClick}
       onDoubleClick={handleDoubleClick}
       onMouseDown={(e) => handleMouseDown(e)}
-      onMouseEnter={() => setShowTooltip(true)}
+      onMouseEnter={() => {
+        if (taskRef.current) {
+          const rect = taskRef.current.getBoundingClientRect()
+          const centerX = rect.left + rect.width / 2
+          const tooltipOffset = 10
+          
+          // Show tooltip below if task is within 180px of viewport top (near the sticky header)
+          const below = rect.top < 180
+          setTooltipBelow(below)
+          
+          if (below) {
+            // Position below the task bar
+            setTooltipPosition({
+              top: rect.bottom + tooltipOffset,
+              left: centerX,
+            })
+          } else {
+            // Position above the task bar
+            setTooltipPosition({
+              top: rect.top - tooltipOffset,
+              left: centerX,
+            })
+          }
+        }
+        setShowTooltip(true)
+      }}
       onMouseLeave={() => setShowTooltip(false)}
     >
-      {/* Progress bar */}
+      {/* Progress bar (solid portion) */}
       {progress > 0 && !isNotStarted && (
         <div
           className="gantt-task-progress"
@@ -168,16 +213,30 @@ const GanttTaskBar: React.FC<GanttTaskBarProps> = ({
         />
       )}
 
+      {/* Hatched remaining portion for in-progress tasks */}
+      {task.status === 'in-progress' && progress > 0 && progress < 100 && (
+        <div
+          className="gantt-task-remaining"
+          style={{
+            width: `${100 - progress}%`,
+          }}
+        />
+      )}
+
       {/* Tooltip */}
       {showTooltip && (
-        <div className="gantt-task-tooltip">
-          <Tooltip
-            title={formatStatus(task.status)}
-            body={getTooltipBody()}
-            hasBody={true}
-            placement="top"
-            visible={true}
-          />
+        <div 
+          className={`gantt-task-tooltip ${tooltipBelow ? 'gantt-task-tooltip--below' : ''}`}
+          style={{
+            top: tooltipPosition.top,
+            left: tooltipPosition.left,
+            transform: 'translateX(-50%)',
+          }}
+        >
+          <div className="gantt-task-tooltip-content">
+            <span className="gantt-task-tooltip-title">{getTooltipTitle()}</span>
+            <span className="gantt-task-tooltip-body">{getTooltipBody()}</span>
+          </div>
         </div>
       )}
 

@@ -143,6 +143,7 @@ export const getTaskColor = (status?: string, color?: string): string => {
     case 'in-progress':
       return '#0451A4' // Blue
     case 'on-hold':
+    case 'pending':
       return '#D9322A' // Red (pending)
     case 'cancelled':
       return '#D9322A' // Red

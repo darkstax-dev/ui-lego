@@ -18,49 +18,57 @@ type Story = StoryObj<typeof GanttChart>
 const calculateHours = (startDate: Date, endDate: Date): number => {
   const diffMs = endDate.getTime() - startDate.getTime()
   const hours = diffMs / (1000 * 60 * 60)
-  return Math.round(hours * 10) / 10 // Round to 1 decimal place
+  return Math.round(hours * 10) / 10
 }
 
-// Task data for time-based views
+// Task data matching Figma reference
 const hourlyTasks: GanttTask[] = [
   {
     id: '1',
     title: 'API Endpoint Spec',
     startDate: new Date('2025-01-15T10:30:00'),
-    endDate: new Date('2025-01-15T11:00:00'),
+    endDate: new Date('2025-01-15T11:30:00'),
     status: 'completed',
     progress: 100,
-    assignee: 'Alice',
+    assignee: 'Maria',
     priority: 'high',
+    product: 'Mobile App',
+    customer: 'Acme Corp',
+    agentComment: 'API endpoint specification completed successfully.',
+    checklist: [
+      { text: 'Define request/response schema', checked: true },
+      { text: 'Write API documentation', checked: true },
+    ],
+    attachments: [{ fileName: 'APISpec.pdf' }],
   },
   {
     id: '2',
-    title: 'Inventory Restock',
+    title: 'Inventory Restock...',
     startDate: new Date('2025-01-15T11:00:00'),
     endDate: new Date('2025-01-15T11:30:00'),
     status: 'completed',
     progress: 100,
-    assignee: 'Bob',
+    assignee: 'Agent name',
     priority: 'medium',
   },
   {
     id: '3',
-    title: 'Optimize SQL Query',
+    title: 'Optimize SQL Que...',
     startDate: new Date('2025-01-15T12:30:00'),
-    endDate: new Date('2025-01-15T15:00:00'),
+    endDate: new Date('2025-01-15T16:30:00'),
     status: 'in-progress',
     progress: 60,
-    assignee: 'Carol',
+    assignee: 'Agent name',
     priority: 'high',
   },
   {
     id: '4',
-    title: 'Inventory Restock',
-    startDate: new Date('2025-01-15T14:30:00'),
-    endDate: new Date('2025-01-15T16:30:00'),
+    title: 'Inventory Restock...',
+    startDate: new Date('2025-01-15T14:00:00'),
+    endDate: new Date('2025-01-15T16:00:00'),
     status: 'in-progress',
     progress: 40,
-    assignee: 'David',
+    assignee: 'Agent name',
     priority: 'medium',
   },
   {
@@ -68,24 +76,64 @@ const hourlyTasks: GanttTask[] = [
     title: 'Task',
     startDate: new Date('2025-01-15T16:00:00'),
     endDate: new Date('2025-01-15T16:30:00'),
-    status: 'on-hold',
+    status: 'pending',
     progress: 0,
-    assignee: 'Eve',
+    assignee: 'Agent name',
     priority: 'low',
   },
   {
     id: '6',
     title: 'Task',
-    startDate: new Date('2025-01-15T19:00:00'),
-    endDate: new Date('2025-01-15T22:00:00'),
+    startDate: new Date('2025-01-15T12:00:00'),
+    endDate: new Date('2025-01-15T13:00:00'),
+    status: 'pending',
+    progress: 0,
+    assignee: 'Agent name',
+    priority: 'medium',
+  },
+  {
+    id: '7',
+    title: 'Design wireframes',
+    startDate: new Date('2025-01-15T10:30:00'),
+    endDate: new Date('2025-01-15T11:30:00'),
+    status: 'completed',
+    progress: 100,
+    assignee: 'Agent name',
+    priority: 'high',
+  },
+  {
+    id: '8',
+    title: 'Conduct user research',
+    startDate: new Date('2025-01-15T11:00:00'),
+    endDate: new Date('2025-01-15T13:00:00'),
+    status: 'in-progress',
+    progress: 30,
+    assignee: 'Agent name',
+    priority: 'medium',
+  },
+  {
+    id: '9',
+    title: 'Develop prototypes',
+    startDate: new Date('2025-01-15T13:00:00'),
+    endDate: new Date('2025-01-15T16:00:00'),
     status: 'not-started',
     progress: 0,
-    assignee: 'Frank',
+    assignee: 'Agent name',
     priority: 'medium',
+  },
+  {
+    id: '10',
+    title: 'Perform usability testing',
+    startDate: new Date('2025-01-15T16:00:00'),
+    endDate: new Date('2025-01-15T20:00:00'),
+    status: 'not-started',
+    progress: 0,
+    assignee: 'Agent name',
+    priority: 'low',
   },
 ]
 
-// Simplified columns matching the reference image
+// Simplified columns matching the Figma reference
 const simplifiedColumns: GanttColumn[] = [
   {
     field: 'title',
@@ -96,20 +144,16 @@ const simplifiedColumns: GanttColumn[] = [
   {
     field: 'hours',
     headerName: 'HOURS',
-    width: 100,
-    align: 'left',
+    width: 60,
+    align: 'center',
     renderCell: (task) => {
       const hours = calculateHours(task.startDate, task.endDate)
       return hours.toString()
     },
   },
-  {
-    field: 'assignee',
-    headerName: 'AGENT NAME',
-    width: 150,
-    align: 'left',
-  },
 ]
+
+const agentNames = ['Agent name', 'Agent name', 'Agent name', 'Agent name', 'Agent name']
 
 export const Default: Story = {
   args: {
@@ -119,8 +163,14 @@ export const Default: Story = {
     rowHeight: 50,
     taskBarHeight: 32,
     showTimeRangeSlider: true,
-    timeRangeStart: new Date('2025-01-15T10:30:00'),
-    timeRangeEnd: new Date('2025-01-15T23:30:00'),
+    showHeader: true,
+    headerTitle: '[GANTT CHART]',
+    projectName: 'Project name',
+    agentNames: agentNames,
+    selectedAgent: 'Agent name',
+    timeRangeStart: new Date('2025-01-15T08:00:00'),
+    timeRangeEnd: new Date('2025-01-15T22:00:00'),
+    defaultGridSectionWidth: 200,
     onTaskClick: (taskId, task) => {
       console.log('Task clicked:', taskId, task)
     },
@@ -131,7 +181,7 @@ export const Default: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'Gantt chart with 30-minute intervals, time range slider, and simplified columns showing task name, hours, and agent name.',
+        story: 'Gantt chart matching Figma design with 30-minute intervals, time range slider, task statuses with proper colors, and tooltips showing Approx.time or Spent time.',
       },
     },
   },
@@ -145,13 +195,101 @@ export const ThirtyMinuteView: Story = {
     rowHeight: 50,
     taskBarHeight: 32,
     showTimeRangeSlider: true,
-    timeRangeStart: new Date('2025-01-15T10:30:00'),
-    timeRangeEnd: new Date('2025-01-15T23:30:00'),
+    showHeader: true,
+    headerTitle: '[GANTT CHART]',
+    projectName: 'Project name',
+    agentNames: agentNames,
+    timeRangeStart: new Date('2025-01-15T08:00:00'),
+    timeRangeEnd: new Date('2025-01-15T22:00:00'),
+    defaultGridSectionWidth: 200,
   },
   parameters: {
     docs: {
       description: {
-        story: 'Gantt chart with 30-minute intervals and time range slider. Similar to the reference image with hourly task scheduling.',
+        story: 'Gantt chart with 30-minute intervals and time range slider.',
+      },
+    },
+  },
+}
+
+// Empty Gantt chart data — tasks with 0 hours and no bars
+const emptyTasks: GanttTask[] = [
+  {
+    id: 'e1',
+    title: 'API Endpoint Spec',
+    startDate: new Date('2025-01-15T07:00:00'),
+    endDate: new Date('2025-01-15T07:00:00'),
+    status: 'not-started',
+    progress: 0,
+    assignee: 'Agent name',
+  },
+  {
+    id: 'e2',
+    title: 'Inventory Restock...',
+    startDate: new Date('2025-01-15T07:00:00'),
+    endDate: new Date('2025-01-15T07:00:00'),
+    status: 'not-started',
+    progress: 0,
+    assignee: 'Agent name',
+  },
+  {
+    id: 'e3',
+    title: 'Optimize SQL Que...',
+    startDate: new Date('2025-01-15T07:00:00'),
+    endDate: new Date('2025-01-15T07:00:00'),
+    status: 'not-started',
+    progress: 0,
+    assignee: 'Agent name',
+  },
+  {
+    id: 'e4',
+    title: 'Inventory Restock...',
+    startDate: new Date('2025-01-15T07:00:00'),
+    endDate: new Date('2025-01-15T07:00:00'),
+    status: 'not-started',
+    progress: 0,
+    assignee: 'Agent name',
+  },
+  {
+    id: 'e5',
+    title: 'Task',
+    startDate: new Date('2025-01-15T07:00:00'),
+    endDate: new Date('2025-01-15T07:00:00'),
+    status: 'not-started',
+    progress: 0,
+    assignee: 'Agent name',
+  },
+  {
+    id: 'e6',
+    title: 'Task',
+    startDate: new Date('2025-01-15T07:00:00'),
+    endDate: new Date('2025-01-15T07:00:00'),
+    status: 'not-started',
+    progress: 0,
+    assignee: 'Agent name',
+  },
+]
+
+export const EmptyChart: Story = {
+  args: {
+    data: emptyTasks,
+    columns: simplifiedColumns,
+    viewMode: '30min',
+    rowHeight: 50,
+    taskBarHeight: 32,
+    showTimeRangeSlider: true,
+    timeInputMode: true,
+    showHeader: true,
+    headerTitle: '[GANTT CHART]',
+    projectName: 'Project name',
+    agentNames: agentNames,
+    selectedAgent: '',
+    defaultGridSectionWidth: 200,
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Empty Gantt chart with no task bars. Shows Select Date, Start time, and End time input fields in the header controls area.',
       },
     },
   },
@@ -165,13 +303,18 @@ export const HourlyView: Story = {
     rowHeight: 50,
     taskBarHeight: 32,
     showTimeRangeSlider: true,
-    timeRangeStart: new Date('2025-01-15T10:00:00'),
-    timeRangeEnd: new Date('2025-01-15T23:00:00'),
+    showHeader: true,
+    headerTitle: '[GANTT CHART]',
+    projectName: 'Project name',
+    agentNames: agentNames,
+    timeRangeStart: new Date('2025-01-15T08:00:00'),
+    timeRangeEnd: new Date('2025-01-15T22:00:00'),
+    defaultGridSectionWidth: 200,
   },
   parameters: {
     docs: {
       description: {
-        story: 'Gantt chart with hourly intervals and time range slider for fine-grained time management.',
+        story: 'Gantt chart with hourly intervals and time range slider.',
       },
     },
   },

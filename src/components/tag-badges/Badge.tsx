@@ -3,8 +3,31 @@ import './Badge.css'
 
 export type BadgeStatus = 'active' | 'canceled' | 'pending'
 
+export type BadgePillVariant =
+  | 'to-do'
+  | 'in-progress'
+  | 'review'
+  | 'done'
+  | 'agents-active'
+  | 'user-action-required'
+  | 'customer-action-required'
+  | 'blocked'
+  | 'waiting'
+  | 'archived'
+  | 'critical'
+  | 'high'
+  | 'medium'
+  | 'low'
+  | 'normal'
+
 export interface BadgeProps {
   status: BadgeStatus
+  children?: React.ReactNode
+  className?: string
+}
+
+export interface BadgePillProps {
+  variant: BadgePillVariant
   children?: React.ReactNode
   className?: string
 }
@@ -58,6 +81,42 @@ const Badge: React.FC<BadgeProps> = ({
         <span className="badge__text">{getStatusText()}</span>
       </div>
     </div>
+  )
+}
+
+const PILL_LABELS: Record<BadgePillVariant, string> = {
+  'to-do': 'TO DO',
+  'in-progress': 'IN PROGRESS',
+  'review': 'REVIEW',
+  'done': 'DONE',
+  'agents-active': 'AGENTS ACTIVE',
+  'user-action-required': 'USER ACTION REQUIRED',
+  'customer-action-required': 'CUSTOMER ACTION REQUIRED',
+  'blocked': 'BLOCKED',
+  'waiting': 'WAITING',
+  'archived': 'ARCHIVED',
+  'critical': 'CRITICAL',
+  'high': 'HIGH',
+  'medium': 'MEDIUM',
+  'low': 'LOW',
+  'normal': 'NORMAL',
+}
+
+export const BadgePill: React.FC<BadgePillProps> = ({
+  variant,
+  children,
+  className = '',
+}) => {
+  const pillClass = [
+    'badge-pill',
+    `badge-pill--${variant}`,
+    className,
+  ].filter(Boolean).join(' ')
+
+  return (
+    <span className={pillClass}>
+      {children || PILL_LABELS[variant] || variant.toUpperCase()}
+    </span>
   )
 }
 

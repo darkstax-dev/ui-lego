@@ -1,0 +1,196 @@
+@import '../../tokens.css';
+
+.gantt-calendar {
+  display: inline-flex;
+  padding: var(--p-3, 12px);
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--gap-4, 16px);
+  background: var(--Background-Background-default, #CECECE);
+  box-shadow: var(--sds-size-depth-0) var(--sds-size-depth-100) var(--sds-size-depth-100) var(--sds-size-depth-negative-025) var(--sds-color-black-200),
+    var(--sds-size-depth-0) var(--sds-size-depth-100) var(--sds-size-depth-100) var(--sds-size-depth-negative-025) var(--sds-color-black-100);
+  z-index: 200;
+  user-select: none;
+}
+
+/* Header row: < [Month v] [Year v] > */
+.gantt-calendar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  gap: 8px;
+}
+
+.gantt-calendar-nav-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: var(--text-blue-main, #00112B);
+  transition: background-color 0.15s ease;
+  outline: none;
+}
+
+.gantt-calendar-nav-btn:hover {
+  background: var(--color-gray-200, #DFDFDF);
+}
+
+.gantt-calendar-selectors {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.gantt-calendar-select-wrapper {
+  position: relative;
+}
+
+.gantt-calendar-select-btn {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 8px;
+  background: var(--surface-card, #DFDFDF);
+  border: 1px solid var(--sds-color-border-default-default, #D9D9D9);
+  cursor: pointer;
+  font-family: var(--font-family-macan);
+  font-size: var(--font-size-sm, 14px);
+  font-weight: 400;
+  color: var(--text-blue-main, #00112B);
+  transition: background-color 0.15s ease;
+  outline: none;
+}
+
+.gantt-calendar-select-btn:hover {
+  background: var(--color-gray-100, #ECECEC);
+  border-color: var(--sds-color-border-default-default, #D9D9D9);
+}
+
+.gantt-calendar-select-btn:focus {
+  outline: none;
+  border-color: var(--sds-color-border-default-default, #D9D9D9);
+}
+
+/* Dropdowns */
+.gantt-calendar-dropdown {
+  position: absolute;
+  top: calc(100% + 2px);
+  left: 0;
+  z-index: 210;
+  min-width: 80px;
+  max-height: 200px;
+  overflow-y: auto;
+  background: var(--Background-Background-default, #CECECE);
+  border: 1px solid var(--sds-color-border-default-default, #D9D9D9);
+  box-shadow: var(--sds-size-depth-0) var(--sds-size-depth-100) var(--sds-size-depth-100) var(--sds-size-depth-negative-025) var(--sds-color-black-200),
+    var(--sds-size-depth-0) var(--sds-size-depth-100) var(--sds-size-depth-100) var(--sds-size-depth-negative-025) var(--sds-color-black-100);
+  display: flex;
+  flex-direction: column;
+}
+
+.gantt-calendar-dropdown--year {
+  min-width: 70px;
+}
+
+.gantt-calendar-dropdown-item {
+  display: flex;
+  align-items: center;
+  padding: 6px 10px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-family: var(--font-family-macan);
+  font-size: var(--font-size-xs, 12px);
+  font-weight: 450;
+  color: var(--text-blue-main, #00112B);
+  text-align: left;
+  transition: background-color 0.1s ease;
+  outline: none;
+}
+
+.gantt-calendar-dropdown-item:hover {
+  background: var(--color-gray-200, #DFDFDF);
+}
+
+.gantt-calendar-dropdown-item.active {
+  font-weight: var(--font-weight-semibold, 600);
+  background: var(--color-gray-200, #DFDFDF);
+}
+
+/* Weekday headers: Su Mo Tu ... */
+.gantt-calendar-weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  width: 100%;
+  gap: 0;
+}
+
+.gantt-calendar-weekday {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 28px;
+  font-family: var(--font-family-macan);
+  font-size: var(--font-size-xs, 12px);
+  font-weight: 450;
+  color: var(--color-gray-500, #78797A);
+}
+
+/* Day grid */
+.gantt-calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  width: 100%;
+  gap: 0;
+}
+
+.gantt-calendar-day {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  margin: 1px auto;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-family: var(--font-family-macan);
+  font-size: var(--font-size-sm, 14px);
+  font-weight: 450;
+  color: var(--text-blue-main, #00112B);
+  transition: background-color 0.1s ease;
+  outline: none;
+}
+
+.gantt-calendar-day:hover {
+  background: var(--color-gray-200, #DFDFDF);
+}
+
+.gantt-calendar-day:focus {
+  outline: none;
+}
+
+.gantt-calendar-day--other-month {
+  color: var(--color-gray-400, #ADADAD);
+}
+
+.gantt-calendar-day--today {
+  font-weight: 450;
+}
+
+.gantt-calendar-day--selected {
+  background: var(--color-blue-dark-950, #00112B);
+  color: var(--color-white, #FFFFFF);
+}
+
+.gantt-calendar-day--selected:hover {
+  background: var(--color-blue-950, #072B56);
+  color: var(--color-white, #FFFFFF);
+}
