@@ -1,6 +1,6 @@
 export type ViewMode = 'month' | 'week' | 'day' | 'hour' | '30min'
 
-export type TaskStatus = 'not-started' | 'in-progress' | 'completed' | 'on-hold' | 'cancelled' | 'pending'
+export type TaskStatus = 'not-started' | 'in-process' | 'completed' | 'on-hold' | 'cancelled' | 'pending'
 
 export interface GanttTask {
   id: string
@@ -8,7 +8,7 @@ export interface GanttTask {
   startDate: Date
   endDate: Date
   status?: TaskStatus
-  progress?: number // 0-100
+  process?: number // 0-100
   assignee?: string
   assigneeAvatar?: string
   priority?: 'low' | 'medium' | 'high'

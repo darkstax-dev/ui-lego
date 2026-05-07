@@ -1,7 +1,9 @@
 import React, { useState, useCallback } from 'react'
 import Drawer from '../drawer'
-import { BadgePill } from '../tag-badges'
-import type { BadgePillVariant } from '../tag-badges'
+import { Badge, Tag } from '../tag-badges'
+import type { BadgeVariant } from '../tag-badges'
+import type { TagScheme } from '../tag-badges'
+import { Checkbox } from '../checkbox'
 import { Tabs } from '../tabs'
 import { GanttTask } from './types'
 import './TaskDetailsDrawer.css'
@@ -33,9 +35,9 @@ const formatDateShort = (date: Date): string => {
   return `${mm}/${dd}/${yyyy}`
 }
 
-const mapStatusToPill = (status?: string): BadgePillVariant => {
+const mapStatusToBadge = (status?: string): BadgeVariant => {
   switch (status) {
-    case 'in-progress': return 'in-progress'
+    case 'in-process': return 'in-process'
     case 'completed': return 'done'
     case 'on-hold': return 'blocked'
     case 'pending': return 'waiting'
@@ -45,8 +47,19 @@ const mapStatusToPill = (status?: string): BadgePillVariant => {
   }
 }
 
-const mapPriorityToPill = (priority?: string): BadgePillVariant => {
+const mapPriorityToBadge = (priority?: string): BadgeVariant => {
   switch (priority) {
+    case 'critical': return 'critical'
+    case 'high': return 'high'
+    case 'medium': return 'medium'
+    case 'low': return 'low'
+    default: return 'normal'
+  }
+}
+
+const mapPriorityToTag = (priority?: string): TagScheme => {
+  switch (priority) {
+    case 'critical': return 'critical'
     case 'high': return 'high'
     case 'medium': return 'medium'
     case 'low': return 'low'
@@ -199,11 +212,13 @@ const TaskDetailsDrawer: React.FC<TaskDetailsDrawerProps> = ({
                         </div>
                         <div className="gantt-drawer-info-item">
                           <div className="gantt-drawer-label">Status</div>
-                          <BadgePill variant={mapStatusToPill(task.status)} />
+                          <Badge variant={mapStatusToBadge(task.status)} />
                         </div>
                         <div className="gantt-drawer-info-item">
                           <div className="gantt-drawer-label">Priority</div>
-                          <BadgePill variant={mapPriorityToPill(task.priority)} />
+                          <Tag scheme={mapPriorityToTag(task.priority)} removable={false}>
+                            {task.priority ? task.priority.toUpperCase() : 'NORMAL'}
+                          </Tag>
                         </div>
                       </div>
 
@@ -300,16 +315,13 @@ const TaskDetailsDrawer: React.FC<TaskDetailsDrawerProps> = ({
                         <ul className="gantt-drawer-checklist">
                           {checklist.map((item, i) => (
                             <li key={i} className="gantt-drawer-checklist-item">
-                              <input
-                                type="checkbox"
+                              <Checkbox
                                 checked={item.checked || false}
                                 onChange={() => {
                                   if (isEditing) {
                                     toggleChecklistItem(i)
                                   }
                                 }}
-                                readOnly={!isEditing}
-                                className="gantt-drawer-checkbox"
                               />
                               {isEditing ? (
                                 <div className="gantt-drawer-checklist-edit-row">
@@ -396,7 +408,7 @@ const TaskDetailsDrawer: React.FC<TaskDetailsDrawerProps> = ({
           )}
 
           {activeTab === 'taskLog' && (
-            <div className="gantt-drawer-text-panel">No task log entries.</div>
+            <div className="gantt-drawer-task-log">No task log entries.</div>
           )}
         </div>
 

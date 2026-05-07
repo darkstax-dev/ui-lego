@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react'
+import ReactDOM from 'react-dom'
 import { GanttTask } from './types'
-import { getTaskColor } from './utils'
 
 export interface GanttTaskBarProps {
   task: GanttTask
@@ -32,11 +32,10 @@ const GanttTaskBar: React.FC<GanttTaskBarProps> = ({
   const [dragStart, setDragStart] = useState({ x: 0, left: 0, width: 0 })
   const [showTooltip, setShowTooltip] = useState(false)
   const [tooltipBelow, setTooltipBelow] = useState(false)
-  const [tooltipPosition, setTooltipPosition] = useState({ top: 0, left: 0 })
+  const [tooltipPos, setTooltipPos] = useState({ x: 0, y: 0 })
   const taskRef = useRef<HTMLDivElement>(null)
 
-  const taskColor = getTaskColor(task.status, task.color)
-  const progress = task.progress || 0
+  const process = task.process || 0 
 
   const handleMouseDown = (e: React.MouseEvent, resizeDirection?: 'left' | 'right') => {
     e.stopPropagation()
@@ -111,7 +110,7 @@ const GanttTaskBar: React.FC<GanttTaskBarProps> = ({
   // Determine status class for CSS
   const getStatusClass = (): string => {
     switch (task.status) {
-      case 'in-progress': return 'in-progress'
+      case 'in-process': return 'in-process'
       case 'completed': return 'completed'
       case 'on-hold': return 'on-hold'
       case 'pending': return 'pending'
@@ -132,7 +131,7 @@ const GanttTaskBar: React.FC<GanttTaskBarProps> = ({
   // Format status for display
   const formatStatus = (status?: string): string => {
     if (!status || status === 'not-started') return 'Not started'
-    if (status === 'in-progress') return 'In process'
+    if (status === 'in-process') return 'In process'
     if (status === 'on-hold' || status === 'pending') return 'Pending'
     if (status === 'completed') return 'Completed'
     return status
@@ -169,7 +168,7 @@ const GanttTaskBar: React.FC<GanttTaskBarProps> = ({
         left: `${left}px`,
         width: `${width}px`,
         height: `${height}px`,
-        backgroundColor: taskColor,
+        ...(task.color ? { backgroundColor: task.color } : {}),
         cursor: enableDragMove ? 'move' : 'pointer',
       }}
       onClick={handleClick}
@@ -178,66 +177,56 @@ const GanttTaskBar: React.FC<GanttTaskBarProps> = ({
       onMouseEnter={() => {
         if (taskRef.current) {
           const rect = taskRef.current.getBoundingClientRect()
-          const centerX = rect.left + rect.width / 2
-          const tooltipOffset = 10
-          
-          // Show tooltip below if task is within 180px of viewport top (near the sticky header)
           const below = rect.top < 180
           setTooltipBelow(below)
-          
-          if (below) {
-            // Position below the task bar
-            setTooltipPosition({
-              top: rect.bottom + tooltipOffset,
-              left: centerX,
-            })
-          } else {
-            // Position above the task bar
-            setTooltipPosition({
-              top: rect.top - tooltipOffset,
-              left: centerX,
-            })
-          }
+          setTooltipPos({
+            x: rect.left + rect.width / 2,
+            y: below ? rect.bottom + 10 : rect.top - 10,
+          })
         }
         setShowTooltip(true)
       }}
       onMouseLeave={() => setShowTooltip(false)}
     >
-      {/* Progress bar (solid portion) */}
-      {progress > 0 && !isNotStarted && (
+      {/* Process bar (solid portion) */}
+      {process > 0 && !isNotStarted && (
         <div
-          className="gantt-task-progress"
+          className="gantt-task-process"
           style={{
-            width: `${progress}%`,
+            width: `${process}%`,
           }}
         />
       )}
 
-      {/* Hatched remaining portion for in-progress tasks */}
-      {task.status === 'in-progress' && progress > 0 && progress < 100 && (
+      {/* Hatched remaining portion for in-process tasks */}
+      {task.status === 'in-process' && process > 0 && process < 100 && (
         <div
           className="gantt-task-remaining"
           style={{
-            width: `${100 - progress}%`,
+            width: `${100 - process}%`,
           }}
         />
       )}
 
-      {/* Tooltip */}
-      {showTooltip && (
-        <div 
+      {/* Tooltip rendered via portal so it escapes overflow:auto containers */}
+      {showTooltip && ReactDOM.createPortal(
+        <div
           className={`gantt-task-tooltip ${tooltipBelow ? 'gantt-task-tooltip--below' : ''}`}
           style={{
-            top: tooltipPosition.top,
-            left: tooltipPosition.left,
-            transform: 'translateX(-50%)',
+            position: 'fixed',
+            left: tooltipPos.x,
+            top: tooltipPos.y,
+            transform: tooltipBelow ? 'translateX(-50%)' : 'translateX(-50%) translateY(-100%)',
+            zIndex: 10000,
+            pointerEvents: 'none',
           }}
         >
           <div className="gantt-task-tooltip-content">
             <span className="gantt-task-tooltip-title">{getTooltipTitle()}</span>
             <span className="gantt-task-tooltip-body">{getTooltipBody()}</span>
           </div>
-        </div>
+        </div>,
+        document.body,
       )}
 
       {/* Resize handles */}

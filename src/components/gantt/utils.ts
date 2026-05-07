@@ -139,18 +139,18 @@ export const getTaskColor = (status?: string, color?: string): string => {
   
   switch (status) {
     case 'completed':
-      return '#00112B' // Dark blue
-    case 'in-progress':
-      return '#0451A4' // Blue
+      return 'rgba(0, 17, 43, 1)' // Dark blue
+    case 'in-process':
+      return 'rgba(4, 81, 164, 1)' // Blue
     case 'on-hold':
     case 'pending':
-      return '#D9322A' // Red (pending)
+      return 'rgba(217, 50, 42, 1)' // Red (pending)
     case 'cancelled':
-      return '#D9322A' // Red
+      return 'rgba(217, 50, 42, 1)' // Red
     case 'not-started':
-      return '#CECECE' // Gray with stripe pattern
+      return 'rgba(0, 17, 43, 1)' // Gray with stripe pattern
     default:
-      return '#CECECE' // Gray with stripe pattern
+      return 'rgba(0, 17, 43, 1)' // Gray with stripe pattern
   }
 }
 

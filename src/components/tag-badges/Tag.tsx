@@ -1,7 +1,7 @@
 import React from 'react'
 import './Tag.css'
 
-export type TagScheme = 'brand' | 'danger' | 'positive' | 'warning' | 'neutral'
+export type TagScheme = 'brand' | 'danger' | 'positive' | 'warning' | 'neutral' | 'critical' | 'high' | 'medium' | 'low' | 'normal'
 export type TagState = 'default' | 'hover'
 
 export interface TagProps {

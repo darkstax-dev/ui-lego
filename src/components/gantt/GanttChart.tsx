@@ -20,7 +20,7 @@ import './GanttChart.css'
 
 const mapStatusToBadge = (status?: string): BadgePillVariant => {
   switch (status) {
-    case 'in-progress': return 'in-progress'
+    case 'in-process': return 'in-process'
     case 'completed': return 'done'
     case 'on-hold': return 'blocked'
     case 'pending': return 'waiting'

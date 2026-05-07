@@ -347,12 +347,12 @@
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='5.53' height='5.53' viewBox='0 0 5.53 5.53'%3E%3Cline x1='0' y1='5.53' x2='5.53' y2='0' stroke='%2300112B' stroke-width='1'/%3E%3C/svg%3E");
   background-repeat: repeat;
   background-size: 5.53px 5.53px;
-  border: 1px solid var(--Blue-Dark-blue-950, #00112B);
+  border: 1px solid var(--Blue-Dark-blue-950, rgba(0, 17, 43, 1));
 }
 
-/* Ensure not-started tasks don't show progress bar styling */
+/* Ensure not-started tasks don't show process bar styling */
 .gantt-task-bar.not-started .gantt-task-remaining,
-.gantt-task-bar.not-started .gantt-task-progress {
+.gantt-task-bar.not-started .gantt-task-process {
   display: none !important;
 }
 
@@ -361,47 +361,38 @@
   text-shadow: none;
 }
 
-/* In-Progress Task — solid fill for completed portion, hatch for remaining */
-.gantt-task-bar.in-progress {
-  background: var(--Blue-Blue-800, #0451A4);
+/* in-process Task — solid fill for completed portion, hatch for remaining */
+.gantt-task-bar.in-process {
+  background-color: var(--Blue-Blue-800, #0451A4);
 }
 
-/* Hatched remainder for in-progress tasks — opaque gray bg to mask parent blue, then diagonal hatch lines */
-.gantt-task-bar.in-progress .gantt-task-remaining {
+/* Hatched remainder for in-process tasks — opaque gray bg to mask parent blue, then diagonal hatch lines */
+.gantt-task-bar.in-process .gantt-task-remaining {
   position: absolute;
   top: 0;
   right: 0;
   bottom: 0;
   background-color: var(--Background-Background-default, #CECECE);
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='5.53' height='5.53' viewBox='0 0 5.53 5.53'%3E%3Cline x1='0' y1='5.53' x2='5.53' y2='0' stroke='%2300112B' stroke-width='1'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='5.53' height='5.53' viewBox='0 0 5.53 5.53'%3E%3Cline x1='0' y1='5.53' x2='5.53' y2='0' stroke='%230451A4' stroke-width='1'/%3E%3C/svg%3E");
   background-repeat: repeat;
   background-size: 5.53px 5.53px;
-  border: 1px solid var(--Blue-Dark-blue-950, #00112B);
+  border: 1px solid var(--Blue-Blue-800, #0451A4);
 }
 
 /* Pending / On-Hold Task */
 .gantt-task-bar.pending,
 .gantt-task-bar.on-hold {
-  background-color: var(--color-red-600, #D9322A);
+  background-color: var(--red-600-cta, #D9322A);
 }
 
 /* Completed Task */
 .gantt-task-bar.completed {
-  background-color: var(--color-blue-dark-950, #00112B);
+  background-color: var(--Blue-Dark-blue-950, #00112B);
 }
 
-/* Task Tooltip */
+/* Task Tooltip — positioned via portal with inline fixed styles */
 .gantt-task-tooltip {
-  position: fixed;
-  z-index: 1000;
   pointer-events: none;
-}
-
-/* Tooltip below variant (for tasks near the header) */
-.gantt-task-tooltip--below .gantt-task-tooltip-arrow {
-  top: -6px;
-  bottom: auto;
-  transform: rotate(180deg);
 }
 
 .gantt-task-tooltip-content {
@@ -455,8 +446,8 @@
   line-height: 1.4;
 }
 
-/* Task Progress */
-.gantt-task-progress {
+/* Task process */
+.gantt-task-process {
   position: absolute;
   top: 0;
   left: 0;

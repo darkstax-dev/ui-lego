@@ -1,11 +1,29 @@
 import React from 'react'
 import './Badge.css'
 
-export type BadgeStatus = 'active' | 'canceled' | 'pending'
+export type BadgeVariant =
+  | 'active'
+  | 'canceled'
+  | 'pending'
+  | 'to-do'
+  | 'in-process'
+  | 'review'
+  | 'done'
+  | 'agents-active'
+  | 'user-action-required'
+  | 'customer-action-required'
+  | 'blocked'
+  | 'waiting'
+  | 'archived'
+  | 'critical'
+  | 'high'
+  | 'medium'
+  | 'low'
+  | 'normal'
 
 export type BadgePillVariant =
   | 'to-do'
-  | 'in-progress'
+  | 'in-process'
   | 'review'
   | 'done'
   | 'agents-active'
@@ -21,7 +39,7 @@ export type BadgePillVariant =
   | 'normal'
 
 export interface BadgeProps {
-  status: BadgeStatus
+  variant: BadgeVariant
   children?: React.ReactNode
   className?: string
 }
@@ -33,60 +51,72 @@ export interface BadgePillProps {
 }
 
 const Badge: React.FC<BadgeProps> = ({
-  status,
+  variant,
   children,
   className = '',
   ...props
 }) => {
   const badgeClass = [
     'badge',
-    `badge--${status}`,
+    `badge--${variant}`,
     className
   ].filter(Boolean).join(' ')
 
   const getStatusText = () => {
     if (children) return children
     
-    switch (status) {
+    switch (variant) {
       case 'active':
         return 'Active'
       case 'canceled':
         return 'Canceled'
       case 'pending':
         return 'Pending'
+      case 'to-do':
+        return 'TO DO'
+      case 'in-process':
+        return 'IN PROCESS'
+      case 'review':
+        return 'REVIEW'
+      case 'done':
+        return 'DONE'
+      case 'agents-active':
+        return 'AGENTS ACTIVE'
+      case 'user-action-required':
+        return 'USER ACTION REQUIRED'
+      case 'customer-action-required':
+        return 'CUSTOMER ACTION REQUIRED'
+      case 'blocked':
+        return 'BLOCKED'
+      case 'waiting':
+        return 'WAITING'
+      case 'archived':
+        return 'ARCHIVED'
+      case 'critical':
+        return 'CRITICAL'
+      case 'high':
+        return 'HIGH'
+      case 'medium':
+        return 'MEDIUM'
+      case 'low':
+        return 'LOW'
+      case 'normal':
+        return 'NORMAL'
       default:
-        return status
-    }
-  }
-
-  const getBackgroundColor = () => {
-    switch (status) {
-      case 'active':
-        return '#108541'
-      case 'canceled':
-        return '#0E0E0E'
-      case 'pending':
-        return '#ED8B30'
-      default:
-        return '#0E0E0E'
+        return variant
     }
   }
 
   return (
     <div className={badgeClass} {...props}>
-      <svg className="badge__flag" width="9" height="20" viewBox="0 0 9 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M9 0H0V11.6667L8.59091 20H9V0Z" fill={getBackgroundColor()} />
-      </svg>
-      <div className="badge__content">
-        <span className="badge__text">{getStatusText()}</span>
-      </div>
+      <span className="badge__text">{getStatusText()}</span>
     </div>
   )
 }
 
 const PILL_LABELS: Record<BadgePillVariant, string> = {
   'to-do': 'TO DO',
-  'in-progress': 'IN PROGRESS',
+  'in-process': 'IN PROCESS',
   'review': 'REVIEW',
   'done': 'DONE',
   'agents-active': 'AGENTS ACTIVE',

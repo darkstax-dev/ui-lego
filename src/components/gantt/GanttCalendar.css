@@ -98,6 +98,29 @@
   min-width: 70px;
 }
 
+/* Scrollbar styling for dropdowns */
+.gantt-calendar-dropdown::-webkit-scrollbar {
+  width: 8px;
+}
+
+.gantt-calendar-dropdown::-webkit-scrollbar-track {
+  background: var(--Background-Background-default, #CECECE);
+}
+
+.gantt-calendar-dropdown::-webkit-scrollbar-thumb {
+  background: var(--color-gray-500, #78797A);
+  border-radius: 0;
+}
+
+.gantt-calendar-dropdown::-webkit-scrollbar-thumb:hover {
+  background: var(--color-gray-600, #5E5E5E);
+}
+
+.gantt-calendar-dropdown {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-gray-500, #78797A) var(--Background-Background-default, #CECECE);
+}
+
 .gantt-calendar-dropdown-item {
   display: flex;
   align-items: center;

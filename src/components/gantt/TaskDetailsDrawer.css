@@ -20,7 +20,6 @@
   align-items: center;
   gap: var(--sds-size-space-300);
   padding: 0 0 12px 0;
-  margin-top: -8px;
   width: 100%;
   flex-shrink: 0;
   color: var(--text-blue-main, #00112B);
@@ -63,15 +62,44 @@
   overflow-x: hidden;
   padding: 0;
   min-height: 0;
+  margin: 0;
+}
+
+/* Scrollbar styling */
+.gantt-drawer-content::-webkit-scrollbar {
+  width: 8px;
+}
+
+.gantt-drawer-content::-webkit-scrollbar-track {
+  background: var(--surface-card, #DFDFDF);
+}
+
+.gantt-drawer-content::-webkit-scrollbar-thumb {
+  background: var(--color-gray-400, #ADADAD);
+  border-radius: 0;
+}
+
+.gantt-drawer-content::-webkit-scrollbar-thumb:hover {
+  background: var(--text-blue-main, #00112B);
 }
 
 /* ===== Accordion Section ===== */
 .gantt-drawer-section {
   display: flex;
   flex-direction: column;
-  gap: var(--sds-size-space-300);
+  gap: 0;
   padding: 16px 0;
   width: 100%;
+  margin: 0;
+  border-bottom: 1px dashed var(--color-gray-400, #ADADAD);
+}
+
+.gantt-drawer-section:last-child {
+  border-bottom: none;
+}
+
+.gantt-drawer-section .gantt-drawer-section-body {
+  margin-top: var(--sds-size-space-300);
 }
 
 .gantt-drawer-section-header {
@@ -108,25 +136,21 @@
   min-height: 0;
 }
 
-/* Dashed separator between sections */
+/* Dashed separator between sections (legacy, now handled by section border) */
 .gantt-drawer-separator {
-  width: 100%;
-  height: 0;
-  border-bottom: 1px dashed var(--color-gray-400, #ADADAD);
-  padding: 0 !important;
+  display: none;
 }
 
 /* ===== Info Card (Main Info) ===== */
 .gantt-drawer-info-card {
   background: var(--surface-card, #DFDFDF);
-  border: 1px solid var(--divider-light);
+  border: none;
   border-radius: 0;
   padding: var(--sds-size-space-400);
   display: flex;
   flex-direction: column;
   gap: var(--sds-size-space-400);
 }
-
 .gantt-drawer-info-card-title {
   color: var(--text-blue-main, #00112B);
   font-size: var(--font-size-lg, 18px);
@@ -144,6 +168,27 @@
   display: flex;
   flex-direction: column;
   gap: var(--sds-size-space-100);
+  align-items: flex-start;
+}
+
+/* Align badges and tags at same height in the info grid */
+.gantt-drawer-info-item .badge,
+.gantt-drawer-info-item .tag {
+  height: 24px;
+  box-sizing: border-box;
+}
+
+.gantt-drawer-info-item .badge {
+  padding: 3px 8px 3px 10px;
+}
+
+.gantt-drawer-info-item .badge .badge__text {
+  font-size: 10px;
+}
+
+.gantt-drawer-info-item .tag {
+  font-size: 11px;
+  padding: 2px 8px;
 }
 
 .gantt-drawer-label {
@@ -205,7 +250,7 @@
 /* ===== Text Panel (Agent Comment) ===== */
 .gantt-drawer-text-panel {
   background: var(--surface-card, #DFDFDF);
-  border: 1px solid var(--divider-light);
+  /* border: 1px solid var(--divider-light); */
   color: var(--text-blue-main, #00112B);
   padding: var(--sds-size-space-400);
   border-radius: 0;
@@ -229,8 +274,8 @@
   gap: 0;
   padding-left: 0;
   list-style: none;
-  background: var(--surface-card, #DFDFDF);
-  border: 1px solid var(--divider-light);
+  /* background: var(--surface-card, #DFDFDF); */
+  border: none;
   border-radius: 0;
   margin: 0;
 }
@@ -240,7 +285,7 @@
   align-items: center;
   gap: var(--sds-size-space-300);
   padding: var(--sds-size-space-300) var(--sds-size-space-400);
-  border-bottom: 1px solid var(--divider-light);
+  border-bottom: 1px dashed var(--color-gray-400, #ADADAD);
   font-family: var(--font-family-macan);
   font-size: var(--font-size-sm, 14px);
   font-weight: 400;
@@ -251,34 +296,9 @@
   border-bottom: none;
 }
 
-.gantt-drawer-checkbox {
-  width: 20px;
-  height: 20px;
-  cursor: pointer;
-  accent-color: var(--color-blue-dark-950, #00112B);
+/* Checkbox component integration */
+.gantt-drawer-checklist-item .checkbox {
   flex-shrink: 0;
-  appearance: none;
-  -webkit-appearance: none;
-  border: 2px solid var(--color-gray-400, #ADADAD);
-  background: transparent;
-  position: relative;
-}
-
-.gantt-drawer-checkbox:checked {
-  background: var(--color-blue-dark-950, #00112B);
-  border-color: var(--color-blue-dark-950, #00112B);
-}
-
-.gantt-drawer-checkbox:checked::after {
-  content: '';
-  position: absolute;
-  left: 5px;
-  top: 1px;
-  width: 6px;
-  height: 10px;
-  border: solid var(--color-white, #FFFFFF);
-  border-width: 0 2px 2px 0;
-  transform: rotate(45deg);
 }
 
 /* ===== Edit mode styles ===== */
@@ -295,9 +315,9 @@
   outline: none;
 }
 
-.gantt-drawer-edit-input:focus {
+/* .gantt-drawer-edit-input:focus {
   border-color: var(--text-blue-main, #00112B);
-}
+} */
 
 .gantt-drawer-edit-title {
   font-size: var(--font-size-lg, 18px);
@@ -318,9 +338,9 @@
   outline: none;
 }
 
-.gantt-drawer-edit-textarea:focus {
+/* .gantt-drawer-edit-textarea:focus {
   border-color: var(--text-blue-main, #00112B);
-}
+} */
 
 /* Checklist edit row */
 .gantt-drawer-checklist-edit-row {
@@ -343,7 +363,6 @@
   background: transparent;
   border: none;
   cursor: pointer;
-  color: var(--text-gray-main, #78797A);
   flex-shrink: 0;
   padding: 0;
 }
@@ -389,10 +408,10 @@
   align-items: center;
   gap: var(--sds-size-space-300);
   background: var(--surface-card, #DFDFDF);
-  box-shadow: 0px 1px 4px 0px rgba(12, 12, 13, 0.05);
+  box-shadow: none;
   padding: var(--sds-size-space-300);
   border-radius: 0;
-  border: 1px solid var(--divider-light);
+  border: none;
 }
 
 .gantt-drawer-file-icon {
@@ -407,7 +426,7 @@
   font-size: 9px;
   font-family: var(--font-family-macan-mono);
   font-weight: 400;
-  border: 1px solid var(--divider-light);
+  border: none;
 }
 
 .gantt-drawer-file-name {
@@ -438,13 +457,14 @@
   display: flex;
   width: 100%;
   height: 56px;
-  padding: var(--sds-size-space-200) 0;
+  padding: var(--sds-size-space-200) var(--sds-size-space-400);
   gap: var(--sds-size-space-300);
   background: var(--surface-card, #DFDFDF);
   justify-content: flex-end;
   align-items: center;
   flex-shrink: 0;
   border-top: 1px solid var(--divider-light);
+  margin: 0;
 }
 
 .gantt-drawer-btn {
@@ -481,4 +501,24 @@
 
 .gantt-drawer-btn--primary:hover {
   background: var(--color-blue-950, #072B56);
+}
+
+/* ===== Task Log ===== */
+.gantt-drawer-task-log {
+  background: var(--surface-card, #DFDFDF);
+  padding: var(--sds-size-space-400);
+  border: none;
+  border-radius: 0;
+  font-family: var(--font-family-macan);
+  font-size: var(--font-size-sm, 14px);
+  font-weight: 400;
+  color: var(--text-blue-main, #00112B);
+  line-height: var(--line-height-normal);
+  flex: 1;
+  min-height: 300px;
+}
+
+/* ===== Section collapse transition ===== */
+.gantt-drawer-section-body {
+  overflow: hidden;
 }

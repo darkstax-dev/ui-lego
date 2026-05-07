@@ -2,170 +2,163 @@
 
 .badge {
   display: inline-flex;
-  justify-content: flex-end;
-  align-items: flex-start;
-  height: 20px;
-}
-
-.badge__flag {
-  width: 9px;
-  height: 20px;
-  flex-shrink: 0;
-}
-
-.badge__content {
-  display: flex;
-  padding: var(--sds-size-space-100) 6px var(--sds-size-space-100) 1px;
   align-items: center;
-  gap: 5px;
-  height: 20px;
+  padding: 4px 10px 4px 12px;
+  height: 28px;
   box-sizing: border-box;
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 10px 100%, 0 calc(100% - 10px));
 }
 
 .badge__text {
-  color: var(--color-white);
-  font-family: var(--font-family-macan-mono);
-  font-size: var(--font-size-xs);
-  font-weight: 400;
+  color: var(--color-white, #FFFFFF);
+  font-family: var(--font-family-macan-mono-bold);
+  font-size: var(--font-size-sm, 12px);
+  font-weight: 500; 
   line-height: 100%;
   text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 /* Active status - Green */
-.badge--active .badge__content {
-  background: var(--color-green-800);
+.badge--active {
+  background: var(--color-green-800, #108541);
 }
 
 /* Canceled status - Black */
-.badge--canceled .badge__content {
-  background: var(--color-black);
+.badge--canceled {
+  background: var(--color-black, #0E0E0E);
 }
 
 /* Pending status - Orange */
-.badge--pending .badge__content {
-  background: var(--color-yellow-500);
+.badge--pending {
+  background: var(--color-yellow-500, #ED8B30);
 }
 
-/* ===== Pill Badges (Status & Priority) ===== */
-.badge-pill {
-  display: inline-flex;
-  padding: 4px 8px;
-  align-items: center;
-  font-family: var(--font-family-macan-mono);
-  font-size: var(--font-size-xs, 12px);
-  font-weight: 400;
-  line-height: 100%;
-  letter-spacing: 0.6px;
-  text-transform: uppercase;
-  white-space: nowrap;
-  border: 1px solid transparent;
-}
-
-/* ===== Status Variants ===== */
+/* ===== Kanban/Gantt Badge Status Variants ===== */
 
 /* TO DO - Blue 700 */
-.badge-pill--to-do {
-  color: var(--Blue-Blue-700, #0072FF);
+.badge--to-do {
   background: rgba(0, 114, 255, 0.20);
-  border-color: rgba(0, 114, 255, 0.30);
+}
+.badge--to-do .badge__text {
+  color: rgba(0, 114, 255, 1);
 }
 
-/* IN PROGRESS - Blue 800 */
-.badge-pill--in-progress {
-  color: var(--Blue-Blue-800, #0451A4);
-  background: rgba(4, 81, 164, 0.20);
-  border-color: rgba(4, 81, 164, 0.30);
-}
-
-/* REVIEW - Yellow 500 */
-.badge-pill--review {
-  color: var(--Yellow-500, #ED8B30);
+/* IN PROCESS - Yellow 500 */
+.badge--in-process {
   background: rgba(237, 139, 48, 0.20);
-  border-color: rgba(237, 139, 48, 0.30);
+}
+.badge--in-process .badge__text {
+  color: rgba(237, 139, 48, 1);
 }
 
-/* DONE - Green 500 */
-.badge-pill--done {
-  color: var(--Green-Green-500, #2EB969);
+/* REVIEW - Green 500 */
+.badge--review {
   background: rgba(85, 211, 138, 0.20);
-  border-color: rgba(85, 211, 138, 0.30);
+}
+.badge--review .badge__text {
+  color: rgba(85, 211, 138, 1);
 }
 
-/* AGENTS ACTIVE - Green 800 */
-.badge-pill--agents-active {
-  color: var(--Green-Green-800, #108541);
+/* DONE - Green 800 */
+.badge--done {
   background: rgba(16, 133, 65, 0.20);
-  border-color: rgba(16, 133, 65, 0.30);
+}
+.badge--done .badge__text {
+  color: rgba(16, 133, 65, 1);
+}
+
+/* AGENTS ACTIVE - Blue 800 */
+.badge--agents-active {
+  background: rgba(4, 81, 164, 0.20);
+}
+.badge--agents-active .badge__text {
+  color: rgba(4, 81, 164, 1);
 }
 
 /* USER ACTION REQUIRED - Red 500 */
-.badge-pill--user-action-required {
-  color: var(--Red-500, #FF3B31);
+.badge--user-action-required {
   background: rgba(255, 59, 49, 0.20);
-  border-color: rgba(255, 59, 49, 0.30);
+}
+.badge--user-action-required .badge__text {
+  color: rgba(255, 59, 49, 1);
 }
 
 /* CUSTOMER ACTION REQUIRED - Gray (neutral) */
-.badge-pill--customer-action-required {
-  color: var(--text-gray-main, #78797A);
+.badge--customer-action-required {
   background: rgba(120, 121, 122, 0.15);
-  border-color: rgba(120, 121, 122, 0.25);
+}
+.badge--customer-action-required .badge__text {
+  color: rgba(120, 121, 122, 1);
 }
 
 /* BLOCKED - Red 500 */
-.badge-pill--blocked {
-  color: var(--Red-500, #FF3B31);
-  background: rgba(255, 59, 49, 0.20);
-  border-color: rgba(255, 59, 49, 0.30);
+.badge--blocked {
+  background: rgba(182, 38, 31, 0.2);
+}
+.badge--blocked .badge__text {
+  color: rgba(182, 38, 31, 1);
 }
 
 /* WAITING - Yellow 500 */
-.badge-pill--waiting {
-  color: var(--Yellow-500, #ED8B30);
-  background: rgba(237, 139, 48, 0.20);
-  border-color: rgba(237, 139, 48, 0.30);
+.badge--waiting {
+  background: rgba(245, 195, 124, 0.2);
+}
+.badge--waiting .badge__text {
+  color: rgba(240, 159, 71, 1);
 }
 
 /* ARCHIVED - Gray (neutral) */
-.badge-pill--archived {
-  color: var(--text-gray-main, #78797A);
-  background: rgba(120, 121, 122, 0.10);
-  border-color: rgba(120, 121, 122, 0.20);
+.badge--archived {
+  background: rgba(120, 121, 122, 0.2);
+}
+.badge--archived .badge__text {
+  color: rgba(120, 121, 122, 1);
 }
 
-/* ===== Priority Variants ===== */
+/* ===== Kanban/Gantt Badge Priority Variants (for storybook only) ===== */
 
 /* CRITICAL - Red 500 */
-.badge-pill--critical {
-  color: var(--Red-500, #FF3B31);
+.badge--critical {
   background: rgba(255, 59, 49, 0.20);
-  border-color: rgba(255, 59, 49, 0.30);
+}
+
+.badge--critical .badge__text {
+  color: rgba(255, 59, 49, 1);
 }
 
 /* HIGH - Yellow 500 */
-.badge-pill--high {
-  color: var(--Yellow-500, #ED8B30);
+.badge--high {
   background: rgba(237, 139, 48, 0.20);
-  border-color: rgba(237, 139, 48, 0.30);
+}
+
+.badge--high .badge__text {
+  color: rgba(237, 139, 48, 1);
 }
 
 /* MEDIUM - Blue 700 */
-.badge-pill--medium {
-  color: var(--Blue-Blue-700, #0072FF);
+.badge--medium {
   background: rgba(0, 114, 255, 0.20);
-  border-color: rgba(0, 114, 255, 0.30);
+}
+
+.badge--medium .badge__text {
+  color: rgba(0, 114, 255, 1);
 }
 
 /* LOW - Green 500 */
-.badge-pill--low {
-  color: var(--Green-Green-500, #2EB969);
+.badge--low {
   background: rgba(85, 211, 138, 0.20);
-  border-color: rgba(85, 211, 138, 0.30);
+}
+
+.badge--low .badge__text {
+  color: rgba(85, 211, 138, 1);
 }
 
 /* NORMAL - Gray (neutral) */
-.badge-pill--normal {
-  color: var(--text-gray-main, #78797A);
+.badge--normal {
   background: rgba(120, 121, 122, 0.10);
-  border-color: rgba(120, 121, 122, 0.20);
+}
+
+.badge--normal .badge__text {
+  color: rgba(120, 121, 122, 1);
 }

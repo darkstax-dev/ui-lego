@@ -5,4 +5,4 @@ export { default as TagBadgeDemo } from './TagBadgeDemo'
 
 export type { TagScheme, TagState } from './Tag'
 export type { TagToggleState } from './TagToggle'
-export type { BadgeStatus, BadgePillVariant, BadgePillProps } from './Badge'
+export type { BadgeVariant, BadgePillVariant, BadgePillProps } from './Badge'

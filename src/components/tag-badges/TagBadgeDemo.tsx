@@ -216,15 +216,15 @@ const TagBadgeDemo: React.FC = () => {
           borderRadius: '8px'
         }}>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', alignItems: 'center' }}>
-            <Badge status="active" />
+            <Badge variant="active" />
             <span style={{ fontSize: '12px', color: 'var(--text-blue-secondary)' }}>Active</span>
           </div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', alignItems: 'center' }}>
-            <Badge status="canceled" />
+            <Badge variant="canceled" />
             <span style={{ fontSize: '12px', color: 'var(--text-blue-secondary)' }}>Canceled</span>
           </div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', alignItems: 'center' }}>
-            <Badge status="pending" />
+            <Badge variant="pending" />
             <span style={{ fontSize: '12px', color: 'var(--text-blue-secondary)' }}>Pending</span>
           </div>
         </div>
